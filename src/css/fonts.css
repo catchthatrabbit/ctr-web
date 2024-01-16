@@ -1,0 +1,15 @@
+
+
+@font-face {
+    font-family: 'Orbitron';
+    src: url('/fonts/orbitron.woff2');
+}
+
+:root{
+    --custom-font-family-base:"Orbitron, sans-serif";
+    --custom-font-family-labels:"Verdana, Geneva, Tahoma, sans-serif";
+    --custom-font-family-values:"Arial, Calibri";
+
+    --ifm-font-family-base: var(--custom-font-family-base);
+    --ifm-font-family-bold: var(--custom-font-family-base);
+}

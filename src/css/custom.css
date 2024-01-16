@@ -1,0 +1,14 @@
+@import url("colors.css");
+@import url("fonts.css");
+
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+ :root{
+  --ifm-navbar-padding-vertical: 20px;
+  --ifm-navbar-padding-horizontal: 0px;
+  --ifm-navbar-height: 82px;
+ }
