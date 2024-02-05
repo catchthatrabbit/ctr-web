@@ -8,7 +8,20 @@
  */
 
  :root{
-  --ifm-navbar-padding-vertical: 20px;
+
+  --custom-space-sm: 10px;
+  --custom-space-md: 20px;
+  --custom-space-lg: 40px;
+  --custom-space-xl: 80px;
+  --custom-space-xxl: 160px;
+  
+  --ifm-table-cell-padding: var(--custom-space-md) var(--custom-space-sm) var(--custom-space-md);
+
+  --ifm-global-spacing: var(--custom-space-md);
+  --ifm-navbar-item-padding-vertical:var(--custom-space-md);
+  --ifm-navbar-item-padding-horizontal:var(--custom-space-md);
+
+  --ifm-navbar-padding-vertical: 0px;
   --ifm-navbar-padding-horizontal: 0px;
   --ifm-navbar-height: 82px;
  }

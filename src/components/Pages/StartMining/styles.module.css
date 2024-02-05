@@ -1,0 +1,39 @@
+.panelContent{
+    padding: var(--custom-space-md) var(--custom-space-lg);
+}
+
+.lineFlex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.alignItemsCenter{
+    align-items: center;
+}
+
+.justifyContentCenter{
+    justify-content: center;
+}
+
+.coreMiner{
+    margin: auto;
+    background-color: var(--blue-rgb-600);
+}
+
+.input{
+    color:var(--ifm-color-primary)!important;
+}
+
+.buttonConfig{
+    width: 254px;
+    margin-top: var(--custom-space-md);
+    margin-bottom: var(--custom-space-md);
+}
+
+.buttonConfigAmong{
+    margin-inline: var(--custom-space-md);
+}
+
+.marginAuto{
+    margin:auto;
+}

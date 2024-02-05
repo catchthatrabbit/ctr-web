@@ -1,0 +1,18 @@
+.navbar__link:hover:after {
+    width: 100%;
+}
+
+.navbar__link:after{
+    content: '';
+    border-bottom: 1px solid white;
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+    height: 100%;
+    width: 0px;
+    transition: width 0.3s ease-out;
+}
+
+.navbar__link{
+    position: relative;
+}

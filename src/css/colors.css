@@ -3,7 +3,8 @@
 
     --blue-0: #FFFFFF;
     --blue-100: #BCCBF0;
-    --blue-600: #424259;
+    --blue-200: #999eac;
+    --blue-600: #424259; /* rgb(66, 66, 89) */
     --blue-900:#181A1F;  
     
     --green-300: #46B549;
@@ -12,9 +13,15 @@
     --blue-rgb-600: rgba(66, 66, 89, 0.2);
     --blue-rgb-650: rgba(66, 66, 89, 0.25);
     --blue-rgb-700: rgba(66, 66, 89, 0.5);
+    --blue-rgb-900: rgba(0, 0, 0, 0.75);
     --ifm-navbar-background-color: var(--blue-900);
 
-    --ifm-color-primary: #2e8555;
+    --ifm-color-emphasis-0:var(--blue-0);
+    --ifm-color-emphasis-500:var(--blue-200);
+
+    --ifm-tabs-color-active:var( --ifm-color-emphasis-0);
+
+    --ifm-color-primary: var(--green-300);
     --ifm-color-primary-dark: #29784c;
     --ifm-color-primary-darker: #277148;
     --ifm-color-primary-darkest: #205d3b;
@@ -23,6 +30,13 @@
     --ifm-color-primary-lightest: #3cad6e;
     --ifm-code-font-size: 95%;
     --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+    --ifm-table-stripe-background: transparent;
+
+    /** Customize other part of IFM colors */    
+    --ifm-link-color:var(--ifm-color-emphasis-0);
+    --ifm-navbar-link-color:var(--ifm-color-emphasis-0);
+    --ifm-navbar-link-hover-color: var(--ifm-color-emphasis-0);
   }
   
   /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -35,5 +49,11 @@
     --ifm-color-primary-lighter: #32d8b4;
     --ifm-color-primary-lightest: #4fddbf;
     --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  }
+
+  html, body{
+
+    background-color: var(--blue-900);
+
   }
   

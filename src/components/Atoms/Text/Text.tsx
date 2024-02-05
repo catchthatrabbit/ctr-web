@@ -8,14 +8,16 @@ import { Spacer } from "../Spacer";
 import styles from "./styles.module.css";
 
 interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
-  size?: "xs" | "s" | "m" | "lg" | "xl" | "2xl" | "3xl";
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
   variant?:
-    | "paragraph"
-    | "smallTitle"
-    | "title"
-    | "description"
-    | "titleWithIndicator";
+    | "normal"
+    | "primary"
+    | "primaryLabels"
+    | "menu"
+    | "link"
+    | "values";
   position?: "right" | "center" | "left";
+  thickness?: "bold" | "narrow";
   children: string;
 }
 
@@ -24,12 +26,10 @@ const SizeToCssClassName = {
   "2xl": "twoXLarge",
   xl: "xLarge",
   lg: "large",
-  m: "medium",
-  s: "small",
+  md: "medium",
+  sm: "small",
   xs: "xSmall",
 };
-
-const positionToCssClassName = (pos: string) => (pos ? `${pos}Text` : "");
 
 const TitleWithIndicator: FC<{ children: React.ReactNode }> = ({
   children,
@@ -43,8 +43,9 @@ const TitleWithIndicator: FC<{ children: React.ReactNode }> = ({
 };
 
 const Text: FC<IText> = ({
-  variant = "smallTitle",
-  size = "m",
+  variant = "normal",
+  size = "xs",
+  thickness = "narrow",
   children,
   className,
   position,
@@ -55,10 +56,8 @@ const Text: FC<IText> = ({
       className={clsx([
         styles[SizeToCssClassName[size]],
         variant && styles[variant],
-        variant === "title" || variant === "titleWithIndicator"
-          ? styles.boldText
-          : styles.regularText,
-        styles[positionToCssClassName(position)],
+        styles[thickness],
+        styles[position],
         styles.text,
         className,
       ])}
@@ -68,11 +67,7 @@ const Text: FC<IText> = ({
     </div>
   );
 
-  return variant === "titleWithIndicator" ? (
-    <TitleWithIndicator>{renderTitle}</TitleWithIndicator>
-  ) : (
-    renderTitle
-  );
+  return renderTitle
 };
 
 export default Text;

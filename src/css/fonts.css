@@ -6,10 +6,25 @@
 }
 
 :root{
-    --custom-font-family-base:"Orbitron, sans-serif";
-    --custom-font-family-labels:"Verdana, Geneva, Tahoma, sans-serif";
-    --custom-font-family-values:"Arial, Calibri";
+    --custom-font-family-base:Orbitron, sans-serif;
+    --custom-font-family-labels:Verdana, Geneva, Tahoma, sans-serif;
+    --custom-font-family-values:Arial, Calibri;
 
     --ifm-font-family-base: var(--custom-font-family-base);
     --ifm-font-family-bold: var(--custom-font-family-base);
+
+    --ifm-font-emphasis-100:400;
+    --ifm-font-emphasis-0:600;
+
+    --custom-font-size-xl: 38px;
+    --custom-font-size-lg: 22px;
+    --custom-font-size-md: 18px;
+    --custom-font-size-sm: 16px;
+    --custom-font-size-xs: 14px;
+
+    --ifm-global-spacing: 0.05em;
+
+    --ifm-color-content-inverse: var(--blue-900);
+    --ifm-font-color-base: var(--blue-0);
+
 }

@@ -1,0 +1,12 @@
+.singleColumnValue {
+    padding: var(--custom-space-md) 0px var(--custom-space-md) var(--custom-space-lg);
+    display: flex;
+}
+
+.singleColumnValue:nth-child(even) {
+    background-color: var(--blue-rgb-500);
+}
+
+.singlePanel{
+    cursor:auto;
+}

@@ -1,0 +1,12 @@
+.ibanRoot{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.iban{
+    display: flex;
+    white-space: normal;
+    line-break: anywhere;
+    font-family: monospace;
+}

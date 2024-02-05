@@ -1,0 +1,10 @@
+.boardRoot{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.boardDropdown{
+    width: 335px;
+    margin: auto;
+}

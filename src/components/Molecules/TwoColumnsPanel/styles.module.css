@@ -1,0 +1,19 @@
+.detailsRow {
+    width: 100%;
+    margin:auto;
+}
+
+.detailsRow:nth-child(even) {
+    background-color: var(--blue-rgb-600);
+}
+
+.detailsTableCaption {
+    padding: var(--custom-space-md) 0px var(--custom-space-md) var(--custom-space-lg);
+    border-right: 1px solid var(--blue-600);
+    width: 50%;
+}
+
+.detailsTableValue {
+    padding: var(--custom-space-md) 0px var(--custom-space-md) var(--custom-space-lg);
+    width: 50%;
+}

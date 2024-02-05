@@ -1,0 +1,27 @@
+.navBarContainer{
+    font-family: var(--ifm-font-family-base);
+}
+
+.navBarContainerMiningItem{
+    color: var( --ifm-color-primary);
+    cursor: pointer;
+}
+
+.navBarContainerMiningItem:hover{
+    color: var( --ifm-color-primary);
+}
+
+.navBarContainerMiningItem:after{
+    content: '';
+    border-bottom:1px solid var( --ifm-color-primary);
+}
+
+.navBarContainerMiningItem:hover:after{
+    content: '';
+    border-bottom:1px solid var( --ifm-color-primary);
+}
+
+.navBarContainerLogo img{
+    width: 140px;
+    height: 62px;
+}
