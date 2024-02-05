@@ -1,7 +1,7 @@
 import { STANDARD_REGIONS_API } from "@site/src/Api/constants";
 import { Header } from "@site/src/components/Templates/Header";
 import { useHeaders } from "@site/src/hooks/useHeaders";
-import BlockListTabs from "@site/src/components/Organisms/BlocksListTabs/BlockListTabs";
+import {BlockListTabs} from "@site/src/components/Organisms/BlocksListTabs";
 import { List } from "@site/src/components/Templates/List";
 import { useFetchAllBlocks } from "@site/src/hooks/useBlocks";
 import { convertAnyBlocksResponse2AnyBlocksInfo } from "./utils";
