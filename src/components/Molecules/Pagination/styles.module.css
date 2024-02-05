@@ -45,7 +45,3 @@
 .paginationPrevious{
     border-right: 1px solid var(--blue-600);
  }
-
- .paginationButton {
-    cursor: pointer;
- }
