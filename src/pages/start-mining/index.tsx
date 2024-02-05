@@ -7,8 +7,6 @@ const StartMiningPage = () => {
 
     const {walletAddress, handleChangeRegion, handleClearWalletAddress,handleWalletAddress, region} = useWalletPage();
 
-    console.log('walletAddress', walletAddress);
-
     return  <ConfiguredLayout>
             {walletAddress? 
                 <Wallet onClearWalletAddress={handleClearWalletAddress} 

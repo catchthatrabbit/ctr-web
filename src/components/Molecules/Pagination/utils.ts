@@ -50,8 +50,6 @@ export const generatePageNumber = (totalPage:number, limit:number, pageShowNumbe
         resultList.push("1");
         resultList.unshift(resultList.pop());
     }
-
-    console.log('resultList', resultList);
     
     return resultList;
 
