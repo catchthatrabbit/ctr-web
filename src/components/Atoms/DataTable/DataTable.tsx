@@ -11,7 +11,7 @@ export interface IDataTable {
     data: Array<{[key in string]:ReactNode}>
 }
 
-const DataTable = ({data, columns}:IDataTable) => {
+export const DataTable = ({data, columns}:IDataTable) => {
 
     return (
         <table className={styles.table} border={0} >
@@ -55,5 +55,3 @@ const DataTable = ({data, columns}:IDataTable) => {
 
 
 }
-
-export default DataTable;

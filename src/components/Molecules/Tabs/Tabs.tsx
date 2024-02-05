@@ -7,7 +7,7 @@ export interface ITabs {
     items:Array<{label:string, value:string, tabContent: React.ReactNode}>
 }
 
-const Tabs = ({items}:ITabs) => {
+export const Tabs = ({items}:ITabs) => {
 
     return <TabsDocusaurus className={styles.tabs} >
             {items?.map((item, index) => (
@@ -18,5 +18,3 @@ const Tabs = ({items}:ITabs) => {
         </TabsDocusaurus>
 
 }
-
-export default Tabs;

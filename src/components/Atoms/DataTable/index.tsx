@@ -1,2 +1,1 @@
-export {default as DataTable} from './DataTable';
-export {IDataTable} from './DataTable';
+export * from './DataTable';
