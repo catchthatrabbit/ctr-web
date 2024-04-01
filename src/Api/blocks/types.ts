@@ -1,50 +1,27 @@
+export type BLOCK = {
+    "height": number,
+    "timestamp": number,
+    "difficulty": number,
+    "shares": number,
+    "uncle": boolean,
+    "uncleHeight": number,
+    "orphan": boolean,
+    "hash": string,
+    "reward": string
+}
+
+
 export type MATURED_RESPONSE = {
-    "matured": [
-        {
-            "height": number,
-            "timestamp": number,
-            "difficulty": number,
-            "shares": number,
-            "uncle": boolean,
-            "uncleHeight": number,
-            "orphan": boolean,
-            "hash": string,
-            "reward": string
-        },
-    ],
+    "matured": BLOCK[],
     "maturedTotal": number
 }
 
 export type IM_MATURED_RESPONSE = {
-        "immature": [
-            {
-                "height": number,
-                "timestamp": number,
-                "difficulty": number,
-                "shares": number,
-                "uncle": boolean,
-                "uncleHeight": number,
-                "orphan": boolean,
-                "hash": string,
-                "reward": string
-            },
-        ],
+        "immature": BLOCK[],
         "immatureTotal": number
 }
 
 export type CANDIDATES_RESPONSE = {
-    "candidates": [
-        {
-            "height": number,
-            "timestamp": number,
-            "difficulty": number,
-            "shares": number,
-            "uncle": boolean,
-            "uncleHeight": number,
-            "orphan": boolean,
-            "hash": number,
-            "reward": number
-        },
-    ],
+    "candidates": BLOCK[],
     "candidatesTotal": number
 }

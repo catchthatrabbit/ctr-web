@@ -4,7 +4,7 @@ import {siFormat} from '@site/src/utils/siFormat';
 import { convertNumber2Currency } from '@site/src/utils/convertNumber2Currency';
 import { numberFormat } from './numberFormat';
 
-type TextFormatOutputType = {
+export type TextFormatOutputType = {
     text:string
     prefix:string
     suffix:string

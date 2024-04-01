@@ -1,15 +1,15 @@
 import axios from "axios";
-import { STANDARD_REGIONS_API_VALUES } from "./types";
+import { STANDARD_REGIONS_API_KEYS } from "./types";
+import { API_SWITCH } from "../configs/pool-endpoints.config";
 
 class AxiosInstance {
 
     _axiosInstance;
 
-    constructor(region?: STANDARD_REGIONS_API_VALUES){
+    constructor(region?: STANDARD_REGIONS_API_KEYS){
 
         this._axiosInstance = axios.create({
-            baseURL: `https://${region}-api.catchthatrabbit.com/v2/api/`,
-            timeout: 1000,
+            baseURL: API_SWITCH[region],
           });
     }
 

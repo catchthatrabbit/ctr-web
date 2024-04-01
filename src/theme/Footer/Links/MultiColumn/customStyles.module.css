@@ -1,0 +1,6 @@
+.title{
+    font-family: var(--regular-font-family);
+    font-size: var(--h3-font-size-desktop);
+    line-height: var(--h3-lineHeight-desktop);
+    font-weight: var(--regular-font-weight);
+}

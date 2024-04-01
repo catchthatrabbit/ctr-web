@@ -12,8 +12,7 @@ const PictureTitle = ({image, title}:IPictureTitle) => {
 
     return <div className={styles.pictureTitleRoot}>
         <div>{image}</div>
-        <Spacer direction='horizontal' />
-        <Text size='xl'>
+        <Text variant="heading1">
             {title}
         </Text>
     </div>

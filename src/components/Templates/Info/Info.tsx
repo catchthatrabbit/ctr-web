@@ -24,10 +24,10 @@ const Info = ({data, payouts, workers}:IInfo) => {
         <>
             <div className={styles.infoRoot}>
                 <TwoColumnsPanel data={computingInformation} />
-                <Spacer direction="horizontal" />
+                <Spacer variant="md" direction="hor" />
                 <TwoColumnsPanel data={generalStats} />
             </div>
-            <Spacer variant="xLarge" />
+            <Spacer variant="xl" />
             <WalletInfoTabs payouts={payouts} workers={workers} />
         </>
     )

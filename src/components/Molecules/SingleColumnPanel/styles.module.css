@@ -1,5 +1,5 @@
 .singleColumnValue {
-    padding: var(--custom-space-md) 0px var(--custom-space-md) var(--custom-space-lg);
+    padding: var(--space-xs) 0px var(--space-xs) var(--space-lg);
     display: flex;
 }
 

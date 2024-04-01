@@ -5,13 +5,15 @@ import { Board } from '@site/src/components/Atoms/Board';
 import styles from './styles.module.css';
 import { Spacer } from '@site/src/components/Atoms/Spacer';
 import {REGIONS} from "@site/src/constants/regions";
-import { STANDARD_REGIONS_API_VALUES } from '@site/src/Api/types';
+import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 import { covertRegionValue2Label } from './utils';
 import { IBan } from '@site/src/components/Molecules/IBan';
+import { POOL_NAME_ENUM } from '@site/src/enums/poolName.enum';
 
 interface IHeader {
-    defaultRegion?: STANDARD_REGIONS_API_VALUES
+    defaultRegion?: STANDARD_REGIONS_API_KEYS
     onSearch?: (searchQuery:string) => void
+    children?:React.ReactNode
     iban?:string
     boardItems?:Array<{
         desc: string
@@ -28,49 +30,57 @@ interface IHeader {
     }
 }
 
-const Header = ({onSearch, boardItems, onChangeRegion, defaultRegion, iban, pageTitleComponent,layout = {boards:true, dropdown:true, search:true}}:IHeader) => {
+const Header = ({onSearch, boardItems, onChangeRegion, defaultRegion, iban, children,
+    pageTitleComponent,layout = {boards:true, dropdown:true, search:true}}:IHeader) => {
     
     return(
         <>
-            <Spacer variant='xLarge' />
+            <Spacer variant='xl' />
             {pageTitleComponent}
-            <Spacer variant='xLarge' />
             {layout.search && (
-                <div className='col col--12'>
-                    <Search onSearch={onSearch} />
-                </div>
+                <>
+                <Spacer variant='xl' />
+                    <div className='col col--12'>
+                        <Search onSearch={onSearch} />
+                    </div>
+                </>
             )}
-            <Spacer variant='xLarge' />
             {layout.dropdown && (
+            <>
+            <Spacer variant='xl' />
                 <div className='col col--12'>
                     <Dropdown defaultValue={covertRegionValue2Label(defaultRegion)} className={styles.boardDropdown}
                     items={
                             [
-                                {label:REGIONS.EU.label, value:REGIONS.EU.value}, 
-                                {label:REGIONS.EU_BACKUP.label, value:REGIONS.EU_BACKUP.value},
-                                {label:REGIONS.AS.label, value:REGIONS.AS.value},
-                                {label:REGIONS.AS_BACKUP.label, value:REGIONS.AS_BACKUP.value},
-                                {label:REGIONS.US.label, value:REGIONS.US.value},
-                                {label:REGIONS.US_BACKUP.label, value:REGIONS.US_BACKUP.value},
+                                {label:REGIONS.EU.label, value:POOL_NAME_ENUM.EU}, 
+                                {label:REGIONS.EU_BACKUP.label, value:POOL_NAME_ENUM.EU_BACKUP},
+                                {label:REGIONS.AS.label, value:POOL_NAME_ENUM.AS},
+                                {label:REGIONS.AS_BACKUP.label, value:POOL_NAME_ENUM.AS_BACKUP},
+                                {label:REGIONS.US.label, value:POOL_NAME_ENUM.US},
+                                {label:REGIONS.US_BACKUP.label, value:POOL_NAME_ENUM.US_BACKUP},
                             ]
                     } 
                     onChange={onChangeRegion} />
                 </div>
+            </>
             )}
-            <Spacer variant='xLarge' />
+            <Spacer variant='xl' />
             {iban && <IBan iBan={iban} />}
-            <Spacer variant='large' />
             {layout.boards && (
-                <div className={styles.boardRoot}>
-                    {
-                        boardItems?.map((boardItem, index) => 
-                            <Board key={index} description={boardItem.desc} value={boardItem.value}
-                            suffix={boardItem.suffix} prefix={boardItem.prefix} />
-                        )
-                    }
-                </div>
-            )}
-            <Spacer variant='medium' />
+                <>
+                <Spacer variant='lg' />
+                    <div className={styles.boardRoot}>
+                        {
+                            boardItems?.map((boardItem, index) => 
+                                <Board key={index} description={boardItem.desc} value={boardItem.value}
+                                suffix={boardItem.suffix} prefix={boardItem.prefix} />
+                            )
+                        }
+                    </div>
+                </>
+                )}
+            {children}
+            <Spacer variant='md' />
         </>
     )
 }

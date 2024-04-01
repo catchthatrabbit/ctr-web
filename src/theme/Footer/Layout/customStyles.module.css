@@ -1,0 +1,28 @@
+.footerLayout{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: var(--space-md);
+}
+
+.customLogo{
+    width: 256px;
+}
+
+.customLogoGrow{
+    flex-grow: 1;
+}
+
+.customLogoText{
+    margin-top:var(--space-lg);
+}
+
+.footer{
+    background-color: transparent;
+    padding-bottom: 0px;
+    padding-inline: 0px;
+}
+
+.footerCopyWrite{
+    background-color: var(--blue-rgb-600);
+    padding-block: var(--space-lg);
+}

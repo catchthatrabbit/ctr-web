@@ -1,0 +1,94 @@
+{
+  "name": "Catch that Rabbit",
+  "description": "Catch that Rabbit — ₡ORE mining pool",
+  "maintainers": {
+    "Support": {
+      "email": "support@catchthatrabbit.com",
+      "description": "If you have any questions about our pool, you can contact us freely through this email."
+    },
+    "Security": {
+      "email": "security@catchthatrabbit.com",
+      "description": "Any bug or any other security issue reports are highly and greatly appreciated."
+    },
+    "Commercial": {
+      "email": "contact@catchthatrabbit.com",
+      "description": "Please, feel free to email us with any legal and commercial questions."
+    }
+  },
+  "keywords": "catch,that,rabbit,mining,pool,core,ore,₡ORE,blockchain,xcb,xce,xab,network,open-source,open,source,mainnet,devin",
+  "images": {
+    "logo": "/images/logo.svg",
+    "favicon": "favicon.ico",
+    "og": "/images/ctr-og.jpg",
+    "twitter": "/images/ctr-tw.jpg",
+    "hero": "/images/map_bg.png"
+  },
+  "slogan": {
+    "primary": "Dedicated Pool for Core Coin and IoT devices",
+    "secondary": "「Core mining pool in the lotusland of Ores」"
+  },
+  "effects": {
+    "showLocations": true,
+    "showActionIcons": true,
+    "scaleHero": true,
+    "emoji": "🐰"
+  },
+  "meta": {
+    "ican:xcb": "cb7936b9b7980a0544a6da7ae1cea8424bac9046d997"
+  },
+  "transactionsDetailsUrl":"https://blockindex.net/tx",
+  "blocksDetailsUrl":"https://blockindex.net/block",
+  "apiBasePath":"v2/api/",
+  "useHTTPS": true,
+  "pools": {
+    "EU": {
+      "fullName": "Primary European Pool",
+      "name": "European Pool",
+      "server": "eu-api.catchthatrabbit.com",
+      "port": "8008",
+      "username": "<your wallet address>.<worker name>",
+      "password": "<empty>"
+    },
+    "EU_BACKUP": {
+      "fullName": "Backup European Pool",
+      "name": "Backup European Pool",
+      "server": "eu1-api.catchthatrabbit.com",
+      "port": "8008",
+      "username": "<your wallet address>.<worker name>",
+      "password": "<empty>"
+    },
+    "AS": {
+      "fullName": "Primary Asian Pool",
+      "name": "Asian Pool",
+      "server": "as-api.catchthatrabbit.com",
+      "port": "8008",
+      "username": "<your wallet address>.<worker name>",
+      "password": "<empty>"
+    },
+    "AS_BACKUP": {
+      "fullName": "Backup Asian Pool",
+      "name": "Backup Asian Pool",
+      "server": "as1-api.catchthatrabbit.com",
+      "port": "8008",
+      "username": "<your wallet address>.<worker name>",
+      "password": "<empty>"
+    },
+    "US": {
+      "fullName": "Primary US Pool",
+      "name": "US Pool",
+      "server": "us-api.catchthatrabbit.com",
+      "port": "8008",
+      "username": "<your wallet address>.<worker name>",
+      "password": "<empty>"
+    },
+    "US_BACKUP": {
+      "fullName": "Backup US Pool",
+      "name": "Backup US Pool",
+      "server": "us1-api.catchthatrabbit.com",
+      "port": "8008",
+      "username": "<your wallet address>.<worker name>",
+      "password": "<empty>"
+    }
+  },
+  "estd": "2022"
+}

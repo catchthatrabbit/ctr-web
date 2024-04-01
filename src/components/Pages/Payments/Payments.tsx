@@ -1,40 +1,23 @@
 import { TextFormat } from "@site/src/utils/textFormat";
 import { Header } from "../../Templates/Header";
-import { useHeaders } from "@site/src/hooks/useHeaders";
-import { useFetchPayments, useFetchPaymentsState } from "@site/src/hooks/usePayments";
-import { usePaginate } from "@site/src/hooks/usePaginate";
 import { List } from "@site/src/components/Templates/List";
-import { useMemo } from "react";
 import { convertPaymentsResponse2PaymentInfo } from "./utils";
-import { STANDARD_REGIONS_API_VALUES } from "@site/src/Api/types";
-import { TRANSACTION_DETAILS_URL } from "@site/src/constants/urls";
 import { PaymentsTitle } from "@site/src/components/Molecules/PictureTitles";
+import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
+import useControls from "./controls";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 
 
-interface IPayments{
-    defaultRegion?: STANDARD_REGIONS_API_VALUES
-    onSetWalletAddress: (walletAddress:string) => void
-    onChangeRegion?: (region:STANDARD_REGIONS_API_VALUES) => void
-}
+interface IPayments extends IAnyPageAndWallet{};
 
 const Payments = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IPayments) => {
 
-    const {handleChangeRegion, handleSearch, region, setWalletAddress} = useHeaders({defaultRegion, onSetWalletAddress, onChangeRegion});
-    const {currentPageNumber, handlePageChange} = usePaginate();
-
-    const {data:fetchedPaymentsState} = useFetchPaymentsState(region);
-    const {data:fetchedPaymentsList} = useFetchPayments(region, 10, currentPageNumber);
-
-    const dataTableColumns = useMemo(() => [
-        {value:'timestamp', label: 'Time'}, 
-        {value:'amount', label: 'Amount', alignToCenter:true}, 
-        {value:'address', label: 'Address', alignToCenter:true,isPrimary:true, fn: setWalletAddress},
-        {value:'tx', label: 'Tx id', alignToCenter:true, isPrimary:true, href:TRANSACTION_DETAILS_URL }
-    ], [])
+    const {dataTableColumns, fetchedPaymentsList, fetchedPaymentsState, handleChangeRegion, handlePageChange, handleSearch} = 
+    useControls({defaultRegion, onSetWalletAddress, onChangeRegion});
 
     return (
         <>
+            <Spacer variant='xxxxl' />
             <Header onChangeRegion={handleChangeRegion} 
             pageTitleComponent={<PaymentsTitle />}
             boardItems={
@@ -47,8 +30,10 @@ const Payments = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IPayments)
                 ]
             } 
             onSearch={handleSearch} />
-            <List data={convertPaymentsResponse2PaymentInfo(fetchedPaymentsList)} dataTableColumns={dataTableColumns} 
-            onPageChange={handlePageChange} total={fetchedPaymentsList?.paymentsTotal}/>
+            <div className="container">
+                <List data={convertPaymentsResponse2PaymentInfo(fetchedPaymentsList)} dataTableColumns={dataTableColumns} 
+                onPageChange={handlePageChange} total={fetchedPaymentsList?.paymentsTotal}/>
+            </div>
         </>
     )
 

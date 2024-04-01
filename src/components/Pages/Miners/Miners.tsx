@@ -1,43 +1,20 @@
-import { useFetchMiners, useFetchMinersState } from '@site/src/hooks/useMiners';
-import { convertMinerResponse2MinerList } from './utils';
-import { useMemo } from 'react';
 import { List } from '@site/src/components/Templates/List';
-import { MINERS_RESPONSE } from '@site/src/Api/miners/types';
-import { useHistory } from '@docusaurus/router';
-import { STANDARD_REGIONS_API_VALUES } from '@site/src/Api/types';
 import { Header } from '@site/src/components/Templates/Header';
 import {TextFormat} from '@site/src/utils/textFormat';
 import { MinersTitle } from '@site/src/components/Molecules/PictureTitles';
-import { useHeaders } from '@site/src/hooks/useHeaders';
-import { usePaginate } from '@site/src/hooks/usePaginate';
+import { IAnyPageAndWallet } from '@site/src/components/Pages/types';
+import useControls from './controls';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
 
 
-interface IMiners {
-    onSetWalletAddress: (walletAddress:string) => void
-    onChangeRegion?: (region:STANDARD_REGIONS_API_VALUES) => void
-    defaultRegion?: STANDARD_REGIONS_API_VALUES
-}
+interface IMiners extends IAnyPageAndWallet {};
 
 const Miners = ({onSetWalletAddress, defaultRegion, onChangeRegion}:IMiners) => {
-    const {push} = useHistory()
 
-    const {region, handleChangeRegion, handleSearch, setWalletAddress} = 
-    useHeaders({defaultRegion, onSetWalletAddress, onChangeRegion});
-
-    const {currentPageNumber, handlePageChange} = usePaginate();
-
-    const {data:fetchedMinerState} = useFetchMinersState(region);
-    const {data:fetchedMinerList} = useFetchMiners(region, 10, currentPageNumber);
-
-    const minerList = useMemo(() => convertMinerResponse2MinerList(fetchedMinerList as MINERS_RESPONSE), [fetchedMinerList]);
-
-    const dataTableColumns = useMemo(() => [
-        {value:'id', label: 'Miner', isPrimary:true, fn: (walletAddress) => {setWalletAddress(walletAddress); push('/miners');}}, 
-        {value:'hr', label: 'Hashrate', alignToCenter:true}, 
-        {value:'lastBeat', label: 'Last beat', alignToCenter:true}
-    ], [])
-
+    const {dataTableColumns, minerList, rowCount, handleChangeRegion, handlePageChange, handleSearch, fetchedMinerState, fetchedMinerList} = 
+    useControls({onSetWalletAddress, defaultRegion, onChangeRegion});
     return <>
+            <Spacer variant='xxxxl' />
             <Header onChangeRegion={handleChangeRegion} 
             pageTitleComponent={<MinersTitle />}
             boardItems={
@@ -55,12 +32,14 @@ const Miners = ({onSetWalletAddress, defaultRegion, onChangeRegion}:IMiners) => 
                 ]
             } 
             onSearch={handleSearch} />
-            <List
-                dataTableColumns={dataTableColumns}
-                data={minerList} 
-                onPageChange={handlePageChange} 
-                total={fetchedMinerList?.minersTotal}
-            />
+            <div className="container">
+                <List
+                    dataTableColumns={dataTableColumns}
+                    data={minerList} 
+                    onPageChange={handlePageChange} 
+                    total={fetchedMinerList?.minersTotal}
+                />
+            </div>
         </>
 
 }

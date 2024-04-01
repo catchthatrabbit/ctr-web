@@ -1,5 +1,6 @@
 @import url("colors.css");
 @import url("fonts.css");
+@import url("spaces.css");
 
 /**
  * Any CSS included here will be global. The classic template
@@ -8,20 +9,18 @@
  */
 
  :root{
-
-  --custom-space-sm: 10px;
-  --custom-space-md: 20px;
-  --custom-space-lg: 40px;
-  --custom-space-xl: 80px;
-  --custom-space-xxl: 160px;
   
-  --ifm-table-cell-padding: var(--custom-space-md) var(--custom-space-sm) var(--custom-space-md);
+  --ifm-table-cell-padding: var(--space-md) var(--space-sm) var(--space-md);
 
-  --ifm-global-spacing: var(--custom-space-md);
-  --ifm-navbar-item-padding-vertical:var(--custom-space-md);
-  --ifm-navbar-item-padding-horizontal:var(--custom-space-md);
+  --ifm-global-spacing: var(--space-md);
+  --ifm-navbar-item-padding-vertical:var(--space-xs);
+  --ifm-navbar-item-padding-horizontal:var(--space-xs);
 
   --ifm-navbar-padding-vertical: 0px;
   --ifm-navbar-padding-horizontal: 0px;
   --ifm-navbar-height: 82px;
+ }
+
+ h1,h2,h3{
+    margin:0px;
  }

@@ -1,6 +1,5 @@
-import {HTMLInputTypeAttribute, InputHTMLAttributes, forwardRef } from "react";
+import { InputHTMLAttributes, forwardRef } from "react";
 import styles from './styles.module.css';
-import { InputProps } from "react-select";
 import clsx from "clsx";
 
 const InputText = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement> & {onPressEnter?:() => void}>

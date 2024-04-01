@@ -17,8 +17,8 @@ interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   const Button = ({ onClick, icon, value, href, variant = 'outline', full = false, size, className,...restProps }: IButtonProps) => {
     const renderedButton = (
       <button onClick={onClick} className={clsx(styles.button, styles[variant], styles[size], styles.full && full, className)} {...restProps} >
-        <div className={styles.buttonIcon}>{icon}</div>
-        <Text size={variant === 'email' ? 'md' : 'sm'} variant="normal">
+        {icon && <div className={styles.buttonIcon}>{icon}</div>}
+        <Text variant={variant === 'email' ? 'smallBody' : 'tinyBody'}>
           {value}
         </Text>
       </button>

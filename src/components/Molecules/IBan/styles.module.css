@@ -9,4 +9,5 @@
     white-space: normal;
     line-break: anywhere;
     font-family: monospace;
+    margin-right: var(--space-lg);
 }

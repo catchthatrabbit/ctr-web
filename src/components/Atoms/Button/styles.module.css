@@ -5,8 +5,8 @@
       cursor: pointer;
       user-select: none;
       border-radius: 10px;
-      color: var(--blue-0);
-      padding: var(--custom-space-md);
+      color: var(--white);
+      padding: var(--space-xs);
       text-align: center;
       white-space: nowrap;
       border: 1px solid var(--blue-rgb-700);
@@ -15,20 +15,20 @@
 
   .buttonIcon{
     vertical-align: baseline;
-    padding-right: var(--custom-space-sm);
+    padding-right: var(--space-sm);
   }
 
   .small{
-    padding: var(--custom-space-sm);
+    padding: calc(var(--space-xs) / 2);
   }
 
   .medium{
-    padding: var(--custom-space-md);
+    padding: var(--space-md);
     min-width: 215px;
   }
 
   .large{
-    padding: var(--custom-space-lg) var(--custom-space-xl)
+    padding: var(--space-lg) var(--space-xl)
   }
 
   .full{
@@ -40,7 +40,7 @@
   }
   
   .button:hover {
-    border: 1px solid var(--blue-600);
+    border: 1px solid var(--gray-700);
     background-color: var(--blue-rgb-700);
   }
   

@@ -1,46 +1,39 @@
 import clsx from "clsx";
-import { FC, HtmlHTMLAttributes } from "react";
+import { FC, HtmlHTMLAttributes, createElement } from "react";
 
 import styles from "./styles.module.css";
 
 interface ISpacer extends HtmlHTMLAttributes<HTMLDivElement> {
-  direction?: "vertical" | "horizontal";
-  variant?: "small" | "medium" | "large" | "xLarge" | "xxLarge";
+  direction?: "vert" | "hor";
+  variant?: "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "xxxl" | "xxxxl";
 }
 
-const directionAndVariantToClassName = {
-  vertical: {
-    small: "spacerVertSmall",
-    medium: "spacerVertMedium",
-    large: "spacerVertLarge",
-    xLarge: "spacerVertXLarge",
-    xxLarge: "spacerVertXXLarge"
-  },
-  horizontal: {
-    small: "spacerHorSmall",
-    medium: "spacerHorMedium",
-    large: "spacerHorLarge",
-    xLarge: "spacerHorXLarge",
-    xxLarge: "spacerHorXXLarge"
-  },
-};
-
+/**
+ * 
+ * @param variant -xs: 16px;
+ *                -sm: 24px;
+ *                -md: 32px;
+ *                -lg: 40px;
+ *                -xl: 48px;
+ *                -xxl: 64px;
+ *                -xxxl: 80px;
+ *                -xxxxl: 160px; 
+ * @returns 
+ */
 const Spacer: FC<ISpacer> = ({
-  direction = "vertical",
-  variant = "medium",
+  direction = "vert",
+  variant = "md",
   className,
   ...restProps
 }) => {
-  return (
-    <div
-      {...restProps}
-      className={clsx([
-        styles.spacer,
-        styles[directionAndVariantToClassName[direction][variant]],
-        className,
-      ])}
-    />
-  );
+  return createElement(direction === "vert" ? "div" : "span", {
+    className: clsx([
+      styles[`spacer-${direction}`],
+      styles[`spacer-${direction}-${variant}`],
+      className,
+    ]),
+    ...restProps,
+  });
 };
 
 export default Spacer;

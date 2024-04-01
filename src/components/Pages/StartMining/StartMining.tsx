@@ -14,17 +14,16 @@ import clsx from "clsx";
 import { Search } from "@site/src/components/Molecules/Search";
 import { TwoColumnsPanel } from "@site/src/components/Molecules/TwoColumnsPanel";
 import { useFetchSettings } from "@site/src/hooks/useSettings";
-import { STANDARD_REGIONS_API_VALUES } from "@site/src/Api/types";
 import { useHeaders } from "@site/src/hooks/useHeaders";
 import { convertSettingsResponse2SettingsInfo } from "./utils";
+import { IAnyPageAndWallet } from "../types";
+import { useControls } from "./controls";
 
-interface IStartMining {
-    defaultRegion?: STANDARD_REGIONS_API_VALUES
-    onSetWalletAddress: (walletAddress:string) => void
-    onChangeRegion?: (region:STANDARD_REGIONS_API_VALUES) => void
-}
+interface IStartMining extends IAnyPageAndWallet{};
 
 const StartMining = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IStartMining) => {
+
+    const {GO_CORE_CLIENT_URL, ICAN_WALLET_URL} = useControls();
 
     const inputStartMiningRef = useRef<HTMLInputElement>();
 
@@ -39,9 +38,9 @@ const StartMining = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IStartM
 
     return (
         <div className="container">
-            <Spacer variant='xLarge' />
+            <Spacer variant='xxxxl' />
             <PoolTitle />
-            <Spacer variant="large" />
+            <Spacer variant="xl" />
             {Object.keys(REGIONS).map(REGION_KEY => (
                 <>
                     <SingleColumnPanel title={REGIONS[REGION_KEY].summary} data={[
@@ -50,58 +49,58 @@ const StartMining = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IStartM
                         {label:"Username", value:"<your wallet address>.<worker name>"},
                         {label:"Password", value:"<empty>"},
                     ]}/>
-                    <Spacer variant="large" />
+                    <Spacer variant="lg" />
                 </>
             ))}
             <GetStartedTitle />
-            <Spacer variant="large" />
-            <Panel titleSize="md" title="Step 1: Get a Wallet">
+            <Spacer variant="lg" />
+            <Panel variant="heading3" title="Step 1: Get a Wallet">
                 <PanelContent>
-                    <Text size="sm" variant="values"> Please, download the Core Wallet, where you can securely store your rewards. </Text>
-                    <Spacer variant="small" />
-                    <br />
-                    <Text variant="values" size="sm">You can download</Text>
-                    <Text variant="link" size="sm">&nbsp; go-core client &nbsp;</Text>
-                    <Text variant="values" >or use</Text>
-                    <Text variant="link">&nbsp; generator of ICAN wallets.</Text>
-                    <br />
-                    <Spacer/>
+                    <Text componentType="p" variant="body" type="value"> Please, download the Core Wallet, where you can securely store your rewards. </Text>
+                    <Text variant="body" type="value">You can download</Text>
+                    <a href={GO_CORE_CLIENT_URL} target="_blank"><Text variant="body" color="primary" type="value">&nbsp; go-core client &nbsp;</Text></a>
+                    <Text variant="body" type="value" >or use</Text>
+                    <a href={ICAN_WALLET_URL} target="_blank"><Text type="value" color="primary" variant="body">&nbsp; generator of ICAN wallets.</Text></a>
+                    <Spacer variant="xs"/>
+                    <Text componentType="p" type="value" variant="body">Always remember to backup your private key! Clear your terminal session and history if needed:&nbsp;</Text>
+                    <Spacer variant="sm"/>
                     <KBD>
                         clear && history -c
                     </KBD>
+                    <Spacer variant="sm" />
+                    <Text type="value" variant="body" componentType="p">No Private key = No Coins!</Text>
+                    <Spacer  variant="sm" />
+                    <div className={clsx(styles.lineFlex, styles.alignItemsCenter)}>
+                    <Text variant="body">Go-core command:</Text>
+                    <KBD>chmod -x gocore && ./gocore account new</KBD></div>
                     <Spacer />
-                    <Text size="sm" variant="values">Always remember to backup your private key! Clear your terminal session and history if needed:</Text>
-                    <br />
-                    <Text size="sm" variant="values">No Private key = No Coins!</Text>
-                    <br />
-                    <div className={clsx(styles.lineFlex, styles.alignItemsCenter)}><Text size="sm">Go-core command:</Text><Spacer direction="horizontal" /><KBD>chmod -x gocore && ./gocore account new</KBD></div>
-                    <Spacer />
-                    <div className={clsx(styles.lineFlex, styles.alignItemsCenter)}><Text>Wallet Generator command:</Text><Spacer direction="horizontal" /> <KBD>chmod -x wallet-generator && ./wallet-generator</KBD></div>
-                    <Spacer variant="xLarge" />
-                    <Title size="md" title="Step 2: Download & Configure Verification software">
-                        <Spacer variant="large" />
-                        <Text variant="values" size="sm">You can automatically download and configure software with just one command</Text>
-                        <Spacer variant="small" />
-                        <Text variant="values" size="sm">Or you can download the software and set it up.</Text>
-                        <br />
-                        <Text variant="values" size="sm">You can choose from the following software:</Text>
+                    <div className={clsx(styles.lineFlex, styles.alignItemsCenter)}>
+                        <Text variant="body">Wallet Generator command:</Text>
+                        <KBD>chmod -x wallet-generator && ./wallet-generator</KBD>
+                    </div>
+                    <Spacer variant="xl" />
+                    <Title variant="subheading" title="Step 2: Download & Configure Verification software">
+                        <Text type="value" variant="body">You can automatically download and configure software with just one command</Text>
+                        <Spacer variant="xs" />
+                        <Text variant="body" type="value">Or you can download the software and set it up.</Text>
+                        <Spacer variant="lg" />
+                        <Text variant="body" type="value">You can choose from the following software:</Text>
                     </Title>
-                    <Spacer variant="large" />
+                    <Spacer variant="lg" />
                     <div className={clsx("col col--7",styles.coreMiner)}>
-                        <Panel title="CoreMiner">
+                        <Panel title="CoreMiner" variant="heading2">
                             <div className={styles.panelContent}>
-                                <Text variant="values">Fast & Open-source miner with excellent hardware support & 0% fees.</Text>
-                                <Spacer variant="small"/>
-                                <Text variant="values">OS: Ubuntu, Raspbian</Text>
-                                <br />
-                                <Text variant="values">CPUs: AMD, Intel, ARM</Text>
-                                <br />
-                                <Text variant="values">Fee: 0%</Text>
+                                <Text variant="smallBody" type="value">Fast & Open-source miner with excellent hardware support & 0% fees.</Text>
+                                <Spacer variant="xs"/>
+                                <Text variant="smallBody" type="value" componentType="p">OS: Ubuntu, Raspbian</Text>
+                                <Text variant="smallBody" type="value" componentType="p">CPUs: AMD, Intel, ARM</Text>
+                                <Text variant="smallBody" type="value">Fee: 0%</Text>
                                 <Spacer />
-                                <Text variant="values">Command to configure the software:</Text>
+                                <Text variant="smallBody" type="value">Command to configure the software:</Text>
+                                <Spacer variant="xs" />
                                 <InputText ref={inputStartMiningRef} className={styles.input} onFocus={handleOnFocus}
                                 value="bash <(curl -s https://raw.githubusercontent.com/catchthatrabbit/coreminer/master/mine.sh)" />
-                                <Spacer variant="large" />
+                                <Spacer variant="lg" />
                                 <div className={clsx(styles.lineFlex, styles.justifyContentCenter)}>
                                     <Link to="https://github.com/catchthatrabbit/coreminer/releases">
                                         <Button value="Download Release" ></Button>
@@ -110,34 +109,33 @@ const StartMining = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IStartM
                             </div>
                         </Panel>
                     </div>
-                    <Spacer variant="xxLarge" />
-                    <Title size="md" title="Step 3: Choose your server">
-                        <Text size="sm" variant="values">
+                    <Spacer variant="xxl" />
+                    <Title variant="subheading" title="Step 3: Choose your server">
+                        <Text variant="body" type="value">
                             We have Geo-locations to choose from:
                         </Text>
-                        <Spacer variant="large" />
-                        <div className={styles.lineFlex}>
+                        <Spacer variant="lg" />
+                        <div className={clsx(styles.lineFlex, "row")}>
                             {Object.keys(REGIONS).map((REGION_KEY, index) => (
-                                <>
+                                <div className={clsx(styles.buttonConfigLessPadding, "col col--2")}>
                                     <Button key={index} className={styles.buttonConfig}
                                     href={`#${REGIONS[REGION_KEY].value}`} value={REGIONS[REGION_KEY].summary} />
-                                    <Spacer direction="horizontal"  />
-                                </>
+                                </div>
                             ))}
                         </div>
                     </Title>
-                    <Spacer variant="large" />
-                    <Title size="md" title="Step 4: Go To Dashboard">
-                        <Text size="sm" variant="values">To access the Dashboard, type your address below.</Text>
-                        <Spacer variant="large" />
+                    <Spacer variant="lg" />
+                    <Title variant="subheading" title="Step 4: Go To Dashboard">
+                        <Text type="value" variant="body">To access the Dashboard, type your address below.</Text>
+                        <Spacer variant="lg" />
                         <div className={clsx(styles.marginAuto,"col col--11")}><Search onSearch={handleSearch} /></div>
 
                     </Title>
                 </PanelContent>
             </Panel>
-            <Spacer variant="large" />
+            <Spacer variant="lg" />
             <TwoColumnsPanel data={{title:'Pool details', data:convertSettingsResponse2SettingsInfo(fetchSettings)}} />
-            <Spacer variant="xLarge" />
+            <Spacer variant="xl" />
         </div>
     )
 

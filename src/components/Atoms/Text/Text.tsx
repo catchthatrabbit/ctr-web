@@ -1,73 +1,97 @@
+import { FC, HtmlHTMLAttributes, createElement, ReactNode } from "react";
 import clsx from "clsx";
-import { FC, HtmlHTMLAttributes } from "react";
 // eslint-disable-next-line import/no-unresolved
 import Translate from "@docusaurus/Translate";
-
-import { Spacer } from "../Spacer";
+import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
 import styles from "./styles.module.css";
-
+/**
+ * 
+ * @param variant - heading1  font size 38 
+ * heading2  font size 22
+ * heading3  font size 20 
+ * subheading  font size 18
+ * body  font size 16
+ * smallBody  font size 14
+ * tinyBody  font size 12
+ * tag  font size 11
+ * CTA; font size 11
+ * @returns React.Node
+ */
 interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
-  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
+  type?: "label" | "value" | "regular";
   variant?:
-    | "normal"
-    | "primary"
-    | "primaryLabels"
-    | "menu"
-    | "link"
-    | "values";
-  position?: "right" | "center" | "left";
-  thickness?: "bold" | "narrow";
+    | "heading1" /** font size 38 */
+    | "heading2" /** font size 22 */
+    | "heading3" /** font size 20 */
+    | "subheading" /** font size 18 */
+    | "body" /** font size 16 */
+    | "smallBody" /** font size 14 */
+    | "tinyBody" /** font size 12 */
+    | "tag" /** font size 11 */
+    | "CTA"; /** font size 11 */
+  weight?: "normal" | "bold";
+  color?: "primary" | "white" | "gray";
+  componentType?: keyof JSX.IntrinsicElements;
+  decorating?: "simple" | "underlined" | "link";
   children: string;
 }
 
-const SizeToCssClassName = {
-  "3xl": "threeXLarge",
-  "2xl": "twoXLarge",
-  xl: "xLarge",
-  lg: "large",
-  md: "medium",
-  sm: "small",
-  xs: "xSmall",
-};
-
-const TitleWithIndicator: FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  return (
-    <div className={styles.titleIndicator}>
-      <Spacer direction="horizontal" />
-      {children}
-    </div>
-  );
+const CustomComponent: FC<
+  Omit<IText, "children"> & { children?: ReactNode }
+> = ({ variant, children, className, componentType, ...restProps }) => {
+  return variant === "heading1" ||
+    variant === "heading2" ||
+    variant === "heading3"
+    ? createElement(
+        (variant === "heading1" && "h1") ||
+          ("heading2" && "h2") ||
+          ("heading3" && "h3"),
+        { className, ...restProps },
+        children,
+      )
+    : createElement(componentType, { className, ...restProps }, children);
 };
 
 const Text: FC<IText> = ({
-  variant = "normal",
-  size = "xs",
-  thickness = "narrow",
+  variant = "subheading",
+  weight = "normal",
   children,
   className,
-  position,
+  type = "regular",
+  componentType = "span",
+  color = "white",
   ...restProps
 }) => {
+  const { mobile, tablet } = useMediaQueries();
   const renderTitle = (
-    <div
+    <CustomComponent
+      variant={variant}
+      componentType={componentType}
       className={clsx([
-        styles[SizeToCssClassName[size]],
-        variant && styles[variant],
-        styles[thickness],
-        styles[position],
         styles.text,
+        variant === "heading1" ||
+        variant === "heading2" ||
+        variant === "heading3"
+          ? tablet
+            ? styles[`${variant}-tablet`]
+            : mobile
+              ? styles[`${variant}-mobile`]
+              : styles[variant]
+          : styles[variant],
+        !mobile && !tablet && styles[variant],
+        styles[weight],
+        styles[type],
+        styles[color],
         className,
       ])}
       {...restProps}
     >
       <Translate>{children}</Translate>
-    </div>
+    </CustomComponent>
   );
 
-  return renderTitle
+  return renderTitle;
 };
 
 export default Text;

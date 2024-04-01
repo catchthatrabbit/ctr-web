@@ -7,16 +7,15 @@ import clsx from 'clsx';
 interface IPanel {
     title?: string
     children?: React.ReactNode
-    variant?:"menu" | "normal" | "primary" | "primaryLabels" | "values"
-    size?:"xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl"
+    variant?: "body" | "heading1" | "heading2" | "heading3" | "subheading" | "smallBody" | "tinyBody" | "tag" | "CTA"
     className?:string
 }
 
-const Title = ({title="", variant="normal", children, size = 'lg', className}:IPanel) => {
+const Title = ({title="", variant="body", children, className}:IPanel) => {
 
     return(<>
             <div className={styles.panelTitleBase}>
-                <Text variant={variant} size={size} className={className}>{title}</Text>
+                <Text variant={variant} className={className}>{title}</Text>
             </div>
             <Spacer />
                 {children}

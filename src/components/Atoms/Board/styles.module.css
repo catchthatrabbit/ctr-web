@@ -9,7 +9,7 @@
     justify-content: space-between;
     border: 1px solid var(--blue-100);
     border-radius: 10px;
-    margin-inline: calc(2 * var(--custom-space-md));
+    margin-inline: var(--space-xs);
 }
 
 .boardItem{

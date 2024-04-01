@@ -1,6 +1,8 @@
 .detailsRow {
     width: 100%;
     margin:auto;
+    display: flex;
+    align-items: center;
 }
 
 .detailsRow:nth-child(even) {
@@ -8,12 +10,12 @@
 }
 
 .detailsTableCaption {
-    padding: var(--custom-space-md) 0px var(--custom-space-md) var(--custom-space-lg);
-    border-right: 1px solid var(--blue-600);
+    padding: var(--space-xs) 0px var(--space-xs) var(--space-lg);
+    border-right: 1px solid var(--gray-700);
     width: 50%;
 }
 
 .detailsTableValue {
-    padding: var(--custom-space-md) 0px var(--custom-space-md) var(--custom-space-lg);
+    padding: var(--space-xs) 0px var(--space-xs) var(--space-lg);
     width: 50%;
 }

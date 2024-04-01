@@ -1,0 +1,23 @@
+.emptyRoot{
+    width: 100%;
+    border: 1px solid var(--gray-700);
+    background-color: var(--blue-rgb-650);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ifm-global-radius);
+    margin: var(--space-xl) 0px;
+}
+
+.small{
+    height: 100px;
+}
+
+.medium{
+    height: 300px;
+}
+
+.large{
+    height: 600px;
+}

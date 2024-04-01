@@ -23,7 +23,7 @@ const Search = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement
     return (
         <div className="container">
             <div className="row">
-                <InputText ref={ref || inputRef} onPressEnter={handleSearch} {...restProps} />
+                <InputText placeholder='Search by wallet address...' ref={ref || inputRef} onPressEnter={handleSearch} {...restProps} />
                 <button className={styles.searchButton} onClick={handleClickSearchButton}>
                     <Magnifier />
                 </button>

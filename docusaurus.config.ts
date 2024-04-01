@@ -29,6 +29,28 @@ const config: Config = {
     locales: ['en'],
   },
 
+  customFields: {
+    EU_PRIMARY_API_ENDPOINT : null,
+    NEXT_PUBLIC_EU_PRIMARY_API_ENDPOINT : null,
+    EU_BACKUP_API_ENDPOINT:null,
+    NEXT_PUBLIC_EU_BACKUP_API_ENDPOINT:null,
+    AS_PRIMARY_API_ENDPOINT:null,
+    NEXT_PUBLIC_AS_PRIMARY_API_ENDPOINT:null,
+    AS_BACKUP_API_ENDPOINT:null,
+    NEXT_PUBLIC_AS_BACKUP_API_ENDPOINT:null,
+    US_PRIMARY_API_ENDPOINT:null,
+    NEXT_PUBLIC_US_PRIMARY_API_ENDPOINT:null,
+    US_BACKUP_API_ENDPOINT:null,
+    NEXT_PUBLIC_US_BACKUP_API_ENDPOINT:null,
+    US_START_MINING_POOL_LOCATION : null,
+    EU_START_MINING_POOL_LOCATION : null,
+    AS_START_MINING_POOL_LOCATION : null,
+    ESTD: null,
+    TRANSACTION_DETAILS_URL: null,
+    BLOCK_DETAILS_URL:null,
+    GO_CORE_CLIENT_URL:null
+  },
+
   presets: [
     [
       'classic',
@@ -87,48 +109,68 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
+      logo: {
+        alt: 'My Site Logo',
+        src: 'img/logo.svg',
+      },      
       links: [
         {
-          title: 'Docs',
+          title: 'Start',
           items: [
             {
-              label: 'Tutorial',
+              label: 'Start mining',
+              to: '/docs/intro',
+            },
+            {
+              label: 'EU pool',
+              to: '/docs/intro',
+            },
+            {
+              label: 'AS pool',
+              to: '/docs/intro',
+            },
+            {
+              label: 'US pool',
               to: '/docs/intro',
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Stats',
           items: [
             {
-              label: 'Stack Overflow',
+              label: 'Miners',
               href: 'https://stackoverflow.com/questions/tagged/docusaurus',
             },
             {
-              label: 'Discord',
+              label: 'Latest blocks',
               href: 'https://discordapp.com/invite/docusaurus',
             },
             {
-              label: 'Twitter',
+              label: 'Payments',
               href: 'https://twitter.com/docusaurus',
             },
           ],
         },
         {
-          title: 'More',
+          title: 'About',
           items: [
             {
-              label: 'Blog',
+              label: 'Contact',
               to: '/blog',
             },
             {
-              label: 'GitHub',
+              label: 'Pool details',
+              href: 'https://github.com/facebook/docusaurus',
+            },
+            {
+              label: 'Mining software',
               href: 'https://github.com/facebook/docusaurus',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} Catch that Rabbit. All rights reserved.`,
     },
     prism: {
       theme: prismThemes.github,

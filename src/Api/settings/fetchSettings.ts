@@ -1,20 +1,20 @@
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { AxiosInstance } from "../api"
-import { STANDARD_REGIONS_API_VALUES } from "../types";
+import { STANDARD_REGIONS_API_KEYS } from "../types";
 import {SETTINGS_RESPONSE } from "./types";
 
-export const fetchSettings = async (region:STANDARD_REGIONS_API_VALUES) => {
+export const fetchSettings = async ({region}:{region:STANDARD_REGIONS_API_KEYS}) => {
 
     try{
         const instance = new AxiosInstance(region).getInstance();
     
-        const response = await (instance.get(`/settings`) as AxiosResponse<SETTINGS_RESPONSE>);
+        const response = instance.get(`/settings`) as Promise<AxiosResponse<SETTINGS_RESPONSE>>;
     
-        return response.data;
+        return (await response).data;
     }catch(e){
         console.error(e);
 
-        return {} as SETTINGS_RESPONSE;
+        return Promise.reject(e as AxiosError);
     }
 
 }

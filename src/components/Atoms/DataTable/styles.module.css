@@ -2,11 +2,11 @@
     width:100%;
     border: 1px solid var(--blue-rgb-700);
     border-radius: var(--ifm-global-radius);
-    padding: var(--custom-space-xl) 0px;
+    padding: var(--space-xl) 0px;
 }
 
 .tablePaddingLeft{
-    padding-left: var(--custom-space-xl);
+    padding-left: var(--space-xl);
 }
 
 .tableRow::nth-child(even){
@@ -31,6 +31,10 @@
 
 .tableCenteredText{
     text-align: center;
+}
+
+.cursorPointer{
+    cursor: pointer;
 }
 
 .table > tbody > tr > td,

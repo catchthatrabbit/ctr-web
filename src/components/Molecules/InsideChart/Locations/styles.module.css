@@ -1,0 +1,36 @@
+
+.locations{
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+.mapPin {
+    position: absolute;
+}
+
+.pinWrapper{
+  position: absolute;
+  top:195px;
+  width: 100%;
+  left:0px;
+}
+
+.Us{
+  left: 126px;
+}
+
+.Eu{
+  left: 420px;
+}
+
+.As{
+  left: 710px;
+}
+
+
+.bgImage{
+  height: 100%;
+  width: 100%;
+}

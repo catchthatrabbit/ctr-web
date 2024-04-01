@@ -1,7 +1,6 @@
 import { Text } from '@site/src/components/Atoms/Text';
 import styles from './styles.module.css';
 import clsx from 'clsx';
-import { Spacer } from '../../Atoms/Spacer';
 import React from 'react';
 import { Panel } from '@site/src/components/Molecules/Panel';
 
@@ -22,8 +21,8 @@ const TwoColumnsPanel = ({data}:IDetailsTable) => {
     return <Panel title={data.title}>
                 {data?.data?.map((item, index) => (
                     <div key={index} className={styles.detailsRow}>
-                        <Text size='sm' className={clsx(styles.detailsTableCaption)}>{item.title}</Text>
-                        <Text variant='values' className={clsx(styles.detailsTableValue)}>{item.value?.toString() || ''}</Text>
+                        <Text weight='normal' componentType='div' variant='body' className={clsx(styles.detailsTableCaption)}>{item.title}</Text>
+                        <Text weight='normal' componentType='div' variant='smallBody' type='value' className={clsx(styles.detailsTableValue)}>{item.value?.toString() || ''}</Text>
                     </div>
                 ))}
             </Panel>

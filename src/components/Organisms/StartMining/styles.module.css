@@ -1,0 +1,16 @@
+.startMining{
+    background-color: var(--blue-rgb-600);
+}
+
+.startMiningContent{
+    padding-block: calc(2 * var(--space-lg));
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button{
+    padding:var(--space-xs)!important;
+    min-width:215px;
+}

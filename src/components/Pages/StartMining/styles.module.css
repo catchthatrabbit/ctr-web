@@ -1,5 +1,5 @@
 .panelContent{
-    padding: var(--custom-space-md) var(--custom-space-lg);
+    padding: var(--space-md) var(--space-lg);
 }
 
 .lineFlex{
@@ -18,20 +18,25 @@
 .coreMiner{
     margin: auto;
     background-color: var(--blue-rgb-600);
+    padding: 0px;
 }
 
 .input{
     color:var(--ifm-color-primary)!important;
 }
 
+.buttonConfigLessPadding{
+    padding-inline: var(--space-xs);
+}
+
 .buttonConfig{
-    width: 254px;
-    margin-top: var(--custom-space-md);
-    margin-bottom: var(--custom-space-md);
+    width: 100%;
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-md);
 }
 
 .buttonConfigAmong{
-    margin-inline: var(--custom-space-md);
+    margin-inline: var(--space-md);
 }
 
 .marginAuto{

@@ -1,5 +1,7 @@
 .navBarContainer{
     font-family: var(--ifm-font-family-base);
+    font-size: var(--subheading-font-size);
+    line-height: var(--subheading-lineHeight);
 }
 
 .navBarContainerMiningItem{

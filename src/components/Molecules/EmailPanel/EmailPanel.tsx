@@ -15,10 +15,10 @@ const EmailPanel = ({title, text, emailAddress}:IEmailPanel) => {
 
     return <Panel title={title}>
         <div className={styles.emailValue}>
-            <Text variant="values" size="sm">
+            <Text variant="body" type="value">
                 {text}
             </Text>
-            <Spacer variant="large" />
+            <Spacer variant="lg" />
             <Link to={`mailto:${emailAddress}`}>
                 <Button value={emailAddress} variant="email" size="large" />
             </Link>

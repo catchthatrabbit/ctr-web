@@ -1,32 +1,32 @@
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { AxiosInstance } from "../api"
 import { MINERS_RESPONSE, MINERS_STATES } from "./types";
-import {STANDARD_REGIONS_API_VALUES} from '../types';
+import {STANDARD_REGIONS_API_KEYS} from '../types';
 
-export const fetchMiners = async (region:STANDARD_REGIONS_API_VALUES, limit = 10, offset = 0) => {
+export const fetchMiners = async (region:STANDARD_REGIONS_API_KEYS, limit = 10, offset = 0) => {
     try{
         const instance = new AxiosInstance(region).getInstance();
-        const response = await (instance.get(`/miners?limit=${limit}&offset=${offset}`) as AxiosResponse<MINERS_RESPONSE>);
-        return response.data;
+        const response = instance.get(`/miners?limit=${limit}&offset=${offset}`) as Promise<AxiosResponse<MINERS_RESPONSE, any>>;
+        return (await response).data;
     }
     catch(e){
         console.error(e)
-        return {} as MINERS_RESPONSE;
+        return e as AxiosError;
     }
 
 }
 
-export const fetchMinersState = async (region:STANDARD_REGIONS_API_VALUES) => {
+export const fetchMinersState = async (region:STANDARD_REGIONS_API_KEYS) => {
     try{
         const instance = new AxiosInstance(region).getInstance();
     
-        const response = await (instance.get('/miners_stats') as AxiosResponse<MINERS_STATES>);
+        const response = instance.get('/miners_stats') as Promise<AxiosResponse<MINERS_STATES, any>>;
     
-        return response.data;
+        return (await response).data;
     }catch(e){
         console.error(e);
 
-        return {} as MINERS_STATES;
+        return e as AxiosError;
     }
 
 }

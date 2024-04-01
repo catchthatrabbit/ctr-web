@@ -2,7 +2,6 @@ import React from 'react';
 import { Panel } from "@site/src/components/Molecules/Panel";
 import styles from './styles.module.css';
 import { Text } from '@site/src/components/Atoms/Text';
-import { Spacer } from '../../Atoms/Spacer';
 
 interface ISingleColumnPanel {
 
@@ -17,14 +16,14 @@ interface ISingleColumnPanel {
 const SingleColumnPanel = ({title, data}:ISingleColumnPanel) => {
 
 
-    return( <Panel title={title} variant='primaryLabels' titleClassName={styles.singlePanel}>
+    return( <Panel title={title} variant='heading2' color='primary' titleClassName={styles.singlePanel}>
         {data?.map(item => (
             <div className={styles.singleColumnValue}>
-                <Text size='md' variant='values'>
-                    {`${item.label}: `}
+                <Text type='value' variant='subheading'>
+                    {`${item.label}:`}
                 </Text>
-                <Spacer direction='horizontal' />
-                <Text size='md' variant='values'>
+                &nbsp;&nbsp;
+                <Text type='value' variant='subheading'>
                     {item.value}
                 </Text>
             </div>

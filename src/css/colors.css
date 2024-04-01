@@ -1,23 +1,35 @@
 /* You can override the default Infima variables here. */
 :root {
 
-    --blue-0: #FFFFFF;
-    --blue-100: #BCCBF0;
-    --blue-200: #999eac;
-    --blue-600: #424259; /* rgb(66, 66, 89) */
-    --blue-900:#181A1F;  
-    
-    --green-300: #46B549;
+    --white: #FFFFFF;
 
+    --gray-100:#999eac; /* SantasGray rgb(153, 158, 172) */
+    --gray-700:#424259; /* rgb(66, 66, 89) */
+    --grey-800: #46484c;
+    --gray-900:#181A1F;
+
+    --blue-100: #BCCBF0;
+
+    --green-300: #46B549;
+    --greenYellow: #ADFF2F;
+    --ocean-blue: #315d65;
+
+
+    --white-rgb-06: rgb(255, 255, 255, 0.6);
+    --white-rgb-04: rgb(255, 255, 255, 0.4);
+    --white-rgb-02: rgb(255, 255, 255, 0.2);
+
+
+    --blue-rgb-400: rgb(93, 99, 115, 0.1);
     --blue-rgb-500: rgba(66, 66, 89, 0.1);
     --blue-rgb-600: rgba(66, 66, 89, 0.2);
     --blue-rgb-650: rgba(66, 66, 89, 0.25);
     --blue-rgb-700: rgba(66, 66, 89, 0.5);
     --blue-rgb-900: rgba(0, 0, 0, 0.75);
-    --ifm-navbar-background-color: var(--blue-900);
+    --ifm-navbar-background-color: var(--gray-900);
 
-    --ifm-color-emphasis-0:var(--blue-0);
-    --ifm-color-emphasis-500:var(--blue-200);
+    --ifm-color-emphasis-0:var(--white);
+    --ifm-color-emphasis-500:var(--gray-100);
 
     --ifm-tabs-color-active:var( --ifm-color-emphasis-0);
 
@@ -53,7 +65,7 @@
 
   html, body{
 
-    background-color: var(--blue-900);
+    background-color: var(--gray-900);
 
   }
   
