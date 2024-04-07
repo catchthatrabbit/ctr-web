@@ -8,7 +8,9 @@ import { Spacer } from "@site/src/components/Atoms/Spacer";
 
 const Blocks = () => {
 
-    const  {region, dataTableColumns, fetchCandidatesBlocks, fetchedImMatureBlocks, fetchedMaturedBlocks, handleChangeRegion, handlePageChange} = 
+    const  {region, dataTableColumns, fetchCandidatesBlocks, fetchedImMatureBlocks, fetchedMaturedBlocks, 
+        isLoadingCandidatesBlocks, isLoadingImMatureBlocks, isLoadingMaturedBlocks,
+        handleChangeRegion, handlePageChange} = 
     useControls()
 
     return (
@@ -19,18 +21,24 @@ const Blocks = () => {
             <div className="container">
                 <BlockListTabs 
                     blocks={
-                        <List data={convertAnyBlocksResponse2AnyBlocksInfo(fetchedMaturedBlocks?.data, "matured")} onPageChange={handlePageChange}
-                        dataTableColumns={dataTableColumns} total={fetchedMaturedBlocks?.data?.maturedTotal} 
+                        <List data={convertAnyBlocksResponse2AnyBlocksInfo(fetchedMaturedBlocks, "matured")} 
+                        isLoading={isLoadingMaturedBlocks}
+                        onPageChange={handlePageChange}
+                        dataTableColumns={dataTableColumns} total={fetchedMaturedBlocks?.maturedTotal} 
                         />
                         } 
                     immature={
-                        <List data={convertAnyBlocksResponse2AnyBlocksInfo(fetchedImMatureBlocks?.data, "immature")} onPageChange={handlePageChange}
-                        dataTableColumns={dataTableColumns} total={fetchedImMatureBlocks?.data?.immatureTotal} 
+                        <List data={convertAnyBlocksResponse2AnyBlocksInfo(fetchedImMatureBlocks, "immature")}
+                        isLoading={isLoadingImMatureBlocks} 
+                        onPageChange={handlePageChange}
+                        dataTableColumns={dataTableColumns} total={fetchedImMatureBlocks?.immatureTotal} 
                         />
                     }
                     candidates={
-                        <List data={convertAnyBlocksResponse2AnyBlocksInfo(fetchCandidatesBlocks?.data, "candidates")} onPageChange={handlePageChange}
-                        dataTableColumns={dataTableColumns} total={fetchCandidatesBlocks?.data?.candidatesTotal} 
+                        <List data={convertAnyBlocksResponse2AnyBlocksInfo(fetchCandidatesBlocks, "candidates")} 
+                        isLoading={isLoadingCandidatesBlocks}
+                        onPageChange={handlePageChange}
+                        dataTableColumns={dataTableColumns} total={fetchCandidatesBlocks?.candidatesTotal} 
                         />
                     }
                 />

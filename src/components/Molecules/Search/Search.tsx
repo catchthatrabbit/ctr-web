@@ -2,6 +2,7 @@ import { Magnifier } from '@site/src/icons';
 import styles from './styles.module.css';
 import { InputHTMLAttributes, forwardRef, useRef } from 'react';
 import { InputText } from '@site/src/components/Atoms/InputText';
+import clsx from 'clsx';
 
 interface ISearch {
     onSearch?: (searchQuery:string) => void
@@ -22,8 +23,9 @@ const Search = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement
 
     return (
         <div className="container">
-            <div className="row">
-                <InputText placeholder='Search by wallet address...' ref={ref || inputRef} onPressEnter={handleSearch} {...restProps} />
+            <div className={clsx("row", styles.search)}>
+                <InputText className={styles.searchInput} 
+                placeholder='Search by wallet address...' ref={ref || inputRef} onPressEnter={handleSearch} {...restProps} />
                 <button className={styles.searchButton} onClick={handleClickSearchButton}>
                     <Magnifier />
                 </button>

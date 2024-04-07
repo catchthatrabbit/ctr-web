@@ -1,6 +1,8 @@
 @import url("colors.css");
 @import url("fonts.css");
 @import url("spaces.css");
+@import url("grid.css");
+@import url("breakpoints.css");
 
 /**
  * Any CSS included here will be global. The classic template
@@ -10,7 +12,7 @@
 
  :root{
   
-  --ifm-table-cell-padding: var(--space-md) var(--space-sm) var(--space-md);
+  --ifm-table-cell-padding: var(--space-sm) var(--space-xs) var(--space-sm);
 
   --ifm-global-spacing: var(--space-md);
   --ifm-navbar-item-padding-vertical:var(--space-xs);
@@ -19,6 +21,11 @@
   --ifm-navbar-padding-vertical: 0px;
   --ifm-navbar-padding-horizontal: 0px;
   --ifm-navbar-height: 82px;
+  --ifm-global-radius: 8px;
+  --ifm-navbar-shadow: rgb(24, 26, 31) 0px 4px 18px 6px;
+
+  --ifm-container-width: 1440px;
+  --ifm-container-width-xl: 1440px;
  }
 
  h1,h2,h3{

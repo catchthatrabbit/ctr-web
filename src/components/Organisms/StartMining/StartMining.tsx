@@ -18,7 +18,7 @@ const StartMining = () => {
                     Let's jump into it
                 </Text>
                 <Spacer variant="xl" />
-                <Button className={styles.button} variant="email" value="Start mining" href="/start-mining"/>
+                <Button className={styles.button} value="Start mining" href="/start-mining"/>
             </div>
         </div>
     )

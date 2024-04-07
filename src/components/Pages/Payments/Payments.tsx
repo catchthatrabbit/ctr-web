@@ -12,13 +12,14 @@ interface IPayments extends IAnyPageAndWallet{};
 
 const Payments = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IPayments) => {
 
-    const {dataTableColumns, fetchedPaymentsList, fetchedPaymentsState, handleChangeRegion, handlePageChange, handleSearch} = 
+    const {dataTableColumns, fetchedPaymentsList, fetchedPaymentsState, handleChangeRegion, handlePageChange, 
+        handleSearch, isLoadingPaymentState, isLoadingPaymentList} = 
     useControls({defaultRegion, onSetWalletAddress, onChangeRegion});
 
     return (
         <>
             <Spacer variant='xxxxl' />
-            <Header onChangeRegion={handleChangeRegion} 
+            <Header onChangeRegion={handleChangeRegion} isLoading={isLoadingPaymentState}
             pageTitleComponent={<PaymentsTitle />}
             boardItems={
                 [
@@ -31,7 +32,8 @@ const Payments = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IPayments)
             } 
             onSearch={handleSearch} />
             <div className="container">
-                <List data={convertPaymentsResponse2PaymentInfo(fetchedPaymentsList)} dataTableColumns={dataTableColumns} 
+                <List isLoading={isLoadingPaymentList} data={convertPaymentsResponse2PaymentInfo(fetchedPaymentsList)} 
+                dataTableColumns={dataTableColumns} 
                 onPageChange={handlePageChange} total={fetchedPaymentsList?.paymentsTotal}/>
             </div>
         </>

@@ -14,10 +14,9 @@ const useControls = ({onSetWalletAddress, defaultRegion, onChangeRegion}:IAnyPag
     const {region, handleChangeRegion, handleSearch, setWalletAddress} = 
     useHeaders({defaultRegion, onSetWalletAddress, onChangeRegion});
     
-    const {currentPageNumber, handlePageChange} = usePaginate();
-    
-    const {data:fetchedMinerState} = useFetchMinersState(region);
-    const {data:fetchedMinerList} = useFetchMiners(region, 10, currentPageNumber);
+    const {currentPageNumber, handlePageChange} = usePaginate();    
+    const {data:fetchedMinerState, isLoading:isLoadingMinerState} = useFetchMinersState(region);
+    const {data:fetchedMinerList, isLoading:isLoadingMinerList} = useFetchMiners(region, 10, currentPageNumber);
     
     const minerList = useMemo(() => convertMinerResponse2MinerList(fetchedMinerList as MINERS_RESPONSE), [fetchedMinerList]);
     
@@ -35,7 +34,9 @@ const useControls = ({onSetWalletAddress, defaultRegion, onChangeRegion}:IAnyPag
         handleChangeRegion,
         handlePageChange,
         fetchedMinerState, 
-        fetchedMinerList
+        fetchedMinerList,
+        isLoadingMinerState,
+        isLoadingMinerList
     }
 }
 

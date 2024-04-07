@@ -10,15 +10,21 @@ interface IPagination {
     onPageChange?: (currentPage:number) => void
     className?: string
     emptyComponent?:React.ReactNode 
+    isLoading?: boolean
+    loadingCompo?: React.ReactNode
 }
 
-const Pagination = ({limit=10, offset=0, total=0,className, onPageChange, emptyComponent = <></>}:IPagination) => {
+const Pagination = ({limit=10, offset=0, total=0,className, onPageChange, emptyComponent = <></>, isLoading, loadingCompo}:IPagination) => {
 
 
     const handleChangePage = ( selectedItem:{selected:number}) => {
         if(typeof onPageChange === "function")
             onPageChange(selectedItem.selected);
     }
+
+    if(isLoading)
+        return <div className={styles.pagination}>{[1,2,3,4,5].map((_, index) => 
+        <div key={index} className={clsx([styles.paginationItem, styles.paginationLoadingSkeleton])}>{loadingCompo} </div>)}</div>;
 
     return total === 0? emptyComponent 
         :

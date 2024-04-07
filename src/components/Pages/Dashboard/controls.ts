@@ -8,15 +8,14 @@ import { EXTERNAL_URL } from "@site/src/constants/links";
 import { EXTERNAL_URL_ENUM } from "@site/src/enums/externalUrls.enum";
 
 const useControls = () => {
-
+  
   const {siteConfig} = useDocusaurusContext();
 
-  const {chart:radialChartData, infoBox:infoBoxRadialData} = useRadialBarChartData();
+  const {chart:radialChartData, infoBox:infoBoxRadialData, isLoading: isLoadingRadialBarChart} = useRadialBarChartData();
 
-  const {infoBoxItems:infoBoxMapData, poolFee} = useMapChartData();
+  const {infoBoxItems:infoBoxMapData, poolFee, isLoading:isLoadingMapChart} = useMapChartData();
 
-  const [{data:AllRegionsMaturedBlocks}] = useFetchAllRegionsMaturedBlocks();
-
+  const {data:AllRegionsMaturedBlocks, isLoading:isLoadingAllRegionMaturedBlocks} = useFetchAllRegionsMaturedBlocks();
 
   const dataTableColumns = useMemo(() => [
     {value:'height', label: 'Height', isPrimary:true, alignToCenter:true, href: String(siteConfig.customFields.BLOCK_DETAILS_URL || 
@@ -39,7 +38,10 @@ const useControls = () => {
     asStarMiningPoolLocation:(siteConfig.customFields.AS_START_MINING_POOL_LOCATION || AS_START_MINING_POOL_LOCATION) as string,
     estd: (siteConfig.customFields.estd !== "" && siteConfig.customFields.estd !== undefined) ? siteConfig.customFields.estd : (new Date().getFullYear().toString()),
     AllRegionsMaturedBlocks,
-    recentMatureBlockListColumns:dataTableColumns
+    recentMatureBlockListColumns:dataTableColumns,
+    isLoadingRadialBarChart,
+    isLoadingMapChart,
+    isLoadingAllRegionMaturedBlocks
   }
 
 }

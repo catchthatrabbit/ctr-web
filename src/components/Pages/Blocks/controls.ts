@@ -1,6 +1,6 @@
 import { useHeaders } from '@site/src/hooks/useHeaders';
 import { usePaginate } from '@site/src/hooks/usePaginate';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { tablesConfig } from '@site/src/configs';
 import { POOL_NAME_ENUM } from '@site/src/enums/poolName.enum';
 import { useFetchAllBlocks } from '@site/src/hooks/useBlocks';
@@ -29,9 +29,12 @@ const useControls = () => {
         dataTableColumns,
         handleChangeRegion,
         handlePageChange,
-        fetchedMaturedBlocks, 
-        fetchedImMatureBlocks,
-        fetchCandidatesBlocks,
+        isLoadingMaturedBlocks:fetchedMaturedBlocks.isLoading,
+        fetchedMaturedBlocks:fetchedMaturedBlocks?.data, 
+        isLoadingImMatureBlocks: fetchedImMatureBlocks.isLoading,
+        fetchedImMatureBlocks: fetchedImMatureBlocks?.data,
+        isLoadingCandidatesBlocks: fetchCandidatesBlocks.isLoading,
+        fetchCandidatesBlocks: fetchCandidatesBlocks?.data,
         rowCount: tablesConfig.PAGE_LIMIT
     }
 }

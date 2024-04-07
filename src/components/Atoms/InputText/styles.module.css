@@ -1,11 +1,19 @@
 .inputText {
-    width: calc(100% - 68px);
+    width: 100%;
     padding: 18px 20px;
-    font-family: Arial, Calibri;
-    font-size: 16px;
-    border-radius: 10px 0px 0px 10px;
-    border: 1px solid rgb(66, 66, 89);
-    color: rgb(255, 255, 255);
-    background-color: rgba(66, 66, 89, 0.35);
+    font-family: var(--value-font-family);
+    font-size: var(--body-font-size);
+    border-radius: var(--ifm-global-radius);
+    border: 1px solid var(--gray-700);
+    color: var(--white);
+    background-color: var(--blue-rgb-600);
     transition: all 0.1s ease-in-out 0s;
+}
+
+.inputText:focus-visible{
+    border: 1px solid var(--gray-100);
+}
+
+.inputText::placeholder {
+    color: var(--gray-700); 
 }

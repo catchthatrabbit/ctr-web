@@ -9,28 +9,30 @@ import styles from './styles.module.css';
 import { MessageProvider } from '@site/src/components/Providers/Message';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import clsx from 'clsx';
 
 
 
 interface IConfiguredLayout {
     children: React.ReactNode
     hideBackground?: boolean
+    backgroundPos?:number
 }
 
-const ConfiguredLayout = ({children, hideBackground}:IConfiguredLayout) => {
+const ConfiguredLayout = ({children, hideBackground, backgroundPos = 10}:IConfiguredLayout) => {
     const {siteConfig} = useDocusaurusContext();
     const queryClient = new QueryClient();
 
    return (
         <Layout
-        title={`Hello from ${siteConfig.title}`}
-        description="Description will go into a meta tag in <head />">
+            title={`${siteConfig.title} — ${siteConfig.tagline}`}
+            description={siteConfig.tagline}>
             <QueryClientProvider client={queryClient}>
                 <MessageProvider>
+                        <main className={clsx([{[styles.background]:!hideBackground}, styles[`backgroundPos-${backgroundPos}`]])}>
+                            {children}
+                        </main>
                     <ToastContainer />
-                    <main className={!hideBackground && styles.background || ""}>
-                        {children}
-                    </main>
                 </MessageProvider>
             </QueryClientProvider>
         </Layout>

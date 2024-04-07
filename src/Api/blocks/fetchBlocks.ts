@@ -13,7 +13,7 @@ export const fetchMatured = async (region:STANDARD_REGIONS_API_KEYS, limit = 10,
     }
     catch(e){
         console.error(e)
-        return e as AxiosError;
+        return Promise.reject(e as AxiosError);
     }
 
 }
@@ -25,7 +25,7 @@ export const fetchAllRegionsMatured = async () => {
         return statsResponses?.map(statsResp => statsResp.data);
     }catch(e){
         console.error(e);
-        return e as AxiosError;
+        return Promise.reject(e as AxiosError);
     }
 }
 
@@ -37,7 +37,7 @@ export const fetchImMatured = async (region:STANDARD_REGIONS_API_KEYS, limit = 1
     }
     catch(e){
         console.error(e)
-        return e as AxiosError;
+        return Promise.reject(e as AxiosError);
     }
 
 }
@@ -51,7 +51,7 @@ export const fetchCandidates = async (region:STANDARD_REGIONS_API_KEYS, limit = 
     }
     catch(e){
         console.error(e)
-        return e as AxiosError;
+        return Promise.reject(e as AxiosError);
     }
 
 }

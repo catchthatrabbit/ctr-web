@@ -15,6 +15,7 @@ interface IHeader {
     onSearch?: (searchQuery:string) => void
     children?:React.ReactNode
     iban?:string
+    isLoading?: boolean
     boardItems?:Array<{
         desc: string
         value: string
@@ -30,8 +31,8 @@ interface IHeader {
     }
 }
 
-const Header = ({onSearch, boardItems, onChangeRegion, defaultRegion, iban, children,
-    pageTitleComponent,layout = {boards:true, dropdown:true, search:true}}:IHeader) => {
+const Header = ({onSearch, boardItems, onChangeRegion, defaultRegion, iban, children, isLoading=false,
+    pageTitleComponent,layout = {boards:true, dropdown:true, search:true,}}:IHeader) => {
     
     return(
         <>
@@ -72,7 +73,7 @@ const Header = ({onSearch, boardItems, onChangeRegion, defaultRegion, iban, chil
                     <div className={styles.boardRoot}>
                         {
                             boardItems?.map((boardItem, index) => 
-                                <Board key={index} description={boardItem.desc} value={boardItem.value}
+                                <Board isLoading={isLoading} key={index} description={boardItem.desc} value={boardItem.value}
                                 suffix={boardItem.suffix} prefix={boardItem.prefix} />
                             )
                         }

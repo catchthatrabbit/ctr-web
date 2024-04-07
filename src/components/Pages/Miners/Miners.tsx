@@ -11,11 +11,12 @@ interface IMiners extends IAnyPageAndWallet {};
 
 const Miners = ({onSetWalletAddress, defaultRegion, onChangeRegion}:IMiners) => {
 
-    const {dataTableColumns, minerList, rowCount, handleChangeRegion, handlePageChange, handleSearch, fetchedMinerState, fetchedMinerList} = 
+    const {dataTableColumns, minerList, rowCount, isLoadingMinerList, isLoadingMinerState, handleChangeRegion, handlePageChange, handleSearch, fetchedMinerState, fetchedMinerList} = 
     useControls({onSetWalletAddress, defaultRegion, onChangeRegion});
     return <>
             <Spacer variant='xxxxl' />
             <Header onChangeRegion={handleChangeRegion} 
+            isLoading={isLoadingMinerState}
             pageTitleComponent={<MinersTitle />}
             boardItems={
                 [
@@ -34,6 +35,7 @@ const Miners = ({onSetWalletAddress, defaultRegion, onChangeRegion}:IMiners) => 
             onSearch={handleSearch} />
             <div className="container">
                 <List
+                    isLoading={isLoadingMinerList}
                     dataTableColumns={dataTableColumns}
                     data={minerList} 
                     onPageChange={handlePageChange} 

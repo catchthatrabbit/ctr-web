@@ -5,6 +5,7 @@ import { Text } from "@site/src/components/Atoms/Text";
 import clsx from 'clsx';
 
 interface IPanel {
+    id?: string
     title?: string
     children?: React.ReactNode
     variant?: "body" | "heading1" | "heading2" | "heading3" | "subheading" | "smallBody" | "tinyBody" | "tag" | "CTA"
@@ -13,9 +14,9 @@ interface IPanel {
     className?:string
 }
 
-const Panel = ({title="", variant="heading2", children, titleClassName, className, color}:IPanel) => {
+const Panel = ({id, title="", variant="heading2", children, titleClassName, className, color}:IPanel) => {
 
-    return(<div className={clsx(styles.panelRoot, className)}>
+    return(<div id={id} className={clsx(styles.panelRoot, className)}>
                 <div className={clsx(styles.panelTitleBase, styles.panelTitle)}>
                     <Text color={color} variant={variant} className={titleClassName}>{title}</Text>
                 </div>

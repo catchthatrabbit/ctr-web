@@ -7,28 +7,22 @@ import { HTMLAttributes } from "react";
 interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
     onClick?: () => void
     href?: string
-    variant?: 'outline' | 'transparent' | 'email'
     size?: 'small' | 'medium' | 'large'
     full?: boolean
     icon?: React.ReactNode;
     value: string
   }
   
-  const Button = ({ onClick, icon, value, href, variant = 'outline', full = false, size, className,...restProps }: IButtonProps) => {
+  const Button = ({ onClick, icon, value, href, full = false, size, className,...restProps }: IButtonProps) => {
     const renderedButton = (
-      <button onClick={onClick} className={clsx(styles.button, styles[variant], styles[size], styles.full && full, className)} {...restProps} >
+      <button onClick={onClick} className={clsx(styles.button, styles.outline, styles[size], styles.full && full, className)} {...restProps} >
         {icon && <div className={styles.buttonIcon}>{icon}</div>}
-        <Text variant={variant === 'email' ? 'smallBody' : 'tinyBody'}>
+        <Text variant={size === 'large' ? 'body' : 'smallBody'}>
           {value}
         </Text>
       </button>
     )
-    if (variant === 'email') {
-      return <Link href={'mailto:' + value} className="buttonlink">{renderedButton}</Link>
-    }
-    if (href) {
-      return <Link href={href} className="buttonlink">{renderedButton}</Link>
-    }
+
     return renderedButton
   }
   

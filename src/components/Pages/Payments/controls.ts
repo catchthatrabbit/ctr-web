@@ -12,8 +12,8 @@ const useControls = ({onSetWalletAddress, defaultRegion, onChangeRegion}:IAnyPag
     const {handleChangeRegion, handleSearch, region, setWalletAddress} = useHeaders({defaultRegion, onSetWalletAddress, onChangeRegion});
     const {currentPageNumber, handlePageChange} = usePaginate();
 
-    const {data:fetchedPaymentsState} = useFetchPaymentsState(region);
-    const {data:fetchedPaymentsList} = useFetchPayments(region, 10, currentPageNumber);
+    const {data:fetchedPaymentsState, isLoading: isLoadingPaymentState} = useFetchPaymentsState(region);
+    const {data:fetchedPaymentsList, isLoading: isLoadingPaymentList} = useFetchPayments(region, 10, currentPageNumber);
 
     const dataTableColumns = useMemo(() => [
         {value:'timestamp', label: 'Time'}, 
@@ -30,6 +30,8 @@ const useControls = ({onSetWalletAddress, defaultRegion, onChangeRegion}:IAnyPag
         handlePageChange,
         fetchedPaymentsList,
         fetchedPaymentsState, 
+        isLoadingPaymentState, 
+        isLoadingPaymentList
     }
 }
 

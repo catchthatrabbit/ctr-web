@@ -1,0 +1,13 @@
+
+.skeletonBorderItem{
+    height: 88px;
+    margin-inline: var(--space-xs);
+  }
+  
+  .removePadding{
+    padding:0px;
+  }
+  
+  .borderRadius{
+    border-radius: var(--ifm-global-radius);
+  }

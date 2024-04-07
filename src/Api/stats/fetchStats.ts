@@ -13,7 +13,7 @@ export const fetchStats = async () => {
     }catch(e){
         console.error(e);
 
-        return e as AxiosError;
+        return Promise.reject(e as AxiosError);
     }
 
 }

@@ -7,12 +7,14 @@ import { POOL_NAME_ENUM } from '@site/src/enums/poolName.enum';
 import { fetchWorkersByWalletAddress } from '@site/src/Api/workers/fetchWorkers';
 import { useQueryConfigured } from './useQueryConfigured';
 import { WORKER_BY_WALLET_ADDRESS_RESPONSE } from '../Api/workers/types';
+import { WALLET_INFO_RESPONSE } from '../Api/wallet/types';
 
 
 
 export const useFetchWallet = (region:STANDARD_REGIONS_API_KEYS, walletAddress:string) =>{
-    return useQuery({queryKey:[QUERY_KEYS.WALLET_INFO, walletAddress], queryFn: () => fetchWalletInfo(region, walletAddress), 
-        enabled:walletAddress !== undefined});
+    
+    return useQueryConfigured<WALLET_INFO_RESPONSE>({region, walletAddress}, QUERY_KEYS.WALLET_INFO, fetchWalletInfo, walletAddress !== undefined);
+    
 }
 
 

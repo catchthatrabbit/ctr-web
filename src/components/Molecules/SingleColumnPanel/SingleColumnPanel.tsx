@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 import { Text } from '@site/src/components/Atoms/Text';
 
 interface ISingleColumnPanel {
+    id?: string
 
     title? :string
 
@@ -13,12 +14,12 @@ interface ISingleColumnPanel {
 
 }
 
-const SingleColumnPanel = ({title, data}:ISingleColumnPanel) => {
+const SingleColumnPanel = ({title, data, id}:ISingleColumnPanel) => {
 
 
-    return( <Panel title={title} variant='heading2' color='primary' titleClassName={styles.singlePanel}>
-        {data?.map(item => (
-            <div className={styles.singleColumnValue}>
+    return( <Panel id={id} title={title} variant='heading2' color='primary' titleClassName={styles.singlePanel}>
+        {data?.map((item, index) => (
+            <div key={index} className={styles.singleColumnValue}>
                 <Text type='value' variant='subheading'>
                     {`${item.label}:`}
                 </Text>

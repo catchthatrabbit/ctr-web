@@ -3,7 +3,7 @@ import { AxiosInstance } from "../api"
 import { STANDARD_REGIONS_API_KEYS } from "../types";
 import { WALLET_INFO_RESPONSE } from "./types";
 
-export const fetchWalletInfo = async (region:STANDARD_REGIONS_API_KEYS, walletAddress:string) => {
+export const fetchWalletInfo = async ({region, walletAddress}:{region:STANDARD_REGIONS_API_KEYS, walletAddress:string}) => {
 
     try{
         const instance = new AxiosInstance(region).getInstance();

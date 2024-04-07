@@ -27,3 +27,11 @@
     width: 140px;
     height: 62px;
 }
+
+.activeNavItemLink{
+    border-bottom: 1px solid var(--white);
+}
+
+.activeNavItemLink:hover{
+    border-bottom: 1px solid transparent;
+}

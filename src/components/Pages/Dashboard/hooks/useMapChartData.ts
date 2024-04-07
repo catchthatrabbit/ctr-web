@@ -7,7 +7,7 @@ import { STATS_RESPONSE } from "@site/src/Api/stats/types";
 
 const useMapChartData = () => {
 
-    const {data:statsResponse} = useFetchStats();
+    const {data:statsResponse, isLoading} = useFetchStats();
 
     const {data:settingsResponse} = useFetchSettings(POOL_NAME_ENUM.EU);
     
@@ -17,7 +17,7 @@ const useMapChartData = () => {
 
     if(statsResponse?.length > 0 )
         stats = reduceList(statsResponse, aggregator);
-    return convertPoolChartDataToMapChartInfoBox(stats, settingsResponse);
+    return {...convertPoolChartDataToMapChartInfoBox(stats, settingsResponse), isLoading};
 }
 
 export default useMapChartData;

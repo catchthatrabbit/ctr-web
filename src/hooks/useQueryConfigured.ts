@@ -10,7 +10,7 @@ export const useQueryConfigured = <T>(fnProps:Object,
 
     const {setMessage, message} = useMessage();
 
-    const {data, isError, error} = useQuery({queryKey:[queryKey, Object.values(fnProps)], 
+    const {data, isError, error, isLoading} = useQuery({queryKey:[queryKey, Object.values(fnProps)], 
         queryFn: () => fetchFn(fnProps), ...DEFAULT_REACT_QUERY_OPTIONS, enabled});
 
     useEffect(() => {
@@ -20,6 +20,6 @@ export const useQueryConfigured = <T>(fnProps:Object,
             setMessage({text:null, type:null});
     }, [isError])
 
-    return {data: data as T};
+    return {data: data as T, isLoading};
 
 }

@@ -20,7 +20,7 @@ const EmailPanel = ({title, text, emailAddress}:IEmailPanel) => {
             </Text>
             <Spacer variant="lg" />
             <Link to={`mailto:${emailAddress}`}>
-                <Button value={emailAddress} variant="email" size="large" />
+                <Button value={emailAddress} size="large" />
             </Link>
         </div>
     </Panel>

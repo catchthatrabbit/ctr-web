@@ -1,25 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {useThemeConfig, ErrorCauseBoundary} from '@docusaurus/theme-common';
 import {
   splitNavbarItems,
   useNavbarMobileSidebar,
 } from '@docusaurus/theme-common/internal';
-import Link from '@docusaurus/Link'
 import NavbarItem from '@theme/NavbarItem';
-import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle';
 import SearchBar from '@theme/SearchBar';
 import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
 import NavbarLogo from '@theme/Navbar/Logo';
 import NavbarSearch from '@theme/Navbar/Search';
-import styles from './styles.module.css';
 import customStyles from './customStyles.module.css';
 import './custom.css';
 import clsx from 'clsx';
+import useIsBrowser from "@docusaurus/useIsBrowser";
 function useNavbarItems() {
   // TODO temporary casting until ThemeConfig type is improved
   return useThemeConfig().navbar.items;
 }
 function NavbarItems({items}) {
+  const isBrowser = useIsBrowser();
+  const [activatePageName, setActivatePageName] = useState(null);
+
+  useEffect(() => {
+    if(isBrowser)
+    {
+      const currentPathname = window.location.pathname;
+      const foundActivePageName = items?.find(item => item.href === currentPathname)?.href;
+
+      if(foundActivePageName)
+        setActivatePageName(foundActivePageName)
+    }
+  }, [isBrowser])
+
   return (
     <>
       {items.map((item, i) => (
@@ -33,7 +45,8 @@ ${JSON.stringify(item, null, 2)}`,
               {cause: error},
             )
           }>
-          <NavbarItem {...item} />
+          <NavbarItem className={clsx([{[customStyles.activeNavItemLink]:item.href === activatePageName}, 
+            {[customStyles.navBarContainerMiningItem]:items?.length === i + 1}])} {...item} />
         </ErrorCauseBoundary>
       ))}
     </>
@@ -68,8 +81,6 @@ export default function NavbarContent() {
           // Ask the user to add the respective navbar items => more flexible
           <>
             <NavbarItems items={rightItems} />
-            <Link to={'/start-mining'} className={clsx('navbar__item navbar__link',customStyles.navBarContainerMiningItem)}>Start mining</Link>
-            <NavbarColorModeToggle className={styles.colorModeToggle} />
             {!searchBarItem && (
               <NavbarSearch>
                 <SearchBar />

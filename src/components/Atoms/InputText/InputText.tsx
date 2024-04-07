@@ -3,11 +3,11 @@ import styles from './styles.module.css';
 import clsx from "clsx";
 
 const InputText = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement> & {onPressEnter?:() => void}>
-(({className, placeholder,...restProps},ref) => {
+(({className, placeholder, onPressEnter,...restProps},ref) => {
 
     const handleSearchOnPressEnter = (e) => {
-        if(e.key === 'Enter' && typeof  restProps.onPressEnter === "function") {
-            restProps.onPressEnter();
+        if(e.key === 'Enter' && typeof onPressEnter === "function") {
+            onPressEnter();
         }
     }
 

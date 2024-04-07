@@ -4,8 +4,20 @@
     cursor: pointer;
     user-select: none;
     border: none;
-    border-radius: 0px 10px 10px 0px;
-    color: rgb(255, 255, 255);
-    background: rgb(66, 66, 89);
+    border-radius: 0px var(--ifm-global-radius) var(--ifm-global-radius) 0px;
+    color: var(--white);
+    background: var(--gray-700);
     transition: all 0.1s ease-in-out 0s;
+    right: 69px;
+    position: absolute;
+}
+
+.searchInput{
+    border-radius: var(--ifm-global-radius);
+    padding-right: 90px;
+    margin-inline: 69px;
+}
+
+.search {
+    position: relative;
 }

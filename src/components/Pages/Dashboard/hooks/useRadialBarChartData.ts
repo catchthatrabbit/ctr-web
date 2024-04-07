@@ -5,7 +5,7 @@ import { ChartItem } from "../types";
 import { TextFormatOutputType } from "@site/src/utils/textFormat";
 
 const useRadialBarChartData = () => {
-    const {data:statsChartsData} = useFetchStatsCharts();
+    const {data:statsChartsData, isLoading} = useFetchStatsCharts();
 
     let infoBox:Array<{title:string, value:TextFormatOutputType}> = null;
     let chart: ChartItem[] = null;
@@ -46,7 +46,7 @@ const useRadialBarChartData = () => {
         infoBox = convertPoolChartDataToRadialInfoBox({ ...statsChartsData[0], lastBlockFound });
     chart = convertPoolChartDataToChartData(stats?.poolCharts || []);
 
-    return {infoBox, chart};
+    return {infoBox, chart, isLoading};
 }
 
 export default useRadialBarChartData;

@@ -41,16 +41,16 @@ const StartMining = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IStartM
             <Spacer variant='xxxxl' />
             <PoolTitle />
             <Spacer variant="xl" />
-            {Object.keys(REGIONS).map(REGION_KEY => (
-                <>
-                    <SingleColumnPanel title={REGIONS[REGION_KEY].summary} data={[
+            {Object.keys(REGIONS).map((REGION_KEY, index) => (
+                <div key={index}>
+                    <SingleColumnPanel id={REGIONS[REGION_KEY].value} title={REGIONS[REGION_KEY].summary} data={[
                         {label:"Server", value:REGIONS[REGION_KEY].url},
                         {label:"Port", value:"8008"},
                         {label:"Username", value:"<your wallet address>.<worker name>"},
                         {label:"Password", value:"<empty>"},
                     ]}/>
                     <Spacer variant="lg" />
-                </>
+                </div>
             ))}
             <GetStartedTitle />
             <Spacer variant="lg" />
@@ -78,7 +78,7 @@ const StartMining = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IStartM
                         <Text variant="body">Wallet Generator command:</Text>
                         <KBD>chmod -x wallet-generator && ./wallet-generator</KBD>
                     </div>
-                    <Spacer variant="xl" />
+                    <Spacer id="software" variant="xl" />
                     <Title variant="subheading" title="Step 2: Download & Configure Verification software">
                         <Text type="value" variant="body">You can automatically download and configure software with just one command</Text>
                         <Spacer variant="xs" />
@@ -98,8 +98,8 @@ const StartMining = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IStartM
                                 <Spacer />
                                 <Text variant="smallBody" type="value">Command to configure the software:</Text>
                                 <Spacer variant="xs" />
-                                <InputText ref={inputStartMiningRef} className={styles.input} onFocus={handleOnFocus}
-                                value="bash <(curl -s https://raw.githubusercontent.com/catchthatrabbit/coreminer/master/mine.sh)" />
+                                <InputText readOnly ref={inputStartMiningRef} className={styles.input} onFocus={handleOnFocus}
+                                defaultValue="bash <(curl -s https://raw.githubusercontent.com/catchthatrabbit/coreminer/master/mine.sh)" />
                                 <Spacer variant="lg" />
                                 <div className={clsx(styles.lineFlex, styles.justifyContentCenter)}>
                                     <Link to="https://github.com/catchthatrabbit/coreminer/releases">
@@ -117,9 +117,11 @@ const StartMining = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IStartM
                         <Spacer variant="lg" />
                         <div className={clsx(styles.lineFlex, "row")}>
                             {Object.keys(REGIONS).map((REGION_KEY, index) => (
-                                <div className={clsx(styles.buttonConfigLessPadding, "col col--2")}>
-                                    <Button key={index} className={styles.buttonConfig}
-                                    href={`#${REGIONS[REGION_KEY].value}`} value={REGIONS[REGION_KEY].summary} />
+                                <div key={index} className={clsx(styles.buttonConfigLessPadding, "col col--2")}>
+                                    <Link to={`#${REGIONS[REGION_KEY].value}`}>
+                                        <Button className={styles.buttonConfig}
+                                        value={REGIONS[REGION_KEY].summary} />
+                                    </Link>
                                 </div>
                             ))}
                         </div>
@@ -133,7 +135,7 @@ const StartMining = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IStartM
                     </Title>
                 </PanelContent>
             </Panel>
-            <Spacer variant="lg" />
+            <Spacer id="pool-details" variant="lg" />
             <TwoColumnsPanel data={{title:'Pool details', data:convertSettingsResponse2SettingsInfo(fetchSettings)}} />
             <Spacer variant="xl" />
         </div>

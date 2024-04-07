@@ -26,7 +26,7 @@
 }
 
 .buttonConfigLessPadding{
-    padding-inline: var(--space-xs);
+    padding-inline: calc(var(--space-xs) / 4);
 }
 
 .buttonConfig{

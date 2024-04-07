@@ -1,16 +1,18 @@
-import {useQuery} from '@tanstack/react-query';
 import {QUERY_KEYS} from "@site/src/constants/queryKeys";
 import { fetchMinersState } from "../Api/miners/fetchMiners";
 import { STANDARD_REGIONS_API_KEYS } from '../Api/types';
 import { fetchMiners } from '../Api/miners/fetchMiners';
-import { useMessage } from './useMessage';
+import { useQueryConfigured } from './useQueryConfigured';
+import { MINERS_RESPONSE, MINERS_STATES } from '../Api/miners/types';
 
 export const useFetchMinersState = (region:STANDARD_REGIONS_API_KEYS) =>{
-    const {data, isError, error} = useQuery({queryKey:[QUERY_KEYS.STATE, region], queryFn: () => fetchMinersState(region)});
+   
+    return useQueryConfigured<MINERS_STATES>({region}, QUERY_KEYS.MINERS,fetchMinersState);
 
-    return {data}
 }
 
 export const useFetchMiners = (region:STANDARD_REGIONS_API_KEYS, limit?:number, offset?:number) =>{
-    return useQuery({queryKey:[QUERY_KEYS.MINERS, region, limit, offset], queryFn: () => fetchMiners(region, limit, offset)});
+    
+    return useQueryConfigured<MINERS_RESPONSE>({region, limit, offset} ,QUERY_KEYS.MINERS, fetchMiners);
+
 }
