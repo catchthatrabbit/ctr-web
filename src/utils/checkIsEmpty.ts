@@ -10,7 +10,7 @@ export const checkArrayObjectIsEmpty = (inputData):boolean => {
             isEmpty = true;
             break;
     }
-
+    
     if(Array.isArray(inputData) && inputData.length > 0)
     {
         inputData.forEach(input => {
@@ -18,6 +18,10 @@ export const checkArrayObjectIsEmpty = (inputData):boolean => {
                 isEmpty = true;
         })
         
+    }
+    else
+    {
+        isEmpty = true;
     }
 
     return isEmpty;

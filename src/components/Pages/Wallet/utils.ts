@@ -18,7 +18,7 @@ export const convertWorkersResponse2Info = (workerResponse:WORKER_BY_WALLET_ADDR
             hr: `${siFormat(workerResponse.workers[key].hr, 2)}h/s`, 
             hr2: `${siFormat(workerResponse.workers[key].hr2, 2)}h/s`,
             lastBeat: ageCalculation(convertTime2Date(workerResponse.workers[key].lastBeat)),
-            offline: workerResponse.workers[key].offline
+            offline: generateWorkerOfflineEmoji(workerResponse.workers[key].offline)
         }));
 }
 
@@ -33,4 +33,12 @@ export const convertPaymentsResponse2PaymentInfo = (paymentResponse:PAYMENTS_BY_
         tx: payment.tx,
         tx_summarized:summarizedText(payment.tx, 10, payment?.tx?.length -6)
     }));
+}
+
+export const generateWorkerOfflineEmoji = (workerOffline:boolean = false) => {
+
+    if(workerOffline)
+        return "BRB ⏳";
+    else
+        return "OK 🐰";
 }

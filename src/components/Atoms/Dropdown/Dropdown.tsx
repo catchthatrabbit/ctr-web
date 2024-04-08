@@ -7,13 +7,16 @@ interface IDropdown {
     onChange?: (newValue: {value:string, label:string}, actionMeta: ActionMeta<unknown>) => void
     defaultValue?: string
     className?:string
+    isLoading?: boolean
 }
   
 
-const Dropdown = ({items, onChange, defaultValue, className}:IDropdown) => {
+const Dropdown = ({items, onChange, defaultValue, className, isLoading}:IDropdown) => {
 
     return (
         <Select
+            isLoading={isLoading}
+            isDisabled={isLoading}
             className={className}
             isSearchable={false}
             isClearable={false}

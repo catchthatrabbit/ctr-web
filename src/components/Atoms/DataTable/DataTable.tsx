@@ -6,6 +6,7 @@ import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import { checkArrayObjectIsEmpty } from "@site/src/utils/checkIsEmpty";
 import React from "react";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 export interface IDataTable {
     columns: Array<{value:string, label:string, alignToCenter?:boolean, isPrimary?:boolean,  fn?:Dispatch<SetStateAction<unknown>>, 
@@ -18,26 +19,11 @@ export interface IDataTable {
 
 export const DataTable = ({data, columns, emptyComponent=<></>, isLoading, loadingComp=<></>}:IDataTable) => {
 
+    if(isLoading)
+        return <LoadingSkeleton columns={columns} loadingComp={loadingComp} />;
+
     return checkArrayObjectIsEmpty(data)? emptyComponent : 
-            isLoading?
-            (<table className={styles.table} border={0}>
-                <thead>
-                    <tr>
-                        {columns?.map((colItem, colIndex) => (
-                            <th key={colIndex} className={clsx(colItem.alignToCenter && styles.tableCenteredText, colIndex === 0 && 
-                            styles.tablePaddingLeft)}>
-                                <Text variant="heading2" weight="bold">{colItem.label || ""}</Text>
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {[...Array(10).keys()].map((_, indexRow) => <tr key={indexRow}>
-                        {columns?.map((_,indexCol) => <td key={indexCol}><div className={styles.loadingComp}>{loadingComp}</div> </td>)}</tr>
-                    )}
-                </tbody>
-            </table>)
-            :(
+            (
             <table className={styles.table} border={0} >
                 <thead>
                     <tr>

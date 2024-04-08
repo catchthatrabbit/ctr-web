@@ -9,7 +9,7 @@ interface IEmpty{
 
 const Empty = ({text="No Data", size="large"}:IEmpty) => {
     return (<div className={clsx(styles.emptyRoot, styles[size])}>
-        <Text className={styles.emptyContent} size="lg">
+        <Text className={styles.emptyContent} variant="subheading">
             {text}
         </Text>
     </div>)

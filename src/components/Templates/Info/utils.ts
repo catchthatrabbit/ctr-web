@@ -5,6 +5,10 @@ import { convertTime2Date } from "@site/src/utils/convertTime2Date";
 
 export const convertWalletInfoResponse2GeneralState = (data:WALLET_INFO_RESPONSE) => 
 {
+
+    if(!data)
+      return null;
+
     return {
         title: 'General stats',
         data: [
@@ -43,6 +47,9 @@ export const convertWalletInfoResponse2GeneralState = (data:WALLET_INFO_RESPONSE
 }
 
 export const convertWalletInfoResponse2ComputingInformation =  (data:WALLET_INFO_RESPONSE) => {
+    if(!data)
+      return null;
+    
     return {
         title: 'Computing information',
         data: [

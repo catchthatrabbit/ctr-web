@@ -8,6 +8,7 @@ import { Panel, PanelContent } from "@site/src/components/Molecules/Panel";
 import { Text } from "@site/src/components/Atoms/Text";
 import { IAnyPageAndWallet } from "../types";
 import useControls from "./controls";
+import { LoadingPlaceholder } from "../../Atoms/LoadingPlaceholder";
 
 
 interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
@@ -19,22 +20,27 @@ interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
 const Wallet = ({walletAddress, defaultRegion, onChangeRegion, onClearWalletAddress}:IWallet) => {
     
     const {fetchPaymentsByWalletAddress, fetchWorkersByWalletAddress, fetchedWalletInfo, handleChangePagePayouts, handleChangePageWorkers
-        , handleChangeRegion, paymentPayoutTableColumns, workersTableColumn} = 
+        , handleChangeRegion, paymentPayoutTableColumns, workersTableColumn, isLoadingFetchPaymentByWalletAddress, isLoadingFetchWallet,
+    isLoadingFetchWorkerByWalletAddress} = 
     useControls({walletAddress, defaultRegion, onChangeRegion});
 
     return(
         <div className="container">
             <Button value="Back" onClick={onClearWalletAddress} />
-            <Header defaultRegion={defaultRegion} onChangeRegion={handleChangeRegion} iban={walletAddress}
+            <Header isLoading={isLoadingFetchWallet} defaultRegion={defaultRegion} onChangeRegion={handleChangeRegion} iban={walletAddress}
             layout={{boards:true, search:false, dropdown:true}}  />
-            <Info data={fetchedWalletInfo} 
+            <Info data={fetchedWalletInfo}
+                isLoading={isLoadingFetchWallet} 
+                loadingPlaceholder={<LoadingPlaceholder />}
                 workers={
-                    <List data={convertWorkersResponse2Info(fetchWorkersByWalletAddress)} dataTableColumns={workersTableColumn} 
+                    <List isLoading={isLoadingFetchWorkerByWalletAddress} data={convertWorkersResponse2Info(fetchWorkersByWalletAddress)} 
+                    dataTableColumns={workersTableColumn} 
                     total={fetchWorkersByWalletAddress?.workersTotal}
-                     onPageChange={handleChangePageWorkers} />
+                    onPageChange={handleChangePageWorkers} />
                 } 
                 payouts={
-                    <List data={convertPaymentsResponse2PaymentInfo(fetchPaymentsByWalletAddress)} 
+                    <List isLoading={isLoadingFetchPaymentByWalletAddress} 
+                    data={convertPaymentsResponse2PaymentInfo(fetchPaymentsByWalletAddress)} 
                     dataTableColumns={paymentPayoutTableColumns} 
                     total={fetchedWalletInfo?.paymentsTotal} onPageChange={handleChangePagePayouts} />
                 }

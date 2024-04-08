@@ -28,7 +28,7 @@ const List = ({dataTableColumns, data, onPageChange, total, hidePagination, isLo
         return total;
 
     }, [total])
-    
+
     const handlePageChange = (page:number) => {
         setCurrentPage(page);
         if(typeof onPageChange === "function")

@@ -3,7 +3,7 @@ export type WORKER_INFO_BY_WALLET_ADDRESS = Array<{
     "lastBeat": string,
     "hr": string,
     "hr2": string
-    "offline": boolean,
+    "offline": string,
 }>
 
 export type PAYMENT_INFO_BY_WALLET_ADDRESS = Array<

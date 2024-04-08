@@ -5,6 +5,15 @@
     align-items: center;
 }
 
+.detailsRowLoadingSkeleton{
+    height: 51px;
+    width: 100%;
+}
+
+.detailsRowContentLoadingSkeleton{
+   padding: calc(var(--space-md) / 4) 20px calc(var(--space-xs)/2) 20px;
+}
+
 .detailsRow:nth-child(even) {
     background-color: var(--blue-rgb-600);
 }

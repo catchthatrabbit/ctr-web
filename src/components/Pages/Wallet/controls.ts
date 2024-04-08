@@ -18,11 +18,11 @@ const useControls = ({defaultRegion, onChangeRegion, walletAddress}:IWallet) => 
     const [currentPageWorkers, setCurrentPageWorkers] = useState<number>(1);
 
     
-    const {data:fetchedWalletInfo} = useFetchWallet(region, walletAddress);
+    const {data:fetchedWalletInfo, isLoading:isLoadingFetchWallet} = useFetchWallet(region, walletAddress);
     
-    const {data:fetchWorkersByWalletAddress} = useFetchWorkersByWalletAddress(region, walletAddress, 10, currentPageWorkers);
+    const {data:fetchWorkersByWalletAddress, isLoading:isLoadingFetchWorkerByWalletAddress} = useFetchWorkersByWalletAddress(region, walletAddress, 10, currentPageWorkers);
     
-    const {data:fetchPaymentsByWalletAddress} = useFetchPaymentByWalletAddress(region, walletAddress, 10, currentPagePayouts);
+    const {data:fetchPaymentsByWalletAddress, isLoading:isLoadingFetchPaymentByWalletAddress} = useFetchPaymentByWalletAddress(region, walletAddress, 10, currentPagePayouts);
     
     const handleChangeRegion = (id:{label:string, value:STANDARD_REGIONS_API_KEYS}) => {
 
@@ -49,6 +49,9 @@ const useControls = ({defaultRegion, onChangeRegion, walletAddress}:IWallet) => 
         handleChangePageWorkers,
         handleChangeRegion,
         rowCount: tablesConfig.PAGE_LIMIT,
+        isLoadingFetchPaymentByWalletAddress, 
+        isLoadingFetchWallet,
+        isLoadingFetchWorkerByWalletAddress
     }
 }
 

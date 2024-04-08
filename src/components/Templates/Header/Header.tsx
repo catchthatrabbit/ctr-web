@@ -50,7 +50,7 @@ const Header = ({onSearch, boardItems, onChangeRegion, defaultRegion, iban, chil
             <>
             <Spacer variant='xl' />
                 <div className='col col--12'>
-                    <Dropdown defaultValue={covertRegionValue2Label(defaultRegion)} className={styles.boardDropdown}
+                    <Dropdown isLoading={isLoading} defaultValue={covertRegionValue2Label(defaultRegion)} className={styles.boardDropdown}
                     items={
                             [
                                 {label:REGIONS.EU.label, value:POOL_NAME_ENUM.EU}, 
