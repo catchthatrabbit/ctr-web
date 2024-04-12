@@ -37,7 +37,7 @@ const StartMining = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IStartM
     const {data:fetchSettings} = useFetchSettings(region);
 
     return (
-        <div className="container">
+        <>
             <Spacer variant='xxxxl' />
             <PoolTitle />
             <Spacer variant="xl" />
@@ -138,7 +138,7 @@ const StartMining = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IStartM
             <Spacer id="pool-details" variant="lg" />
             <TwoColumnsPanel data={{title:'Pool details', data:convertSettingsResponse2SettingsInfo(fetchSettings)}} />
             <Spacer variant="xl" />
-        </div>
+        </>
     )
 
 }

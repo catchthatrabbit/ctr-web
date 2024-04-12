@@ -29,7 +29,8 @@ const ConfiguredLayout = ({children, hideBackground, backgroundPos = 10}:IConfig
             description={siteConfig.tagline}>
             <QueryClientProvider client={queryClient}>
                 <MessageProvider>
-                        <main className={clsx([{[styles.background]:!hideBackground}, styles[`backgroundPos-${backgroundPos}`]])}>
+                        <main className={clsx(["container", "content",
+                        {[styles.background]:!hideBackground}, styles[`backgroundPos-${backgroundPos}`]])}>
                             {children}
                         </main>
                     <ToastContainer />

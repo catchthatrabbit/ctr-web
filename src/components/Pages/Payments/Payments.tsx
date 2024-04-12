@@ -31,11 +31,9 @@ const Payments = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IPayments)
                 ]
             } 
             onSearch={handleSearch} />
-            <div className="container">
-                <List isLoading={isLoadingPaymentList} data={convertPaymentsResponse2PaymentInfo(fetchedPaymentsList)} 
-                dataTableColumns={dataTableColumns} 
-                onPageChange={handlePageChange} total={fetchedPaymentsList?.paymentsTotal}/>
-            </div>
+            <List isLoading={isLoadingPaymentList} data={convertPaymentsResponse2PaymentInfo(fetchedPaymentsList)} 
+            dataTableColumns={dataTableColumns} 
+            onPageChange={handlePageChange} total={fetchedPaymentsList?.paymentsTotal}/>
         </>
     )
 

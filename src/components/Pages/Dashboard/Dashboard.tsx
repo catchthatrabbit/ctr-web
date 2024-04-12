@@ -24,10 +24,10 @@ const Dashboard = ({onSetWalletAddress}:IDashboard) => {
         estd, poolFee, infoBoxRadialData, radialChartData, recentMatureBlockListColumns, AllRegionsMaturedBlocks
     ,isLoadingMapChart, isLoadingRadialBarChart, isLoadingAllRegionMaturedBlocks} = useControls();
 
-    return(<div className="container">
+    return(<>
         <Spacer variant="xxxxl" />
         <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
-            <div className={clsx("row", styles.fullWidth)}>
+            <div className={clsx("grid xl-grid-col--5 lg-grid-col--5 md-grid-col--5", styles.fullWidth)}>
                 <div className="col col--3">   
                     <Text variant="subheading">
                         Dedicated Pool for Core Coin and IoT devices
@@ -95,7 +95,7 @@ const Dashboard = ({onSetWalletAddress}:IDashboard) => {
         <List dataTableColumns={recentMatureBlockListColumns} hidePagination isLoading={isLoadingAllRegionMaturedBlocks}
         data={convertMaturedResponseToRecentBlocksInfo(AllRegionsMaturedBlocks)} />
 
-    </div>
+    </>
     )
 }
 

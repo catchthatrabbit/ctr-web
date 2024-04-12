@@ -5,7 +5,7 @@ import {EmailPanel} from "@site/src/components/Molecules/EmailPanel";
 const Contact = () => {
 
     return (
-        <div className="container">
+        <>
             <Spacer variant="xxxxl" />
             <ContactTitle />
             <Spacer variant="lg" />
@@ -18,7 +18,7 @@ const Contact = () => {
             <EmailPanel title="Commercial" emailAddress="contact@catchthatrabbit.com" 
             text="Please, feel free to email us with any legal and commercial questions."  />
             <Spacer variant="xl" />
-        </div>
+        </>
     )
 
 }

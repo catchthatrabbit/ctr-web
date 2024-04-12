@@ -26,8 +26,15 @@
 
   --ifm-container-width: 1440px;
   --ifm-container-width-xl: 1440px;
+
+  --content-width: 95%;
+  --content-width-xl: 90%;
  }
 
  h1,h2,h3{
     margin:0px;
+ }
+
+ .content{
+   margin:auto;
  }
