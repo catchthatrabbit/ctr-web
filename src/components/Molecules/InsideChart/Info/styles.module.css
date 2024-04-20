@@ -1,14 +1,11 @@
-
-.info{
-    z-index: 1;
-    align-self: start;
-    text-align: center;
-    width: 100%;
+.justifyCenter{
+    justify-content: center;
 }
 
-.infoContent{
-    bottom: 25%;
-    margin: 30px 0;
-    display: flex;
-    flex-flow: column;
+.justifySpaceBetween{
+    justify-content: space-between;
+}
+
+.flexDirectionColumn{
+    flex-direction: column;
 }

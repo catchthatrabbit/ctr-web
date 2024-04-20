@@ -1,7 +1,21 @@
 .singleColumnValue {
-    padding: var(--space-xs) 0px var(--space-xs) var(--space-lg);
     display: flex;
 }
+
+.singleColumnValuePaddingDesktop{
+    padding: var(--space-xs) 0px var(--space-xs) var(--space-lg);
+}
+
+
+.singleColumnValuePaddingTablet{
+    padding: var(--space-xs) 0px var(--space-xs) var(--space-sm);
+}
+
+
+.singleColumnValuePaddingMobile{
+    padding: var(--space-xs) 0px var(--space-xs) var(--space-xs);
+}
+
 
 .singleColumnValue:nth-child(even) {
     background-color: var(--blue-rgb-500);

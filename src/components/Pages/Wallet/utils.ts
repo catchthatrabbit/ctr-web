@@ -7,19 +7,24 @@ import { PAYMENTS_BY_WALLET_ADDRESS_RESPONSE } from "@site/src/Api/payments/type
 import { convertNumber2Currency } from "@site/src/utils/convertNumber2Currency";
 import { UNITS } from "@site/src/constants/units";
 import { summarizedText } from "@site/src/utils";
+import { convertWorkerName } from "@site/src/utils/convertWorkerName";
 
 export const convertWorkersResponse2Info = (workerResponse:WORKER_BY_WALLET_ADDRESS_RESPONSE):WORKER_INFO_BY_WALLET_ADDRESS => {
 
+
     if(!workerResponse)
         return [] as WORKER_INFO_BY_WALLET_ADDRESS;
-
-    return Object.keys(workerResponse.workers)?.map(key => ({
-            rabbit:key, 
+    return Object.keys(workerResponse.workers)?.map(key =>{
+        const {caption, href} = convertWorkerName(key);
+        return {
+            rabbit:href,
+            rabbit_summarized:caption,
             hr: `${siFormat(workerResponse.workers[key].hr, 2)}h/s`, 
             hr2: `${siFormat(workerResponse.workers[key].hr2, 2)}h/s`,
             lastBeat: ageCalculation(convertTime2Date(workerResponse.workers[key].lastBeat)),
             offline: generateWorkerOfflineEmoji(workerResponse.workers[key].offline)
-        }));
+        }
+    })
 }
 
 export const convertPaymentsResponse2PaymentInfo = (paymentResponse:PAYMENTS_BY_WALLET_ADDRESS_RESPONSE):PAYMENT_INFO_BY_WALLET_ADDRESS => {

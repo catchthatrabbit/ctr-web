@@ -5,6 +5,10 @@
     border-radius: 50%;
 }
 
+.wordWrap{
+  white-space: normal
+}
+
 .border {
   box-sizing: border-box;
   border-radius: 50%;

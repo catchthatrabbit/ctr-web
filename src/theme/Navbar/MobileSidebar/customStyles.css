@@ -1,0 +1,9 @@
+.navbar-sidebar {
+    right: 0px;
+    transform: translate3d(80%, 0, 0);
+  }
+  
+  .navbar-sidebar--show .navbar-sidebar {
+    transform: translate3d(21%, 0, 0);
+  }
+  

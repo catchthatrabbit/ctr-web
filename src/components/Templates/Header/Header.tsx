@@ -9,6 +9,7 @@ import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 import { covertRegionValue2Label } from './utils';
 import { IBan } from '@site/src/components/Molecules/IBan';
 import { POOL_NAME_ENUM } from '@site/src/enums/poolName.enum';
+import clsx from 'clsx';
 
 interface IHeader {
     defaultRegion?: STANDARD_REGIONS_API_KEYS
@@ -48,8 +49,8 @@ const Header = ({onSearch, boardItems, onChangeRegion, defaultRegion, iban, chil
             )}
             {layout.dropdown && (
             <>
-            <Spacer variant='xl' />
-                <div className='col col--12'>
+                <Spacer variant='xl' />
+                <div className='flex flex-col--12'>
                     <Dropdown isLoading={isLoading} defaultValue={covertRegionValue2Label(defaultRegion)} className={styles.boardDropdown}
                     items={
                             [
@@ -70,7 +71,7 @@ const Header = ({onSearch, boardItems, onChangeRegion, defaultRegion, iban, chil
             {layout.boards && (
                 <>
                 <Spacer variant='lg' />
-                    <div className={styles.boardRoot}>
+                    <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
                         {
                             boardItems?.map((boardItem, index) => 
                                 <Board isLoading={isLoading} key={index} description={boardItem.desc} value={boardItem.value}

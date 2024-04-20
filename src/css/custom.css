@@ -3,6 +3,7 @@
 @import url("spaces.css");
 @import url("grid.css");
 @import url("breakpoints.css");
+@import url("flex.css");
 
 /**
  * Any CSS included here will be global. The classic template
@@ -27,8 +28,14 @@
   --ifm-container-width: 1440px;
   --ifm-container-width-xl: 1440px;
 
+  --ifm-spacing-horizontal: 0px;
+
   --content-width: 95%;
   --content-width-xl: 90%;
+
+  --ifm-footer-logo-max-width: 256px;
+
+  --ifm-table-cell-padding: var(--space-xs);
  }
 
  h1,h2,h3{
@@ -36,5 +43,17 @@
  }
 
  .content{
-   margin:auto;
+   margin:0 auto;
+ }
+
+ .text-center{
+  text-align: center;
+ }
+
+ .whitespace-normal{
+  white-space: normal!important;
+ }
+
+ .remove-padding-inline{
+  padding-inline: 0px;
  }

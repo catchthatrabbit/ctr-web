@@ -6,6 +6,8 @@ import { Empty } from '@site/src/components/Atoms/Empty';
 import { useCallback, useMemo, useState } from 'react';
 import { LoadingPlaceholder } from '@site/src/components/Atoms/LoadingPlaceholder';
 import { MAX_PAGES } from '@site/src/configs/tables.config';
+import clsx from 'clsx';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 
 
 interface IList {
@@ -20,6 +22,7 @@ interface IList {
 const List = ({dataTableColumns, data, onPageChange, total, hidePagination, isLoading}:IList) => {
 
     const [currentPage, setCurrentPage] = useState<number>(0);
+    const {mobile} = useMediaQueries();
 
     const calcTotal = useCallback(() => {
 
@@ -40,14 +43,14 @@ const List = ({dataTableColumns, data, onPageChange, total, hidePagination, isLo
             <div>
                 <div className='row'>
                     <Spacer variant='xl' />
-                    <div className='col col--12'>
+                    <div className={clsx(styles.tableWrapper,{ [styles.listMarginInlineMobile]:mobile})}>
                         <DataTable emptyComponent={<Empty />} columns={dataTableColumns} data={data} isLoading={isLoading} 
                         loadingComp={<LoadingPlaceholder />} />
                     </div>
                     {!hidePagination && 
-                        <div className='col col--12'>
+                        <div className={styles.paginationWrapper}>
                             <Pagination offset={currentPage} total={calcTotal()} onPageChange={handlePageChange} isLoading={isLoading} 
-                            loadingCompo={<LoadingPlaceholder />} />
+                            loadingComp={<LoadingPlaceholder />} />
                         </div>
                     }
                 </div>

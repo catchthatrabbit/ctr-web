@@ -1,11 +1,10 @@
 import { TextFormatOutputType } from '@site/src/utils/textFormat';
-import { Board } from '@site/src/components/Atoms/Board';
 import { PoolStatisticsTitle } from '@site/src/components/Molecules/PictureTitles';
 import { Spacer } from '@site/src/components/Atoms/Spacer';
 import styles from "./styles.module.css";
-import clsx from 'clsx';
-import { InfoBoxLoadingSkeleton } from '@site/src/components/Atoms/InfoBoxLoadingSkeleton';
 import { LoadingPlaceholder } from '@site/src/components/Atoms/LoadingPlaceholder';
+import {InfoBox} from '@site/src/components/Molecules/InsideChart/Info';
+import { InfoBoxLoadingSkeleton } from '../../Atoms/InfoBoxLoadingSkeleton';
 
 interface IStatsChart{
   radialBarChart: React.ReactNode
@@ -15,23 +14,22 @@ interface IStatsChart{
 
 const StatsChart = ({radialBarChart, infoItems, isLoading}:IStatsChart) => {
 
+  const vertClassName = "xl-flex-col--12 lg-flex-col--12 md-flex-col--6 sm-flex-col--12 xs-flex-col--12";
+  const radialClassName = "xl-flex-col--9 lg-flex-col--9 md-flex-col--12 sm-flex-col--12 xs-flex-col--12";
+  const infoBoxClassName = "xl-flex-col--3 lg-flex-col--3 md-flex-col--12 sm-flex-col--12 xs-flex-col--12";
+
   return (
     <div className={styles.statsChart}>
       <PoolStatisticsTitle />
       <Spacer variant='lg' />
-      <div className='grid grid-col-gap grid-col--12'>
-        <div className='grid-span-col--9'>
+      <div className='flex'>
+        <div className={radialClassName}>
           {isLoading? <div className={styles.loadingSkeleton}><LoadingPlaceholder/></div> : radialBarChart}
         </div>
-          {isLoading ? <InfoBoxLoadingSkeleton className='grid-span-col--3' direction='row' itemNum={5} loadingPlaceholder={<LoadingPlaceholder/>} /> : 
-            <div className={clsx(["grid-span-col--3 grid grid-row-gap grid-row--5"])}>
-                {infoItems?.map((info, index) => (
-                  <Board key={index} description={info?.title} value={info?.value.text}
-                      suffix={info?.value.suffix} prefix={info?.value.prefix} /> 
-                  ))
-                }
-            </div>
-          }
+          <InfoBox boardClassNameVert={vertClassName} className={infoBoxClassName}
+           dir='vert' items={infoItems} isLoading={isLoading}         
+           loadingComponent={<InfoBoxLoadingSkeleton className={infoBoxClassName} boardClassNameHor={vertClassName}
+           loadingPlaceholder={<LoadingPlaceholder />} />}  />
       </div>
     </div>
   )

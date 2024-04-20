@@ -4,12 +4,12 @@ import React from "react";
 
 interface IMapPin{
     mapButton: React.ReactNode
-    place: "Eu" | "As" | "Us"
+    className?: string
 }
 
-const MapPin = ({mapButton, place = "Eu"}:IMapPin) => {
+const MapPin = ({mapButton, className}:IMapPin) => {
     return(
-        <div className={clsx([styles.mapPin, styles[place]])} >
+        <div className={clsx([styles.mapPin, className])} >
             {mapButton}
         </div>
     )

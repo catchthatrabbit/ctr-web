@@ -3,9 +3,9 @@ import { TwoColumnsPanel } from "../../Molecules/TwoColumnsPanel";
 import { WALLET_INFO_RESPONSE } from "@site/src/Api/wallet/types";
 import { convertWalletInfoResponse2ComputingInformation, convertWalletInfoResponse2GeneralState } from "./utils";
 import { useMemo } from "react";
-import styles from './styles.module.css';
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { WalletInfoTabs } from "@site/src/components/Organisms/WalletInfoTabs";
+import clsx from "clsx";
 
 interface IInfo{
     data: WALLET_INFO_RESPONSE
@@ -26,9 +26,8 @@ const Info = ({data, payouts, workers, isLoading, loadingPlaceholder}:IInfo) => 
 
     return(
         <>
-            <div className={styles.infoRoot}>
+            <div className={clsx(["grid grid-col-gap grid-row-gap xl-grid-col--2 lg-grid-col--2 md-grid-row--2 sm-grid-row--2 xs-grid-row--2"])}>
                 <TwoColumnsPanel data={computingInformation} isLoading={isLoading} loadingPlaceholder={loadingPlaceholder} />
-                <Spacer variant="md" direction="hor" />
                 <TwoColumnsPanel data={generalStats} isLoading={isLoading} loadingPlaceholder={loadingPlaceholder} />
             </div>
             <Spacer variant="xl" />

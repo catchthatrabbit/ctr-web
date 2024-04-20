@@ -14,6 +14,14 @@
     padding: var(--space-lg) 0px;
 }
 
-.panelContent{
+.panelContentDesktop{
     padding: var(--space-md) var(--space-lg);
+}
+
+.panelContentTablet{
+    padding: var(--space-md) var(--space-sm);
+}
+
+.panelContentMobile{
+    padding: var(--space-md) var(--space-xs);
 }

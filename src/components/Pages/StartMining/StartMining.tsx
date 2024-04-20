@@ -115,11 +115,12 @@ const StartMining = ({defaultRegion, onSetWalletAddress, onChangeRegion}:IStartM
                             We have Geo-locations to choose from:
                         </Text>
                         <Spacer variant="lg" />
-                        <div className={clsx(styles.lineFlex, "row")}>
+                        <div className="grid grid-row-gap grid-col-gap xl-grid-col--6 lg-grid-col--6 md-grid-col--4 sm-grid-col--2 xs-grid-col--1">
                             {Object.keys(REGIONS).map((REGION_KEY, index) => (
-                                <div key={index} className={clsx(styles.buttonConfigLessPadding, "col col--2")}>
+                                <div key={index} className={clsx(styles.buttonConfigLessPadding)}>
                                     <Link to={`#${REGIONS[REGION_KEY].value}`}>
-                                        <Button className={styles.buttonConfig}
+                                        <Button className={clsx([styles.buttonConfig,
+                                         "whitespace-normal remove-padding-inline"])}
                                         value={REGIONS[REGION_KEY].summary} />
                                     </Link>
                                 </div>

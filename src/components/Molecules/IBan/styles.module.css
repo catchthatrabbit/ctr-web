@@ -1,13 +1,18 @@
-.ibanRoot{
+.justifyCenter{
     justify-content: center;
-    align-items: center;
-    display: flex;
 }
 
-.iban{
-    display: flex;
+.iBan{
     white-space: normal;
     line-break: anywhere;
     font-family: monospace;
-    margin-right: var(--space-lg);
+    padding-right: var(--space-xs);
+}
+
+.iBanPaddingBottom{
+    padding-bottom: var(--space-xs);
+}
+
+.iBanRoot{
+    align-items: center;
 }

@@ -4,10 +4,6 @@
     margin-bottom: var(--space-md);
 }
 
-.customLogo{
-    width: 256px;
-}
-
 .customLogoText{
     margin-top:var(--space-lg);
 }

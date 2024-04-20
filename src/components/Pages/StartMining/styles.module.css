@@ -31,8 +31,10 @@
 
 .buttonConfig{
     width: 100%;
-    margin-top: var(--space-md);
-    margin-bottom: var(--space-md);
+    height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .buttonConfigAmong{

@@ -72,7 +72,8 @@ const Text: FC<IText> = ({
         styles.text,
         variant === "heading1" ||
         variant === "heading2" ||
-        variant === "heading3"
+        variant === "heading3" ||
+        variant === "subheading"
           ? tablet
             ? styles[`${variant}-tablet`]
             : mobile

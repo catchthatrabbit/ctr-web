@@ -6,9 +6,10 @@ import {StartMining} from "@site/src/components/Organisms/StartMining";
 import {Spacer} from "@site/src/components/Atoms/Spacer";
 
 export default function FooterLayout({style, links, logo, copyright}) {
+
   return (
     <footer
-      className={clsx('footer', "container", customStyles.footer, {
+      className={clsx('footer', customStyles.footer, {
         'footer--dark': style === 'dark',
       })}>
       <StartMining />
@@ -16,14 +17,17 @@ export default function FooterLayout({style, links, logo, copyright}) {
       <div className="container container-fluid">
         <div className={customStyles.footerLayout}>
           <div className='content'>
-            <div className='grid xl-grid-col--2 lg-grid-col--2 md-grid-col--2 sm-grid-row--2 xs-grid-row--2'>
-              <div className={customStyles.customLogo}>
+            <div className='flex md-center-items sm-center-items xs-center-items md-center-text sm-center-text xs-center-text'>
+              <div className={clsx(["xl-flex-col--6 lg-flex-col--6 md-flex-col--12 sm-flex-col--12 xs-flex-col--12"])}>
                 {logo}
                 <div className={customStyles.customLogoText}>
                   <Text>Dedicated Pool for Core Coin and IoT devices</Text>
                 </div>
               </div>
-              {links}
+              <Spacer className="xl-hide lg-hide" />
+              <div className="xl-flex-col--6 lg-flex-col--6 md-flex-col--12 sm-flex-col--12 xs-flex-col--12">
+                {links}
+              </div>
             </div>
           </div>
         </div>

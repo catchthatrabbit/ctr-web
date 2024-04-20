@@ -96,10 +96,22 @@
     line-height: var(--h3-lineHeight-mobile);
   }
   
-  .subheading {
-    font-size: var(--subheading-font-size);
-    line-height: var(--subheading-lineHeight);
+  .subheading-desktop {
+    font-size: var(--subheading-font-size-desktop);
+    line-height: var(--subheading-lineHeight-desktop);
   }
+
+  .subheading-tablet {
+    font-size: var(--subheading-font-size-tablet);
+    line-height: var(--subheading-lineHeight-tablet);
+  }
+
+  .subheading-mobile {
+    font-size: var(--subheading-font-size-mobile);
+    line-height: var(--subheading-lineHeight-mobile);
+  }
+
+  
   
   .body {
     font-size: var(--body-font-size);
