@@ -33,15 +33,13 @@ const Miners = ({onSetWalletAddress, defaultRegion, onChangeRegion}:IMiners) => 
                 ]
             } 
             onSearch={handleSearch} />
-            <div className="container">
-                <List
-                    isLoading={isLoadingMinerList}
-                    dataTableColumns={dataTableColumns}
-                    data={minerList} 
-                    onPageChange={handlePageChange} 
-                    total={fetchedMinerList?.minersTotal}
-                />
-            </div>
+            <List
+                isLoading={isLoadingMinerList}
+                dataTableColumns={dataTableColumns}
+                data={minerList} 
+                onPageChange={handlePageChange} 
+                total={fetchedMinerList?.minersTotal}
+            />
         </>
 
 }

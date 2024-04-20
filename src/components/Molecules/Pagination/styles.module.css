@@ -1,7 +1,6 @@
 .pagination{
     display: flex;
     margin: auto;
-    width: 45%;
     justify-content: space-evenly;
     align-items: center;
     padding: var(--space-md);
@@ -9,6 +8,22 @@
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
     list-style: none;
+}
+
+.paginationWidthDesktop{
+    width: 45%;
+}
+
+.paginationWidthLaptop{
+    width: 65%;
+}
+
+.paginationWidthTablet{
+    width: 85%;
+}
+
+.paginationWidthMobile{
+    width: 100%
 }
 
 .disabled{
@@ -33,6 +48,7 @@
     cursor: pointer;
     font-size: var(--body-small-font-size);
     font-family: var(--regular-font-family);
+    padding: calc(var(--space-xs) / 4);
 }
 
 .paginationItem:not(.selectedPage) a{
@@ -41,7 +57,7 @@
 
 .paginationNext a, .paginationPrevious a{
     color: var(--ifm-color-primary);
-    padding: var(--space-md);
+    padding: var(--space-xs);
 }
 
 .paginationNext{

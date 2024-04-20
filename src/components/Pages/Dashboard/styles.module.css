@@ -14,3 +14,11 @@
 .loadingPlaceholder{
     position: static;
 }
+
+.directionRtl{
+    direction: rtl;
+}
+
+.directionLtr{
+    direction: ltr;
+}

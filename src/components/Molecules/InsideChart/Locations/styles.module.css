@@ -7,28 +7,15 @@
   }
 
 .mapPin {
-    position: absolute;
 }
 
 .pinWrapper{
   position: absolute;
-  top:195px;
+  top:30%;
   width: 100%;
   left:0px;
+  height: 126px;
 }
-
-.Us{
-  left: 126px;
-}
-
-.Eu{
-  left: 420px;
-}
-
-.As{
-  left: 710px;
-}
-
 
 .bgImage{
   height: 100%;

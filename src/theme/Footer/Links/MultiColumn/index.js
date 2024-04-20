@@ -19,9 +19,9 @@ function ColumnLinkItem({item}) {
 }
 function Column({column}) {
   return (
-    <div className="col footer__col">
+    <div className={clsx("col footer__col", customStyles.removePaddingInline)}>
       <div className={clsx("footer__title", customStyles.title)}>{column.title}</div>
-      <ul className="footer__items clean-list">
+      <ul className={clsx(["footer__items clean-list", customStyles.footerItem])} >
         {column.items.map((item, i) => (
           <ColumnLinkItem key={i} item={item} />
         ))}
@@ -31,7 +31,7 @@ function Column({column}) {
 }
 export default function FooterLinksMultiColumn({columns}) {
   return (
-    <div className="row footer__links">
+    <div className="grid grid-col--3 grid-col-gap">
       {columns.map((column, i) => (
         <Column key={i} column={column} />
       ))}

@@ -18,7 +18,6 @@ const Blocks = () => {
             <Spacer variant="xxxxl" />
             <Header defaultRegion={region} pageTitleComponent={<BlockTitle />} onChangeRegion={handleChangeRegion} 
             layout={{boards:false, search:false, dropdown:true}} />
-            <div className="container">
                 <BlockListTabs 
                     blocks={
                         <List data={convertAnyBlocksResponse2AnyBlocksInfo(fetchedMaturedBlocks, "matured")} 
@@ -42,7 +41,6 @@ const Blocks = () => {
                         />
                     }
                 />
-            </div>
         </>
     )
 }

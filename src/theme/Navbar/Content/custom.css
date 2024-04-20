@@ -4,12 +4,13 @@
 
 .navbar__link:after{
     content: '';
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid var(--white);
     position: absolute;
     bottom: 0px;
     left: 0px;
     height: 100%;
     width: 0px;
+    top:-1px;
     transition: width 0.3s ease-out;
 }
 

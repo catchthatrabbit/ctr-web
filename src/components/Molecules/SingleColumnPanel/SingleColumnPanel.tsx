@@ -2,6 +2,8 @@ import React from 'react';
 import { Panel } from "@site/src/components/Molecules/Panel";
 import styles from './styles.module.css';
 import { Text } from '@site/src/components/Atoms/Text';
+import clsx from 'clsx';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 
 interface ISingleColumnPanel {
     id?: string
@@ -16,10 +18,12 @@ interface ISingleColumnPanel {
 
 const SingleColumnPanel = ({title, data, id}:ISingleColumnPanel) => {
 
+    const {desktop, laptop, mobile, tablet} = useMediaQueries();
 
     return( <Panel id={id} title={title} variant='heading2' color='primary' titleClassName={styles.singlePanel}>
         {data?.map((item, index) => (
-            <div key={index} className={styles.singleColumnValue}>
+            <div key={index} className={clsx(styles.singleColumnValue, {[styles.singleColumnValuePaddingDesktop]:desktop || laptop, 
+            [styles.singleColumnValuePaddingTablet]:tablet, [styles.singleColumnValuePaddingMobile]:mobile})}>
                 <Text type='value' variant='subheading'>
                     {`${item.label}:`}
                 </Text>

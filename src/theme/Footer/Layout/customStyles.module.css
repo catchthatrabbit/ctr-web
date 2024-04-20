@@ -4,14 +4,6 @@
     margin-bottom: var(--space-md);
 }
 
-.customLogo{
-    width: 256px;
-}
-
-.customLogoGrow{
-    flex-grow: 1;
-}
-
 .customLogoText{
     margin-top:var(--space-lg);
 }

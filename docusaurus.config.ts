@@ -30,6 +30,7 @@ const config: Config = {
   },
 
   customFields: {
+    CORE_TALK_SPACE_URL: null,
     EU_PRIMARY_API_ENDPOINT : null,
     NEXT_PUBLIC_EU_PRIMARY_API_ENDPOINT : null,
     EU_BACKUP_API_ENDPOINT:null,
@@ -92,6 +93,7 @@ const config: Config = {
       logo: {
         alt: 'CTR LOGO',
         src: 'img/logo.svg',
+        width: '256px'
       },
       items: [
         {

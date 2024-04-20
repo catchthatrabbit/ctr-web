@@ -25,7 +25,7 @@ const Wallet = ({walletAddress, defaultRegion, onChangeRegion, onClearWalletAddr
     useControls({walletAddress, defaultRegion, onChangeRegion});
 
     return(
-        <div className="container">
+        <>
             <Button value="Back" onClick={onClearWalletAddress} />
             <Header isLoading={isLoadingFetchWallet} defaultRegion={defaultRegion} onChangeRegion={handleChangeRegion} iban={walletAddress}
             layout={{boards:true, search:false, dropdown:true}}  />
@@ -59,7 +59,7 @@ const Wallet = ({walletAddress, defaultRegion, onChangeRegion, onClearWalletAddr
             </Panel>
 
             <Spacer variant="xl" />
-        </div>
+        </>
     )
 }
 

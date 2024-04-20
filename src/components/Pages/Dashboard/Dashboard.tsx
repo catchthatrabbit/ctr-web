@@ -24,64 +24,71 @@ const Dashboard = ({onSetWalletAddress}:IDashboard) => {
         estd, poolFee, infoBoxRadialData, radialChartData, recentMatureBlockListColumns, AllRegionsMaturedBlocks
     ,isLoadingMapChart, isLoadingRadialBarChart, isLoadingAllRegionMaturedBlocks} = useControls();
 
-    return(<div className="container">
-        <Spacer variant="xxxxl" />
+    return(<>
+        <Spacer variant="xxxl" />
         <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
-            <div className={clsx("row", styles.fullWidth)}>
-                <div className="col col--3">   
-                    <Text variant="subheading">
-                        Dedicated Pool for Core Coin and IoT devices
-                    </Text>
-                    <br />
-                    <Text variant="body" color="gray" type="label">
-                        Core mining pool in the lotusland of Ores」
-                    </Text>
-                    <br />
-                    <Text variant="subheading" color="primary">
-                        Estd.&nbsp;
-                    </Text>
-                    <Text variant="subheading" color="primary" >
-                        {String(estd)}
-                    </Text>
-                    <br />
-                    <Text variant="body" color="primary" type="value">
-                        Pay-per-last-N-shares &nbsp;&nbsp;
-                    </Text>
-                    <Text variant="body" color="gray" type="value">
-                        (PPLNS)&nbsp;
-                    </Text>
-                    <Text variant="body" color="gray" type="value">
-                        system with only&nbsp;
-                    </Text>
-                    <Text variant="body" color="primary" type="value">
-                         {poolFee ? `${poolFee}% fee` : '-'}
-                    </Text>
-                    <br />
-                    <Text variant="body" color="gray" type="value">
-                        Please, select one of the locations to&nbsp;
-                    </Text>
-                    <a href="/start-mining">
-                        <Text variant="body" color="primary" type="value">
-                            start your mining today
-                        </Text>
-                    </a>
-                </div>
-                <div className={clsx([styles.mapChartLocationPlace, "col col--9"])}>
+            <div className={clsx(["grid xl-grid-col--5 lg-grid-col--5 md-grid-row--2 sm-grid-row--2 xs-grid-row--2", styles.directionRtl,styles.fullWidth])}>
+                <div className={clsx([styles.mapChartLocationPlace, "xl-grid-span-col--4", "lg-grid-span-col--4", styles.directionLtr])}>
                     {isLoadingMapChart? 
                         <div className={styles.loadingSkeleton}><LoadingPlaceholder className={styles.loadingPlaceholder} /></div> 
-                        : 
-                            <>
-                                <Locations>
-                                    <MapPin place="Us" mapButton={<MapButton value="US location" href={usStarMiningPoolLocation} />} />
-                                    <MapPin place="Eu" mapButton={<MapButton value="EU location" href={euStarMiningPoolLocation} />} />
-                                    <MapPin place="As" mapButton={<MapButton value="AP location" href={asStarMiningPoolLocation} />} />
-                                </Locations>
-                                <Mouse>
-                                    <MouseContent />
-                                </Mouse>
-                            </>
-                    }
+                            : 
+                                <>
+                                    <Locations>
+                                        <span className="lg-hide md-hide" />
+                                        <MapPin className="lg-grid-span-col--2 md-grid-span-col--3" 
+                                     mapButton={<MapButton value="US location" href={usStarMiningPoolLocation} />} />
+                                        <span className="lg-hide" />
+                                        <MapPin className="xl-grid-span-col--2 lg-grid-span-col--2 md-grid-span-col--3 sm-grid-span-col--6" mapButton={<MapButton value="EU location" href={euStarMiningPoolLocation} />} />
+                                        <span className="lg-hide md-hide" />
+                                        <MapPin className="lg-grid-span-col--2 md-grid-span-col--2" mapButton={<MapButton value="AP location" href={asStarMiningPoolLocation} />} />
+                                    </Locations>
+                                    <Mouse>
+                                        <MouseContent />
+                                    </Mouse>
+                                </>
+                        }
                 </div>
+                <Spacer className="xl-hide lg-hide" variant="lg" />
+                <div className={clsx([styles.directionLtr, "xs-text-center sm-text-center md-text-center"])}> 
+                        <Spacer variant="lg" className="xl-hide lg-hide md-hide"/>
+                        <Text variant="subheading">
+                            Dedicated Pool for Core Coin and IoT devices
+                        </Text>
+                        <br />
+                        <Text variant="body" color="gray" type="label">
+                            Core mining pool in the lotusland of Ores」
+                        </Text>
+                        <br />
+                        <Text variant="subheading" color="primary">
+                            Estd.&nbsp;
+                        </Text>
+                        <Text variant="subheading" color="primary" >
+                            {String(estd)}
+                        </Text>
+                        <br />
+                        <Text variant="body" color="primary" type="value">
+                            Pay-per-last-N-shares &nbsp;&nbsp;
+                        </Text>
+                        <Text variant="body" color="gray" type="value">
+                            (PPLNS)&nbsp;
+                        </Text>
+                        <Text variant="body" color="gray" type="value">
+                            system with only&nbsp;
+                        </Text>
+                        <Text variant="body" color="primary" type="value">
+                            {poolFee ? `${poolFee}% fee` : '-'}
+                        </Text>
+                        <br />
+                        <Text variant="body" color="gray" type="value">
+                            Please, select one of the locations to&nbsp;
+                        </Text>
+                        <a href="/start-mining">
+                            <Text variant="body" color="primary" type="value">
+                                start your mining today
+                            </Text>
+                        </a>
+                </div>
+
             </div>
         </MapChart>
         <Spacer variant="xl" />
@@ -95,7 +102,7 @@ const Dashboard = ({onSetWalletAddress}:IDashboard) => {
         <List dataTableColumns={recentMatureBlockListColumns} hidePagination isLoading={isLoadingAllRegionMaturedBlocks}
         data={convertMaturedResponseToRecentBlocksInfo(AllRegionsMaturedBlocks)} />
 
-    </div>
+    </>
     )
 }
 

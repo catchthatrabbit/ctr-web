@@ -1,3 +1,11 @@
-.emailValue {
+.emailValueDesktop {
     padding: var(--space-md) 0px var(--space-md) var(--space-lg);
+}
+
+.emailValueTablet {
+    padding: var(--space-md) 0px var(--space-md) var(--space-sm);
+}
+
+.emailValueMobile {
+    padding: var(--space-md) 0px var(--space-md) var(--space-xs);
 }

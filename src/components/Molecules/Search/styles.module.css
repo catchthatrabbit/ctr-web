@@ -8,14 +8,29 @@
     color: var(--white);
     background: var(--gray-700);
     transition: all 0.1s ease-in-out 0s;
-    right: 69px;
     position: absolute;
+}
+
+.searchButtonDesktop{
+    right: 69px;
+}
+
+.searchInputDesktop{
+    margin-inline: 69px;
+}
+
+
+.searchButtonMobile{
+    right: 0px;
+}
+
+.searchInputMobile{
+    margin-inline: 0px;
 }
 
 .searchInput{
     border-radius: var(--ifm-global-radius);
     padding-right: 90px;
-    margin-inline: 69px;
 }
 
 .search {

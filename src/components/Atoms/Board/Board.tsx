@@ -13,23 +13,26 @@ interface IBoard {
     isLoading?:boolean
 }
 
-const Board = ({description, value, suffix, prefix, className, loaderComp = <Text variant="subheading">&nbsp;--&nbsp;</Text>, isLoading = false}:IBoard) => {
+const Board = ({description, value, suffix, prefix, className, 
+    loaderComp = <Text variant="subheading">&nbsp;--&nbsp;</Text>, isLoading = false}:IBoard) => {
 
     return (
         <div className={clsx([styles.boardContainer, className])}>
-            <div className={styles.boardItem}>
-                <Text>{prefix}</Text>
-                {isLoading? loaderComp : 
-                    <Text variant='subheading' weight='bold'>
-                        {value || '0'}
+            <div className={styles.content}>
+                <div className={styles.boardItem}>
+                    <Text>{prefix}</Text>
+                    {isLoading? loaderComp : 
+                        <Text variant='subheading' weight='bold'>
+                            {value || '0'}
+                        </Text>
+                    }
+                    <Text variant='subheading' weight='bold'>{suffix}</Text>
+                </div>
+                <div className={styles.boardItem}>
+                    <Text>
+                        {description || ''}
                     </Text>
-                }
-                <Text variant='subheading' weight='bold'>{suffix}</Text>
-            </div>
-            <div className={styles.boardItem}>
-                <Text>
-                    {description || ''}
-                </Text>
+                </div>
             </div>
         </div>
     )

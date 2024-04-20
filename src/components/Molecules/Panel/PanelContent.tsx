@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './styles.module.css';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
+import clsx from 'clsx';
 
 interface IPanelContent{
     children: React.ReactNode
@@ -7,7 +9,10 @@ interface IPanelContent{
 
 const PanelContent = ({children}:IPanelContent) => {
 
-    return <div className={styles.panelContent}>
+    const {desktop, laptop, mobile, tablet} = useMediaQueries();
+
+    return <div className={clsx({[styles.panelContentDesktop]:desktop || laptop, [styles.panelContentTablet]:tablet, 
+        [styles.panelContentMobile]:mobile})}>
         {children}
     </div>
  }

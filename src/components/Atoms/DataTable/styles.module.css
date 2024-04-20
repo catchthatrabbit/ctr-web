@@ -5,9 +5,6 @@
     padding: var(--space-xl) 0px;
 }
 
-.tablePaddingLeft{
-    padding-left: var(--space-xl);
-}
 
 .tableRow::nth-child(even){
     background-color: var(--blue-rgb-600);

@@ -22,5 +22,6 @@ export const DEFAULT_API_URL:Record<STANDARD_REGIONS_API_KEYS, string> = {
 
 export const EXTERNAL_URL:Record<EXTERNAL_URL_ENUM, string> = {
     TRANSACTION_DETAILS:"https://blockindex.net/tx",
-    BLOCK_DETAILS: "https://blockindex.net/block"
+    BLOCK_DETAILS: "https://blockindex.net/block",
+    CORE_TALK_SPACE_URL:"https://coretalk.space"
 }
