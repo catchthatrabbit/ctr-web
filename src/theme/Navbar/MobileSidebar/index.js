@@ -1,12 +1,14 @@
-import React from 'react';
+/* eslint-disable import/no-unresolved */
+import React from "react";
 import {
   useLockBodyScroll,
   useNavbarMobileSidebar,
-} from '@docusaurus/theme-common/internal';
-import NavbarMobileSidebarLayout from '@theme/Navbar/MobileSidebar/Layout';
-import NavbarMobileSidebarHeader from '@theme/Navbar/MobileSidebar/Header';
-import NavbarMobileSidebarPrimaryMenu from '@theme/Navbar/MobileSidebar/PrimaryMenu';
-import NavbarMobileSidebarSecondaryMenu from '@theme/Navbar/MobileSidebar/SecondaryMenu';
+} from "@docusaurus/theme-common/internal";
+import NavbarMobileSidebarLayout from "@theme/Navbar/MobileSidebar/Layout";
+import NavbarMobileSidebarHeader from "@theme/Navbar/MobileSidebar/Header";
+import NavbarMobileSidebarPrimaryMenu from "@theme/Navbar/MobileSidebar/PrimaryMenu";
+import NavbarMobileSidebarSecondaryMenu from "@theme/Navbar/MobileSidebar/SecondaryMenu";
+
 import "./customStyles.css";
 export default function NavbarMobileSidebar() {
   const mobileSidebar = useNavbarMobileSidebar();

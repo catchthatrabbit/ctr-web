@@ -1,1 +1,1 @@
-export {default as Miners} from './Miners';
+export { default as Miners } from "./Miners";

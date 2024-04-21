@@ -1,1 +1,1 @@
-export {default as MapButton } from './MapButton';
+export { default as MapButton } from "./MapButton";

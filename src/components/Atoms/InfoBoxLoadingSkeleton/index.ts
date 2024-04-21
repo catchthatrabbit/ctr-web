@@ -1,1 +1,1 @@
-export {default as InfoBoxLoadingSkeleton} from "./InfoBoxLoadingSkeleton";
+export { default as InfoBoxLoadingSkeleton } from "./InfoBoxLoadingSkeleton";

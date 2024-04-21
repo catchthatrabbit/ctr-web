@@ -1,41 +1,50 @@
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { Text } from "@site/src/components/Atoms/Text";
-import {generateIBan} from "@site/src/utils/generateIBan";
-import styles from "./styles.module.css";
+import { generateIBan } from "@site/src/utils/generateIBan";
 import { Button } from "@site/src/components/Atoms/Button";
 import { Copy } from "@site/src/icons";
-import clsx from 'clsx';
-import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
+import clsx from "clsx";
+import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
+import styles from "./styles.module.css";
 
 interface IIBan {
-    iBan?: string
+  iBan?: string;
 }
 
-const IBan = ({iBan = ''}:IIBan) => {
+const IBan = ({ iBan = "" }: IIBan) => {
+  const { mobile, tablet } = useMediaQueries();
 
-    const {mobile, tablet} = useMediaQueries();
+  const handleCopy = () => {
+    navigator.clipboard.writeText(iBan);
+    notify();
+  };
 
-    const handleCopy = () => {
-        navigator.clipboard.writeText(iBan);
-        notify();
-    }
+  const notify = () => toast.success("Address copied");
 
-    const notify = () => toast.success("Address copied");
-
-    return (
-        <div className={clsx([[styles.iBanRoot, styles.justifyCenter, "flex"]])} >
-            <div className='"md-flex-col--12 sm-flex-col--12 xs-flex-col--12"'>
-                <Text className={clsx(styles.iBan, {[styles.iBanPaddingBottom]:mobile || tablet})} variant="heading2" color='primary'>
-                    {generateIBan(iBan)}
-                </Text>
-            </div>
-            <div className={clsx(["flex md-flex-col--12 sm-flex-col--12 xs-flex-col--12", styles.justifyCenter])}>
-                <Button onClick={handleCopy} value="Copy" icon={<Copy />} />
-            </div>
-        </div>
-    )
-
-}
+  return (
+    <div className={clsx([[styles.iBanRoot, styles.justifyCenter, "flex"]])}>
+      <div className='"md-flex-col--12 sm-flex-col--12 xs-flex-col--12"'>
+        <Text
+          className={clsx(styles.iBan, {
+            [styles.iBanPaddingBottom]: mobile || tablet,
+          })}
+          variant="heading2"
+          color="primary"
+        >
+          {generateIBan(iBan)}
+        </Text>
+      </div>
+      <div
+        className={clsx([
+          "flex md-flex-col--12 sm-flex-col--12 xs-flex-col--12",
+          styles.justifyCenter,
+        ])}
+      >
+        <Button onClick={handleCopy} value="Copy" icon={<Copy />} />
+      </div>
+    </div>
+  );
+};
 
 export default IBan;

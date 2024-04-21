@@ -1,17 +1,11 @@
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 interface IKBD {
-    children?:string
+  children?: string;
 }
 
-const KBD = ({children}:IKBD) => {
+const Kbd = ({ children }: IKBD) => {
+  return <kbd className={styles.kbd}>{children}</kbd>;
+};
 
-    return(
-            <kbd className={styles.kbd}>
-                {children}
-            </kbd>
-    )
-
-}
-
-export default KBD;
+export default Kbd;

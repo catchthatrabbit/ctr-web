@@ -4,10 +4,23 @@
 */
 export const WHITELIST_AGGREGATE_KEYS = {
   home: {
-    jumbotron: [ 'hashrate', 'minersTotal' ],
-    stats: [ 'poolCharts', 'y' ],
+    jumbotron: ["hashrate", "minersTotal"],
+    stats: ["poolCharts", "y"],
   },
-  miners: [ 'hashrate', 'minersTotal' ],
-  payments: [ 'paymentsAmount', 'paymentsTotal' ],
-  wallet: [ 'currentHashrate', 'hashrate', 'balance', 'blocksFound', 'immature', 'paid', 'pending', 'roundShares', 'paymentsTotal', 'workersOffline', 'workersOnline', 'workersTotal' ],
-}
+  miners: ["hashrate", "minersTotal"],
+  payments: ["paymentsAmount", "paymentsTotal"],
+  wallet: [
+    "currentHashrate",
+    "hashrate",
+    "balance",
+    "blocksFound",
+    "immature",
+    "paid",
+    "pending",
+    "roundShares",
+    "paymentsTotal",
+    "workersOffline",
+    "workersOnline",
+    "workersTotal",
+  ],
+};

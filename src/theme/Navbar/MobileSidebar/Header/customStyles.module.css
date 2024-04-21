@@ -3,7 +3,8 @@
 }
 
 .mobileSidebarButtonsPlaceholder {
-  width: 100%;
+  position: absolute;
+  right: 25%;
 }
 
 .mobileSeparatorLine {

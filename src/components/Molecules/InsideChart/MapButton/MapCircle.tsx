@@ -1,5 +1,6 @@
-import clsx from 'clsx';
-import styles from './styles.module.css';
+import clsx from "clsx";
+
+import styles from "./styles.module.css";
 
 const MapCircle = () => (
   <div className={clsx(styles.border, styles.border3)}>
@@ -9,6 +10,6 @@ const MapCircle = () => (
       </div>
     </div>
   </div>
-)
+);
 
-export default MapCircle
+export default MapCircle;

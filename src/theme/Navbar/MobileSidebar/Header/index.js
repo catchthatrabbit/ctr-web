@@ -5,7 +5,6 @@ import { translate } from "@docusaurus/Translate";
 import IconClose from "@theme/Icon/Close";
 import clsx from "clsx";
 
-import CustomButtonsPlaceholder from "./CustomButtonsPlaceholder";
 import CustomNavButtonsPlaceholder from "./CustomNavButtonsPlaceholder";
 
 import customStyles from "./customStyles.module.css";
@@ -38,11 +37,7 @@ export default function NavbarMobileSidebarHeader() {
     >
       <CustomNavButtonsPlaceholder>
         <div className={customStyles.closeButtonPlaceholder}>
-          <CustomButtonsPlaceholder>
-            <div>
-              <CloseButton />
-            </div>
-          </CustomButtonsPlaceholder>
+          <CloseButton />
         </div>
       </CustomNavButtonsPlaceholder>
     </div>

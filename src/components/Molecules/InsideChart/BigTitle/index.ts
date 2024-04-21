@@ -1,1 +1,1 @@
-export {default as BigTitle} from "./BigTitle";
+export { default as BigTitle } from "./BigTitle";

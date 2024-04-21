@@ -1,24 +1,29 @@
-import React from 'react';
-import clsx from 'clsx';
+import React from "react";
+import clsx from "clsx";
+import { Text } from "@site/src/components/Atoms/Text";
+import { StartMining } from "@site/src/components/Organisms/StartMining";
+import { Spacer } from "@site/src/components/Atoms/Spacer";
+
 import customStyles from "./customStyles.module.css";
-import {Text} from "@site/src/components/Atoms/Text";
-import {StartMining} from "@site/src/components/Organisms/StartMining";
-import {Spacer} from "@site/src/components/Atoms/Spacer";
 
-export default function FooterLayout({style, links, logo, copyright}) {
-
+export default function FooterLayout({ style, links, logo, copyright }) {
   return (
     <footer
-      className={clsx('footer', customStyles.footer, {
-        'footer--dark': style === 'dark',
-      })}>
+      className={clsx("footer", customStyles.footer, {
+        "footer--dark": style === "dark",
+      })}
+    >
       <StartMining />
-      <Spacer variant='xxl'/>
+      <Spacer variant="xxl" />
       <div className="container container-fluid">
         <div className={customStyles.footerLayout}>
-          <div className='content'>
-            <div className='flex md-center-items sm-center-items xs-center-items md-center-text sm-center-text xs-center-text'>
-              <div className={clsx(["xl-flex-col--6 lg-flex-col--6 md-flex-col--12 sm-flex-col--12 xs-flex-col--12"])}>
+          <div className="content">
+            <div className="flex md-center-items sm-center-items xs-center-items md-center-text sm-center-text xs-center-text">
+              <div
+                className={clsx([
+                  "xl-flex-col--6 lg-flex-col--6 md-flex-col--12 sm-flex-col--12 xs-flex-col--12",
+                ])}
+              >
                 {logo}
                 <div className={customStyles.customLogoText}>
                   <Text>Dedicated Pool for Core Coin and IoT devices</Text>
@@ -32,8 +37,13 @@ export default function FooterLayout({style, links, logo, copyright}) {
           </div>
         </div>
       </div>
-      {(copyright) && (
-        <div className={clsx(["footer__bottom text--center", customStyles.footerCopyWrite])}>
+      {copyright && (
+        <div
+          className={clsx([
+            "footer__bottom text--center",
+            customStyles.footerCopyWrite,
+          ])}
+        >
           {copyright}
         </div>
       )}

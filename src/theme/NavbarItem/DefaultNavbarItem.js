@@ -1,6 +1,8 @@
-import React from 'react';
-import clsx from 'clsx';
-import NavbarNavLink from '@theme/NavbarItem/NavbarNavLink';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React from "react";
+import clsx from "clsx";
+// eslint-disable-next-line import/no-unresolved
+import NavbarNavLink from "@theme/NavbarItem/NavbarNavLink";
 function DefaultNavbarItemDesktop({
   className,
   isDropdownItem = false,
@@ -9,7 +11,7 @@ function DefaultNavbarItemDesktop({
   const element = (
     <NavbarNavLink
       className={clsx(
-        isDropdownItem ? 'dropdown__link' : 'navbar__item navbar__link',
+        isDropdownItem ? "dropdown__link" : "navbar__item navbar__link",
         className,
       )}
       isDropdownLink={isDropdownItem}
@@ -21,10 +23,10 @@ function DefaultNavbarItemDesktop({
   }
   return element;
 }
-function DefaultNavbarItemMobile({className, isDropdownItem, ...props}) {
+function DefaultNavbarItemMobile({ className, isDropdownItem, ...props }) {
   return (
     <li className="menu__list-item">
-      <NavbarNavLink className={clsx('menu__link', className)} {...props} />
+      <NavbarNavLink className={clsx("menu__link", className)} {...props} />
     </li>
   );
 }
@@ -39,7 +41,7 @@ export default function DefaultNavbarItem({
       {...props}
       activeClassName={
         props.activeClassName ??
-        (mobile ? 'menu__link--active' : 'navbar__link--active')
+        (mobile ? "menu__link--active" : "navbar__link--active")
       }
     />
   );

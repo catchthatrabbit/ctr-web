@@ -6,10 +6,10 @@ import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
 import styles from "./styles.module.css";
 /**
- * 
- * @param variant - heading1  font size 38 
+ *
+ * @param variant - heading1  font size 38
  * heading2  font size 22
- * heading3  font size 20 
+ * heading3  font size 20
  * subheading  font size 18
  * body  font size 16
  * smallBody  font size 14
@@ -29,7 +29,7 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "smallBody" /** font size 14 */
     | "tinyBody" /** font size 12 */
     | "tag" /** font size 11 */
-    | "CTA"; /** font size 11 */
+    | "CTA" /** font size 11 */;
   weight?: "normal" | "bold";
   color?: "primary" | "white" | "gray";
   componentType?: keyof JSX.IntrinsicElements;

@@ -1,5 +1,5 @@
 export type ChartItem = {
-    time: string
-    value: number
-    hour: string
-  }
+  time: string;
+  value: number;
+  hour: string;
+};

@@ -1,1 +1,1 @@
-export {default as Legal} from './Legal';
+export { default as Legal } from "./Legal";

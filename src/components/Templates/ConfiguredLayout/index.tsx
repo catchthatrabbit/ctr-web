@@ -1,1 +1,1 @@
-export {default as ConfiguredLayout} from './ConfiguredLayout';
+export { default as ConfiguredLayout } from "./ConfiguredLayout";

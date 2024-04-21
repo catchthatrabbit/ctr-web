@@ -9,7 +9,7 @@ interface ISpacer extends HtmlHTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * 
+ *
  * @param variant -xs: 16px;
  *                -sm: 24px;
  *                -md: 32px;
@@ -17,8 +17,8 @@ interface ISpacer extends HtmlHTMLAttributes<HTMLDivElement> {
  *                -xl: 48px;
  *                -xxl: 64px;
  *                -xxxl: 80px;
- *                -xxxxl: 160px; 
- * @returns 
+ *                -xxxxl: 160px;
+ * @returns
  */
 const Spacer: FC<ISpacer> = ({
   direction = "vert",
