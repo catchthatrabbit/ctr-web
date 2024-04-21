@@ -1,2 +1,2 @@
-export {default as MouseContent} from './MouseContent';
-export {default as Mouse} from './Mouse';
+export { default as MouseContent } from "./MouseContent";
+export { default as Mouse } from "./Mouse";

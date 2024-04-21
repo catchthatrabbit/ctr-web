@@ -1,4 +1,4 @@
 export type MESSAGE = {
-    text?: string
-    type?: "warning" | "error" | "info" | "success" | "warn" 
-}
+  text?: string;
+  type?: "warning" | "error" | "info" | "success" | "warn";
+};

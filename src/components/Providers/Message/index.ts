@@ -1,1 +1,1 @@
-export {default as MessageProvider} from "./MessageProvider";
+export { default as MessageProvider } from "./MessageProvider";

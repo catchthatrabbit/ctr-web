@@ -4,16 +4,15 @@ import { getAllStats } from "./utils";
 import { AxiosError } from "axios";
 
 export const fetchStats = async () => {
+  try {
+    const instanceArray = getAllStats();
+    const statsResponses = await filterAllSettled<{ data: STATS_RESPONSE }>(
+      instanceArray,
+    );
+    return statsResponses?.map((statsResp) => statsResp.data);
+  } catch (e) {
+    console.error(e);
 
-    try{
-
-        const instanceArray = getAllStats();
-        const statsResponses = await filterAllSettled<{data:STATS_RESPONSE}>(instanceArray)
-        return statsResponses?.map(statsResp => statsResp.data);
-    }catch(e){
-        console.error(e);
-
-        return Promise.reject(e as AxiosError);
-    }
-
-}
+    return Promise.reject(e as AxiosError);
+  }
+};

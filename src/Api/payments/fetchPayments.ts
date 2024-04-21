@@ -1,49 +1,75 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { AxiosInstance } from "../api"
+import { AxiosInstance } from "../api";
 import { STANDARD_REGIONS_API_KEYS } from "../types";
-import { PAYMENTS_BY_WALLET_ADDRESS_RESPONSE, PAYMENTS_RESPONSE, PAYMENTS_STATE } from "./types";
+import {
+  PAYMENTS_BY_WALLET_ADDRESS_RESPONSE,
+  PAYMENTS_RESPONSE,
+  PAYMENTS_STATE,
+} from "./types";
 
-export const fetchPaymentsByWalletAddress = async ({region, walletAddress, limit = 10, offset = 0}:
-    {region:STANDARD_REGIONS_API_KEYS, walletAddress:string, limit : number, offset : number}) => {
-    
-    try{
-        const instance = new AxiosInstance(region).getInstance();
-        
-        const response = instance.get(`/payments/${walletAddress}?limit=${limit}&offset=${offset}`)  as Promise<AxiosResponse<PAYMENTS_BY_WALLET_ADDRESS_RESPONSE>>;
-    
-        return (await response).data;
-    }catch(e){
-        console.error(e);
+export const fetchPaymentsByWalletAddress = async ({
+  region,
+  walletAddress,
+  limit = 10,
+  offset = 0,
+}: {
+  region: STANDARD_REGIONS_API_KEYS;
+  walletAddress: string;
+  limit: number;
+  offset: number;
+}) => {
+  try {
+    const instance = new AxiosInstance(region).getInstance();
 
-        return Promise.reject(e as AxiosError);
-    }
+    const response = instance.get(
+      `/payments/${walletAddress}?limit=${limit}&offset=${offset}`,
+    ) as Promise<AxiosResponse<PAYMENTS_BY_WALLET_ADDRESS_RESPONSE>>;
 
-}
+    return (await response).data;
+  } catch (e) {
+    console.error(e);
 
-export const fetchPayments = async ({region, limit = 10, offset = 0}:{region:STANDARD_REGIONS_API_KEYS, limit:number, offset:number}) => {
-    try{
-        const instance = new AxiosInstance(region).getInstance();
-    
-        const response = instance.get(`/payments?limit=${limit}&offset=${offset}`) as Promise<AxiosResponse<PAYMENTS_RESPONSE>>;
-    
-        return (await response).data;
-    }catch(e){
-        console.error(e);
+    return Promise.reject(e as AxiosError);
+  }
+};
 
-        return Promise.reject(e as AxiosError);
-    }
+export const fetchPayments = async ({
+  region,
+  limit = 10,
+  offset = 0,
+}: {
+  region: STANDARD_REGIONS_API_KEYS;
+  limit: number;
+  offset: number;
+}) => {
+  try {
+    const instance = new AxiosInstance(region).getInstance();
 
-}
+    const response = instance.get(
+      `/payments?limit=${limit}&offset=${offset}`,
+    ) as Promise<AxiosResponse<PAYMENTS_RESPONSE>>;
 
-export const fetchPaymentsState = async ({region}:{region:STANDARD_REGIONS_API_KEYS}) => {
-    try{
-        const instance = new AxiosInstance(region).getInstance();
-        const response = instance.get(`/payments_stats`) as Promise<AxiosResponse<PAYMENTS_STATE>>;
-        return (await response).data;
-    }
-    catch(e){
-        console.error(e)
-        return Promise.reject(e as AxiosError);
-    }
+    return (await response).data;
+  } catch (e) {
+    console.error(e);
 
-}
+    return Promise.reject(e as AxiosError);
+  }
+};
+
+export const fetchPaymentsState = async ({
+  region,
+}: {
+  region: STANDARD_REGIONS_API_KEYS;
+}) => {
+  try {
+    const instance = new AxiosInstance(region).getInstance();
+    const response = instance.get(`/payments_stats`) as Promise<
+      AxiosResponse<PAYMENTS_STATE>
+    >;
+    return (await response).data;
+  } catch (e) {
+    console.error(e);
+    return Promise.reject(e as AxiosError);
+  }
+};

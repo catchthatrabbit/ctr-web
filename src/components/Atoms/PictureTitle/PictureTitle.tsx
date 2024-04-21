@@ -1,21 +1,20 @@
-import React from 'react';
-import { Text } from '@site/src/components/Atoms/Text';
-import styles from './styles.module.css';
-import { Spacer } from '../Spacer';
+import React from "react";
+import { Text } from "@site/src/components/Atoms/Text";
 
-interface IPictureTitle{
-    title:string
-    image:React.ReactNode
+import styles from "./styles.module.css";
+
+interface IPictureTitle {
+  title: string;
+  image: React.ReactNode;
 }
 
-const PictureTitle = ({image, title}:IPictureTitle) => {
-
-    return <div className={styles.pictureTitleRoot}>
-        <div>{image}</div>
-        <Text variant="heading1">
-            {title}
-        </Text>
+const PictureTitle = ({ image, title }: IPictureTitle) => {
+  return (
+    <div className={styles.pictureTitleRoot}>
+      <div>{image}</div>
+      <Text variant="heading1">{title}</Text>
     </div>
-}
+  );
+};
 
 export default PictureTitle;

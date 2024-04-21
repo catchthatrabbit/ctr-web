@@ -1,14 +1,14 @@
-import React from 'react';
-import styles from './styles.module.css';
-import ScrollIndicator from './ScrollIndicator';
+import React from "react";
+import ScrollIndicator from "./ScrollIndicator";
 
-interface IMouse {
-}
+import styles from "./styles.module.css";
 
-const Mouse = ({}:IMouse) => {
-    return (<div className={styles.mouse}>
-        <ScrollIndicator />
-    </div>)
-}
+const Mouse = () => {
+  return (
+    <div className={styles.mouse}>
+      <ScrollIndicator />
+    </div>
+  );
+};
 
 export default Mouse;

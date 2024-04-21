@@ -1,1 +1,1 @@
-export {default as EmailPanel} from './EmailPanel';
+export { default as EmailPanel } from "./EmailPanel";

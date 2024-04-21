@@ -48,7 +48,8 @@
     cursor: pointer;
     font-size: var(--body-small-font-size);
     font-family: var(--regular-font-family);
-    padding: calc(var(--space-xs) / 4);
+    padding-inline: calc(var(--space-xs) / 2);
+    padding-block: calc(var(--space-xs) / 4);
 }
 
 .paginationItem:not(.selectedPage) a{

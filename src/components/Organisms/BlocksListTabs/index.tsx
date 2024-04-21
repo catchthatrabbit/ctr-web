@@ -1,1 +1,1 @@
-export {default as BlockListTabs} from './BlockListTabs';
+export { default as BlockListTabs } from "./BlockListTabs";
