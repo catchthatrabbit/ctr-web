@@ -14,6 +14,11 @@ dotenv.config({ path: `${__dirname}/.env.pools` });
 dotenv.config({ path: `${__dirname}/.env.urls` });
 dotenv.config({ path: `${__dirname}/.env.resources` });
 
+import remarkCorepass from "remark-corepass";
+import remarkCorebc from "remark-corebc";
+import remarkCurrencyFormatter from 'remark-currency-formatter';
+import remarkFediverseUser from "remark-fediverse-user";
+
 const config: Config = {
   title: process.env.NAME,
   tagline: process.env.DESCRIPTION,
@@ -343,6 +348,10 @@ const config: Config = {
             {
               label: "Mobile App",
               href: "/start-mining#app",
+            },
+            {
+              label: 'Mobile App',
+              href: '/start-mining#app',
             },
           ],
         },
