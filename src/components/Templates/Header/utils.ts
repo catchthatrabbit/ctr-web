@@ -5,19 +5,19 @@ export const covertRegionValue2Label = (
   apiKeys: STANDARD_REGIONS_API_KEYS,
 ): string => {
   switch (apiKeys) {
-    case "EU":
-      return REGIONS.EU.label;
-    case "EU_BACKUP":
-      return REGIONS.EU_BACKUP.label;
-    case "AS":
-      return REGIONS.AS.label;
-    case "AS_BACKUP":
-      return REGIONS.AS_BACKUP.label;
-    case "US":
-      return REGIONS.US.label;
-    case "US_BACKUP":
-      return REGIONS.US_BACKUP.label;
+    case "DE":
+      return REGIONS.DE.label;
+    case "FI":
+      return REGIONS.FI.label;
+    case "SG":
+      return REGIONS.SG.label;
+    case "HK":
+      return REGIONS.HK.label;
+    case "AM":
+      return REGIONS.AM.label;
+    case "AM1":
+      return REGIONS.AM1.label;
     default:
-      return REGIONS.EU.label;
+      return REGIONS.DE.label;
   }
 };

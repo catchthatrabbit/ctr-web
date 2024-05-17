@@ -5,21 +5,21 @@ import {
 } from "@site/src/Api/types";
 
 export const REGIONS_FULL_NAME: Record<STANDARD_REGIONS_API_KEYS, string> = {
-  EU: poolConfig.pools.EU.fullName,
-  EU_BACKUP: poolConfig.pools.EU_BACKUP.fullName,
-  AS: poolConfig.pools.AS.fullName,
-  AS_BACKUP: poolConfig.pools.AS_BACKUP.fullName,
-  US: poolConfig.pools.US.fullName,
-  US_BACKUP: poolConfig.pools.US_BACKUP.fullName,
+  DE: poolConfig.pools.DE.fullName,
+  FI: poolConfig.pools.FI.fullName,
+  SG: poolConfig.pools.SG.fullName,
+  HK: poolConfig.pools.HK.fullName,
+  AM: poolConfig.pools.AM.fullName,
+  AM1: poolConfig.pools.AM1.fullName,
 };
 
 export const REGIONS_SHORT_NAME: Record<STANDARD_REGIONS_API_KEYS, string> = {
-  EU: poolConfig.pools.EU.name,
-  EU_BACKUP: poolConfig.pools.EU_BACKUP.name,
-  AS: poolConfig.pools.AS.name,
-  AS_BACKUP: poolConfig.pools.AS_BACKUP.name,
-  US: poolConfig.pools.US.name,
-  US_BACKUP: poolConfig.pools.US_BACKUP.name,
+  DE: poolConfig.pools.DE.name,
+  FI: poolConfig.pools.FI.name,
+  SG: poolConfig.pools.SG.name,
+  HK: poolConfig.pools.HK.name,
+  AM: poolConfig.pools.AM.name,
+  AM1: poolConfig.pools.AM1.name,
 };
 
 export const REGIONS: Record<
@@ -31,40 +31,40 @@ export const REGIONS: Record<
     url: string;
   }
 > = {
-  EU: {
-    label: "Primary European Pool",
-    value: "eu",
-    summary: "European Pool",
-    url: "eu.catchthatrabbit.com",
+  DE: {
+    label: "German Pool",
+    value: "de",
+    summary: "German Pool",
+    url: "de.catchthatrabbit.com",
   },
-  EU_BACKUP: {
-    label: "Backup European Pool",
-    value: "eu1",
-    summary: "Backup European Pool",
-    url: "eu1.catchthatrabbit.com",
+  FI: {
+    label: "Finish Pool",
+    value: "fi",
+    summary: "Finish Pool",
+    url: "fi.catchthatrabbit.com",
   },
-  AS: {
-    label: "Primary Asian Pool",
-    value: "as",
-    summary: "Asian Pool",
-    url: "as.catchthatrabbit.com",
+  SG: {
+    label: "Singaporean Pool",
+    value: "sg",
+    summary: "Singaporean Pool",
+    url: "sg.catchthatrabbit.com",
   },
-  AS_BACKUP: {
-    label: "Backup Asian Pool",
-    value: "as1",
-    summary: "Backup Asian Pool",
-    url: "as1.catchthatrabbit.com",
+  HK: {
+    label: "Hong Kong Pool",
+    value: "hk",
+    summary: "Hong Kong Pool",
+    url: "hk.catchthatrabbit.com",
   },
-  US: {
-    label: "Primary US Pool",
-    value: "us",
-    summary: "US Pool",
-    url: "us.catchthatrabbit.com",
+  AM: {
+    label: "American Pool",
+    value: "am",
+    summary: "American Pool",
+    url: "am.catchthatrabbit.com",
   },
-  US_BACKUP: {
-    label: "Backup US Pool",
-    value: "us1",
-    summary: "Backup US Pool",
-    url: "us1.catchthatrabbit.com",
+  AM1: {
+    label: "American 1 Pool",
+    value: "am1",
+    summary: "American 1 Pool",
+    url: "am1.catchthatrabbit.com",
   },
 };

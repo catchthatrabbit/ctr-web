@@ -1,20 +1,25 @@
 export const convertWorkerName = (
   str: string,
 ): { href: string; caption: string } => {
-  if (str === null) return {} as { href: string; caption: string };
+  if (!str) return {} as { href: string; caption: string };
 
-  const regex = /^_([a-z0-9]+)-(\d{1,5})([A-Z][^\s]*)([A-Z][^\s]*)$/;
+  const regex = /^_([a-z0-9]+)([A-Z][^\s]*)([A-Z][^\s]*)(?:-([a-zA-Z0-9]+))?$/;
+  const match = str.match(regex);
 
-  const hrefReplacement = "@$1";
+  if (!match) return {} as { href: string; caption: string };
 
-  const captionReplacement = "@$1@$3.$4 $2";
+  const [, username, domainPart, tldPart, workerPart] = match;
 
-  const hrefFormatted = str.replace(regex, hrefReplacement);
+  const domain = domainPart.toLowerCase();
+  const tld = tldPart.replace(/[A-Z]/g, letter => '.' + letter.toLowerCase());
 
-  const captionFormatted = str.replace(regex, captionReplacement);
+  const href = `https://${domain}${tld}/@${username}`;
+  const caption = workerPart
+    ? `@${username}@${domain}${tld} ${workerPart}`
+    : `@${username}@${domain}${tld}`;
 
   return {
-    href: hrefFormatted,
-    caption: captionFormatted,
+    href,
+    caption,
   };
 };

@@ -1,14 +1,14 @@
 export type STANDARD_REGIONS_API_KEYS =
-  | "EU"
-  | "EU_BACKUP"
-  | "AS"
-  | "AS_BACKUP"
-  | "US"
-  | "US_BACKUP";
+  | "DE"
+  | "FI"
+  | "SG"
+  | "HK"
+  | "AM"
+  | "AM1";
 export type STANDARD_REGIONS_API_VALUES =
-  | "eu"
-  | "eu1"
-  | "as"
-  | "as1"
-  | "us"
-  | "us1";
+  | "de"
+  | "fi"
+  | "sg"
+  | "hk"
+  | "am"
+  | "am1";

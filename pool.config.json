@@ -41,51 +41,57 @@
   "apiBasePath":"v2/api/",
   "useHTTPS": true,
   "pools": {
-    "EU": {
-      "fullName": "Primary European Pool",
-      "name": "European Pool",
-      "server": "eu-api.catchthatrabbit.com",
+    "DE": {
+      "fullName": "DACH Pool 🇩🇪🇦🇹🇨🇭",
+      "name": "German Pool",
+      "server": "de-api.catchthatrabbit.com",
       "port": "8008",
+      "workername": "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
       "username": "<your wallet address>.<worker name>",
       "password": "<empty>"
     },
-    "EU_BACKUP": {
-      "fullName": "Backup European Pool",
-      "name": "Backup European Pool",
-      "server": "eu1-api.catchthatrabbit.com",
+    "FI": {
+      "fullName": "Northeast EU Pool 🇫🇮",
+      "name": "Finish Pool",
+      "server": "fi-api.catchthatrabbit.com",
       "port": "8008",
+      "workername": "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
       "username": "<your wallet address>.<worker name>",
       "password": "<empty>"
     },
-    "AS": {
-      "fullName": "Primary Asian Pool",
-      "name": "Asian Pool",
-      "server": "as-api.catchthatrabbit.com",
+    "SG": {
+      "fullName": "ASEAN Pool 🇸🇬",
+      "name": "Singaporean Pool",
+      "server": "sg-api.catchthatrabbit.com",
       "port": "8008",
+      "workername": "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
       "username": "<your wallet address>.<worker name>",
       "password": "<empty>"
     },
-    "AS_BACKUP": {
-      "fullName": "Backup Asian Pool",
-      "name": "Backup Asian Pool",
-      "server": "as1-api.catchthatrabbit.com",
+    "HK": {
+      "fullName": "East Asian Pool 🇭🇰",
+      "name": "Hong Kong Pool",
+      "server": "hk-api.catchthatrabbit.com",
       "port": "8008",
+      "workername": "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
       "username": "<your wallet address>.<worker name>",
       "password": "<empty>"
     },
-    "US": {
-      "fullName": "Primary US Pool",
-      "name": "US Pool",
-      "server": "us-api.catchthatrabbit.com",
+    "AM": {
+      "fullName": "American Pool 🌎",
+      "name": "American Pool",
+      "server": "am-api.catchthatrabbit.com",
       "port": "8008",
+      "workername": "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
       "username": "<your wallet address>.<worker name>",
       "password": "<empty>"
     },
-    "US_BACKUP": {
-      "fullName": "Backup US Pool",
-      "name": "Backup US Pool",
-      "server": "us1-api.catchthatrabbit.com",
+    "AM1": {
+      "fullName": "American 1 Pool 🌎",
+      "name": "American 1 Pool",
+      "server": "am1-api.catchthatrabbit.com",
       "port": "8008",
+      "workername": "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
       "username": "<your wallet address>.<worker name>",
       "password": "<empty>"
     }

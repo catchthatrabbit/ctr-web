@@ -1,8 +1,8 @@
 export enum POOL_NAME_ENUM {
-  EU = "EU",
-  EU_BACKUP = "EU_BACKUP",
-  AS = "AS",
-  AS_BACKUP = "AS_BACKUP",
-  US = "US",
-  US_BACKUP = "US_BACKUP",
+  DE = "DE",
+  FI = "FI",
+  SG = "SG",
+  HK = "HK",
+  AM = "AM",
+  AM1 = "AM1",
 }

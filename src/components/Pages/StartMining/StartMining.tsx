@@ -35,7 +35,7 @@ const StartMining = ({
   onSetWalletAddress,
   onChangeRegion,
 }: IStartMining) => {
-  const { GO_CORE_CLIENT_URL, ICAN_WALLET_URL } = useControls();
+  const { CORE_CLIENT_URL, ICAN_WALLET_URL } = useControls();
 
   const inputStartMiningRef = useRef<HTMLInputElement>();
 
@@ -85,7 +85,7 @@ const StartMining = ({
           <Text variant="body" type="value">
             You can download
           </Text>
-          <a href={GO_CORE_CLIENT_URL} target="_blank" rel="noreferrer">
+          <a href={CORE_CLIENT_URL} target="_blank" rel="noreferrer">
             <Text variant="body" color="primary" type="value">
               &nbsp; go-core client &nbsp;
             </Text>
