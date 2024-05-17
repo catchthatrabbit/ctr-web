@@ -11,7 +11,7 @@ dotenv.config({ path: `${__dirname}/.env.resources` });
 
 import remarkCorepass from "remark-corepass";
 import remarkCorebc from "remark-corebc";
-import remarkCurrencyFormatter from 'remark-currency-formatter';
+import remarkCurrencyFormatter from "remark-currency-formatter";
 import remarkFediverseUser from "remark-fediverse-user";
 
 const config: Config = {
@@ -138,8 +138,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
-          editUrl:
-            `https://github.com/catchthatrabbit/frontend/edit/master/docs`,
+          editUrl: `https://github.com/catchthatrabbit/frontend/edit/master/docs`,
           routeBasePath: "/docs",
           path: "docs",
           showLastUpdateAuthor: true,
@@ -154,17 +153,17 @@ const config: Config = {
         blog: {
           showReadingTime: true,
           editUrl:
-            'https://github.com/catchthatrabbit/frontend/edit/master/blog',
-          path: 'blog',
-          routeBasePath: '/blog',
+            "https://github.com/catchthatrabbit/frontend/edit/master/blog",
+          path: "blog",
+          routeBasePath: "/blog",
           blogSidebarCount: 0,
-          blogTitle: 'Blog news',
+          blogTitle: "Blog news",
           postsPerPage: 10,
           feedOptions: {
-            type: 'all',
-            copyright: `${process.env.org || 'CTR'} ⛬ Copyright CatchThatRabbit`,
+            type: "all",
+            copyright: `${process.env.org || "CTR"} ⛬ Copyright CatchThatRabbit`,
             createFeedItems: async (params) => {
-              const {blogPosts, defaultCreateFeedItems, ...rest} = params;
+              const { blogPosts, defaultCreateFeedItems, ...rest } = params;
               return defaultCreateFeedItems({
                 blogPosts: blogPosts.filter((item, index) => index < 10),
                 ...rest,
@@ -200,16 +199,16 @@ const config: Config = {
       },
     },
     {
-      tagName: 'script',
+      tagName: "script",
       attributes: {
-        type: 'application/ld+json',
+        type: "application/ld+json",
       },
       innerHTML: JSON.stringify({
-        '@context': 'https://schema.org/',
-        '@type': 'Organization',
-        name: 'CatchThatRabbit',
-        url: 'https://catchthatrabbit.com',
-        logo: 'https://catchthatrabbit.com/img/logo.svg',
+        "@context": "https://schema.org/",
+        "@type": "Organization",
+        name: "CatchThatRabbit",
+        url: "https://catchthatrabbit.com",
+        logo: "https://catchthatrabbit.com/img/logo.svg",
       }),
     },
   ],
@@ -283,16 +282,16 @@ const config: Config = {
               to: "/start-mining",
             },
             {
-              label: 'DACH Pool',
-              to: '/start-mining#de',
+              label: "DACH Pool",
+              to: "/start-mining#de",
             },
             {
-              label: 'ASEAN Pool',
-              to: '/start-mining#sg',
+              label: "ASEAN Pool",
+              to: "/start-mining#sg",
             },
             {
-              label: 'East Asian Pool',
-              to: '/start-mining#hk',
+              label: "East Asian Pool",
+              to: "/start-mining#hk",
             },
           ],
         },
@@ -329,8 +328,8 @@ const config: Config = {
               href: "/start-mining#software",
             },
             {
-              label: 'Mobile App',
-              href: '/start-mining#app',
+              label: "Mobile App",
+              href: "/start-mining#app",
             },
           ],
         },

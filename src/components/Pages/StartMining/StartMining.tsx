@@ -35,6 +35,7 @@ const StartMining = ({
   onSetWalletAddress,
   onChangeRegion,
 }: IStartMining) => {
+    
   const {
     goCoreClientUrl,
     icanWalletUrl,
