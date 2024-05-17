@@ -8,11 +8,7 @@ import {
 import { useFetchPaymentByWalletAddress } from "@site/src/hooks/usePayments";
 import { useState } from "react";
 import { paymentPayoutTableColumns } from "./constants";
-import { IDataTable } from "@site/src/components/Atoms/DataTable";
-// eslint-disable-next-line import/no-unresolved
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { EXTERNAL_URL } from "@site/src/constants/links";
-import { EXTERNAL_URL_ENUM } from "@site/src/enums/externalUrls.enum";
+import { IDataTable } from "@site/src/components/Atoms/DataTable/types";
 
 interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
   walletAddress: string;
@@ -27,16 +23,12 @@ const useControls = ({
     useState<STANDARD_REGIONS_API_KEYS>(defaultRegion);
   const [currentPagePayouts, setCurrentPagePayouts] = useState<number>(1);
   const [currentPageWorkers, setCurrentPageWorkers] = useState<number>(1);
-  const { siteConfig } = useDocusaurusContext();
 
   const workersTableColumn = [
     {
       value: "rabbit",
       label: "Rabbit",
       isPrimary: true,
-      href: siteConfig.customFields.CORE_TALK_SPACE_URL
-        ? siteConfig.customFields.CORE_TALK_SPACE_URL
-        : EXTERNAL_URL[EXTERNAL_URL_ENUM.CORE_TALK_SPACE_URL],
     },
     {
       value: "hr",

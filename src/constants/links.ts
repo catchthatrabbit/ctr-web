@@ -6,37 +6,36 @@ export const POOL_CATCH_THE_RABBIT_SUB_DOMAINS: Record<
   STANDARD_REGIONS_API_KEYS,
   string
 > = {
-  EU: poolConfig.pools.EU.server,
-  EU_BACKUP: poolConfig.pools.EU_BACKUP.server,
-  AS: poolConfig.pools.AS.server,
-  AS_BACKUP: poolConfig.pools.AS_BACKUP.server,
-  US: poolConfig.pools.US.server,
-  US_BACKUP: poolConfig.pools.US_BACKUP.server,
+  DE: poolConfig.pools.DE.server,
+  FI: poolConfig.pools.FI.server,
+  SG: poolConfig.pools.SG.server,
+  HK: poolConfig.pools.HK.server,
+  AM: poolConfig.pools.AM.server,
+  AM1: poolConfig.pools.AM1.server,
 };
 
 export const DEFAULT_API_URL: Record<STANDARD_REGIONS_API_KEYS, string> = {
-  EU: poolConfig.useHTTPS
-    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.EU}/${poolConfig.apiBasePath}`
-    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.EU}/${poolConfig.apiBasePath}`,
-  EU_BACKUP: poolConfig.useHTTPS
-    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.EU_BACKUP}/${poolConfig.apiBasePath}`
-    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.EU_BACKUP}/${poolConfig.apiBasePath}`,
-  AS: poolConfig.useHTTPS
-    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AS}/${poolConfig.apiBasePath}`
-    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AS}/${poolConfig.apiBasePath}`,
-  AS_BACKUP: poolConfig.useHTTPS
-    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AS_BACKUP}/${poolConfig.apiBasePath}`
-    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AS_BACKUP}/${poolConfig.apiBasePath}`,
-  US: poolConfig.useHTTPS
-    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.US}/${poolConfig.apiBasePath}`
-    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.US}/${poolConfig.apiBasePath}`,
-  US_BACKUP: poolConfig.useHTTPS
-    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.US_BACKUP}/${poolConfig.apiBasePath}`
-    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.US_BACKUP}/${poolConfig.apiBasePath}`,
+  DE: poolConfig.useHTTPS
+    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.DE}/${poolConfig.apiBasePath}`
+    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.DE}/${poolConfig.apiBasePath}`,
+  FI: poolConfig.useHTTPS
+    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.FI}/${poolConfig.apiBasePath}`
+    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.FI}/${poolConfig.apiBasePath}`,
+  SG: poolConfig.useHTTPS
+    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.SG}/${poolConfig.apiBasePath}`
+    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.SG}/${poolConfig.apiBasePath}`,
+  HK: poolConfig.useHTTPS
+    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.HK}/${poolConfig.apiBasePath}`
+    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.HK}/${poolConfig.apiBasePath}`,
+  AM: poolConfig.useHTTPS
+    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AM}/${poolConfig.apiBasePath}`
+    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AM}/${poolConfig.apiBasePath}`,
+  AM1: poolConfig.useHTTPS
+    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AM1}/${poolConfig.apiBasePath}`
+    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AM1}/${poolConfig.apiBasePath}`,
 };
 
 export const EXTERNAL_URL: Record<EXTERNAL_URL_ENUM, string> = {
   TRANSACTION_DETAILS: "https://blockindex.net/tx",
   BLOCK_DETAILS: "https://blockindex.net/block",
-  CORE_TALK_SPACE_URL: "https://coretalk.space",
 };

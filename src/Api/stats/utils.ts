@@ -9,12 +9,12 @@ const generateAllApiInstances = (): Record<
 > => {
   return {
     instances: {
-      [POOL_NAME_ENUM.EU]: new AxiosInstance(POOL_NAME_ENUM.EU),
-      [POOL_NAME_ENUM.EU_BACKUP]: new AxiosInstance(POOL_NAME_ENUM.EU_BACKUP),
-      [POOL_NAME_ENUM.AS]: new AxiosInstance(POOL_NAME_ENUM.AS),
-      [POOL_NAME_ENUM.AS_BACKUP]: new AxiosInstance(POOL_NAME_ENUM.AS_BACKUP),
-      [POOL_NAME_ENUM.US]: new AxiosInstance(POOL_NAME_ENUM.US),
-      [POOL_NAME_ENUM.US_BACKUP]: new AxiosInstance(POOL_NAME_ENUM.US_BACKUP),
+      [POOL_NAME_ENUM.DE]: new AxiosInstance(POOL_NAME_ENUM.DE),
+      [POOL_NAME_ENUM.FI]: new AxiosInstance(POOL_NAME_ENUM.FI),
+      [POOL_NAME_ENUM.SG]: new AxiosInstance(POOL_NAME_ENUM.SG),
+      [POOL_NAME_ENUM.HK]: new AxiosInstance(POOL_NAME_ENUM.HK),
+      [POOL_NAME_ENUM.AM]: new AxiosInstance(POOL_NAME_ENUM.AM),
+      [POOL_NAME_ENUM.AM1]: new AxiosInstance(POOL_NAME_ENUM.AM1),
     },
   };
 };
@@ -36,9 +36,6 @@ export const getAllStatsCharts = () => {
 export const getAllRegionsMaturedBlocks = (limit = 5, offset = 0) => {
   const allApi = generateAllApiInstances();
   return Object.keys(allApi.instances)
-    .filter(
-      (key) => key !== POOL_NAME_ENUM.US && key !== POOL_NAME_ENUM.US_BACKUP,
-    )
     .map((key) =>
       allApi.instances[key]
         .getInstance()

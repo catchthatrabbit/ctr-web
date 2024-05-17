@@ -65,20 +65,20 @@ const Header = ({
               defaultValue={covertRegionValue2Label(defaultRegion)}
               className={styles.boardDropdown}
               items={[
-                { label: REGIONS.EU.label, value: POOL_NAME_ENUM.EU },
+                { label: REGIONS.DE.label, value: POOL_NAME_ENUM.DE },
                 {
-                  label: REGIONS.EU_BACKUP.label,
-                  value: POOL_NAME_ENUM.EU_BACKUP,
+                  label: REGIONS.FI.label,
+                  value: POOL_NAME_ENUM.FI,
                 },
-                { label: REGIONS.AS.label, value: POOL_NAME_ENUM.AS },
+                { label: REGIONS.SG.label, value: POOL_NAME_ENUM.SG },
                 {
-                  label: REGIONS.AS_BACKUP.label,
-                  value: POOL_NAME_ENUM.AS_BACKUP,
+                  label: REGIONS.HK.label,
+                  value: POOL_NAME_ENUM.HK,
                 },
-                { label: REGIONS.US.label, value: POOL_NAME_ENUM.US },
+                { label: REGIONS.AM.label, value: POOL_NAME_ENUM.AM },
                 {
-                  label: REGIONS.US_BACKUP.label,
-                  value: POOL_NAME_ENUM.US_BACKUP,
+                  label: REGIONS.AM1.label,
+                  value: POOL_NAME_ENUM.AM1,
                 },
               ]}
               onChange={onChangeRegion}

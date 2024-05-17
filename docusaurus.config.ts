@@ -2,6 +2,11 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+import remarkCorepass from "remark-corepass";
+import remarkCorebc from "remark-corebc";
+import remarkCurrencyFormatter from 'remark-currency-formatter';
+import remarkFediverseUser from "remark-fediverse-user";
+
 const config: Config = {
   title: 'Catch that Rabbit',
   tagline: 'Catch that Rabbit — ₡ORE mining pool',
@@ -16,9 +21,10 @@ const config: Config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'catchthatrabbit', // Usually your GitHub org/user name.
-  projectName: 'catchthatrabbit-web', // Usually your repo name.
+  projectName: 'frontend', // Usually your repo name.
 
   onBrokenLinks: 'throw',
+  onBrokenAnchors: "throw",
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
@@ -30,7 +36,6 @@ const config: Config = {
   },
 
   customFields: {
-    CORE_TALK_SPACE_URL: null,
     EU_PRIMARY_API_ENDPOINT : null,
     NEXT_PUBLIC_EU_PRIMARY_API_ENDPOINT : null,
     EU_BACKUP_API_ENDPOINT:null,
@@ -43,13 +48,15 @@ const config: Config = {
     NEXT_PUBLIC_US_PRIMARY_API_ENDPOINT:null,
     US_BACKUP_API_ENDPOINT:null,
     NEXT_PUBLIC_US_BACKUP_API_ENDPOINT:null,
-    US_START_MINING_POOL_LOCATION : null,
+    // Mining locations links
+    AM_START_MINING_POOL_LOCATION : null,
     EU_START_MINING_POOL_LOCATION : null,
     AS_START_MINING_POOL_LOCATION : null,
+    // Established year
     ESTD: null,
     TRANSACTION_DETAILS_URL: null,
     BLOCK_DETAILS_URL:null,
-    GO_CORE_CLIENT_URL:null
+    CORE_CLIENT_URL:null
   },
 
   presets: [
@@ -57,14 +64,81 @@ const config: Config = {
       'classic',
       {
         docs: {
+          sidebarPath: "./sidebars.ts",
+          editUrl:
+            `https://github.com/catchthatrabbit/frontend/edit/master/docs`,
+          routeBasePath: "/docs",
+          path: "docs",
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
+          remarkPlugins: [
+            remarkCorepass,
+            remarkCorebc,
+            remarkFediverseUser,
+            remarkCurrencyFormatter,
+          ],
         },
         blog: {
+          showReadingTime: true,
+          editUrl:
+            'https://github.com/catchthatrabbit/frontend/edit/master/blog',
+          path: 'blog',
+          routeBasePath: '/blog',
+          blogSidebarCount: 0,
+          blogTitle: 'Blog news',
+          postsPerPage: 10,
+          feedOptions: {
+            type: 'all',
+            copyright: `${process.env.org || 'CTR'} ⛬ Copyright CatchThatRabbit`,
+            createFeedItems: async (params) => {
+              const {blogPosts, defaultCreateFeedItems, ...rest} = params;
+              return defaultCreateFeedItems({
+                blogPosts: blogPosts.filter((item, index) => index < 10),
+                ...rest,
+              });
+            },
+          },
+          remarkPlugins: [
+            remarkCorepass,
+            remarkCorebc,
+            remarkFediverseUser,
+            remarkCurrencyFormatter,
+          ],
         },
         theme: {
           customCss: './src/css/custom.css',
         },
       } satisfies Preset.Options,
     ],
+  ],
+  headTags: [
+    {
+      tagName: "link",
+      attributes: {
+        rel: "manifest",
+        href: "/manifest.json",
+      },
+    },
+    {
+      tagName: "meta",
+      attributes: {
+        name: "generator",
+        content: "CTR Generator",
+      },
+    },
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'application/ld+json',
+      },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org/',
+        '@type': 'Organization',
+        name: 'CatchThatRabbit',
+        url: 'https://catchthatrabbit.com',
+        logo: 'https://catchthatrabbit.com/img/logo.svg',
+      }),
+    },
   ],
 
   themeConfig: {
@@ -105,7 +179,7 @@ const config: Config = {
           href: '/payments',
           label: 'Payments',
           position: 'right'
-        },        
+        },
         {
           href: '/miners',
           label: 'Miners',
@@ -128,7 +202,7 @@ const config: Config = {
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
-      },      
+      },
       links: [
         {
           title: 'Start',
@@ -138,16 +212,16 @@ const config: Config = {
               to: '/start-mining',
             },
             {
-              label: 'EU pool',
-              to: '/start-mining#eu',
+              label: 'DACH Pool',
+              to: '/start-mining#de',
             },
             {
-              label: 'AS pool',
-              to: '/start-mining#as',
+              label: 'ASEAN Pool',
+              to: '/start-mining#sg',
             },
             {
-              label: 'US pool',
-              to: '/start-mining#us',
+              label: 'East Asian Pool',
+              to: '/start-mining#hk',
             },
           ],
         },
@@ -182,6 +256,10 @@ const config: Config = {
             {
               label: 'Mining software',
               href: '/start-mining#software',
+            },
+            {
+              label: 'Mobile App',
+              href: '/start-mining#app',
             },
           ],
         },
