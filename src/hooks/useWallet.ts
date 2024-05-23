@@ -7,6 +7,7 @@ import { fetchWorkersByWalletAddress } from "@site/src/Api/workers/fetchWorkers"
 import { useQueryConfigured } from "./useQueryConfigured";
 import { WORKER_BY_WALLET_ADDRESS_RESPONSE } from "../Api/workers/types";
 import { WALLET_INFO_RESPONSE } from "../Api/wallet/types";
+import { useConfigUrlBasedRegion } from "./useConfigUrlBasedRegion";
 
 export const useFetchWallet = (
   region: STANDARD_REGIONS_API_KEYS,
@@ -53,8 +54,9 @@ export const useFetchWorkersByWalletAddress = (
   limit?: number,
   offset?: number,
 ) => {
+  const { url } = useConfigUrlBasedRegion(region);
   return useQueryConfigured<WORKER_BY_WALLET_ADDRESS_RESPONSE>(
-    { region, walletAddress, limit, offset },
+    { region, walletAddress, limit, offset, url },
     QUERY_KEYS.WORKER,
     fetchWorkersByWalletAddress,
     walletAddress !== undefined,

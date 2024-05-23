@@ -50,3 +50,19 @@
     height: 28.8px;
     display: block;
 }
+
+.copyButton {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.copyButton > button {
+    visibility: hidden;
+    position: absolute;
+    left: 13rem;
+}
+
+.copyButton:hover > button{
+    visibility: visible;
+}

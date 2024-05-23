@@ -3,21 +3,32 @@ import { usePaginate } from "@site/src/hooks/usePaginate";
 import { useMemo } from "react";
 import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
 import { tablesConfig } from "@site/src/configs";
-import { EXTERNAL_URL } from "@site/src/constants/links";
-import { EXTERNAL_URL_ENUM } from "@site/src/enums/externalUrls.enum";
 import {
   useFetchPayments,
   useFetchPaymentsState,
 } from "@site/src/hooks/usePayments";
+// eslint-disable-next-line import/no-unresolved
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
 
 const useControls = ({
   onSetWalletAddress,
   defaultRegion,
   onChangeRegion,
 }: IAnyPageAndWallet) => {
-  const { handleChangeRegion, handleSearch, region, setWalletAddress } =
-    useHeaders({ defaultRegion, onSetWalletAddress, onChangeRegion });
+  const {
+    handleChangeRegion,
+    handleSearch,
+    region,
+    setWalletAddress,
+    dropdownItems,
+    regionLabel,
+  } = useHeaders({ defaultRegion, onSetWalletAddress, onChangeRegion });
   const { currentPageNumber, handlePageChange } = usePaginate();
+
+  const { siteConfig } = useDocusaurusContext();
+
+  const urlsConfigs = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
 
   const { data: fetchedPaymentsState, isLoading: isLoadingPaymentState } =
     useFetchPaymentsState(region);
@@ -31,6 +42,7 @@ const useControls = ({
       {
         value: "address",
         label: "Address",
+        canBeCopied: true,
         alignToCenter: true,
         isPrimary: true,
         fn: setWalletAddress,
@@ -38,12 +50,13 @@ const useControls = ({
       {
         value: "tx",
         label: "Tx id",
+        canBeCopied: true,
         alignToCenter: true,
         isPrimary: true,
-        href: EXTERNAL_URL[EXTERNAL_URL_ENUM.TRANSACTION_DETAILS],
+        href: urlsConfigs.TRANSACTION_DETAILS_URL,
       },
     ],
-    [setWalletAddress],
+    [setWalletAddress, urlsConfigs.TRANSACTION_DETAILS_URL],
   );
 
   return {
@@ -56,6 +69,8 @@ const useControls = ({
     fetchedPaymentsState,
     isLoadingPaymentState,
     isLoadingPaymentList,
+    dropdownItems,
+    regionLabel,
   };
 };
 

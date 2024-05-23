@@ -9,11 +9,26 @@ import {
 } from "@site/src/configs/start-minings.config";
 import { useFetchAllRegionsMaturedBlocks } from "@site/src/hooks/useBlocks";
 import { useMemo } from "react";
-import { EXTERNAL_URL } from "@site/src/constants/links";
-import { EXTERNAL_URL_ENUM } from "@site/src/enums/externalUrls.enum";
+import { IDataTable } from "@site/src/components/Atoms/DataTable/types";
+import {
+  POOLS_API_CONFIG_TYPE,
+  URLS_CONFIG_TYPE,
+} from "@site/src/configs/types";
 
 const useControls = () => {
   const { siteConfig } = useDocusaurusContext();
+
+  const urlsConfigs = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
+  const estd = siteConfig.customFields.ESTD;
+  const effectsShowLocation: boolean =
+    siteConfig.customFields.EFFECTS_SHOW_LOCATIONS === "true" ? true : false;
+
+  const effectsShowActionIcons: boolean =
+    siteConfig.customFields.EFFECTS_SHOW_ACTION_ICONS === "true" ? true : false;
+  const sLoganPrimary: string = String(siteConfig.customFields.SLOGAN_PRIMARY);
+  const SLoganSecondary: string = String(
+    siteConfig.customFields.SLOGAN_SECONDARY,
+  );
 
   const {
     chart: radialChartData,
@@ -30,7 +45,10 @@ const useControls = () => {
   const {
     data: AllRegionsMaturedBlocks,
     isLoading: isLoadingAllRegionMaturedBlocks,
-  } = useFetchAllRegionsMaturedBlocks();
+  } = useFetchAllRegionsMaturedBlocks({
+    urls: siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
+    apiPath: String(siteConfig.customFields.API_PATH),
+  });
 
   const dataTableColumns = useMemo(
     () => [
@@ -39,30 +57,22 @@ const useControls = () => {
         label: "Height",
         isPrimary: true,
         alignToCenter: true,
-        href: String(
-          siteConfig.customFields.BLOCK_DETAILS_URL ||
-            EXTERNAL_URL[EXTERNAL_URL_ENUM.BLOCK_DETAILS],
-        ),
+        href: urlsConfigs.BLOCK_DETAILS_URL,
       },
       { value: "type", label: "Type", alignToCenter: true },
       { value: "minedOn", label: "Mined on" },
       {
+        canBeCopied: true,
         value: "blockHash",
         label: "Block hash",
         isPrimary: true,
-        href: String(
-          siteConfig.customFields.TRANSACTION_DETAILS_URL ||
-            EXTERNAL_URL[EXTERNAL_URL_ENUM.BLOCK_DETAILS],
-        ),
+        href: urlsConfigs.BLOCK_DETAILS_URL,
       },
       { value: "reward", label: "Reward", alignToCenter: true },
       { value: "variance", label: "Variance", alignToCenter: true },
     ],
-    [
-      siteConfig.customFields.BLOCK_DETAILS_URL,
-      siteConfig.customFields.TRANSACTION_DETAILS_URL,
-    ],
-  );
+    [urlsConfigs.BLOCK_DETAILS_URL],
+  ) as IDataTable["columns"];
 
   return {
     radialChartData,
@@ -79,15 +89,18 @@ const useControls = () => {
       .AS_START_MINING_POOL_LOCATION ||
       AS_START_MINING_POOL_LOCATION) as string,
     estd:
-      siteConfig.customFields.estd !== "" &&
-      siteConfig.customFields.estd !== undefined
-        ? siteConfig.customFields.estd
+      estd !== "" && estd !== undefined
+        ? estd
         : new Date().getFullYear().toString(),
     AllRegionsMaturedBlocks,
     recentMatureBlockListColumns: dataTableColumns,
     isLoadingRadialBarChart,
     isLoadingMapChart,
     isLoadingAllRegionMaturedBlocks,
+    effectsShowLocation,
+    effectsShowActionIcons,
+    sLoganPrimary,
+    SLoganSecondary,
   };
 };
 

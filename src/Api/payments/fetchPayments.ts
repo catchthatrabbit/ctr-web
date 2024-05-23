@@ -12,14 +12,16 @@ export const fetchPaymentsByWalletAddress = async ({
   walletAddress,
   limit = 10,
   offset = 0,
+  url,
 }: {
   region: STANDARD_REGIONS_API_KEYS;
   walletAddress: string;
   limit: number;
   offset: number;
+  url?: string;
 }) => {
   try {
-    const instance = new AxiosInstance(region).getInstance();
+    const instance = new AxiosInstance({ region, url }).getInstance();
 
     const response = instance.get(
       `/payments/${walletAddress}?limit=${limit}&offset=${offset}`,
@@ -37,13 +39,15 @@ export const fetchPayments = async ({
   region,
   limit = 10,
   offset = 0,
+  url,
 }: {
   region: STANDARD_REGIONS_API_KEYS;
   limit: number;
   offset: number;
+  url?: string;
 }) => {
   try {
-    const instance = new AxiosInstance(region).getInstance();
+    const instance = new AxiosInstance({ region, url }).getInstance();
 
     const response = instance.get(
       `/payments?limit=${limit}&offset=${offset}`,
@@ -59,11 +63,13 @@ export const fetchPayments = async ({
 
 export const fetchPaymentsState = async ({
   region,
+  url,
 }: {
   region: STANDARD_REGIONS_API_KEYS;
+  url?: string;
 }) => {
   try {
-    const instance = new AxiosInstance(region).getInstance();
+    const instance = new AxiosInstance({ region, url }).getInstance();
     const response = instance.get(`/payments_stats`) as Promise<
       AxiosResponse<PAYMENTS_STATE>
     >;

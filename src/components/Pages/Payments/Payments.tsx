@@ -23,12 +23,16 @@ const Payments = ({
     handleSearch,
     isLoadingPaymentState,
     isLoadingPaymentList,
+    dropdownItems,
+    regionLabel,
   } = useControls({ defaultRegion, onSetWalletAddress, onChangeRegion });
 
   return (
     <>
       <Spacer variant="xxxxl" />
       <Header
+        items={dropdownItems}
+        defaultRegion={regionLabel}
         onChangeRegion={handleChangeRegion}
         isLoading={isLoadingPaymentState}
         pageTitleComponent={<PaymentsTitle />}

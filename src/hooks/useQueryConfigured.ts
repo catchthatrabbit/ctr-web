@@ -23,7 +23,8 @@ export const useQueryConfigured = <T>(
       setMessage({ text: error.message, type: "error" });
     else if (!isError && message.text && message.type)
       setMessage({ text: null, type: null });
-  }, [error?.message, isError, message, setMessage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error?.message, isError]);
 
   return { data: data as T, isLoading };
 };

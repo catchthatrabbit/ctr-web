@@ -11,6 +11,11 @@
     position: absolute;
 }
 
+.searchButton:hover{
+    background-color: var(--white);
+    color: var(--gray-700);
+}
+
 .searchButtonDesktop{
     right: 69px;
 }

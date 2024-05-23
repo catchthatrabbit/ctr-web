@@ -7,15 +7,16 @@ import {
 
 const useControls = () => {
   const { siteConfig } = useDocusaurusContext();
-  const { customFields } = siteConfig;
+  const urlsConfig = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
+  const startMiningPoolConfigurations = siteConfig.customFields
+    .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
 
   return {
-    CORE_CLIENT_URL: (customFields.CORE_CLIENT_URL
-      ? customFields.CORE_CLIENT_URL
-      : CORE_CLIENT_URL) as string,
-    ICAN_WALLET_URL: (customFields.ICAN_WALLET_URL
-      ? customFields.ICAN_WALLET_URL
-      : ICAN_WALLET_URL) as string,
+    goCoreClientUrl: String(urlsConfig.GO_CORE_CLIENT_URL),
+    icanWalletUrl: String(urlsConfig.ICAN_WALLET_URL),
+    githubReleaseDownloadUrl: String(urlsConfig.GITHUB_RELEASE_DOWNLOAD_URL),
+    githubRawMineSh: String(urlsConfig.GITHUB_RAW_MINE_SH),
+    startMiningPoolConfigurations,
   };
 };
 

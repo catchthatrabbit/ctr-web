@@ -1,3 +1,5 @@
+import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
+
 type NODE = {
   blocktime: string;
   difficulty: string;
@@ -41,3 +43,5 @@ export type STATS_CHARTS_RESPONSE = {
   poolCharts: CHART_NODE[];
   stats: STATS;
 };
+
+export type GET_ALL_PROPS = { urls: POOLS_API_CONFIG_TYPE; apiPath: string };

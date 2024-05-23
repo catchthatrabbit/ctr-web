@@ -5,11 +5,13 @@ import { SETTINGS_RESPONSE } from "./types";
 
 export const fetchSettings = async ({
   region,
+  url,
 }: {
   region: STANDARD_REGIONS_API_KEYS;
+  url?: string;
 }) => {
   try {
-    const instance = new AxiosInstance(region).getInstance();
+    const instance = new AxiosInstance({ region, url }).getInstance();
 
     const response = instance.get(`/settings`) as Promise<
       AxiosResponse<SETTINGS_RESPONSE>

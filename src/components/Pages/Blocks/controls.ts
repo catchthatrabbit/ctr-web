@@ -4,18 +4,24 @@ import { useMemo } from "react";
 import { tablesConfig } from "@site/src/configs";
 import { POOL_NAME_ENUM } from "@site/src/enums/poolName.enum";
 import { useFetchAllBlocks } from "@site/src/hooks/useBlocks";
-import { EXTERNAL_URL } from "@site/src/constants/links";
-import { EXTERNAL_URL_ENUM } from "@site/src/enums/externalUrls.enum";
+// eslint-disable-next-line import/no-unresolved
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
 
 const useControls = () => {
-  const { region, handleChangeRegion } = useHeaders({
-    defaultRegion: POOL_NAME_ENUM.EU,
-  });
+  const { region, regionLabel, handleChangeRegion, dropdownItems } = useHeaders(
+    {
+      defaultRegion: POOL_NAME_ENUM.EU,
+    },
+  );
+  const { siteConfig } = useDocusaurusContext();
 
   const { currentPageNumber, handlePageChange } = usePaginate();
 
   const [fetchedMaturedBlocks, fetchedImMatureBlocks, fetchCandidatesBlocks] =
     useFetchAllBlocks(region, 10, currentPageNumber);
+
+  const urlsConfigs = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
 
   const dataTableColumns = useMemo(
     () => [
@@ -23,7 +29,7 @@ const useControls = () => {
         value: "height",
         label: "Height",
         isPrimary: true,
-        href: EXTERNAL_URL[EXTERNAL_URL_ENUM.BLOCK_DETAILS],
+        href: urlsConfigs.BLOCK_DETAILS_URL,
       },
       { value: "type", label: "Type", alignToCenter: true },
       { value: "minedOn", label: "Mined on", alignToCenter: true },
@@ -31,17 +37,19 @@ const useControls = () => {
         value: "blockHash",
         label: "Block hash",
         alignToCenter: true,
+        canBeCopied: true,
         isPrimary: true,
-        href: EXTERNAL_URL[EXTERNAL_URL_ENUM.BLOCK_DETAILS],
+        href: urlsConfigs.BLOCK_DETAILS_URL,
       },
       { value: "reward", label: "Reward", alignToCenter: true },
       { value: "variance", label: "Variance", alignToCenter: true },
     ],
-    [],
+    [urlsConfigs.BLOCK_DETAILS_URL],
   );
 
   return {
-    region,
+    regionLabel,
+    dropdownItems,
     dataTableColumns,
     handleChangeRegion,
     handlePageChange,

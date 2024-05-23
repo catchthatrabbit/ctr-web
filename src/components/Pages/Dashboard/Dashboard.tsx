@@ -21,6 +21,8 @@ import { IAnyPageAndWallet } from "../types";
 import { Header } from "@site/src/components/Templates/Header";
 import { LoadingPlaceholder } from "@site/src/components/Atoms/LoadingPlaceholder";
 
+import { Empty } from "@site/src/components/Atoms/Empty";
+
 import styles from "./styles.module.css";
 
 interface IDashboard extends IAnyPageAndWallet {}
@@ -40,6 +42,10 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
     isLoadingMapChart,
     isLoadingRadialBarChart,
     isLoadingAllRegionMaturedBlocks,
+    SLoganSecondary,
+    sLoganPrimary,
+    effectsShowActionIcons,
+    effectsShowLocation,
   } = useControls();
 
   return (
@@ -69,35 +75,45 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
               <>
                 <Locations>
                   <span className="lg-hide md-hide" />
-                  <MapPin
-                    className="lg-grid-span-col--2 md-grid-span-col--3"
-                    mapButton={
-                      <MapButton
-                        value="US location"
-                        href={usStarMiningPoolLocation}
+                  {effectsShowLocation && (
+                    <>
+                      <MapPin
+                        className="lg-grid-span-col--2 md-grid-span-col--3"
+                        mapButton={
+                          <MapButton
+                            value="US location"
+                            href={
+                              effectsShowActionIcons && usStarMiningPoolLocation
+                            }
+                          />
+                        }
                       />
-                    }
-                  />
-                  <span className="lg-hide" />
-                  <MapPin
-                    className="xl-grid-span-col--2 lg-grid-span-col--2 md-grid-span-col--3 sm-grid-span-col--6"
-                    mapButton={
-                      <MapButton
-                        value="EU location"
-                        href={euStarMiningPoolLocation}
+                      <span className="lg-hide" />
+                      <MapPin
+                        className="xl-grid-span-col--2 lg-grid-span-col--2 md-grid-span-col--3 sm-grid-span-col--6"
+                        mapButton={
+                          <MapButton
+                            value="EU location"
+                            href={
+                              effectsShowActionIcons && euStarMiningPoolLocation
+                            }
+                          />
+                        }
                       />
-                    }
-                  />
-                  <span className="lg-hide md-hide" />
-                  <MapPin
-                    className="lg-grid-span-col--2 md-grid-span-col--2"
-                    mapButton={
-                      <MapButton
-                        value="AP location"
-                        href={asStarMiningPoolLocation}
+                      <span className="lg-hide md-hide" />
+                      <MapPin
+                        className="lg-grid-span-col--2 md-grid-span-col--2"
+                        mapButton={
+                          <MapButton
+                            value="AP location"
+                            href={
+                              effectsShowActionIcons && asStarMiningPoolLocation
+                            }
+                          />
+                        }
                       />
-                    }
-                  />
+                    </>
+                  )}
                 </Locations>
                 <Mouse>
                   <MouseContent />
@@ -113,12 +129,10 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
             ])}
           >
             <Spacer variant="lg" className="xl-hide lg-hide md-hide" />
-            <Text variant="subheading">
-              Dedicated Pool for Core Coin and IoT devices
-            </Text>
+            <Text variant="subheading">{sLoganPrimary}</Text>
             <br />
             <Text variant="body" color="gray" type="label">
-              Core mining pool in the lotusland of Ores」
+              {SLoganSecondary}
             </Text>
             <br />
             <Text variant="subheading" color="primary">
@@ -161,7 +175,9 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       <StatsChart
         isLoading={isLoadingRadialBarChart}
         infoItems={infoBoxRadialData}
-        radialBarChart={<RadialBarChart data={radialChartData} />}
+        radialBarChart={
+          <RadialBarChart emptyComponent={<Empty />} data={radialChartData} />
+        }
       />
       <Spacer variant="xl" />
       <RecentBlocksTitle />

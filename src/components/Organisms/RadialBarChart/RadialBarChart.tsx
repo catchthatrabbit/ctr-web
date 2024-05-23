@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as d3 from "d3";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, ReactNode } from "react";
 
 import styles from "./styles.module.css";
 
@@ -10,9 +10,13 @@ interface IRadialBarChartProps {
     value: number;
     hour: string;
   }>;
+  emptyComponent: ReactNode;
 }
 
-const RadialBarChart = ({ data = null }: IRadialBarChartProps) => {
+const RadialBarChart = ({
+  data = null,
+  emptyComponent,
+}: IRadialBarChartProps) => {
   const chartRef = useRef(null);
   const tipRef = useRef(null);
 
@@ -205,7 +209,9 @@ const RadialBarChart = ({ data = null }: IRadialBarChartProps) => {
       </svg>
       <div ref={tipRef} className={styles.tip} />
     </div>
-  ) : null;
+  ) : (
+    <div className={styles.emptySkeleton}>{emptyComponent}</div>
+  );
 };
 
 export default RadialBarChart;

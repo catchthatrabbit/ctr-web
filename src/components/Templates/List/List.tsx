@@ -1,4 +1,5 @@
-import { DataTable, IDataTable } from "@site/src/components/Atoms/DataTable";
+import { DataTable } from "@site/src/components/Atoms/DataTable";
+import type { IDataTable } from "@site/src/components/Atoms/DataTable/types";
 import { Pagination } from "@site/src/components/Molecules/Pagination";
 import { Spacer } from "../../Atoms/Spacer";
 import { Empty } from "@site/src/components/Atoms/Empty";

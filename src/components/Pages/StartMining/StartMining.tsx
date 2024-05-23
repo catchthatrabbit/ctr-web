@@ -35,7 +35,13 @@ const StartMining = ({
   onSetWalletAddress,
   onChangeRegion,
 }: IStartMining) => {
-  const { CORE_CLIENT_URL, ICAN_WALLET_URL } = useControls();
+  const {
+    goCoreClientUrl,
+    icanWalletUrl,
+    githubRawMineSh,
+    githubReleaseDownloadUrl,
+    startMiningPoolConfigurations,
+  } = useControls();
 
   const inputStartMiningRef = useRef<HTMLInputElement>();
 
@@ -59,16 +65,25 @@ const StartMining = ({
       {Object.keys(REGIONS).map((REGION_KEY, index) => (
         <div key={index}>
           <SingleColumnPanel
-            id={REGIONS[REGION_KEY].value}
-            title={REGIONS[REGION_KEY].summary}
+            id={REGION_KEY.toLowerCase()}
+            title={startMiningPoolConfigurations[`${REGION_KEY}_NAME`]}
             data={[
-              { label: "Server", value: REGIONS[REGION_KEY].url },
-              { label: "Port", value: "8008" },
+              {
+                label: "Server",
+                value: startMiningPoolConfigurations[`${REGION_KEY}_SERVER`],
+              },
+              {
+                label: "Port",
+                value: startMiningPoolConfigurations[`${REGION_KEY}_PORT`],
+              },
               {
                 label: "Username",
-                value: "<your wallet address>.<worker name>",
+                value: startMiningPoolConfigurations[`${REGION_KEY}_USERNAME`],
               },
-              { label: "Password", value: "<empty>" },
+              {
+                label: "Password",
+                value: startMiningPoolConfigurations[`${REGION_KEY}_PASSWORD`],
+              },
             ]}
           />
           <Spacer variant="lg" />
@@ -85,7 +100,7 @@ const StartMining = ({
           <Text variant="body" type="value">
             You can download
           </Text>
-          <a href={CORE_CLIENT_URL} target="_blank" rel="noreferrer">
+          <a href={goCoreClientUrl} target="_blank" rel="noreferrer">
             <Text variant="body" color="primary" type="value">
               &nbsp; go-core client &nbsp;
             </Text>
@@ -93,7 +108,7 @@ const StartMining = ({
           <Text variant="body" type="value">
             or use
           </Text>
-          <a href={ICAN_WALLET_URL} target="_blank" rel="noreferrer">
+          <a href={icanWalletUrl} target="_blank" rel="noreferrer">
             <Text type="value" color="primary" variant="body">
               &nbsp; generator of ICAN wallets.
             </Text>
@@ -165,13 +180,13 @@ const StartMining = ({
                   ref={inputStartMiningRef}
                   className={styles.input}
                   onFocus={handleOnFocus}
-                  defaultValue="bash <(curl -s https://raw.githubusercontent.com/catchthatrabbit/coreminer/master/mine.sh)"
+                  defaultValue={githubRawMineSh}
                 />
                 <Spacer variant="lg" />
                 <div
                   className={clsx(styles.lineFlex, styles.justifyContentCenter)}
                 >
-                  <Link to="https://github.com/catchthatrabbit/coreminer/releases">
+                  <Link to={githubReleaseDownloadUrl}>
                     <Button value="Download Release"></Button>
                   </Link>
                 </div>
@@ -190,13 +205,15 @@ const StartMining = ({
                   key={index}
                   className={clsx(styles.buttonConfigLessPadding)}
                 >
-                  <Link to={`#${REGIONS[REGION_KEY].value}`}>
+                  <Link to={`#${REGION_KEY.toLowerCase()}`}>
                     <Button
                       className={clsx([
                         styles.buttonConfig,
                         "whitespace-normal remove-padding-inline",
                       ])}
-                      value={REGIONS[REGION_KEY].summary}
+                      value={
+                        startMiningPoolConfigurations[`${REGION_KEY}_NAME`]
+                      }
                     />
                   </Link>
                 </div>

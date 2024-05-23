@@ -7,13 +7,15 @@ export const fetchMiners = async ({
   region,
   limit = 10,
   offset = 0,
+  url,
 }: {
   region: STANDARD_REGIONS_API_KEYS;
   limit: number;
   offset: number;
+  url?: string;
 }) => {
   try {
-    const instance = new AxiosInstance(region).getInstance();
+    const instance = new AxiosInstance({ region, url }).getInstance();
     const response = instance.get(
       `/miners?limit=${limit}&offset=${offset}`,
     ) as Promise<AxiosResponse<MINERS_RESPONSE, unknown>>;
@@ -26,11 +28,13 @@ export const fetchMiners = async ({
 
 export const fetchMinersState = async ({
   region,
+  url,
 }: {
   region: STANDARD_REGIONS_API_KEYS;
+  url?: string;
 }) => {
   try {
-    const instance = new AxiosInstance(region).getInstance();
+    const instance = new AxiosInstance({ region, url }).getInstance();
 
     const response = instance.get("/miners_stats") as Promise<
       AxiosResponse<MINERS_STATES, unknown>

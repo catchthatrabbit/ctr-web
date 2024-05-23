@@ -8,14 +8,16 @@ export const fetchWorkersByWalletAddress = async ({
   walletAddress,
   limit = 10,
   offset = 0,
+  url,
 }: {
   region: STANDARD_REGIONS_API_KEYS;
   walletAddress: string;
   limit: number;
   offset: number;
+  url?: string;
 }) => {
   try {
-    const instance = new AxiosInstance(region).getInstance();
+    const instance = new AxiosInstance({ region, url }).getInstance();
 
     const response = instance.get(
       `/workers/${walletAddress}?limit=${limit}&offset=${offset}`,

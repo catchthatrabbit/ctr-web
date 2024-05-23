@@ -1,8 +1,6 @@
 import { STANDARD_REGIONS_API_KEYS } from "../Api/types";
-import poolConfig from "@site/pool.config.json";
-import { EXTERNAL_URL_ENUM } from "../enums/externalUrls.enum";
 
-export const POOL_CATCH_THE_RABBIT_SUB_DOMAINS: Record<
+const POOL_CATCH_THE_RABBIT_SUB_DOMAINS: Record<
   STANDARD_REGIONS_API_KEYS,
   string
 > = {
@@ -13,6 +11,8 @@ export const POOL_CATCH_THE_RABBIT_SUB_DOMAINS: Record<
   AM: poolConfig.pools.AM.server,
   AM1: poolConfig.pools.AM1.server,
 };
+
+const API_BASE_PATH = "v2/api/";
 
 export const DEFAULT_API_URL: Record<STANDARD_REGIONS_API_KEYS, string> = {
   DE: poolConfig.useHTTPS

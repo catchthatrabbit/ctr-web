@@ -16,8 +16,14 @@ const useControls = ({
 }: IAnyPageAndWallet) => {
   const { push } = useHistory();
 
-  const { region, handleChangeRegion, handleSearch, setWalletAddress } =
-    useHeaders({ defaultRegion, onSetWalletAddress, onChangeRegion });
+  const {
+    region,
+    regionLabel,
+    dropdownItems,
+    handleChangeRegion,
+    handleSearch,
+    setWalletAddress,
+  } = useHeaders({ defaultRegion, onSetWalletAddress, onChangeRegion });
 
   const { currentPageNumber, handlePageChange } = usePaginate();
   const { data: fetchedMinerState, isLoading: isLoadingMinerState } =
@@ -35,6 +41,7 @@ const useControls = ({
       {
         value: "id",
         label: "Miner",
+        canBeCopied: true,
         isPrimary: true,
         fn: (walletAddress) => {
           setWalletAddress(walletAddress);
@@ -58,6 +65,8 @@ const useControls = ({
     fetchedMinerList,
     isLoadingMinerState,
     isLoadingMinerList,
+    regionLabel,
+    dropdownItems,
   };
 };
 

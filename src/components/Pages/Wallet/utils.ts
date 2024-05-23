@@ -14,6 +14,8 @@ import { convertWorkerName } from "@site/src/utils/convertWorkerName";
 
 export const convertWorkersResponse2Info = (
   workerResponse: WORKER_BY_WALLET_ADDRESS_RESPONSE,
+  falseEmoji: string,
+  trueEmoji: string,
 ): WORKER_INFO_BY_WALLET_ADDRESS => {
   if (!workerResponse) return [] as WORKER_INFO_BY_WALLET_ADDRESS;
   return Object.keys(workerResponse.workers)?.map((key) => {
@@ -26,7 +28,11 @@ export const convertWorkersResponse2Info = (
       lastBeat: ageCalculation(
         convertTime2Date(workerResponse.workers[key].lastBeat),
       ),
-      offline: generateWorkerOfflineEmoji(workerResponse.workers[key].offline),
+      offline: generateWorkerOfflineEmoji(
+        workerResponse.workers[key].offline,
+        falseEmoji,
+        trueEmoji,
+      ),
     };
   });
 };
@@ -44,7 +50,11 @@ export const convertPaymentsResponse2PaymentInfo = (
   }));
 };
 
-export const generateWorkerOfflineEmoji = (workerOffline: boolean = false) => {
-  if (workerOffline) return "BRB ⏳";
-  else return "OK 🐰";
+export const generateWorkerOfflineEmoji = (
+  workerIsOnline: boolean = false,
+  brbEmoji: string,
+  okEmoji: string,
+) => {
+  if (workerIsOnline) return okEmoji;
+  else return brbEmoji;
 };

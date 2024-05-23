@@ -7,9 +7,10 @@ import { checkArrayObjectIsEmpty } from "@site/src/utils/checkIsEmpty";
 import LoadingSkeleton from "./LoadingSkeleton";
 import { IDataTable } from "./types";
 
-import "./styles.css";
-import styles from "./styles.module.css";
+import { CopyButtonSmall } from "../../Molecules/CopyButton";
 
+import styles from "./styles.module.css";
+import "./styles.css";
 const DataTable = ({
   data,
   columns,
@@ -52,33 +53,41 @@ const DataTable = ({
                   colIndex === 0 && styles.tablePaddingLeft,
                 )}
               >
-                {colItem.isPrimary ? (
-                  colItem.href ? (
-                    <Link to={`${colItem.href}/${rowItem[colItem.value]}`}>
-                      <Text variant="body" color="primary" type="value">
+                <span className={styles.copyButton}>
+                  {colItem.isPrimary ? (
+                    colItem.href ? (
+                      <Link to={`${colItem.href}/${rowItem[colItem.value]}`}>
+                        <Text variant="body" color="primary" type="value">
+                          {rowItem[`${colItem.value}_summarized`]?.toString() ||
+                            ""}
+                        </Text>
+                      </Link>
+                    ) : (
+                      <Text
+                        variant="body"
+                        className={styles.cursorPointer}
+                        color="primary"
+                        type="value"
+                        onClick={() =>
+                          typeof colItem?.fn === "function" &&
+                          colItem.fn(rowItem[colItem.value]?.toString())
+                        }
+                      >
                         {rowItem[`${colItem.value}_summarized`]?.toString() ||
                           ""}
                       </Text>
-                    </Link>
+                    )
                   ) : (
-                    <Text
-                      variant="body"
-                      className={styles.cursorPointer}
-                      color="primary"
-                      type="value"
-                      onClick={() =>
-                        typeof colItem?.fn === "function" &&
-                        colItem.fn(rowItem[colItem.value]?.toString())
-                      }
-                    >
-                      {rowItem[`${colItem.value}_summarized`]?.toString() || ""}
+                    <Text variant="body" type="value">
+                      {rowItem[colItem.value]?.toString() || ""}
                     </Text>
-                  )
-                ) : (
-                  <Text variant="body" type="value">
-                    {rowItem[colItem.value]?.toString() || ""}
-                  </Text>
-                )}
+                  )}
+                  {colItem.canBeCopied && (
+                    <CopyButtonSmall
+                      textToCopy={rowItem[colItem.value]?.toString() || ""}
+                    />
+                  )}
+                </span>
               </td>
             ))}
           </tr>

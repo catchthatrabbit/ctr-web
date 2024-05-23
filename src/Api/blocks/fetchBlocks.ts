@@ -13,9 +13,10 @@ export const fetchMatured = async (
   region: STANDARD_REGIONS_API_KEYS,
   limit = 10,
   offset = 0,
+  url?: string,
 ) => {
   try {
-    const instance = new AxiosInstance(region).getInstance();
+    const instance = new AxiosInstance({ region, url }).getInstance();
     const response = instance.get(
       `/matured_blocks?limit=${limit}&offset=${offset}`,
     ) as Promise<AxiosResponse<MATURED_RESPONSE, unknown>>;
@@ -26,9 +27,12 @@ export const fetchMatured = async (
   }
 };
 
-export const fetchAllRegionsMatured = async () => {
+export const fetchAllRegionsMatured = async ({
+  apiPath,
+  urls,
+}: Parameters<typeof getAllRegionsMaturedBlocks>[0]) => {
   try {
-    const instanceArray = getAllRegionsMaturedBlocks();
+    const instanceArray = getAllRegionsMaturedBlocks({ urls, apiPath });
     const statsResponses = await filterAllSettled<{ data: MATURED_RESPONSE }>(
       instanceArray,
     );
@@ -43,9 +47,10 @@ export const fetchImMatured = async (
   region: STANDARD_REGIONS_API_KEYS,
   limit = 10,
   offset = 0,
+  url?: string,
 ) => {
   try {
-    const instance = new AxiosInstance(region).getInstance();
+    const instance = new AxiosInstance({ region, url }).getInstance();
     const response = instance.get(
       `/immature_blocks?limit=${limit}&offset=${offset}`,
     ) as Promise<AxiosResponse<IM_MATURED_RESPONSE, unknown>>;
@@ -60,9 +65,10 @@ export const fetchCandidates = async (
   region: STANDARD_REGIONS_API_KEYS,
   limit = 10,
   offset = 0,
+  url?: string,
 ) => {
   try {
-    const instance = new AxiosInstance(region).getInstance();
+    const instance = new AxiosInstance({ region, url }).getInstance();
     const response = instance.get(
       `/candidates_blocks?limit=${limit}&offset=${offset}`,
     ) as Promise<AxiosResponse<CANDIDATES_RESPONSE, unknown>>;

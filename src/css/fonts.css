@@ -67,6 +67,7 @@
 
   --bold-font-weight: 600;
   --regular-font-weight: 400;
+  --ifm-font-weight-semibold: var(--regular-font-weight);
 
   --ifm-h1-font-size: 2.8rem;
   --ifm-h2-font-size: 2rem;

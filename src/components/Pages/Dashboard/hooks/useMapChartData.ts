@@ -8,9 +8,17 @@ import {
 } from "../utils";
 import { WHITELIST_AGGREGATE_KEYS } from "@site/src/configs/aggregate-keys.config";
 import { STATS_RESPONSE } from "@site/src/Api/stats/types";
+// eslint-disable-next-line import/no-unresolved
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
 
 const useMapChartData = () => {
-  const { data: statsResponse, isLoading } = useFetchStats();
+  const { siteConfig } = useDocusaurusContext();
+
+  const { data: statsResponse, isLoading } = useFetchStats({
+    urls: siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
+    apiPath: String(siteConfig.customFields.API_PATH),
+  });
 
   const { data: settingsResponse } = useFetchSettings(POOL_NAME_ENUM.EU);
 

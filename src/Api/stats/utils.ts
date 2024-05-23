@@ -1,12 +1,16 @@
 import { POOL_NAME_ENUM } from "@site/src/enums/poolName.enum";
 import { AxiosInstance } from "../api";
-import { STATS_CHARTS_RESPONSE, STATS_RESPONSE } from "./types";
+import { GET_ALL_PROPS, STATS_CHARTS_RESPONSE, STATS_RESPONSE } from "./types";
 import { MATURED_RESPONSE } from "../blocks/types";
+import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
 
-const generateAllApiInstances = (): Record<
-  "instances",
-  Record<string, AxiosInstance>
-> => {
+const generateAllApiInstances = ({
+  urls,
+  apiPath,
+}: {
+  urls?: POOLS_API_CONFIG_TYPE;
+  apiPath?: string;
+}): Record<"instances", Record<string, AxiosInstance>> => {
   return {
     instances: {
       [POOL_NAME_ENUM.DE]: new AxiosInstance(POOL_NAME_ENUM.DE),
@@ -19,22 +23,32 @@ const generateAllApiInstances = (): Record<
   };
 };
 
-export const getAllStats = () => {
-  const allApi = generateAllApiInstances();
+const concatApiPath = (url: string, apiPath: string) => {
+  if (apiPath) return `${url}${apiPath}`;
+  return url;
+};
+
+export const getAllStats = ({ apiPath, urls }: GET_ALL_PROPS) => {
+  const allApi = generateAllApiInstances({ urls, apiPath });
   return Object.keys(allApi.instances).map((key) =>
     allApi.instances[key].getInstance().get("/stats"),
   ) as Array<Promise<{ data: STATS_RESPONSE }>>;
 };
 
-export const getAllStatsCharts = () => {
-  const allApi = generateAllApiInstances();
+export const getAllStatsCharts = ({ apiPath, urls }: GET_ALL_PROPS) => {
+  const allApi = generateAllApiInstances({ urls, apiPath });
   return Object.keys(allApi.instances).map((key) =>
     allApi.instances[key].getInstance().get("/stats/chart"),
   ) as Array<Promise<{ data: STATS_CHARTS_RESPONSE }>>;
 };
 
-export const getAllRegionsMaturedBlocks = (limit = 5, offset = 0) => {
-  const allApi = generateAllApiInstances();
+export const getAllRegionsMaturedBlocks = ({
+  apiPath,
+  urls,
+}: GET_ALL_PROPS) => {
+  const allApi = generateAllApiInstances({ urls, apiPath });
+  const limit = 5;
+  const offset = 0;
   return Object.keys(allApi.instances)
     .map((key) =>
       allApi.instances[key]

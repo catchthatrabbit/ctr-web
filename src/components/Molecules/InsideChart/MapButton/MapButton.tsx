@@ -12,15 +12,24 @@ interface IMapButton {
 }
 
 const MapButton = ({ value, href }: IMapButton) => {
+  const LinkComp = (children) => <Link to={href}>{children}</Link>;
+  const MapButtonComp = ({ className }: { className?: string }) => (
+    <Button
+      className={clsx([styles.button, styles.wordWrap, className])}
+      value={value}
+    />
+  );
+
   return (
     <div className={styles.mapButton}>
       <MapCircle />
-      <Link to={href}>
-        <Button
-          className={clsx([styles.button, styles.wordWrap])}
-          value={value}
-        />
-      </Link>
+      {href ? (
+        <LinkComp>
+          <MapButtonComp />
+        </LinkComp>
+      ) : (
+        <MapButtonComp className={styles.cursorAuto} />
+      )}
     </div>
   );
 };

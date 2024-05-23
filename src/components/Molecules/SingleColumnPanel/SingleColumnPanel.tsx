@@ -18,11 +18,10 @@ interface ISingleColumnPanel {
 
 const SingleColumnPanel = ({ title, data, id }: ISingleColumnPanel) => {
   const { desktop, laptop, mobile, tablet } = useMediaQueries();
-
   return (
     <Panel
-      id={id}
-      title={title}
+      id={id || ""}
+      title={title || ""}
       variant="heading2"
       color="primary"
       titleClassName={styles.singlePanel}
@@ -41,7 +40,7 @@ const SingleColumnPanel = ({ title, data, id }: ISingleColumnPanel) => {
           </Text>
           &nbsp;&nbsp;
           <Text type="value" variant="subheading">
-            {item.value}
+            {item.value || ""}
           </Text>
         </div>
       ))}

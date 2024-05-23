@@ -24,12 +24,7 @@ export const REGIONS_SHORT_NAME: Record<STANDARD_REGIONS_API_KEYS, string> = {
 
 export const REGIONS: Record<
   STANDARD_REGIONS_API_KEYS,
-  {
-    label: string;
-    value: STANDARD_REGIONS_API_VALUES;
-    summary: string;
-    url: string;
-  }
+  STANDARD_REGIONS_API_KEYS
 > = {
   DE: {
     label: "German Pool",

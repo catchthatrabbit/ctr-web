@@ -23,11 +23,15 @@ const Miners = ({
     handleSearch,
     fetchedMinerState,
     fetchedMinerList,
+    dropdownItems,
+    regionLabel,
   } = useControls({ onSetWalletAddress, defaultRegion, onChangeRegion });
   return (
     <>
       <Spacer variant="xxxxl" />
       <Header
+        defaultRegion={regionLabel}
+        items={dropdownItems}
         onChangeRegion={handleChangeRegion}
         isLoading={isLoadingMinerState}
         pageTitleComponent={<MinersTitle />}

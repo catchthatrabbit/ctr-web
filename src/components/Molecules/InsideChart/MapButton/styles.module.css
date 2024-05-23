@@ -5,6 +5,10 @@
     border-radius: 50%;
 }
 
+.cursorAuto{
+  cursor: auto;
+}
+
 .wordWrap{
   white-space: normal
 }

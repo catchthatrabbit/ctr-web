@@ -11,6 +11,7 @@ import {
   PAYMENTS_RESPONSE,
   PAYMENTS_STATE,
 } from "../Api/payments/types";
+import { useConfigUrlBasedRegion } from "./useConfigUrlBasedRegion";
 
 export const useFetchPaymentByWalletAddress = (
   region: STANDARD_REGIONS_API_KEYS,
@@ -18,8 +19,10 @@ export const useFetchPaymentByWalletAddress = (
   limit?: number,
   offset?: number,
 ) => {
+  const { url } = useConfigUrlBasedRegion(region);
+
   return useQueryConfigured<PAYMENTS_BY_WALLET_ADDRESS_RESPONSE>(
-    { region, walletAddress, limit, offset },
+    { region, walletAddress, limit, offset, url },
     QUERY_KEYS.PAYMENTS,
     fetchPaymentsByWalletAddress,
   );
@@ -30,16 +33,20 @@ export const useFetchPayments = (
   limit?: number,
   offset?: number,
 ) => {
+  const { url } = useConfigUrlBasedRegion(region);
+
   return useQueryConfigured<PAYMENTS_RESPONSE>(
-    { region, limit, offset },
+    { region, limit, offset, url },
     QUERY_KEYS.PAYMENTS,
     fetchPayments,
   );
 };
 
 export const useFetchPaymentsState = (region: STANDARD_REGIONS_API_KEYS) => {
+  const { url } = useConfigUrlBasedRegion(region);
+
   return useQueryConfigured<PAYMENTS_STATE>(
-    { region },
+    { region, url },
     QUERY_KEYS.PAYMENTS,
     fetchPaymentsState,
   );

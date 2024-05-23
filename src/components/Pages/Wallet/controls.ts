@@ -6,9 +6,11 @@ import {
   useFetchWorkersByWalletAddress,
 } from "@site/src/hooks/useWallet";
 import { useFetchPaymentByWalletAddress } from "@site/src/hooks/usePayments";
-import { useState } from "react";
-import { paymentPayoutTableColumns } from "./constants";
-import { IDataTable } from "@site/src/components/Atoms/DataTable/types";
+import { useMemo, useState } from "react";
+// eslint-disable-next-line import/no-unresolved
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
+import { useHeaders } from "@site/src/hooks/useHeaders";
 
 interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
   walletAddress: string;
@@ -23,34 +25,68 @@ const useControls = ({
     useState<STANDARD_REGIONS_API_KEYS>(defaultRegion);
   const [currentPagePayouts, setCurrentPagePayouts] = useState<number>(1);
   const [currentPageWorkers, setCurrentPageWorkers] = useState<number>(1);
+  const { dropdownItems, regionLabel } = useHeaders({ defaultRegion });
+  const { siteConfig } = useDocusaurusContext();
 
-  const workersTableColumn = [
-    {
-      value: "rabbit",
-      label: "Rabbit",
-      isPrimary: true,
-    },
-    {
-      value: "hr",
-      label: "Hashrate ~30m",
-      alignToCenter: true,
-    },
-    {
-      value: "hr2",
-      label: "Hashrate ~3h",
-      alignToCenter: true,
-    },
-    {
-      value: "lastBeat",
-      label: "Last share",
-      alignToCenter: true,
-    },
-    {
-      value: "offline",
-      label: "Status",
-      alignToCenter: true,
-    },
-  ] as IDataTable["columns"];
+  const urlConfig = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
+  const okEmoji = String(siteConfig.customFields.EFFECTS_OK_EMOJI);
+  const brbEmoji = String(siteConfig.customFields.EFFECTS_BRB_EMOJI);
+
+  const paymentPayoutTableColumns = useMemo(
+    () => [
+      {
+        label: "Time",
+        value: "timestamp",
+        alignToCenter: true,
+      },
+      {
+        label: "Tx id",
+        value: "tx",
+        canBeCopied: true,
+        isPrimary: true,
+        alignToCenter: true,
+        href: urlConfig.TRANSACTION_DETAILS_URL,
+      },
+      {
+        label: "Amount",
+        value: "amount",
+        alignToCenter: true,
+      },
+    ],
+    [urlConfig.TRANSACTION_DETAILS_URL],
+  );
+
+  const workersTableColumn = useMemo(
+    () => [
+      {
+        value: "rabbit",
+        label: "Rabbit",
+        isPrimary: true,
+        href: urlConfig.CORE_TALK_SPACE_URL,
+      },
+      {
+        value: "hr",
+        label: "Hashrate ~30m",
+        alignToCenter: true,
+      },
+      {
+        value: "hr2",
+        label: "Hashrate ~3h",
+        alignToCenter: true,
+      },
+      {
+        value: "lastBeat",
+        label: "Last share",
+        alignToCenter: true,
+      },
+      {
+        value: "offline",
+        label: "Status",
+        alignToCenter: true,
+      },
+    ],
+    [urlConfig.CORE_TALK_SPACE_URL],
+  );
 
   const { data: fetchedWalletInfo, isLoading: isLoadingFetchWallet } =
     useFetchWallet(region, walletAddress);
@@ -104,6 +140,10 @@ const useControls = ({
     isLoadingFetchPaymentByWalletAddress,
     isLoadingFetchWallet,
     isLoadingFetchWorkerByWalletAddress,
+    okEmoji,
+    brbEmoji,
+    dropdownItems,
+    regionLabel,
   };
 };
 

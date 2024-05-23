@@ -2,6 +2,7 @@ import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export interface IDataTable {
   columns: Array<{
+    canBeCopied?: boolean;
     value: string;
     label: string;
     alignToCenter?: boolean;

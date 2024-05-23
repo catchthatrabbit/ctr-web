@@ -36,14 +36,19 @@ const Wallet = ({
     isLoadingFetchPaymentByWalletAddress,
     isLoadingFetchWallet,
     isLoadingFetchWorkerByWalletAddress,
+    okEmoji,
+    brbEmoji,
+    dropdownItems,
+    regionLabel,
   } = useControls({ walletAddress, defaultRegion, onChangeRegion });
 
   return (
     <>
       <Button value="Back" onClick={onClearWalletAddress} />
       <Header
+        items={dropdownItems}
         isLoading={isLoadingFetchWallet}
-        defaultRegion={defaultRegion}
+        defaultRegion={regionLabel}
         onChangeRegion={handleChangeRegion}
         iban={walletAddress}
         layout={{ boards: true, search: false, dropdown: true }}
@@ -55,7 +60,11 @@ const Wallet = ({
         workers={
           <List
             isLoading={isLoadingFetchWorkerByWalletAddress}
-            data={convertWorkersResponse2Info(fetchWorkersByWalletAddress)}
+            data={convertWorkersResponse2Info(
+              fetchWorkersByWalletAddress,
+              okEmoji,
+              brbEmoji,
+            )}
             dataTableColumns={workersTableColumn}
             total={fetchWorkersByWalletAddress?.workersTotal}
             onPageChange={handleChangePageWorkers}

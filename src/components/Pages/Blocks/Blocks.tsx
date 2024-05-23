@@ -8,7 +8,7 @@ import { Spacer } from "@site/src/components/Atoms/Spacer";
 
 const Blocks = () => {
   const {
-    region,
+    regionLabel,
     dataTableColumns,
     fetchCandidatesBlocks,
     fetchedImMatureBlocks,
@@ -18,13 +18,15 @@ const Blocks = () => {
     isLoadingMaturedBlocks,
     handleChangeRegion,
     handlePageChange,
+    dropdownItems,
   } = useControls();
 
   return (
     <>
       <Spacer variant="xxxxl" />
       <Header
-        defaultRegion={region}
+        items={dropdownItems}
+        defaultRegion={regionLabel}
         pageTitleComponent={<BlockTitle />}
         onChangeRegion={handleChangeRegion}
         layout={{ boards: false, search: false, dropdown: true }}
