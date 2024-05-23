@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import * as d3 from "d3";
 import { useEffect, useRef, ReactNode } from "react";
 
@@ -26,6 +25,7 @@ const RadialBarChart = ({
 
   useEffect(() => {
     if (chartRef.current && tipRef.current) updateChart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, chartRef, tipRef]);
 
   const updateChart = () => {

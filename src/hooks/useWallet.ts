@@ -24,7 +24,7 @@ export const useFetchWallet = (
 export const useWalletPage = () => {
   const [walletAddress, setWalletAddress] = useState<string>();
   const [region, setRegion] = useState<STANDARD_REGIONS_API_KEYS>(
-    POOL_NAME_ENUM.EU,
+    POOL_NAME_ENUM.DE,
   );
 
   const handleWalletAddress = (walletAddress: string) => {

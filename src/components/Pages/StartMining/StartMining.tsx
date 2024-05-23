@@ -35,9 +35,8 @@ const StartMining = ({
   onSetWalletAddress,
   onChangeRegion,
 }: IStartMining) => {
-    
   const {
-    goCoreClientUrl,
+    coreClientUrl,
     icanWalletUrl,
     githubRawMineSh,
     githubReleaseDownloadUrl,
@@ -67,23 +66,27 @@ const StartMining = ({
         <div key={index}>
           <SingleColumnPanel
             id={REGION_KEY.toLowerCase()}
-            title={startMiningPoolConfigurations[`${REGION_KEY}_NAME`]}
+            title={startMiningPoolConfigurations[REGION_KEY][`NAME`]}
             data={[
               {
                 label: "Server",
-                value: startMiningPoolConfigurations[`${REGION_KEY}_SERVER`],
+                value: startMiningPoolConfigurations[REGION_KEY][`SERVER`],
               },
               {
                 label: "Port",
-                value: startMiningPoolConfigurations[`${REGION_KEY}_PORT`],
+                value: startMiningPoolConfigurations[REGION_KEY][`PORT`],
               },
               {
                 label: "Username",
-                value: startMiningPoolConfigurations[`${REGION_KEY}_USERNAME`],
+                value: startMiningPoolConfigurations[REGION_KEY][`USERNAME`],
+              },
+              {
+                label: "Worker name",
+                value: startMiningPoolConfigurations[REGION_KEY][`WORKER_NAME`],
               },
               {
                 label: "Password",
-                value: startMiningPoolConfigurations[`${REGION_KEY}_PASSWORD`],
+                value: startMiningPoolConfigurations[REGION_KEY][`PASSWORD`],
               },
             ]}
           />
@@ -101,7 +104,7 @@ const StartMining = ({
           <Text variant="body" type="value">
             You can download
           </Text>
-          <a href={goCoreClientUrl} target="_blank" rel="noreferrer">
+          <a href={coreClientUrl} target="_blank" rel="noreferrer">
             <Text variant="body" color="primary" type="value">
               &nbsp; go-core client &nbsp;
             </Text>
@@ -212,9 +215,7 @@ const StartMining = ({
                         styles.buttonConfig,
                         "whitespace-normal remove-padding-inline",
                       ])}
-                      value={
-                        startMiningPoolConfigurations[`${REGION_KEY}_NAME`]
-                      }
+                      value={startMiningPoolConfigurations[REGION_KEY]["NAME"]}
                     />
                   </Link>
                 </div>

@@ -11,7 +11,7 @@ import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
 const useControls = () => {
   const { region, regionLabel, handleChangeRegion, dropdownItems } = useHeaders(
     {
-      defaultRegion: POOL_NAME_ENUM.EU,
+      defaultRegion: POOL_NAME_ENUM.DE,
     },
   );
   const { siteConfig } = useDocusaurusContext();

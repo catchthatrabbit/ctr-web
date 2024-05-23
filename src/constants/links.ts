@@ -4,38 +4,21 @@ const POOL_CATCH_THE_RABBIT_SUB_DOMAINS: Record<
   STANDARD_REGIONS_API_KEYS,
   string
 > = {
-  DE: poolConfig.pools.DE.server,
-  FI: poolConfig.pools.FI.server,
-  SG: poolConfig.pools.SG.server,
-  HK: poolConfig.pools.HK.server,
-  AM: poolConfig.pools.AM.server,
-  AM1: poolConfig.pools.AM1.server,
+  DE: "eu-api.catchthatrabbit.com",
+  FI: "eu1-api.catchthatrabbit.com",
+  SG: "as-api.catchthatrabbit.com",
+  HK: "as1-api.catchthatrabbit.com",
+  AM: "us-api.catchthatrabbit.com",
+  AM1: "us1-api.catchthatrabbit.com",
 };
 
 const API_BASE_PATH = "v2/api/";
 
 export const DEFAULT_API_URL: Record<STANDARD_REGIONS_API_KEYS, string> = {
-  DE: poolConfig.useHTTPS
-    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.DE}/${poolConfig.apiBasePath}`
-    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.DE}/${poolConfig.apiBasePath}`,
-  FI: poolConfig.useHTTPS
-    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.FI}/${poolConfig.apiBasePath}`
-    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.FI}/${poolConfig.apiBasePath}`,
-  SG: poolConfig.useHTTPS
-    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.SG}/${poolConfig.apiBasePath}`
-    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.SG}/${poolConfig.apiBasePath}`,
-  HK: poolConfig.useHTTPS
-    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.HK}/${poolConfig.apiBasePath}`
-    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.HK}/${poolConfig.apiBasePath}`,
-  AM: poolConfig.useHTTPS
-    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AM}/${poolConfig.apiBasePath}`
-    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AM}/${poolConfig.apiBasePath}`,
-  AM1: poolConfig.useHTTPS
-    ? `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AM1}/${poolConfig.apiBasePath}`
-    : `http://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AM1}/${poolConfig.apiBasePath}`,
-};
-
-export const EXTERNAL_URL: Record<EXTERNAL_URL_ENUM, string> = {
-  TRANSACTION_DETAILS: "https://blockindex.net/tx",
-  BLOCK_DETAILS: "https://blockindex.net/block",
+  DE: `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.DE}/${API_BASE_PATH}`,
+  FI: `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.FI}/${API_BASE_PATH}`,
+  SG: `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.SG}/${API_BASE_PATH}`,
+  HK: `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.HK}/${API_BASE_PATH}`,
+  AM: `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AM}/${API_BASE_PATH}`,
+  AM1: `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.AM1}/${API_BASE_PATH}`,
 };

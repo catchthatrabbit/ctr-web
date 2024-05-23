@@ -11,7 +11,7 @@ export const convertWorkerName = (
   const [, username, domainPart, tldPart, workerPart] = match;
 
   const domain = domainPart.toLowerCase();
-  const tld = tldPart.replace(/[A-Z]/g, letter => '.' + letter.toLowerCase());
+  const tld = tldPart.replace(/[A-Z]/g, (letter) => "." + letter.toLowerCase());
 
   const href = `https://${domain}${tld}/@${username}`;
   const caption = workerPart

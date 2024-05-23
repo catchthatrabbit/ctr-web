@@ -13,12 +13,42 @@ const generateAllApiInstances = ({
 }): Record<"instances", Record<string, AxiosInstance>> => {
   return {
     instances: {
-      [POOL_NAME_ENUM.DE]: new AxiosInstance(POOL_NAME_ENUM.DE),
-      [POOL_NAME_ENUM.FI]: new AxiosInstance(POOL_NAME_ENUM.FI),
-      [POOL_NAME_ENUM.SG]: new AxiosInstance(POOL_NAME_ENUM.SG),
-      [POOL_NAME_ENUM.HK]: new AxiosInstance(POOL_NAME_ENUM.HK),
-      [POOL_NAME_ENUM.AM]: new AxiosInstance(POOL_NAME_ENUM.AM),
-      [POOL_NAME_ENUM.AM1]: new AxiosInstance(POOL_NAME_ENUM.AM1),
+      [POOL_NAME_ENUM.DE]: new AxiosInstance({
+        region: POOL_NAME_ENUM.DE,
+        url: urls.DE_API_ENDPOINT
+          ? concatApiPath(urls.DE_API_ENDPOINT, apiPath)
+          : concatApiPath(urls.NEXT_PUBLIC_DE_API_ENDPOINT, apiPath),
+      }),
+      [POOL_NAME_ENUM.FI]: new AxiosInstance({
+        region: POOL_NAME_ENUM.FI,
+        url: urls.FI_API_ENDPOINT
+          ? concatApiPath(urls.FI_API_ENDPOINT, apiPath)
+          : concatApiPath(urls.NEXT_PUBLIC_FI_API_ENDPOINT, apiPath),
+      }),
+      [POOL_NAME_ENUM.SG]: new AxiosInstance({
+        region: POOL_NAME_ENUM.SG,
+        url: urls.SG_API_ENDPOINT
+          ? concatApiPath(urls.SG_API_ENDPOINT, apiPath)
+          : concatApiPath(urls.NEXT_PUBLIC_SG_API_ENDPOINT, apiPath),
+      }),
+      [POOL_NAME_ENUM.HK]: new AxiosInstance({
+        region: POOL_NAME_ENUM.HK,
+        url: urls.HK_API_ENDPOINT
+          ? concatApiPath(urls.HK_API_ENDPOINT, apiPath)
+          : concatApiPath(urls.NEXT_PUBLIC_HK_API_ENDPOINT, apiPath),
+      }),
+      [POOL_NAME_ENUM.AM]: new AxiosInstance({
+        region: POOL_NAME_ENUM.AM,
+        url: urls.AM_API_ENDPOINT
+          ? concatApiPath(urls.AM_API_ENDPOINT, apiPath)
+          : concatApiPath(urls.NEXT_PUBLIC_AM_API_ENDPOINT, apiPath),
+      }),
+      [POOL_NAME_ENUM.AM1]: new AxiosInstance({
+        region: POOL_NAME_ENUM.AM1,
+        url: urls.AM1_API_ENDPOINT
+          ? concatApiPath(urls.AM1_API_ENDPOINT, apiPath)
+          : concatApiPath(urls.NEXT_PUBLIC_AM1_API_ENDPOINT, apiPath),
+      }),
     },
   };
 };
@@ -49,10 +79,9 @@ export const getAllRegionsMaturedBlocks = ({
   const allApi = generateAllApiInstances({ urls, apiPath });
   const limit = 5;
   const offset = 0;
-  return Object.keys(allApi.instances)
-    .map((key) =>
-      allApi.instances[key]
-        .getInstance()
-        .get(`/matured_blocks?limit=${limit}&offset=${offset}`),
-    ) as Array<Promise<{ data: MATURED_RESPONSE }>>;
+  return Object.keys(allApi.instances).map((key) =>
+    allApi.instances[key]
+      .getInstance()
+      .get(`/matured_blocks?limit=${limit}&offset=${offset}`),
+  ) as Array<Promise<{ data: MATURED_RESPONSE }>>;
 };

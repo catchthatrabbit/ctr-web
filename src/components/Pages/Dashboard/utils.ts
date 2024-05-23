@@ -133,7 +133,7 @@ export const convertPoolChartDataToMapChartInfoBox = (
       {
         title: "Round variance",
         value: TextFormat.getPercentText(
-          (100 * Number(roundShares) / Number(node.difficulty)).toFixed(2), // TODO: check if this is correct
+          ((100 * Number(roundShares)) / Number(node.difficulty)).toFixed(2), // TODO: check if this is correct
         ),
       },
     ],
@@ -231,7 +231,7 @@ export const convertMaturedResponseToRecentBlocksInfo = (
       blockHash: item.hash,
       blockHash_summarized: summarizedText(item.hash, 10, item.hash.length - 6),
       reward: TextFormat.getXCBText(Number(item.reward || 0) / UNITS.CORE).text,
-      variance: `${(100 * Number(item.shares) / Number(item.difficulty)).toFixed(2)}%`,
+      variance: `${((100 * Number(item.shares)) / Number(item.difficulty)).toFixed(2)}%`,
     })),
   );
 

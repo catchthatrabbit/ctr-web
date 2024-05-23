@@ -27,28 +27,28 @@ export const useHeaders = ({
 
   const dropdownItems = [
     {
-      label: startMiningPoolConfigurations[`${REGIONS.EU}_FULL_NAME`],
-      value: POOL_NAME_ENUM.EU,
+      label: startMiningPoolConfigurations[REGIONS.DE][`FULL_NAME`],
+      value: POOL_NAME_ENUM.DE,
     },
     {
-      label: startMiningPoolConfigurations[`${REGIONS.EU_BACKUP}_FULL_NAME`],
-      value: POOL_NAME_ENUM.EU_BACKUP,
+      label: startMiningPoolConfigurations[REGIONS.FI][`FULL_NAME`],
+      value: POOL_NAME_ENUM.FI,
     },
     {
-      label: startMiningPoolConfigurations[`${REGIONS.AS}_FULL_NAME`],
-      value: POOL_NAME_ENUM.AS,
+      label: startMiningPoolConfigurations[REGIONS.SG][`FULL_NAME`],
+      value: POOL_NAME_ENUM.SG,
     },
     {
-      label: startMiningPoolConfigurations[`${REGIONS.AS_BACKUP}_FULL_NAME`],
-      value: POOL_NAME_ENUM.AS_BACKUP,
+      label: startMiningPoolConfigurations[REGIONS.HK][`FULL_NAME`],
+      value: POOL_NAME_ENUM.HK,
     },
     {
-      label: startMiningPoolConfigurations[`${REGIONS.US}_FULL_NAME`],
-      value: POOL_NAME_ENUM.US,
+      label: startMiningPoolConfigurations[REGIONS.AM][`FULL_NAME`],
+      value: POOL_NAME_ENUM.AM,
     },
     {
-      label: startMiningPoolConfigurations[`${REGIONS.US_BACKUP}_FULL_NAME`],
-      value: POOL_NAME_ENUM.US_BACKUP,
+      label: startMiningPoolConfigurations[REGIONS.AM1][`FULL_NAME`],
+      value: POOL_NAME_ENUM.AM1,
     },
   ];
 
@@ -73,20 +73,20 @@ export const useHeaders = ({
     apiKeys: STANDARD_REGIONS_API_KEYS,
   ): string => {
     switch (apiKeys) {
-      case "EU":
-        return startMiningPoolConfigurations[`${REGIONS.EU}_FULL_NAME`];
-      case "EU_BACKUP":
-        return startMiningPoolConfigurations[`${REGIONS.EU_BACKUP}_FULL_NAME`];
-      case "AS":
-        return startMiningPoolConfigurations[`${REGIONS.AS}_FULL_NAME`];
-      case "AS_BACKUP":
-        return startMiningPoolConfigurations[`${REGIONS.AS_BACKUP}_FULL_NAME`];
-      case "US":
-        return startMiningPoolConfigurations[`${REGIONS.US}_FULL_NAME`];
-      case "US_BACKUP":
-        return startMiningPoolConfigurations[`${REGIONS.US_BACKUP}_FULL_NAME`];
+      case "DE":
+        return startMiningPoolConfigurations[REGIONS.DE][`FULL_NAME`];
+      case "FI":
+        return startMiningPoolConfigurations[REGIONS.FI][`FULL_NAME`];
+      case "SG":
+        return startMiningPoolConfigurations[REGIONS.SG][`FULL_NAME`];
+      case "HK":
+        return startMiningPoolConfigurations[REGIONS.HK][`FULL_NAME`];
+      case "AM":
+        return startMiningPoolConfigurations[REGIONS.AM][`FULL_NAME`];
+      case "AM1":
+        return startMiningPoolConfigurations[REGIONS.AM1][`FULL_NAME`];
       default:
-        return startMiningPoolConfigurations[`${REGIONS.EU}_FULL_NAME`];
+        return startMiningPoolConfigurations[REGIONS.DE][`FULL_NAME`];
     }
   };
 

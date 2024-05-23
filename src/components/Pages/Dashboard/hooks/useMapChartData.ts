@@ -20,7 +20,7 @@ const useMapChartData = () => {
     apiPath: String(siteConfig.customFields.API_PATH),
   });
 
-  const { data: settingsResponse } = useFetchSettings(POOL_NAME_ENUM.EU);
+  const { data: settingsResponse } = useFetchSettings(POOL_NAME_ENUM.DE);
 
   const aggregator = aggregateNumbers(WHITELIST_AGGREGATE_KEYS.home.jumbotron);
 

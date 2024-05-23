@@ -62,7 +62,6 @@ const useControls = ({
         value: "rabbit",
         label: "Rabbit",
         isPrimary: true,
-        href: urlConfig.CORE_TALK_SPACE_URL,
       },
       {
         value: "hr",
@@ -85,7 +84,7 @@ const useControls = ({
         alignToCenter: true,
       },
     ],
-    [urlConfig.CORE_TALK_SPACE_URL],
+    [],
   );
 
   const { data: fetchedWalletInfo, isLoading: isLoadingFetchWallet } =

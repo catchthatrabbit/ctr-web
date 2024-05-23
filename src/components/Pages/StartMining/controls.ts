@@ -12,7 +12,7 @@ const useControls = () => {
     .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
 
   return {
-    goCoreClientUrl: String(urlsConfig.GO_CORE_CLIENT_URL),
+    coreClientUrl: String(urlsConfig.CORE_CLIENT_URL),
     icanWalletUrl: String(urlsConfig.ICAN_WALLET_URL),
     githubReleaseDownloadUrl: String(urlsConfig.GITHUB_RELEASE_DOWNLOAD_URL),
     githubRawMineSh: String(urlsConfig.GITHUB_RAW_MINE_SH),

@@ -26,40 +26,10 @@ export const REGIONS: Record<
   STANDARD_REGIONS_API_KEYS,
   STANDARD_REGIONS_API_KEYS
 > = {
-  DE: {
-    label: "German Pool",
-    value: "de",
-    summary: "German Pool",
-    url: "de.catchthatrabbit.com",
-  },
-  FI: {
-    label: "Finish Pool",
-    value: "fi",
-    summary: "Finish Pool",
-    url: "fi.catchthatrabbit.com",
-  },
-  SG: {
-    label: "Singaporean Pool",
-    value: "sg",
-    summary: "Singaporean Pool",
-    url: "sg.catchthatrabbit.com",
-  },
-  HK: {
-    label: "Hong Kong Pool",
-    value: "hk",
-    summary: "Hong Kong Pool",
-    url: "hk.catchthatrabbit.com",
-  },
-  AM: {
-    label: "American Pool",
-    value: "am",
-    summary: "American Pool",
-    url: "am.catchthatrabbit.com",
-  },
-  AM1: {
-    label: "American 1 Pool",
-    value: "am1",
-    summary: "American 1 Pool",
-    url: "am1.catchthatrabbit.com",
-  },
+  DE: "DE",
+  FI: "FI",
+  SG: "SG",
+  HK: "HK",
+  AM: "AM",
+  AM1: "AM1",
 };
