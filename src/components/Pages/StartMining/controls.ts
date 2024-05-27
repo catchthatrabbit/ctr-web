@@ -1,9 +1,9 @@
 // eslint-disable-next-line import/no-unresolved
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
-  CORE_CLIENT_URL,
-  ICAN_WALLET_URL,
-} from "@site/src/configs/start-minings.config";
+  START_MINING_POOL_CONFIGURATIONS,
+  URLS_CONFIG_TYPE,
+} from "@site/src/configs/types";
 
 const useControls = () => {
   const { siteConfig } = useDocusaurusContext();
