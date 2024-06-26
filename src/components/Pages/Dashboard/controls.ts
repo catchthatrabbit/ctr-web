@@ -1,6 +1,5 @@
 import useRadialBarChartData from "./hooks/useRadialBarChartData";
 import useMapChartData from "./hooks/useMapChartData";
-// eslint-disable-next-line import/no-unresolved
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
   AS_START_MINING_POOL_LOCATION,
@@ -56,10 +55,9 @@ const useControls = () => {
         value: "height",
         label: "Height",
         isPrimary: true,
-        alignToCenter: true,
         href: urlsConfigs.BLOCK_DETAILS_URL,
       },
-      { value: "type", label: "Type", alignToCenter: true },
+      { value: "type", label: "Type" },
       { value: "minedOn", label: "Mined on" },
       {
         canBeCopied: true,
@@ -68,8 +66,8 @@ const useControls = () => {
         isPrimary: true,
         href: urlsConfigs.BLOCK_DETAILS_URL,
       },
-      { value: "reward", label: "Reward", alignToCenter: true },
-      { value: "variance", label: "Variance", alignToCenter: true },
+      { value: "reward", label: "Reward" },
+      { value: "variance", label: "Variance" },
     ],
     [urlsConfigs.BLOCK_DETAILS_URL],
   ) as IDataTable["columns"];

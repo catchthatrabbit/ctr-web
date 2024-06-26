@@ -1,6 +1,4 @@
-// eslint-disable-next-line import/no-unresolved
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-// eslint-disable-next-line import/no-unresolved
 import Layout from "@theme/Layout";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

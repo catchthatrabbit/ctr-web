@@ -1,11 +1,8 @@
-@font-face {
-  font-family: "Orbitron";
-  src: url("/fonts/orbitron.woff2");
-}
+@import url('https://fonts.googleapis.com/css2?family=Exo&display=swap');
 
 :root {
-  --regular-font-family: Orbitron, sans-serif;
-  --orbitron-font-family: Orbitron;
+  --regular-font-family: "Exo", Verdana, Geneva, Tahoma, sans-serif;
+  --exo-font-family:  "Exo";
   --label-font-family: Verdana, Geneva, Tahoma, sans-serif;
   --value-font-family: Arial, Calibri;
   --custom-font-size-navbar-item: var(--custom-font-size-s);
@@ -14,35 +11,35 @@
   --ifm-font-family-bold: var(--bold-font-family);
   --ifm-font-weight-semibold: var(--bold-font-weight);
 
-  --h1-font-size-desktop: 2.714rem; /* heading 1 38px */
-  --h1-lineHeight-desktop: 3.2rem;
+  --h1-font-size-desktop: 2.1rem; /* heading 1 33px */
+  --h1-lineHeight-desktop: 2.3rem;
 
-  --h2-font-size-desktop: 1.571rem; /* heading 2  22px*/
-  --h2-lineHeight-desktop: 2.4rem;
+  --h2-font-size-desktop: 1.4rem; /* heading 2  22px*/
+  --h2-lineHeight-desktop: 1.6rem;
 
-  --h3-font-size-desktop: 1.429rem; /* heading 3  20px*/
-  --h3-lineHeight-desktop: 1.6rem;
+  --h3-font-size-desktop: 1.1rem; /* heading 3 */
+  --h3-lineHeight-desktop: 1.3rem;
 
-  --h1-font-size-tablet: 1.571rem; /* heading 1 */
-  --h1-lineHeight-tablet: 2.4rem;
+  --h1-font-size-tablet: 1.6rem; /* heading 1 */
+  --h1-lineHeight-tablet: 1.8rem;
 
-  --h2-font-size-tablet: 1.429rem; /* heading 2 */
+  --h2-font-size-tablet: 1.4rem; /* heading 2 */
   --h2-lineHeight-tablet: 1.6rem;
 
   --h3-font-size-tablet: 1.1rem; /* heading 3 */
-  --h3-lineHeight-tablet: 1.4rem;
+  --h3-lineHeight-tablet: 1.3rem;
 
-  --h1-font-size-mobile: 1.571rem;
-  --h1-lineHeight-mobile: 2.4rem;
+  --h1-font-size-mobile: 1.6rem;
+  --h1-lineHeight-mobile: 1.8rem;
 
-  --h2-font-size-mobile: 1.429rem;
-  --h2-lineHeight-mobile: 1.6rem;
+  --h2-font-size-mobile: 1.3rem;
+  --h2-lineHeight-mobile: 1.5rem;
 
   --h3-font-size-mobile: 1.1rem;
-  --h3-lineHeight-mobile: 1.4;
+  --h3-lineHeight-mobile: 1.3rem;
 
-  --subheading-font-size-desktop: 1.286rem; /* subheading 18px */
-  --subheading-lineHeight-desktop: 1.4rem;
+  --subheading-font-size-desktop: 1rem; /* subheading 18px */
+  --subheading-lineHeight-desktop: 1.1rem;
 
   --subheading-font-size-tablet: 1.143rem; /* subheading 18px */
   --subheading-lineHeight-tablet: 1.4rem;
@@ -50,20 +47,23 @@
   --subheading-font-size-mobile: 1rem; /* subheading 18px */
   --subheading-lineHeight-mobile: 1.2rem;
 
-  --body-font-size: 1.143rem; /* Body 1 16px */
-  --body-lineHeight: 1.6rem;
+  --body-font-size: 1rem; /* Body 1 16px */
+  --body-lineHeight: 1.1rem;
 
-  --body-small-font-size: 1rem; /* Body 2 14px */
-  --body-small-lineHeight: 1.2rem;
+  --body-small-font-size: 0.9rem; /* Body 2 */
+  --body-small-lineHeight: 1rem;
 
-  --body-tiny-font-size: 0.857rem; /* Body 3 12px */
-  --body-tiny-lineHeight: 1.2rem;
+  --body-tiny-font-size: 0.8rem; /* Body 3 13px */
+  --body-tiny-lineHeight: 0.9rem;
 
-  --tag-font-size: 0.786rem; /* tag 11px */
-  --tag-lineHeight: 0.8rem;
+  --body-large-font-size: 1.2rem; /* Body 1 16px */
+  --body-large-lineHeight: 1.3rem;
 
-  --cta-font-size: 0.786rem; /* cta 11px */
-  --cta-lineHeight: 1.2rem;
+  --tag-font-size: 0.8rem; /* tag */
+  --tag-lineHeight: 0.9rem;
+
+  --cta-font-size: 0.8rem; /* cta */
+  --cta-lineHeight: 0.9rem;
 
   --bold-font-weight: 600;
   --regular-font-weight: 400;
@@ -75,7 +75,6 @@
 }
 
 html {
-  font-size: 14px!important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

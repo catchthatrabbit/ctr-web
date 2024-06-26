@@ -4,5 +4,5 @@ export enum POOL_NAME_ENUM {
   SG = "SG",
   HK = "HK",
   AM = "AM",
-  AM1 = "AM1",
+  JP = "JP",
 }

@@ -1,4 +1,4 @@
-.emptyRoot{
+.emptyRoot {
     width: 100%;
     border: 1px solid var(--gray-700);
     background-color: var(--blue-rgb-650);
@@ -10,14 +10,14 @@
     margin: var(--space-xl) 0px;
 }
 
-.small{
+.small {
     height: 100px;
 }
 
-.medium{
+.medium {
     height: 300px;
 }
 
-.large{
+.large {
     height: 600px;
 }

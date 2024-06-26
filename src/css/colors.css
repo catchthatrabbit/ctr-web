@@ -1,71 +1,69 @@
 /* You can override the default Infima variables here. */
 :root {
+  --white: #FFFFFF;
 
-    --white: #FFFFFF;
+  --gray-100:#999eac; /* SantasGray rgb(153, 158, 172) */
+  --gray-700:#424259; /* rgb(66, 66, 89) */
+  --gray-800: #46484c;
+  --gray-900:#181A1F;
 
-    --gray-100:#999eac; /* SantasGray rgb(153, 158, 172) */
-    --gray-700:#424259; /* rgb(66, 66, 89) */
-    --grey-800: #46484c;
-    --gray-900:#181A1F;
+  --blue-100: #BCCBF0;
 
-    --blue-100: #BCCBF0;
-
-    --green-300: #46B549;
-    --greenYellow: #ADFF2F;
-    --ocean-blue: #315d65;
-
-
-    --white-rgb-06: rgb(255, 255, 255, 0.6);
-    --white-rgb-04: rgb(255, 255, 255, 0.4);
-    --white-rgb-02: rgb(255, 255, 255, 0.2);
+  --green-300: #46B549;
+  --greenYellow: #ADFF2F;
+  --ocean-blue: #315d65;
 
 
-    --blue-rgb-400: rgb(93, 99, 115, 0.1);
-    --blue-rgb-500: rgba(66, 66, 89, 0.1);
-    --blue-rgb-600: rgba(66, 66, 89, 0.2);
-    --blue-rgb-650: rgba(66, 66, 89, 0.25);
-    --blue-rgb-700: rgba(66, 66, 89, 0.5);
-    --blue-rgb-900: rgba(0, 0, 0, 0.75);
-    --ifm-navbar-background-color: var(--gray-900);
+  --white-rgb-06: rgb(255, 255, 255, 0.6);
+  --white-rgb-04: rgb(255, 255, 255, 0.4);
+  --white-rgb-02: rgb(255, 255, 255, 0.2);
 
-    --ifm-color-emphasis-0:var(--white);
-    --ifm-color-emphasis-500:var(--gray-100);
 
-    --ifm-tabs-color-active:var( --ifm-color-emphasis-0);
+  --blue-rgb-400: rgb(93, 99, 115, 0.1);
+  --blue-rgb-500: rgba(66, 66, 89, 0.1);
+  --blue-rgb-600: rgba(66, 66, 89, 0.2);
+  --blue-rgb-650: rgba(66, 66, 89, 0.25);
+  --blue-rgb-700: rgba(66, 66, 89, 0.5);
+  --blue-rgb-900: rgba(0, 0, 0, 0.75);
+  --ifm-navbar-background-color: var(--gray-900);
 
-    --ifm-color-primary: var(--green-300);
-    --ifm-color-primary-dark: #29784c;
-    --ifm-color-primary-darker: #277148;
-    --ifm-color-primary-darkest: #205d3b;
-    --ifm-color-primary-light: #33925d;
-    --ifm-color-primary-lighter: #359962;
-    --ifm-color-primary-lightest: #3cad6e;
-    --ifm-code-font-size: 95%;
-    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-color-emphasis-0:var(--white);
+  --ifm-color-emphasis-500:var(--gray-100);
 
-    --ifm-table-stripe-background: transparent;
+  --ifm-tabs-color-active:var( --ifm-color-emphasis-0);
 
-    /** Customize other part of IFM colors */    
-    --ifm-link-color:var(--ifm-color-emphasis-0);
-    --ifm-navbar-link-color:var(--ifm-color-emphasis-0);
-    --ifm-navbar-link-hover-color: var(--ifm-color-emphasis-0);
-  }
-  
-  /* For readability concerns, you should choose a lighter palette in dark mode. */
-  [data-theme='dark'] {
-    --ifm-color-primary: #25c2a0;
-    --ifm-color-primary-dark: #21af90;
-    --ifm-color-primary-darker: #1fa588;
-    --ifm-color-primary-darkest: #1a8870;
-    --ifm-color-primary-light: #29d5b0;
-    --ifm-color-primary-lighter: #32d8b4;
-    --ifm-color-primary-lightest: #4fddbf;
-    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  }
+  --ifm-color-primary: var(--green-300);
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.2);
 
-  html, body{
+  --ifm-table-stripe-background: transparent;
 
-    background-color: var(--gray-900);
+  /** Customize other part of IFM colors */
+  --ifm-link-color:var(--ifm-color-emphasis-0);
+  --ifm-navbar-link-color:var(--ifm-color-emphasis-0);
+  --ifm-navbar-link-hover-color: var(--ifm-color-emphasis-0);
+}
 
-  }
-  
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.2);
+  --ifm-link-color: var(--ifm-color-emphasis-900);
+  --ifm-navbar-link-color: var(--ifm-color-emphasis-900);
+  --ifm-navbar-link-hover-color: var(--ifm-color-emphasis-900);
+}
+
+html, body{
+  background-color: var(--gray-900);
+}

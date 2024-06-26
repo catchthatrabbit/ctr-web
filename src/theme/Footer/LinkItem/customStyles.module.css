@@ -1,6 +1,4 @@
 .footerLink{
     font-family: var(--value-font-family);
     font-size: var(--body-font-size);
-    line-height: var(--body-lineHeight);
-    border-bottom: 1px dashed var(--white);
 }

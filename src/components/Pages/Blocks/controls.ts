@@ -4,7 +4,6 @@ import { useMemo } from "react";
 import { tablesConfig } from "@site/src/configs";
 import { POOL_NAME_ENUM } from "@site/src/enums/poolName.enum";
 import { useFetchAllBlocks } from "@site/src/hooks/useBlocks";
-// eslint-disable-next-line import/no-unresolved
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
 
@@ -31,18 +30,17 @@ const useControls = () => {
         isPrimary: true,
         href: urlsConfigs.BLOCK_DETAILS_URL,
       },
-      { value: "type", label: "Type", alignToCenter: true },
-      { value: "minedOn", label: "Mined on", alignToCenter: true },
+      { value: "type", label: "Type" },
+      { value: "minedOn", label: "Mined on" },
       {
         value: "blockHash",
         label: "Block hash",
-        alignToCenter: true,
         canBeCopied: true,
         isPrimary: true,
         href: urlsConfigs.BLOCK_DETAILS_URL,
       },
-      { value: "reward", label: "Reward", alignToCenter: true },
-      { value: "variance", label: "Variance", alignToCenter: true },
+      { value: "reward", label: "Reward" },
+      { value: "variance", label: "Variance" },
     ],
     [urlsConfigs.BLOCK_DETAILS_URL],
   );

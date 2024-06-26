@@ -11,5 +11,5 @@ export const STANDARD_REGIONS_API: {
   SG: "sg",
   HK: "hk",
   AM: "am",
-  AM1: "am1",
+  JP: "jp",
 };

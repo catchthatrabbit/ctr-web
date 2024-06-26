@@ -8,7 +8,6 @@ import {
 } from "../utils";
 import { WHITELIST_AGGREGATE_KEYS } from "@site/src/configs/aggregate-keys.config";
 import { STATS_RESPONSE } from "@site/src/Api/stats/types";
-// eslint-disable-next-line import/no-unresolved
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
 

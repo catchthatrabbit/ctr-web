@@ -20,6 +20,7 @@ import { convertMaturedResponseToRecentBlocksInfo } from "./utils";
 import { IAnyPageAndWallet } from "../types";
 import { Header } from "@site/src/components/Templates/Header";
 import { LoadingPlaceholder } from "@site/src/components/Atoms/LoadingPlaceholder";
+import { StartMining } from "@site/src/components/Organisms/StartMining";
 
 import { Empty } from "@site/src/components/Atoms/Empty";
 
@@ -33,7 +34,6 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
     asStarMiningPoolLocation,
     euStarMiningPoolLocation,
     usStarMiningPoolLocation,
-    estd,
     poolFee,
     infoBoxRadialData,
     radialChartData,
@@ -135,13 +135,6 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
               {SLoganSecondary}
             </Text>
             <br />
-            <Text variant="subheading" color="primary">
-              Estd.&nbsp;
-            </Text>
-            <Text variant="subheading" color="primary">
-              {String(estd)}
-            </Text>
-            <br />
             <Text variant="body" color="primary" type="value">
               Pay-per-last-N-shares &nbsp;&nbsp;
             </Text>
@@ -188,6 +181,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
         isLoading={isLoadingAllRegionMaturedBlocks}
         data={convertMaturedResponseToRecentBlocksInfo(AllRegionsMaturedBlocks)}
       />
+      <Spacer variant="xxl" />
+      <StartMining />
     </>
   );
 };

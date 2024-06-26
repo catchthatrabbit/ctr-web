@@ -3,7 +3,6 @@ import { convertMinerResponse2MinerList } from "./utils";
 import { useHeaders } from "@site/src/hooks/useHeaders";
 import { usePaginate } from "@site/src/hooks/usePaginate";
 import { MINERS_RESPONSE } from "@site/src/Api/miners/types";
-// eslint-disable-next-line import/no-unresolved
 import { useHistory } from "@docusaurus/router";
 import { useMemo } from "react";
 import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
@@ -48,8 +47,8 @@ const useControls = ({
           push("/miners");
         },
       },
-      { value: "hr", label: "Hashrate", alignToCenter: true },
-      { value: "lastBeat", label: "Last beat", alignToCenter: true },
+      { value: "hr", label: "Hashrate" },
+      { value: "lastBeat", label: "Last beat" },
     ],
     [push, setWalletAddress],
   );

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import siteContext from "@docusaurus/useDocusaurusContext";
 import { useCallback } from "react";
 import { customPoolAndApiUrlSwitch } from "../utils/customPoolUrlSwitch";

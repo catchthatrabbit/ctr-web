@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import useIsBrowser from "@docusaurus/useIsBrowser";
 import { useEffect, useMemo, useState } from "react";
 function useMediaQuery(query: string) {
