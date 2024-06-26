@@ -1,0 +1,12 @@
+.infoBoxStatsChart{
+    display: flex;
+    flex-direction: column;
+}
+
+.statsChart{
+    position: relative;
+}
+
+.loadingSkeleton{
+    height: 938px;
+}

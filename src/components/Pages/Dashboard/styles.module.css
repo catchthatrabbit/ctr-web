@@ -1,0 +1,24 @@
+.mapChartLocationPlace{
+    position: relative;
+}
+
+.fullWidth{
+    width: 100%;
+}
+
+.loadingSkeleton{
+    min-height: 615px;
+    width: 100%;
+}
+
+.loadingPlaceholder{
+    position: static;
+}
+
+.directionRtl{
+    direction: rtl;
+}
+
+.directionLtr{
+    direction: ltr;
+}

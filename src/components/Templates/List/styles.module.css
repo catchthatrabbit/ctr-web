@@ -1,0 +1,16 @@
+.listRoot{
+    position: relative;
+}
+
+.tableWrapper{
+    width: 100%;
+    overflow-x: auto;
+}
+
+.listMarginInlineMobile{
+    margin-inline: calc(var(--space-xs) / 2);
+}
+
+.paginationWrapper{
+    width: 100%;
+}

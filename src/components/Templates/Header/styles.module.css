@@ -1,0 +1,13 @@
+.boardRoot{
+    display: flex;
+    width: 100%;
+}
+
+.boardDropdown{
+    width: 335px;
+    margin: auto;
+}
+
+.boardJustifyCenter{
+    justify-content: center;
+}

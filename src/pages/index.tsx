@@ -1,43 +1,29 @@
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Heading from '@theme/Heading';
-
-import styles from './index.module.css';
-
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
+import { ConfiguredLayout } from "@site/src/components/Templates/ConfiguredLayout";
+import { Dashboard } from "@site/src/components/Pages/Dashboard";
+import { useWalletPage } from "@site/src/hooks/useWallet";
+import { Wallet } from "@site/src/components/Pages/Wallet";
 
 export default function Home(): JSX.Element {
-  const {siteConfig} = useDocusaurusContext();
+  const {
+    walletAddress,
+    handleChangeRegion,
+    handleClearWalletAddress,
+    handleWalletAddress,
+    region,
+  } = useWalletPage();
+
   return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
-    </Layout>
+    <ConfiguredLayout backgroundPos={40}>
+      {walletAddress ? (
+        <Wallet
+          onClearWalletAddress={handleClearWalletAddress}
+          defaultRegion={region}
+          walletAddress={walletAddress}
+          onChangeRegion={handleChangeRegion}
+        />
+      ) : (
+        <Dashboard onSetWalletAddress={handleWalletAddress} />
+      )}
+    </ConfiguredLayout>
   );
 }

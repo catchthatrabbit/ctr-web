@@ -1,0 +1,39 @@
+export type URLS_CONFIG_TYPE = {
+  TRANSACTION_DETAILS_URL: string;
+  BLOCK_DETAILS_URL: string;
+  CORE_CLIENT_URL: string;
+  CORE_TALK_SPACE_URL: string;
+  ICAN_WALLET_URL: string;
+  GITHUB_RELEASE_DOWNLOAD_URL: string;
+  GITHUB_RAW_MINE_SH: string;
+};
+
+export type POOLS_API_CONFIG_TYPE = Record<
+  | "DE_API_ENDPOINT"
+  | "NEXT_PUBLIC_DE_API_ENDPOINT"
+  | "FI_API_ENDPOINT"
+  | "NEXT_PUBLIC_FI_API_ENDPOINT"
+  | "SG_API_ENDPOINT"
+  | "NEXT_PUBLIC_SG_API_ENDPOINT"
+  | "HK_API_ENDPOINT"
+  | "NEXT_PUBLIC_HK_API_ENDPOINT"
+  | "AM_API_ENDPOINT"
+  | "NEXT_PUBLIC_AM_API_ENDPOINT"
+  | "JP_API_ENDPOINT"
+  | "NEXT_PUBLIC_JP_API_ENDPOINT",
+  string
+>;
+
+export type START_MINING_POOL_CONFIGURATIONS = Record<
+  "DE" | "FI" | "SG" | "HK" | "AM" | "JP",
+  Record<
+    | "DESCRIPTION"
+    | "NAME"
+    | "SERVER"
+    | "PORT"
+    | "USERNAME"
+    | "WORKER_NAME"
+    | "PASSWORD",
+    string
+  >
+>;

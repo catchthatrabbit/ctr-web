@@ -1,0 +1,54 @@
+.emptySkeleton{
+  display: block;
+  height: 100%;  
+  width: 100%;
+}
+
+.tip{
+    display: none;
+    position: absolute;
+    color: var(--white);
+    background-color: var(--gray-700);
+    border-radius: 5px;
+    padding: 10px;
+    font-family: var( --value-font-family);
+    font-size: var(--body-tiny-font-size);
+}
+
+.radialChart{
+    position: relative;
+    width: 100%;
+}
+
+.radialChart svg text{
+   fill: var(--white);
+   font-size: var(--body-font-size);
+   font-weight: var(--body-lineHeight);
+}
+
+.radicalBarColorOffset0{
+    stop-color: var(--gray-800);
+}
+
+.radicalBarColorOffset30{
+    stop-color: var(--ocean-blue);
+}
+
+.radicalBarColorOffset60{
+    stop-color: var(--green-300);
+}
+
+.radialBarAxisCircle{
+    fill: none;
+    stroke: var(--gray-700);
+}
+
+.radialBarHour{
+    fill: var(--greenYellow);
+}
+
+g:last-child .radialBarHour {
+    fill: var(--greenYellow);
+}
+
+

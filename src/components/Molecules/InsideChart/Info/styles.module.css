@@ -1,0 +1,11 @@
+.justifyCenter{
+    justify-content: center;
+}
+
+.justifySpaceBetween{
+    justify-content: space-between;
+}
+
+.flexDirectionColumn{
+    flex-direction: column;
+}

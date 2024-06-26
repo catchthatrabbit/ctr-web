@@ -1,0 +1,19 @@
+.inputText {
+    width: 100%;
+    padding: 18px 20px;
+    font-family: var(--value-font-family);
+    font-size: var(--body-font-size);
+    border-radius: var(--ifm-global-radius);
+    border: 1px solid var(--gray-700);
+    color: var(--white);
+    background-color: var(--blue-rgb-600);
+    transition: all 0.1s ease-in-out 0s;
+}
+
+.inputText:focus-visible{
+    border: 1px solid var(--gray-100);
+}
+
+.inputText::placeholder {
+    color: var(--gray-700); 
+}

@@ -1,0 +1,46 @@
+.panelContent{
+    padding: var(--space-md) var(--space-lg);
+}
+
+.lineFlex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.alignItemsCenter{
+    align-items: center;
+}
+
+.justifyContentCenter{
+    justify-content: center;
+}
+
+.coreMiner{
+    margin: auto;
+    background-color: var(--blue-rgb-600);
+    padding: 0px;
+}
+
+.input{
+    color:var(--ifm-color-primary)!important;
+}
+
+.buttonConfigLessPadding{
+    padding-inline: calc(var(--space-xs) / 4);
+}
+
+.buttonConfig{
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonConfigAmong{
+    margin-inline: var(--space-md);
+}
+
+.marginAuto{
+    margin:auto;
+}

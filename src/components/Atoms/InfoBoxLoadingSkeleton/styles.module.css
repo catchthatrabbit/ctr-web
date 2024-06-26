@@ -1,0 +1,17 @@
+
+.skeletonBorderItem{
+    height: 88px;
+    padding: var(--space-xs);
+  }
+  
+  .borderRadius{
+    border-radius: var(--ifm-global-radius);
+  }
+
+  .justifyCenter{
+      justify-content: center;
+  }
+
+  .justifySpaceBetween{
+      justify-content: space-between;
+  }

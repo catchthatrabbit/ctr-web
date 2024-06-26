@@ -1,0 +1,28 @@
+.panelRoot{
+    border: 1px solid var(--gray-700);
+    border-radius: var(--ifm-global-radius);
+    flex-grow: 1;
+    background-color: var(--blue-rgb-500);
+}
+
+.panelTitleBase{
+    width: 94%;
+    border-bottom: 1px solid var(--gray-700);
+}
+
+.panelTitle {
+    margin: auto;
+    padding: var(--space-lg) 0px;
+}
+
+.panelContentDesktop{
+    padding: var(--space-md) var(--space-lg);
+}
+
+.panelContentTablet{
+    padding: var(--space-md) var(--space-sm);
+}
+
+.panelContentMobile{
+    padding: var(--space-md) var(--space-xs);
+}

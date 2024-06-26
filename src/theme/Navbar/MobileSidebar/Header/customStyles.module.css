@@ -1,0 +1,21 @@
+.mobileSidebarButtonPadding {
+  padding: 10px;
+}
+
+.mobileSidebarButtonsPlaceholder {
+  position: absolute;
+  right: 25%;
+}
+
+.mobileSeparatorLine {
+  width: 100%;
+  margin-bottom: var(--space-xxxl);
+}
+
+.closeButtonPlaceholder {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding: 0px 18px;
+  margin-top: 20px;
+}

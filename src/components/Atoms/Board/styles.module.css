@@ -1,0 +1,19 @@
+.boardContainer{
+    padding: var(--space-xs);
+}
+    
+.content{
+    height: 88px;
+    padding: 15px var(--space-xs) 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--blue-100);
+    border-radius: 10px;
+}
+
+.boardItem{
+    display: flex;
+}
