@@ -29,7 +29,7 @@ const LoadingSkeleton = ({ columns, loadingComp }: ILoadingSkeleton) => {
                 colIndex === 0 && styles.tablePaddingLeft,
               )}
             >
-              <Text variant="heading2" weight="bold">
+              <Text variant="heading2">
                 {colItem.label || ""}
               </Text>
             </th>

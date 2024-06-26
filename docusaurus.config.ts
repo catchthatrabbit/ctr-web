@@ -6,21 +6,13 @@ import remarkCorebc from "remark-corebc";
 import remarkCurrencyFormatter from "remark-currency-formatter";
 import remarkFediverseUser from "remark-fediverse-user";
 
-import * as dotenv from "dotenv";
-
-dotenv.config({ path: `${__dirname}/.env.api` });
-dotenv.config({ path: `${__dirname}/.env.common.site` });
-dotenv.config({ path: `${__dirname}/.env.pools` });
-dotenv.config({ path: `${__dirname}/.env.urls` });
-dotenv.config({ path: `${__dirname}/.env.resources` });
-
 const config: Config = {
-  title: process.env.NAME,
-  tagline: process.env.DESCRIPTION,
-  favicon: process.env.IMAGES_FAVICON,
+  title: "Catch that Rabbit",
+  tagline: "Catch that Rabbit — ₡ORE mining pool",
+  favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: process.env.WEBSITE_URL,
+  url: "http://catchthatrabbit.com",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
@@ -44,105 +36,111 @@ const config: Config = {
 
   customFields: {
     API_ENDPOINTS: {
-      DE_API_ENDPOINT: process.env.DE_API_ENDPOINT,
-      NEXT_PUBLIC_DE_API_ENDPOINT: process.env.NEXT_PUBLIC_DE_API_ENDPOINT,
-      FI_API_ENDPOINT: process.env.FI_API_ENDPOINT,
-      NEXT_PUBLIC_FI_API_ENDPOINT: process.env.NEXT_PUBLIC_FI_API_ENDPOINT,
-      SG_API_ENDPOINT: process.env.SG_API_ENDPOINT,
-      NEXT_PUBLIC_SG_API_ENDPOINT: process.env.NEXT_PUBLIC_SG_API_ENDPOINT,
-      HK_API_ENDPOINT: process.env.HK_API_ENDPOINT,
-      NEXT_PUBLIC_HK_API_ENDPOINT: process.env.NEXT_PUBLIC_HK_API_ENDPOINT,
-      AM_API_ENDPOINT: process.env.AM_API_ENDPOINT,
-      NEXT_PUBLIC_AM_API_ENDPOINT: process.env.NEXT_PUBLIC_AM_API_ENDPOINT,
-      AM1_API_ENDPOINT: process.env.AM1_API_ENDPOINT,
-      NEXT_PUBLIC_AM1_API_ENDPOINT: process.env.NEXT_PUBLIC_AM1_API_ENDPOINT,
+      DE_API_ENDPOINT: "https://eu-api.catchthatrabbit.com/",
+      NEXT_PUBLIC_DE_API_ENDPOINT: "",
+      FI_API_ENDPOINT: "https://eu1-api.catchthatrabbit.com/",
+      NEXT_PUBLIC_FI_API_ENDPOINT: "",
+      SG_API_ENDPOINT: "https://as1-api.catchthatrabbit.com/",
+      NEXT_PUBLIC_SG_API_ENDPOINT: "",
+      HK_API_ENDPOINT: "https://as-api.catchthatrabbit.com/",
+      NEXT_PUBLIC_HK_API_ENDPOINT: "",
+      AM_API_ENDPOINT: "https://us-api.catchthatrabbit.com/",
+      NEXT_PUBLIC_AM_API_ENDPOINT: "",
+      JP_API_ENDPOINT: "https://us1-api.catchthatrabbit.com/",
+      NEXT_PUBLIC_JP_API_ENDPOINT: "",
     },
-    API_PATH: process.env.API_PATH,
+    API_PATH: "v2/api/",
     URLS: {
-      TRANSACTION_DETAILS_URL: process.env.TRANSACTION_DETAILS_URL,
-      BLOCK_DETAILS_URL: process.env.BLOCK_DETAILS_URL,
-      CORE_CLIENT_URL: process.env.CORE_CLIENT_URL,
-      CORE_TALK_SPACE_URL: process.env.CORE_TALK_SPACE_URL,
-      ICAN_WALLET_URL: process.env.ICAN_WALLET_URL,
-      GITHUB_RELEASE_DOWNLOAD_URL: process.env.GITHUB_RELEASE_DOWNLOAD_URL,
-      GITHUB_RAW_MINE_SH: process.env.GITHUB_RAW_MINE_SH,
+      TRANSACTION_DETAILS_URL: "https://blockindex.net/tx",
+      BLOCK_DETAILS_URL: "https://blockindex.net/block",
+      CORE_CLIENT_URL: "https://github.com/core-coin/go-core/releases",
+      CORE_TALK_SPACE_URL: "https://coretalk.space",
+      ICAN_WALLET_URL: "https://github.com/core-coin/wallet-generator/releases",
+      GITHUB_RELEASE_DOWNLOAD_URL: "https://github.com/catchthatrabbit/coreminer/releases",
+      GITHUB_RAW_MINE_SH: "bash <(curl -s https://raw.githubusercontent.com/catchthatrabbit/coreminer/master/mine.sh)",
     },
     START_MINING_POOL_CONFIGURATIONS: {
       DE: {
-        FULL_NAME: process.env.DE_FULL_NAME,
-        NAME: process.env.DE_NAME,
-        SERVER: process.env.DE_SERVER,
-        PORT: process.env.DE_PORT,
-        WORKER_NAME: process.env.DE_WORKER_NAME,
-        USERNAME: process.env.DE_USERNAME,
-        PASSWORD: process.env.DE_PASSWORD,
+        NAME: "Central Europe",
+        DESCRIPTION: "DACH Pool 🇩🇪🇦🇹🇨🇭",
+        SERVER: "de.catchthatrabbit.com",
+        PORT: "8008",
+        WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
+        USERNAME: "<your wallet address>.<worker name>",
+        PASSWORD: "<empty>",
+        PAYOUT: "cb0576bd9a75ac639da66010e34a24f9418218c4ecae", // TODO: Define
       },
       FI: {
-        FULL_NAME: process.env.FI_FULL_NAME,
-        NAME: process.env.FI_NAME,
-        SERVER: process.env.FI_SERVER,
-        PORT: process.env.FI_PORT,
-        WORKER_NAME: process.env.FI_WORKER_NAME,
-        USERNAME: process.env.FI_USERNAME,
-        PASSWORD: process.env.FI_PASSWORD,
+        NAME: "Northeast Europe",
+        DESCRIPTION: "Northeast EU Pool 🇫🇮🇪🇺",
+        SERVER: "fi.catchthatrabbit.com",
+        PORT: "8008",
+        WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
+        USERNAME: "<your wallet address>.<worker name>",
+        PASSWORD: "<empty>",
+        PAYOUT: "cb0576bd9a75ac639da66010e34a24f9418218c4ecae", // TODO: Define
       },
       SG: {
-        FULL_NAME: process.env.SG_FULL_NAME,
-        NAME: process.env.SG_NAME,
-        SERVER: process.env.SG_SERVER,
-        PORT: process.env.SG_PORT,
-        WORKER_NAME: process.env.SG_WORKER_NAME,
-        USERNAME: process.env.SG_USERNAME,
-        PASSWORD: process.env.SG_PASSWORD,
+        NAME: "Southeast Asia",
+        DESCRIPTION: "ASEAN Pool 🇸🇬🇹🇭🇵🇭",
+        SERVER: "sg.catchthatrabbit.com",
+        PORT: "8008",
+        WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
+        USERNAME: "<your wallet address>.<worker name>",
+        PASSWORD: "<empty>",
+        PAYOUT: "cb0576bd9a75ac639da66010e34a24f9418218c4ecae", // TODO: Define
       },
       HK: {
-        FULL_NAME: process.env.HK_FULL_NAME,
-        NAME: process.env.HK_NAME,
-        SERVER: process.env.HK_SERVER,
-        PORT: process.env.HK_PORT,
-        WORKER_NAME: process.env.HK_WORKER_NAME,
-        USERNAME: process.env.HK_USERNAME,
-        PASSWORD: process.env.HK_PASSWORD,
+        NAME: "East Asia",
+        DESCRIPTION: "East Asian Pool 🇭🇰🇰🇷",
+        SERVER: "hk.catchthatrabbit.com",
+        PORT: "8008",
+        WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
+        USERNAME: "<your wallet address>.<worker name>",
+        PASSWORD: "<empty>",
+        PAYOUT: "cb0576bd9a75ac639da66010e34a24f9418218c4ecae", // TODO: Define
       },
       AM: {
-        FULL_NAME: process.env.AM_FULL_NAME,
-        NAME: process.env.AM_NAME,
-        SERVER: process.env.AM_SERVER,
-        PORT: process.env.AM_PORT,
-        WORKER_NAME: process.env.AM_WORKER_NAME,
-        USERNAME: process.env.AM_USERNAME,
-        PASSWORD: process.env.AM_PASSWORD,
+        NAME: "America",
+        DESCRIPTION: "American Pool 🇧🇷🇲🇽🇺🇸",
+        SERVER: "br.catchthatrabbit.com",
+        PORT: "8008",
+        WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
+        USERNAME: "<your wallet address>.<worker name>",
+        PASSWORD: "<empty>",
+        PAYOUT: "cb0576bd9a75ac639da66010e34a24f9418218c4ecae", // TODO: Define
       },
-      AM1: {
-        FULL_NAME: process.env.AM1_FULL_NAME,
-        NAME: process.env.AM1_NAME,
-        SERVER: process.env.AM1_SERVER,
-        PORT: process.env.AM1_PORT,
-        WORKER_NAME: process.env.AM1_WORKER_NAME,
-        USERNAME: process.env.AM1_USERNAME,
-        PASSWORD: process.env.AM1_PASSWORD,
+      JP: {
+        NAME: "Japan",
+        DESCRIPTION: "Japanese Pool 🇯🇵",
+        SERVER: "jp.catchthatrabbit.com",
+        PORT: "8008",
+        WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
+        USERNAME: "<your wallet address>.<worker name>",
+        PASSWORD: "<empty>",
+        PAYOUT: "cb0576bd9a75ac639da66010e34a24f9418218c4ecae", // TODO: Define
       },
     },
 
-    MAINTAINERS_SUPPORT_EMAIL: process.env.MAINTAINERS_SUPPORT_EMAIL,
+    MAINTAINERS_SUPPORT_EMAIL: "support@catchthatrabbit.com",
     MAINTAINERS_SUPPORT_DESCRIPTION:
-      process.env.MAINTAINERS_SUPPORT_DESCRIPTION,
-    MAINTAINERS_SECURITY_EMAIL: process.env.MAINTAINERS_SECURITY_EMAIL,
+      "If you have any questions about our pool, you can contact us freely through this email.",
+    MAINTAINERS_SECURITY_EMAIL: ["security@catchthatrabbit.com", { "ctr@onion.email": "https://keys.openpgp.org/vks/v1/by-fingerprint/ABC" }], // TODO: Replace
     MAINTAINERS_SECURITY_DESCRIPTION:
-      process.env.MAINTAINERS_SECURITY_DESCRIPTION,
-    MAINTAINERS_COMMERCIAL_EMAIL: process.env.MAINTAINERS_COMMERCIAL_EMAIL,
+      "Any bug or any other security issue reports are highly and greatly appreciated.",
+    MAINTAINERS_COMMERCIAL_EMAIL: "contact@catchthatrabbit.com",
     MAINTAINERS_COMMERCIAL_DESCRIPTION:
-      process.env.MAINTAINERS_COMMERCIAL_DESCRIPTION,
+      "Please, feel free to email us with any legal and commercial questions.",
 
-    ESTD: process.env.ESTD,
+    ESTD: "2022",
 
-    EFFECTS_SHOW_LOCATIONS: process.env.EFFECTS_SHOW_LOCATIONS,
-    EFFECTS_SHOW_ACTION_ICONS: process.env.EFFECTS_SHOW_ACTION_ICONS,
-    SLOGAN_PRIMARY: process.env.SLOGAN_PRIMARY,
-    SLOGAN_SECONDARY: process.env.SLOGAN_SECONDARY,
+    EFFECTS_SHOW_LOCATIONS: true,
+    EFFECTS_SHOW_ACTION_ICONS: false,
+    SLOGAN_PRIMARY: "Dedicated Pool for Core Coin and IoT devices",
+    SLOGAN_SECONDARY: "「Core mining pool in the lotusland of Ores」",
 
-    EFFECTS_OK_EMOJI: process.env.EFFECTS_OK_EMOJI,
-    EFFECTS_BRB_EMOJI: process.env.EFFECTS_BRB_EMOJI,
+    EFFECTS_EMOJI_OK: "🐰 Working",
+    EFFECTS_EMOJI_BRB: "⏳ BRB",
   },
 
   presets: [
@@ -151,7 +149,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
-          editUrl: `https://github.com/catchthatrabbit/frontend/edit/master/docs`,
+          editUrl: `https://github.com/catchthatrabbit/ctr-web/edit/master/docs`,
           routeBasePath: "/docs",
           path: "docs",
           showLastUpdateAuthor: true,
@@ -166,7 +164,7 @@ const config: Config = {
         blog: {
           showReadingTime: true,
           editUrl:
-            "https://github.com/catchthatrabbit/frontend/edit/master/blog",
+            "https://github.com/catchthatrabbit/ctr-web/edit/master/blog",
           path: "blog",
           routeBasePath: "/blog",
           blogSidebarCount: 0,
@@ -174,7 +172,7 @@ const config: Config = {
           postsPerPage: 10,
           feedOptions: {
             type: "all",
-            copyright: `${process.env.org || "CTR"} ⛬ Copyright CatchThatRabbit`,
+            copyright: `© ${new Date().getFullYear()} Catch that Rabbit. All rights reserved.`,
             createFeedItems: async (params) => {
               const { blogPosts, defaultCreateFeedItems, ...rest } = params;
               return defaultCreateFeedItems({
@@ -228,28 +226,28 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: process.env.IMAGES_OG,
+    image: "img/ctr-og.jpg",
     metadata: [
       {
         name: "description",
-        content: process.env.DESCRIPTION,
+        content: "Catch that Rabbit — ₡ORE mining pool",
       },
       { property: "og:title", content: "Catch that Rabbit" },
       {
         property: "og:description",
-        content: process.env.DESCRIPTION,
+        content: "Catch that Rabbit — ₡ORE mining pool",
       },
       { property: "og:type", content: "website" },
       {
         name: "keywords",
-        content: process.env.KEYWORDS,
+        content: "catch,that,rabbit,mining,pool,core,ore,₡ORE,blockchain,xcb,xce,xab,network,open-source,open,source,mainnet,devin",
       },
     ],
     navbar: {
       hideOnScroll: true,
       logo: {
         alt: "CTR LOGO",
-        src: process.env.IMAGES_LOGO,
+        src: "img/logo.svg",
         width: "256px",
       },
       items: [
@@ -284,7 +282,7 @@ const config: Config = {
       style: "dark",
       logo: {
         alt: "My Site Logo",
-        src: process.env.IMAGES_LOGO,
+        src: "img/logo.svg",
       },
       links: [
         {
@@ -295,16 +293,16 @@ const config: Config = {
               to: "/start-mining",
             },
             {
-              label: "DACH Pool",
-              to: "/start-mining#de",
+              label: "Mining software",
+              href: "/docs/intro",
             },
             {
-              label: "ASEAN Pool",
-              to: "/start-mining#sg",
+              label: "Download mining config",
+              href: "/docs/intro",
             },
             {
-              label: "East Asian Pool",
-              to: "/start-mining#hk",
+              label: "Mobile App",
+              href: "/docs/intro",
             },
           ],
         },
@@ -333,31 +331,38 @@ const config: Config = {
               to: "/contact",
             },
             {
+              label: "GPG key",
+              href: "/",
+            },
+            {
               label: "Pool details",
-              href: "/start-mining#pool-details",
-            },
-            {
-              label: "Mining software",
-              href: "/start-mining#software",
-            },
-            {
-              label: "Mobile App",
-              href: "/start-mining#app",
-            },
-            {
-              label: "Mobile App",
-              href: "/start-mining#app",
+              href: "/docs/intro",
             },
           ],
         },
       ],
       copyright: `© ${new Date().getFullYear()} Catch that Rabbit. All rights reserved.`,
     },
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
+    },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+
+  plugins: [
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'G-K79ZXPBSHD',
+        anonymizeIP: true,
+      },
+    ],
+  ],
 };
 
 export default config;

@@ -2,7 +2,6 @@
     width:100%;
     border: 1px solid var(--blue-rgb-700);
     border-radius: var(--ifm-global-radius);
-    padding: var(--space-xl) 0px;
 }
 
 
@@ -54,13 +53,11 @@
 .copyButton {
     display: flex;
     align-items: center;
-    position: relative;
 }
 
 .copyButton > button {
     visibility: hidden;
-    position: absolute;
-    left: 13rem;
+    left: 2rem;
 }
 
 .copyButton:hover > button{

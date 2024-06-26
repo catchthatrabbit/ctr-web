@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { STANDARD_REGIONS_API_KEYS } from "../Api/types";
-// eslint-disable-next-line import/no-unresolved
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { START_MINING_POOL_CONFIGURATIONS } from "../configs/types";
 import { REGIONS } from "../constants/regions";
@@ -27,28 +26,28 @@ export const useHeaders = ({
 
   const dropdownItems = [
     {
-      label: startMiningPoolConfigurations[REGIONS.DE][`FULL_NAME`],
+      label: startMiningPoolConfigurations[REGIONS.DE][`DESCRIPTION`],
       value: POOL_NAME_ENUM.DE,
     },
     {
-      label: startMiningPoolConfigurations[REGIONS.FI][`FULL_NAME`],
+      label: startMiningPoolConfigurations[REGIONS.FI][`DESCRIPTION`],
       value: POOL_NAME_ENUM.FI,
     },
     {
-      label: startMiningPoolConfigurations[REGIONS.SG][`FULL_NAME`],
+      label: startMiningPoolConfigurations[REGIONS.SG][`DESCRIPTION`],
       value: POOL_NAME_ENUM.SG,
     },
     {
-      label: startMiningPoolConfigurations[REGIONS.HK][`FULL_NAME`],
+      label: startMiningPoolConfigurations[REGIONS.HK][`DESCRIPTION`],
       value: POOL_NAME_ENUM.HK,
     },
     {
-      label: startMiningPoolConfigurations[REGIONS.AM][`FULL_NAME`],
+      label: startMiningPoolConfigurations[REGIONS.AM][`DESCRIPTION`],
       value: POOL_NAME_ENUM.AM,
     },
     {
-      label: startMiningPoolConfigurations[REGIONS.AM1][`FULL_NAME`],
-      value: POOL_NAME_ENUM.AM1,
+      label: startMiningPoolConfigurations[REGIONS.JP][`DESCRIPTION`],
+      value: POOL_NAME_ENUM.JP,
     },
   ];
 
@@ -74,19 +73,19 @@ export const useHeaders = ({
   ): string => {
     switch (apiKeys) {
       case "DE":
-        return startMiningPoolConfigurations[REGIONS.DE][`FULL_NAME`];
+        return startMiningPoolConfigurations[REGIONS.DE][`DESCRIPTION`];
       case "FI":
-        return startMiningPoolConfigurations[REGIONS.FI][`FULL_NAME`];
+        return startMiningPoolConfigurations[REGIONS.FI][`DESCRIPTION`];
       case "SG":
-        return startMiningPoolConfigurations[REGIONS.SG][`FULL_NAME`];
+        return startMiningPoolConfigurations[REGIONS.SG][`DESCRIPTION`];
       case "HK":
-        return startMiningPoolConfigurations[REGIONS.HK][`FULL_NAME`];
+        return startMiningPoolConfigurations[REGIONS.HK][`DESCRIPTION`];
       case "AM":
-        return startMiningPoolConfigurations[REGIONS.AM][`FULL_NAME`];
-      case "AM1":
-        return startMiningPoolConfigurations[REGIONS.AM1][`FULL_NAME`];
+        return startMiningPoolConfigurations[REGIONS.AM][`DESCRIPTION`];
+      case "JP":
+        return startMiningPoolConfigurations[REGIONS.JP][`DESCRIPTION`];
       default:
-        return startMiningPoolConfigurations[REGIONS.DE][`FULL_NAME`];
+        return startMiningPoolConfigurations[REGIONS.DE][`DESCRIPTION`];
     }
   };
 

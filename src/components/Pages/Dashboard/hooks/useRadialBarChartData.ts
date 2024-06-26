@@ -8,7 +8,6 @@ import {
 import { WHITELIST_AGGREGATE_KEYS } from "@site/src/configs/aggregate-keys.config";
 import { ChartItem } from "../types";
 import { TextFormatOutputType } from "@site/src/utils/textFormat";
-// eslint-disable-next-line import/no-unresolved
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
 

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import React from "react";
 import { isMultiColumnFooterLinks } from "@docusaurus/theme-common";
 import FooterLinksMultiColumn from "@theme/Footer/Links/MultiColumn";

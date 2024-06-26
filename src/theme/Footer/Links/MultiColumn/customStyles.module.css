@@ -1,4 +1,4 @@
-.title{
+.title {
     font-family: var(--regular-font-family);
     font-size: var(--h3-font-size-desktop);
     line-height: var(--h3-lineHeight-desktop);
@@ -6,11 +6,11 @@
     text-align: center;
 }
 
-.removePaddingInline{
+.removePaddingInline {
     padding-inline: 0px;
 }
 
-.footerItem{
+.footerItem {
     display: flex;
     flex-direction: column;
     align-items: center;

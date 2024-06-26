@@ -9,5 +9,5 @@ export const REGIONS: Record<
   SG: "SG",
   HK: "HK",
   AM: "AM",
-  AM1: "AM1",
+  JP: "JP",
 };

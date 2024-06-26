@@ -7,7 +7,6 @@ import {
   useFetchPayments,
   useFetchPaymentsState,
 } from "@site/src/hooks/usePayments";
-// eslint-disable-next-line import/no-unresolved
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
 
@@ -38,12 +37,11 @@ const useControls = ({
   const dataTableColumns = useMemo(
     () => [
       { value: "timestamp", label: "Time" },
-      { value: "amount", label: "Amount", alignToCenter: true },
+      { value: "amount", label: "Amount" },
       {
         value: "address",
         label: "Address",
         canBeCopied: true,
-        alignToCenter: true,
         isPrimary: true,
         fn: setWalletAddress,
       },
@@ -51,7 +49,6 @@ const useControls = ({
         value: "tx",
         label: "Tx id",
         canBeCopied: true,
-        alignToCenter: true,
         isPrimary: true,
         href: urlsConfigs.TRANSACTION_DETAILS_URL,
       },

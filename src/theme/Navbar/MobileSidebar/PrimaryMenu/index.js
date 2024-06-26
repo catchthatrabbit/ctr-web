@@ -1,7 +1,6 @@
 import React from "react";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import { useNavbarMobileSidebar } from "@docusaurus/theme-common/internal";
-// eslint-disable-next-line import/no-unresolved
 import NavbarItem from "@theme/NavbarItem";
 import { useNav } from "@site/src/hooks/useNav";
 import clsx from "clsx";

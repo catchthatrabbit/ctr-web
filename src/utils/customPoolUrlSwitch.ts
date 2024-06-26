@@ -30,13 +30,13 @@ export const customPoolAndApiUrlSwitch = (
       break;
     case "AM":
       resultUrl = poolUrl["AM_API_ENDPOINT"]
-        ? poolUrl["AM1_API_ENDPOINT"]
+        ? poolUrl["JP_API_ENDPOINT"]
         : poolUrl["NEXT_PUBLIC_AM_API_ENDPOINT"];
       break;
-    case "AM1":
-      resultUrl = poolUrl["AM1_API_ENDPOINT"]
-        ? poolUrl["AM1_API_ENDPOINT"]
-        : poolUrl["NEXT_PUBLIC_AM1_API_ENDPOINT"];
+    case "JP":
+      resultUrl = poolUrl["JP_API_ENDPOINT"]
+        ? poolUrl["JP_API_ENDPOINT"]
+        : poolUrl["NEXT_PUBLIC_JP_API_ENDPOINT"];
       break;
   }
   if (apiPath) return `${resultUrl}${apiPath}`;

@@ -1,7 +1,6 @@
 import React from "react";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import { useNavbarSecondaryMenu } from "@docusaurus/theme-common/internal";
-// eslint-disable-next-line import/no-unresolved
 import Translate from "@docusaurus/Translate";
 function SecondaryMenuBackButton(props) {
   return (

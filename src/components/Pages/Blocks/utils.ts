@@ -8,7 +8,7 @@ export const convertAnyBlocksResponse2AnyBlocksInfo = <T>(
   mainProperty: "matured" | "immature" | "candidates",
 ): Array<{
   height: number;
-  height_summarized;
+  height_summarized: string;
   minedOn: string;
   type: string;
   blockHash: string;
@@ -27,11 +27,13 @@ export const convertAnyBlocksResponse2AnyBlocksInfo = <T>(
         : "Block",
     minedOn: convertTime2Date(maturedBlock.timestamp),
     blockHash: maturedBlock.hash,
-    blockHash_summarized: summarizedText(
-      maturedBlock.hash,
-      10,
-      maturedBlock.hash.length - 6,
-    ),
+    blockHash_summarized: maturedBlock.orphan
+      ? "❌"
+      : summarizedText(
+        maturedBlock.hash,
+        10,
+        maturedBlock.hash.length - 6,
+      ),
     reward: convertNumber2Currency(Number(maturedBlock?.reward) / UNITS.CORE),
     variance: `${(maturedBlock.difficulty / maturedBlock.shares).toFixed(2)}%`,
   }));

@@ -4,11 +4,11 @@ export type STANDARD_REGIONS_API_KEYS =
   | "SG"
   | "HK"
   | "AM"
-  | "AM1";
+  | "JP";
 export type STANDARD_REGIONS_API_VALUES =
   | "de"
   | "fi"
   | "sg"
   | "hk"
   | "am"
-  | "am1";
+  | "jp";

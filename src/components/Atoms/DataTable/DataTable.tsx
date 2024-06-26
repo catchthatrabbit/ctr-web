@@ -1,7 +1,6 @@
 import React from "react";
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
-// eslint-disable-next-line import/no-unresolved
 import Link from "@docusaurus/Link";
 import { checkArrayObjectIsEmpty } from "@site/src/utils/checkIsEmpty";
 import LoadingSkeleton from "./LoadingSkeleton";
@@ -35,7 +34,7 @@ const DataTable = ({
                 colIndex === 0 && styles.tablePaddingLeft,
               )}
             >
-              <Text variant="heading2" weight="bold">
+              <Text variant="heading2">
                 {colItem.label || ""}
               </Text>
             </th>

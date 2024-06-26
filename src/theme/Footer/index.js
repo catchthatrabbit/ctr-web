@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import React from "react";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import FooterLinks from "@theme/Footer/Links";
@@ -21,5 +20,5 @@ function Footer() {
     />
   );
 }
-// eslint-disable-next-line import/no-named-as-default-member
+
 export default React.memo(Footer);

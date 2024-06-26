@@ -1,20 +1,20 @@
 import React from "react";
 import clsx from "clsx";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { Text } from "@site/src/components/Atoms/Text";
-import { StartMining } from "@site/src/components/Organisms/StartMining";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
-
 import customStyles from "./customStyles.module.css";
 
 export default function FooterLayout({ style, links, logo, copyright }) {
+  const { siteConfig } = useDocusaurusContext();
+  const estd = siteConfig.customFields.ESTD;
+
   return (
     <footer
       className={clsx("footer", customStyles.footer, {
         "footer--dark": style === "dark",
       })}
     >
-      <StartMining />
-      <Spacer variant="xxl" />
       <div className="container container-fluid">
         <div className={customStyles.footerLayout}>
           <div className="content">
@@ -24,9 +24,9 @@ export default function FooterLayout({ style, links, logo, copyright }) {
                   "xl-flex-col--6 lg-flex-col--6 md-flex-col--12 sm-flex-col--12 xs-flex-col--12",
                 ])}
               >
-                {logo}
+                {logo} ESTD {estd}
                 <div className={customStyles.customLogoText}>
-                  <Text>Dedicated Pool for Core Coin and IoT devices</Text>
+                  <Text>Dedicated Pool for Core Coin and IoT devices.</Text>
                 </div>
               </div>
               <Spacer className="xl-hide lg-hide" />

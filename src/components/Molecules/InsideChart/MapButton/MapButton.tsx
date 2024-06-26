@@ -1,6 +1,5 @@
 import { Button } from "@site/src/components/Atoms/Button";
 import MapCircle from "./MapCircle";
-// eslint-disable-next-line import/no-unresolved
 import Link from "@docusaurus/Link";
 import clsx from "clsx";
 

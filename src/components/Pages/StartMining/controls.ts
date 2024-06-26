@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
   START_MINING_POOL_CONFIGURATIONS,

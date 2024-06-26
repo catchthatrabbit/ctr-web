@@ -11,8 +11,8 @@ export const summarizedText = (
 ): string => {
   if (!text) return "";
 
-  const fromText = text.slice(0, fromChar);
-  const toText = text.slice(toChar, text.split("").length);
+  const fromText = text.startsWith('0x') ? '0×'+text.slice(2, fromChar).toUpperCase() : text.slice(0, fromChar).toUpperCase();
+  const toText = text.slice(toChar, text.split("").length).toUpperCase();
 
-  return `${fromText} ... ${toText}`;
+  return `${fromText}…${toText}`;
 };

@@ -1,6 +1,5 @@
 import { FC, HtmlHTMLAttributes, createElement, ReactNode } from "react";
 import clsx from "clsx";
-// eslint-disable-next-line import/no-unresolved
 import Translate from "@docusaurus/Translate";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
