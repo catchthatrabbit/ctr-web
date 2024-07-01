@@ -1,16 +1,23 @@
 :root {
-    --space-xs: 16px;
-    --space-sm: 24px;
-    --space-md: 32px;
-    --space-lg: 40px;
-    --space-xl: 48px;
-    --space-xxl: 64px;
-    --space-xxxl: 80px;
-    --space-xxxxl: 160px;
-  
-    --content-offset-desktop: 136px;
-    --content-offset-laptop: 136px;
-    --content-offset-tablet: 32px;
-    --content-offset-mobile: 20px;
-  }
-  
+  --space-xs: 16px;
+  --space-sm: 24px;
+  --space-md: 32px;
+  --space-lg: 40px;
+  --space-xl: 48px;
+  --space-xxl: 64px;
+  --space-xxxl: 80px;
+  --space-xxxxl: 160px;
+
+  --content-offset-desktop: 136px;
+  --content-offset-laptop: 136px;
+  --content-offset-tablet: 32px;
+  --content-offset-mobile: 20px;
+
+  --margin-xs: .05rem;
+  --margin-sm: .1rem;
+  --margin-md: .3rem;
+  --margin-lg: .6rem;
+  --margin-xl: .8rem;
+  --margin-xxl: 1rem;
+  --margin-xxxl: 1.2rem;
+}

@@ -7,6 +7,7 @@ import {
   convertWorkersResponse2Info,
 } from "./utils";
 import { Button } from "../../Atoms/Button";
+import Link from "@docusaurus/Link";
 import { Panel, PanelContent } from "@site/src/components/Molecules/Panel";
 import { Text } from "@site/src/components/Atoms/Text";
 import { IAnyPageAndWallet } from "../types";
@@ -44,6 +45,7 @@ const Wallet = ({
 
   return (
     <>
+      <Spacer variant="xl" />
       <Button value="Back" onClick={onClearWalletAddress} />
       <Header
         items={dropdownItems}
@@ -87,16 +89,12 @@ const Wallet = ({
 
       <Panel title="Connections">
         <PanelContent>
-          <Text variant="body" type="value">
-            Direct link to stats:&nbsp;
+          <Text variant="body" type="value" className="mr">
+            Fediverse link:
           </Text>
-          <Text variant="body" color="primary" type="value" decorating="link">
-            {`${walletAddress}.ctr.watch`}
-          </Text>
-          <br />
-          <Text variant="body" type="value">
-            Direct link.
-          </Text>
+          <Link to={`https://ctr.watch/@${walletAddress}`}>
+            {`pool.ctr.watch/@${walletAddress}`}
+          </Link>
         </PanelContent>
       </Panel>
 

@@ -68,7 +68,7 @@ const config: Config = {
         WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
         USERNAME: "<your wallet address>.<worker name>",
         PASSWORD: "<empty>",
-        PAYOUT: "cb0576bd9a75ac639da66010e34a24f9418218c4ecae", // TODO: Define
+        PAYOUT: "cb11ca5aa7cf5ffa5ed333e962310b3922b48af68698",
       },
       FI: {
         NAME: "Northeast Europe",
@@ -78,7 +78,7 @@ const config: Config = {
         WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
         USERNAME: "<your wallet address>.<worker name>",
         PASSWORD: "<empty>",
-        PAYOUT: "cb0576bd9a75ac639da66010e34a24f9418218c4ecae", // TODO: Define
+        PAYOUT: "cb806ca47e07b803e598ea9bf7413355486723270f71",
       },
       SG: {
         NAME: "Southeast Asia",
@@ -88,7 +88,7 @@ const config: Config = {
         WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
         USERNAME: "<your wallet address>.<worker name>",
         PASSWORD: "<empty>",
-        PAYOUT: "cb0576bd9a75ac639da66010e34a24f9418218c4ecae", // TODO: Define
+        PAYOUT: "cb060ea54cce80fcb689f8824b238118cb5005572a36",
       },
       HK: {
         NAME: "East Asia",
@@ -98,7 +98,7 @@ const config: Config = {
         WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
         USERNAME: "<your wallet address>.<worker name>",
         PASSWORD: "<empty>",
-        PAYOUT: "cb0576bd9a75ac639da66010e34a24f9418218c4ecae", // TODO: Define
+        PAYOUT: "cb6242d8b1903db52f99813f79fe4dff2b85fd7c1fdd",
       },
       AM: {
         NAME: "America",
@@ -108,7 +108,7 @@ const config: Config = {
         WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
         USERNAME: "<your wallet address>.<worker name>",
         PASSWORD: "<empty>",
-        PAYOUT: "cb0576bd9a75ac639da66010e34a24f9418218c4ecae", // TODO: Define
+        PAYOUT: "cb532b4658c0077fe257c44fbd3ee89f8c85ce5c68e3",
       },
       JP: {
         NAME: "Japan",
@@ -118,7 +118,7 @@ const config: Config = {
         WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
         USERNAME: "<your wallet address>.<worker name>",
         PASSWORD: "<empty>",
-        PAYOUT: "cb0576bd9a75ac639da66010e34a24f9418218c4ecae", // TODO: Define
+        PAYOUT: "cb51bee89e80d6586642f29748054c1566df056472ec",
       },
     },
 
