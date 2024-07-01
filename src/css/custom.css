@@ -32,11 +32,11 @@
 }
 
 h1, h2, h3 {
-  margin:0px;
+  margin: 0px;
 }
 
 .content {
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .text-center {
@@ -71,4 +71,54 @@ h1, h2, h3 {
   border: 1px solid var(--gray-700);
   background-color: var(--blue-rgb-700);
   text-decoration: none;
+}
+
+.mr-0 {
+  margin-right: 0;
+}
+.mr-1 {
+  margin-right: var(--margin-xs);
+}
+.mr-2 {
+  margin-right: var(--margin-sm);
+}
+.mr-3, .mr {
+  margin-right: var(--margin-md);
+}
+.mr-4 {
+  margin-right: var(--margin-lg);
+}
+.mr-5 {
+  margin-right: var(--margin-xl);
+}
+.mr-6 {
+  margin-right: var(--margin-xxl);
+}
+.mr-7 {
+  margin-right: var(--margin-xxxl);
+}
+
+.ml-0 {
+  margin-left: 0;
+}
+.ml-1 {
+  margin-left: var(--margin-xs);
+}
+.ml-2 {
+  margin-left: var(--margin-sm);
+}
+.ml-3, .ml {
+  margin-left: var(--margin-md);
+}
+.ml-4 {
+  margin-left: var(--margin-lg);
+}
+.ml-5 {
+  margin-left: var(--margin-xl);
+}
+.ml-6 {
+  margin-left: var(--margin-xxl);
+}
+.ml-7 {
+  margin-left: var(--margin-xxxl);
 }

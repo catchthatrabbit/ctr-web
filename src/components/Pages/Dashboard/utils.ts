@@ -133,7 +133,7 @@ export const convertPoolChartDataToMapChartInfoBox = (
       {
         title: "Round variance",
         value: TextFormat.getPercentText(
-          ((100 * Number(roundShares)) / Number(node.difficulty)).toFixed(2), // TODO: check if this is correct
+          ((100 * Number(roundShares)) / Number(node.difficulty)).toFixed(2),
         ),
       },
     ],

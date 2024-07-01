@@ -14,7 +14,7 @@ export const convertWalletInfoResponse2GeneralState = (
     data: [
       {
         key: "1",
-        title: "Rank",
+        title: "Round rank",
         value: convert2Rank(data?.stats?.immature / UNITS.NUCLE),
       },
       {
@@ -82,7 +82,7 @@ export const convertWalletInfoResponse2ComputingInformation = (
       {
         key: "5",
         title: "Round share",
-        value: data?.roundShares,
+        value: data?.roundShares + '%',
       },
       {
         key: "6",

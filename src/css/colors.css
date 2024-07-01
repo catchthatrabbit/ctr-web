@@ -13,11 +13,9 @@
   --greenYellow: #ADFF2F;
   --ocean-blue: #315d65;
 
-
   --white-rgb-06: rgb(255, 255, 255, 0.6);
   --white-rgb-04: rgb(255, 255, 255, 0.4);
   --white-rgb-02: rgb(255, 255, 255, 0.2);
-
 
   --blue-rgb-400: rgb(93, 99, 115, 0.1);
   --blue-rgb-500: rgba(66, 66, 89, 0.1);
@@ -62,6 +60,7 @@
   --ifm-link-color: var(--ifm-color-emphasis-900);
   --ifm-navbar-link-color: var(--ifm-color-emphasis-900);
   --ifm-navbar-link-hover-color: var(--ifm-color-emphasis-900);
+  --ifm-tabs-color-active: var(--ifm-color-primary);
 }
 
 html, body{
