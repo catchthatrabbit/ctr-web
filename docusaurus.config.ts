@@ -56,8 +56,10 @@ const config: Config = {
       CORE_CLIENT_URL: "https://github.com/core-coin/go-core/releases",
       CORE_TALK_SPACE_URL: "https://coretalk.space",
       ICAN_WALLET_URL: "https://github.com/core-coin/wallet-generator/releases",
-      GITHUB_RELEASE_DOWNLOAD_URL: "https://github.com/catchthatrabbit/coreminer/releases",
-      GITHUB_RAW_MINE_SH: "bash <(curl -s https://raw.githubusercontent.com/catchthatrabbit/coreminer/master/mine.sh)",
+      GITHUB_RELEASE_DOWNLOAD_URL:
+        "https://github.com/catchthatrabbit/coreminer/releases",
+      GITHUB_RAW_MINE_SH:
+        "bash <(curl -s https://raw.githubusercontent.com/catchthatrabbit/coreminer/master/mine.sh)",
     },
     START_MINING_POOL_CONFIGURATIONS: {
       DE: {
@@ -65,7 +67,8 @@ const config: Config = {
         DESCRIPTION: "DACH Pool 🇩🇪🇦🇹🇨🇭",
         SERVER: "de.catchthatrabbit.com",
         PORT: "8008",
-        WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
+        WORKER_NAME:
+          "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
         USERNAME: "<your wallet address>.<worker name>",
         PASSWORD: "<empty>",
         PAYOUT: "cb11ca5aa7cf5ffa5ed333e962310b3922b48af68698",
@@ -75,7 +78,8 @@ const config: Config = {
         DESCRIPTION: "Northeast EU Pool 🇫🇮🇪🇺",
         SERVER: "fi.catchthatrabbit.com",
         PORT: "8008",
-        WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
+        WORKER_NAME:
+          "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
         USERNAME: "<your wallet address>.<worker name>",
         PASSWORD: "<empty>",
         PAYOUT: "cb806ca47e07b803e598ea9bf7413355486723270f71",
@@ -85,7 +89,8 @@ const config: Config = {
         DESCRIPTION: "ASEAN Pool 🇸🇬🇹🇭🇵🇭",
         SERVER: "sg.catchthatrabbit.com",
         PORT: "8008",
-        WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
+        WORKER_NAME:
+          "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
         USERNAME: "<your wallet address>.<worker name>",
         PASSWORD: "<empty>",
         PAYOUT: "cb060ea54cce80fcb689f8824b238118cb5005572a36",
@@ -95,7 +100,8 @@ const config: Config = {
         DESCRIPTION: "East Asian Pool 🇭🇰🇰🇷",
         SERVER: "hk.catchthatrabbit.com",
         PORT: "8008",
-        WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
+        WORKER_NAME:
+          "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
         USERNAME: "<your wallet address>.<worker name>",
         PASSWORD: "<empty>",
         PAYOUT: "cb6242d8b1903db52f99813f79fe4dff2b85fd7c1fdd",
@@ -105,7 +111,8 @@ const config: Config = {
         DESCRIPTION: "American Pool 🇧🇷🇲🇽🇺🇸",
         SERVER: "br.catchthatrabbit.com",
         PORT: "8008",
-        WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
+        WORKER_NAME:
+          "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
         USERNAME: "<your wallet address>.<worker name>",
         PASSWORD: "<empty>",
         PAYOUT: "cb532b4658c0077fe257c44fbd3ee89f8c85ce5c68e3",
@@ -115,7 +122,8 @@ const config: Config = {
         DESCRIPTION: "Japanese Pool 🇯🇵",
         SERVER: "jp.catchthatrabbit.com",
         PORT: "8008",
-        WORKER_NAME: "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
+        WORKER_NAME:
+          "Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)",
         USERNAME: "<your wallet address>.<worker name>",
         PASSWORD: "<empty>",
         PAYOUT: "cb51bee89e80d6586642f29748054c1566df056472ec",
@@ -125,7 +133,12 @@ const config: Config = {
     MAINTAINERS_SUPPORT_EMAIL: "support@catchthatrabbit.com",
     MAINTAINERS_SUPPORT_DESCRIPTION:
       "If you have any questions about our pool, you can contact us freely through this email.",
-    MAINTAINERS_SECURITY_EMAIL: ["security@catchthatrabbit.com", { "ctr@onion.email": "https://keys.openpgp.org/vks/v1/by-fingerprint/ABC" }], // TODO: Replace
+    MAINTAINERS_SECURITY_EMAIL: [
+      "security@catchthatrabbit.com",
+      {
+        "ctr@onion.email": "https://keys.openpgp.org/vks/v1/by-fingerprint/ABC",
+      },
+    ], // TODO: Replace
     MAINTAINERS_SECURITY_DESCRIPTION:
       "Any bug or any other security issue reports are highly and greatly appreciated.",
     MAINTAINERS_COMMERCIAL_EMAIL: "contact@catchthatrabbit.com",
@@ -240,15 +253,15 @@ const config: Config = {
       { property: "og:type", content: "website" },
       {
         name: "keywords",
-        content: "catch,that,rabbit,mining,pool,core,ore,₡ORE,blockchain,xcb,xce,xab,network,open-source,open,source,mainnet,devin",
+        content:
+          "catch,that,rabbit,mining,pool,core,ore,₡ORE,blockchain,xcb,xce,xab,network,open-source,open,source,mainnet,devin",
       },
     ],
     navbar: {
       hideOnScroll: true,
       logo: {
         alt: "CTR LOGO",
-        src: "img/logo.svg",
-        width: "256px",
+        src: "img/newLogo.svg",
       },
       items: [
         {
@@ -273,7 +286,7 @@ const config: Config = {
         },
         {
           href: "/start-mining",
-          label: "Start Mining",
+          label: "Start mining",
           position: "right",
         },
       ],
@@ -344,7 +357,7 @@ const config: Config = {
       copyright: `© ${new Date().getFullYear()} Catch that Rabbit. All rights reserved.`,
     },
     colorMode: {
-      defaultMode: 'dark',
+      defaultMode: "dark",
       disableSwitch: true,
       respectPrefersColorScheme: false,
     },
@@ -355,13 +368,13 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
 
   plugins: [
-    [
-      '@docusaurus/plugin-google-gtag',
-      {
-        trackingID: 'G-K79ZXPBSHD',
-        anonymizeIP: true,
-      },
-    ],
+    // [
+    //   "@docusaurus/plugin-google-gtag",
+    //   {
+    //     trackingID: "G-K79ZXPBSHD",
+    //     anonymizeIP: true,
+    //   },
+    // ],
   ],
 };
 

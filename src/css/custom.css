@@ -6,12 +6,14 @@
 @import url("flex.css");
 
 :root {
+  
   --ifm-table-cell-padding: var(--space-sm) var(--space-xs) var(--space-sm);
 
   --ifm-global-spacing: var(--space-md);
   --ifm-navbar-item-padding-vertical:var(--space-xs);
   --ifm-navbar-item-padding-horizontal:var(--space-xs);
 
+ 
   --ifm-navbar-padding-vertical: 0px;
   --ifm-navbar-padding-horizontal: 0px;
   --ifm-navbar-height: 82px;
@@ -24,11 +26,21 @@
   --ifm-spacing-horizontal: 0px;
 
   --content-width: 95%;
-  --content-width-xl: 90%;
+  --content-width-xl: 81%;
 
   --ifm-footer-logo-max-width: 256px;
 
   --ifm-table-cell-padding: var(--space-xs);
+}
+
+:root nav.navbar {
+  --ifm-font-family-base: 'Inter', sans-serif;
+  --ifm-navbar-background-color: rgba(2, 2, 2, 1);
+  --ifm-font-weight-semibold: 600;
+  --ifm-color-primary: rgba(22, 199, 132, 1);
+  --subheading-lineHeight-desktop: 1.5rem;
+ 
+
 }
 
 h1, h2, h3 {
@@ -122,3 +134,4 @@ h1, h2, h3 {
 .ml-7 {
   margin-left: var(--margin-xxxl);
 }
+

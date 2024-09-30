@@ -19,5 +19,9 @@
 }
 
 .navbar__logo {
-    margin: 1rem;
+    margin: 1.1rem 0.9rem;
+}
+
+.navbar__items{
+    margin: 0px 9px 10px 10px;
 }

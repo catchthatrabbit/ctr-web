@@ -7,6 +7,11 @@
 .navBarContainerMiningItem {
     color: var( --ifm-color-primary);
     cursor: pointer;
+    background-color: rgba(6, 42, 28, 1);
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-left: 19px;
 }
 
 .navBarContainerMiningItem:hover {
@@ -24,8 +29,8 @@
 }
 
 .navBarContainerLogo img {
-    width: 140px;
-    height: 62px;
+    width: 170px;
+    height: 35px;
 }
 
 .activeNavStartMiningItemLink:before {
