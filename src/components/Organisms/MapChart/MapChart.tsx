@@ -40,7 +40,7 @@ const MapChart = ({ children, infoItems, isLoading }: IMapChart) => {
     <div className={styles.mapRoot}>
       {!mobile && !tablet && (
         <>
-          <Spacer variant="lg" />
+          {/* <Spacer variant="lg" /> */}
           <ConfiguredInfoBox />
           <Spacer variant="lg" />
         </>

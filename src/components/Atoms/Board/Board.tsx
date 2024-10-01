@@ -26,16 +26,17 @@ const Board = ({
   return (
     <div className={clsx([styles.boardContainer, className])}>
       <div className={styles.content}>
-        <div className={styles.boardItem}>
+        <div className={`${styles.boardItem} ${styles.number}`}>
           <Text>{prefix}</Text>
+          &nbsp;
           {isLoading ? (
             loaderComp
           ) : (
-            <Text variant="subheading" weight="bold">
+            <Text variant="subheading" weight="bold" color="valueChartColor">
               {value || "0"}
             </Text>
           )}
-          <Text variant="subheading" weight="bold">
+          <Text variant="subheading" weight="bold" color="valueChartColor">
             {suffix}
           </Text>
         </div>

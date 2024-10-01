@@ -22,8 +22,12 @@
   letter-spacing: 0.05em;
 }
 
-.white {
-  color: var(--white);
+.InsideChartColor {
+  color: var(--ifm-InsideChart-color-text);
+}
+
+.valueChartColor{
+  color: var(--ifm-value-chart-color)
 }
 
 .gray {

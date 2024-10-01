@@ -50,7 +50,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
 
   return (
     <>
-      <Spacer variant="xxxl" />
+      {/* <Spacer variant="xxxl" /> */}
       <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
         <div
           className={clsx([

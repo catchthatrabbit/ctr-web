@@ -30,7 +30,7 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "tag" /** font size 11 */
     | "CTA" /** font size 11 */;
   weight?: "normal" | "bold";
-  color?: "primary" | "white" | "gray";
+  color?: "primary" | "InsideChartColor" | "gray" | "valueChartColor";
   componentType?: keyof JSX.IntrinsicElements;
   decorating?: "simple" | "underlined" | "link";
   children: string;
@@ -59,7 +59,7 @@ const Text: FC<IText> = ({
   className,
   type = "regular",
   componentType = "span",
-  color = "white",
+  color = "InsideChartColor",
   ...restProps
 }) => {
   const { mobile, tablet } = useMediaQueries();

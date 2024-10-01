@@ -1,7 +1,8 @@
 /* You can override the default Infima variables here. */
 :root {
   --white: #FFFFFF;
-
+  --ifm-InsideChart-color-text: rgba(156, 163, 175, 1);
+  --ifm-value-chart-color: rgba(0, 191, 255, 1);
   --gray-100:#999eac; /* SantasGray rgb(153, 158, 172) */
   --gray-700:#424259; /* rgb(66, 66, 89) */
   --gray-800: #46484c;

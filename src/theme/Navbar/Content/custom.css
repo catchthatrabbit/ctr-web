@@ -1,3 +1,7 @@
+.navbar{
+    box-shadow: none;
+}
+
 .navbar__link:hover:after {
     width: 100%;
 }
