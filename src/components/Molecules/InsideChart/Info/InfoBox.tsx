@@ -14,6 +14,7 @@ interface IInfoBox {
   boardClassNameVert?: string;
   boardClassNameHor?: string;
   dir?: "vert" | "hor";
+  applyFullWidthBorder?: boolean;
 }
 
 const InfoBox = ({
@@ -24,6 +25,7 @@ const InfoBox = ({
   className,
   boardClassNameHor,
   boardClassNameVert,
+  applyFullWidthBorder = false,
 }: IInfoBox) => {
   const { desktop, laptop, mobile, tablet } = useMediaQueries();
 
@@ -37,6 +39,7 @@ const InfoBox = ({
           [styles.flexDirectionColumn]: dir === "vert" && (desktop || laptop),
           [styles.justifySpaceBetween]: desktop || laptop,
           [styles.justifyCenter]: tablet || mobile,
+          [styles.fullWidthBorder]: applyFullWidthBorder && (desktop || laptop),
         },
         className,
       ])}

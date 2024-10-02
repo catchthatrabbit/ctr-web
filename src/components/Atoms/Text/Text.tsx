@@ -30,6 +30,7 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "tag" /** font size 11 */
     | "CTA" /** font size 11 */;
   weight?: "normal" | "bold";
+  size?: "small";
   color?: "primary" | "InsideChartColor" | "gray" | "valueChartColor";
   componentType?: keyof JSX.IntrinsicElements;
   decorating?: "simple" | "underlined" | "link";
@@ -55,6 +56,7 @@ const CustomComponent: FC<
 const Text: FC<IText> = ({
   variant = "subheading",
   weight = "normal",
+  size = "small",
   children,
   className,
   type = "regular",
@@ -81,8 +83,10 @@ const Text: FC<IText> = ({
           : styles[variant],
         !mobile && !tablet && styles[variant],
         styles[weight],
+        styles[size],
         styles[type],
         styles[color],
+
         className,
       ])}
       {...restProps}

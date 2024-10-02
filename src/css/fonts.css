@@ -12,6 +12,8 @@
   --ifm-font-family-bold: var(--bold-font-family);
   --ifm-font-weight-semibold: var(--bold-font-weight);
 
+  --small-font-size: 14px;
+
   --h1-font-size-desktop: 2.1rem; /* heading 1 33px */
   --h1-lineHeight-desktop: 2.3rem;
 

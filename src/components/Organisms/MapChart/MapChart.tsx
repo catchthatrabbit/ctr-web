@@ -32,6 +32,7 @@ const MapChart = ({ children, infoItems, isLoading }: IMapChart) => {
             loadingPlaceholder={<LoadingPlaceholder />}
           />
         }
+        applyFullWidthBorder={true}
       />
     </>
   );

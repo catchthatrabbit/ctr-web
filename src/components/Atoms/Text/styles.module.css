@@ -18,6 +18,10 @@
   font-weight: var(--bold-font-weight);
 }
 
+.small {
+  font-size: var(--small-font-size);
+}
+
 .text {
   letter-spacing: 0.05em;
 }

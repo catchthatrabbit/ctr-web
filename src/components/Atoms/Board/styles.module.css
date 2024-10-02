@@ -1,10 +1,14 @@
 .boardContainer{
     /* padding: var(--space-xs); */
     width: auto;
+   
+}
+.boardContainer:not(:last-child) {
+  padding-right: var(--space-md);
 }
     
 .content{
-    height: 58px;
+    height: 37px;
     /* padding: 15px var(--space-xs) 20px; */
     box-sizing: border-box;
     display: flex;
