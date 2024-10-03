@@ -11,12 +11,10 @@
 }
 
 .fullWidthBorder {
-    width: 100vw; /* Full viewport width */
-    position: relative; /* Ensure it spans the full width */
-    left: 50%; /* Center the element */
-    right: 50%;
-    margin-left: -50vw; /* Adjust the left margin */
-    margin-right: -50vw; /* Adjust the right margin */
-    border-top: 1px solid rgba(54, 54, 54, 1); /* Top border */
-    border-bottom: 1px solid rgba(54, 54, 54, 1); /* Bottom border */
+    position: relative; 
+    width: calc(100vw - 1.5%);
+    left: 50%; 
+    transform: translateX(-50%);
+    border-top: 1px solid rgba(54, 54, 54, 1); 
+    border-bottom: 1px solid rgba(54, 54, 54, 1); 
   }
