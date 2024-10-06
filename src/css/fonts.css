@@ -13,6 +13,12 @@
   --ifm-font-weight-semibold: var(--bold-font-weight);
 
   --small-font-size: 14px;
+  --medium-font-size: 24px;
+  --large-font-size: 32px;
+  --extra-large-font-size: 50px;
+
+  
+  
 
   --h1-font-size-desktop: 2.1rem; /* heading 1 33px */
   --h1-lineHeight-desktop: 2.3rem;
@@ -72,7 +78,7 @@
   --regular-font-weight: 400;
   --ifm-font-weight-semibold: var(--regular-font-weight);
 
-  --ifm-h1-font-size: 2.8rem;
+  --ifm-h1-font-size: 3.15rem;
   --ifm-h2-font-size: 2rem;
   --ifm-h3-font-size: 1.2rem;
 }

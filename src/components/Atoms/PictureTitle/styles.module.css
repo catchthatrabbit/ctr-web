@@ -3,3 +3,7 @@
     align-items: center;
     justify-content: center;
 }
+
+.flexStart{
+    justify-content: flex-start;
+}

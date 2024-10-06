@@ -18,8 +18,9 @@ import styles from "./styles.module.css";
  * @returns React.Node
  */
 interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
-  type?: "label" | "value" | "regular";
+  type?: "label" | "value" | "regular" | "exo";
   variant?:
+    | "heading" /** font size 50 */
     | "heading1" /** font size 38 */
     | "heading2" /** font size 22 */
     | "heading3" /** font size 20 */
@@ -59,7 +60,7 @@ const Text: FC<IText> = ({
   size = "small",
   children,
   className,
-  type = "regular",
+  type = "regular" || "exo",
   componentType = "span",
   color = "InsideChartColor",
   ...restProps
@@ -71,10 +72,12 @@ const Text: FC<IText> = ({
       componentType={componentType}
       className={clsx([
         styles.text,
+
         variant === "heading1" ||
         variant === "heading2" ||
         variant === "heading3" ||
-        variant === "subheading"
+        variant === "subheading" ||
+        variant === "heading"
           ? tablet
             ? styles[`${variant}-tablet`]
             : mobile

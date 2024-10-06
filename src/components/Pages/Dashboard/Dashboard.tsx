@@ -23,8 +23,10 @@ import { LoadingPlaceholder } from "@site/src/components/Atoms/LoadingPlaceholde
 import { StartMining } from "@site/src/components/Organisms/StartMining";
 
 import { Empty } from "@site/src/components/Atoms/Empty";
-
+import { Search } from "../../Molecules/Search";
 import styles from "./styles.module.css";
+
+import MainPageSearch from "@site/src/components/Molecules/PictureTitles/MainPageSearch";
 
 interface IDashboard extends IAnyPageAndWallet {}
 
@@ -54,7 +56,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
         <div
           className={clsx([
-            "grid xl-grid-col--5 lg-grid-col--5 md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
+            "grid xl-grid-col--2 lg-grid-col--5 md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
             styles.directionRtl,
             styles.fullWidth,
           ])}
@@ -62,7 +64,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           <div
             className={clsx([
               styles.mapChartLocationPlace,
-              "xl-grid-span-col--4",
+
               "lg-grid-span-col--4",
               styles.directionLtr,
             ])}
@@ -77,7 +79,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                   <span className="lg-hide md-hide" />
                   {effectsShowLocation && (
                     <>
-                      <MapPin
+                      {/* <MapPin
                         className="lg-grid-span-col--2 md-grid-span-col--3"
                         mapButton={
                           <MapButton
@@ -87,8 +89,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                             }
                           />
                         }
-                      />
-                      <span className="lg-hide" />
+                      /> */}
+                      {/* <span className="lg-hide" />
                       <MapPin
                         className="xl-grid-span-col--2 lg-grid-span-col--2 md-grid-span-col--3 sm-grid-span-col--6"
                         mapButton={
@@ -100,8 +102,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                           />
                         }
                       />
-                      <span className="lg-hide md-hide" />
-                      <MapPin
+                      <span className="lg-hide md-hide" /> */}
+                      {/* <MapPin
                         className="lg-grid-span-col--2 md-grid-span-col--2"
                         mapButton={
                           <MapButton
@@ -111,7 +113,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                             }
                           />
                         }
-                      />
+                      /> */}
                     </>
                   )}
                 </Locations>
@@ -121,21 +123,25 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
               </>
             )}
           </div>
-          <Spacer className="xl-hide lg-hide" variant="lg" />
+          {/* <Spacer className="xl-hide lg-hide" variant="lg" /> */}
           <div
             className={clsx([
               styles.directionLtr,
               "xs-text-center sm-text-center md-text-center",
             ])}
           >
-            <Spacer variant="lg" className="xl-hide lg-hide md-hide" />
-            <Text variant="subheading">{sLoganPrimary}</Text>
+            <MainPageSearch />
+            {/* <Spacer variant="lg" className="xl-hide lg-hide md-hide" /> */}
+            <Text variant="heading" type="exo">
+              {sLoganPrimary}
+            </Text>
             <br />
             <Text variant="body" color="gray" type="label">
               {SLoganSecondary}
             </Text>
             <br />
-            <Text variant="body" color="primary" type="value">
+            <Search onSearch={onSetWalletAddress} />
+            {/* <Text variant="body" color="primary" type="value">
               Pay-per-last-N-shares &nbsp;&nbsp;
             </Text>
             <Text variant="body" color="gray" type="value">
@@ -155,7 +161,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
               <Text variant="body" color="primary" type="value">
                 start your mining today
               </Text>
-            </a>
+            </a> */}
           </div>
         </div>
       </MapChart>

@@ -6,3 +6,4 @@ export { default as PaymentsTitle } from "./PaymentsTitle";
 export { default as GetStartedTitle } from "./GetStartedTitle";
 export { default as PoolStatisticsTitle } from "./PoolStatisticsTitle";
 export { default as RecentBlocksTitle } from "./RecentBlocksTitle";
+export { default as MainPageSearch } from "./MainPageSearch";

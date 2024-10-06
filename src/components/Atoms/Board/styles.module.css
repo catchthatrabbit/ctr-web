@@ -22,5 +22,6 @@
 
 .boardItem{
     display: flex;
+    align-items: center;
 }
 

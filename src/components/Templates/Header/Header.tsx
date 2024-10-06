@@ -50,7 +50,8 @@ const Header = ({
         <>
           <Spacer variant="xl" />
           <div className="col col--12">
-            <Search onSearch={onSearch} />
+            {/* <Search onSearch={onSearch} /> */}
+            {/* insert here start mining today! */}
           </div>
         </>
       )}

@@ -3,7 +3,7 @@
     position: relative;
     display: flex;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: flex-end;
   }
 
 .mapPin {
@@ -19,5 +19,5 @@
 
 .bgImage{
   height: 100%;
-  width: 100%;
+  width: 74%;
 }
