@@ -22,7 +22,7 @@ interface ISpacer extends HtmlHTMLAttributes<HTMLDivElement> {
  */
 const Spacer: FC<ISpacer> = ({
   direction = "vert",
-  variant = "md",
+  variant = "md" || "xxxl",
   className,
   ...restProps
 }) => {

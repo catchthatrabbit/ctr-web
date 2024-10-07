@@ -18,12 +18,38 @@
   font-weight: var(--bold-font-weight);
 }
 
+.largeLineHeight {
+  line-height: var(--large-line-height);
+}
+
+.smallLineHeight {
+  line-height: var(--small-line-height);
+}
+
+.normalLineHeight {
+  line-height: var(--normal-line-height);
+}
+
+.smallLineHeight {
+  line-height: var(--small-line-height);
+}
+
+.extraBold {
+  font-weight: var(--extra-bold-font-weight);
+}
+
 .small {
   font-size: var(--small-font-size);
 }
 
+.medium {
+  font-size: var(--medium-font-size);
+}
+
+
+
 .text {
-  letter-spacing: 0.05em;
+  /* letter-spacing: 0.05em; */
 }
 
 .InsideChartColor {
@@ -32,6 +58,14 @@
 
 .valueChartColor{
   color: var(--ifm-value-chart-color)
+}
+
+.dashboardColor {
+  color: var( --ifm-primary-color);
+}
+
+.subheadingColor {
+  color: var(--ifm-subheading-color);
 }
 
 .gray {

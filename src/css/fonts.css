@@ -74,9 +74,14 @@
   --cta-font-size: 0.8rem; /* cta */
   --cta-lineHeight: 0.9rem;
 
+  --extra-bold-font-weight: 800;
   --bold-font-weight: 600;
   --regular-font-weight: 400;
   --ifm-font-weight-semibold: var(--regular-font-weight);
+
+  --normal-line-height: 36px;
+  --small-line-height: 24px;
+  --large-line-height: 65px;
 
   --ifm-h1-font-size: 3.15rem;
   --ifm-h2-font-size: 2rem;

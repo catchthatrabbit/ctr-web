@@ -149,8 +149,8 @@ const config: Config = {
 
     EFFECTS_SHOW_LOCATIONS: true,
     EFFECTS_SHOW_ACTION_ICONS: false,
-    SLOGAN_PRIMARY: "Dedicated Pool for Core Coin and IoT devices",
-    SLOGAN_SECONDARY: "「Core mining pool in the lotusland of Ores」",
+    SLOGAN_PRIMARY: "Dedicated pool for Core Coin and IoT devices",
+    SLOGAN_SECONDARY: "Core mining pool in the lotusland of Ores",
 
     EFFECTS_EMOJI_OK: "🐰 Working",
     EFFECTS_EMOJI_BRB: "⏳ BRB",

@@ -30,11 +30,17 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "tinyBody" /** font size 12 */
     | "tag" /** font size 11 */
     | "CTA" /** font size 11 */;
-  weight?: "normal" | "bold";
-  size?: "small";
-  color?: "primary" | "InsideChartColor" | "gray" | "valueChartColor";
+  weight?: "normal" | "bold" | "extraBold";
+  size?: "small" | "medium";
+  color?:
+    | "primary"
+    | "InsideChartColor"
+    | "dashboardColor"
+    | "valueChartColor"
+    | "subheadingColor";
   componentType?: keyof JSX.IntrinsicElements;
   decorating?: "simple" | "underlined" | "link";
+  lineHeight: "normalLineHeight" | "smallLineHeight" | "largeLineHeight";
   children: string;
 }
 
@@ -56,13 +62,14 @@ const CustomComponent: FC<
 
 const Text: FC<IText> = ({
   variant = "subheading",
-  weight = "normal",
-  size = "small",
+  weight = "normal" || "extraBold" || "bold",
+  size = "small" || "medium",
   children,
   className,
+  lineHeight = "smallLineHeight" || "normalLineHeight" || "largeLineHeight",
   type = "regular" || "exo",
   componentType = "span",
-  color = "InsideChartColor",
+  color = "InsideChartColor" || "dashboardColor" || "subheadingColor",
   ...restProps
 }) => {
   const { mobile, tablet } = useMediaQueries();
@@ -89,6 +96,7 @@ const Text: FC<IText> = ({
         styles[size],
         styles[type],
         styles[color],
+        styles[lineHeight],
 
         className,
       ])}

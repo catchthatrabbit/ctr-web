@@ -131,15 +131,22 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
             ])}
           >
             <MainPageSearch />
-            {/* <Spacer variant="lg" className="xl-hide lg-hide md-hide" /> */}
-            <Text variant="heading" type="exo">
+            <Spacer variant="sm" />
+            <Text
+              variant="heading"
+              weight="extraBold"
+              lineHeight="largeLineHeight"
+              color="dashboardColor"
+              style={{ width: "43rem", display: "inline-block" }}
+            >
               {sLoganPrimary}
             </Text>
-            <br />
-            <Text variant="body" color="gray" type="label">
+            <Spacer variant="xs" />
+            <Text color="subheadingColor" type="regular" size="medium">
               {SLoganSecondary}
             </Text>
             <br />
+            <Spacer variant="xxl" />
             <Search onSearch={onSetWalletAddress} />
             {/* <Text variant="body" color="primary" type="value">
               Pay-per-last-N-shares &nbsp;&nbsp;
