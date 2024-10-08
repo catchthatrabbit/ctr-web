@@ -13,6 +13,7 @@
   --ifm-font-weight-semibold: var(--bold-font-weight);
 
   --small-font-size: 14px;
+  --regular-font-size: 16px;
   --medium-font-size: 24px;
   --large-font-size: 32px;
   --extra-large-font-size: 50px;
@@ -76,12 +77,13 @@
 
   --extra-bold-font-weight: 800;
   --bold-font-weight: 600;
+  --medium-font-weight: 500;
   --regular-font-weight: 400;
   --ifm-font-weight-semibold: var(--regular-font-weight);
 
   --normal-line-height: 36px;
   --small-line-height: 24px;
-  --large-line-height: 65px;
+  --large-line-height: 60px;
 
   --ifm-h1-font-size: 3.15rem;
   --ifm-h2-font-size: 2rem;

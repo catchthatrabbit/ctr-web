@@ -20,4 +20,7 @@
 .bgImage{
   height: 100%;
   width: 84%;
+  top: -28px;
+  position: relative;
+  right: 13px;
 }

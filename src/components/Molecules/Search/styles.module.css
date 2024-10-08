@@ -1,23 +1,28 @@
 .searchButton {
-    height: 55px;
-    width: 68px;
+    height: 48px;
+    width: 102px;
     cursor: pointer;
     user-select: none;
     border: none;
-    border-radius: 0px var(--ifm-global-radius) var(--ifm-global-radius) 0px;
-    color: var(--white);
-    background: var(--gray-700);
+    /* border-radius: 0px var(--ifm-global-radius) var(--ifm-global-radius) 0px; */
+    border-radius: 8px;
+    color: var( --black-800);
+    background: var( --ifm-search-btn-color);
     transition: all 0.1s ease-in-out 0s;
     position: absolute;
+    font-family: var(--regular-font-family);
+    font-size: var(--regular-font-size);
+    font-weight: var(--medium-font-weight);
 }
 
 .searchButton:hover{
-    background-color: var(--white);
-    color: var(--gray-700);
+    background-color: var(--ifm-search-btn-hover);
+    
 }
 
 .searchButtonDesktop{
-    right: 69px;
+    right: 9px;
+    top: 42px;
 }
 
 .searchInputDesktop{
@@ -36,8 +41,10 @@
 .searchInput{
     border-radius: var(--ifm-global-radius);
     padding-right: 90px;
+    margin-top: 8px;
 }
 
 .search {
     position: relative;
+    flex-direction: column;
 }

@@ -141,7 +141,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
             >
               {sLoganPrimary}
             </Text>
-            <Spacer variant="xs" />
+            <Spacer variant="md" />
             <Text color="subheadingColor" type="regular" size="medium">
               {SLoganSecondary}
             </Text>

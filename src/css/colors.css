@@ -10,6 +10,8 @@
   --gray-800: #46484c;
   --gray-900:#181A1F;
 
+
+  --black-800: rgba(2, 2, 2, 1);
   --blue-100: #BCCBF0;
 
   --green-300: #46B549;
@@ -49,6 +51,9 @@
   --ifm-link-color:var(--ifm-color-emphasis-0);
   --ifm-navbar-link-color:var(--ifm-color-emphasis-0);
   --ifm-navbar-link-hover-color: var(--ifm-color-emphasis-0);
+
+  --ifm-search-btn-color: rgba(22, 199, 132, 1);
+  --ifm-search-btn-hover: rgba(25, 229, 152, 1);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */

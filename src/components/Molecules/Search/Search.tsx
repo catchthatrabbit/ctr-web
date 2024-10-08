@@ -4,6 +4,7 @@ import { InputText } from "@site/src/components/Atoms/InputText";
 import clsx from "clsx";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 import { Text } from "../../Atoms/Text";
+import SearchIcon from "@site/src/icons/SearchIcon";
 
 import styles from "./styles.module.css";
 
@@ -37,6 +38,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
           placeholder="Search your miners"
           ref={ref || inputRef}
           onPressEnter={handleSearch}
+          icon={<SearchIcon />}
           {...restProps}
         />
         <button
@@ -46,7 +48,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
           })}
           onClick={handleClickSearchButton}
         >
-          <Magnifier />
+          Search
         </button>
       </div>
     );
