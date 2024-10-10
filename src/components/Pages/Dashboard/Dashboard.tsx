@@ -27,6 +27,7 @@ import { Search } from "../../Molecules/Search";
 import styles from "./styles.module.css";
 
 import MainPageSearch from "@site/src/components/Molecules/PictureTitles/MainPageSearch";
+import { StartPanel } from "../../Molecules/StartPanel";
 
 interface IDashboard extends IAnyPageAndWallet {}
 
@@ -148,30 +149,12 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
             <br />
             <Spacer variant="xxl" />
             <Search onSearch={onSetWalletAddress} />
-            {/* <Text variant="body" color="primary" type="value">
-              Pay-per-last-N-shares &nbsp;&nbsp;
-            </Text>
-            <Text variant="body" color="gray" type="value">
-              (PPLNS)&nbsp;
-            </Text>
-            <Text variant="body" color="gray" type="value">
-              system with only&nbsp;
-            </Text>
-            <Text variant="body" color="primary" type="value">
-              {poolFee ? `${poolFee}% fee` : "-"}
-            </Text>
-            <br />
-            <Text variant="body" color="gray" type="value">
-              Please, select one of the locations to&nbsp;
-            </Text>
-            <a href="/start-mining">
-              <Text variant="body" color="primary" type="value">
-                start your mining today
-              </Text>
-            </a> */}
           </div>
         </div>
       </MapChart>
+      <Spacer variant="xxl" />
+      <Spacer variant="xxl" />
+      <StartPanel />
       <Spacer variant="xl" />
       <Header
         layout={{ boards: false, dropdown: false, search: true }}

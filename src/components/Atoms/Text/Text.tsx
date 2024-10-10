@@ -30,10 +30,11 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "tinyBody" /** font size 12 */
     | "tag" /** font size 11 */
     | "CTA" /** font size 11 */;
-  weight?: "normal" | "bold" | "extraBold";
+  weight?: "normal" | "bold" | "extraBold" | "semiBold";
   size?: "small" | "medium";
   color?:
     | "primary"
+    | "secondary"
     | "InsideChartColor"
     | "dashboardColor"
     | "valueChartColor"
@@ -62,14 +63,17 @@ const CustomComponent: FC<
 
 const Text: FC<IText> = ({
   variant = "subheading",
-  weight = "normal" || "extraBold" || "bold",
+  weight = "normal" || "extraBold" || "bold" || "semiBold",
   size = "small" || "medium",
   children,
   className,
   lineHeight = "smallLineHeight" || "normalLineHeight" || "largeLineHeight",
   type = "regular" || "exo",
   componentType = "span",
-  color = "InsideChartColor" || "dashboardColor" || "subheadingColor",
+  color = "InsideChartColor" ||
+    "dashboardColor" ||
+    "subheadingColor" ||
+    "secondary",
   ...restProps
 }) => {
   const { mobile, tablet } = useMediaQueries();

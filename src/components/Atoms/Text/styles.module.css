@@ -38,6 +38,10 @@
   font-weight: var(--extra-bold-font-weight);
 }
 
+.semiBold{
+  font-weight: var(--semi-bold-font-weight);
+}
+
 .small {
   font-size: var(--small-font-size);
 }
@@ -66,6 +70,10 @@
 
 .subheadingColor {
   color: var(--ifm-subheading-color);
+}
+
+.secondary{
+  color: var(--ifm-secondary-text);
 }
 
 .gray {
