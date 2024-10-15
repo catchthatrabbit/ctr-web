@@ -155,12 +155,12 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       <Spacer variant="xxl" />
       <Spacer variant="xxl" />
       <StartPanel />
-      <Spacer variant="xl" />
+      {/* <Spacer variant="xl" /> */}
       <Header
         layout={{ boards: false, dropdown: false, search: true }}
         onSearch={onSetWalletAddress}
       />
-      <Spacer variant="xl" />
+      <Spacer variant="xxs" />
       <StatsChart
         isLoading={isLoadingRadialBarChart}
         infoItems={infoBoxRadialData}

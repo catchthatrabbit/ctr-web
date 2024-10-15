@@ -25,7 +25,7 @@ const StatsChart = ({ radialBarChart, infoItems, isLoading }: IStatsChart) => {
     <div className={styles.statsChart}>
       <PoolStatisticsTitle />
       <Spacer variant="lg" />
-      <div className="flex">
+      <div className={styles.flex}>
         <div className={radialClassName}>
           {isLoading ? (
             <div className={styles.loadingSkeleton}>

@@ -18,6 +18,7 @@
 .radialChart{
     position: relative;
     width: 100%;
+    
 }
 
 .radialChart svg text{
@@ -50,5 +51,7 @@
 g:last-child .radialBarHour {
     fill: var(--greenYellow);
 }
+
+
 
 

@@ -30,6 +30,10 @@
   line-height: var(--normal-line-height);
 }
 
+.mediumLineHeight {
+  line-height: var(--medium-line-height);
+}
+
 .smallLineHeight {
   line-height: var(--small-line-height);
 }
@@ -50,10 +54,17 @@
   font-size: var(--medium-font-size);
 }
 
+.pictureTitle{
+  font-size: var(--picture-title-font-size);
+}
 
 
 .text {
   /* letter-spacing: 0.05em; */
+}
+
+.letterSpacing {
+  letter-spacing: 0.02em;
 }
 
 .InsideChartColor {

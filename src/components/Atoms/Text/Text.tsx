@@ -31,7 +31,7 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "tag" /** font size 11 */
     | "CTA" /** font size 11 */;
   weight?: "normal" | "bold" | "extraBold" | "semiBold";
-  size?: "small" | "medium";
+  size?: "small" | "medium" | "pictureTitle";
   color?:
     | "primary"
     | "secondary"
@@ -41,7 +41,12 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "subheadingColor";
   componentType?: keyof JSX.IntrinsicElements;
   decorating?: "simple" | "underlined" | "link";
-  lineHeight: "normalLineHeight" | "smallLineHeight" | "largeLineHeight";
+  lineHeight:
+    | "normalLineHeight"
+    | "smallLineHeight"
+    | "largeLineHeight"
+    | "mediumLineHeight";
+  letterSpacing: "letterSpacing";
   children: string;
 }
 
@@ -64,10 +69,14 @@ const CustomComponent: FC<
 const Text: FC<IText> = ({
   variant = "subheading",
   weight = "normal" || "extraBold" || "bold" || "semiBold",
-  size = "small" || "medium",
+  size = "small" || "medium" || "pictureTitle",
   children,
   className,
-  lineHeight = "smallLineHeight" || "normalLineHeight" || "largeLineHeight",
+  lineHeight = "smallLineHeight" ||
+    "normalLineHeight" ||
+    "largeLineHeight" ||
+    "mediumLineHeight",
+  letterSpacing,
   type = "regular" || "exo",
   componentType = "span",
   color = "InsideChartColor" ||
@@ -101,7 +110,7 @@ const Text: FC<IText> = ({
         styles[type],
         styles[color],
         styles[lineHeight],
-
+        styles[letterSpacing],
         className,
       ])}
       {...restProps}

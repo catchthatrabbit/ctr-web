@@ -8,5 +8,6 @@ export { default as LegsUp } from "./pages/LegsUp";
 export { default as Dive } from "./pages/Dive";
 export { default as TailsAbove } from "./pages/TailsAbove";
 export { default as RabbitMiners } from "./pages/RabbitMiners";
+export { default as RabbitPoolStatistics } from "./pages/RabbitPoolStatistics";
 export { default as Arrow } from "./Arrow";
 export { default as Ears } from "./pages/Ears";
