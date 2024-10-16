@@ -25,3 +25,6 @@
     align-items: center;
 }
 
+.boardClassNameColumn{
+    flex-direction: column;
+}

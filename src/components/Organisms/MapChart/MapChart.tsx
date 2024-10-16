@@ -24,6 +24,7 @@ const MapChart = ({ children, infoItems, isLoading }: IMapChart) => {
     <>
       <InfoBox
         boardClassNameHor={horClassName}
+        dir="hor"
         isLoading={isLoading}
         items={infoItems}
         loadingComponent={

@@ -38,7 +38,8 @@ const StatsChart = ({ radialBarChart, infoItems, isLoading }: IStatsChart) => {
         <InfoBox
           boardClassNameVert={vertClassName}
           className={infoBoxClassName}
-          dir="vert"
+          dir="column"
+          spaceAround={true}
           items={infoItems}
           isLoading={isLoading}
           loadingComponent={

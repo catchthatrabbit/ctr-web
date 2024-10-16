@@ -12,6 +12,9 @@ interface IBoard {
   className?: string;
   loaderComp?: React.ReactNode;
   isLoading?: boolean;
+  dir?: "vert" | "hor" | "column";
+  boardClassNameHor?: string;
+  boardClassNameColumn?: string;
 }
 
 const Board = ({
@@ -20,12 +23,20 @@ const Board = ({
   suffix,
   prefix,
   className,
+  dir,
+  boardClassNameHor,
+  boardClassNameColumn,
   loaderComp = <Text variant="subheading">&nbsp;--&nbsp;</Text>,
   isLoading = false,
 }: IBoard) => {
   return (
     <div className={clsx([styles.boardContainer, className])}>
-      <div className={styles.content}>
+      <div
+        className={clsx(styles.content, {
+          [styles.boardClassNameHor]: dir === "hor",
+          [styles.boardClassNameColumn]: dir === "column",
+        })}
+      >
         <div className={`${styles.boardItem} ${styles.number}`}>
           <Text>{prefix}</Text>
           &nbsp;

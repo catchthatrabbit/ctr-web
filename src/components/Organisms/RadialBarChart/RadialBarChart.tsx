@@ -33,11 +33,11 @@ const RadialBarChart = ({
 
     // Declare the chart dimensions and margins.
     const width = 1185;
-    const height = 362;
-    const marginTop = 30;
+    const height = 412; // Increased by 50px to accommodate the space above the chart
+    const marginTop = 80; // Increased by 50px to accommodate the space above the chart
     const marginRight = 0;
     const marginBottom = 30;
-    const marginLeft = 40;
+    const marginLeft = 70;
 
     // Declare the x (horizontal position) scale.
     const x = d3
@@ -60,9 +60,17 @@ const RadialBarChart = ({
       .append("svg")
       .attr("width", width)
       .attr("height", height)
-
       .attr("viewBox", [0, 0, width, height]);
-    // .attr("style", "max-width: 100%; height: auto;");
+
+    // Add the title text element
+    svg
+      .append("text")
+      .attr("x", width / 2)
+      .attr("y", 20) // Position the text 20px from the top
+      .attr("fill", "rgba(128, 128, 128, 1)") // Set the text color using the fill attribute
+      .attr("text-anchor", "middle")
+      .attr("style", "font-size: 16px;") // Set the font size using the style attribute
+      .text("Pool Hash Rate — Last 24H");
 
     // Create the tooltip element
     const tooltip = d3
@@ -94,19 +102,22 @@ const RadialBarChart = ({
       tooltip.transition().duration(200).style("opacity", 0);
     };
 
+    // Add grid lines for the y-axis
     svg
       .append("g")
-      .attr("style", "stroke-dasharray : 8, 8; color: rgba(54, 54, 54, 1); ")
       .attr("class", "grid")
       .attr("transform", `translate(${marginLeft},0)`)
       .call(
         d3
           .axisLeft(y)
-          .tickSize(-width + marginRight + marginLeft) // Set the tick size to span the width of the chart
+          .tickSize(-width + marginLeft + marginRight) // Extend grid lines across the chart
           .tickFormat("") // Remove the tick labels
-          .tickValues(y.ticks().slice(1)), // Skip the first tick (10M)
+          .tickValues(y.ticks().slice(1)), // Exclude the bottom-most tick
       )
-      .call((g) => g.select(".domain").remove());
+      .call((g) => g.select(".domain").remove()) // Remove the axis line
+      .selectAll(".tick line")
+      .attr("stroke-dasharray", "8,8") // Apply dashed style to grid lines
+      .attr("stroke", "rgba(54, 54, 54, 1)"); // Set the color of the grid lines
 
     // Add a rect for each bar with animation.
     svg
@@ -120,7 +131,6 @@ const RadialBarChart = ({
       .attr("y", height - marginBottom) // Start 8px from the bottom
       .attr("height", 0) // Start with height 0
       .attr("width", 16)
-
       .attr("rx", 4) // Add horizontal radius
       .attr("ry", 4) // Add vertical radius
       .on("mouseover", onMouseover)
@@ -136,34 +146,32 @@ const RadialBarChart = ({
       .append("g")
       .attr("class", "x-axis")
       .attr("transform", `translate(0,${height - marginBottom})`)
-      .call(d3.axisBottom(x).tickSizeOuter(0));
+      .call(d3.axisBottom(x).tickSize(0).tickSizeOuter(0)); // Set the tick size to 0 to remove the ticks
 
     svg
       .selectAll(".x-axis text")
       .style("fill", "rgba(128, 128, 128, 1)")
-      .style("font-size", "16px");
+      .style("font-size", "16px")
+      .attr("transform", "translate(0, 8)"); // Move the text 10px to the left
 
     // Add the y-axis and label, and remove the domain line.
     svg
       .append("g")
       .attr("class", "y-axis")
       .attr("transform", `translate(${marginLeft},0)`)
-      .call(d3.axisLeft(y).tickFormat((d) => formatValue(d).replace("M", "M")))
-      .call((g) => g.select(".domain").remove())
-      .call((g) =>
-        g
-          .append("text")
-          .attr("x", -marginLeft)
-          .attr("y", 10)
-          .attr("fill", "red")
-          .attr("text-anchor", "start")
+      .call(
+        d3
+          .axisLeft(y)
+          .tickSize(0)
+          .tickFormat((d) => formatValue(d).replace("M", "M")),
+      )
+      .call((g) => g.select(".domain").remove());
 
-          .text("↑ Frequency (%)"),
-      );
     svg
       .selectAll(".y-axis text")
       .style("fill", "rgba(128, 128, 128, 1)")
-      .style("font-size", "16px");
+      .style("font-size", "16px")
+      .attr("transform", "translate(-10,0)"); // Move the text 10px to the left
 
     svg.selectAll(".domain").style("stroke", "rgba(128, 128, 128, 1)"); // Change the color of the axis lines
   };

@@ -6,8 +6,21 @@
     justify-content: center;
 }
 
+.justifySpaceAround{
+    justify-content: space-around;
+}
+
 .flexDirectionColumn{
     flex-direction: column;
+}
+
+.fullWidth{
+    width: 100%;
+}
+
+.flexDirectionRow{
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 
 .fullWidthBorder {
