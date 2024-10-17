@@ -15,6 +15,7 @@ interface IBoard {
   dir?: "vert" | "hor" | "column";
   boardClassNameHor?: string;
   boardClassNameColumn?: string;
+  context?: "mapChart" | "statsChart";
 }
 
 const Board = ({
@@ -26,6 +27,7 @@ const Board = ({
   dir,
   boardClassNameHor,
   boardClassNameColumn,
+  context,
   loaderComp = <Text variant="subheading">&nbsp;--&nbsp;</Text>,
   isLoading = false,
 }: IBoard) => {
@@ -43,16 +45,38 @@ const Board = ({
           {isLoading ? (
             loaderComp
           ) : (
-            <Text variant="subheading" weight="bold" color="valueChartColor">
+            <Text
+              variant={
+                context === "statsChart" ? "heading2-mobile" : "subheading"
+              }
+              weight="bold"
+              color={
+                context === "statsChart" ? "primaryColor" : "valueChartColor"
+              }
+            >
               {value || "0"}
             </Text>
           )}
-          <Text variant="subheading" weight="bold" color="valueChartColor">
+          <Text
+            variant={
+              context === "statsChart" ? "heading2-mobile" : "subheading"
+            }
+            weight="bold"
+            color={
+              context === "statsChart" ? "primaryColor" : "valueChartColor"
+            }
+          >
             {suffix}
           </Text>
         </div>
         <div className={styles.boardItem}>
-          <Text>{description || ""}</Text>
+          <Text
+            variant={
+              context === "statsChart" ? "subheading-desktop" : "subheading"
+            }
+          >
+            {description || ""}
+          </Text>
         </div>
       </div>
     </div>

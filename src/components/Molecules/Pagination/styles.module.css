@@ -1,9 +1,9 @@
 .pagination {
     display: flex;
-    margin: auto;
-    justify-content: space-between;
+
+    justify-content: flex-end;
     align-items: center;
-    padding: var(--space-md);
+    padding: var(--space-xxs) var(--space-xxs);
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
@@ -13,7 +13,8 @@
 }
 
 .paginationWidthDesktop {
-    width: 35%;
+    width: 100%;
+    background-color: var(--dart-rgb-400);
 }
 
 .paginationWidthLaptop {
@@ -35,7 +36,7 @@
 .selectedPage {
     border: 1px solid var(--gray-700);
     background-color: var(--blue-rgb-650);
-    border-radius: var(--ifm-global-radius);
+    /* border-radius: var(--ifm-global-radius); */
     padding: calc(var(--space-xs) / 2) var(--space-xs);
     color: var(--ifm-color-emphasis-0);
 }

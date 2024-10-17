@@ -17,6 +17,7 @@ interface IInfoBox {
   dir?: "vert" | "hor" | "column" | "around";
   applyFullWidthBorder?: boolean;
   spaceAround?: boolean;
+  context?: "mapChart" | "statsChart";
 }
 
 const InfoBox = ({
@@ -30,6 +31,7 @@ const InfoBox = ({
   boardClassNameColumn,
   applyFullWidthBorder = false,
   spaceAround = false,
+  context = "mapChart",
 }: IInfoBox) => {
   const { desktop, laptop, mobile, tablet } = useMediaQueries();
 
@@ -58,6 +60,7 @@ const InfoBox = ({
             [boardClassNameHor]: dir === "hor",
             [boardClassNameColumn]: dir === "column",
           })}
+          context={context}
           dir={dir}
           boardClassNameColumn={boardClassNameColumn}
           isLoading={isLoading}

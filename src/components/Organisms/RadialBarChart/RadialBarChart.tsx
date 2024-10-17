@@ -163,7 +163,7 @@ const RadialBarChart = ({
         d3
           .axisLeft(y)
           .tickSize(0)
-          .tickFormat((d) => formatValue(d).replace("M", "M")),
+          .tickFormat((d) => (d === 0 ? "" : formatValue(d).replace("M", "M"))),
       )
       .call((g) => g.select(".domain").remove());
 

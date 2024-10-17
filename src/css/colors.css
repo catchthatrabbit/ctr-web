@@ -29,6 +29,13 @@
   --blue-rgb-650: rgba(66, 66, 89, 0.25);
   --blue-rgb-700: rgba(66, 66, 89, 0.5);
   --blue-rgb-900: rgba(0, 0, 0, 0.75);
+  /* ///////////////////////////////////////////////////////// */
+
+  --dark-rgb-border: rgba(41, 41, 41, 1);
+  --dart-rgb-400: rgba(20,20,20,255);
+  --dart-rgb-600: rgba(27, 28, 28, 1);
+
+
   --ifm-navbar-background-color: var(--gray-900);
 
   --ifm-color-emphasis-0:var(--white);
@@ -36,7 +43,7 @@
 
   --ifm-tabs-color-active:var( --ifm-color-emphasis-0);
 
-  --ifm-color-primary: var(--green-300);
+  --ifm-color-primary: rgba(22, 199, 132, 1);
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
   --ifm-color-primary-darkest: #205d3b;
@@ -47,6 +54,10 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.2);
 
   --ifm-table-stripe-background: transparent;
+  --ifm-table-head-background  : rgba(26, 51, 41, 1);
+  --ifm-table-head-color: rgba(255, 255, 255, 1);
+
+
 
   /** Customize other part of IFM colors */
   --ifm-link-color:var(--ifm-color-emphasis-0);

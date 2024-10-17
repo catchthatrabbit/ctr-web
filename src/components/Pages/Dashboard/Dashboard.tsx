@@ -168,9 +168,11 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           <RadialBarChart emptyComponent={<Empty />} data={radialChartData} />
         }
       />
-      <Spacer variant="xl" />
+      <Spacer variant="xxl" />
+      <Spacer variant="xxl" />
       <RecentBlocksTitle />
-      <Spacer variant="xl" />
+      <Spacer variant="sm" />
+
       <List
         dataTableColumns={recentMatureBlockListColumns}
         hidePagination
