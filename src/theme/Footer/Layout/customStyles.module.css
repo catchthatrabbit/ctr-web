@@ -19,3 +19,18 @@
     background-color: var(--blue-rgb-600);
     padding-block: var(--space-lg);
 }
+.flex{
+    display: flex;
+    flex-direction: column;
+}
+
+.downloadBtns{
+    display: flex;
+    flex-direction: column;
+}
+
+.googlePlayImage {
+    width: 119px; 
+    height: 40px;
+   
+  }

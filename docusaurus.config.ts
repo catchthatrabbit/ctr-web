@@ -299,43 +299,43 @@ const config: Config = {
       },
       links: [
         {
-          title: "Start",
+          title: "Mining",
           items: [
             {
               label: "Start mining",
               to: "/start-mining",
             },
             {
-              label: "Mining software",
-              href: "/docs/intro",
+              label: "Pool statistics",
+              to: "/",
             },
-            {
-              label: "Download mining config",
-              href: "/docs/intro",
-            },
-            {
-              label: "Mobile App",
-              href: "/docs/intro",
-            },
-          ],
-        },
-        {
-          title: "Stats",
-          items: [
             {
               label: "Miners",
               href: "/miners",
             },
             {
-              label: "Latest blocks",
-              href: "/blocks",
-            },
-            {
               label: "Payments",
               href: "/payments",
             },
+            {
+              label: "Blocks",
+              href: "/blocks",
+            },
+            // {
+            //   label: "Mining software",
+            //   href: "/docs/intro",
+            // },
+            // {
+            //   label: "Download mining config",
+            //   href: "/docs/intro",
+            // },
+            // {
+            //   label: "Mobile App",
+            //   href: "/docs/intro",
+            // },
           ],
         },
+
         {
           title: "About",
           items: [
@@ -348,7 +348,15 @@ const config: Config = {
               href: "/",
             },
             {
-              label: "Pool details",
+              label: "Coreblockchain",
+              href: "/docs/intro",
+            },
+            {
+              label: "Corecoin",
+              href: "/docs/intro",
+            },
+            {
+              label: "Coretoken",
               href: "/docs/intro",
             },
           ],

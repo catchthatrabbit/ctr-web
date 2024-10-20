@@ -8,10 +8,16 @@
 
 .removePaddingInline {
     padding-inline: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
 }
 
 .footerItem {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    width: 100%;
+    justify-content: space-between;
 }

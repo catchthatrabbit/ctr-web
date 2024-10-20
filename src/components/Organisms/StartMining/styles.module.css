@@ -1,11 +1,11 @@
 .startMining{
-    background-color: var(--blue-rgb-600);
+   
     text-align: center;
     border-radius: var(--ifm-global-radius);
 }
 
 .startMiningContent{
-    padding-block: calc(2 * var(--space-lg));
+    padding-top: var(--space-xxs);
     margin:auto;
     display: flex;
     flex-direction: column;
@@ -15,4 +15,11 @@
 .button{
     padding:var(--space-xs)!important;
     min-width:215px;
+}
+
+.linkButton{
+    font-family: var(--regular-font-family);
+    font-weight: var(--bold-font-weight);
+    
+
 }

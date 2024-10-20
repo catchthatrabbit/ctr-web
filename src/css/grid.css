@@ -8,6 +8,10 @@
     display: grid;
 }
 
+.grid-end{
+    align-items: end;
+}
+
 .grid-col-gap{
     column-gap: var(--gutter-x);
 }

@@ -1,4 +1,9 @@
 .footerLink{
     font-family: var(--value-font-family);
     font-size: var(--body-font-size);
+    color: var(--ifm-color-primary)
+}
+
+.footerLink:hover{
+    color: var(--ifm-footerLink-hover)
 }

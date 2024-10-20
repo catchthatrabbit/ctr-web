@@ -35,6 +35,7 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
   color?:
     | "primary"
     | "secondary"
+    | "summary"
     | "InsideChartColor"
     | "dashboardColor"
     | "valueChartColor"

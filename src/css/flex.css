@@ -4,6 +4,10 @@
     flex-direction: row;
 }
 
+.flex-column{
+    flex-direction: column;
+}
+
 .flex::before::after{
     content: '';
     clear: both;

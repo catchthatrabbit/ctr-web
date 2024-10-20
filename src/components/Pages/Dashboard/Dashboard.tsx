@@ -180,6 +180,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
         data={convertMaturedResponseToRecentBlocksInfo(AllRegionsMaturedBlocks)}
       />
       <Spacer variant="xxl" />
+      <Spacer variant="lg" />
+
       <StartMining />
     </>
   );

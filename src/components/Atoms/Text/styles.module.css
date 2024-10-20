@@ -79,6 +79,10 @@
   color: var( --ifm-primary-color);
 }
 
+.summary{
+  color: var( --if-secondary-color)
+}
+
 .subheadingColor {
   color: var(--ifm-subheading-color);
 }

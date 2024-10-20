@@ -74,17 +74,20 @@ h1, h2, h3 {
   -webkit-user-select: none;
   user-select: none;
   border-radius: 10px;
-  color: var(--white);
-  padding: var(--space-xs);
+  color: var(--black-800);
+  font-weight: var(--medium-font-weight);
+  padding: var(--space-xxs) var( --space-sm);
   text-align: center;
   white-space: nowrap;
   border: 1px solid var(--blue-rgb-700);
+  background-color: var(--ifm-color-primary);
   justify-content: center;
 }
 
 .link-button:hover {
   border: 1px solid var(--gray-700);
-  background-color: var(--blue-rgb-700);
+  background-color: var(--ifm-search-btn-hover);
+  color: var(--black-800);
   text-decoration: none;
 }
 

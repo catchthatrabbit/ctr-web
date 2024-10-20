@@ -1,5 +1,6 @@
 import React from "react";
 import LinkItem from "@theme/Footer/LinkItem";
+import { Spacer } from "@site/src/components/Atoms/Spacer";
 import clsx from "clsx";
 
 import customStyles from "./customStyles.module.css";
@@ -21,6 +22,7 @@ function ColumnLinkItem({ item }) {
 function Column({ column }) {
   return (
     <div className={clsx("col footer__col", customStyles.removePaddingInline)}>
+      <Spacer variant="xl" />
       <div className={clsx("footer__title", customStyles.title)}>
         {column.title}
       </div>
@@ -36,7 +38,7 @@ function Column({ column }) {
 }
 export default function FooterLinksMultiColumn({ columns }) {
   return (
-    <div className="grid grid-col--3 grid-col-gap">
+    <div className="">
       {columns.map((column, i) => (
         <Column key={i} column={column} />
       ))}

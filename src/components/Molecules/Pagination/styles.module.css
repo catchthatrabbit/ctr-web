@@ -1,3 +1,15 @@
+.paginationContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-xxs) var(--space-xxs);
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    list-style: none;
+  
+    background-color: var(--dart-rgb-400);
+}
 .pagination {
     display: flex;
 
@@ -8,13 +20,13 @@
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
     list-style: none;
-    font-size: var(--body-large-font-size);
-    line-height: var(--body-large-lineHeigh);
+    margin: 0;
+   
 }
 
 .paginationWidthDesktop {
-    width: 100%;
-    background-color: var(--dart-rgb-400);
+    width: 50%;
+
 }
 
 .paginationWidthLaptop {
@@ -29,17 +41,12 @@
     width: 100%
 }
 
-.disabled {
-    display: none;
+.disabled svg path  {
+   
+    fill: var(--ifm-subheading-color)
 }
 
-.selectedPage {
-    border: 1px solid var(--gray-700);
-    background-color: var(--blue-rgb-650);
-    /* border-radius: var(--ifm-global-radius); */
-    padding: calc(var(--space-xs) / 2) var(--space-xs);
-    color: var(--ifm-color-emphasis-0);
-}
+
 
 .paginationLoadingSkeleton {
     width: 50px;
@@ -48,26 +55,46 @@
 }
 
 .paginationItem {
+    border: 1px solid var(--gray-700);
+    
     cursor: pointer;
-    padding-inline: calc(var(--space-xs) / 2);
-    padding-block: calc(var(--space-xs) / 4);
+    padding-inline: calc(var(--space-sm) / 2);
+    padding-block: calc(var(--space-xxs) / 4);
+    background-color: var(--blue-rgb-650);
+    font-size: var(--small-font-size);
+}
+
+.selectedPage {
+   
+    background-color: transparent;
+    /* border-radius: var(--ifm-global-radius); */
+    padding-inline: calc(var(--space-sm) / 2);
+    padding-block: calc(var(--space-xxs) / 4);
+    color: var(--ifm-color-emphasis-0);
 }
 
 .paginationItem:not(.selectedPage) a {
     color: var(--ifm-color-primary);
 }
 
-.paginationNext a, .paginationPrevious a {
+.paginationNext, .paginationPrevious  {
     color: var(--ifm-color-primary);
-    padding: var(--space-xs);
+    padding-inline: calc(var(--space-sm) / 2);
+    padding-block: calc(var(--space-xxs) / 4);
+    background-color: var(--blue-rgb-650);
+    border: 1px solid var(--gray-700);
+    border-radius: 0.5px;
+    font-size: var(--small-font-size);
+
 }
 
-.paginationNext {
-   border-left: 1px solid var(--gray-700);
+.paginationNext a {
+    border-left: none;
    cursor: pointer;
 }
 
-.paginationPrevious {
-    border-right: 1px solid var(--gray-700);
+.paginationPrevious a {
+    border-right: none;
     cursor: pointer;
  }
+
