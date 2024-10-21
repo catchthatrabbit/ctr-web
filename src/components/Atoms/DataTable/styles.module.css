@@ -16,10 +16,12 @@
     background-color:var(--dart-rgb-400);
     border-top: 1px solid var(--dark-rgb-border);
     border-bottom: 1px solid var(--dark-rgb-border);
+   
 }
 
 .table tbody tr:nth-child(even){
     background-color:var(--dart-rgb-600);
+  
 }
 
 .table thead {
@@ -27,9 +29,15 @@
     background-color: var(--ifm-table-stripe-background);
 }
 
+.table th, .table td {
+  
+    white-space: nowrap; 
+}
+
 .table th {
     width: 1%;
 }
+
 
 .table tbody tr:hover{
     background-color: var(--blue-rgb-700);

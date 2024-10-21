@@ -168,8 +168,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           <RadialBarChart emptyComponent={<Empty />} data={radialChartData} />
         }
       />
-      <Spacer variant="xxl" />
-      <Spacer variant="xxl" />
+      <Spacer variant="xxxl" />
+      <Spacer variant="xxxl" />
       <RecentBlocksTitle />
       <Spacer variant="sm" />
 

@@ -51,6 +51,7 @@ const DataTable = ({
                 <Text
                   variant="tinyBody"
                   color="white"
+                  weight="bold"
                   style={{ textTransform: "uppercase" }}
                 >
                   {colItem.label || ""}

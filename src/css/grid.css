@@ -80,6 +80,10 @@
     grid-template-columns: repeat(12, 1fr);
 }
 
+.grid-col--2-1 {
+    grid-template-columns: 2fr 1fr;
+}
+
 .grid-span-col--2{
     grid-column: span 2;
 }

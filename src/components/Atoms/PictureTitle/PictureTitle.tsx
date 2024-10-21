@@ -8,6 +8,7 @@ interface IPictureTitle {
   image: React.ReactNode;
   flexStart?: boolean;
   secondaryText?: string;
+  secondaryTextStyle?: React.CSSProperties;
 }
 
 const PictureTitle = ({
@@ -15,6 +16,7 @@ const PictureTitle = ({
   title,
   flexStart,
   secondaryText,
+  secondaryTextStyle,
 }: IPictureTitle) => {
   return (
     <div
@@ -39,7 +41,7 @@ const PictureTitle = ({
           lineHeight="normalLineHeight"
           color="subheadingColor"
           letterSpacing="letterSpacing"
-          style={{ marginTop: "8px" }}
+          style={{ marginTop: "8px", ...secondaryTextStyle }}
         >
           {secondaryText}
         </Text>

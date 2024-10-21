@@ -185,7 +185,7 @@ const config: Config = {
           postsPerPage: 10,
           feedOptions: {
             type: "all",
-            copyright: `© ${new Date().getFullYear()} Catch that Rabbit. All rights reserved.`,
+            copyright: `© 2022—  ${new Date().getFullYear()} Catch that Rabbit. All rights reserved.`,
             createFeedItems: async (params) => {
               const { blogPosts, defaultCreateFeedItems, ...rest } = params;
               return defaultCreateFeedItems({
@@ -362,7 +362,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `© ${new Date().getFullYear()} Catch that Rabbit. All rights reserved.`,
+      copyright: `© 2022—  ${new Date().getFullYear()} Catch that Rabbit. All rights reserved.`,
     },
     colorMode: {
       defaultMode: "dark",

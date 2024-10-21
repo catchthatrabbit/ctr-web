@@ -20,7 +20,7 @@ export default function FooterLayout({ style, links, logo, copyright }) {
     >
       <div className="container container-fluid">
         <div className={customStyles.footerLayout}>
-          <div className="content grid grid-col--2 grid-end">
+          <div className="content grid grid-col--2-1 grid-end">
             <div className="flex-column md-center-items sm-center-items xs-center-items md-center-text sm-center-text xs-center-text">
               <div
                 className={clsx([
@@ -33,30 +33,35 @@ export default function FooterLayout({ style, links, logo, copyright }) {
                 </div> */}
               </div>
 
-              <div className="xl-flex-col--6 lg-flex-col--6 md-flex-col--12 sm-flex-col--12 xs-flex-col--12">
+              <div className="xl-flex-col--8 lg-flex-col--6 md-flex-col--12 sm-flex-col--12 xs-flex-col--12">
                 {links}
               </div>
             </div>
             <div className={customStyles.downloadBtns}>
-              <Text variant="smallBody">Download the app</Text>
-              <a
-                href="https://apps.apple.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <DownloadAppStore />
-              </a>
-              <a
-                href="https://play.google.com/store"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={googlePlayImage}
-                  alt="Download on Google Play"
-                  className={customStyles.googlePlayImage}
-                />
-              </a>
+              <Text variant="smallBody" type="regular" color="white">
+                Download the app
+              </Text>
+              <Spacer variant="xs" />
+              <div className={customStyles.btns}>
+                <a
+                  href="https://apps.apple.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <DownloadAppStore />
+                </a>
+                <a
+                  href="https://play.google.com/store"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={googlePlayImage}
+                    alt="Download on Google Play"
+                    className={customStyles.googlePlayImage}
+                  />
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -64,7 +69,7 @@ export default function FooterLayout({ style, links, logo, copyright }) {
       {copyright && (
         <div
           className={clsx([
-            "footer__bottom text--center",
+            "footer__bottom text--center ",
             customStyles.footerCopyWrite,
           ])}
         >

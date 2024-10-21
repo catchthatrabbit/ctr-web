@@ -69,12 +69,12 @@ const RadialBarChart = ({
       .attr("y", 20) // Position the text 20px from the top
       .attr("fill", "rgba(128, 128, 128, 1)") // Set the text color using the fill attribute
       .attr("text-anchor", "middle")
-      .attr("style", "font-size: 16px;") // Set the font size using the style attribute
+      .attr("style", "font-size: 16px; margin-bottom: 56px") // Set the font size using the style attribute
       .text("Pool Hash Rate — Last 24H");
 
     // Create the tooltip element
     const tooltip = d3
-      .select("body")
+      .select(chartRef.current) // Append to the chart container
       .append("div")
       .attr("id", "tooltip")
       .attr(
@@ -93,9 +93,10 @@ const RadialBarChart = ({
     };
 
     const onMousemove = (event) => {
+      const [mouseX, mouseY] = d3.pointer(event);
       tooltip
-        .style("left", `${event.pageX + 10}px`)
-        .style("top", `${event.pageY + 10}px`);
+        .style("left", `${mouseX + 10}px`)
+        .style("top", `${mouseY + 10}px`);
     };
 
     const onMouseout = () => {
@@ -163,7 +164,7 @@ const RadialBarChart = ({
         d3
           .axisLeft(y)
           .tickSize(0)
-          .tickFormat((d) => (d === 0 ? "" : formatValue(d).replace("M", "M"))),
+          .tickFormat((d) => (d === 0 ? "" : formatValue(d).replace("M", "M"))), // Filter out the 0 tick value
       )
       .call((g) => g.select(".domain").remove());
 
@@ -171,7 +172,7 @@ const RadialBarChart = ({
       .selectAll(".y-axis text")
       .style("fill", "rgba(128, 128, 128, 1)")
       .style("font-size", "16px")
-      .attr("transform", "translate(-10,0)"); // Move the text 10px to the left
+      .attr("transform", "translate(-15,0)"); // Move the text 10px to the left
 
     svg.selectAll(".domain").style("stroke", "rgba(128, 128, 128, 1)"); // Change the color of the axis lines
   };

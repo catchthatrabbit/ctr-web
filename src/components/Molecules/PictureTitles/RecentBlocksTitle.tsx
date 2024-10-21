@@ -7,6 +7,7 @@ const RecentBlocksTitle = () => {
       title="Recent blocks"
       image={<HeadAndNeckAbove />}
       secondaryText="Core mining pool in the lotusland of Ores"
+      secondaryTextStyle={{ fontSize: "20px" }}
     />
   );
 };
