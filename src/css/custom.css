@@ -29,6 +29,7 @@
   --content-width-xl: 81%;
 
   --ifm-footer-logo-max-width: 256px;
+  --ifm-footer-padding-vertical: 28px;
 
   --ifm-table-cell-padding: var(--space-xs);
 

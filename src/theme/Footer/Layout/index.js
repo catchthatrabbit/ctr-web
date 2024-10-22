@@ -18,9 +18,9 @@ export default function FooterLayout({ style, links, logo, copyright }) {
         "footer--dark": style === "dark",
       })}
     >
-      <div className="container container-fluid">
+      <div className="container content">
         <div className={customStyles.footerLayout}>
-          <div className="content grid grid-col--2-1 grid-end">
+          <div className="grid grid-col--2-5-1 grid-end">
             <div className="flex-column md-center-items sm-center-items xs-center-items md-center-text sm-center-text xs-center-text">
               <div
                 className={clsx([

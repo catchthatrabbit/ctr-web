@@ -22,7 +22,7 @@ function ColumnLinkItem({ item }) {
 function Column({ column }) {
   return (
     <div className={clsx("col footer__col", customStyles.removePaddingInline)}>
-      <Spacer variant="xl" />
+      <Spacer variant="md" />
       <div className={clsx("footer__title", customStyles.title)}>
         {column.title}
       </div>

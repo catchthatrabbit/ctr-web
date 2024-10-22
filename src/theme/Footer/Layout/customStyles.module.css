@@ -1,5 +1,5 @@
 .footerLayout{
-    display: flex;
+   
     flex-direction: row;
     margin-bottom: var(--space-md);
 }

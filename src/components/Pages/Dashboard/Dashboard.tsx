@@ -179,8 +179,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
         isLoading={isLoadingAllRegionMaturedBlocks}
         data={convertMaturedResponseToRecentBlocksInfo(AllRegionsMaturedBlocks)}
       />
-      <Spacer variant="xxl" />
-      <Spacer variant="lg" />
+      <Spacer variant="xxxl" />
+      <Spacer variant="xl" />
 
       <StartMining />
     </>
