@@ -117,21 +117,24 @@ export const convertPoolChartDataToMapChartInfoBox = (
   return {
     poolFee: settings.PoolFee,
     infoBoxItems: [
-      { title: "Pools hashrate", value: TextFormat.getHashText(data.hashrate) },
       {
-        title: "Network hashrate",
+        title: "Pools hashrate: ",
+        value: TextFormat.getHashText(data.hashrate),
+      },
+      {
+        title: "Network hashrate: ",
         value: TextFormat.getHashText(Number(node.difficulty) / BLOCK_TIME),
       },
       {
-        title: "Network difficulty",
+        title: "Network difficulty: ",
         value: TextFormat.getHashText(Number(node.difficulty), ""),
       },
       {
-        title: "Active miners",
+        title: "Active miners: ",
         value: TextFormat.getNumberText(data.minersTotal),
       },
       {
-        title: "Round variance",
+        title: "Round variance: ",
         value: TextFormat.getPercentText(
           ((100 * Number(roundShares)) / Number(node.difficulty)).toFixed(2),
         ),

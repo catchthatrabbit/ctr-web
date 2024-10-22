@@ -45,7 +45,7 @@ const List = ({
     <div className={styles.listRoot}>
       <div>
         <div className="row">
-          <Spacer variant="xl" />
+          <Spacer variant="md" />
           <div
             className={clsx(styles.tableWrapper, {
               [styles.listMarginInlineMobile]: mobile,

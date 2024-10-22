@@ -18,12 +18,77 @@
   font-weight: var(--bold-font-weight);
 }
 
-.text {
-  letter-spacing: 0.05em;
+.largeLineHeight {
+  line-height: var(--large-line-height);
 }
 
-.white {
-  color: var(--white);
+.smallLineHeight {
+  line-height: var(--small-line-height);
+}
+
+.normalLineHeight {
+  line-height: var(--normal-line-height);
+}
+
+.mediumLineHeight {
+  line-height: var(--medium-line-height);
+}
+
+.smallLineHeight {
+  line-height: var(--small-line-height);
+}
+
+.extraBold {
+  font-weight: var(--extra-bold-font-weight);
+}
+
+.semiBold{
+  font-weight: var(--semi-bold-font-weight);
+}
+
+.small {
+  font-size: var(--small-font-size);
+}
+
+.medium {
+  font-size: var(--medium-font-size);
+}
+
+.pictureTitle{
+  font-size: var(--picture-title-font-size);
+}
+
+
+.text {
+  /* letter-spacing: 0.05em; */
+}
+
+.letterSpacing {
+  letter-spacing: 0.02em;
+}
+
+.InsideChartColor {
+  color: var(--ifm-InsideChart-color-text);
+}
+
+.valueChartColor{
+  color: var(--ifm-value-chart-color)
+}
+
+.dashboardColor {
+  color: var( --ifm-primary-color);
+}
+
+.summary{
+  color: var( --if-secondary-color)
+}
+
+.subheadingColor {
+  color: var(--ifm-subheading-color);
+}
+
+.secondary{
+  color: var(--ifm-secondary-text);
 }
 
 .gray {
@@ -48,6 +113,14 @@
   width: 2px;
   height: 28px;
   background: var(--ifm-color-primary);
+}
+
+.exo{
+  font-family: var(--exo-font-family);
+}
+
+.heading{
+  font-size: var( --ifm-h1-font-size);
 }
 
 .heading1 {

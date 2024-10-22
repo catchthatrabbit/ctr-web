@@ -12,6 +12,10 @@ interface IBoard {
   className?: string;
   loaderComp?: React.ReactNode;
   isLoading?: boolean;
+  dir?: "vert" | "hor" | "column";
+  boardClassNameHor?: string;
+  boardClassNameColumn?: string;
+  context?: "mapChart" | "statsChart";
 }
 
 const Board = ({
@@ -20,27 +24,59 @@ const Board = ({
   suffix,
   prefix,
   className,
+  dir,
+  boardClassNameHor,
+  boardClassNameColumn,
+  context,
   loaderComp = <Text variant="subheading">&nbsp;--&nbsp;</Text>,
   isLoading = false,
 }: IBoard) => {
   return (
     <div className={clsx([styles.boardContainer, className])}>
-      <div className={styles.content}>
-        <div className={styles.boardItem}>
+      <div
+        className={clsx(styles.content, {
+          [styles.boardClassNameHor]: dir === "hor",
+          [styles.boardClassNameColumn]: dir === "column",
+        })}
+      >
+        <div className={`${styles.boardItem} ${styles.number}`}>
           <Text>{prefix}</Text>
+          &nbsp;
           {isLoading ? (
             loaderComp
           ) : (
-            <Text variant="subheading" weight="bold">
+            <Text
+              variant={
+                context === "statsChart" ? "heading2-mobile" : "subheading"
+              }
+              weight="bold"
+              color={
+                context === "statsChart" ? "primaryColor" : "valueChartColor"
+              }
+            >
               {value || "0"}
             </Text>
           )}
-          <Text variant="subheading" weight="bold">
+          <Text
+            variant={
+              context === "statsChart" ? "heading2-mobile" : "subheading"
+            }
+            weight="bold"
+            color={
+              context === "statsChart" ? "primaryColor" : "valueChartColor"
+            }
+          >
             {suffix}
           </Text>
         </div>
         <div className={styles.boardItem}>
-          <Text>{description || ""}</Text>
+          <Text
+            variant={
+              context === "statsChart" ? "subheading-desktop" : "subheading"
+            }
+          >
+            {description || ""}
+          </Text>
         </div>
       </div>
     </div>

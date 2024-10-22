@@ -13,17 +13,25 @@ interface IInfoBox {
   className?: string;
   boardClassNameVert?: string;
   boardClassNameHor?: string;
-  dir?: "vert" | "hor";
+  boardClassNameColumn?: string;
+  dir?: "vert" | "hor" | "column" | "around";
+  applyFullWidthBorder?: boolean;
+  spaceAround?: boolean;
+  context?: "mapChart" | "statsChart";
 }
 
 const InfoBox = ({
   items,
   isLoading,
   loadingComponent,
-  dir = "hor",
+  dir,
   className,
   boardClassNameHor,
   boardClassNameVert,
+  boardClassNameColumn,
+  applyFullWidthBorder = false,
+  spaceAround = false,
+  context = "mapChart",
 }: IInfoBox) => {
   const { desktop, laptop, mobile, tablet } = useMediaQueries();
 
@@ -34,9 +42,13 @@ const InfoBox = ({
       className={clsx([
         "flex",
         {
-          [styles.flexDirectionColumn]: dir === "vert" && (desktop || laptop),
+          [styles.flexDirectionRow]: dir === "vert" && (desktop || laptop),
+          [styles.justifySpaceAround]: (spaceAround && desktop) || laptop,
+
           [styles.justifySpaceBetween]: desktop || laptop,
           [styles.justifyCenter]: tablet || mobile,
+          [styles.fullWidthBorder]: applyFullWidthBorder && (desktop || laptop),
+          [styles.fullWidth]: desktop || laptop,
         },
         className,
       ])}
@@ -46,7 +58,11 @@ const InfoBox = ({
           className={clsx("text-center", {
             [boardClassNameVert]: dir === "vert",
             [boardClassNameHor]: dir === "hor",
+            [boardClassNameColumn]: dir === "column",
           })}
+          context={context}
+          dir={dir}
+          boardClassNameColumn={boardClassNameColumn}
           isLoading={isLoading}
           key={index}
           description={info?.title}

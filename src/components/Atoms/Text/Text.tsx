@@ -18,8 +18,9 @@ import styles from "./styles.module.css";
  * @returns React.Node
  */
 interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
-  type?: "label" | "value" | "regular";
+  type?: "label" | "value" | "regular" | "exo";
   variant?:
+    | "heading" /** font size 50 */
     | "heading1" /** font size 38 */
     | "heading2" /** font size 22 */
     | "heading3" /** font size 20 */
@@ -29,10 +30,24 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "tinyBody" /** font size 12 */
     | "tag" /** font size 11 */
     | "CTA" /** font size 11 */;
-  weight?: "normal" | "bold";
-  color?: "primary" | "white" | "gray";
+  weight?: "normal" | "bold" | "extraBold" | "semiBold";
+  size?: "small" | "medium" | "pictureTitle";
+  color?:
+    | "primary"
+    | "secondary"
+    | "summary"
+    | "InsideChartColor"
+    | "dashboardColor"
+    | "valueChartColor"
+    | "subheadingColor";
   componentType?: keyof JSX.IntrinsicElements;
   decorating?: "simple" | "underlined" | "link";
+  lineHeight:
+    | "normalLineHeight"
+    | "smallLineHeight"
+    | "largeLineHeight"
+    | "mediumLineHeight";
+  letterSpacing: "letterSpacing";
   children: string;
 }
 
@@ -54,12 +69,21 @@ const CustomComponent: FC<
 
 const Text: FC<IText> = ({
   variant = "subheading",
-  weight = "normal",
+  weight = "normal" || "extraBold" || "bold" || "semiBold",
+  size = "small" || "medium" || "pictureTitle",
   children,
   className,
-  type = "regular",
+  lineHeight = "smallLineHeight" ||
+    "normalLineHeight" ||
+    "largeLineHeight" ||
+    "mediumLineHeight",
+  letterSpacing,
+  type = "regular" || "exo",
   componentType = "span",
-  color = "white",
+  color = "InsideChartColor" ||
+    "dashboardColor" ||
+    "subheadingColor" ||
+    "secondary",
   ...restProps
 }) => {
   const { mobile, tablet } = useMediaQueries();
@@ -69,10 +93,12 @@ const Text: FC<IText> = ({
       componentType={componentType}
       className={clsx([
         styles.text,
+
         variant === "heading1" ||
         variant === "heading2" ||
         variant === "heading3" ||
-        variant === "subheading"
+        variant === "subheading" ||
+        variant === "heading"
           ? tablet
             ? styles[`${variant}-tablet`]
             : mobile
@@ -81,8 +107,11 @@ const Text: FC<IText> = ({
           : styles[variant],
         !mobile && !tablet && styles[variant],
         styles[weight],
+        styles[size],
         styles[type],
         styles[color],
+        styles[lineHeight],
+        styles[letterSpacing],
         className,
       ])}
       {...restProps}

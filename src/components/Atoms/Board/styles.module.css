@@ -1,19 +1,30 @@
 .boardContainer{
-    padding: var(--space-xs);
+    /* padding: var(--space-xs); */
+    width: auto;
+   
+}
+.boardContainer:not(:last-child) {
+  padding-right: var(--space-md);
 }
     
 .content{
-    height: 88px;
-    padding: 15px var(--space-xs) 20px;
+    height: 37px;
+    /* padding: 15px var(--space-xs) 20px; */
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid var(--blue-100);
-    border-radius: 10px;
+    /* border: 1px solid var(--blue-100); */
+    /* border-radius: 10px; */
+    width: 100%;
 }
 
 .boardItem{
     display: flex;
+    align-items: center;
+}
+
+.boardClassNameColumn{
+    flex-direction: column;
 }

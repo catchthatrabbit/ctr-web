@@ -23,8 +23,11 @@ import { LoadingPlaceholder } from "@site/src/components/Atoms/LoadingPlaceholde
 import { StartMining } from "@site/src/components/Organisms/StartMining";
 
 import { Empty } from "@site/src/components/Atoms/Empty";
-
+import { Search } from "../../Molecules/Search";
 import styles from "./styles.module.css";
+
+import MainPageSearch from "@site/src/components/Molecules/PictureTitles/MainPageSearch";
+import { StartPanel } from "../../Molecules/StartPanel";
 
 interface IDashboard extends IAnyPageAndWallet {}
 
@@ -50,11 +53,11 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
 
   return (
     <>
-      <Spacer variant="xxxl" />
+      {/* <Spacer variant="xxxl" /> */}
       <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
         <div
           className={clsx([
-            "grid xl-grid-col--5 lg-grid-col--5 md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
+            "grid xl-grid-col--2 lg-grid-col--5 md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
             styles.directionRtl,
             styles.fullWidth,
           ])}
@@ -62,7 +65,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           <div
             className={clsx([
               styles.mapChartLocationPlace,
-              "xl-grid-span-col--4",
+
               "lg-grid-span-col--4",
               styles.directionLtr,
             ])}
@@ -77,7 +80,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                   <span className="lg-hide md-hide" />
                   {effectsShowLocation && (
                     <>
-                      <MapPin
+                      {/* <MapPin
                         className="lg-grid-span-col--2 md-grid-span-col--3"
                         mapButton={
                           <MapButton
@@ -87,8 +90,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                             }
                           />
                         }
-                      />
-                      <span className="lg-hide" />
+                      /> */}
+                      {/* <span className="lg-hide" />
                       <MapPin
                         className="xl-grid-span-col--2 lg-grid-span-col--2 md-grid-span-col--3 sm-grid-span-col--6"
                         mapButton={
@@ -100,8 +103,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                           />
                         }
                       />
-                      <span className="lg-hide md-hide" />
-                      <MapPin
+                      <span className="lg-hide md-hide" /> */}
+                      {/* <MapPin
                         className="lg-grid-span-col--2 md-grid-span-col--2"
                         mapButton={
                           <MapButton
@@ -111,7 +114,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                             }
                           />
                         }
-                      />
+                      /> */}
                     </>
                   )}
                 </Locations>
@@ -121,50 +124,43 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
               </>
             )}
           </div>
-          <Spacer className="xl-hide lg-hide" variant="lg" />
+          {/* <Spacer className="xl-hide lg-hide" variant="lg" /> */}
           <div
             className={clsx([
               styles.directionLtr,
               "xs-text-center sm-text-center md-text-center",
             ])}
           >
-            <Spacer variant="lg" className="xl-hide lg-hide md-hide" />
-            <Text variant="subheading">{sLoganPrimary}</Text>
-            <br />
-            <Text variant="body" color="gray" type="label">
+            <MainPageSearch />
+            <Spacer variant="sm" />
+            <Text
+              variant="heading"
+              weight="extraBold"
+              lineHeight="largeLineHeight"
+              color="dashboardColor"
+              style={{ width: "43rem", display: "inline-block" }}
+            >
+              {sLoganPrimary}
+            </Text>
+            <Spacer variant="md" />
+            <Text color="subheadingColor" type="regular" size="medium">
               {SLoganSecondary}
             </Text>
             <br />
-            <Text variant="body" color="primary" type="value">
-              Pay-per-last-N-shares &nbsp;&nbsp;
-            </Text>
-            <Text variant="body" color="gray" type="value">
-              (PPLNS)&nbsp;
-            </Text>
-            <Text variant="body" color="gray" type="value">
-              system with only&nbsp;
-            </Text>
-            <Text variant="body" color="primary" type="value">
-              {poolFee ? `${poolFee}% fee` : "-"}
-            </Text>
-            <br />
-            <Text variant="body" color="gray" type="value">
-              Please, select one of the locations to&nbsp;
-            </Text>
-            <a href="/start-mining">
-              <Text variant="body" color="primary" type="value">
-                start your mining today
-              </Text>
-            </a>
+            <Spacer variant="xxl" />
+            <Search onSearch={onSetWalletAddress} />
           </div>
         </div>
       </MapChart>
-      <Spacer variant="xl" />
+      <Spacer variant="xxl" />
+      <Spacer variant="xxl" />
+      <StartPanel />
+      {/* <Spacer variant="xl" /> */}
       <Header
         layout={{ boards: false, dropdown: false, search: true }}
         onSearch={onSetWalletAddress}
       />
-      <Spacer variant="xl" />
+      <Spacer variant="xxs" />
       <StatsChart
         isLoading={isLoadingRadialBarChart}
         infoItems={infoBoxRadialData}
@@ -172,16 +168,20 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           <RadialBarChart emptyComponent={<Empty />} data={radialChartData} />
         }
       />
-      <Spacer variant="xl" />
+      <Spacer variant="xxxl" />
+      <Spacer variant="xxxl" />
       <RecentBlocksTitle />
-      <Spacer variant="xl" />
+      <Spacer variant="sm" />
+
       <List
         dataTableColumns={recentMatureBlockListColumns}
         hidePagination
         isLoading={isLoadingAllRegionMaturedBlocks}
         data={convertMaturedResponseToRecentBlocksInfo(AllRegionsMaturedBlocks)}
       />
-      <Spacer variant="xxl" />
+      <Spacer variant="xxxl" />
+      <Spacer variant="xl" />
+
       <StartMining />
     </>
   );

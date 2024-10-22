@@ -1,6 +1,5 @@
 import * as d3 from "d3";
 import { useEffect, useRef, ReactNode } from "react";
-
 import styles from "./styles.module.css";
 
 interface IRadialBarChartProps {
@@ -17,198 +16,169 @@ const RadialBarChart = ({
   emptyComponent,
 }: IRadialBarChartProps) => {
   const chartRef = useRef(null);
-  const tipRef = useRef(null);
-
-  const size = 900;
-  const innerRadius = 250;
-  const outerRadius = size * 0.6;
 
   useEffect(() => {
-    if (chartRef.current && tipRef.current) updateChart();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, chartRef, tipRef]);
+    if (chartRef.current) {
+      updateChart();
+    }
+  }, [data]);
 
   const updateChart = () => {
     if (!data) {
       return;
     }
 
-    d3.selectAll(`#chart-container svg g`).remove();
+    // Clear any existing chart
+    d3.select(chartRef.current).selectAll("*").remove();
 
+    // Declare the chart dimensions and margins.
+    const width = 1185;
+    const height = 412; // Increased by 50px to accommodate the space above the chart
+    const marginTop = 80; // Increased by 50px to accommodate the space above the chart
+    const marginRight = 0;
+    const marginBottom = 30;
+    const marginLeft = 70;
+
+    // Declare the x (horizontal position) scale.
     const x = d3
       .scaleBand()
-      .domain(data.map((d) => d.time))
-      .range([0, 2 * Math.PI])
-      .align(0);
+      .domain(data.map((d) => d.hour)) // Use 'hour' for the x-axis
+      .range([marginLeft, width - marginRight])
+      .padding(0.1);
 
-    const maxYDomainValue = d3.max(data, (d) => d.value);
-
+    // Declare the y (vertical position) scale.
     const y = d3
-      .scaleRadial()
-      .domain([0, maxYDomainValue + maxYDomainValue * 0.2])
-      .range([innerRadius, outerRadius]);
+      .scaleLinear()
+      .domain([0, d3.max(data, (d) => d.value)]) // Use 'value' for the y-axis
+      .range([height - marginBottom, marginTop]);
 
-    const arc = d3
-      .arc()
-      .innerRadius(innerRadius)
-      .outerRadius((d) => y(d.value))
-      .startAngle((d) => x(d.time) || 0)
-      .endAngle((d) => x(d.time) + x.bandwidth())
-      .padAngle(0.1)
-      .padRadius(innerRadius);
+    const formatValue = d3.format(".2s"); // Format values in millions with 2 decimal places
 
-    const xAxis = (g) =>
-      g.attr("text-anchor", "middle").call((g) =>
-        g
-          .selectAll("g")
-          .data(data)
-          .enter()
-          .append("g")
-          .attr(
-            "transform",
-            (d) => `
-              rotate(${((x(d.time) + x.bandwidth() / 2) * 180) / Math.PI - 90})
-              translate(${innerRadius - 30},0)
-            `,
-          )
-          .call((g) =>
-            g
-              .append("text")
-              .attr("class", styles.radialBarHour)
-              .attr(
-                "transform",
-                (d) =>
-                  `rotate(${
-                    90 - ((x(d.time) + x.bandwidth() / 2) * 180) / Math.PI
-                  }) translate(0, 6)`,
-              )
-              .text((d) => `${d.hour}H`),
-          ),
+    // Create the SVG container.
+    const svg = d3
+      .select(chartRef.current)
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", [0, 0, width, height]);
+
+    // Add the title text element
+    svg
+      .append("text")
+      .attr("x", width / 2)
+      .attr("y", 20) // Position the text 20px from the top
+      .attr("fill", "rgba(128, 128, 128, 1)") // Set the text color using the fill attribute
+      .attr("text-anchor", "middle")
+      .attr("style", "font-size: 16px; margin-bottom: 56px") // Set the font size using the style attribute
+      .text("Pool Hash Rate — Last 24H");
+
+    // Create the tooltip element
+    const tooltip = d3
+      .select(chartRef.current) // Append to the chart container
+      .append("div")
+      .attr("id", "tooltip")
+      .attr(
+        "style",
+        "position: absolute; opacity: 0; background-color: #424259; color: white; border: 1px solid #ccc; padding: 10px; border-radius: 5px; pointer-events: none; z-index: 33",
       );
-
-    const yAxis = (g) =>
-      g
-        .attr("text-anchor", "middle")
-        .call((g) =>
-          g
-            .append("text")
-            .attr("x", 0)
-            .attr("y", -y(y.ticks().pop() || 0))
-            .attr("dy", "-2em")
-            .text("Pool Hash Rate — Last 24H"),
-        )
-        .call((g) =>
-          g
-            .selectAll("g")
-            .data(y.ticks(5))
-            .join("g")
-            .call((g) =>
-              g
-                .append("circle")
-                .attr("class", styles.radialBarAxisCircle)
-                .attr("r", y),
-            ),
-        );
-
-    const tooltip = d3.select(tipRef.current);
 
     const onMouseover = (event, datum) => {
       tooltip
-        .style("display", "block")
-        .html(
-          `Time: ${datum.time}<br/><br/>Average Hash Rate: ${d3.format("0.4s")(
-            datum.value,
-          )}`,
-        )
-        .style("opacity", "0.8");
+        .transition()
+        .duration(200)
+        .style("opacity", 1)
+        .text(
+          `Time: ${datum.time}\nAverage Hash Rate: ${d3.format(".2s")(datum.value)}`,
+        );
     };
 
-    const onMousemove = (event, datum) => {
-      const { pageX, pageY } = event;
-      const rect = document
-        .querySelector("#chart-container")
-        .getBoundingClientRect();
-      const tipRect = tooltip.node().getBoundingClientRect();
-      const tipX = pageX - window.scrollX - rect.x;
-      const tipY = pageY - window.scrollY - rect.y - tipRect.height - 20;
-
+    const onMousemove = (event) => {
+      const [mouseX, mouseY] = d3.pointer(event);
       tooltip
-        .style(
-          "left",
-          `${x(datum.time) < Math.PI ? tipX - tipRect.width : tipX}px`,
-        )
-        .style("top", `${tipY}px`);
+        .style("left", `${mouseX + 10}px`)
+        .style("top", `${mouseY + 10}px`);
     };
 
     const onMouseout = () => {
-      tooltip.style("display", "none");
+      tooltip.transition().duration(200).style("opacity", 0);
     };
 
-    const svg = d3
-      .select(`#chart-container svg`)
-      .attr(
-        "viewBox",
-        `${-size / 2 - 150} ${-size / 2 - 150}
-        ${size + 300} ${size + 300}`,
-      )
-      .style("width", "100%")
-      .style("height", "auto");
-
-    svg.append("g").call(xAxis);
-
-    svg.append("g").call(yAxis);
-
+    // Add grid lines for the y-axis
     svg
       .append("g")
-      .attr("fill", "url(#arcGrad)")
-      .selectAll("path")
+      .attr("class", "grid")
+      .attr("transform", `translate(${marginLeft},0)`)
+      .call(
+        d3
+          .axisLeft(y)
+          .tickSize(-width + marginLeft + marginRight) // Extend grid lines across the chart
+          .tickFormat("") // Remove the tick labels
+          .tickValues(y.ticks().slice(1)), // Exclude the bottom-most tick
+      )
+      .call((g) => g.select(".domain").remove()) // Remove the axis line
+      .selectAll(".tick line")
+      .attr("stroke-dasharray", "8,8") // Apply dashed style to grid lines
+      .attr("stroke", "rgba(54, 54, 54, 1)"); // Set the color of the grid lines
+
+    // Add a rect for each bar with animation.
+    svg
+      .append("g")
+      .attr("fill", "steelblue")
+      .selectAll("rect")
       .data(data)
-      .enter()
-      .append("path")
-      .attr("d", arc)
+      .join("rect")
+      .attr("x", (d) => x(d.hour))
+      .attr("x", (d) => x(d.hour) + 13) // Add 8px space from the y-axis
+      .attr("y", height - marginBottom) // Start 8px from the bottom
+      .attr("height", 0) // Start with height 0
+      .attr("width", 16)
+      .attr("rx", 4) // Add horizontal radius
+      .attr("ry", 4) // Add vertical radius
       .on("mouseover", onMouseover)
       .on("mousemove", onMousemove)
-      .on("mouseout", onMouseout);
+      .on("mouseout", onMouseout)
+      .transition() // Add transition for animation
+      .duration(800)
+      .attr("y", (d) => y(d.value))
+      .attr("height", (d) => y(0) - y(d.value) - 8);
 
-    svg.append("g").call((g) =>
-      g
-        .attr("text-anchor", "middle")
-        .selectAll("g")
-        .data(y.ticks(5).slice(1))
-        .join("g")
-        .attr("fill", "none")
-        .call((g) => g.append("circle").attr("fill-opacity", "0%").attr("r", y))
-        .call((g) =>
-          g
-            .append("text")
-            .attr("x", 0)
-            .attr("y", (d) => -y(d))
-            .attr("dy", "0.35em")
-            .text(y.tickFormat(10, "s")),
-        ),
-    );
-    /* eslint-enable */
+    // Add the x-axis and label.
+    svg
+      .append("g")
+      .attr("class", "x-axis")
+      .attr("transform", `translate(0,${height - marginBottom})`)
+      .call(d3.axisBottom(x).tickSize(0).tickSizeOuter(0)); // Set the tick size to 0 to remove the ticks
+
+    svg
+      .selectAll(".x-axis text")
+      .style("fill", "rgba(128, 128, 128, 1)")
+      .style("font-size", "16px")
+      .attr("transform", "translate(0, 8)"); // Move the text 10px to the left
+
+    // Add the y-axis and label, and remove the domain line.
+    svg
+      .append("g")
+      .attr("class", "y-axis")
+      .attr("transform", `translate(${marginLeft},0)`)
+      .call(
+        d3
+          .axisLeft(y)
+          .tickSize(0)
+          .tickFormat((d) => (d === 0 ? "" : formatValue(d).replace("M", "M"))), // Filter out the 0 tick value
+      )
+      .call((g) => g.select(".domain").remove());
+
+    svg
+      .selectAll(".y-axis text")
+      .style("fill", "rgba(128, 128, 128, 1)")
+      .style("font-size", "16px")
+      .attr("transform", "translate(-15,0)"); // Move the text 10px to the left
+
+    svg.selectAll(".domain").style("stroke", "rgba(128, 128, 128, 1)"); // Change the color of the axis lines
   };
 
   return data ? (
-    <div id="chart-container" ref={chartRef} className={styles.radialChart}>
-      <svg>
-        <defs>
-          <radialGradient
-            id="arcGrad"
-            gradientUnits="userSpaceOnUse"
-            cx="0"
-            cy="0"
-            fr="180"
-          >
-            <stop offset="0%" className={styles.radicalBarColorOffset0} />
-            <stop offset="30%" className={styles.radicalBarColorOffset30} />
-            <stop offset="60%" className={styles.radicalBarColorOffset60} />
-          </radialGradient>
-        </defs>
-      </svg>
-      <div ref={tipRef} className={styles.tip} />
-    </div>
+    <div id="chart-container" ref={chartRef} className={styles.radialChart} />
   ) : (
     <div className={styles.emptySkeleton}>{emptyComponent}</div>
   );

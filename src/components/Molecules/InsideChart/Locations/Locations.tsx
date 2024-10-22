@@ -11,18 +11,18 @@ const Locations = ({ children }: ILocation) => {
   return (
     <div className={styles.locations}>
       <img
-        src="/img/map_bg.png"
+        src="/img/thatRabbitImg.png"
         className={styles.bgImage}
         alt="BACKGROUND_IMAGE"
       />
-      <div
+      {/* <div
         className={clsx([
           styles.pinWrapper,
           "grid xl-grid-col--8 lg-grid-col--6 md-grid-col--10 sm-grid-col--10 sm-grid-col--12",
         ])}
       >
         {children}
-      </div>
+      </div> */}
     </div>
   );
 };

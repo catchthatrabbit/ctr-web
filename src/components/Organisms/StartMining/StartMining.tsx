@@ -12,12 +12,13 @@ const StartMining = () => {
     <div className={styles.startMining}>
       <div className={styles.startMiningContent}>
         <StartMiningTitle />
-        <Spacer variant="xl" />
-        <Text variant="heading2">Let's jump into it</Text>
-        <Spacer variant="xl" />
+
+        <Spacer variant="lg" />
         <Link to={"/start-mining"} className="link-button">
           Start mining
         </Link>
+        <Spacer variant="md" />
+        <Spacer variant="sm" />
       </div>
     </div>
   );

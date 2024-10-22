@@ -1,12 +1,19 @@
 /* You can override the default Infima variables here. */
 :root {
   --white: #FFFFFF;
-
+  --ifm-primary-color: rgba(238, 238, 238, 1);
+  --ifm-InsideChart-color-text: rgba(156, 163, 175, 1);
+  --ifm-subheading-color: rgba(128, 128, 128, 1);
+  --ifm-value-chart-color: rgba(0, 191, 255, 1);
+  --ifm-secondary-text: rgba(156, 163, 175, 1);
+  --if-secondary-color: rgba(153, 153, 153, 1);
   --gray-100:#999eac; /* SantasGray rgb(153, 158, 172) */
   --gray-700:#424259; /* rgb(66, 66, 89) */
   --gray-800: #46484c;
   --gray-900:#181A1F;
 
+
+  --black-800: rgba(2, 2, 2, 1);
   --blue-100: #BCCBF0;
 
   --green-300: #46B549;
@@ -23,6 +30,13 @@
   --blue-rgb-650: rgba(66, 66, 89, 0.25);
   --blue-rgb-700: rgba(66, 66, 89, 0.5);
   --blue-rgb-900: rgba(0, 0, 0, 0.75);
+  /* ///////////////////////////////////////////////////////// */
+
+  --dark-rgb-border: rgba(41, 41, 41, 1);
+  --dart-rgb-400: rgba(20,20,20,255);
+  --dart-rgb-600: rgba(27, 28, 28, 1);
+
+
   --ifm-navbar-background-color: var(--gray-900);
 
   --ifm-color-emphasis-0:var(--white);
@@ -30,7 +44,7 @@
 
   --ifm-tabs-color-active:var( --ifm-color-emphasis-0);
 
-  --ifm-color-primary: var(--green-300);
+  --ifm-color-primary: rgba(22, 199, 132, 1);
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
   --ifm-color-primary-darkest: #205d3b;
@@ -41,11 +55,24 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.2);
 
   --ifm-table-stripe-background: transparent;
+  --ifm-table-head-background  : rgba(26, 51, 41, 1);
+  --ifm-table-head-color: rgba(255, 255, 255, 1);
+
+
 
   /** Customize other part of IFM colors */
   --ifm-link-color:var(--ifm-color-emphasis-0);
   --ifm-navbar-link-color:var(--ifm-color-emphasis-0);
   --ifm-navbar-link-hover-color: var(--ifm-color-emphasis-0);
+
+  --ifm-search-btn-color: rgba(22, 199, 132, 1);
+  --ifm-search-btn-hover: rgba(25, 229, 152, 1);
+
+  --ifm-guide-btn-color: rgba(6, 42, 28, 1);
+  --ifm-guide-btn-hover: rgba(8, 59, 39, 1);
+
+
+  --ifm-footerLink-hover : rgba(0, 255, 159, 1);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */

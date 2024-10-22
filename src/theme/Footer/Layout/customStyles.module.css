@@ -1,11 +1,12 @@
 .footerLayout{
-    display: flex;
+   
     flex-direction: row;
     margin-bottom: var(--space-md);
 }
 
 .customLogoText{
     margin-top:var(--space-lg);
+   
 }
 
 .footer{
@@ -15,6 +16,44 @@
 }
 
 .footerCopyWrite{
-    background-color: var(--blue-rgb-600);
-    padding-block: var(--space-lg);
+    /* background-color: var(--blue-rgb-600); */
+    padding-block: var(--space-sm);
+    position: relative;
+    
 }
+.footerCopyWrite::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 48%;
+    transform: translateX(-50%);
+    width: 73%;
+    border-top: 1px solid rgba(54, 54, 54, 1);
+}
+
+
+.flex{
+    display: flex;
+    flex-direction: column;
+}
+
+.downloadBtns{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    span{
+        width: 65%;
+    }
+}
+
+.btns{
+    width: 75%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.googlePlayImage {
+    width: 119px; 
+    height: 40px;
+   
+  }

@@ -3,6 +3,8 @@ import { InputHTMLAttributes, forwardRef, useRef } from "react";
 import { InputText } from "@site/src/components/Atoms/InputText";
 import clsx from "clsx";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
+import { Text } from "../../Atoms/Text";
+import SearchIcon from "@site/src/icons/SearchIcon";
 
 import styles from "./styles.module.css";
 
@@ -26,14 +28,17 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
 
     return (
       <div className={clsx("row", styles.search)}>
+        <Text lineHeight="smallLineHeight" color="subheadingColor">
+          Wallet address
+        </Text>
         <InputText
           className={clsx(styles.searchInput, {
             [styles.searchInputMobile]: mobile,
-            [styles.searchInputDesktop]: !mobile,
           })}
-          placeholder="Search by wallet address..."
+          placeholder="Search your miners"
           ref={ref || inputRef}
           onPressEnter={handleSearch}
+          icon={<SearchIcon />}
           {...restProps}
         />
         <button
@@ -43,7 +48,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
           })}
           onClick={handleClickSearchButton}
         >
-          <Magnifier />
+          Search
         </button>
       </div>
     );

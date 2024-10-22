@@ -24,8 +24,10 @@ const StatsChart = ({ radialBarChart, infoItems, isLoading }: IStatsChart) => {
   return (
     <div className={styles.statsChart}>
       <PoolStatisticsTitle />
-      <Spacer variant="lg" />
-      <div className="flex">
+      <Spacer variant="sm" />
+      <Spacer variant="md" />
+
+      <div className={styles.flex}>
         <div className={radialClassName}>
           {isLoading ? (
             <div className={styles.loadingSkeleton}>
@@ -35,12 +37,15 @@ const StatsChart = ({ radialBarChart, infoItems, isLoading }: IStatsChart) => {
             radialBarChart
           )}
         </div>
+        <Spacer variant="xxxl" />
         <InfoBox
           boardClassNameVert={vertClassName}
           className={infoBoxClassName}
-          dir="vert"
+          dir="column"
+          spaceAround={true}
           items={infoItems}
           isLoading={isLoading}
+          context="statsChart"
           loadingComponent={
             <InfoBoxLoadingSkeleton
               className={infoBoxClassName}

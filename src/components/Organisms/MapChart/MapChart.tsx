@@ -24,6 +24,7 @@ const MapChart = ({ children, infoItems, isLoading }: IMapChart) => {
     <>
       <InfoBox
         boardClassNameHor={horClassName}
+        dir="hor"
         isLoading={isLoading}
         items={infoItems}
         loadingComponent={
@@ -32,6 +33,7 @@ const MapChart = ({ children, infoItems, isLoading }: IMapChart) => {
             loadingPlaceholder={<LoadingPlaceholder />}
           />
         }
+        applyFullWidthBorder={true}
       />
     </>
   );
@@ -40,12 +42,11 @@ const MapChart = ({ children, infoItems, isLoading }: IMapChart) => {
     <div className={styles.mapRoot}>
       {!mobile && !tablet && (
         <>
-          <Spacer variant="lg" />
+          {/* <Spacer variant="lg" /> */}
           <ConfiguredInfoBox />
-          <Spacer variant="lg" />
         </>
       )}
-      <div>{children}</div>
+      <div className={styles.dashboardContainer}>{children}</div>
       {(mobile || tablet) && (
         <>
           <Spacer variant="lg" />
