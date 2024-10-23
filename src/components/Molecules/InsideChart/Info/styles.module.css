@@ -24,6 +24,7 @@
 }
 
 .fullWidthBorder {
+    background-color: var(--black-800);
     position: relative; 
     width: calc(100vw - 1.5%);
     left: 50%; 
