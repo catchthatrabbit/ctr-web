@@ -14,6 +14,8 @@ import { IAnyPageAndWallet } from "../types";
 import useControls from "./controls";
 import { LoadingPlaceholder } from "../../Atoms/LoadingPlaceholder";
 
+import styles from "./styles.module.css";
+
 interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
   walletAddress: string;
   onClearWalletAddress?: () => void;
@@ -46,7 +48,18 @@ const Wallet = ({
   return (
     <>
       <Spacer variant="xl" />
-      <Button value="Back" onClick={onClearWalletAddress} />
+      {/* <Button value="Back" onClick={onClearWalletAddress} /> */}
+      <div className={`flex items-center xl-center-items ${styles.fullWidth}`}>
+        <Text
+          type="exo"
+          size="pictureTitle"
+          lineHeight="mediumLineHeight"
+          color="white"
+          weight="extraBold"
+        >
+          Wallet overview
+        </Text>
+      </div>
       <Header
         items={dropdownItems}
         isLoading={isLoadingFetchWallet}

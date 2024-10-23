@@ -44,7 +44,7 @@ const Header = ({
 }: IHeader) => {
   return (
     <>
-      <Spacer variant="xl" />
+      {/* <Spacer variant="xl" /> */}
       {pageTitleComponent}
       {layout.search && (
         <>
@@ -57,6 +57,7 @@ const Header = ({
       )}
       {layout.dropdown && (
         <>
+          {iban && <IBan iBan={iban} />}
           <Spacer variant="xl" />
           <div className="flex flex-col--12">
             <Dropdown
@@ -70,7 +71,7 @@ const Header = ({
         </>
       )}
       <Spacer variant="xl" />
-      {iban && <IBan iBan={iban} />}
+
       {layout.boards && (
         <>
           <Spacer variant="lg" />

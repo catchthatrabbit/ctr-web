@@ -10,7 +10,9 @@ const CopyButton = ({ textToCopy, onCopy }: ICopyButton) => {
     if (typeof onCopy === "function") onCopy();
     notify();
   };
-  return <Button onClick={handleCopy} value="Copy" icon={<Copy />} />;
+  return (
+    <Button onClick={handleCopy} value="Copy wallet address" icon={<Copy />} />
+  );
 };
 
 export default CopyButton;
