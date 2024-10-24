@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Noto+Color+Emoji&display=swap");
 :root {
-  --regular-font-family: "Inter", "Exo", Verdana, Geneva, Tahoma, sans-serif;
+  --regular-font-family: "Inter", "Noto Color Emoji", "Exo", Verdana, Geneva, Tahoma, sans-serif;
   --exo-font-family:  "Exo";
   --label-font-family: Verdana, Geneva, Tahoma, sans-serif;
   --value-font-family: Arial, Calibri;

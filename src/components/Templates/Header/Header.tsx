@@ -4,6 +4,7 @@ import { Dropdown } from "@site/src/components/Atoms/Dropdown";
 import { Board } from "@site/src/components/Atoms/Board";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { IBan } from "@site/src/components/Molecules/IBan";
+import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
 
 import styles from "./styles.module.css";
@@ -59,7 +60,15 @@ const Header = ({
         <>
           {iban && <IBan iBan={iban} />}
           <Spacer variant="xl" />
-          <div className="flex flex-col--12">
+
+          <div className="flex flex-col--12 flex-column flex-column-center">
+            <Text
+              variant="subheading"
+              color="subheadingColor"
+              style={{ width: "588px" }}
+            >
+              Mining pool
+            </Text>
             <Dropdown
               isLoading={isLoading}
               defaultValue={defaultRegion}

@@ -8,6 +8,10 @@
     flex-direction: column;
 }
 
+.flex-column-center{
+    align-items: center;
+}
+
 .flex::before::after{
     content: '';
     clear: both;
