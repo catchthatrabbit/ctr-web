@@ -34,18 +34,20 @@ const TwoColumnsPanel = ({
       {data?.data?.map((item, index) => (
         <div key={index} className={styles.detailsRow}>
           <Text
-            weight="normal"
+            weight="bold"
             componentType="div"
-            variant="body"
+            variant="subheading"
+            color="white"
             className={clsx(styles.detailsTableCaption)}
           >
             {item.title}
           </Text>
           <Text
-            weight="normal"
+            weight="bold"
             componentType="div"
-            variant="smallBody"
+            variant="subheading"
             type="value"
+            color="white"
             className={clsx(styles.detailsTableValue)}
           >
             {item.value?.toString() || ""}

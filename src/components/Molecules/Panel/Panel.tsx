@@ -22,27 +22,33 @@ interface IPanel {
   color?: "primary" | "white" | "gray";
   titleClassName?: string;
   className?: string;
+  weight?: "normal" | "bold" | "extraBold" | "semiBold";
 }
 
 const Panel = ({
   id,
   title = "",
-  variant = "heading2",
+  variant = "heading3",
   children,
   titleClassName,
   className,
-  color,
+  color = "white",
+  weight = "bold",
 }: IPanel) => {
   return (
     <div id={id} className={clsx(styles.panelRoot, className)}>
       <div className={clsx(styles.panelTitleBase, styles.panelTitle)}>
-        <Text color={color} variant={variant} className={titleClassName}>
+        <Text
+          color={color}
+          variant={variant}
+          className={titleClassName}
+          weight={weight}
+        >
           {title}
         </Text>
       </div>
-      <Spacer />
+
       {children}
-      <Spacer />
     </div>
   );
 };

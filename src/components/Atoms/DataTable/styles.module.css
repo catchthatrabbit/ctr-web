@@ -13,7 +13,7 @@
 
 
 .table tbody tr:nth-child(odd){
-    background-color:var(--dart-rgb-400);
+    background-color:var(--dark-rgb-400);
     border-top: 1px solid var(--dark-rgb-border);
     border-bottom: 1px solid var(--dark-rgb-border);
    

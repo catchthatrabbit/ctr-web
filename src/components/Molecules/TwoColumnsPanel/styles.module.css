@@ -14,17 +14,17 @@
    padding: calc(var(--space-md) / 4) 20px calc(var(--space-xs)/2) 20px;
 }
 
-.detailsRow:nth-child(even) {
-    background-color: var(--blue-rgb-600);
+.detailsRow:nth-child(odd) {
+    background-color: var(--dark-rgb-400);
 }
 
 .detailsTableCaption {
-    padding: var(--space-xs) 0px var(--space-xs) var(--space-lg);
-    border-right: 1px solid var(--gray-700);
+    padding: var(--space-xs);
+    border-right: 1px solid var(--dark-rgb-border);
     width: 50%;
 }
 
 .detailsTableValue {
-    padding: var(--space-xs) 0px var(--space-xs) var(--space-lg);
+    padding: var(--space-xs);
     width: 50%;
 }
