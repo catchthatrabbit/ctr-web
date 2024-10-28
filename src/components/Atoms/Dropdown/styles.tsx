@@ -6,7 +6,7 @@ export const colourStyles: StylesConfig = {
     backgroundColor: "rgba(32, 33, 33, 1)",
     color: "var(--white)",
     padding: "10px",
-    border: "1px solid rgba(128, 128, 128, 1)",
+    border: "1px solid rgba(54, 54, 54, 1)",
     borderRadius: "8px",
     cursor: "context-menu",
     boxShadow: "0 0 5px rgba(128, 128, 128, 0.5)",

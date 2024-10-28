@@ -1,5 +1,49 @@
+:root {
+    --toastify-icon-color-success: var(--ifm-color-primary); /* Set the variable here */
+  }
+
 .copyButtonSmall{
     background-color: transparent!important;
     border: none;
     cursor: pointer;
+   
 }
+.customToastBody {
+    font-size: 16px;
+    font-family: var(--regular-font-family);
+  }
+
+.customToast {
+    background-color: rgba(54, 54, 54, 1);
+    color: #fff;
+    border-radius: 8px;
+    width: 397px;
+    position: relative;
+    right: var(--space-xxl);
+    top: calc(var(--space-xxxl) + var(--space-xs));
+    
+  
+   
+}
+  
+  .customToastBody {
+    font-size: 16px;
+    display: flex; /* Use Flexbox */
+    align-items: center; /* Center items vertically */
+  }
+  
+  .customToastProgress {
+    background-color: var(--ifm-color-primary);
+  }
+
+  .customToast > svg{
+    width: 13px;
+    height: 13px;
+  }
+
+
+  
+
+  .Toastify__close-button {
+    align-self: center;
+  } 
