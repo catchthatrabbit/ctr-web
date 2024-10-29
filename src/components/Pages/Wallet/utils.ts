@@ -20,6 +20,8 @@ export const convertWorkersResponse2Info = (
   if (!workerResponse) return [] as WORKER_INFO_BY_WALLET_ADDRESS;
   return Object.keys(workerResponse.workers)?.map((key) => {
     const { caption, href } = convertWorkerName(key);
+    const isOffline = workerResponse.workers[key].offline;
+    const status = isOffline ? "Inactive" : "Running"; // Determine status based on offline field
     return {
       rabbit: href,
       rabbit_summarized: caption,
@@ -33,6 +35,7 @@ export const convertWorkersResponse2Info = (
         falseEmoji,
         trueEmoji,
       ),
+      status,
     };
   });
 };

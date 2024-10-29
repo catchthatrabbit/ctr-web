@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import { Info } from "@site/src/components/Templates/Info";
 import { List } from "@site/src/components/Templates/List";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
@@ -45,6 +47,12 @@ const Wallet = ({
     regionLabel,
   } = useControls({ walletAddress, defaultRegion, onChangeRegion });
 
+  const [filterStatus, setFilterStatus] = useState("All");
+
+  const handleFilterChange = (status: string) => {
+    setFilterStatus(status);
+  };
+
   return (
     <>
       <Spacer variant="xl" />
@@ -72,18 +80,33 @@ const Wallet = ({
         data={fetchedWalletInfo}
         isLoading={isLoadingFetchWallet}
         loadingPlaceholder={<LoadingPlaceholder />}
+        handleFilterChange={handleFilterChange}
         workers={
-          <List
-            isLoading={isLoadingFetchWorkerByWalletAddress}
-            data={convertWorkersResponse2Info(
-              fetchWorkersByWalletAddress,
-              okEmoji,
-              brbEmoji,
-            )}
-            dataTableColumns={workersTableColumn}
-            total={fetchWorkersByWalletAddress?.workersTotal}
-            onPageChange={handleChangePageWorkers}
-          />
+          <>
+            {/* <div>
+              <button onClick={() => handleFilterChange("All")}>All</button>
+              <button onClick={() => handleFilterChange("Running")}>
+                Running
+              </button>
+              <button onClick={() => handleFilterChange("Inactive")}>
+                Inactive
+              </button>
+            </div> */}
+
+            <List
+              isLoading={isLoadingFetchWorkerByWalletAddress}
+              data={convertWorkersResponse2Info(
+                fetchWorkersByWalletAddress,
+                okEmoji,
+                brbEmoji,
+              )}
+              dataTableColumns={workersTableColumn}
+              total={fetchWorkersByWalletAddress?.workersTotal}
+              onPageChange={handleChangePageWorkers}
+              isWalletPage={true}
+              filterStatus={filterStatus} // Pass filterStatus prop
+            />
+          </>
         }
         payouts={
           <List
@@ -94,6 +117,7 @@ const Wallet = ({
             dataTableColumns={paymentPayoutTableColumns}
             total={fetchedWalletInfo?.paymentsTotal}
             onPageChange={handleChangePagePayouts}
+            isWalletPage={true}
           />
         }
       />

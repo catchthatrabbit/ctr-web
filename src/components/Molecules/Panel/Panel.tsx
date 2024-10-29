@@ -23,6 +23,7 @@ interface IPanel {
   titleClassName?: string;
   className?: string;
   weight?: "normal" | "bold" | "extraBold" | "semiBold";
+  handleFilterChange?: (status: string) => void;
 }
 
 const Panel = ({
@@ -34,6 +35,7 @@ const Panel = ({
   className,
   color = "white",
   weight = "bold",
+  handleFilterChange,
 }: IPanel) => {
   return (
     <div id={id} className={clsx(styles.panelRoot, className)}>
@@ -46,6 +48,17 @@ const Panel = ({
         >
           {title}
         </Text>
+        {handleFilterChange && (
+          <div className={styles.panelTitleBtns}>
+            <button onClick={() => handleFilterChange("All")}>All</button>
+            <button onClick={() => handleFilterChange("Running")}>
+              Running
+            </button>
+            <button onClick={() => handleFilterChange("Inactive")}>
+              Inactive
+            </button>
+          </div>
+        )}
       </div>
 
       {children}

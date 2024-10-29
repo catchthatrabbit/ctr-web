@@ -1,8 +1,8 @@
 .table{
     width:100%;
     border: 1px solid var(--blue-rgb-700);
-    border-top-left-radius: var(--ifm-global-radius);
-    border-top-right-radius: var(--ifm-global-radius);
+    /* border-top-left-radius: var(--ifm-global-radius);
+    border-top-right-radius: var(--ifm-global-radius); */
     margin-bottom: 0;
 }
 
@@ -36,6 +36,10 @@
 
 .table th {
     width: 1%;
+}
+
+.table .walletTableHeader{
+    background-color: rgba(22, 43, 35, 1);
 }
 
 

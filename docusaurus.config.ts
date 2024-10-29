@@ -152,8 +152,8 @@ const config: Config = {
     SLOGAN_PRIMARY: "Dedicated pool for Core Coin and IoT devices",
     SLOGAN_SECONDARY: "Core mining pool in the lotusland of Ores",
 
-    EFFECTS_EMOJI_OK: "🐰 Working",
-    EFFECTS_EMOJI_BRB: "⏳ BRB",
+    EFFECTS_EMOJI_OK: "Running",
+    EFFECTS_EMOJI_BRB: "Inactive",
   },
 
   presets: [

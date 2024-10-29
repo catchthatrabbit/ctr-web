@@ -19,6 +19,7 @@ const DataTable = ({
   isLoading,
   loadingComp = <></>,
   itemsPerPage = 10, // Add itemsPerPage prop
+  isWalletPage = false,
 }: IDataTable) => {
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -46,6 +47,7 @@ const DataTable = ({
                 className={clsx(
                   colItem.alignToCenter && styles.tableCenteredText,
                   colIndex === 0 && styles.tablePaddingLeft,
+                  isWalletPage && styles.walletTableHeader,
                 )}
               >
                 <Text
