@@ -83,16 +83,6 @@ const Wallet = ({
         handleFilterChange={handleFilterChange}
         workers={
           <>
-            {/* <div>
-              <button onClick={() => handleFilterChange("All")}>All</button>
-              <button onClick={() => handleFilterChange("Running")}>
-                Running
-              </button>
-              <button onClick={() => handleFilterChange("Inactive")}>
-                Inactive
-              </button>
-            </div> */}
-
             <List
               isLoading={isLoadingFetchWorkerByWalletAddress}
               data={convertWorkersResponse2Info(

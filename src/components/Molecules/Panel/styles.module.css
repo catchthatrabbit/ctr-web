@@ -19,6 +19,19 @@
 
 .panelTitleBtns button{
     padding: calc(var(--space-xs) / 2) var(--space-xxs);
+    margin-right: calc(var(--space-xs) / 2);
+    border-radius: calc(var(--space-xs) / 2);
+    background-color: transparent;
+    border: 1px solid var(--ifm-color-primary);
+    color: var(--ifm-color-primary);
+    font-size: var(--body-tiny-font-size);
+    font-weight: var(--medium-font-weight);
+    font-family: var(--regular-font-family);
+}
+
+.panelTitleBtns .activeButton{
+    background-color: var(--ifm-color-primary);
+    color: var(--ifm-color-primary-background)
 }
 
 

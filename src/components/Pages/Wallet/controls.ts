@@ -56,7 +56,7 @@ const useControls = ({
     () => [
       {
         value: "rabbit",
-        label: "Rabbit",
+        label: "Miner",
         isPrimary: true,
       },
       {

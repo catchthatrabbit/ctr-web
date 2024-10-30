@@ -38,7 +38,10 @@ const DataTable = ({
     emptyComponent
   ) : (
     <>
-      <table className={styles.table} border={0}>
+      <table
+        className={clsx(styles.table, isWalletPage && styles.walletTable)}
+        border={0}
+      >
         <thead>
           <tr>
             {columns?.map((colItem, colIndex) => (
@@ -105,9 +108,15 @@ const DataTable = ({
                     ) : (
                       <Text
                         variant="smallBody"
-                        type="value"
+                        type="regular"
+                        weight="medium"
                         color="white"
-                        weight="bold"
+                        className={clsx({
+                          [styles.runningText]:
+                            rowItem[colItem.value] === "Running",
+                          [styles.inactiveText]:
+                            rowItem[colItem.value] === "Inactive",
+                        })}
                       >
                         {rowItem[colItem.value]?.toString() || ""}
                       </Text>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
@@ -37,6 +37,13 @@ const Panel = ({
   weight = "bold",
   handleFilterChange,
 }: IPanel) => {
+  const [activeButton, setActiveButton] = useState("All"); // Add state for active button
+
+  const handleButtonClick = (status: string) => {
+    setActiveButton(status);
+    handleFilterChange?.(status);
+  };
+
   return (
     <div id={id} className={clsx(styles.panelRoot, className)}>
       <div className={clsx(styles.panelTitleBase, styles.panelTitle)}>
@@ -50,11 +57,28 @@ const Panel = ({
         </Text>
         {handleFilterChange && (
           <div className={styles.panelTitleBtns}>
-            <button onClick={() => handleFilterChange("All")}>All</button>
-            <button onClick={() => handleFilterChange("Running")}>
+            <button
+              className={clsx({
+                [styles.activeButton]: activeButton === "All",
+              })}
+              onClick={() => handleButtonClick("All")}
+            >
+              All
+            </button>
+            <button
+              className={clsx({
+                [styles.activeButton]: activeButton === "Running",
+              })}
+              onClick={() => handleButtonClick("Running")}
+            >
               Running
             </button>
-            <button onClick={() => handleFilterChange("Inactive")}>
+            <button
+              className={clsx({
+                [styles.activeButton]: activeButton === "Inactive",
+              })}
+              onClick={() => handleButtonClick("Inactive")}
+            >
               Inactive
             </button>
           </div>
