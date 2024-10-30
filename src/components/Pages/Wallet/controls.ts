@@ -34,10 +34,6 @@ const useControls = ({
   const paymentPayoutTableColumns = useMemo(
     () => [
       {
-        label: "Time",
-        value: "timestamp",
-      },
-      {
         label: "Tx id",
         value: "tx",
         canBeCopied: true,
@@ -47,6 +43,10 @@ const useControls = ({
       {
         label: "Amount",
         value: "amount",
+      },
+      {
+        label: "Time",
+        value: "timestamp",
       },
     ],
     [urlConfig.TRANSACTION_DETAILS_URL],

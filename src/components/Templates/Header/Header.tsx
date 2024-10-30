@@ -59,7 +59,7 @@ const Header = ({
       {layout.dropdown && (
         <>
           {iban && <IBan iBan={iban} />}
-          <Spacer variant="xl" />
+          <Spacer variant="xxs" />
 
           <div className="flex flex-col--12 flex-column flex-column-center">
             <Text

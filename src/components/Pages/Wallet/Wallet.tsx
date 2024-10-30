@@ -55,7 +55,7 @@ const Wallet = ({
 
   return (
     <>
-      <Spacer variant="xl" />
+      <Spacer variant="xxl" />
       {/* <Button value="Back" onClick={onClearWalletAddress} /> */}
       <div className={`flex items-center xl-center-items ${styles.fullWidth}`}>
         <Text
@@ -113,7 +113,7 @@ const Wallet = ({
       />
 
       <Spacer />
-
+      {/* 
       <Panel title="Connections">
         <PanelContent>
           <Text variant="body" type="value" className="mr">
@@ -123,7 +123,7 @@ const Wallet = ({
             {`pool.ctr.watch/@${walletAddress}`}
           </Link>
         </PanelContent>
-      </Panel>
+      </Panel> */}
 
       <Spacer variant="xl" />
     </>

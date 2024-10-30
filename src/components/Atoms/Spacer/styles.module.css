@@ -8,6 +8,10 @@
   height: 100%;
 }
 
+.spacer-ver-xxs {
+  height: var(--space-xxs);
+}
+
 .spacer-vert-xs {
   height: var(--space-xs);
 }

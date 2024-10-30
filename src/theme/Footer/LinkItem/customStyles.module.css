@@ -1,6 +1,6 @@
 .footerLink{
     font-family: var(--value-font-family);
-    font-size: var(--body-font-size);
+    font-size: var( --body-small-font-size);
     color: var(--ifm-color-primary)
 }
 
