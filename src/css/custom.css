@@ -5,6 +5,12 @@
 @import url("breakpoints.css");
 @import url("flex.css");
 
+
+body{
+  overflow-x: hidden !important;
+}
+
+
 :root {
   
   --ifm-table-cell-padding: var(--space-sm) var(--space-xs) var(--space-sm);

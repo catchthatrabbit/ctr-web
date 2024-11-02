@@ -8,8 +8,12 @@
   height: 100%;
 }
 
-.spacer-ver-xxs {
+.spacer-vert-xxs {
   height: var(--space-xxs);
+}
+
+.spacer-hor-xxs{
+  width: var(--space-xxs);
 }
 
 .spacer-vert-xs {

@@ -28,9 +28,11 @@
   
   .icon {
     position: absolute;
-    left: 16px; 
-    bottom: 17px;
+   left: 4%;
+  top: 50%; 
+  transform: translate(-50%, -50%); 
     pointer-events: none; 
+    height: 30%;
   }
 
   

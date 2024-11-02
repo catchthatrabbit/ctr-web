@@ -4,6 +4,7 @@ import { Info } from "@site/src/components/Templates/Info";
 import { List } from "@site/src/components/Templates/List";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { Header } from "@site/src/components/Templates/Header";
+import { Search } from "../../Molecules/Search";
 import {
   convertPaymentsResponse2PaymentInfo,
   convertWorkersResponse2Info,
@@ -21,6 +22,7 @@ import styles from "./styles.module.css";
 interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
   walletAddress: string;
   onClearWalletAddress?: () => void;
+  onSetWalletAddress: (walletAddress: string) => void;
 }
 
 const Wallet = ({
@@ -28,6 +30,7 @@ const Wallet = ({
   defaultRegion,
   onChangeRegion,
   onClearWalletAddress,
+  onSetWalletAddress,
 }: IWallet) => {
   const {
     fetchPaymentsByWalletAddress,
@@ -53,6 +56,8 @@ const Wallet = ({
     setFilterStatus(status);
   };
 
+  const walletNotFound = !fetchedWalletInfo || !walletAddress;
+
   return (
     <>
       <Spacer variant="xxl" />
@@ -68,63 +73,76 @@ const Wallet = ({
           Wallet overview
         </Text>
       </div>
-      <Header
-        items={dropdownItems}
-        isLoading={isLoadingFetchWallet}
-        defaultRegion={regionLabel}
-        onChangeRegion={handleChangeRegion}
-        iban={walletAddress}
-        layout={{ boards: true, search: false, dropdown: true }}
-      />
-      <Info
-        data={fetchedWalletInfo}
-        isLoading={isLoadingFetchWallet}
-        loadingPlaceholder={<LoadingPlaceholder />}
-        handleFilterChange={handleFilterChange}
-        workers={
-          <>
-            <List
-              isLoading={isLoadingFetchWorkerByWalletAddress}
-              data={convertWorkersResponse2Info(
-                fetchWorkersByWalletAddress,
-                okEmoji,
-                brbEmoji,
-              )}
-              dataTableColumns={workersTableColumn}
-              total={fetchWorkersByWalletAddress?.workersTotal}
-              onPageChange={handleChangePageWorkers}
-              isWalletPage={true}
-              filterStatus={filterStatus} // Pass filterStatus prop
-            />
-          </>
-        }
-        payouts={
-          <List
-            isLoading={isLoadingFetchPaymentByWalletAddress}
-            data={convertPaymentsResponse2PaymentInfo(
-              fetchPaymentsByWalletAddress,
-            )}
-            dataTableColumns={paymentPayoutTableColumns}
-            total={fetchedWalletInfo?.paymentsTotal}
-            onPageChange={handleChangePagePayouts}
-            isWalletPage={true}
+      {walletNotFound ? (
+        <>
+          <div
+            className={`flex flex-column items-center xl-center-items ${styles.fullWidth}`}
+          >
+            <Spacer variant="xxs" />
+            <Text
+              type="regular"
+              variant="heading3"
+              color="white"
+              weight="regular"
+            >
+              Wallet not found. No data to show.
+            </Text>
+            <Spacer variant="xxxl" />
+            <Spacer variant="sm" />
+            <Spacer variant="xxs" />
+          </div>
+          <Search context="wallet" onSearch={onSetWalletAddress} />
+          <Spacer variant="xxxl" />
+          <Spacer variant="sm" />
+          <Spacer variant="xxs" />
+        </>
+      ) : (
+        <>
+          <Header
+            items={dropdownItems}
+            isLoading={isLoadingFetchWallet}
+            defaultRegion={regionLabel}
+            onChangeRegion={handleChangeRegion}
+            iban={walletAddress}
+            layout={{ boards: true, search: false, dropdown: true }}
           />
-        }
-      />
-
-      <Spacer />
-      {/* 
-      <Panel title="Connections">
-        <PanelContent>
-          <Text variant="body" type="value" className="mr">
-            Fediverse link:
-          </Text>
-          <Link to={`https://ctr.watch/@${walletAddress}`}>
-            {`pool.ctr.watch/@${walletAddress}`}
-          </Link>
-        </PanelContent>
-      </Panel> */}
-
+          <Info
+            data={fetchedWalletInfo}
+            isLoading={isLoadingFetchWallet}
+            loadingPlaceholder={<LoadingPlaceholder />}
+            handleFilterChange={handleFilterChange}
+            workers={
+              <>
+                <List
+                  isLoading={isLoadingFetchWorkerByWalletAddress}
+                  data={convertWorkersResponse2Info(
+                    fetchWorkersByWalletAddress,
+                    okEmoji,
+                    brbEmoji,
+                  )}
+                  dataTableColumns={workersTableColumn}
+                  total={fetchWorkersByWalletAddress?.workersTotal}
+                  onPageChange={handleChangePageWorkers}
+                  isWalletPage={true}
+                  filterStatus={filterStatus} // Pass filterStatus prop
+                />
+              </>
+            }
+            payouts={
+              <List
+                isLoading={isLoadingFetchPaymentByWalletAddress}
+                data={convertPaymentsResponse2PaymentInfo(
+                  fetchPaymentsByWalletAddress,
+                )}
+                dataTableColumns={paymentPayoutTableColumns}
+                total={fetchedWalletInfo?.paymentsTotal}
+                onPageChange={handleChangePagePayouts}
+                isWalletPage={true}
+              />
+            }
+          />
+        </>
+      )}
       <Spacer variant="xl" />
     </>
   );

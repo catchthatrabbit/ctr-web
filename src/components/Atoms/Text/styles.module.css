@@ -46,6 +46,10 @@
   font-weight: var(--semi-bold-font-weight);
 }
 
+.regular {
+  font-weight: var(--regular-font-weight);
+}
+
 .small {
   font-size: var(--small-font-size);
 }
@@ -53,6 +57,8 @@
 .medium {
   font-size: var(--medium-font-size);
 }
+
+
 
 .pictureTitle{
   font-size: var(--picture-title-font-size);
