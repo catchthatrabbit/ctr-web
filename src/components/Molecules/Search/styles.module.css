@@ -72,7 +72,13 @@
         width: 684px;
         height: 52px;
         background-color: var(--dark-rgb-600);
+        color: var(--white);
     }
+
+.searchWallet  .searchInput::placeholder{
+        color: var(--ifm-subheading-color);
+    }
+
 .searchWallet  .searchButton{
         background-color: var(--ifm-guide-btn-color);
         color: var(--ifm-color-primary);

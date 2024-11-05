@@ -45,16 +45,10 @@ const List = ({
     if (typeof onPageChange === "function") onPageChange(page);
   };
 
-  console.log("Original Data:", data);
-  console.log("Filter Status:", filterStatus);
-
   const filteredData = data?.filter((item) => {
-    console.log("Item Status:", item.status);
     if (filterStatus === "All") return true;
     return item.status === filterStatus;
   });
-
-  console.log("Filtered Data:", filteredData);
 
   return (
     <div className={styles.listRoot}>

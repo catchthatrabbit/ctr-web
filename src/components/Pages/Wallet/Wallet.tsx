@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Info } from "@site/src/components/Templates/Info";
 import { List } from "@site/src/components/Templates/List";
@@ -16,7 +16,9 @@ import { Text } from "@site/src/components/Atoms/Text";
 import { IAnyPageAndWallet } from "../types";
 import useControls from "./controls";
 import { LoadingPlaceholder } from "../../Atoms/LoadingPlaceholder";
+import { CustomToastError } from "../../Molecules/CopyButton";
 
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./styles.module.css";
 
 interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
@@ -49,14 +51,27 @@ const Wallet = ({
     dropdownItems,
     regionLabel,
   } = useControls({ walletAddress, defaultRegion, onChangeRegion });
-
   const [filterStatus, setFilterStatus] = useState("All");
+  const [toastShown, setToastShown] = useState(false);
 
   const handleFilterChange = (status: string) => {
     setFilterStatus(status);
   };
 
-  const walletNotFound = !fetchedWalletInfo || !walletAddress;
+  const walletNotFound = !walletAddress || !fetchedWalletInfo;
+
+  useEffect(() => {
+    if (walletNotFound && !toastShown && !isLoadingFetchWallet) {
+      CustomToastError({ message: "Wallet not found" });
+      setToastShown(true);
+    }
+  }, [walletNotFound, toastShown, isLoadingFetchWallet]);
+
+  useEffect(() => {
+    if (!walletNotFound && toastShown) {
+      setToastShown(false);
+    }
+  }, [walletNotFound, toastShown, isLoadingFetchWallet]);
 
   return (
     <>
