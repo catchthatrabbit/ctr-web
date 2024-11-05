@@ -29,11 +29,8 @@ const StartMining = ({
   onSetWalletAddress,
   onChangeRegion,
 }: IStartMining) => {
-  const {
-    startMiningPoolConfigurations,
-    githubReleaseDownloadUrl,
-
-  } = useControls();
+  const { startMiningPoolConfigurations, githubReleaseDownloadUrl } =
+    useControls();
 
   const inputStartMiningRef = useRef<HTMLInputElement>();
 
@@ -47,20 +44,20 @@ const StartMining = ({
 
   return (
     <>
-      <Spacer variant="xxxxl" />
+      <Spacer variant="sm" />
+      <Spacer variant="md" />
+
       <span id="start"></span>
       <GetStartedTitle />
       <Spacer variant="lg" />
       <Panel variant="heading3" title="Configure your device">
         <PanelContent>
-        <Text variant="body" type="value">
+          <Text variant="body" type="value">
             Download software:
           </Text>
           <Spacer variant="lg" />
           <div className="grid grid-row-gap grid-col-gap xl-grid-col--6 lg-grid-col--6 md-grid-col--4 sm-grid-col--2 xs-grid-col--1">
-            <div
-              className={clsx(styles.buttonConfigLessPadding)}
-            >
+            <div className={clsx(styles.buttonConfigLessPadding)}>
               <Link to={githubReleaseDownloadUrl} className="link-button">
                 CoreMiner for Linux
               </Link>
@@ -75,9 +72,7 @@ const StartMining = ({
           </Text>
           <Spacer variant="lg" />
           <div className="grid grid-row-gap grid-col-gap xl-grid-col--6 lg-grid-col--6 md-grid-col--4 sm-grid-col--2 xs-grid-col--1">
-            <div
-              className={clsx(styles.buttonConfigLessPadding)}
-            >
+            <div className={clsx(styles.buttonConfigLessPadding)}>
               <Link to="/docs/intro" className="link-button">
                 Open configuration manual
               </Link>
@@ -107,7 +102,9 @@ const StartMining = ({
           <SingleColumnPanel
             id={REGION_KEY.toLowerCase()}
             title={startMiningPoolConfigurations[REGION_KEY][`NAME`]}
-            description={startMiningPoolConfigurations[REGION_KEY][`DESCRIPTION`]}
+            description={
+              startMiningPoolConfigurations[REGION_KEY][`DESCRIPTION`]
+            }
             data={[
               {
                 label: "Server",
@@ -131,7 +128,11 @@ const StartMining = ({
               },
               {
                 label: "Payouts from",
-                value: startMiningPoolConfigurations[REGION_KEY][`PAYOUT`] ? startMiningPoolConfigurations[REGION_KEY][`PAYOUT`].toUpperCase() : '',
+                value: startMiningPoolConfigurations[REGION_KEY][`PAYOUT`]
+                  ? startMiningPoolConfigurations[REGION_KEY][
+                      `PAYOUT`
+                    ].toUpperCase()
+                  : "",
               },
             ]}
           />
