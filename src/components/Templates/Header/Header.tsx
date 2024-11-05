@@ -4,6 +4,7 @@ import { Dropdown } from "@site/src/components/Atoms/Dropdown";
 import { Board } from "@site/src/components/Atoms/Board";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { IBan } from "@site/src/components/Molecules/IBan";
+import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
 
 import styles from "./styles.module.css";
@@ -44,7 +45,7 @@ const Header = ({
 }: IHeader) => {
   return (
     <>
-      <Spacer variant="xl" />
+      {/* <Spacer variant="xl" /> */}
       {pageTitleComponent}
       {layout.search && (
         <>
@@ -57,8 +58,17 @@ const Header = ({
       )}
       {layout.dropdown && (
         <>
-          <Spacer variant="xl" />
-          <div className="flex flex-col--12">
+          {iban && <IBan iBan={iban} />}
+          <Spacer variant="xxs" />
+
+          <div className="flex flex-col--12 flex-column flex-column-center">
+            <Text
+              variant="subheading"
+              color="subheadingColor"
+              style={{ width: "588px" }}
+            >
+              Mining pool
+            </Text>
             <Dropdown
               isLoading={isLoading}
               defaultValue={defaultRegion}
@@ -70,7 +80,7 @@ const Header = ({
         </>
       )}
       <Spacer variant="xl" />
-      {iban && <IBan iBan={iban} />}
+
       {layout.boards && (
         <>
           <Spacer variant="lg" />

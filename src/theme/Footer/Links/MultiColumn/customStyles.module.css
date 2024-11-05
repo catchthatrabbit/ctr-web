@@ -1,6 +1,6 @@
 .title {
     font-family: var(--regular-font-family);
-    font-size: var(--h3-font-size-desktop);
+    font-size: var( --body-small-font-size);
     line-height: var(--h3-lineHeight-desktop);
     font-weight: var(--regular-font-weight);
     text-align: center;

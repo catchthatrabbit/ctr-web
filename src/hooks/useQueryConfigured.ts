@@ -9,7 +9,7 @@ export const useQueryConfigured = <T>(
   fetchFn?: (fnProps: unknown) => unknown,
   enabled: boolean = true,
 ) => {
-  const { setMessage, message } = useMessage();
+  // const { setMessage, message } = useMessage();
 
   const { data, isError, error, isLoading } = useQuery({
     queryKey: [queryKey, Object.values(fnProps)],
@@ -18,13 +18,13 @@ export const useQueryConfigured = <T>(
     enabled,
   });
 
-  useEffect(() => {
-    if (isError && (message === null || message.text === null))
-      setMessage({ text: error.message, type: "error" });
-    else if (!isError && message.text && message.type)
-      setMessage({ text: null, type: null });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [error?.message, isError]);
+  // useEffect(() => {
+  //   if (isError && (message === null || message.text === null))
+  //     setMessage({ text: error.message, type: "error" });
+  //   else if (!isError && message.text && message.type)
+  //     setMessage({ text: null, type: null });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [error?.message, isError]);
 
   return { data: data as T, isLoading };
 };

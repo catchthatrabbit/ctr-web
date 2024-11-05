@@ -5,12 +5,13 @@ import styles from "./styles.module.css";
 
 interface ISpacer extends HtmlHTMLAttributes<HTMLDivElement> {
   direction?: "vert" | "hor";
-  variant?: "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "xxxl" | "xxxxl";
+  variant?: "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "xxxl" | "xxxxl";
 }
 
 /**
  *
- * @param variant -xs: 16px;
+ * @param variant -xxs: 12px;
+ *                -xs: 16px;
  *                -sm: 24px;
  *                -md: 32px;
  *                -lg: 40px;

@@ -16,6 +16,7 @@ interface IInfo {
   isLoading?: boolean;
   loadingPlaceholder?: React.ReactNode;
   isLoadingWorkers?: boolean;
+  handleFilterChange?: (status: string) => void;
 }
 
 const Info = ({
@@ -24,6 +25,7 @@ const Info = ({
   workers,
   isLoading,
   loadingPlaceholder,
+  handleFilterChange,
 }: IInfo) => {
   const generalStats = useMemo(
     () => convertWalletInfoResponse2GeneralState(data),
@@ -54,7 +56,11 @@ const Info = ({
         />
       </div>
       <Spacer variant="xl" />
-      <WalletInfoTabs payouts={payouts} workers={workers} />
+      <WalletInfoTabs
+        payouts={payouts}
+        workers={workers}
+        handleFilterChange={handleFilterChange}
+      />
     </>
   );
 };

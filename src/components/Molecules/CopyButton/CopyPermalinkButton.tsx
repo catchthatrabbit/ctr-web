@@ -1,6 +1,7 @@
+import React from "react";
+import { toast } from "react-toastify";
 import { Button } from "@site/src/components/Atoms/Button";
 import { Copy } from "@site/src/icons";
-import { toast } from "react-toastify";
 import { ICopyButton } from "./types";
 
 import styles from "./styles.module.css";
@@ -22,9 +23,9 @@ const CustomCloseButton = ({ closeToast }) => (
   </button>
 );
 
-const CopyButton = ({ textToCopy, onCopy }: ICopyButton) => {
+const CopyPermalinkButton = ({ textToCopy, onCopy }: ICopyButton) => {
   const notify = () => {
-    toast.success("Wallet address copied to clipboard", {
+    toast.success("Permalink copied to clipboard", {
       className: styles.customToast,
       bodyClassName: styles.customToastBody,
       progressClassName: styles.customToastProgress,
@@ -37,9 +38,8 @@ const CopyButton = ({ textToCopy, onCopy }: ICopyButton) => {
     if (typeof onCopy === "function") onCopy();
     notify();
   };
-  return (
-    <Button onClick={handleCopy} value="Copy wallet address" icon={<Copy />} />
-  );
+
+  return <Button onClick={handleCopy} value="Copy permalink" icon={<Copy />} />;
 };
 
-export default CopyButton;
+export default CopyPermalinkButton;

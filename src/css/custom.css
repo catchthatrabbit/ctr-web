@@ -5,6 +5,12 @@
 @import url("breakpoints.css");
 @import url("flex.css");
 
+
+body{
+  overflow-x: hidden !important;
+}
+
+
 :root {
   
   --ifm-table-cell-padding: var(--space-sm) var(--space-xs) var(--space-sm);
@@ -29,12 +35,13 @@
   --content-width-xl: 81%;
 
   --ifm-footer-logo-max-width: 256px;
-  --ifm-footer-padding-vertical: 28px;
+  --ifm-footer-padding-vertical: 8px;
 
   --ifm-table-cell-padding: var(--space-xs);
 
 
   --ifm-color-primary-background:rgba(2, 2, 2, 1); 
+
 }
 
 :root nav.navbar {

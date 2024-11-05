@@ -18,7 +18,7 @@ const Button = ({
   icon,
   value,
   full = false,
-  size,
+  size = "large",
   className,
   ...restProps
 }: IButtonProps) => {
@@ -35,7 +35,9 @@ const Button = ({
       {...restProps}
     >
       {icon && <div className={styles.buttonIcon}>{icon}</div>}
-      <Text variant={size === "large" ? "body" : "smallBody"}>{value}</Text>
+      <Text variant={size === "large" ? "body" : "smallBody"} color="primary">
+        {value}
+      </Text>
     </button>
   );
 

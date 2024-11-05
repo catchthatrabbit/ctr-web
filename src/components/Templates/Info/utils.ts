@@ -61,7 +61,7 @@ export const convertWalletInfoResponse2ComputingInformation = (
     data: [
       {
         key: "1",
-        title: "Workers online",
+        title: "Miners online",
         value: data?.workersOnline,
       },
       {
@@ -82,7 +82,7 @@ export const convertWalletInfoResponse2ComputingInformation = (
       {
         key: "5",
         title: "Round share",
-        value: data?.roundShares + '%',
+        value: data?.roundShares + "%",
       },
       {
         key: "6",

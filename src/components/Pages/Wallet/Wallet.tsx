@@ -1,7 +1,10 @@
+import React, { useState, useEffect } from "react";
+
 import { Info } from "@site/src/components/Templates/Info";
 import { List } from "@site/src/components/Templates/List";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { Header } from "@site/src/components/Templates/Header";
+import { Search } from "../../Molecules/Search";
 import {
   convertPaymentsResponse2PaymentInfo,
   convertWorkersResponse2Info,
@@ -13,10 +16,15 @@ import { Text } from "@site/src/components/Atoms/Text";
 import { IAnyPageAndWallet } from "../types";
 import useControls from "./controls";
 import { LoadingPlaceholder } from "../../Atoms/LoadingPlaceholder";
+import { CustomToastError } from "../../Molecules/CopyButton";
+
+import "react-toastify/dist/ReactToastify.css";
+import styles from "./styles.module.css";
 
 interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
   walletAddress: string;
   onClearWalletAddress?: () => void;
+  onSetWalletAddress: (walletAddress: string) => void;
 }
 
 const Wallet = ({
@@ -24,6 +32,7 @@ const Wallet = ({
   defaultRegion,
   onChangeRegion,
   onClearWalletAddress,
+  onSetWalletAddress,
 }: IWallet) => {
   const {
     fetchPaymentsByWalletAddress,
@@ -42,62 +51,113 @@ const Wallet = ({
     dropdownItems,
     regionLabel,
   } = useControls({ walletAddress, defaultRegion, onChangeRegion });
+  const [filterStatus, setFilterStatus] = useState("All");
+  const [toastShown, setToastShown] = useState(false);
+
+  const handleFilterChange = (status: string) => {
+    setFilterStatus(status);
+  };
+
+  const walletNotFound = !walletAddress || !fetchedWalletInfo;
+
+  useEffect(() => {
+    if (walletNotFound && !toastShown && !isLoadingFetchWallet) {
+      CustomToastError({ message: "Wallet not found" });
+      setToastShown(true);
+    }
+  }, [walletNotFound, toastShown, isLoadingFetchWallet]);
+
+  useEffect(() => {
+    if (!walletNotFound && toastShown) {
+      setToastShown(false);
+    }
+  }, [walletNotFound, toastShown, isLoadingFetchWallet]);
 
   return (
     <>
-      <Spacer variant="xl" />
-      <Button value="Back" onClick={onClearWalletAddress} />
-      <Header
-        items={dropdownItems}
-        isLoading={isLoadingFetchWallet}
-        defaultRegion={regionLabel}
-        onChangeRegion={handleChangeRegion}
-        iban={walletAddress}
-        layout={{ boards: true, search: false, dropdown: true }}
-      />
-      <Info
-        data={fetchedWalletInfo}
-        isLoading={isLoadingFetchWallet}
-        loadingPlaceholder={<LoadingPlaceholder />}
-        workers={
-          <List
-            isLoading={isLoadingFetchWorkerByWalletAddress}
-            data={convertWorkersResponse2Info(
-              fetchWorkersByWalletAddress,
-              okEmoji,
-              brbEmoji,
-            )}
-            dataTableColumns={workersTableColumn}
-            total={fetchWorkersByWalletAddress?.workersTotal}
-            onPageChange={handleChangePageWorkers}
+      <Spacer variant="xxl" />
+      {/* <Button value="Back" onClick={onClearWalletAddress} /> */}
+      <div className={`flex items-center xl-center-items ${styles.fullWidth}`}>
+        <Text
+          type="exo"
+          size="pictureTitle"
+          lineHeight="mediumLineHeight"
+          color="white"
+          weight="extraBold"
+        >
+          Wallet overview
+        </Text>
+      </div>
+      {walletNotFound ? (
+        <>
+          <div
+            className={`flex flex-column items-center xl-center-items ${styles.fullWidth}`}
+          >
+            <Spacer variant="xxs" />
+            <Text
+              type="regular"
+              variant="heading3"
+              color="white"
+              weight="regular"
+            >
+              Wallet not found. No data to show.
+            </Text>
+            <Spacer variant="xxxl" />
+            <Spacer variant="sm" />
+            <Spacer variant="xxs" />
+          </div>
+          <Search context="wallet" onSearch={onSetWalletAddress} />
+          <Spacer variant="xxxl" />
+          <Spacer variant="sm" />
+          <Spacer variant="xxs" />
+        </>
+      ) : (
+        <>
+          <Header
+            items={dropdownItems}
+            isLoading={isLoadingFetchWallet}
+            defaultRegion={regionLabel}
+            onChangeRegion={handleChangeRegion}
+            iban={walletAddress}
+            layout={{ boards: true, search: false, dropdown: true }}
           />
-        }
-        payouts={
-          <List
-            isLoading={isLoadingFetchPaymentByWalletAddress}
-            data={convertPaymentsResponse2PaymentInfo(
-              fetchPaymentsByWalletAddress,
-            )}
-            dataTableColumns={paymentPayoutTableColumns}
-            total={fetchedWalletInfo?.paymentsTotal}
-            onPageChange={handleChangePagePayouts}
+          <Info
+            data={fetchedWalletInfo}
+            isLoading={isLoadingFetchWallet}
+            loadingPlaceholder={<LoadingPlaceholder />}
+            handleFilterChange={handleFilterChange}
+            workers={
+              <>
+                <List
+                  isLoading={isLoadingFetchWorkerByWalletAddress}
+                  data={convertWorkersResponse2Info(
+                    fetchWorkersByWalletAddress,
+                    okEmoji,
+                    brbEmoji,
+                  )}
+                  dataTableColumns={workersTableColumn}
+                  total={fetchWorkersByWalletAddress?.workersTotal}
+                  onPageChange={handleChangePageWorkers}
+                  isWalletPage={true}
+                  filterStatus={filterStatus} // Pass filterStatus prop
+                />
+              </>
+            }
+            payouts={
+              <List
+                isLoading={isLoadingFetchPaymentByWalletAddress}
+                data={convertPaymentsResponse2PaymentInfo(
+                  fetchPaymentsByWalletAddress,
+                )}
+                dataTableColumns={paymentPayoutTableColumns}
+                total={fetchedWalletInfo?.paymentsTotal}
+                onPageChange={handleChangePagePayouts}
+                isWalletPage={true}
+              />
+            }
           />
-        }
-      />
-
-      <Spacer />
-
-      <Panel title="Connections">
-        <PanelContent>
-          <Text variant="body" type="value" className="mr">
-            Fediverse link:
-          </Text>
-          <Link to={`https://ctr.watch/@${walletAddress}`}>
-            {`pool.ctr.watch/@${walletAddress}`}
-          </Link>
-        </PanelContent>
-      </Panel>
-
+        </>
+      )}
       <Spacer variant="xl" />
     </>
   );

@@ -6,14 +6,15 @@ import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 import { Text } from "../../Atoms/Text";
 import SearchIcon from "@site/src/icons/SearchIcon";
 
-import styles from "./styles.module.css";
+import styles from "./styles.module.css"; // Ensure this import is correct
 
 interface ISearch extends InputHTMLAttributes<HTMLInputElement> {
   onSearch?: (searchQuery: string) => void;
+  context?: "wallet" | "main"; // Add context prop
 }
 
 const Search = forwardRef<HTMLInputElement, ISearch>(
-  ({ onSearch, ...restProps }, ref) => {
+  ({ onSearch, context = "main", ...restProps }, ref) => {
     const inputRef = useRef<HTMLInputElement>();
 
     const { mobile } = useMediaQueries();
@@ -27,20 +28,30 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
     };
 
     return (
-      <div className={clsx("row", styles.search)}>
+      <div
+        className={clsx("row", styles.search, {
+          [styles.searchWallet]: context === "wallet", // Apply wallet-specific styles
+          [styles.searchMain]: context === "main", // Apply main page styles
+        })}
+      >
         <Text lineHeight="smallLineHeight" color="subheadingColor">
-          Wallet address
+          {context === "wallet" ? "Corepass wallet address" : "Wallet address"}
         </Text>
-        <InputText
-          className={clsx(styles.searchInput, {
-            [styles.searchInputMobile]: mobile,
-          })}
-          placeholder="Search your miners"
-          ref={ref || inputRef}
-          onPressEnter={handleSearch}
-          icon={<SearchIcon />}
-          {...restProps}
-        />
+        <div className={styles.searchContainer}>
+          <InputText
+            className={clsx(styles.searchInput, {
+              [styles.searchInputMobile]: mobile,
+              [styles.searchWallet]: context === "wallet",
+            })}
+            placeholder={
+              context === "wallet" ? "Wallet address" : "Search your miners"
+            }
+            ref={ref || inputRef}
+            onPressEnter={handleSearch}
+            icon={<SearchIcon />}
+            {...restProps}
+          />
+        </div>
         <button
           className={clsx(styles.searchButton, {
             [styles.searchButtonMobile]: mobile,

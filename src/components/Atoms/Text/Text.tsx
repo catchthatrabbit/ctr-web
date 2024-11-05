@@ -30,8 +30,8 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "tinyBody" /** font size 12 */
     | "tag" /** font size 11 */
     | "CTA" /** font size 11 */;
-  weight?: "normal" | "bold" | "extraBold" | "semiBold";
-  size?: "small" | "medium" | "pictureTitle";
+  weight?: "normal" | "bold" | "extraBold" | "semiBold" | "medium";
+  size?: "small" | "regular" | "medium" | "pictureTitle";
   color?:
     | "primary"
     | "secondary"
@@ -69,7 +69,12 @@ const CustomComponent: FC<
 
 const Text: FC<IText> = ({
   variant = "subheading",
-  weight = "normal" || "extraBold" || "bold" || "semiBold",
+  weight = "normal" ||
+    "regular" ||
+    "extraBold" ||
+    "bold" ||
+    "semiBold" ||
+    "medium",
   size = "small" || "medium" || "pictureTitle",
   children,
   className,

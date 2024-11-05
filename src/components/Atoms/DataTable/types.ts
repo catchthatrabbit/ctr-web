@@ -14,4 +14,5 @@ export interface IDataTable {
   emptyComponent: React.ReactNode;
   isLoading?: boolean;
   loadingComp?: React.ReactNode;
+  isWalletPage?: boolean;
 }

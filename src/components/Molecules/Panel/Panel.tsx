@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
@@ -22,27 +22,70 @@ interface IPanel {
   color?: "primary" | "white" | "gray";
   titleClassName?: string;
   className?: string;
+  weight?: "normal" | "bold" | "extraBold" | "semiBold";
+  handleFilterChange?: (status: string) => void;
 }
 
 const Panel = ({
   id,
   title = "",
-  variant = "heading2",
+  variant = "heading3",
   children,
   titleClassName,
   className,
-  color,
+  color = "white",
+  weight = "bold",
+  handleFilterChange,
 }: IPanel) => {
+  const [activeButton, setActiveButton] = useState("All"); // Add state for active button
+
+  const handleButtonClick = (status: string) => {
+    setActiveButton(status);
+    handleFilterChange?.(status);
+  };
+
   return (
     <div id={id} className={clsx(styles.panelRoot, className)}>
       <div className={clsx(styles.panelTitleBase, styles.panelTitle)}>
-        <Text color={color} variant={variant} className={titleClassName}>
+        <Text
+          color={color}
+          variant={variant}
+          className={titleClassName}
+          weight={weight}
+        >
           {title}
         </Text>
+        {handleFilterChange && (
+          <div className={styles.panelTitleBtns}>
+            <button
+              className={clsx({
+                [styles.activeButton]: activeButton === "All",
+              })}
+              onClick={() => handleButtonClick("All")}
+            >
+              All
+            </button>
+            <button
+              className={clsx({
+                [styles.activeButton]: activeButton === "Running",
+              })}
+              onClick={() => handleButtonClick("Running")}
+            >
+              Running
+            </button>
+            <button
+              className={clsx({
+                [styles.activeButton]: activeButton === "Inactive",
+              })}
+              onClick={() => handleButtonClick("Inactive")}
+            >
+              Inactive
+            </button>
+          </div>
+        )}
       </div>
-      <Spacer />
+
       {children}
-      <Spacer />
     </div>
   );
 };

@@ -8,7 +8,7 @@
     user-select: none; /* Standard syntax */
     list-style: none;
   
-    background-color: var(--dart-rgb-400);
+    background-color: var(--dark-rgb-400);
 }
 .pagination {
     display: flex;

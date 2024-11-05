@@ -1,5 +1,6 @@
 import Select, { ActionMeta } from "react-select";
 import { colourStyles } from "./styles";
+import CustomDropdownIndicator from "./DropdownIndicator";
 
 interface IDropdown {
   id?: string;
@@ -31,6 +32,7 @@ const Dropdown = ({
       styles={colourStyles}
       onChange={onChange}
       defaultValue={{ value: defaultValue, label: defaultValue }}
+      components={{ DropdownIndicator: CustomDropdownIndicator }}
     />
   );
 };

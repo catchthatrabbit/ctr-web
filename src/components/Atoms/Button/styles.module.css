@@ -5,17 +5,29 @@
   cursor: pointer;
   user-select: none;
   border-radius: 10px;
-  color: var(--white);
+  color: var(--ifm-color-primary);
   padding: var(--space-xs);
   text-align: center;
   white-space: nowrap;
-  border: 1px solid var(--blue-rgb-700);
+  border: none;
   justify-content: center;
+  align-items: center;
 }
+
 
 .buttonIcon{
   vertical-align: baseline;
-  padding-right: var(--space-sm);
+  padding-right: calc(var(--space-xs) / 2);
+  svg path{
+    fill: var(--ifm-color-primary);
+  }
+
+}
+
+.buttonIcon:hover{
+  svg path{
+    fill: var(--ifm-search-btn-hover);
+  }
 }
 
 .small{
@@ -28,7 +40,7 @@
 }
 
 .large{
-  padding: var(--space-lg) var(--space-xs)
+  /* padding: var(--space-lg) var(--space-xs) */
 }
 
 .full{
@@ -40,16 +52,16 @@
 }
 
 .button:hover {
-  border: 1px solid var(--gray-700);
-  background-color: var(--blue-rgb-700);
+  border: none;
+  background-color: transparent;
 }
 
 .outline{
-  background-color: var(--blue-rgb-500);
+  background-color: transparent;
 }
 
 .outline:hover{
-  background-color: var(--blue-rgb-700);
+  background-color: transparent;
 }
 
 .transparent{

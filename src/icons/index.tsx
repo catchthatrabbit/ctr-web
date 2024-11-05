@@ -12,4 +12,6 @@ export { default as RabbitPoolStatistics } from "./pages/RabbitPoolStatistics";
 export { default as Arrow } from "./Arrow";
 export { default as Ears } from "./pages/Ears";
 export { default as DownloadAppStore } from "./DownloadAppStore";
+export { default as DropdownIconDown } from "./DropdownIconDown";
+export { default as Cancel } from "./Cancel";
 // export { default as DownloadGooglePlay } from "./DownloadGooglePlay";

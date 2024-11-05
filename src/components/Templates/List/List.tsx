@@ -18,6 +18,8 @@ interface IList {
   total?: number;
   onPageChange?: (currentPage: number) => void;
   isLoading?: boolean;
+  isWalletPage?: boolean;
+  filterStatus?: string;
 }
 
 const List = ({
@@ -27,6 +29,8 @@ const List = ({
   total,
   hidePagination,
   isLoading,
+  isWalletPage,
+  filterStatus = "All",
 }: IList) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const { mobile } = useMediaQueries();
@@ -41,11 +45,15 @@ const List = ({
     if (typeof onPageChange === "function") onPageChange(page);
   };
 
+  const filteredData = data?.filter((item) => {
+    if (filterStatus === "All") return true;
+    return item.status === filterStatus;
+  });
+
   return (
     <div className={styles.listRoot}>
       <div>
         <div className="row">
-          <Spacer variant="md" />
           <div
             className={clsx(styles.tableWrapper, {
               [styles.listMarginInlineMobile]: mobile,
@@ -54,12 +62,13 @@ const List = ({
             <DataTable
               emptyComponent={<Empty />}
               columns={dataTableColumns}
-              data={data}
+              data={filteredData}
               isLoading={isLoading}
               loadingComp={<LoadingPlaceholder />}
+              isWalletPage={isWalletPage}
             />
           </div>
-          {!hidePagination && (
+          {/* {!hidePagination && (
             <div className={styles.paginationWrapper}>
               <Pagination
                 offset={currentPage}
@@ -69,7 +78,7 @@ const List = ({
                 loadingComp={<LoadingPlaceholder />}
               />
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

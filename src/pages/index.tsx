@@ -20,6 +20,7 @@ export default function Home(): JSX.Element {
           defaultRegion={region}
           walletAddress={walletAddress}
           onChangeRegion={handleChangeRegion}
+          onSetWalletAddress={handleWalletAddress}
         />
       ) : (
         <Dashboard onSetWalletAddress={handleWalletAddress} />

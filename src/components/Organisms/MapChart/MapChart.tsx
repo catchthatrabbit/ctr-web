@@ -40,12 +40,6 @@ const MapChart = ({ children, infoItems, isLoading }: IMapChart) => {
 
   return (
     <div className={styles.mapRoot}>
-      {!mobile && !tablet && (
-        <>
-          {/* <Spacer variant="lg" /> */}
-          <ConfiguredInfoBox />
-        </>
-      )}
       <div className={styles.dashboardContainer}>{children}</div>
       {(mobile || tablet) && (
         <>
