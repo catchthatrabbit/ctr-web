@@ -4,6 +4,7 @@ import { Spacer } from "@site/src/components/Atoms/Spacer";
 import {
   GetStartedTitle,
   PoolTitle,
+  GuideTitle,
 } from "@site/src/components/Molecules/PictureTitles";
 import {
   Panel,
@@ -19,6 +20,8 @@ import { useFetchSettings } from "@site/src/hooks/useSettings";
 import { useHeaders } from "@site/src/hooks/useHeaders";
 import { IAnyPageAndWallet } from "../types";
 import { useControls } from "./controls";
+import { InfoPanel } from "@site/src/components/Molecules/InfoPanel";
+import { Steps } from "../../Molecules/Steps";
 
 import styles from "./styles.module.css";
 
@@ -49,7 +52,28 @@ const StartMining = ({
 
       <span id="start"></span>
       <GetStartedTitle />
-      <Spacer variant="lg" />
+      <Spacer variant="sm" />
+      <Spacer variant="md" />
+      <div className={`flex ${styles.infoPanel}`}>
+        <InfoPanel
+          title="How to start minig"
+          text="Step by step guide to get you hop on board."
+          link=""
+          linkText="View section"
+        />
+        <InfoPanel
+          title="Pools"
+          text="View all geo-locations you can use."
+          link=""
+          linkText="View section"
+        />
+      </div>
+      <Spacer variant="xxxl" />
+      <Spacer variant="md" />
+      <GuideTitle />
+      <Spacer variant="xxxl" />
+      <Spacer variant="md" />
+      <Steps />
       <Panel variant="heading3" title="Configure your device">
         <PanelContent>
           <Text variant="body" type="value">

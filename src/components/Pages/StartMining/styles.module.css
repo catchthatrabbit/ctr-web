@@ -2,6 +2,10 @@
     padding: var(--space-md) var(--space-lg);
 }
 
+.infoPanel{
+    justify-content: space-between;
+}
+
 .lineFlex{
     display: flex;
     flex-wrap: wrap;

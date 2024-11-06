@@ -75,7 +75,7 @@ const Text: FC<IText> = ({
     "bold" ||
     "semiBold" ||
     "medium",
-  size = "small" || "medium" || "pictureTitle",
+  size = "regular" || "small" || "medium" || "pictureTitle",
   children,
   className,
   lineHeight = "smallLineHeight" ||

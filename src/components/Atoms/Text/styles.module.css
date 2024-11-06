@@ -47,7 +47,7 @@
 }
 
 .regular {
-  font-weight: var(--regular-font-weight);
+  font-size: var(--regular-font-size);
 }
 
 .small {
