@@ -31,7 +31,7 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "tag" /** font size 11 */
     | "CTA" /** font size 11 */;
   weight?: "normal" | "bold" | "extraBold" | "semiBold" | "medium";
-  size?: "small" | "regular" | "medium" | "pictureTitle";
+  size?: "small" | "regular" | "medium" | "large" | "pictureTitle";
   color?:
     | "primary"
     | "secondary"
@@ -75,7 +75,7 @@ const Text: FC<IText> = ({
     "bold" ||
     "semiBold" ||
     "medium",
-  size = "regular" || "small" || "medium" || "pictureTitle",
+  size = "regular" || "small" || "medium" || "large" || "pictureTitle",
   children,
   className,
   lineHeight = "smallLineHeight" ||

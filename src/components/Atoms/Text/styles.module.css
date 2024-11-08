@@ -58,6 +58,9 @@
   font-size: var(--medium-font-size);
 }
 
+.large{
+  font-size: var(--large-font-size);
+}
 
 
 .pictureTitle{

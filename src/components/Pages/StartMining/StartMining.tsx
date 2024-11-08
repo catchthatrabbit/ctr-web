@@ -1,3 +1,4 @@
+import React from "react";
 import { SingleColumnPanel } from "@site/src/components/Molecules/SingleColumnPanel";
 import { REGIONS } from "@site/src/constants/regions";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
@@ -69,10 +70,10 @@ const StartMining = ({
         />
       </div>
       <Spacer variant="xxxl" />
-      <Spacer variant="md" />
+      <Spacer variant="sm" />
       <GuideTitle />
-      <Spacer variant="xxxl" />
-      <Spacer variant="md" />
+      <Spacer variant="xxl" />
+
       <Steps />
       <Panel variant="heading3" title="Configure your device">
         <PanelContent>

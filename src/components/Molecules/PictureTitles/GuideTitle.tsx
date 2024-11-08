@@ -6,7 +6,10 @@ const GuideTitle = () => {
       title="How to start mining"
       titleStyles={{ fontWeight: "800", fontFamily: "Exo" }}
       secondaryText="Step by step guide to mine your first XCB."
-      secondaryTextStyle={{ fontSize: "var(--regular-font-size)" }}
+      secondaryTextStyle={{
+        fontSize: "var(--regular-font-size)",
+        marginTop: "0px",
+      }}
     />
   );
 };
