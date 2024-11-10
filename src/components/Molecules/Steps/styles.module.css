@@ -26,9 +26,13 @@
   .text {
     margin: 0 0 10px 0;
   }
+
+  .buttonLinkContainer{
+    margin-left: 29px;
+  }
   
   .linkSteps{
-    margin: 0px 0px 0px 22px;
+    
     align-items: center;
     cursor: pointer;
   }
@@ -36,7 +40,7 @@
   .link {
     color: #007bff;
     text-decoration: none;
-    padding-left: calc(var(--space-xs) / 2);
+    /* padding-left: calc(var(--space-xs) / 2); */
   }
   
   .image {
@@ -48,7 +52,11 @@
     background-color: #1B190C;
     border: 1px solid #746010;
     color: #FACA15;
-    padding: 16px;
+    padding: 13px 12px;
     border-radius: 8px;
+    margin-left: 31px;
+    margin-top: -9px;
    
   }
+
+  

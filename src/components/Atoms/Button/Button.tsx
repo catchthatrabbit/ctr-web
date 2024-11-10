@@ -11,6 +11,8 @@ interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   full?: boolean;
   icon?: React.ReactNode;
   value: string;
+  backgroundColor?: string;
+  textColor?: string;
 }
 
 const Button = ({
@@ -20,8 +22,15 @@ const Button = ({
   full = false,
   size = "large",
   className,
+  backgroundColor = "#062A1C", // Default background color
+  textColor = "white", // Default text color
   ...restProps
 }: IButtonProps) => {
+  const buttonStyle = {
+    backgroundColor,
+    color: textColor,
+  };
+
   const renderedButton = (
     <button
       onClick={onClick}
@@ -32,10 +41,11 @@ const Button = ({
         styles.full && full,
         className,
       )}
+      style={buttonStyle}
       {...restProps}
     >
       {icon && <div className={styles.buttonIcon}>{icon}</div>}
-      <Text variant={size === "large" ? "body" : "smallBody"} color="primary">
+      <Text variant={size === "large" ? "body" : "smallBody"} color={textColor}>
         {value}
       </Text>
     </button>
