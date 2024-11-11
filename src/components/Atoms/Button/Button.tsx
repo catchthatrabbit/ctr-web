@@ -22,8 +22,8 @@ const Button = ({
   full = false,
   size = "large",
   className,
-  backgroundColor = "#062A1C", // Default background color
-  textColor = "white", // Default text color
+  backgroundColor,
+  textColor,
   ...restProps
 }: IButtonProps) => {
   const buttonStyle = {

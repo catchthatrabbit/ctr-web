@@ -74,7 +74,7 @@ const StartMining = ({
       <GuideTitle />
       <Spacer variant="xxl" />
 
-      <Steps />
+      <Steps onSetWalletAddress={onSetWalletAddress} />
       <Panel variant="heading3" title="Configure your device">
         <PanelContent>
           <Text variant="body" type="value">

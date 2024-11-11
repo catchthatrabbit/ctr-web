@@ -6,6 +6,7 @@ import { DownloadPanel } from "@site/src/components/Molecules/DownloadPanel";
 import { Spacer } from "@site/src/components/Atoms/Spacer"; // Ensure this import is correct
 import { OpenInNew } from "@site/src/icons";
 import Button from "@site/src/components/Atoms/Button/Button"; // Ensure this import is correct
+import { useWalletPage } from "@site/src/hooks/useWallet";
 
 interface Step {
   number: number;
@@ -22,6 +23,7 @@ interface Step {
 
 interface StepsProps {
   steps: Step[];
+  onSetWalletAddress: (address: string) => void;
 }
 
 const stepsData: Step[] = [
@@ -58,14 +60,13 @@ const stepsData: Step[] = [
     showSearch: true,
   },
 ];
-
-const Steps: React.FC = () => {
+const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
   return (
     <div className={`flex flex-column ${styles.stepsContainer}`}>
       {stepsData.map((step) => (
         <div key={step.number} className={`flex flex-column ${styles.step}`}>
           <h2 className={styles.title}>
-            {step.number}. &nbsp; {step.title}
+            {step.number}.&nbsp;{step.title}
           </h2>
           <Text
             size="regular"
@@ -95,11 +96,11 @@ const Steps: React.FC = () => {
 
           {step.link && step.linkText && (
             <>
-              {!step.buttonTitle && <Spacer variant="md" />}
+              {!step.buttonTitle && <Spacer variant="xxs" />}
               <div className={`flex ${styles.buttonLinkContainer}`}>
                 {step.button && (
                   <>
-                    <Spacer variant="xxs" />
+                    {step.buttonTitle && <Spacer variant="lg" />}
                     <div className={styles.button}>
                       {step.buttonTitle ? (
                         <Text
@@ -151,7 +152,12 @@ const Steps: React.FC = () => {
               <DownloadPanel />
             </>
           )}
-          {step.showSearch && <Search />}
+          {step.showSearch && (
+            <>
+              <Spacer variant="lg" />
+              <Search context="startMining" onSearch={onSetWalletAddress} />
+            </>
+          )}
           <Spacer variant="md" />
         </div>
       ))}

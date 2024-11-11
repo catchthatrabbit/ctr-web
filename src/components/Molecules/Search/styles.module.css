@@ -75,11 +75,11 @@
         color: var(--white);
     }
 
-.searchWallet  .searchInput::placeholder{
+.searchWallet .searchInput::placeholder{
         color: var(--ifm-subheading-color);
     }
 
-.searchWallet  .searchButton{
+.searchWallet .searchButton{
         background-color: var(--ifm-guide-btn-color);
         color: var(--ifm-color-primary);
         border-radius: var(--ifm-global-radius);
@@ -91,10 +91,53 @@
         background-color: var(--white);
         color: var(--gray-700);
     }
-.searchWallet .searchButtonDesktop{
+.searchWallet  .searchButtonDesktop{
     margin-left: -7px;
     left: 82%;
     top: 38%;
     }
+
+    .searchStartMining{
+        display: flex;
+        width: 90%;
+        align-content: center;
+    }
+ .searchStartMining  .searchContainer {
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }
   
+.searchStartMining .searchButtonDesktop{
+    margin-left: 3px;
+    left: 97%;
+    top: 15%;
+}
+
+.searchStartMining  .searchInput{
+    width: 646px;
   
+        flex: 1;
+       
+        height: 52px;
+        background-color: var(--dark-rgb-600);
+        color: var(--white);
+   
+}
+
+.searchStartMining  .searchInput::placeholder{
+    color: var(--ifm-subheading-color);
+}
+
+ .searchStartMining  .searchButton{
+    background-color: var(--ifm-guide-btn-color);
+    color: var(--ifm-color-primary);
+    border-radius: var(--ifm-global-radius);
+    height: 52px;
+
+}
+
+ .searchStartMining .searchButton:hover{
+    background-color: var(--white);
+    color: var(--gray-700);
+}

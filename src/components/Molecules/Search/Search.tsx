@@ -10,7 +10,7 @@ import styles from "./styles.module.css"; // Ensure this import is correct
 
 interface ISearch extends InputHTMLAttributes<HTMLInputElement> {
   onSearch?: (searchQuery: string) => void;
-  context?: "wallet" | "main"; // Add context prop
+  context?: "wallet" | "main" | "startMining";
 }
 
 const Search = forwardRef<HTMLInputElement, ISearch>(
@@ -24,19 +24,26 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
     };
 
     const handleSearch = () => {
-      if (typeof onSearch === "function") onSearch(inputRef.current.value);
+      if (typeof onSearch === "function") {
+        onSearch(inputRef.current.value);
+      }
     };
 
     return (
       <div
         className={clsx("row", styles.search, {
-          [styles.searchWallet]: context === "wallet", // Apply wallet-specific styles
-          [styles.searchMain]: context === "main", // Apply main page styles
+          [styles.searchWallet]: context === "wallet",
+          [styles.searchMain]: context === "main",
+          [styles.searchStartMining]: context === "startMining",
         })}
       >
-        <Text lineHeight="smallLineHeight" color="subheadingColor">
-          {context === "wallet" ? "Corepass wallet address" : "Wallet address"}
-        </Text>
+        {context !== "startMining" && (
+          <Text lineHeight="smallLineHeight" color="subheadingColor">
+            {context === "wallet"
+              ? "Corepass wallet address"
+              : "Wallet address"}
+          </Text>
+        )}
         <div className={styles.searchContainer}>
           <InputText
             className={clsx(styles.searchInput, {
@@ -44,7 +51,9 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
               [styles.searchWallet]: context === "wallet",
             })}
             placeholder={
-              context === "wallet" ? "Wallet address" : "Search your miners"
+              context === "wallet" || context === "startMining"
+                ? "Wallet address"
+                : "Search your miners"
             }
             ref={ref || inputRef}
             onPressEnter={handleSearch}
