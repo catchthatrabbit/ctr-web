@@ -48,3 +48,7 @@
 .panelContentMobile{
     padding: var(--space-md) var(--space-xs);
 }
+
+.startMiningPanel{
+    border: none;
+}

@@ -48,3 +48,13 @@
 .marginAuto{
     margin:auto;
 }
+
+.dropdownHeader{
+    font-size: var( --h3-font-size-desktop);
+    color: var(--white)
+}
+
+.poolContainer{
+    width: 65%;
+    margin: 0 auto;
+}

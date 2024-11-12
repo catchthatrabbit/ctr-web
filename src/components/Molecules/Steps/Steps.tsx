@@ -63,17 +63,22 @@ const stepsData: Step[] = [
 const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
   return (
     <div className={`flex flex-column ${styles.stepsContainer}`}>
-      {stepsData.map((step) => (
-        <div key={step.number} className={`flex flex-column ${styles.step}`}>
+      {stepsData.map((step, index) => (
+        <div
+          key={step.number}
+          className={`flex flex-column ${styles.step}
+         ${index === stepsData.length - 1 ? styles.lastStep : ""}
+        `}
+        >
           <h2 className={styles.title}>
-            {step.number}.&nbsp;{step.title}
+            {step.number}.&nbsp;&nbsp;{step.title}
           </h2>
           <Text
             size="regular"
             weight="normal"
             lineHeight="smallLineHeight"
             color="white"
-            style={{ marginLeft: "29px" }}
+            style={{ marginLeft: "33px" }}
           >
             {step.text}
           </Text>

@@ -12,9 +12,16 @@ interface ISingleColumnPanel {
   children?: React.ReactNode;
   data: Array<{ label: string; value: string }>;
   description?: string;
+  context?: "default" | "startMining";
 }
 
-const SingleColumnPanel = ({ title, data, id, description }: ISingleColumnPanel) => {
+const SingleColumnPanel = ({
+  title,
+  data,
+  id,
+  description,
+  context = "default",
+}: ISingleColumnPanel) => {
   const { desktop, laptop, mobile, tablet } = useMediaQueries();
   return (
     <Panel
@@ -23,6 +30,7 @@ const SingleColumnPanel = ({ title, data, id, description }: ISingleColumnPanel)
       variant="heading2"
       color="primary"
       titleClassName={styles.singlePanel}
+      context={context}
     >
       {description && (
         <div
@@ -30,6 +38,8 @@ const SingleColumnPanel = ({ title, data, id, description }: ISingleColumnPanel)
             [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
             [styles.singleColumnValuePaddingTablet]: tablet,
             [styles.singleColumnValuePaddingMobile]: mobile,
+            [styles.singleColumnValuePaddingStartMining]:
+              context === "startMining",
           })}
         >
           <Text type="value" variant="subheading">
@@ -44,15 +54,34 @@ const SingleColumnPanel = ({ title, data, id, description }: ISingleColumnPanel)
             [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
             [styles.singleColumnValuePaddingTablet]: tablet,
             [styles.singleColumnValuePaddingMobile]: mobile,
+            [styles.singleColumnValuePaddingStartMining]:
+              context === "startMining",
           })}
         >
-          <Text type="value" variant="subheading">
-            {`${item.label}:`}
-          </Text>
-          &nbsp;&nbsp;
-          <Text type="value" variant="subheading">
-            {item.value || ""}
-          </Text>
+          {context === "startMining" ? (
+            <div className={styles.labelValueContainer}>
+              <div className={styles.label}>
+                <Text type="value" variant="subheading">
+                  {item.label}
+                </Text>
+              </div>
+              <div className={styles.value}>
+                <Text type="value" variant="subheading">
+                  {item.value || ""}
+                </Text>
+              </div>
+            </div>
+          ) : (
+            <>
+              <Text type="value" variant="subheading">
+                {`${item.label}:`}
+              </Text>
+              &nbsp;&nbsp;
+              <Text type="value" variant="subheading">
+                {item.value || ""}
+              </Text>
+            </>
+          )}
         </div>
       ))}
     </Panel>
