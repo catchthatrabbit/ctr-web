@@ -22,6 +22,7 @@ import { IAnyPageAndWallet } from "../types";
 import { useControls } from "./controls";
 import { InfoPanel } from "@site/src/components/Molecules/InfoPanel";
 import { Steps } from "../../Molecules/Steps";
+import { DropdownIconDown } from "@site/src/icons";
 
 import styles from "./styles.module.css";
 
@@ -90,10 +91,22 @@ const StartMining = ({
         {Object.keys(REGIONS).map((REGION_KEY, index) => (
           <div key={index}>
             <div
-              className={styles.dropdownHeader}
+              className={`flex ${styles.dropdownHeader}`}
               onClick={() => toggleRegion(REGION_KEY)}
             >
               {startMiningPoolConfigurations[REGION_KEY][`NAME`]}
+              <DropdownIconDown
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  color: "pink",
+                  transform:
+                    openRegion === REGION_KEY
+                      ? "rotate(180deg)"
+                      : "rotate(0deg)",
+                  transition: "transform 0.2s ease",
+                }}
+              />
             </div>
             {openRegion === REGION_KEY && (
               <SingleColumnPanel

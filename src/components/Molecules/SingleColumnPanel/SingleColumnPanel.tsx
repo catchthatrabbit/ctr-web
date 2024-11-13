@@ -3,6 +3,7 @@ import { Panel } from "@site/src/components/Molecules/Panel";
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
+import { Spacer } from "@site/src/components/Atoms/Spacer";
 
 import styles from "./styles.module.css";
 
@@ -33,19 +34,23 @@ const SingleColumnPanel = ({
       context={context}
     >
       {description && (
-        <div
-          className={clsx(styles.singleColumnValue, {
-            [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
-            [styles.singleColumnValuePaddingTablet]: tablet,
-            [styles.singleColumnValuePaddingMobile]: mobile,
-            [styles.singleColumnValuePaddingStartMining]:
-              context === "startMining",
-          })}
-        >
-          <Text type="value" variant="subheading">
-            {description}
-          </Text>
-        </div>
+        <>
+          <Spacer variant="sm" />
+          <div
+            className={clsx(styles.singleColumnValue, {
+              [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
+              [styles.singleColumnValuePaddingTablet]: tablet,
+              [styles.singleColumnValuePaddingMobile]: mobile,
+              [styles.singleColumnValuePaddingStartMining]:
+                context === "startMining",
+            })}
+          >
+            <Text type="value" variant="subheading">
+              {description}
+            </Text>
+          </div>
+          <Spacer variant="sm" />
+        </>
       )}
       {data?.map((item, index) => (
         <div
@@ -61,12 +66,12 @@ const SingleColumnPanel = ({
           {context === "startMining" ? (
             <div className={styles.labelValueContainer}>
               <div className={styles.label}>
-                <Text type="value" variant="subheading">
+                <Text type="value" variant="subheading" color="white">
                   {item.label}
                 </Text>
               </div>
               <div className={styles.value}>
-                <Text type="value" variant="subheading">
+                <Text type="value" variant="subheading" color="white">
                   {item.value || ""}
                 </Text>
               </div>

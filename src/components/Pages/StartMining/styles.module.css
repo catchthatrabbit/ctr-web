@@ -51,7 +51,8 @@
 
 .dropdownHeader{
     font-size: var( --h3-font-size-desktop);
-    color: var(--white)
+    color: var(--white);
+    justify-content: space-between;
 }
 
 .poolContainer{
