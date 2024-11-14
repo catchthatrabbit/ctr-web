@@ -1,5 +1,6 @@
 .singleColumnValue {
     display: flex;
+    
 }
 
 .singleColumnValuePaddingDesktop{
@@ -33,6 +34,7 @@
     display: flex;
     width: 100%;
     border-bottom: 1px solid #292929;
+   
   }
 
 
@@ -41,7 +43,11 @@
   }
 
   .singleColumnValue:nth-child(even) .labelValueContainer {
-    background-color: rgba(20,20,20,255);
+    background-color: rgba(20, 20, 20, 255);
+  }
+
+  .singleColumnValue:not(:first-child){
+    background-color: transparent;
   }
   
   

@@ -35,7 +35,7 @@ const SingleColumnPanel = ({
     >
       {description && (
         <>
-          <Spacer variant="sm" />
+          <Spacer variant="xxs" />
           <div
             className={clsx(styles.singleColumnValue, {
               [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
@@ -66,12 +66,12 @@ const SingleColumnPanel = ({
           {context === "startMining" ? (
             <div className={styles.labelValueContainer}>
               <div className={styles.label}>
-                <Text type="value" variant="subheading" color="white">
+                <Text type="value" variant="smallBody" color="white">
                   {item.label}
                 </Text>
               </div>
               <div className={styles.value}>
-                <Text type="value" variant="subheading" color="white">
+                <Text type="value" variant="smallBody" color="white">
                   {item.value || ""}
                 </Text>
               </div>

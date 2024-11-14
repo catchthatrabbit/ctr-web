@@ -65,18 +65,19 @@ const StartMining = ({
         <InfoPanel
           title="How to start minig"
           text="Step by step guide to get you hop on board."
-          link=""
+          link="#steps"
           linkText="View section"
         />
         <InfoPanel
           title="Pools"
           text="View all geo-locations you can use."
-          link=""
+          link="#pools"
           linkText="View section"
         />
       </div>
       <Spacer variant="xxxl" />
       <Spacer variant="sm" />
+      <span id="steps"></span>
       <GuideTitle />
       <Spacer variant="xxl" />
 
@@ -85,11 +86,12 @@ const StartMining = ({
       <Spacer variant="xl" />
       <span id="pools"></span>
       <Spacer variant="md" />
+
       <PoolTitle />
       <Spacer variant="xl" />
       <div className={`flex flex-column ${styles.poolContainer}`}>
         {Object.keys(REGIONS).map((REGION_KEY, index) => (
-          <div key={index}>
+          <div key={index} className={styles.poolTable}>
             <div
               className={`flex ${styles.dropdownHeader}`}
               onClick={() => toggleRegion(REGION_KEY)}
@@ -97,8 +99,8 @@ const StartMining = ({
               {startMiningPoolConfigurations[REGION_KEY][`NAME`]}
               <DropdownIconDown
                 style={{
-                  width: "20px",
-                  height: "20px",
+                  width: "24px",
+                  height: "24px",
                   color: "pink",
                   transform:
                     openRegion === REGION_KEY
@@ -154,7 +156,7 @@ const StartMining = ({
           </div>
         ))}
       </div>
-      <Spacer variant="xl" />
+      <Spacer variant="xxxl" />
     </>
   );
 };

@@ -12,6 +12,18 @@ interface BlockProps {
 }
 
 const InfoPanel: React.FC<BlockProps> = ({ title, text, link, linkText }) => {
+  const handleLinkClick = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    if (link.startsWith("#")) {
+      event.preventDefault();
+      const targetElement = document.getElementById(link.substring(1));
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <div className={`flex flex-column ${styles.block}`}>
       <Text
@@ -27,7 +39,7 @@ const InfoPanel: React.FC<BlockProps> = ({ title, text, link, linkText }) => {
       </Text>
       <Spacer variant="xs" />
 
-      <a href={link} className={styles.link}>
+      <a href={link} className={styles.link} onClick={handleLinkClick}>
         <Text variant="smallBody" color="primary" weight="bold">
           {linkText}
         </Text>
