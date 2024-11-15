@@ -31,7 +31,7 @@ const stepsData: Step[] = [
     number: 1,
     title: "Download CorePass",
     text: "Download CorePass mobile app, wallet where you can securely store your rewards.",
-    link: "#",
+    link: "https://corepass.net/",
     linkText: "Open Corepass site",
     image: true,
   },
@@ -133,6 +133,8 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
                   {step.button && <Spacer variant="xl" />}
                   <a
                     href={step.link}
+                    target="_blank"
+                    rel="noreferrer"
                     className={`flex items-center ${styles.linkSteps} ${styles.link}`}
                   >
                     <OpenInNew />
