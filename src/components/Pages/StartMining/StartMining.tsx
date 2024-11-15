@@ -1,9 +1,11 @@
+import React, { useState, useRef } from "react";
 import { SingleColumnPanel } from "@site/src/components/Molecules/SingleColumnPanel";
 import { REGIONS } from "@site/src/constants/regions";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import {
   GetStartedTitle,
   PoolTitle,
+  GuideTitle,
 } from "@site/src/components/Molecules/PictureTitles";
 import {
   Panel,
@@ -11,7 +13,6 @@ import {
   Title,
 } from "@site/src/components/Molecules/Panel";
 import { Text } from "@site/src/components/Atoms/Text";
-import { useRef } from "react";
 import Link from "@docusaurus/Link";
 import clsx from "clsx";
 import { Search } from "@site/src/components/Molecules/Search";
@@ -19,6 +20,9 @@ import { useFetchSettings } from "@site/src/hooks/useSettings";
 import { useHeaders } from "@site/src/hooks/useHeaders";
 import { IAnyPageAndWallet } from "../types";
 import { useControls } from "./controls";
+import { InfoPanel } from "@site/src/components/Molecules/InfoPanel";
+import { Steps } from "../../Molecules/Steps";
+import { DropdownIconDown } from "@site/src/icons";
 
 import styles from "./styles.module.css";
 
@@ -29,11 +33,8 @@ const StartMining = ({
   onSetWalletAddress,
   onChangeRegion,
 }: IStartMining) => {
-  const {
-    startMiningPoolConfigurations,
-    githubReleaseDownloadUrl,
-
-  } = useControls();
+  const { startMiningPoolConfigurations, githubReleaseDownloadUrl } =
+    useControls();
 
   const inputStartMiningRef = useRef<HTMLInputElement>();
 
@@ -45,100 +46,117 @@ const StartMining = ({
 
   const { data: fetchSettings } = useFetchSettings(region);
 
+  const [openRegion, setOpenRegion] = useState<string | null>(null);
+
+  const toggleRegion = (regionKey: string) => {
+    setOpenRegion(openRegion === regionKey ? null : regionKey);
+  };
+
   return (
     <>
-      <Spacer variant="xxxxl" />
+      <Spacer variant="sm" />
+      <Spacer variant="md" />
+
       <span id="start"></span>
       <GetStartedTitle />
-      <Spacer variant="lg" />
-      <Panel variant="heading3" title="Configure your device">
-        <PanelContent>
-        <Text variant="body" type="value">
-            Download software:
-          </Text>
-          <Spacer variant="lg" />
-          <div className="grid grid-row-gap grid-col-gap xl-grid-col--6 lg-grid-col--6 md-grid-col--4 sm-grid-col--2 xs-grid-col--1">
-            <div
-              className={clsx(styles.buttonConfigLessPadding)}
-            >
-              <Link to={githubReleaseDownloadUrl} className="link-button">
-                CoreMiner for Linux
-              </Link>
-              <Link to="/docs/intro" className="link-button">
-                Auto-install script
-              </Link>
-            </div>
-          </div>
-          <Spacer variant="lg" />
-          <Text variant="body" type="value">
-            Choose the configuration type:
-          </Text>
-          <Spacer variant="lg" />
-          <div className="grid grid-row-gap grid-col-gap xl-grid-col--6 lg-grid-col--6 md-grid-col--4 sm-grid-col--2 xs-grid-col--1">
-            <div
-              className={clsx(styles.buttonConfigLessPadding)}
-            >
-              <Link to="/docs/intro" className="link-button">
-                Open configuration manual
-              </Link>
-              <Link to="/docs/intro" className="link-button">
-                Create config file
-              </Link>
-            </div>
-          </div>
-          <Spacer variant="lg" />
-          <Title title="Open your account">
-            <Text type="value" variant="body">
-              To access the Dashboard, type your address below.
-            </Text>
-            <Spacer variant="lg" />
-            <div className={clsx(styles.marginAuto, "col col--11")}>
-              <Search onSearch={handleSearch} />
-            </div>
-          </Title>
-        </PanelContent>
-      </Panel>
+      <Spacer variant="sm" />
+      <Spacer variant="md" />
+      <div className={`flex ${styles.infoPanel}`}>
+        <InfoPanel
+          title="How to start minig"
+          text="Step by step guide to get you hop on board."
+          link="#steps"
+          linkText="View section"
+        />
+        <InfoPanel
+          title="Pools"
+          text="View all geo-locations you can use."
+          link="#pools"
+          linkText="View section"
+        />
+      </div>
+      <Spacer variant="xxxl" />
+      <Spacer variant="sm" />
+      <span id="steps"></span>
+      <GuideTitle />
+      <Spacer variant="xxl" />
+
+      <Steps onSetWalletAddress={onSetWalletAddress} />
+
       <Spacer variant="xl" />
       <span id="pools"></span>
+      <Spacer variant="md" />
+
       <PoolTitle />
       <Spacer variant="xl" />
-      {Object.keys(REGIONS).map((REGION_KEY, index) => (
-        <div key={index}>
-          <SingleColumnPanel
-            id={REGION_KEY.toLowerCase()}
-            title={startMiningPoolConfigurations[REGION_KEY][`NAME`]}
-            description={startMiningPoolConfigurations[REGION_KEY][`DESCRIPTION`]}
-            data={[
-              {
-                label: "Server",
-                value: startMiningPoolConfigurations[REGION_KEY][`SERVER`],
-              },
-              {
-                label: "Port",
-                value: startMiningPoolConfigurations[REGION_KEY][`PORT`],
-              },
-              {
-                label: "Username",
-                value: startMiningPoolConfigurations[REGION_KEY][`USERNAME`],
-              },
-              {
-                label: "Worker name",
-                value: startMiningPoolConfigurations[REGION_KEY][`WORKER_NAME`],
-              },
-              {
-                label: "Password",
-                value: startMiningPoolConfigurations[REGION_KEY][`PASSWORD`],
-              },
-              {
-                label: "Payouts from",
-                value: startMiningPoolConfigurations[REGION_KEY][`PAYOUT`] ? startMiningPoolConfigurations[REGION_KEY][`PAYOUT`].toUpperCase() : '',
-              },
-            ]}
-          />
-          <Spacer variant="lg" />
-        </div>
-      ))}
-      <Spacer variant="xl" />
+      <div className={`flex flex-column ${styles.poolContainer}`}>
+        {Object.keys(REGIONS).map((REGION_KEY, index) => (
+          <div key={index} className={styles.poolTable}>
+            <div
+              className={`flex ${styles.dropdownHeader}`}
+              onClick={() => toggleRegion(REGION_KEY)}
+            >
+              {startMiningPoolConfigurations[REGION_KEY][`NAME`]}
+              <DropdownIconDown
+                style={{
+                  width: "24px",
+                  height: "24px",
+                  color: "pink",
+                  transform:
+                    openRegion === REGION_KEY
+                      ? "rotate(180deg)"
+                      : "rotate(0deg)",
+                  transition: "transform 0.2s ease",
+                }}
+              />
+            </div>
+            {openRegion === REGION_KEY && (
+              <SingleColumnPanel
+                id={REGION_KEY.toLowerCase()}
+                description={
+                  startMiningPoolConfigurations[REGION_KEY][`DESCRIPTION`]
+                }
+                context="startMining"
+                data={[
+                  {
+                    label: "Server",
+                    value: startMiningPoolConfigurations[REGION_KEY][`SERVER`],
+                  },
+                  {
+                    label: "Port",
+                    value: startMiningPoolConfigurations[REGION_KEY][`PORT`],
+                  },
+                  {
+                    label: "Username",
+                    value:
+                      startMiningPoolConfigurations[REGION_KEY][`USERNAME`],
+                  },
+                  {
+                    label: "Worker name",
+                    value:
+                      startMiningPoolConfigurations[REGION_KEY][`WORKER_NAME`],
+                  },
+                  {
+                    label: "Password",
+                    value:
+                      startMiningPoolConfigurations[REGION_KEY][`PASSWORD`],
+                  },
+                  {
+                    label: "Payouts from",
+                    value: startMiningPoolConfigurations[REGION_KEY][`PAYOUT`]
+                      ? startMiningPoolConfigurations[REGION_KEY][
+                          `PAYOUT`
+                        ].toUpperCase()
+                      : "",
+                  },
+                ]}
+              />
+            )}
+            <Spacer variant="lg" />
+          </div>
+        ))}
+      </div>
+      <Spacer variant="xxxl" />
     </>
   );
 };

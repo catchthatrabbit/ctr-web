@@ -3,6 +3,7 @@ import { Panel } from "@site/src/components/Molecules/Panel";
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
+import { Spacer } from "@site/src/components/Atoms/Spacer";
 
 import styles from "./styles.module.css";
 
@@ -12,9 +13,16 @@ interface ISingleColumnPanel {
   children?: React.ReactNode;
   data: Array<{ label: string; value: string }>;
   description?: string;
+  context?: "default" | "startMining";
 }
 
-const SingleColumnPanel = ({ title, data, id, description }: ISingleColumnPanel) => {
+const SingleColumnPanel = ({
+  title,
+  data,
+  id,
+  description,
+  context = "default",
+}: ISingleColumnPanel) => {
   const { desktop, laptop, mobile, tablet } = useMediaQueries();
   return (
     <Panel
@@ -23,19 +31,26 @@ const SingleColumnPanel = ({ title, data, id, description }: ISingleColumnPanel)
       variant="heading2"
       color="primary"
       titleClassName={styles.singlePanel}
+      context={context}
     >
       {description && (
-        <div
-          className={clsx(styles.singleColumnValue, {
-            [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
-            [styles.singleColumnValuePaddingTablet]: tablet,
-            [styles.singleColumnValuePaddingMobile]: mobile,
-          })}
-        >
-          <Text type="value" variant="subheading">
-            {description}
-          </Text>
-        </div>
+        <>
+          <Spacer variant="xxs" />
+          <div
+            className={clsx(styles.singleColumnValue, {
+              [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
+              [styles.singleColumnValuePaddingTablet]: tablet,
+              [styles.singleColumnValuePaddingMobile]: mobile,
+              [styles.singleColumnValuePaddingStartMining]:
+                context === "startMining",
+            })}
+          >
+            <Text type="value" variant="subheading">
+              {description}
+            </Text>
+          </div>
+          <Spacer variant="sm" />
+        </>
       )}
       {data?.map((item, index) => (
         <div
@@ -44,15 +59,34 @@ const SingleColumnPanel = ({ title, data, id, description }: ISingleColumnPanel)
             [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
             [styles.singleColumnValuePaddingTablet]: tablet,
             [styles.singleColumnValuePaddingMobile]: mobile,
+            [styles.singleColumnValuePaddingStartMining]:
+              context === "startMining",
           })}
         >
-          <Text type="value" variant="subheading">
-            {`${item.label}:`}
-          </Text>
-          &nbsp;&nbsp;
-          <Text type="value" variant="subheading">
-            {item.value || ""}
-          </Text>
+          {context === "startMining" ? (
+            <div className={styles.labelValueContainer}>
+              <div className={styles.label}>
+                <Text type="value" variant="smallBody" color="white">
+                  {item.label}
+                </Text>
+              </div>
+              <div className={styles.value}>
+                <Text type="value" variant="smallBody" color="white">
+                  {item.value || ""}
+                </Text>
+              </div>
+            </div>
+          ) : (
+            <>
+              <Text type="value" variant="subheading">
+                {`${item.label}:`}
+              </Text>
+              &nbsp;&nbsp;
+              <Text type="value" variant="subheading">
+                {item.value || ""}
+              </Text>
+            </>
+          )}
         </div>
       ))}
     </Panel>

@@ -39,7 +39,14 @@ const CopyPermalinkButton = ({ textToCopy, onCopy }: ICopyButton) => {
     notify();
   };
 
-  return <Button onClick={handleCopy} value="Copy permalink" icon={<Copy />} />;
+  return (
+    <Button
+      onClick={handleCopy}
+      value="Copy permalink"
+      icon={<Copy />}
+      textColor="var(--ifm-color-primary)"
+    />
+  );
 };
 
 export default CopyPermalinkButton;

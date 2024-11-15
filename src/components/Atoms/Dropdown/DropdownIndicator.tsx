@@ -3,7 +3,8 @@ import { components } from "react-select";
 import { DropdownIconDown } from "@site/src/icons";
 
 const CustomDropdownIndicator = (props) => {
-  const { menuIsOpen } = props.selectProps;
+  const { selectProps } = props;
+  const { menuIsOpen } = selectProps;
 
   return (
     <components.DropdownIndicator {...props}>

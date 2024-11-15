@@ -6,7 +6,7 @@
   user-select: none;
   border-radius: 10px;
   color: var(--ifm-color-primary);
-  padding: var(--space-xs);
+  padding: var(--space-xxs) var(--space-sm);
   text-align: center;
   white-space: nowrap;
   border: none;

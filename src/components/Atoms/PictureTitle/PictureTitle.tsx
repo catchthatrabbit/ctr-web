@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 
 interface IPictureTitle {
   title: string;
+  titleStyles?: React.CSSProperties;
   image: React.ReactNode;
   flexStart?: boolean;
   secondaryText?: string;
@@ -14,6 +15,7 @@ interface IPictureTitle {
 const PictureTitle = ({
   image,
   title,
+  titleStyles,
   flexStart,
   secondaryText,
   secondaryTextStyle,
@@ -30,6 +32,7 @@ const PictureTitle = ({
         lineHeight="mediumLineHeight"
         color="white"
         letterSpacing="letterSpacing"
+        style={{ ...titleStyles }}
       >
         {title}
       </Text>

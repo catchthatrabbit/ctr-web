@@ -38,7 +38,12 @@ const CopyButton = ({ textToCopy, onCopy }: ICopyButton) => {
     notify();
   };
   return (
-    <Button onClick={handleCopy} value="Copy wallet address" icon={<Copy />} />
+    <Button
+      onClick={handleCopy}
+      value="Copy wallet address"
+      icon={<Copy />}
+      textColor="var(--ifm-color-primary)"
+    />
   );
 };
 

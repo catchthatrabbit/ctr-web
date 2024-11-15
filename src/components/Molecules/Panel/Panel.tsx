@@ -24,6 +24,7 @@ interface IPanel {
   className?: string;
   weight?: "normal" | "bold" | "extraBold" | "semiBold";
   handleFilterChange?: (status: string) => void;
+  context?: "default" | "startMining";
 }
 
 const Panel = ({
@@ -36,8 +37,9 @@ const Panel = ({
   color = "white",
   weight = "bold",
   handleFilterChange,
+  context = "default",
 }: IPanel) => {
-  const [activeButton, setActiveButton] = useState("All"); // Add state for active button
+  const [activeButton, setActiveButton] = useState("All");
 
   const handleButtonClick = (status: string) => {
     setActiveButton(status);
@@ -45,45 +47,54 @@ const Panel = ({
   };
 
   return (
-    <div id={id} className={clsx(styles.panelRoot, className)}>
-      <div className={clsx(styles.panelTitleBase, styles.panelTitle)}>
-        <Text
-          color={color}
-          variant={variant}
-          className={titleClassName}
-          weight={weight}
-        >
-          {title}
-        </Text>
-        {handleFilterChange && (
-          <div className={styles.panelTitleBtns}>
-            <button
-              className={clsx({
-                [styles.activeButton]: activeButton === "All",
-              })}
-              onClick={() => handleButtonClick("All")}
-            >
-              All
-            </button>
-            <button
-              className={clsx({
-                [styles.activeButton]: activeButton === "Running",
-              })}
-              onClick={() => handleButtonClick("Running")}
-            >
-              Running
-            </button>
-            <button
-              className={clsx({
-                [styles.activeButton]: activeButton === "Inactive",
-              })}
-              onClick={() => handleButtonClick("Inactive")}
-            >
-              Inactive
-            </button>
-          </div>
-        )}
-      </div>
+    <div
+      id={id}
+      className={clsx(
+        styles.panelRoot,
+        className,
+        context === "startMining" && styles.startMiningPanel,
+      )}
+    >
+      {title && (
+        <div className={clsx(styles.panelTitleBase, styles.panelTitle)}>
+          <Text
+            color={color}
+            variant={variant}
+            className={titleClassName}
+            weight={weight}
+          >
+            {title}
+          </Text>
+          {handleFilterChange && (
+            <div className={styles.panelTitleBtns}>
+              <button
+                className={clsx({
+                  [styles.activeButton]: activeButton === "All",
+                })}
+                onClick={() => handleButtonClick("All")}
+              >
+                All
+              </button>
+              <button
+                className={clsx({
+                  [styles.activeButton]: activeButton === "Running",
+                })}
+                onClick={() => handleButtonClick("Running")}
+              >
+                Running
+              </button>
+              <button
+                className={clsx({
+                  [styles.activeButton]: activeButton === "Inactive",
+                })}
+                onClick={() => handleButtonClick("Inactive")}
+              >
+                Inactive
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
       {children}
     </div>

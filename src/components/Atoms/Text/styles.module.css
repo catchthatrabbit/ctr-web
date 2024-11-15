@@ -47,7 +47,7 @@
 }
 
 .regular {
-  font-weight: var(--regular-font-weight);
+  font-size: var(--regular-font-size);
 }
 
 .small {
@@ -58,6 +58,9 @@
   font-size: var(--medium-font-size);
 }
 
+.large{
+  font-size: var(--large-font-size);
+}
 
 
 .pictureTitle{

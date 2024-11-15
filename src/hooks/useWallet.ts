@@ -29,6 +29,7 @@ export const useWalletPage = () => {
 
   const handleWalletAddress = (walletAddress: string) => {
     setWalletAddress(walletAddress);
+    console.log("Search query:", walletAddress);
   };
 
   const handleChangeRegion = (selectedRegion: STANDARD_REGIONS_API_KEYS) => {

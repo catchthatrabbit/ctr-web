@@ -1,12 +1,11 @@
 import PictureTitle from "@site/src/components/Atoms/PictureTitle/PictureTitle";
-import { Dive } from "@site/src/icons";
 
-const PoolTitle = () => {
+const GuideTitle = () => {
   return (
     <PictureTitle
-      title="Pools"
+      title="How to start mining"
       titleStyles={{ fontWeight: "800", fontFamily: "Exo" }}
-      secondaryText="We have several geo-locations to choose from:"
+      secondaryText="Step by step guide to mine your first XCB."
       secondaryTextStyle={{
         fontSize: "var(--regular-font-size)",
         marginTop: "0px",
@@ -15,4 +14,4 @@ const PoolTitle = () => {
   );
 };
 
-export default PoolTitle;
+export default GuideTitle;

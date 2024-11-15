@@ -1,5 +1,6 @@
 .singleColumnValue {
     display: flex;
+    
 }
 
 .singleColumnValuePaddingDesktop{
@@ -24,3 +25,50 @@
 .singlePanel{
     cursor:auto;
 }
+
+.singleColumnValuePaddingStartMining{
+    padding: 0;
+}
+
+.labelValueContainer {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #292929;
+   
+  }
+
+
+  .singleColumnValue:nth-child(odd) .labelValueContainer {
+    background-color: rgba(27, 28, 28, 255);
+  }
+
+  .singleColumnValue:nth-child(even) .labelValueContainer {
+    background-color: rgba(20, 20, 20, 255);
+  }
+
+  .singleColumnValue:not(:first-child){
+    background-color: transparent;
+  }
+  
+  
+  
+  .label {
+    flex: 1;
+    padding: 14px;
+    position: relative;
+  }
+  .label::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 91%; 
+    width: 1px;
+    background-color: #292929;
+  }
+
+
+  .value {
+    flex: 3;
+    padding: 14px 0;
+  }
