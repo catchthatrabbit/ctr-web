@@ -135,6 +135,7 @@ const Wallet = ({
                     okEmoji,
                     brbEmoji,
                   )}
+                  hidePagination
                   dataTableColumns={workersTableColumn}
                   total={fetchWorkersByWalletAddress?.workersTotal}
                   onPageChange={handleChangePageWorkers}

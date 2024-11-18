@@ -62,6 +62,7 @@ const Blocks = () => {
             onPageChange={handlePageChange}
             dataTableColumns={dataTableColumns}
             total={fetchedMaturedBlocks?.maturedTotal}
+            hidePagination={true}
           />
         }
         immature={
@@ -74,6 +75,7 @@ const Blocks = () => {
             onPageChange={handlePageChange}
             dataTableColumns={dataTableColumns}
             total={fetchedImMatureBlocks?.immatureTotal}
+            hidePagination={true}
           />
         }
         candidates={
@@ -86,6 +88,7 @@ const Blocks = () => {
             onPageChange={handlePageChange}
             dataTableColumns={dataTableColumns}
             total={fetchCandidatesBlocks?.candidatesTotal}
+            hidePagination={true}
           />
         }
         activeTab={activeTab}

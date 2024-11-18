@@ -19,7 +19,8 @@ const DataTable = ({
   isLoading,
   loadingComp = <></>,
   itemsPerPage = 10, // Add itemsPerPage prop
-  isWalletPage = false,
+  context,
+  hidePagination = false,
 }: IDataTable) => {
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -39,7 +40,10 @@ const DataTable = ({
   ) : (
     <>
       <table
-        className={clsx(styles.table, isWalletPage && styles.walletTable)}
+        className={clsx(
+          styles.table,
+          context === "wallet" && styles.walletTable,
+        )}
         border={0}
       >
         <thead>
@@ -50,7 +54,7 @@ const DataTable = ({
                 className={clsx(
                   colItem.alignToCenter && styles.tableCenteredText,
                   colIndex === 0 && styles.tablePaddingLeft,
-                  isWalletPage && styles.walletTableHeader,
+                  context === "wallet" && styles.walletTableHeader,
                 )}
               >
                 <Text
@@ -133,11 +137,14 @@ const DataTable = ({
           ))}
         </tbody>
       </table>
-      <Pagination
-        offset={currentPage}
-        total={data ? data.length : 0}
-        onPageChange={handlePageChange}
-      />
+      {!hidePagination && (
+        <Pagination
+          limit={itemsPerPage}
+          offset={currentPage}
+          total={data ? data.length : 0}
+          onPageChange={handlePageChange}
+        />
+      )}
     </>
   );
 };

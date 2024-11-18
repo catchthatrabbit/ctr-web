@@ -18,7 +18,7 @@ interface IList {
   total?: number;
   onPageChange?: (currentPage: number) => void;
   isLoading?: boolean;
-  isWalletPage?: boolean;
+  context?: string;
   filterStatus?: string;
 }
 
@@ -29,7 +29,7 @@ const List = ({
   total,
   hidePagination,
   isLoading,
-  isWalletPage,
+  context,
   filterStatus = "All",
 }: IList) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -65,7 +65,8 @@ const List = ({
               data={filteredData}
               isLoading={isLoading}
               loadingComp={<LoadingPlaceholder />}
-              isWalletPage={isWalletPage}
+              context={context}
+              hidePagination={hidePagination}
             />
           </div>
 
