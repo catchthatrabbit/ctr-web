@@ -175,7 +175,6 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
 
       <List
         dataTableColumns={recentMatureBlockListColumns}
-        hidePagination
         isLoading={isLoadingAllRegionMaturedBlocks}
         data={convertMaturedResponseToRecentBlocksInfo(AllRegionsMaturedBlocks)}
       />

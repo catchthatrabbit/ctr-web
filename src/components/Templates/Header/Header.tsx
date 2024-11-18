@@ -64,6 +64,7 @@ const Header = ({
         <>
           {iban && <IBan iBan={iban} />}
           <Spacer variant="xxs" />
+          {context === "blocks" && <Spacer variant="xl" />}
           <div
             className={clsx("flex", {
               [styles.blocksContainer]: context === "blocks",
@@ -78,7 +79,10 @@ const Header = ({
               <Text
                 variant="subheading"
                 color="subheadingColor"
-                style={{ width: context === "blocks" ? "100%" : "50%" }}
+                style={{
+                  width: context === "blocks" ? "95%" : "50%",
+                  marginBottom: "8px",
+                }}
               >
                 Mining pool
               </Text>
@@ -96,7 +100,7 @@ const Header = ({
           </div>
         </>
       )}
-      <Spacer variant="xl" />
+      {context === "blocks" ? <Spacer variant="md" /> : <Spacer variant="xl" />}
 
       {layout.boards && (
         <>
@@ -116,7 +120,7 @@ const Header = ({
         </>
       )}
       {children}
-      <Spacer variant="md" />
+      {context !== "blocks" && <Spacer variant="md" />}
     </>
   );
 };

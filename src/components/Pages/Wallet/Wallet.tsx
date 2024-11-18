@@ -138,21 +138,22 @@ const Wallet = ({
                   dataTableColumns={workersTableColumn}
                   total={fetchWorkersByWalletAddress?.workersTotal}
                   onPageChange={handleChangePageWorkers}
-                  isWalletPage={true}
+                  context="wallet"
                   filterStatus={filterStatus} // Pass filterStatus prop
                 />
               </>
             }
             payouts={
               <List
+                dataTableColumns={paymentPayoutTableColumns}
+                hidePagination
                 isLoading={isLoadingFetchPaymentByWalletAddress}
                 data={convertPaymentsResponse2PaymentInfo(
                   fetchPaymentsByWalletAddress,
                 )}
-                dataTableColumns={paymentPayoutTableColumns}
                 total={fetchedWalletInfo?.paymentsTotal}
                 onPageChange={handleChangePagePayouts}
-                isWalletPage={true}
+                context="wallet"
               />
             }
           />

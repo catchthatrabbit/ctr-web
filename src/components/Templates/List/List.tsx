@@ -68,17 +68,16 @@ const List = ({
               isWalletPage={isWalletPage}
             />
           </div>
-          {/* {!hidePagination && (
-            <div className={styles.paginationWrapper}>
-              <Pagination
-                offset={currentPage}
-                total={calcTotal()}
-                onPageChange={handlePageChange}
-                isLoading={isLoading}
-                loadingComp={<LoadingPlaceholder />}
-              />
-            </div>
-          )} */}
+
+          <div className={styles.paginationWrapper}>
+            <Pagination
+              offset={currentPage}
+              total={calcTotal()}
+              onPageChange={handlePageChange}
+              isLoading={isLoading}
+              loadingComp={<LoadingPlaceholder />}
+            />
+          </div>
         </div>
       </div>
     </div>

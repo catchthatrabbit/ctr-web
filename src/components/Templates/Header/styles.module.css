@@ -6,8 +6,9 @@
 .blocksContainer{
     flex-direction: row-reverse;
     justify-content: space-between;
-    align-items: end;
+    align-items: flex-end; 
 }
+
 
 .boardDropdown{
     width: 588px;

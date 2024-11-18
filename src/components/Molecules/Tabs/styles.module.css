@@ -7,9 +7,9 @@
 }
 
 .tabs button{
-    padding: var(--space-xs) var(--space-xxl);
-    background-color: #292929;
-    border: 1px solid #474747;
+  padding: var(--space-xs)  var(--space-xxl);
+  background-color: #1B1C1C;
+  border: 1px solid #292929;
    
 }
 

@@ -134,7 +134,6 @@ const DataTable = ({
         </tbody>
       </table>
       <Pagination
-        limit={itemsPerPage}
         offset={currentPage}
         total={data ? data.length : 0}
         onPageChange={handlePageChange}
