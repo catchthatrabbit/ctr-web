@@ -15,6 +15,12 @@
     margin: auto;
 }
 
+.blocksDropdown{
+ align-items: flex-start;
+ align-content: flex-end;
+    
+}
+
 .boardJustifyCenter{
     justify-content: center;
 }

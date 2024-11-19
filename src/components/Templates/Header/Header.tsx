@@ -74,6 +74,7 @@ const Header = ({
               className={clsx("flex flex-column flex-column-center", {
                 "flex-col--4": context === "blocks",
                 "flex-col--12": context !== "blocks",
+                [styles.blocksDropdown]: context === "blocks",
               })}
             >
               <Text
