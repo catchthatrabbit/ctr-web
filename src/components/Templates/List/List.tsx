@@ -18,7 +18,7 @@ interface IList {
   total?: number;
   onPageChange?: (currentPage: number) => void;
   isLoading?: boolean;
-  isWalletPage?: boolean;
+  context?: string;
   filterStatus?: string;
 }
 
@@ -29,7 +29,7 @@ const List = ({
   total,
   hidePagination,
   isLoading,
-  isWalletPage,
+  context,
   filterStatus = "All",
 }: IList) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -51,7 +51,13 @@ const List = ({
   });
 
   return (
-    <div className={styles.listRoot}>
+    <div
+      className={clsx(
+        styles.listRoot,
+        context === "wallet" && styles.walletListRoot,
+        context === "blocks" && styles.blocksListRoot,
+      )}
+    >
       <div>
         <div className="row">
           <div
@@ -65,20 +71,25 @@ const List = ({
               data={filteredData}
               isLoading={isLoading}
               loadingComp={<LoadingPlaceholder />}
-              isWalletPage={isWalletPage}
+              context={context}
+              hidePagination={hidePagination}
             />
           </div>
-          {/* {!hidePagination && (
-            <div className={styles.paginationWrapper}>
-              <Pagination
-                offset={currentPage}
-                total={calcTotal()}
-                onPageChange={handlePageChange}
-                isLoading={isLoading}
-                loadingComp={<LoadingPlaceholder />}
-              />
-            </div>
-          )} */}
+
+          <div
+            className={clsx(
+              styles.paginationWrapper,
+              context === "blocks" && styles.blocksPaginationWrapper, // Ensure the context value matches
+            )}
+          >
+            <Pagination
+              offset={currentPage}
+              total={calcTotal()}
+              onPageChange={handlePageChange}
+              isLoading={isLoading}
+              loadingComp={<LoadingPlaceholder />}
+            />
+          </div>
         </div>
       </div>
     </div>

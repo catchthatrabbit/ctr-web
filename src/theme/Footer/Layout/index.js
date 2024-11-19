@@ -20,6 +20,7 @@ export default function FooterLayout({ style, links, logo, copyright }) {
     >
       <div className="container content">
         <div className={customStyles.footerLayout}>
+          <Spacer variant="sm" />
           <div className="grid grid-col--2-5-1 grid-end">
             <div className="flex-column md-center-items sm-center-items xs-center-items md-center-text sm-center-text xs-center-text">
               <div

@@ -31,6 +31,7 @@
 }
 
 
+
 /* .tableRow::nth-child(even){
     background-color: var(--dart-rgb-600);
 } */
@@ -108,4 +109,24 @@
 
 .copyButton:hover > button{
     visibility: visible;
+}
+
+
+.listRoot{
+    position: relative;
+}
+
+.tableWrapper{
+    width: 100%; 
+    /* max-width: 1200px; 
+    margin: 0 auto; */
+    overflow-x: auto;
+}
+
+.listMarginInlineMobile{
+    margin-inline: calc(var(--space-xs) / 2);
+}
+
+.paginationWrapper{
+    width: 100%;
 }

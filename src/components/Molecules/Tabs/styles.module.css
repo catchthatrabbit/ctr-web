@@ -2,4 +2,27 @@
     justify-content: center;
     font-family: var(--regular-font-family)!important;
     font-size: var(--body-font-size);
+  
+    
+}
+
+.tabs button{
+  padding: var(--space-xs)  var(--space-xxl);
+  background-color: #1B1C1C;
+  border: 1px solid #292929;
+   
+}
+
+.tabs button:first-child {
+    border-top-left-radius: var(--ifm-global-radius);
+    border-bottom-left-radius: var(--ifm-global-radius);
+  }
+  
+  .tabs button:last-child {
+    border-top-right-radius: var(--ifm-global-radius);
+    border-bottom-right-radius: var(--ifm-global-radius);
+  }
+
+  .tabs .activeTab{ 
+    background-color: #141414;
 }

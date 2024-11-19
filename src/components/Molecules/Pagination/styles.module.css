@@ -59,7 +59,7 @@
     
     cursor: pointer;
     padding-inline: calc(var(--space-sm) / 2);
-    padding-block: calc(var(--space-xxs) / 4);
+    padding-block: calc(var(--space-xs) / 4);
     background-color: var(--blue-rgb-650);
     font-size: var(--small-font-size);
 }
@@ -69,7 +69,7 @@
     background-color: transparent;
     /* border-radius: var(--ifm-global-radius); */
     padding-inline: calc(var(--space-sm) / 2);
-    padding-block: calc(var(--space-xxs) / 4);
+    padding-block: calc(var(--space-xs) / 4);
     color: var(--ifm-color-emphasis-0);
 }
 
@@ -79,8 +79,8 @@
 
 .paginationNext, .paginationPrevious  {
     color: var(--ifm-color-primary);
-    padding-inline: calc(var(--space-sm) / 2);
-    padding-block: calc(var(--space-xxs) / 4);
+    padding-inline: calc(var(--space-md) / 2);
+    padding-block: calc(var(--space-xs) / 4);
     background-color: var(--blue-rgb-650);
     border: 1px solid var(--gray-700);
     border-radius: 0.5px;
@@ -98,3 +98,14 @@
     cursor: pointer;
  }
 
+ .paginationNext {
+    border-top-right-radius: calc(var(--ifm-global-radius) / 2);
+    border-bottom-right-radius: calc(var(--ifm-global-radius) / 2);
+  }
+  
+  .paginationPrevious {
+    border-top-left-radius: calc(var(--ifm-global-radius) / 2);
+    border-bottom-left-radius:  calc(var(--ifm-global-radius) / 2);
+
+  }
+  

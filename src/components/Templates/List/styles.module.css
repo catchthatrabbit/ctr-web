@@ -1,5 +1,14 @@
 .listRoot{
     position: relative;
+  
+    overflow: hidden; 
+}
+.blocksListRoot{
+    border-radius: var(--ifm-global-radius);
+}
+
+.blocksContext{
+    border-radius: var(--ifm-global-radius);
 }
 
 .tableWrapper{
@@ -16,3 +25,4 @@
 .paginationWrapper{
     width: 100%;
 }
+

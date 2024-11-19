@@ -1,3 +1,6 @@
+import React, { useState } from "react";
+import { Tabs } from "@site/src/components/Molecules/Tabs";
+
 import { Header } from "@site/src/components/Templates/Header";
 import { BlockListTabs } from "@site/src/components/Organisms/BlocksListTabs";
 import { List } from "@site/src/components/Templates/List";
@@ -21,13 +24,25 @@ const Blocks = () => {
     dropdownItems,
   } = useControls();
 
+  const [activeTab, setActiveTab] = useState("blocks");
+
+  const tabs = [
+    { label: "Blocks", value: "blocks" },
+    { label: "Immature", value: "immature" },
+    { label: "New blocks", value: "newBlocks" },
+  ];
+
   return (
     <>
-      <Spacer variant="xxxxl" />
+      <Spacer variant="xxxl" />
       <Header
         items={dropdownItems}
         defaultRegion={regionLabel}
         pageTitleComponent={<BlockTitle />}
+        tabsComponent={
+          <Tabs items={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+        }
+        context="blocks"
         onChangeRegion={handleChangeRegion}
         layout={{ boards: false, search: false, dropdown: true }}
         isLoading={
@@ -47,6 +62,8 @@ const Blocks = () => {
             onPageChange={handlePageChange}
             dataTableColumns={dataTableColumns}
             total={fetchedMaturedBlocks?.maturedTotal}
+            hidePagination={true}
+            context="blocks"
           />
         }
         immature={
@@ -59,6 +76,8 @@ const Blocks = () => {
             onPageChange={handlePageChange}
             dataTableColumns={dataTableColumns}
             total={fetchedImMatureBlocks?.immatureTotal}
+            hidePagination={true}
+            context="blocks"
           />
         }
         candidates={
@@ -71,9 +90,14 @@ const Blocks = () => {
             onPageChange={handlePageChange}
             dataTableColumns={dataTableColumns}
             total={fetchCandidatesBlocks?.candidatesTotal}
+            hidePagination={true}
+            context="blocks"
           />
         }
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
       />
+      <Spacer variant="xxxl" />
     </>
   );
 };

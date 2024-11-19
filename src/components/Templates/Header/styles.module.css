@@ -3,11 +3,28 @@
     width: 100%;
 }
 
+.blocksContainer{
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-end; 
+}
+
+
 .boardDropdown{
     width: 588px;
     margin: auto;
 }
 
+.blocksDropdown{
+ align-items: flex-start;
+ align-content: flex-end;
+    
+}
+
 .boardJustifyCenter{
     justify-content: center;
 }
+
+.smallWidth {
+    width: 384px;
+  }
