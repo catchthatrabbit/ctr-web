@@ -24,7 +24,7 @@ interface IHeader {
   }>;
   onChangeRegion?: (id: unknown) => void;
   pageTitleComponent?: React.ReactNode;
-  tabsComponent?: React.ReactNode;
+  addComponent?: React.ReactNode;
   layout?: {
     search: boolean;
     dropdown: boolean;
@@ -43,7 +43,7 @@ const Header = ({
   children,
   isLoading = false,
   pageTitleComponent,
-  tabsComponent,
+  addComponent,
   layout = { boards: true, dropdown: true, search: true },
   context,
 }: IHeader) => {
@@ -55,7 +55,7 @@ const Header = ({
         <>
           <Spacer variant="xl" />
           <div className="col col--12">
-            {/* <Search onSearch={onSearch} /> */}
+            {/* <Search context={context} onSearch={onSearch} /> */}
             {/* insert here start mining today! */}
           </div>
         </>
@@ -97,7 +97,7 @@ const Header = ({
                 onChange={onChangeRegion}
               />
             </div>
-            {tabsComponent}
+            {addComponent}
           </div>
         </>
       )}

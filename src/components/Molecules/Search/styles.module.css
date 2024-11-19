@@ -97,6 +97,8 @@
     top: 38%;
     }
 
+    /* styles for start mining page */
+
     .searchStartMining{
         display: flex;
         width: 90%;
@@ -140,4 +142,11 @@
  .searchStartMining .searchButton:hover{
     background-color: var(--white);
     color: var(--gray-700);
+}
+
+ /* styles for payments page */
+.searchPayments{
+    display: flex;
+    width: 50%;
+    align-content: center;
 }

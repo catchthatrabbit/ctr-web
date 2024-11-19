@@ -6,6 +6,7 @@ import { PaymentsTitle } from "@site/src/components/Molecules/PictureTitles";
 import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
 import useControls from "./controls";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
+import { Search } from "@site/src/components/Molecules/Search";
 
 interface IPayments extends IAnyPageAndWallet {}
 
@@ -29,13 +30,16 @@ const Payments = ({
 
   return (
     <>
-      <Spacer variant="xxxxl" />
+      <Spacer variant="lg" />
+      <Spacer variant="md" />
+
       <Header
         items={dropdownItems}
         defaultRegion={regionLabel}
         onChangeRegion={handleChangeRegion}
         isLoading={isLoadingPaymentState}
         pageTitleComponent={<PaymentsTitle />}
+        addComponent={<Search context="payments" onSearch={handleSearch} />}
         boardItems={[
           {
             desc: "Sent payments",
@@ -45,6 +49,7 @@ const Payments = ({
             suffix: "",
           },
         ]}
+        context="payments"
         onSearch={handleSearch}
       />
       <List

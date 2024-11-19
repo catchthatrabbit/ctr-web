@@ -39,7 +39,7 @@ const Blocks = () => {
         items={dropdownItems}
         defaultRegion={regionLabel}
         pageTitleComponent={<BlockTitle />}
-        tabsComponent={
+        addComponent={
           <Tabs items={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
         }
         context="blocks"

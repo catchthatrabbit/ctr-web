@@ -10,7 +10,7 @@ import styles from "./styles.module.css"; // Ensure this import is correct
 
 interface ISearch extends InputHTMLAttributes<HTMLInputElement> {
   onSearch?: (searchQuery: string) => void;
-  context?: "wallet" | "main" | "startMining";
+  context?: "wallet" | "main" | "startMining" | "payments";
 }
 
 const Search = forwardRef<HTMLInputElement, ISearch>(
@@ -33,8 +33,8 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
       <div
         className={clsx("row", styles.search, {
           [styles.searchWallet]: context === "wallet",
-          [styles.searchMain]: context === "main",
           [styles.searchStartMining]: context === "startMining",
+          [styles.searchPayments]: context === "payments",
         })}
       >
         {context !== "startMining" && (
