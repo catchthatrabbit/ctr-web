@@ -29,7 +29,7 @@ const BlockListTabs = ({
     }
   };
 
-  return <div>{renderContent()}</div>;
+  return renderContent();
 };
 
 export default BlockListTabs;

@@ -43,6 +43,7 @@ const DataTable = ({
         className={clsx(
           styles.table,
           context === "wallet" && styles.walletTable,
+          context === "blocks" && styles.blocksTable,
         )}
         border={0}
       >

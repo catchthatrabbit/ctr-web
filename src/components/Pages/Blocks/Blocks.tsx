@@ -63,6 +63,7 @@ const Blocks = () => {
             dataTableColumns={dataTableColumns}
             total={fetchedMaturedBlocks?.maturedTotal}
             hidePagination={true}
+            context="blocks"
           />
         }
         immature={
@@ -76,6 +77,7 @@ const Blocks = () => {
             dataTableColumns={dataTableColumns}
             total={fetchedImMatureBlocks?.immatureTotal}
             hidePagination={true}
+            context="blocks"
           />
         }
         candidates={
@@ -89,11 +91,13 @@ const Blocks = () => {
             dataTableColumns={dataTableColumns}
             total={fetchCandidatesBlocks?.candidatesTotal}
             hidePagination={true}
+            context="blocks"
           />
         }
         activeTab={activeTab}
         onTabChange={setActiveTab}
       />
+      <Spacer variant="xxxl" />
     </>
   );
 };

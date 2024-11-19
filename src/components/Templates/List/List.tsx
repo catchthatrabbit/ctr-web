@@ -51,7 +51,13 @@ const List = ({
   });
 
   return (
-    <div className={styles.listRoot}>
+    <div
+      className={clsx(
+        styles.listRoot,
+        context === "wallet" && styles.walletListRoot,
+        context === "blocks" && styles.blocksListRoot,
+      )}
+    >
       <div>
         <div className="row">
           <div
@@ -70,7 +76,12 @@ const List = ({
             />
           </div>
 
-          <div className={styles.paginationWrapper}>
+          <div
+            className={clsx(
+              styles.paginationWrapper,
+              context === "blocks" && styles.blocksPaginationWrapper, // Ensure the context value matches
+            )}
+          >
             <Pagination
               offset={currentPage}
               total={calcTotal()}
