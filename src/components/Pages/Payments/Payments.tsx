@@ -7,6 +7,10 @@ import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
 import useControls from "./controls";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { Search } from "@site/src/components/Molecules/Search";
+import { Board } from "@site/src/components/Atoms/Board";
+
+import clsx from "clsx";
+import styles from "./styles.module.css";
 
 interface IPayments extends IAnyPageAndWallet {}
 
@@ -40,15 +44,6 @@ const Payments = ({
         isLoading={isLoadingPaymentState}
         pageTitleComponent={<PaymentsTitle />}
         addComponent={<Search context="payments" onSearch={handleSearch} />}
-        boardItems={[
-          {
-            desc: "Sent payments",
-            value: TextFormat.getNumberText(fetchedPaymentsState?.paymentsTotal)
-              .text,
-            prefix: "",
-            suffix: "",
-          },
-        ]}
         context="payments"
         onSearch={handleSearch}
       />
@@ -58,7 +53,25 @@ const Payments = ({
         dataTableColumns={dataTableColumns}
         onPageChange={handlePageChange}
         total={fetchedPaymentsList?.paymentsTotal}
+        hidePagination
+        context="blocks"
       />
+      <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
+        <Spacer variant="sm" />
+        <Spacer variant="md" />
+        <Board
+          isLoading={isLoadingPaymentState}
+          description="Sent payments"
+          value={
+            TextFormat.getNumberText(fetchedPaymentsState?.paymentsTotal).text
+          }
+          context="payments"
+          prefix=""
+          suffix=""
+        />
+        <Spacer variant="sm" />
+        <Spacer variant="md" />
+      </div>
     </>
   );
 };

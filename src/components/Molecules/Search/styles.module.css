@@ -147,6 +147,44 @@
  /* styles for payments page */
 .searchPayments{
     display: flex;
-    width: 50%;
+  
     align-content: center;
+}
+
+.searchPayments  .searchContainer {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+
+
+.searchPayments  .searchInput{
+    flex: 1;
+    background-color: var(--dark-rgb-600);
+    color: var(--white);
+    height: 52px;
+    width: 474px;
+    padding: 15px 20px 18px 47px;
+}
+
+.searchPayments .searchInput::placeholder{
+    color: var(--ifm-subheading-color);
+}
+
+.searchPayments .searchButton{
+    background-color: var(--ifm-guide-btn-color);
+    color: var(--ifm-color-primary);
+    border-radius: var(--ifm-global-radius);
+ 
+}
+
+.searchPayments .searchButton:hover{
+    background-color: var(--white);
+    color: var(--gray-700);
+}
+.searchPayments  .searchButtonDesktop{
+    margin-left: 10px;
+    left: 100%;
+    top: 38%;
 }

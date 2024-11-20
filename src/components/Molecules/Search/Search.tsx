@@ -29,6 +29,20 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
       }
     };
 
+    const placeholderTextMap = {
+      wallet: "Wallet address",
+      startMining: "Wallet address",
+      payments: "Wallet address",
+      main: "Search your miners",
+    };
+
+    const labelTextMap = {
+      wallet: "Corepass wallet address",
+      startMining: "Wallet address",
+      payments: "Wallet",
+      main: "Wallet address",
+    };
+
     return (
       <div
         className={clsx("row", styles.search, {
@@ -39,9 +53,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
       >
         {context !== "startMining" && (
           <Text lineHeight="smallLineHeight" color="subheadingColor">
-            {context === "wallet"
-              ? "Corepass wallet address"
-              : "Wallet address"}
+            {labelTextMap[context] || "Wallet address"}
           </Text>
         )}
         <div className={styles.searchContainer}>
@@ -50,14 +62,11 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
               [styles.searchInputMobile]: mobile,
               [styles.searchWallet]: context === "wallet",
             })}
-            placeholder={
-              context === "wallet" || context === "startMining"
-                ? "Wallet address"
-                : "Search your miners"
-            }
+            placeholder={placeholderTextMap[context] || "Search your miners"}
             ref={ref || inputRef}
             onPressEnter={handleSearch}
             icon={<SearchIcon />}
+            context={context}
             {...restProps}
           />
         </div>

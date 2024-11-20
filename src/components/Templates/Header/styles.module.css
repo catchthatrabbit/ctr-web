@@ -9,6 +9,13 @@
     align-items: flex-end; 
 }
 
+.paymentsContainer{
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-end; 
+}
+
 
 .boardDropdown{
     width: 588px;

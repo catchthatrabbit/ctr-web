@@ -9,7 +9,10 @@ interface IInputText extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const InputText = forwardRef<HTMLInputElement, IInputText>(
-  ({ className, placeholder, onPressEnter, icon, ...restProps }, ref) => {
+  (
+    { className, placeholder, onPressEnter, icon, context, ...restProps },
+    ref,
+  ) => {
     const handleSearchOnPressEnter = (e: { key: string }) => {
       if (e.key === "Enter" && typeof onPressEnter === "function") {
         onPressEnter();
@@ -18,7 +21,15 @@ const InputText = forwardRef<HTMLInputElement, IInputText>(
 
     return (
       <div className={styles.inputContainer}>
-        {icon && <span className={styles.icon}>{icon}</span>}
+        {icon && (
+          <span
+            className={clsx(styles.icon, {
+              [styles.smallIcon]: context === "payments",
+            })}
+          >
+            {icon}
+          </span>
+        )}
         <input
           ref={ref}
           {...restProps}

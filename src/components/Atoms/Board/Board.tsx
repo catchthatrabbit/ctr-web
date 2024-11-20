@@ -15,7 +15,7 @@ interface IBoard {
   dir?: "vert" | "hor" | "column";
   boardClassNameHor?: string;
   boardClassNameColumn?: string;
-  context?: "mapChart" | "statsChart";
+  context?: "mapChart" | "statsChart" | "payments";
 }
 
 const Board = ({
@@ -37,6 +37,7 @@ const Board = ({
         className={clsx(styles.content, {
           [styles.boardClassNameHor]: dir === "hor",
           [styles.boardClassNameColumn]: dir === "column",
+          [styles.boardTotal]: context === "payments",
         })}
       >
         <div className={`${styles.boardItem} ${styles.number}`}>
@@ -47,11 +48,17 @@ const Board = ({
           ) : (
             <Text
               variant={
-                context === "statsChart" ? "heading2-mobile" : "subheading"
+                context === "statsChart" || context === "payments"
+                  ? "heading2-mobile"
+                  : "subheading"
               }
-              weight="bold"
+              weight={context === "payments" ? "extraBold" : "bold"}
               color={
-                context === "statsChart" ? "primaryColor" : "valueChartColor"
+                context === "payments"
+                  ? "white"
+                  : context === "statsChart"
+                    ? "primaryColor"
+                    : "valueChartColor"
               }
             >
               {value || "0"}
