@@ -1,0 +1,9 @@
+.boardRoot {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-lg);
+  }
+  
+  .boardJustifyCenter {
+    justify-content: center;
+  }
