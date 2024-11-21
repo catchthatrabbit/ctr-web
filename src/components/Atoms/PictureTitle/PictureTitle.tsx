@@ -26,9 +26,9 @@ const PictureTitle = ({
     >
       <div className={styles.pictureImg}>{image}</div>
       <Text
-        type="regular"
+        type="exo"
         size="pictureTitle"
-        weight="semiBold"
+        weight="extraBold"
         lineHeight="mediumLineHeight"
         color="white"
         letterSpacing="letterSpacing"

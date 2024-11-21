@@ -6,6 +6,11 @@ import { PaymentsTitle } from "@site/src/components/Molecules/PictureTitles";
 import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
 import useControls from "./controls";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
+import { Search } from "@site/src/components/Molecules/Search";
+import { Board } from "@site/src/components/Atoms/Board";
+
+import clsx from "clsx";
+import styles from "./styles.module.css";
 
 interface IPayments extends IAnyPageAndWallet {}
 
@@ -29,22 +34,17 @@ const Payments = ({
 
   return (
     <>
-      <Spacer variant="xxxxl" />
+      <Spacer variant="lg" />
+      <Spacer variant="md" />
+
       <Header
         items={dropdownItems}
         defaultRegion={regionLabel}
         onChangeRegion={handleChangeRegion}
         isLoading={isLoadingPaymentState}
         pageTitleComponent={<PaymentsTitle />}
-        boardItems={[
-          {
-            desc: "Sent payments",
-            value: TextFormat.getNumberText(fetchedPaymentsState?.paymentsTotal)
-              .text,
-            prefix: "",
-            suffix: "",
-          },
-        ]}
+        addComponent={<Search context="payments" onSearch={handleSearch} />}
+        context="payments"
         onSearch={handleSearch}
       />
       <List
@@ -53,7 +53,25 @@ const Payments = ({
         dataTableColumns={dataTableColumns}
         onPageChange={handlePageChange}
         total={fetchedPaymentsList?.paymentsTotal}
+        hidePagination
+        context="blocks"
       />
+      <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
+        <Spacer variant="sm" />
+        <Spacer variant="md" />
+        <Board
+          isLoading={isLoadingPaymentState}
+          description="Sent payments"
+          value={
+            TextFormat.getNumberText(fetchedPaymentsState?.paymentsTotal).text
+          }
+          context="payments"
+          prefix=""
+          suffix=""
+        />
+        <Spacer variant="sm" />
+        <Spacer variant="md" />
+      </div>
     </>
   );
 };

@@ -20,6 +20,11 @@
     width: 100%;
 }
 
+.boardTotal{
+    flex-direction: column;
+    justify-content: center;
+}
+
 .boardItem{
     display: flex;
     align-items: center;

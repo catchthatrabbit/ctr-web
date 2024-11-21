@@ -35,6 +35,15 @@
     height: 30%;
   }
 
+  .smallIcon{
+    left: 6%;
+    height: 25%;
+    svg{
+      width: 18px;
+      height: 18px;
+    }
+  }
+
   
 .inputWithIcon {
     padding-left: 30px; 

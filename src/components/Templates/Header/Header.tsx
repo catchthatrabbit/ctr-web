@@ -24,7 +24,7 @@ interface IHeader {
   }>;
   onChangeRegion?: (id: unknown) => void;
   pageTitleComponent?: React.ReactNode;
-  tabsComponent?: React.ReactNode;
+  addComponent?: React.ReactNode;
   layout?: {
     search: boolean;
     dropdown: boolean;
@@ -43,10 +43,15 @@ const Header = ({
   children,
   isLoading = false,
   pageTitleComponent,
-  tabsComponent,
+  addComponent,
   layout = { boards: true, dropdown: true, search: true },
   context,
 }: IHeader) => {
+  const columnClass =
+    context === "blocks" || context === "payments"
+      ? "flex-col--4"
+      : "flex-col--12";
+
   return (
     <>
       {/* <Spacer variant="xl" /> */}
@@ -55,7 +60,7 @@ const Header = ({
         <>
           <Spacer variant="xl" />
           <div className="col col--12">
-            {/* <Search onSearch={onSearch} /> */}
+            {/* <Search context={context} onSearch={onSearch} /> */}
             {/* insert here start mining today! */}
           </div>
         </>
@@ -68,20 +73,24 @@ const Header = ({
           <div
             className={clsx("flex", {
               [styles.blocksContainer]: context === "blocks",
+              [styles.paymentsContainer]: context === "payments",
             })}
           >
             <div
-              className={clsx("flex flex-column flex-column-center", {
-                "flex-col--4": context === "blocks",
-                "flex-col--12": context !== "blocks",
-                [styles.blocksDropdown]: context === "blocks",
-              })}
+              className={clsx(
+                "flex flex-column flex-column-center",
+                columnClass,
+                { [styles.blocksDropdown]: context === "blocks" },
+              )}
             >
               <Text
                 variant="subheading"
                 color="subheadingColor"
                 style={{
-                  width: context === "blocks" ? "95%" : "50%",
+                  width:
+                    context === "blocks" || context === "payments"
+                      ? "95%"
+                      : "50%",
                   marginBottom: "8px",
                 }}
               >
@@ -91,17 +100,23 @@ const Header = ({
                 isLoading={isLoading}
                 defaultValue={defaultRegion}
                 className={clsx(styles.boardDropdown, {
-                  [styles.smallWidth]: context === "blocks",
+                  [styles.smallWidth]:
+                    context === "blocks" || context === "payments",
                 })}
                 items={items}
                 onChange={onChangeRegion}
               />
             </div>
-            {tabsComponent}
+            {addComponent}
           </div>
         </>
       )}
-      {context === "blocks" ? <Spacer variant="md" /> : <Spacer variant="xl" />}
+      {context !== "payments" &&
+        (context === "blocks" ? (
+          <Spacer variant="md" />
+        ) : (
+          <Spacer variant="xl" />
+        ))}
 
       {layout.boards && (
         <>
@@ -121,7 +136,9 @@ const Header = ({
         </>
       )}
       {children}
-      {context !== "blocks" && <Spacer variant="md" />}
+      {context !== "blocks" && context !== "payments" ? (
+        <Spacer variant="md" />
+      ) : null}
     </>
   );
 };
