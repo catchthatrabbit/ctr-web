@@ -20,6 +20,7 @@ const PaymentsPage = () => {
           defaultRegion={region}
           walletAddress={walletAddress}
           onChangeRegion={handleChangeRegion}
+          onSetWalletAddress={handleWalletAddress}
         />
       ) : (
         <Payments

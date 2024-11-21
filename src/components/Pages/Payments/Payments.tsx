@@ -43,7 +43,9 @@ const Payments = ({
         onChangeRegion={handleChangeRegion}
         isLoading={isLoadingPaymentState}
         pageTitleComponent={<PaymentsTitle />}
-        addComponent={<Search context="payments" onSearch={handleSearch} />}
+        addComponent={
+          <Search context="payments" onSearch={onSetWalletAddress} />
+        }
         context="payments"
         onSearch={handleSearch}
       />

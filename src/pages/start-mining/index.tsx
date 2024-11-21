@@ -20,6 +20,7 @@ const StartMiningPage = () => {
           defaultRegion={region}
           walletAddress={walletAddress}
           onChangeRegion={handleChangeRegion}
+          onSetWalletAddress={handleWalletAddress}
         />
       ) : (
         <StartMining
