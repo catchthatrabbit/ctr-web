@@ -1,7 +1,7 @@
 .boardRoot {
     display: flex;
     justify-content: center;
-    margin-top: var(--space-lg);
+    margin: var(--space-lg) 0;
   }
   
   .boardJustifyCenter {

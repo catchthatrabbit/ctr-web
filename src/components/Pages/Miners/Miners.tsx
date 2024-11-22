@@ -63,6 +63,7 @@ const Miners = ({
         hidePagination
         context="blocks"
       />
+      <Spacer variant="xs" />
       <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
         <Board
           isLoading={isLoadingMinerState}
@@ -76,6 +77,7 @@ const Miners = ({
             TextFormat.getNumberText(fetchedMinerState?.minersTotal).suffix
           }
         />
+        <Spacer direction="hor" variant="lg" />
         {networkDifficultyItem && (
           <Board
             isLoading={isLoadingMinerState}
@@ -87,6 +89,7 @@ const Miners = ({
           />
         )}
       </div>
+      <Spacer variant="sm" />
     </>
   );
 };
