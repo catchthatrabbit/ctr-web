@@ -5,6 +5,13 @@ import { MinersTitle } from "@site/src/components/Molecules/PictureTitles";
 import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
 import useControls from "./controls";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
+import { Search } from "@site/src/components/Molecules/Search";
+import { Board } from "@site/src/components/Atoms/Board";
+import useControlsDashboard from "@site/src/components/Pages/Dashboard/controls";
+
+import clsx from "clsx";
+
+import styles from "./styles.module.css";
 
 interface IMiners extends IAnyPageAndWallet {}
 
@@ -26,32 +33,25 @@ const Miners = ({
     dropdownItems,
     regionLabel,
   } = useControls({ onSetWalletAddress, defaultRegion, onChangeRegion });
+
+  const { infoBoxMapData } = useControlsDashboard();
+  const networkDifficultyItem = infoBoxMapData?.find((item) =>
+    item.title.includes("Network difficulty"),
+  );
+
   return (
     <>
-      <Spacer variant="xxxxl" />
+      <Spacer variant="xxxl" />
       <Header
         defaultRegion={regionLabel}
         items={dropdownItems}
         onChangeRegion={handleChangeRegion}
         isLoading={isLoadingMinerState}
         pageTitleComponent={<MinersTitle />}
-        boardItems={[
-          {
-            desc: "Total miners",
-            value: TextFormat.getNumberText(fetchedMinerState?.minersTotal)
-              .text,
-            prefix: TextFormat.getNumberText(fetchedMinerState?.minersTotal)
-              .prefix,
-            suffix: TextFormat.getNumberText(fetchedMinerState?.minersTotal)
-              .suffix,
-          },
-          {
-            desc: "Total hashrate",
-            value: TextFormat.getHashText(fetchedMinerState?.hashrate).text,
-            prefix: TextFormat.getHashText(fetchedMinerState?.hashrate).prefix,
-            suffix: TextFormat.getHashText(fetchedMinerState?.hashrate).suffix,
-          },
-        ]}
+        addComponent={
+          <Search context="payments" onSearch={onSetWalletAddress} />
+        }
+        context="payments"
         onSearch={handleSearch}
       />
       <List
@@ -60,7 +60,36 @@ const Miners = ({
         data={minerList}
         onPageChange={handlePageChange}
         total={fetchedMinerList?.minersTotal}
+        hidePagination
+        context="blocks"
       />
+      <Spacer variant="xs" />
+      <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
+        <Board
+          isLoading={isLoadingMinerState}
+          description="Total miners"
+          value={TextFormat.getNumberText(fetchedMinerState?.minersTotal).text}
+          context="payments"
+          prefix={
+            TextFormat.getNumberText(fetchedMinerState?.minersTotal).prefix
+          }
+          suffix={
+            TextFormat.getNumberText(fetchedMinerState?.minersTotal).suffix
+          }
+        />
+        <Spacer direction="hor" variant="lg" />
+        {networkDifficultyItem && (
+          <Board
+            isLoading={isLoadingMinerState}
+            description={networkDifficultyItem.title}
+            value={networkDifficultyItem.value.text}
+            context="payments"
+            prefix={networkDifficultyItem.value.prefix}
+            suffix={networkDifficultyItem.value.suffix}
+          />
+        )}
+      </div>
+      <Spacer variant="sm" />
     </>
   );
 };

@@ -20,6 +20,7 @@ const MinersPage = () => {
           defaultRegion={region}
           walletAddress={walletAddress}
           onChangeRegion={handleChangeRegion}
+          onSetWalletAddress={handleWalletAddress}
         />
       ) : (
         <Miners
