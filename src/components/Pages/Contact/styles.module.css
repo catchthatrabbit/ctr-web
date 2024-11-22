@@ -1,0 +1,23 @@
+.contactContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .leftContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .rightContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .textarea {
+    width: 100%;
+    height: 150px;
+    padding: 8px;
+    border: 1px solid var(--ifm-border-color);
+    border-radius: 4px;
+    resize: vertical;
+  }
