@@ -31,7 +31,7 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "tag" /** font size 11 */
     | "CTA" /** font size 11 */;
   weight?: "normal" | "bold" | "extraBold" | "semiBold" | "medium";
-  size?: "small" | "regular" | "medium" | "large" | "pictureTitle";
+  size?: "small" | "regular" | "mediumSize" | "large" | "pictureTitle";
   color?:
     | "primary"
     | "secondary"
@@ -39,7 +39,8 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "InsideChartColor"
     | "dashboardColor"
     | "valueChartColor"
-    | "subheadingColor";
+    | "subheadingColor"
+    | "black";
   componentType?: keyof JSX.IntrinsicElements;
   decorating?: "simple" | "underlined" | "link";
   lineHeight:
@@ -75,7 +76,7 @@ const Text: FC<IText> = ({
     "bold" ||
     "semiBold" ||
     "medium",
-  size = "regular" || "small" || "medium" || "large" || "pictureTitle",
+  size = "regular" || "small" || "mediumSize" || "large" || "pictureTitle",
   children,
   className,
   lineHeight = "smallLineHeight" ||
@@ -88,7 +89,8 @@ const Text: FC<IText> = ({
   color = "InsideChartColor" ||
     "dashboardColor" ||
     "subheadingColor" ||
-    "secondary",
+    "secondary" ||
+    "black",
   ...restProps
 }) => {
   const { mobile, tablet } = useMediaQueries();

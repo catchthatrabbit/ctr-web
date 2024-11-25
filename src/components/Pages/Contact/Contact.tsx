@@ -60,9 +60,14 @@ const Contact = () => {
     <>
       <Spacer variant="xxxl" />
       <ContactTitle />
-      <Spacer variant="lg" />
+      <Spacer variant="sm" />
+      <Spacer variant="md" />
       <div className={clsx("row", styles.contactContainer)}>
-        <div className={clsx("col col--4", styles.leftContainer)}>
+        <div className={clsx("col col--6", styles.leftContainer)}>
+          <Text variant="smallBody" weight="normal" color="subheadingColor">
+            Select topic
+          </Text>
+          <Spacer variant="xxs" />
           <Dropdown
             items={emailPanels.map((panel) => ({
               label: panel.title,
@@ -71,21 +76,29 @@ const Contact = () => {
             onChange={handleDropdownChange}
             defaultValue={selectedTitle}
           />
-          <Spacer variant="md" />
+          <Spacer variant="sm" />
+          <Text variant="smallBody" weight="normal" color="subheadingColor">
+            Your message
+          </Text>
+          <Spacer variant="xxs" />
           <textarea
             className={styles.textarea}
             value={message}
             onChange={handleTextareaChange}
-            placeholder="Type your message here..."
+            placeholder="Write text here ..."
           />
           <Spacer variant="md" />
           <Link to={mailtoLink} className={styles.linkButton}>
-            <Text variant="smallBody" color="primary" weight="bold">
-              Send
+            <Text variant="body" color="black" weight="medium">
+              Send via email client
             </Text>
           </Link>
         </div>
-        <div className={clsx("col col--5", styles.rightContainer)}>
+        <div className={styles.rightContainer}>
+          <Text variant="smallBody" weight="normal" color="subheadingColor">
+            Contact informations
+          </Text>
+          <Spacer variant="xxs" />
           {emailPanels.map((panel, index) => (
             <React.Fragment key={index}>
               <EmailPanel
@@ -93,7 +106,7 @@ const Contact = () => {
                 emailAddress={panel.emailAddress}
                 text={panel.text}
               />
-              {index < emailPanels.length - 1 && <Spacer variant="lg" />}
+              {index < emailPanels.length - 1 && <Spacer variant="xs" />}
             </React.Fragment>
           ))}
         </div>

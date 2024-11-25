@@ -42,27 +42,33 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
         const keyLink = emailItem[email];
         return (
           <React.Fragment key={index}>
-            <div className={styles.emailRow}>
-              <Link
-                to={`mailto:${email}?subject=Web%20contact`}
-                className={styles.link}
-                style={{ marginRight: "8px" }}
-              >
-                <Text variant="smallBody" color="primary" weight="bold">
-                  {email}
-                </Text>
-              </Link>
-              {keyLink && (
+            <div className={`flex flex-column ${styles.emailRow}`}>
+              <>
+                <Spacer variant="xxs" />
                 <Link
-                  to={keyLink}
+                  to={`mailto:${email}?subject=Web%20contact`}
                   className={styles.link}
-                  download
-                  style={{ marginLeft: "8px" }}
+                  style={{ marginRight: "8px" }}
                 >
                   <Text variant="smallBody" color="primary" weight="bold">
-                    🔑 Key
+                    {email}
                   </Text>
                 </Link>
+              </>
+              {keyLink && (
+                <>
+                  <Spacer variant="sm" />
+                  <Link
+                    to={keyLink}
+                    className={`${styles.link} ${styles.linkKey}`}
+                    download
+                    style={{ marginLeft: "8px" }}
+                  >
+                    <Text variant="smallBody" color="primary" weight="bold">
+                      🔑 Key
+                    </Text>
+                  </Link>
+                </>
               )}
             </div>
           </React.Fragment>
@@ -84,7 +90,7 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
       <Text variant="subheading" color="subheadingColor">
         {text}
       </Text>
-      <Spacer variant="xs" />
+
       <div
         className={clsx({
           [styles.emailValueDesktop]: desktop || laptop,
@@ -92,8 +98,8 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
           [styles.emailValueMobile]: mobile,
         })}
       >
-        <Spacer variant="sm" />
-        <div className={styles.emailButtonsContainer}>
+        <Spacer variant="xs" />
+        <div className={`flex flex-column ${styles.emailButtonsContainer}`}>
           {renderEmailButtons(emailAddress)}
         </div>
       </div>
