@@ -22,9 +22,17 @@ const CustomCloseButton = ({ closeToast }) => (
   </button>
 );
 
-const CopyButton = ({ textToCopy, onCopy }: ICopyButton) => {
+const CopyButton = ({
+  textToCopy,
+  onCopy,
+  value,
+  toastText,
+  customStyles,
+  icon = <Copy />,
+}: ICopyButton) => {
+  const mergedStyles = { ...styles, ...customStyles };
   const notify = () => {
-    toast.success("Wallet address copied to clipboard", {
+    toast.success(toastText, {
       className: styles.customToast,
       bodyClassName: styles.customToastBody,
       progressClassName: styles.customToastProgress,
@@ -40,9 +48,10 @@ const CopyButton = ({ textToCopy, onCopy }: ICopyButton) => {
   return (
     <Button
       onClick={handleCopy}
-      value="Copy wallet address"
-      icon={<Copy />}
+      value={value}
+      icon={icon}
       textColor="var(--ifm-color-primary)"
+      style={mergedStyles}
     />
   );
 };

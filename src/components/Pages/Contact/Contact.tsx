@@ -1,7 +1,12 @@
+import React, { useState, useEffect } from "react";
 import { ContactTitle } from "@site/src/components/Molecules/PictureTitles";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { EmailPanel } from "@site/src/components/Molecules/EmailPanel";
 import { useControls } from "./controls";
+import { Text } from "@site/src/components/Atoms/Text";
+import { Dropdown } from "@site/src/components/Atoms/Dropdown";
+import clsx from "clsx";
+import styles from "./styles.module.css";
 
 const Contact = () => {
   const {
@@ -13,29 +18,108 @@ const Contact = () => {
     maintainersSupportEmail,
   } = useControls();
 
+  const [selectedTitle, setSelectedTitle] = useState("Support");
+  const [message, setMessage] = useState("");
+  const [mailtoLink, setMailtoLink] = useState("");
+
+  const emailPanels = [
+    {
+      title: "Support",
+      emailAddress: maintainersSupportEmail,
+      text: maintainersSupportDescription,
+    },
+    {
+      title: "Security",
+      emailAddress: maintainersSecurityEmail,
+      text: maintainersSecurityDescription,
+    },
+    {
+      title: "Commercial",
+      emailAddress: maintainersCommercialEmail,
+      text: maintainersCommercialDescription,
+    },
+  ];
+  useEffect(() => {
+    const selectedEmailPanel = emailPanels.find(
+      (panel) => panel.title === selectedTitle,
+    );
+    if (selectedEmailPanel) {
+      const emailAddress = selectedEmailPanel.emailAddress;
+
+      setMailtoLink(
+        `mailto:${emailAddress}?subject=Web%20contact&body=${encodeURIComponent(
+          message,
+        )}`,
+      );
+    }
+  }, [selectedTitle, message]);
+
+  const handleDropdownChange = (newValue: { value: string; label: string }) => {
+    setSelectedTitle(newValue.value);
+  };
+
+  const handleTextareaChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setMessage(event.target.value);
+  };
+
   return (
     <>
-      <Spacer variant="xxxxl" />
+      <Spacer variant="xxxl" />
       <ContactTitle />
-      <Spacer variant="lg" />
-      <EmailPanel
-        title="Support"
-        emailAddress={maintainersSupportEmail}
-        text={maintainersSupportDescription}
-      />
-      <Spacer variant="lg" />
-      <EmailPanel
-        title="Security"
-        emailAddress={maintainersSecurityEmail}
-        text={maintainersSecurityDescription}
-      />
-      <Spacer variant="lg" />
-      <EmailPanel
-        title="Commercial"
-        emailAddress={maintainersCommercialEmail}
-        text={maintainersCommercialDescription}
-      />
-      <Spacer variant="xl" />
+      <Spacer variant="sm" />
+      <Spacer variant="md" />
+      <div className={clsx("row", styles.contactContainer)}>
+        <div className={clsx("col col--6", styles.leftContainer)}>
+          <Text variant="smallBody" weight="normal" color="subheadingColor">
+            Select topic
+          </Text>
+          <Spacer variant="xxs" />
+          <Dropdown
+            items={emailPanels.map((panel) => ({
+              label: panel.title,
+              value: panel.title,
+            }))}
+            onChange={handleDropdownChange}
+            defaultValue={selectedTitle}
+          />
+          <Spacer variant="sm" />
+          <Text variant="smallBody" weight="normal" color="subheadingColor">
+            Your message
+          </Text>
+          <Spacer variant="xxs" />
+          <textarea
+            className={styles.textarea}
+            value={message}
+            onChange={handleTextareaChange}
+            placeholder="Write text here ..."
+          />
+          <Spacer variant="md" />
+          <a href={mailtoLink} target="_blank" className={styles.linkButton}>
+            <Text variant="body" color="black" weight="medium">
+              Send via email client
+            </Text>
+          </a>
+        </div>
+        <div className={styles.rightContainer}>
+          <Text variant="smallBody" weight="normal" color="subheadingColor">
+            Contact informations
+          </Text>
+          <Spacer variant="xxs" />
+          {emailPanels.map((panel, index) => (
+            <React.Fragment key={index}>
+              <EmailPanel
+                title={panel.title}
+                emailAddress={panel.emailAddress}
+                text={panel.text}
+              />
+              {index < emailPanels.length - 1 && <Spacer variant="xs" />}
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+      <Spacer variant="xxxl" />
     </>
   );
 };

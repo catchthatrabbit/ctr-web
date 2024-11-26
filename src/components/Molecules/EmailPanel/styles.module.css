@@ -1,21 +1,56 @@
-.emailButtonsContainer {
+.block {
+  padding: var(--space-sm);
+  padding-right: 0;
+  background-color: var(--ifm-background-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.emailValueDesktop {
   display: flex;
+  flex-direction: column;
+}
+
+.emailValueTablet {
+  display: flex;
+  flex-direction: column;
+}
+
+.emailValueMobile {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .emailButtonsContainer {
+  display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 
 .emailRow {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+
+} */
+
+.link {
+  text-decoration: none;
+  color: var(--ifm-link-color);
+  transition: color 0.3s ease;
+  position: relative;
 }
 
-.emailValueDesktop {
-  padding: var(--space-md) 0px var(--space-md) var(--space-lg);
+.linkKey::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  width: 96%;
+  left: -1%;
+  right: 0%;
+  height: 1px;  
+  background-color: #363636; 
 }
 
-.emailValueTablet {
-  padding: var(--space-md) 0px var(--space-md) var(--space-sm);
-}
-
-.emailValueMobile {
-  padding: var(--space-md) 0px var(--space-md) var(--space-xs);
+.link:hover {
+  color: var(--ifm-link-hover-color);
 }

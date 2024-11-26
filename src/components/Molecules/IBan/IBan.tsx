@@ -2,10 +2,7 @@ import { Text } from "@site/src/components/Atoms/Text";
 import { generateIBan } from "@site/src/utils/generateIBan";
 import clsx from "clsx";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
-import {
-  CopyButton,
-  CopyPermalinkButton,
-} from "@site/src/components/Molecules/CopyButton";
+import { CopyButton } from "@site/src/components/Molecules/CopyButton";
 
 import styles from "./styles.module.css";
 
@@ -36,8 +33,16 @@ const IBan = ({ iBan = "" }: IIBan) => {
           styles.justifyCenter,
         ])}
       >
-        <CopyButton textToCopy={iBan} />
-        <CopyPermalinkButton textToCopy={iBan} />
+        <CopyButton
+          textToCopy={iBan}
+          value="Copy wallet address"
+          toastText="Wallet address copied to clipboard"
+        />
+        <CopyButton
+          textToCopy={`${iBan}.ctr.watch`}
+          value="Copy permalink"
+          toastText="Permalink copied to clipboard"
+        />
       </div>
     </>
   );
