@@ -5,6 +5,8 @@ import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 import clsx from "clsx";
 import styles from "./styles.module.css";
+import { CopyBent } from "@site/src/icons";
+import { CopyButton } from "@site/src/components/Molecules/CopyButton";
 
 interface IEmailPanel {
   title?: string;
@@ -64,9 +66,12 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
                     download
                     style={{ marginLeft: "8px" }}
                   >
-                    <Text variant="smallBody" color="primary" weight="bold">
-                      🔑 Key
-                    </Text>
+                    <CopyButton
+                      textToCopy={keyLink}
+                      value="Copy GPG key"
+                      toastText="GPG Key copied to clipboard"
+                      icon={<CopyBent />}
+                    />
                   </Link>
                 </>
               )}
