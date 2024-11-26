@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ContactTitle } from "@site/src/components/Molecules/PictureTitles";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { EmailPanel } from "@site/src/components/Molecules/EmailPanel";
 import { useControls } from "./controls";
 import { Text } from "@site/src/components/Atoms/Text";
 import { Dropdown } from "@site/src/components/Atoms/Dropdown";
-import Link from "@docusaurus/Link";
 import clsx from "clsx";
 import styles from "./styles.module.css";
 
@@ -21,6 +20,7 @@ const Contact = () => {
 
   const [selectedTitle, setSelectedTitle] = useState("Support");
   const [message, setMessage] = useState("");
+  const [mailtoLink, setMailtoLink] = useState("");
 
   const emailPanels = [
     {
@@ -39,9 +39,23 @@ const Contact = () => {
       text: maintainersCommercialDescription,
     },
   ];
+  useEffect(() => {
+    const selectedEmailPanel = emailPanels.find(
+      (panel) => panel.title === selectedTitle,
+    );
+    if (selectedEmailPanel) {
+      const emailAddress = selectedEmailPanel.emailAddress;
 
-  const handleDropdownChange = (value: string) => {
-    setSelectedTitle(value);
+      setMailtoLink(
+        `mailto:${emailAddress}?subject=Web%20contact&body=${encodeURIComponent(
+          message,
+        )}`,
+      );
+    }
+  }, [selectedTitle, message]);
+
+  const handleDropdownChange = (newValue: { value: string; label: string }) => {
+    setSelectedTitle(newValue.value);
   };
 
   const handleTextareaChange = (
@@ -49,12 +63,6 @@ const Contact = () => {
   ) => {
     setMessage(event.target.value);
   };
-
-  const selectedEmailPanel = emailPanels.find(
-    (panel) => panel.title === selectedTitle,
-  );
-  const emailAddress = selectedEmailPanel?.emailAddress;
-  const mailtoLink = `mailto:${emailAddress}?subject=Web%20contact&body=${encodeURIComponent(message)}`;
 
   return (
     <>
@@ -88,11 +96,11 @@ const Contact = () => {
             placeholder="Write text here ..."
           />
           <Spacer variant="md" />
-          <Link to={mailtoLink} className={styles.linkButton}>
+          <a href={mailtoLink} target="_blank" className={styles.linkButton}>
             <Text variant="body" color="black" weight="medium">
               Send via email client
             </Text>
-          </Link>
+          </a>
         </div>
         <div className={styles.rightContainer}>
           <Text variant="smallBody" weight="normal" color="subheadingColor">
@@ -111,7 +119,7 @@ const Contact = () => {
           ))}
         </div>
       </div>
-      <Spacer variant="xl" />
+      <Spacer variant="xxxl" />
     </>
   );
 };

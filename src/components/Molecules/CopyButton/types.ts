@@ -5,4 +5,5 @@ export interface ICopyButton {
   toastText?: string;
   styles?: React.CSSProperties;
   icon?: React.ReactNode;
+  customStyles?: { [key: string]: string };
 }

@@ -28,15 +28,16 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
       if (typeof emailItem === "string") {
         return (
           <React.Fragment key={index}>
-            <Link
-              to={`mailto:${emailItem}?subject=Web%20contact`}
+            <a
+              href={`mailto:${emailItem}?subject=Web%20contact`}
+              target="_blank"
               className={styles.link}
               style={{ marginRight: index < emails.length - 1 ? "8px" : "0" }}
             >
               <Text variant="smallBody" color="primary" weight="bold">
                 {emailItem}
               </Text>
-            </Link>
+            </a>
           </React.Fragment>
         );
       } else {
@@ -47,32 +48,33 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
             <div className={`flex flex-column ${styles.emailRow}`}>
               <>
                 <Spacer variant="xxs" />
-                <Link
-                  to={`mailto:${email}?subject=Web%20contact`}
+                <a
+                  href={`mailto:${email}?subject=Web%20contact`}
+                  target="_blank"
                   className={styles.link}
                   style={{ marginRight: "8px" }}
                 >
                   <Text variant="smallBody" color="primary" weight="bold">
                     {email}
                   </Text>
-                </Link>
+                </a>
               </>
               {keyLink && (
                 <>
                   <Spacer variant="sm" />
-                  <Link
-                    to={keyLink}
+                  <a
+                    href={keyLink}
                     className={`${styles.link} ${styles.linkKey}`}
                     download
-                    style={{ marginLeft: "8px" }}
                   >
                     <CopyButton
                       textToCopy={keyLink}
                       value="Copy GPG key"
                       toastText="GPG Key copied to clipboard"
+                      customStyles={{ padding: "0" }}
                       icon={<CopyBent />}
                     />
-                  </Link>
+                  </a>
                 </>
               )}
             </div>
