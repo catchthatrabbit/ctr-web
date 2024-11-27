@@ -25,6 +25,12 @@
     display: flex;
     align-items: center;
   }
+
+  .searchDark{
+    background-color: var(--dark-rgb-600);
+    color: var(--white);
+    padding: 14px 16px;
+  }
   
   .icon {
     position: absolute;

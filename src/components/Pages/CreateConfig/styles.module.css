@@ -1,0 +1,22 @@
+.mainContent{
+    width: 67%;
+}
+
+.boardDropdown{
+    width: 588px;
+    margin: auto;
+}
+
+.blocksDropdown{
+    align-items: flex-start;
+    align-content: flex-end;
+       
+   }
+   
+   .boardJustifyCenter{
+       justify-content: center;
+   }
+   
+   .smallWidth {
+       width: 47%;
+     }
