@@ -24,30 +24,70 @@ const CreateConfig = ({
     isLoadingPaymentState,
     dropdownItems,
     regionLabel,
+    convertWorkerName,
+    startMiningPoolConfigurations,
   } = useControls({ defaultRegion, onSetWalletAddress, onChangeRegion });
 
-  const [inputValue, setInputValue] = useState("");
+  const [walletAddress, setWalletAddress] = useState("");
   const [inputType, setInputType] = useState("plain");
+  const [plainMinerName, setPlainMinerName] = useState("");
+  const [fediverseMinerName, setFediverseMinerName] = useState("");
+  const [typePortal, setTypePortal] = useState("");
+  const [uniqueId, setUniqueId] = useState("");
+  const [dropdownValue1, setDropdownValue1] = useState(regionLabel);
+  const [dropdownValue2, setDropdownValue2] = useState(regionLabel);
 
   const formatWalletAddress = (value: string) => {
     return value.replace(/(.{4})/g, "$1 ").trim();
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleWalletAddressChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const formattedValue = formatWalletAddress(
       event.target.value.replace(/\s+/g, ""),
     );
-    setInputValue(formattedValue);
+    setWalletAddress(formattedValue);
   };
 
+  const handlePlainMinerNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setPlainMinerName(event.target.value);
+  };
+
+  const handleFediverseMinerNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setFediverseMinerName(event.target.value);
+  };
+
+  const handleTypePortalChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setTypePortal(event.target.value);
+  };
+
+  const handleUniqueIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUniqueId(event.target.value);
+  };
+
+  const handleDropdownChange1 = (selectedOption: { label: string }) => {
+    console.log(selectedOption);
+    setDropdownValue1(selectedOption.label);
+  };
+
+  const handleDropdownChange2 = (selectedOption: { label: string }) => {
+    setDropdownValue2(selectedOption.label);
+  };
   const renderInputs = () => {
     if (inputType === "plain") {
       return (
         <InputText
           context="dark"
-          value={inputValue}
-          onChange={handleInputChange}
-          placeholder="Enter wallet address..."
+          value={plainMinerName}
+          onChange={handlePlainMinerNameChange}
+          placeholder="Miner name"
         />
       );
     } else if (inputType === "fediverse") {
@@ -55,35 +95,86 @@ const CreateConfig = ({
         <>
           <InputText
             context="dark"
-            value={inputValue}
-            onChange={handleInputChange}
-            placeholder="Enter first input..."
+            value={fediverseMinerName}
+            onChange={handleFediverseMinerNameChange}
+            placeholder="Miner name"
           />
           <Spacer variant="sm" />
           <InputText
             context="dark"
-            value={inputValue}
-            onChange={handleInputChange}
-            placeholder="Enter second input..."
+            value={typePortal}
+            onChange={handleTypePortalChange}
+            placeholder="Type portal"
           />
           <Spacer variant="sm" />
           <InputText
             context="dark"
-            value={inputValue}
-            onChange={handleInputChange}
-            placeholder="Enter third input..."
+            value={uniqueId}
+            onChange={handleUniqueIdChange}
+            placeholder="Unique ID"
           />
         </>
       );
     }
   };
 
+  const handleDownloadConfig = () => {
+    let walletAddressFormat = walletAddress.replace(/\s+/g, "").toLowerCase();
+    let workerName = "";
+    if (inputType === "plain") {
+      workerName = plainMinerName;
+    } else if (inputType === "fediverse") {
+      const { href, caption } = convertWorkerName(
+        `_${fediverseMinerName}${typePortal}${uniqueId ? `-${uniqueId}` : ""}`,
+      );
+      workerName = caption;
+    }
+    const regionKey1 = Object.keys(startMiningPoolConfigurations).find(
+      (key) =>
+        startMiningPoolConfigurations[key]["DESCRIPTION"] === dropdownValue1,
+    );
+    const regionKey2 = Object.keys(startMiningPoolConfigurations).find(
+      (key) =>
+        startMiningPoolConfigurations[key]["DESCRIPTION"] === dropdownValue2,
+    );
+
+    const server1 =
+      regionKey1 && startMiningPoolConfigurations[regionKey1]["SERVER"];
+    const port1 =
+      regionKey1 && startMiningPoolConfigurations[regionKey1]["PORT"];
+    const server2 =
+      regionKey2 && startMiningPoolConfigurations[regionKey2]["SERVER"];
+    const port2 =
+      regionKey2 && startMiningPoolConfigurations[regionKey2]["PORT"];
+
+    const configData = {
+      wallet: walletAddressFormat,
+      worker: workerName,
+      [`server[1]`]: server1,
+      [`port[1]`]: port1,
+      [`server[2]`]: server2,
+      [`port[2]`]: port2,
+    };
+
+    const configContent = Object.entries(configData)
+      .map(([key, value]) => `${key}=${value}`)
+      .join("\n");
+
+    const blob = new Blob([configContent], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "config.cfg";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <>
       <Spacer variant="xxl" />
       <CreateConfigTitle />
-      <Spacer variant="md" />
-      <Spacer variant="sm" />
+
+      <Spacer variant="xxl" />
 
       <div className="flex xl-center-items">
         <div className={`flex flex-column ${styles.mainContent}`}>
@@ -91,11 +182,17 @@ const CreateConfig = ({
             Miner details
           </Text>
           <Spacer variant="xs" />
+          <Text
+            lineHeight="smallLineHeight"
+            color="subheadingColor"
+            style={{ marginBottom: "8px" }}
+          >
+            Corepass wallet address
+          </Text>
           <InputText
             context="dark"
-            value={inputValue}
-            onChange={handleInputChange}
-            text="Corepass wallet address"
+            value={walletAddress}
+            onChange={handleWalletAddressChange}
           />
           <div className="row">
             <Dropdown
@@ -105,7 +202,7 @@ const CreateConfig = ({
                 [styles.smallWidth]: true,
               })}
               items={dropdownItems}
-              onChange={handleChangeRegion}
+              onChange={handleDropdownChange1}
             />
 
             <Dropdown
@@ -115,7 +212,7 @@ const CreateConfig = ({
                 [styles.smallWidth]: true,
               })}
               items={dropdownItems}
-              onChange={handleChangeRegion}
+              onChange={handleDropdownChange2}
             />
           </div>
           <Spacer variant="md" />
@@ -136,6 +233,13 @@ const CreateConfig = ({
           </div>
           <Spacer variant="md" />
           {renderInputs()}
+          <Spacer variant="md" />
+          <Button
+            backgroundColor="#062A1C"
+            textColor="#16C784"
+            value="Download Config"
+            onClick={handleDownloadConfig}
+          />
         </div>
       </div>
     </>

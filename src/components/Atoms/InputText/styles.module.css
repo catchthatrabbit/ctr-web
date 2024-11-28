@@ -30,6 +30,7 @@
     background-color: var(--dark-rgb-600);
     color: var(--white);
     padding: 14px 16px;
+    height: 52px;
   }
   
   .icon {
