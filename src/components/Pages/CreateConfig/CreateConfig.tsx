@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { CreateConfigTitle } from "@site/src/components/Molecules/PictureTitles";
 import { InputText } from "@site/src/components/Atoms/InputText";
 import { Dropdown } from "../../Atoms/Dropdown";
 import { Text } from "@site/src/components/Atoms/Text";
 import { Header } from "../../Templates/Header";
-import Button from "@site/src/components/Atoms/Button/Button"; // Ensure this import is correct
+import Button from "@site/src/components/Atoms/Button/Button";
 
 import useControls from "./controls";
 
@@ -183,7 +184,7 @@ const CreateConfig = ({
           </Text>
           <Spacer variant="xs" />
           <Text
-            lineHeight="smallLineHeight"
+            variant="smallBody"
             color="subheadingColor"
             style={{ marginBottom: "8px" }}
           >
@@ -194,42 +195,64 @@ const CreateConfig = ({
             value={walletAddress}
             onChange={handleWalletAddressChange}
           />
-          <div className="row">
-            <Dropdown
-              isLoading={isLoadingPaymentState}
-              defaultValue={regionLabel}
-              className={clsx(styles.boardDropdown, {
-                [styles.smallWidth]: true,
-              })}
-              items={dropdownItems}
-              onChange={handleDropdownChange1}
-            />
-
-            <Dropdown
-              isLoading={isLoadingPaymentState}
-              defaultValue={regionLabel}
-              className={clsx(styles.boardDropdown, {
-                [styles.smallWidth]: true,
-              })}
-              items={dropdownItems}
-              onChange={handleDropdownChange2}
-            />
+          <Spacer variant="xs" />
+          <div className={styles.dropdowns}>
+            <div className={styles.dropdownContainer}>
+              <Dropdown
+                isLoading={isLoadingPaymentState}
+                defaultValue={regionLabel}
+                className={clsx(styles.boardDropdown)}
+                items={dropdownItems}
+                onChange={handleDropdownChange1}
+                text="Mining pool"
+              />
+            </div>
+            <div className={styles.dropdownContainer}>
+              <Dropdown
+                isLoading={isLoadingPaymentState}
+                defaultValue={regionLabel}
+                className={clsx(styles.boardDropdown)}
+                items={dropdownItems}
+                onChange={handleDropdownChange2}
+                text="Mining pool"
+              />
+            </div>
           </div>
-          <Spacer variant="md" />
-          <div className="row">
-            <Button
-              backgroundColor="#062A1C"
-              textColor="#16C784"
-              value="Plain"
+          <Spacer variant="xs" />
+          <Link to="/start-mining#pools" className={styles.viewPoolsLink}>
+            <Text variant="subheading" color="primary" type="value">
+              View pools
+            </Text>
+          </Link>
+          <Spacer variant="sm" />
+          <Text variant="heading3" color="white" weight="semiBold">
+            Miner name
+          </Text>
+          <Spacer variant="sm" />
+          <div className={`row  ${styles.inputs}`}>
+            <Text
+              variant="smallBody"
+              color="primary"
+              type="value"
               onClick={() => setInputType("plain")}
-            />
-            <Spacer direction="hor" variant="sm" />
-            <Button
-              backgroundColor="#062A1C"
-              textColor="#16C784"
-              value="Fediverse"
+              className={clsx(styles.linkText, {
+                [styles.activeLink]: inputType === "plain",
+              })}
+            >
+              Plain
+            </Text>
+
+            <Text
+              variant="smallBody"
+              color="primary"
+              type="value"
               onClick={() => setInputType("fediverse")}
-            />
+              className={clsx(styles.linkText, {
+                [styles.activeLink]: inputType === "fediverse",
+              })}
+            >
+              Fediverse
+            </Text>
           </div>
           <Spacer variant="md" />
           {renderInputs()}

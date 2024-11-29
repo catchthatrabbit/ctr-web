@@ -83,19 +83,6 @@ const Header = ({
                 { [styles.blocksDropdown]: context === "blocks" },
               )}
             >
-              <Text
-                variant="subheading"
-                color="subheadingColor"
-                style={{
-                  width:
-                    context === "blocks" || context === "payments"
-                      ? "95%"
-                      : "50%",
-                  marginBottom: "8px",
-                }}
-              >
-                Mining pool
-              </Text>
               <Dropdown
                 isLoading={isLoading}
                 defaultValue={defaultRegion}
@@ -105,6 +92,8 @@ const Header = ({
                 })}
                 items={items}
                 onChange={onChangeRegion}
+                text="Mining pool"
+                context={context}
               />
             </div>
             {addComponent}
