@@ -1,13 +1,14 @@
 import React from "react";
-import styles from "./styles.module.css"; // Ensure this import is correct
-import { Text } from "@site/src/components/Atoms/Text"; // Ensure this import is correct
+import styles from "./styles.module.css";
+import { Text } from "@site/src/components/Atoms/Text";
 import { Search } from "@site/src/components/Molecules/Search";
+import { Warning } from "@site/src/components/Atoms/Warning";
 import { DownloadPanel } from "@site/src/components/Molecules/DownloadPanel";
-import { Spacer } from "@site/src/components/Atoms/Spacer"; // Ensure this import is correct
+import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { OpenInNew } from "@site/src/icons";
-import Button from "@site/src/components/Atoms/Button/Button"; // Ensure this import is correct
+import Button from "@site/src/components/Atoms/Button/Button";
 import { useWalletPage } from "@site/src/hooks/useWallet";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 
 interface Step {
   number: number;
@@ -89,17 +90,10 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
           {step.warning && (
             <>
               <Spacer variant="md" />
-              <div className={styles.warning}>
-                <Text
-                  variant="smallBody"
-                  weight="normal"
-                  color="white"
-                  lineHeight="smallLineHeight"
-                >
-                  In case you do not own a Linux device, we recommend using the
-                  Linux virtual operating system.
-                </Text>
-              </div>
+              <Warning
+                text="In case you do not own a Linux device, we recommend using the
+                  Linux virtual operating system."
+              />
             </>
           )}
 

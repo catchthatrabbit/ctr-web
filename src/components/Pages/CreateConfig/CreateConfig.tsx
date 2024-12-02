@@ -5,9 +5,9 @@ import { CreateConfigTitle } from "@site/src/components/Molecules/PictureTitles"
 import { InputText } from "@site/src/components/Atoms/InputText";
 import { Dropdown } from "../../Atoms/Dropdown";
 import { Text } from "@site/src/components/Atoms/Text";
-import { Header } from "../../Templates/Header";
+import { Warning } from "@site/src/components/Atoms/Warning";
 import Button from "@site/src/components/Atoms/Button/Button";
-
+import Ican from "@blockchainhub/ican";
 import useControls from "./controls";
 
 import clsx from "clsx";
@@ -30,9 +30,9 @@ const CreateConfig = ({
   } = useControls({ defaultRegion, onSetWalletAddress, onChangeRegion });
 
   const [walletAddress, setWalletAddress] = useState("");
+  const [isWalletValid, setIsWalletValid] = useState(true);
   const [inputType, setInputType] = useState("plain");
-  const [plainMinerName, setPlainMinerName] = useState("");
-  const [fediverseMinerName, setFediverseMinerName] = useState("");
+  const [minerName, setMinerName] = useState({ value: "", isValid: true }); // Combined state for miner names
   const [typePortal, setTypePortal] = useState("");
   const [uniqueId, setUniqueId] = useState("");
   const [dropdownValue1, setDropdownValue1] = useState(regionLabel);
@@ -48,19 +48,18 @@ const CreateConfig = ({
     const formattedValue = formatWalletAddress(
       event.target.value.replace(/\s+/g, ""),
     );
+    const isValid = Ican.isValid(formattedValue, true);
+    setIsWalletValid(isValid);
     setWalletAddress(formattedValue);
   };
 
-  const handlePlainMinerNameChange = (
+  const handleMinerNameChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setPlainMinerName(event.target.value);
-  };
-
-  const handleFediverseMinerNameChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setFediverseMinerName(event.target.value);
+    const value = event.target.value;
+    const regex = inputType === "plain" ? /^[A-Za-z0-9_-]+$/ : /^[A-Za-z0-9]+$/;
+    const isValid = regex.test(value);
+    setMinerName({ value, isValid });
   };
 
   const handleTypePortalChange = (
@@ -81,26 +80,68 @@ const CreateConfig = ({
   const handleDropdownChange2 = (selectedOption: { label: string }) => {
     setDropdownValue2(selectedOption.label);
   };
+
   const renderInputs = () => {
     if (inputType === "plain") {
       return (
-        <InputText
-          context="dark"
-          value={plainMinerName}
-          onChange={handlePlainMinerNameChange}
-          placeholder="Miner name"
-        />
+        <>
+          <Text
+            variant="smallBody"
+            color="subheadingColor"
+            style={{ marginBottom: "8px" }}
+          >
+            Plain name
+          </Text>
+          <InputText
+            context="dark"
+            value={minerName.value}
+            onChange={handleMinerNameChange}
+            placeholder="Miner name"
+          />
+          {!minerName.isValid && (
+            <Text
+              variant="smallBody"
+              style={{ marginTop: "4px", color: "#E54E4E" }}
+            >
+              Plain name is not valid. Only letters, numbers, underscores, and
+              hyphens are allowed.
+            </Text>
+          )}
+          <Spacer variant="xs" />
+        </>
       );
     } else if (inputType === "fediverse") {
       return (
         <>
+          <Text
+            variant="smallBody"
+            color="subheadingColor"
+            style={{ marginBottom: "8px" }}
+          >
+            Username
+          </Text>
           <InputText
             context="dark"
-            value={fediverseMinerName}
-            onChange={handleFediverseMinerNameChange}
+            value={minerName.value}
+            onChange={handleMinerNameChange}
             placeholder="Miner name"
           />
+          {!minerName.isValid && (
+            <Text
+              variant="smallBody"
+              style={{ marginTop: "4px", color: "#E54E4E" }}
+            >
+              Username is not valid. Only letters and numbers are allowed.
+            </Text>
+          )}
           <Spacer variant="sm" />
+          <Text
+            variant="smallBody"
+            color="subheadingColor"
+            style={{ marginBottom: "8px" }}
+          >
+            Portal
+          </Text>
           <InputText
             context="dark"
             value={typePortal}
@@ -108,25 +149,36 @@ const CreateConfig = ({
             placeholder="Type portal"
           />
           <Spacer variant="sm" />
+          <Text
+            variant="smallBody"
+            color="subheadingColor"
+            style={{ marginBottom: "8px" }}
+          >
+            Index (optional)
+          </Text>
           <InputText
             context="dark"
             value={uniqueId}
             onChange={handleUniqueIdChange}
             placeholder="Unique ID"
           />
+          <Spacer variant="xs" />
         </>
       );
     }
   };
 
   const handleDownloadConfig = () => {
+    if (!isWalletValid || !minerName.isValid) {
+      return; // Prevent config generation if wallet or miner name is not valid
+    }
     let walletAddressFormat = walletAddress.replace(/\s+/g, "").toLowerCase();
     let workerName = "";
     if (inputType === "plain") {
-      workerName = plainMinerName;
+      workerName = minerName.value;
     } else if (inputType === "fediverse") {
       const { href, caption } = convertWorkerName(
-        `_${fediverseMinerName}${typePortal}${uniqueId ? `-${uniqueId}` : ""}`,
+        `_${minerName.value}${typePortal}${uniqueId ? `-${uniqueId}` : ""}`,
       );
       workerName = caption;
     }
@@ -195,6 +247,14 @@ const CreateConfig = ({
             value={walletAddress}
             onChange={handleWalletAddressChange}
           />
+          {!isWalletValid && (
+            <Text
+              variant="smallBody"
+              style={{ marginTop: "4px", color: "#E54E4E" }}
+            >
+              Wallet address is not valid
+            </Text>
+          )}
           <Spacer variant="xs" />
           <div className={styles.dropdowns}>
             <div className={styles.dropdownContainer}>
@@ -242,6 +302,7 @@ const CreateConfig = ({
               Plain
             </Text>
 
+            <Spacer direction="hor" variant="sm" />
             <Text
               variant="smallBody"
               color="primary"
@@ -256,13 +317,20 @@ const CreateConfig = ({
           </div>
           <Spacer variant="md" />
           {renderInputs()}
+          <Warning
+            context="config"
+            text={`By clicking download button, the file pool.cfg will be downloaded, <span class="${styles.boldText}"> which needs to be placed in the same folder where miner software resides. </span>`}
+          />
           <Spacer variant="md" />
           <Button
-            backgroundColor="#062A1C"
-            textColor="#16C784"
-            value="Download Config"
+            backgroundColor="#16C784"
+            textColor="#020202"
+            weight="medium"
+            value="Generate & Download"
+            context="config"
             onClick={handleDownloadConfig}
           />
+          <Spacer variant="xxxl" />
         </div>
       </div>
     </>
