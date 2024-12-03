@@ -1,0 +1,103 @@
+.mainContent{
+    width: 67%;
+}
+
+.boardDropdown{
+    width: 588px;
+    margin: auto;
+}
+
+.blocksDropdown{
+    align-items: flex-start;
+    align-content: flex-end;
+       
+   }
+   
+   .boardJustifyCenter{
+       justify-content: center;
+   }
+   
+   .smallWidth {
+       width: 47%;
+     }
+
+ .dropdowns {
+        display: flex;
+        justify-content: space-between;
+}
+      
+.dropdownContainer {
+    flex: 0 0 48%; 
+      }
+       .boardDropdown {
+        width: 100%;
+      }
+
+.viewPoolsLink{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.inputs {
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+}
+
+.inputs::before,
+.inputs::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  width: 50%;
+  height: 1px;
+  background-color: #292929;
+}
+
+.inputs::before {
+  left: 0;
+}
+
+.inputs::after {
+  right: 0;
+}
+
+.linkText {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  max-width: 48%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.linkText::before,
+.linkText::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  width: 50%;
+  height: 1px;
+  background-color: #292929;
+  z-index: 1;
+}
+
+.linkText::before {
+  left: -10px;
+  width: 100%;
+}
+
+.linkText::after {
+  right: 0;
+}
+
+.activeLink::before,
+.activeLink::after {
+  position: absolute;
+  background-color: #16C784;
+  z-index: 2;
+}
+  .boldText {
+    font-weight: 600;
+  }

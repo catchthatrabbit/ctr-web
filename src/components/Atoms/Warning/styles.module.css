@@ -1,0 +1,18 @@
+.warning {
+    background-color: #1B190C;
+    border: 1px solid #746010;
+    color: #FACA15;
+    padding: 13px 12px;
+    border-radius: 8px;
+    margin-left: 31px;
+    margin-top: -9px;
+   
+  }
+
+  .configWarning{
+    margin: 0;
+  }
+
+  .warningText{
+    margin: 0;
+  }

@@ -81,7 +81,7 @@ const Miners = ({
         {networkDifficultyItem && (
           <Board
             isLoading={isLoadingMinerState}
-            description={networkDifficultyItem.title}
+            description="Network difficulty"
             value={networkDifficultyItem.value.text}
             context="payments"
             prefix={networkDifficultyItem.value.prefix}

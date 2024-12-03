@@ -1,16 +1,28 @@
-import { InputHTMLAttributes, forwardRef, ReactNode } from "react";
+import React, { forwardRef, InputHTMLAttributes } from "react";
+import { Text } from "../../Atoms/Text";
+
 import clsx from "clsx";
 
 import styles from "./styles.module.css";
 
-interface IInputText extends InputHTMLAttributes<HTMLInputElement> {
+interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
+  context?: "wallet" | "main" | "startMining" | "payments" | "dark";
   onPressEnter?: () => void;
-  icon?: ReactNode;
+  icon?: React.ReactNode;
+  text?: string;
 }
 
-const InputText = forwardRef<HTMLInputElement, IInputText>(
+const InputText = forwardRef<HTMLInputElement, InputTextProps>(
   (
-    { className, placeholder, onPressEnter, icon, context, ...restProps },
+    {
+      context = "main",
+      onPressEnter,
+      icon,
+      className,
+      placeholder,
+      text,
+      ...restProps
+    },
     ref,
   ) => {
     const handleSearchOnPressEnter = (e: { key: string }) => {
@@ -20,7 +32,7 @@ const InputText = forwardRef<HTMLInputElement, IInputText>(
     };
 
     return (
-      <div className={styles.inputContainer}>
+      <div className={`row ${styles.inputContainer}`}>
         {icon && (
           <span
             className={clsx(styles.icon, {
@@ -30,11 +42,19 @@ const InputText = forwardRef<HTMLInputElement, IInputText>(
             {icon}
           </span>
         )}
+        {text && (
+          <Text lineHeight="smallLineHeight" color="subheadingColor">
+            {text}
+          </Text>
+        )}
         <input
           ref={ref}
           {...restProps}
           onKeyDown={handleSearchOnPressEnter}
-          className={clsx(styles.inputText, className)}
+          className={clsx(styles.inputText, className, {
+            [styles.searchWallet]: context === "wallet",
+            [styles.searchDark]: context === "dark",
+          })}
           placeholder={placeholder}
         />
       </div>

@@ -1,12 +1,14 @@
 import React from "react";
-import styles from "./styles.module.css"; // Ensure this import is correct
-import { Text } from "@site/src/components/Atoms/Text"; // Ensure this import is correct
+import styles from "./styles.module.css";
+import { Text } from "@site/src/components/Atoms/Text";
 import { Search } from "@site/src/components/Molecules/Search";
+import { Warning } from "@site/src/components/Atoms/Warning";
 import { DownloadPanel } from "@site/src/components/Molecules/DownloadPanel";
-import { Spacer } from "@site/src/components/Atoms/Spacer"; // Ensure this import is correct
+import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { OpenInNew } from "@site/src/icons";
-import Button from "@site/src/components/Atoms/Button/Button"; // Ensure this import is correct
+import Button from "@site/src/components/Atoms/Button/Button";
 import { useWalletPage } from "@site/src/hooks/useWallet";
+import { Link } from "react-router-dom";
 
 interface Step {
   number: number;
@@ -17,6 +19,7 @@ interface Step {
   image?: boolean;
   button?: string;
   buttonTitle?: string;
+  buttonLink?: string; // Add buttonLink property
   warning?: boolean;
   showSearch?: boolean;
 }
@@ -38,7 +41,7 @@ const stepsData: Step[] = [
   {
     number: 2,
     title: "Download mining software",
-    text: "CoreMiner is a RandomY CPU mining worker - with CoreMiner you can mine every coin which relies on a RandomY Proof of Work. ",
+    text: "CoreMiner is a RandomY CPU mining worker - with CoreMiner you can mine every coin which relies on a RandomY Proof of Work.",
     warning: true,
     button: "Download CoreMiner",
     buttonTitle: "CoreMiner for Linux",
@@ -48,8 +51,9 @@ const stepsData: Step[] = [
   {
     number: 3,
     title: "Create configuration file",
-    text: "It's time to configure the miner so that everything works as it should. ",
+    text: "It's time to configure the miner so that everything works as it should.",
     button: "Create config file",
+    buttonLink: "/create-config",
     link: "#",
     linkText: "Open configuration manual (github)",
   },
@@ -60,6 +64,7 @@ const stepsData: Step[] = [
     showSearch: true,
   },
 ];
+
 const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
   return (
     <div className={`flex flex-column ${styles.stepsContainer}`}>
@@ -85,17 +90,10 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
           {step.warning && (
             <>
               <Spacer variant="md" />
-              <div className={styles.warning}>
-                <Text
-                  variant="smallBody"
-                  weight="normal"
-                  color="white"
-                  lineHeight="smallLineHeight"
-                >
-                  In case you do not own a Linux device, we recommend using the
-                  Linux virtual operating system.
-                </Text>
-              </div>
+              <Warning
+                text="In case you do not own a Linux device, we recommend using the
+                  Linux virtual operating system."
+              />
             </>
           )}
 
@@ -119,11 +117,21 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
                         <Spacer variant="sm" />
                       )}
                       <Spacer variant="xs" />
-                      <Button
-                        backgroundColor="#062A1C"
-                        textColor="#16C784"
-                        value={step.button}
-                      />
+                      {step.buttonLink ? (
+                        <Link to={step.buttonLink}>
+                          <Button
+                            backgroundColor="#062A1C"
+                            textColor="#16C784"
+                            value={step.button}
+                          />
+                        </Link>
+                      ) : (
+                        <Button
+                          backgroundColor="#062A1C"
+                          textColor="#16C784"
+                          value={step.button}
+                        />
+                      )}
                     </div>
                     <Spacer direction="hor" variant="xs" />
                   </>

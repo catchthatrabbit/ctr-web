@@ -19,6 +19,7 @@
     "start-chrome-mac-nocors": "open -na 'Google Chrome' --args --disable-web-security --user-data-dir=/tmp/chrome_dev_test"
   },
   "dependencies": {
+    "@blockchainhub/ican": "^0.4.1",
     "@docusaurus/core": "3.4.0",
     "@docusaurus/plugin-google-gtag": "^3.5.2",
     "@docusaurus/preset-classic": "3.4.0",

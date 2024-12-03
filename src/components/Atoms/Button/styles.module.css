@@ -83,3 +83,8 @@
 .email:hover{
   background-color: var(--blue-rgb-700);
 }
+
+.configButton{
+  width: 27%;
+  padding: var(--space-xxs) var(--space-sm);
+}

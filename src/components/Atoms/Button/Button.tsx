@@ -13,6 +13,9 @@ interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   value: string;
   backgroundColor?: string;
   textColor?: string;
+  customWidth?: string;
+  weight?: "medium";
+  context?: "config";
 }
 
 const Button = ({
@@ -24,6 +27,9 @@ const Button = ({
   className,
   backgroundColor,
   textColor,
+  customWidth,
+  weight,
+  context,
   ...restProps
 }: IButtonProps) => {
   const buttonStyle = {
@@ -40,12 +46,17 @@ const Button = ({
         styles[size],
         styles.full && full,
         className,
+        { [styles.configButton]: context === "config" },
       )}
       style={buttonStyle}
       {...restProps}
     >
       {icon && <div className={styles.buttonIcon}>{icon}</div>}
-      <Text variant={size === "large" ? "body" : "smallBody"} color={textColor}>
+      <Text
+        variant={size === "large" ? "body" : "smallBody"}
+        color={textColor}
+        weight={weight}
+      >
         {value}
       </Text>
     </button>
