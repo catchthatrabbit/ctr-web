@@ -33,7 +33,7 @@ const CreateConfig = ({
   const [isWalletValid, setIsWalletValid] = useState(true);
   const [inputType, setInputType] = useState("plain");
   const [minerName, setMinerName] = useState({ value: "", isValid: true }); // Combined state for miner names
-  const [typePortal, setTypePortal] = useState("");
+  const [typePortal, setTypePortal] = useState({ value: "", isValid: true });
   const [uniqueId, setUniqueId] = useState("");
   const [dropdownValue1, setDropdownValue1] = useState(regionLabel);
   const [dropdownValue2, setDropdownValue2] = useState(regionLabel);
@@ -65,8 +65,18 @@ const CreateConfig = ({
   const handleTypePortalChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setTypePortal(event.target.value);
+    const value = event.target.value;
+    const regex =
+      /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$/;
+    const isValid = regex.test(value);
+    setTypePortal({ value, isValid });
   };
+  // Examples of Valid Domains
+  // example.com
+  // subdomain.example.com
+  // example.co.uk
+  // my-site.example.org
+  // another.subdomain.example.io
 
   const handleUniqueIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUniqueId(event.target.value);
@@ -144,10 +154,18 @@ const CreateConfig = ({
           </Text>
           <InputText
             context="dark"
-            value={typePortal}
+            value={typePortal.value}
             onChange={handleTypePortalChange}
             placeholder="Type portal"
           />
+          {!typePortal.isValid && (
+            <Text
+              variant="smallBody"
+              style={{ marginTop: "4px", color: "#E54E4E" }}
+            >
+              Portal is not valid. Please enter a valid domain.
+            </Text>
+          )}
           <Spacer variant="sm" />
           <Text
             variant="smallBody"
@@ -169,8 +187,8 @@ const CreateConfig = ({
   };
 
   const handleDownloadConfig = () => {
-    if (!isWalletValid || !minerName.isValid) {
-      return; // Prevent config generation if wallet or miner name is not valid
+    if (!isWalletValid || !minerName.isValid || !typePortal.isValid) {
+      return; // Prevent config generation if wallet, miner name, or portal is not valid
     }
     let walletAddressFormat = walletAddress.replace(/\s+/g, "").toLowerCase();
     let workerName = "";
@@ -178,7 +196,7 @@ const CreateConfig = ({
       workerName = minerName.value;
     } else if (inputType === "fediverse") {
       const { href, caption } = convertWorkerName(
-        `_${minerName.value}${typePortal}${uniqueId ? `-${uniqueId}` : ""}`,
+        `_${minerName.value}${typePortal.value}${uniqueId ? `-${uniqueId}` : ""}`,
       );
       workerName = caption;
     }
