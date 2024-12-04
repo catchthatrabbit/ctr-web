@@ -25,6 +25,7 @@ interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
   walletAddress: string;
   onClearWalletAddress?: () => void;
   onSetWalletAddress: (walletAddress: string) => void;
+  selectedPool: string;
 }
 
 const Wallet = ({
@@ -33,6 +34,7 @@ const Wallet = ({
   onChangeRegion,
   onClearWalletAddress,
   onSetWalletAddress,
+  selectedPool,
 }: IWallet) => {
   const {
     fetchPaymentsByWalletAddress,
@@ -53,6 +55,8 @@ const Wallet = ({
   } = useControls({ walletAddress, defaultRegion, onChangeRegion });
   const [filterStatus, setFilterStatus] = useState("All");
   const [toastShown, setToastShown] = useState(false);
+
+  console.log("walletAddress", walletAddress);
 
   const handleFilterChange = (status: string) => {
     setFilterStatus(status);
@@ -120,6 +124,7 @@ const Wallet = ({
             onChangeRegion={handleChangeRegion}
             iban={walletAddress}
             layout={{ boards: true, search: false, dropdown: true }}
+            selectedPool={selectedPool}
           />
           <Info
             data={fetchedWalletInfo}

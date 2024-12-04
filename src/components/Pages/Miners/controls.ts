@@ -4,6 +4,8 @@ import { useHeaders } from "@site/src/hooks/useHeaders";
 import { usePaginate } from "@site/src/hooks/usePaginate";
 import { MINERS_RESPONSE } from "@site/src/Api/miners/types";
 import { useHistory } from "@docusaurus/router";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
 import { useMemo } from "react";
 import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
 import { tablesConfig } from "@site/src/configs";
@@ -14,6 +16,8 @@ const useControls = ({
   onChangeRegion,
 }: IAnyPageAndWallet) => {
   const { push } = useHistory();
+
+  const { siteConfig } = useDocusaurusContext();
 
   const {
     region,
@@ -44,7 +48,8 @@ const useControls = ({
         isPrimary: true,
         fn: (walletAddress) => {
           setWalletAddress(walletAddress);
-          push("/miners");
+
+          push(`/wallet-overview/${walletAddress}`);
         },
       },
       { value: "hr", label: "Hashrate" },
@@ -52,6 +57,9 @@ const useControls = ({
     ],
     [push, setWalletAddress],
   );
+
+  const startMiningPoolConfigurations = siteConfig.customFields
+    .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
 
   return {
     dataTableColumns,
@@ -66,6 +74,7 @@ const useControls = ({
     isLoadingMinerList,
     regionLabel,
     dropdownItems,
+    startMiningPoolConfigurations,
   };
 };
 

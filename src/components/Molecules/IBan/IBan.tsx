@@ -10,8 +10,9 @@ interface IIBan {
   iBan?: string;
 }
 
-const IBan = ({ iBan = "" }: IIBan) => {
+const IBan = ({ iBan = "", pool = "de" }: IIBan) => {
   const { mobile, tablet } = useMediaQueries();
+  const permalink = `${pool}.ctr.watch/@${iBan}`;
   return (
     <>
       <div className={clsx([[styles.iBanRoot, styles.justifyCenter, "flex"]])}>
@@ -39,7 +40,7 @@ const IBan = ({ iBan = "" }: IIBan) => {
           toastText="Wallet address copied to clipboard"
         />
         <CopyButton
-          textToCopy={`${iBan}.ctr.watch`}
+          textToCopy={permalink}
           value="Copy permalink"
           toastText="Permalink copied to clipboard"
         />

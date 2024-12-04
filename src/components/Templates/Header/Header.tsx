@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Search } from "@site/src/components/Molecules/Search";
 import { Dropdown } from "@site/src/components/Atoms/Dropdown";
 import { Board } from "@site/src/components/Atoms/Board";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { IBan } from "@site/src/components/Molecules/IBan";
+import useControls from "./controls";
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
 
@@ -31,6 +32,7 @@ interface IHeader {
     boards: boolean;
   };
   context?: string;
+  selectedPool?: string;
 }
 
 const Header = ({
@@ -46,6 +48,7 @@ const Header = ({
   addComponent,
   layout = { boards: true, dropdown: true, search: true },
   context,
+  selectedPool,
 }: IHeader) => {
   const columnClass =
     context === "blocks" || context === "payments"
@@ -67,7 +70,7 @@ const Header = ({
       )}
       {layout.dropdown && (
         <>
-          {iban && <IBan iBan={iban} />}
+          {iban && <IBan iBan={iban} pool={selectedPool} />}
           <Spacer variant="xxs" />
           {context === "blocks" && <Spacer variant="xl" />}
           <div
