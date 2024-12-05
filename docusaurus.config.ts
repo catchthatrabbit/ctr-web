@@ -382,7 +382,7 @@ const config: Config = {
     //     trackingID: "G-K79ZXPBSHD",
     //     anonymizeIP: true,
     //   },
-    // ],
+    // ]
   ],
 };
 

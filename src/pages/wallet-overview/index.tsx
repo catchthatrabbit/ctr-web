@@ -1,12 +1,24 @@
-import React, { useEffect } from "react";
-import { useLocation } from "@docusaurus/router";
+import React from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { Wallet } from "@site/src/components/Pages/Wallet";
 import { ConfiguredLayout } from "@site/src/components/Templates/ConfiguredLayout";
 import { useWalletPage } from "@site/src/hooks/useWallet";
 
 const WalletOverviewPage = () => {
   const location = useLocation();
-  const walletAddress = location.pathname.split("/").pop();
+  const { walletAddress: paramWalletAddress, pool: paramPool } = useParams<{
+    walletAddress: string;
+    pool: string;
+  }>();
+
+  console.log(location);
+
+  const queryParams = new URLSearchParams(location.search);
+  const queryWalletAddress = queryParams.get("walletAddress");
+  const queryPool = queryParams.get("pool") || "de";
+
+  const walletAddress = paramWalletAddress || queryWalletAddress;
+  const pool = paramPool || queryPool;
 
   const {
     handleChangeRegion,
@@ -17,18 +29,14 @@ const WalletOverviewPage = () => {
 
   return (
     <ConfiguredLayout backgroundPos={40}>
-      {walletAddress ? (
-        <Wallet
-          onClearWalletAddress={handleClearWalletAddress}
-          defaultRegion={region}
-          walletAddress={walletAddress as string}
-          onChangeRegion={handleChangeRegion}
-          onSetWalletAddress={handleWalletAddress}
-          selectedPool="de" // Replace with actual logic to get selected pool
-        />
-      ) : (
-        <div>Loading...</div>
-      )}
+      <Wallet
+        onClearWalletAddress={handleClearWalletAddress}
+        defaultRegion={region}
+        walletAddress={walletAddress}
+        onChangeRegion={handleChangeRegion}
+        onSetWalletAddress={handleWalletAddress}
+        selectedPool={pool} // Pass pool to Wallet
+      />
     </ConfiguredLayout>
   );
 };

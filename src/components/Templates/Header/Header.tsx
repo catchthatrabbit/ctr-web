@@ -88,7 +88,7 @@ const Header = ({
             >
               <Dropdown
                 isLoading={isLoading}
-                defaultValue={defaultRegion}
+                defaultValue={selectedPool || defaultRegion}
                 className={clsx(styles.boardDropdown, {
                   [styles.smallWidth]:
                     context === "blocks" || context === "payments",

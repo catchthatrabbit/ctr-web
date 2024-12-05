@@ -49,7 +49,7 @@ const useControls = ({
         fn: (walletAddress) => {
           setWalletAddress(walletAddress);
 
-          push(`/wallet-overview/${walletAddress}`);
+          push(`/wallet-overview?walletAddress=${walletAddress}`);
         },
       },
       { value: "hr", label: "Hashrate" },
