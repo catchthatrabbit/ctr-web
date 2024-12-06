@@ -6,7 +6,7 @@ import { MINERS_RESPONSE } from "@site/src/Api/miners/types";
 import { useHistory } from "@docusaurus/router";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
 import { tablesConfig } from "@site/src/configs";
 
@@ -14,6 +14,7 @@ const useControls = ({
   onSetWalletAddress,
   defaultRegion,
   onChangeRegion,
+  selectedPool,
 }: IAnyPageAndWallet) => {
   const { push } = useHistory();
 
@@ -34,6 +35,9 @@ const useControls = ({
   const { data: fetchedMinerList, isLoading: isLoadingMinerList } =
     useFetchMiners(region, 10, currentPageNumber);
 
+  const startMiningPoolConfigurations = siteConfig.customFields
+    .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
+
   const minerList = useMemo(
     () => convertMinerResponse2MinerList(fetchedMinerList as MINERS_RESPONSE),
     [fetchedMinerList],
@@ -48,18 +52,17 @@ const useControls = ({
         isPrimary: true,
         fn: (walletAddress) => {
           setWalletAddress(walletAddress);
-
-          push(`/wallet-overview?walletAddress=${walletAddress}`);
+          console.log("controls", selectedPool);
+          push(
+            `/wallet-overview?walletAddress=${walletAddress}&pool=${selectedPool}`,
+          );
         },
       },
       { value: "hr", label: "Hashrate" },
       { value: "lastBeat", label: "Last beat" },
     ],
-    [push, setWalletAddress],
+    [push, setWalletAddress, selectedPool],
   );
-
-  const startMiningPoolConfigurations = siteConfig.customFields
-    .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
 
   return {
     dataTableColumns,

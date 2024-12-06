@@ -26,10 +26,15 @@ export const useWalletPage = () => {
   const [region, setRegion] = useState<STANDARD_REGIONS_API_KEYS>(
     POOL_NAME_ENUM.DE,
   );
+  const [selectedPool, setSelectedPool] = useState<string>("de");
 
   const handleWalletAddress = (walletAddress: string) => {
     setWalletAddress(walletAddress);
     console.log("Search query:", walletAddress);
+  };
+
+  const handleSelectedPool = (selectedPool: string) => {
+    setSelectedPool(selectedPool);
   };
 
   const handleChangeRegion = (selectedRegion: STANDARD_REGIONS_API_KEYS) => {
@@ -46,6 +51,8 @@ export const useWalletPage = () => {
     handleChangeRegion,
     handleClearWalletAddress,
     handleWalletAddress,
+    selectedPool,
+    handleSelectedPool,
   };
 };
 

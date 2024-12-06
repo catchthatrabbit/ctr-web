@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Search } from "@site/src/components/Molecules/Search";
 import { Dropdown } from "@site/src/components/Atoms/Dropdown";
 import { Board } from "@site/src/components/Atoms/Board";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { IBan } from "@site/src/components/Molecules/IBan";
-import useControls from "./controls";
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
 
@@ -32,7 +31,6 @@ interface IHeader {
     boards: boolean;
   };
   context?: string;
-  selectedPool?: string;
 }
 
 const Header = ({
@@ -50,6 +48,8 @@ const Header = ({
   context,
   selectedPool,
 }: IHeader) => {
+  console.log("header", selectedPool);
+
   const columnClass =
     context === "blocks" || context === "payments"
       ? "flex-col--4"
@@ -70,7 +70,7 @@ const Header = ({
       )}
       {layout.dropdown && (
         <>
-          {iban && <IBan iBan={iban} pool={selectedPool} />}
+          {iban && <IBan iBan={iban} />}
           <Spacer variant="xxs" />
           {context === "blocks" && <Spacer variant="xl" />}
           <div
@@ -88,7 +88,7 @@ const Header = ({
             >
               <Dropdown
                 isLoading={isLoading}
-                defaultValue={selectedPool || defaultRegion}
+                defaultValue={defaultRegion}
                 className={clsx(styles.boardDropdown, {
                   [styles.smallWidth]:
                     context === "blocks" || context === "payments",

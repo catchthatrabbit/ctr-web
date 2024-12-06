@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { List } from "@site/src/components/Templates/List";
 import { Header } from "@site/src/components/Templates/Header";
 import { TextFormat } from "@site/src/utils/textFormat";
@@ -38,7 +39,12 @@ const Miners = ({
     dropdownItems,
     regionLabel,
     startMiningPoolConfigurations,
-  } = useControls({ onSetWalletAddress, defaultRegion, onChangeRegion });
+  } = useControls({
+    onSetWalletAddress,
+    defaultRegion,
+    onChangeRegion,
+    selectedPool,
+  });
 
   const { infoBoxMapData } = useControlsDashboard();
   const networkDifficultyItem = infoBoxMapData?.find((item) =>
@@ -53,7 +59,10 @@ const Miners = ({
     const poolShortcut = poolConfig
       ? poolConfig.SERVER.slice(0, 2)
       : selectedOption.value.slice(0, 2);
+
     setSelectedPool(poolShortcut);
+
+    console.log(selectedPool, poolShortcut, 1);
 
     handleChangeRegion(selectedOption);
   };

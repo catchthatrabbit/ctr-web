@@ -11,9 +11,9 @@ const MinersPage = () => {
     handleClearWalletAddress,
     handleWalletAddress,
     region,
+    selectedPool,
+    handleSelectedPool,
   } = useWalletPage();
-
-  const [selectedPool, setSelectedPool] = useState<string>("de");
 
   return (
     <ConfiguredLayout>
@@ -22,7 +22,7 @@ const MinersPage = () => {
         onSetWalletAddress={handleWalletAddress}
         onChangeRegion={handleChangeRegion}
         selectedPool={selectedPool}
-        setSelectedPool={setSelectedPool}
+        setSelectedPool={handleSelectedPool}
       />
     </ConfiguredLayout>
   );
