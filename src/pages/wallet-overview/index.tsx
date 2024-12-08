@@ -1,28 +1,23 @@
 import React from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Wallet } from "@site/src/components/Pages/Wallet";
 import { ConfiguredLayout } from "@site/src/components/Templates/ConfiguredLayout";
 import { useWalletPage } from "@site/src/hooks/useWallet";
-import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
 
 const WalletOverviewPage = () => {
   const { siteConfig } = useDocusaurusContext();
 
   const START_MINING_POOL_CONFIGURATIONS = siteConfig.customFields
     .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
-  const location = useLocation();
-  const { walletAddress: paramWalletAddress, pool: paramPool } = useParams<{
+  const { walletAddress, pool } = useParams<{
     walletAddress: string;
     pool: string;
   }>();
 
-  const queryParams = new URLSearchParams(location.search);
-  const queryWalletAddress = queryParams.get("walletAddress");
-  const queryPool = queryParams.get("pool") || "de";
-
-  const walletAddress = paramWalletAddress || queryWalletAddress;
-  const pool = paramPool || queryPool;
+  console.log("walletAddress:", walletAddress);
+  console.log("pool:", pool);
 
   const poolConfig = Object.values(START_MINING_POOL_CONFIGURATIONS).find(
     (siteConfig) => siteConfig.SERVER.startsWith(pool),
@@ -37,7 +32,7 @@ const WalletOverviewPage = () => {
     handleClearWalletAddress,
     handleWalletAddress,
     region,
-  } = useWalletPage();
+  } = useWalletPage(pool);
 
   return (
     <ConfiguredLayout backgroundPos={40}>
@@ -48,6 +43,7 @@ const WalletOverviewPage = () => {
         onChangeRegion={handleChangeRegion}
         onSetWalletAddress={handleWalletAddress}
         selectedPool={pool} // Pass pool to Wallet
+        poolDescription={poolDescription} // Pass pool description to Wallet
       />
     </ConfiguredLayout>
   );

@@ -53,9 +53,7 @@ const useControls = ({
         fn: (walletAddress) => {
           setWalletAddress(walletAddress);
           console.log("controls", selectedPool);
-          push(
-            `/wallet-overview?walletAddress=${walletAddress}&pool=${selectedPool}`,
-          );
+          push(`/wallet-overview/${walletAddress}/${selectedPool}`);
         },
       },
       { value: "hr", label: "Hashrate" },

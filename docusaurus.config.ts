@@ -5,6 +5,7 @@ import remarkCorepass from "remark-corepass";
 import remarkCorebc from "remark-corebc";
 import remarkCurrencyFormatter from "remark-currency-formatter";
 import remarkFediverseUser from "remark-fediverse-user";
+import path from "path";
 
 const config: Config = {
   title: "Catch that Rabbit",
@@ -383,6 +384,18 @@ const config: Config = {
     //     anonymizeIP: true,
     //   },
     // ]
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        redirects: [
+          {
+            to: "/wallet-overview/:walletAddress/:pool",
+            from: "/coreid/:walletAddress/:pool",
+          },
+        ],
+      },
+    ],
+    path.resolve(__dirname, "./src/plugins/dynamic-router-plugin.ts"),
   ],
 };
 
