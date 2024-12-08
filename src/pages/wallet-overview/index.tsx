@@ -32,17 +32,17 @@ const WalletOverviewPage = () => {
     handleClearWalletAddress,
     handleWalletAddress,
     region,
-  } = useWalletPage(pool);
+  } = useWalletPage();
 
   return (
     <ConfiguredLayout backgroundPos={40}>
       <Wallet
         onClearWalletAddress={handleClearWalletAddress}
-        defaultRegion={pool.toUpperCase() || region}
+        defaultRegion={pool ? pool.toUpperCase() : region}
         walletAddress={walletAddress}
         onChangeRegion={handleChangeRegion}
         onSetWalletAddress={handleWalletAddress}
-        selectedPool={pool} // Pass pool to Wallet
+        selectedPool={pool}
         poolDescription={poolDescription} // Pass pool description to Wallet
       />
     </ConfiguredLayout>
