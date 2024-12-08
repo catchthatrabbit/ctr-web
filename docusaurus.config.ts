@@ -384,17 +384,6 @@ const config: Config = {
     //     anonymizeIP: true,
     //   },
     // ]
-    [
-      "@docusaurus/plugin-client-redirects",
-      {
-        redirects: [
-          {
-            to: "/wallet-overview/:walletAddress/:pool",
-            from: "/coreid/:walletAddress/:pool",
-          },
-        ],
-      },
-    ],
     path.resolve(__dirname, "./src/plugins/dynamic-router-plugin.ts"),
   ],
 };

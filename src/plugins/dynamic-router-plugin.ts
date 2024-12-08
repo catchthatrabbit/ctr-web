@@ -1,6 +1,6 @@
 import { LoadContext, Plugin } from "@docusaurus/types";
 
-export default function dynamicRouter(
+export default function dynamicRouterPlugin(
   context: LoadContext,
   options: {},
 ): Plugin<void> {
@@ -8,9 +8,9 @@ export default function dynamicRouter(
     name: "dynamic-router-plugin",
     async contentLoaded({ actions }) {
       actions.addRoute({
-        path: "/wallet-overview/:walletAddress/:pool",
+        path: "/coreid/:walletAddress/:pool",
         component: "@site/src/pages/wallet-overview",
-        exact: false,
+        exact: true,
       });
     },
   };
