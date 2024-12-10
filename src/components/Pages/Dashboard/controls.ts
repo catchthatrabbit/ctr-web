@@ -4,7 +4,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
   AS_START_MINING_POOL_LOCATION,
   EU_START_MINING_POOL_LOCATION,
-  AM_START_MINING_POOL_LOCATION,
+  BR_START_MINING_POOL_LOCATION,
 } from "@site/src/configs/start-minings.config";
 import { useFetchAllRegionsMaturedBlocks } from "@site/src/hooks/useBlocks";
 import { useMemo } from "react";
@@ -78,8 +78,8 @@ const useControls = () => {
     infoBoxMapData,
     poolFee,
     usStarMiningPoolLocation: (siteConfig.customFields
-      .AM_START_MINING_POOL_LOCATION ||
-      AM_START_MINING_POOL_LOCATION) as string,
+      .BR_START_MINING_POOL_LOCATION ||
+      BR_START_MINING_POOL_LOCATION) as string,
     euStarMiningPoolLocation: (siteConfig.customFields
       .EU_START_MINING_POOL_LOCATION ||
       EU_START_MINING_POOL_LOCATION) as string,

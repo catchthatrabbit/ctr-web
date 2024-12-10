@@ -45,8 +45,8 @@ const config: Config = {
       NEXT_PUBLIC_SG_API_ENDPOINT: "",
       HK_API_ENDPOINT: "https://as-api.catchthatrabbit.com/",
       NEXT_PUBLIC_HK_API_ENDPOINT: "",
-      AM_API_ENDPOINT: "https://us-api.catchthatrabbit.com/",
-      NEXT_PUBLIC_AM_API_ENDPOINT: "",
+      BR_API_ENDPOINT: "https://us-api.catchthatrabbit.com/",
+      NEXT_PUBLIC_BR_API_ENDPOINT: "",
       JP_API_ENDPOINT: "https://us1-api.catchthatrabbit.com/",
       NEXT_PUBLIC_JP_API_ENDPOINT: "",
     },
@@ -107,7 +107,7 @@ const config: Config = {
         PASSWORD: "<empty>",
         PAYOUT: "cb6242d8b1903db52f99813f79fe4dff2b85fd7c1fdd",
       },
-      AM: {
+      BR: {
         NAME: "America",
         DESCRIPTION: "American Pool 🇧🇷🇲🇽🇺🇸",
         SERVER: "br.catchthatrabbit.com",

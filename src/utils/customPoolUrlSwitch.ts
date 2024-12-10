@@ -28,10 +28,10 @@ export const customPoolAndApiUrlSwitch = (
         ? poolUrl["HK_API_ENDPOINT"]
         : poolUrl["NEXT_PUBLIC_HK_API_ENDPOINT"];
       break;
-    case "AM":
-      resultUrl = poolUrl["AM_API_ENDPOINT"]
-        ? poolUrl["JP_API_ENDPOINT"]
-        : poolUrl["NEXT_PUBLIC_AM_API_ENDPOINT"];
+    case "BR":
+      resultUrl = poolUrl["BR_API_ENDPOINT"]
+        ? poolUrl["BR_API_ENDPOINT"]
+        : poolUrl["NEXT_PUBLIC_BR_API_ENDPOINT"];
       break;
     case "JP":
       resultUrl = poolUrl["JP_API_ENDPOINT"]

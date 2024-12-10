@@ -10,6 +10,6 @@ export const STANDARD_REGIONS_API: {
   FI: "fi",
   SG: "sg",
   HK: "hk",
-  AM: "am",
+  BR: "br",
   JP: "jp",
 };

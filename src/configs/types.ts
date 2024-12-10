@@ -17,15 +17,15 @@ export type POOLS_API_CONFIG_TYPE = Record<
   | "NEXT_PUBLIC_SG_API_ENDPOINT"
   | "HK_API_ENDPOINT"
   | "NEXT_PUBLIC_HK_API_ENDPOINT"
-  | "AM_API_ENDPOINT"
-  | "NEXT_PUBLIC_AM_API_ENDPOINT"
+  | "BR_API_ENDPOINT"
+  | "NEXT_PUBLIC_BR_API_ENDPOINT"
   | "JP_API_ENDPOINT"
   | "NEXT_PUBLIC_JP_API_ENDPOINT",
   string
 >;
 
 export type START_MINING_POOL_CONFIGURATIONS = Record<
-  "DE" | "FI" | "SG" | "HK" | "AM" | "JP",
+  "DE" | "FI" | "SG" | "HK" | "BR" | "JP",
   Record<
     | "DESCRIPTION"
     | "NAME"

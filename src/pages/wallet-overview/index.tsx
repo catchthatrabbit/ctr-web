@@ -43,7 +43,7 @@ const WalletOverviewPage = () => {
         onChangeRegion={handleChangeRegion}
         onSetWalletAddress={handleWalletAddress}
         selectedPool={pool}
-        poolDescription={poolDescription} // Pass pool description to Wallet
+        poolDescription={poolDescription}
       />
     </ConfiguredLayout>
   );

@@ -42,8 +42,8 @@ export const useHeaders = ({
       value: POOL_NAME_ENUM.HK,
     },
     {
-      label: startMiningPoolConfigurations[REGIONS.AM][`DESCRIPTION`],
-      value: POOL_NAME_ENUM.AM,
+      label: startMiningPoolConfigurations[REGIONS.BR][`DESCRIPTION`],
+      value: POOL_NAME_ENUM.BR,
     },
     {
       label: startMiningPoolConfigurations[REGIONS.JP][`DESCRIPTION`],
@@ -80,8 +80,8 @@ export const useHeaders = ({
         return startMiningPoolConfigurations[REGIONS.SG][`DESCRIPTION`];
       case "HK":
         return startMiningPoolConfigurations[REGIONS.HK][`DESCRIPTION`];
-      case "AM":
-        return startMiningPoolConfigurations[REGIONS.AM][`DESCRIPTION`];
+      case "BR":
+        return startMiningPoolConfigurations[REGIONS.BR][`DESCRIPTION`];
       case "JP":
         return startMiningPoolConfigurations[REGIONS.JP][`DESCRIPTION`];
       default:

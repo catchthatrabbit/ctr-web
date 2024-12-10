@@ -3,6 +3,6 @@ export enum POOL_NAME_ENUM {
   FI = "FI",
   SG = "SG",
   HK = "HK",
-  AM = "AM",
+  BR = "BR",
   JP = "JP",
 }

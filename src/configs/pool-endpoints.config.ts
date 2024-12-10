@@ -5,7 +5,7 @@ export const DE_API = DEFAULT_API_URL.DE;
 export const FI_API = DEFAULT_API_URL.FI;
 export const SG_API = DEFAULT_API_URL.SG;
 export const HK_API = DEFAULT_API_URL.HK;
-export const AM_API = DEFAULT_API_URL.AM;
+export const BR_API = DEFAULT_API_URL.BR;
 export const JP_API = DEFAULT_API_URL.JP;
 
 export const API_SWITCH: Record<STANDARD_REGIONS_API_KEYS, string> = {
@@ -13,7 +13,7 @@ export const API_SWITCH: Record<STANDARD_REGIONS_API_KEYS, string> = {
   FI: FI_API,
   SG: SG_API,
   HK: HK_API,
-  AM: AM_API,
+  BR: BR_API,
   JP: JP_API,
 };
 
@@ -22,6 +22,6 @@ export const AGGREGATION_APIS = [
   FI_API,
   SG_API,
   HK_API,
-  AM_API,
+  BR_API,
   JP_API,
 ];
