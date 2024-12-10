@@ -1,32 +1,38 @@
 import { Magnifier } from "@site/src/icons";
-import { InputHTMLAttributes, forwardRef, useRef } from "react";
+import { InputHTMLAttributes, forwardRef, useRef, useState } from "react";
 import { InputText } from "@site/src/components/Atoms/InputText";
 import clsx from "clsx";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 import { Text } from "../../Atoms/Text";
 import SearchIcon from "@site/src/icons/SearchIcon";
-
+import { useHistory } from "react-router-dom";
 import styles from "./styles.module.css"; // Ensure this import is correct
 
 interface ISearch extends InputHTMLAttributes<HTMLInputElement> {
   onSearch?: (searchQuery: string) => void;
   context?: "wallet" | "main" | "startMining" | "payments";
+  selectedPool?: string; // Add selectedPool prop
 }
 
 const Search = forwardRef<HTMLInputElement, ISearch>(
-  ({ onSearch, context = "main", ...restProps }, ref) => {
+  ({ onSearch, context = "main", selectedPool = "de", ...restProps }, ref) => {
     const inputRef = useRef<HTMLInputElement>();
-
     const { mobile } = useMediaQueries();
+    const [walletAddress, setWalletAddress] = useState("");
+    const history = useHistory();
 
     const handleClickSearchButton = () => {
       handleSearch();
     };
 
     const handleSearch = () => {
+      const address = inputRef.current.value;
+      setWalletAddress(address);
       if (typeof onSearch === "function") {
-        onSearch(inputRef.current.value);
+        onSearch(address);
       }
+      console.log("walletAddress", address);
+      history.push(`/coreid/${address}/${selectedPool}`);
     };
 
     const placeholderTextMap = {
