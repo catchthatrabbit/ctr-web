@@ -16,6 +16,7 @@ interface IInfoBox {
   boardClassNameColumn?: string;
   dir?: "vert" | "hor" | "column" | "around";
   applyFullWidthBorder?: boolean;
+  applyFullWidth?: boolean;
   spaceAround?: boolean;
   context?: "mapChart" | "statsChart";
 }
@@ -30,6 +31,7 @@ const InfoBox = ({
   boardClassNameVert,
   boardClassNameColumn,
   applyFullWidthBorder = false,
+  applyFullWidth = false,
   spaceAround = false,
   context = "mapChart",
 }: IInfoBox) => {
@@ -48,7 +50,7 @@ const InfoBox = ({
           [styles.justifySpaceBetween]: desktop || laptop,
           [styles.justifyCenter]: tablet || mobile,
           [styles.fullWidthBorder]: applyFullWidthBorder && (desktop || laptop),
-          [styles.fullWidth]: desktop || laptop,
+          [styles.fullWidth]: (applyFullWidth && desktop) || laptop,
         },
         className,
       ])}
@@ -57,7 +59,7 @@ const InfoBox = ({
         <Board
           className={clsx("text-center", {
             [boardClassNameVert]: dir === "vert",
-            [boardClassNameHor]: dir === "hor",
+            // [boardClassNameHor]: dir === "hor",
             [boardClassNameColumn]: dir === "column",
           })}
           context={context}

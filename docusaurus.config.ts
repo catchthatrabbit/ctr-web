@@ -75,7 +75,7 @@ const config: Config = {
         PAYOUT: "cb11ca5aa7cf5ffa5ed333e962310b3922b48af68698",
       },
       FI: {
-        NAME: "Northeast Europe",
+        NAME: "Backup European Pool",
         DESCRIPTION: "Northeast EU Pool 🇫🇮🇪🇺",
         SERVER: "fi.catchthatrabbit.com",
         PORT: "8008",
@@ -86,7 +86,7 @@ const config: Config = {
         PAYOUT: "cb806ca47e07b803e598ea9bf7413355486723270f71",
       },
       SG: {
-        NAME: "Southeast Asia",
+        NAME: "Asian Pool",
         DESCRIPTION: "ASEAN Pool 🇸🇬🇹🇭🇵🇭",
         SERVER: "sg.catchthatrabbit.com",
         PORT: "8008",
@@ -97,7 +97,7 @@ const config: Config = {
         PAYOUT: "cb060ea54cce80fcb689f8824b238118cb5005572a36",
       },
       HK: {
-        NAME: "East Asia",
+        NAME: "Backup Asian Pool",
         DESCRIPTION: "East Asian Pool 🇭🇰🇰🇷",
         SERVER: "hk.catchthatrabbit.com",
         PORT: "8008",
@@ -108,7 +108,7 @@ const config: Config = {
         PAYOUT: "cb6242d8b1903db52f99813f79fe4dff2b85fd7c1fdd",
       },
       BR: {
-        NAME: "America",
+        NAME: "US Pool",
         DESCRIPTION: "American Pool 🇧🇷🇲🇽🇺🇸",
         SERVER: "br.catchthatrabbit.com",
         PORT: "8008",
@@ -119,7 +119,7 @@ const config: Config = {
         PAYOUT: "cb532b4658c0077fe257c44fbd3ee89f8c85ce5c68e3",
       },
       JP: {
-        NAME: "Japan",
+        NAME: "Backup US Pool",
         DESCRIPTION: "Japanese Pool 🇯🇵",
         SERVER: "jp.catchthatrabbit.com",
         PORT: "8008",

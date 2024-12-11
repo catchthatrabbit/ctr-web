@@ -142,8 +142,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
             >
               {sLoganPrimary}
             </Text>
-            <Spacer variant="md" />
-            <Text color="subheadingColor" type="regular" size="medium">
+            <Spacer variant="sm" />
+            <Text color="subheadingColor" variant="subheading1">
               {SLoganSecondary}
             </Text>
             <br />
@@ -152,10 +152,10 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           </div>
         </div>
       </MapChart>
-      <Spacer variant="xxl" />
-      <Spacer variant="xxl" />
+      <Spacer variant="xxxl" />
+      <Spacer variant="xxxl" />
       <StartPanel />
-      {/* <Spacer variant="xl" /> */}
+      <Spacer variant="md" />
       <Header
         layout={{ boards: false, dropdown: false, search: true }}
         onSearch={onSetWalletAddress}
@@ -171,7 +171,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       <Spacer variant="xxxl" />
       <Spacer variant="xxxl" />
       <RecentBlocksTitle />
-      <Spacer variant="sm" />
+      <Spacer variant="xl" />
 
       <List
         dataTableColumns={recentMatureBlockListColumns}

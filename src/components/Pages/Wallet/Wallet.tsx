@@ -54,6 +54,7 @@ const Wallet = ({
   const [filterStatus, setFilterStatus] = useState("All");
   const [toastShown, setToastShown] = useState(false);
 
+  console.log("regionLabel:", regionLabel);
   const handleFilterChange = (status: string) => {
     setFilterStatus(status);
   };

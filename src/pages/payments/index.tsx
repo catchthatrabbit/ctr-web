@@ -9,6 +9,8 @@ const PaymentsPage = () => {
     handleChangeRegion,
     handleClearWalletAddress,
     handleWalletAddress,
+    selectedPool,
+    handleSelectedPool,
     region,
   } = useWalletPage();
 
@@ -27,6 +29,8 @@ const PaymentsPage = () => {
           defaultRegion={region}
           onSetWalletAddress={handleWalletAddress}
           onChangeRegion={handleChangeRegion}
+          selectedPool={selectedPool}
+          setSelectedPool={handleSelectedPool}
         />
       )}
     </ConfiguredLayout>

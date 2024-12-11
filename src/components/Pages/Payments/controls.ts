@@ -9,12 +9,15 @@ import {
 } from "@site/src/hooks/usePayments";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
+import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
+import { useHistory } from "@docusaurus/router";
 
 const useControls = ({
   onSetWalletAddress,
   defaultRegion,
   onChangeRegion,
-}: IAnyPageAndWallet) => {
+  selectedPool,
+}: IAnyPageAndWallet & { selectedPool: string }) => {
   const {
     handleChangeRegion,
     handleSearch,
@@ -26,6 +29,7 @@ const useControls = ({
   const { currentPageNumber, handlePageChange } = usePaginate();
 
   const { siteConfig } = useDocusaurusContext();
+  const { push } = useHistory();
 
   const urlsConfigs = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
 
@@ -33,6 +37,9 @@ const useControls = ({
     useFetchPaymentsState(region);
   const { data: fetchedPaymentsList, isLoading: isLoadingPaymentList } =
     useFetchPayments(region, 10, currentPageNumber);
+
+  const startMiningPoolConfigurations = siteConfig.customFields
+    .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
 
   const dataTableColumns = useMemo(
     () => [
@@ -43,7 +50,11 @@ const useControls = ({
         label: "Address",
         canBeCopied: true,
         isPrimary: true,
-        fn: setWalletAddress,
+        fn: (walletAddress) => {
+          setWalletAddress(walletAddress);
+          console.log("controls", selectedPool);
+          push(`/coreid/${walletAddress}/${selectedPool}`);
+        },
       },
       {
         value: "tx",
@@ -53,7 +64,7 @@ const useControls = ({
         href: urlsConfigs.TRANSACTION_DETAILS_URL,
       },
     ],
-    [setWalletAddress, urlsConfigs.TRANSACTION_DETAILS_URL],
+    [setWalletAddress, push, selectedPool, urlsConfigs.TRANSACTION_DETAILS_URL],
   );
 
   return {
@@ -68,6 +79,7 @@ const useControls = ({
     isLoadingPaymentList,
     dropdownItems,
     regionLabel,
+    startMiningPoolConfigurations,
   };
 };
 

@@ -23,15 +23,11 @@ const MapChart = ({ children, infoItems, isLoading }: IMapChart) => {
   const ConfiguredInfoBox = () => (
     <>
       <InfoBox
-        boardClassNameHor={horClassName}
         dir="hor"
         isLoading={isLoading}
         items={infoItems}
         loadingComponent={
-          <InfoBoxLoadingSkeleton
-            boardClassNameHor={horClassName}
-            loadingPlaceholder={<LoadingPlaceholder />}
-          />
+          <InfoBoxLoadingSkeleton loadingPlaceholder={<LoadingPlaceholder />} />
         }
         applyFullWidthBorder={true}
       />

@@ -6,13 +6,18 @@
 }
 
 .flexColumn{
+    display: flex;
     flex-direction: column;
-    .pictureImg{
-        margin-bottom: 5px;
-    }
+    
+  
+}
+
+.pictureImg{
+    margin-bottom: 5px;
 }
 
 .flexStart{
-    justify-content: flex-start;
+    display: flex;
+    justify-content: flex-start !important;
     
 }

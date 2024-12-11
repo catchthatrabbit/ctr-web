@@ -48,7 +48,7 @@ const Header = ({
   context,
   selectedPool,
 }: IHeader) => {
-  console.log("header", selectedPool);
+  console.log("region", defaultRegion);
 
   const columnClass =
     context === "blocks" || context === "payments"

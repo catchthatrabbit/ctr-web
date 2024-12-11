@@ -108,7 +108,7 @@ const DataTable = ({
                         >
                           {rowItem[`${colItem.value}_summarized`]?.toString() ||
                             ""}
-                        </Text>
+                        </Text> //wallet address
                       )
                     ) : (
                       <Text

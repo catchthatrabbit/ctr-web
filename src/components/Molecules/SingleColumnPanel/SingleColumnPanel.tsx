@@ -38,7 +38,7 @@ const SingleColumnPanel = ({
           <Spacer variant="xxs" />
           <div
             className={clsx(styles.singleColumnValue, {
-              [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
+              // [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
               [styles.singleColumnValuePaddingTablet]: tablet,
               [styles.singleColumnValuePaddingMobile]: mobile,
               [styles.singleColumnValuePaddingStartMining]:
@@ -56,7 +56,7 @@ const SingleColumnPanel = ({
         <div
           key={index}
           className={clsx(styles.singleColumnValue, {
-            [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
+            // [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
             [styles.singleColumnValuePaddingTablet]: tablet,
             [styles.singleColumnValuePaddingMobile]: mobile,
             [styles.singleColumnValuePaddingStartMining]:

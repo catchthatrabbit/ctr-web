@@ -190,6 +190,11 @@
   line-height: var(--subheading-lineHeight-desktop);
 }
 
+.subheading1{
+  font-size: var(--subheading1-font-size-desktop);
+  line-height: var(--subheading1-lineHeight-desktop);
+}
+
 .subheading-tablet {
   font-size: var(--subheading-font-size-tablet);
   line-height: var(--subheading-lineHeight-tablet);
