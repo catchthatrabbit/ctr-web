@@ -8,6 +8,6 @@ export const REGIONS: Record<
   FI: "FI",
   SG: "SG",
   HK: "HK",
-  AM: "AM",
+  BR: "BR",
   JP: "JP",
 };

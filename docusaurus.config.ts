@@ -5,6 +5,7 @@ import remarkCorepass from "remark-corepass";
 import remarkCorebc from "remark-corebc";
 import remarkCurrencyFormatter from "remark-currency-formatter";
 import remarkFediverseUser from "remark-fediverse-user";
+import path from "path";
 
 const config: Config = {
   title: "Catch that Rabbit",
@@ -44,8 +45,8 @@ const config: Config = {
       NEXT_PUBLIC_SG_API_ENDPOINT: "",
       HK_API_ENDPOINT: "https://as-api.catchthatrabbit.com/",
       NEXT_PUBLIC_HK_API_ENDPOINT: "",
-      AM_API_ENDPOINT: "https://us-api.catchthatrabbit.com/",
-      NEXT_PUBLIC_AM_API_ENDPOINT: "",
+      BR_API_ENDPOINT: "https://us-api.catchthatrabbit.com/",
+      NEXT_PUBLIC_BR_API_ENDPOINT: "",
       JP_API_ENDPOINT: "https://us1-api.catchthatrabbit.com/",
       NEXT_PUBLIC_JP_API_ENDPOINT: "",
     },
@@ -74,7 +75,7 @@ const config: Config = {
         PAYOUT: "cb11ca5aa7cf5ffa5ed333e962310b3922b48af68698",
       },
       FI: {
-        NAME: "Northeast Europe",
+        NAME: "Backup European Pool",
         DESCRIPTION: "Northeast EU Pool 🇫🇮🇪🇺",
         SERVER: "fi.catchthatrabbit.com",
         PORT: "8008",
@@ -85,7 +86,7 @@ const config: Config = {
         PAYOUT: "cb806ca47e07b803e598ea9bf7413355486723270f71",
       },
       SG: {
-        NAME: "Southeast Asia",
+        NAME: "Asian Pool",
         DESCRIPTION: "ASEAN Pool 🇸🇬🇹🇭🇵🇭",
         SERVER: "sg.catchthatrabbit.com",
         PORT: "8008",
@@ -96,7 +97,7 @@ const config: Config = {
         PAYOUT: "cb060ea54cce80fcb689f8824b238118cb5005572a36",
       },
       HK: {
-        NAME: "East Asia",
+        NAME: "Backup Asian Pool",
         DESCRIPTION: "East Asian Pool 🇭🇰🇰🇷",
         SERVER: "hk.catchthatrabbit.com",
         PORT: "8008",
@@ -106,8 +107,8 @@ const config: Config = {
         PASSWORD: "<empty>",
         PAYOUT: "cb6242d8b1903db52f99813f79fe4dff2b85fd7c1fdd",
       },
-      AM: {
-        NAME: "America",
+      BR: {
+        NAME: "US Pool",
         DESCRIPTION: "American Pool 🇧🇷🇲🇽🇺🇸",
         SERVER: "br.catchthatrabbit.com",
         PORT: "8008",
@@ -118,7 +119,7 @@ const config: Config = {
         PAYOUT: "cb532b4658c0077fe257c44fbd3ee89f8c85ce5c68e3",
       },
       JP: {
-        NAME: "Japan",
+        NAME: "Backup US Pool",
         DESCRIPTION: "Japanese Pool 🇯🇵",
         SERVER: "jp.catchthatrabbit.com",
         PORT: "8008",
@@ -382,7 +383,8 @@ const config: Config = {
     //     trackingID: "G-K79ZXPBSHD",
     //     anonymizeIP: true,
     //   },
-    // ],
+    // ]
+    path.resolve(__dirname, "./src/plugins/dynamic-router-plugin.ts"),
   ],
 };
 

@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { List } from "@site/src/components/Templates/List";
 import { Header } from "@site/src/components/Templates/Header";
 import { TextFormat } from "@site/src/utils/textFormat";
@@ -13,12 +14,17 @@ import clsx from "clsx";
 
 import styles from "./styles.module.css";
 
-interface IMiners extends IAnyPageAndWallet {}
+interface IMiners extends IAnyPageAndWallet {
+  selectedPool: string;
+  setSelectedPool: (pool: string) => void;
+}
 
 const Miners = ({
   onSetWalletAddress,
   defaultRegion,
   onChangeRegion,
+  selectedPool,
+  setSelectedPool,
 }: IMiners) => {
   const {
     dataTableColumns,
@@ -32,12 +38,34 @@ const Miners = ({
     fetchedMinerList,
     dropdownItems,
     regionLabel,
-  } = useControls({ onSetWalletAddress, defaultRegion, onChangeRegion });
+    startMiningPoolConfigurations,
+  } = useControls({
+    onSetWalletAddress,
+    defaultRegion,
+    onChangeRegion,
+    selectedPool,
+  });
 
   const { infoBoxMapData } = useControlsDashboard();
   const networkDifficultyItem = infoBoxMapData?.find((item) =>
     item.title.includes("Network difficulty"),
   );
+
+  const handleDropdownChange = (selectedOption: {
+    label: string;
+    value: string;
+  }) => {
+    const poolConfig = startMiningPoolConfigurations[selectedOption.value];
+    const poolShortcut = poolConfig
+      ? poolConfig.SERVER.slice(0, 2)
+      : selectedOption.value.slice(0, 2);
+
+    setSelectedPool(poolShortcut);
+
+    console.log(selectedPool, poolShortcut, 1);
+
+    handleChangeRegion(selectedOption);
+  };
 
   return (
     <>
@@ -45,13 +73,14 @@ const Miners = ({
       <Header
         defaultRegion={regionLabel}
         items={dropdownItems}
-        onChangeRegion={handleChangeRegion}
+        onChangeRegion={handleDropdownChange}
         isLoading={isLoadingMinerState}
         pageTitleComponent={<MinersTitle />}
         addComponent={
           <Search context="payments" onSearch={onSetWalletAddress} />
         }
         context="payments"
+        selectedPool={selectedPool}
         onSearch={handleSearch}
       />
       <List

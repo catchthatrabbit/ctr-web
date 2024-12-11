@@ -29,16 +29,19 @@ const Dropdown = ({
 }: IDropdown) => {
   return (
     <>
-      <Text
-        variant="subheading"
-        color="subheadingColor"
-        style={{
-          width: context === "blocks" || context === "payments" ? "95%" : "50%",
-          marginBottom: "8px",
-        }}
-      >
-        {text}
-      </Text>
+      {text && (
+        <Text
+          variant="subheading"
+          color="subheadingColor"
+          style={{
+            width:
+              context === "blocks" || context === "payments" ? "95%" : "50%",
+            marginBottom: "8px",
+          }}
+        >
+          {text}
+        </Text>
+      )}
       <Select
         isLoading={isLoading}
         isDisabled={isLoading}

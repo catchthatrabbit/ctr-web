@@ -18,9 +18,9 @@
 }
 
 
-.singleColumnValue:nth-child(even) {
+/* .singleColumnValue:nth-child(even) {
     background-color: var(--blue-rgb-500);
-}
+} */
 
 .singlePanel{
     cursor:auto;

@@ -10,6 +10,8 @@ import { useMemo, useState } from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
 import { useHeaders } from "@site/src/hooks/useHeaders";
+import { useLocation } from "@docusaurus/router";
+import { useHistory } from "react-router-dom";
 
 interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
   walletAddress: string;
@@ -26,6 +28,8 @@ const useControls = ({
   const [currentPageWorkers, setCurrentPageWorkers] = useState<number>(1);
   const { dropdownItems, regionLabel } = useHeaders({ defaultRegion });
   const { siteConfig } = useDocusaurusContext();
+  const location = useLocation();
+  const history = useHistory();
 
   const urlConfig = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
   const okEmoji = String(siteConfig.customFields.EFFECTS_EMOJI_OK);
@@ -106,7 +110,16 @@ const useControls = ({
     label: string;
     value: STANDARD_REGIONS_API_KEYS;
   }) => {
+    // change current url to reflect the selected region
+
+    const splitted = location.pathname.split("/");
+    console.log("splitted", splitted);
+    splitted[3] = id.value.toLowerCase();
+    const newUrl = splitted.join("/");
+    history.push(newUrl);
+    console.log("newUrl", newUrl);
     setRegion(id.value);
+    console.log("id", id);
     if (typeof onChangeRegion === "function") onChangeRegion(region);
   };
 

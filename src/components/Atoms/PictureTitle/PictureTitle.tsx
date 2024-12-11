@@ -38,10 +38,7 @@ const PictureTitle = ({
       </Text>
       {secondaryText && (
         <Text
-          type="regular"
-          size="medium"
-          weight="regular"
-          lineHeight="normalLineHeight"
+          variant="subheading1"
           color="subheadingColor"
           letterSpacing="letterSpacing"
           style={{ marginTop: "8px", ...secondaryTextStyle }}

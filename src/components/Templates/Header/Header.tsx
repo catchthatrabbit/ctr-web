@@ -46,7 +46,10 @@ const Header = ({
   addComponent,
   layout = { boards: true, dropdown: true, search: true },
   context,
+  selectedPool,
 }: IHeader) => {
+  console.log("region", defaultRegion);
+
   const columnClass =
     context === "blocks" || context === "payments"
       ? "flex-col--4"

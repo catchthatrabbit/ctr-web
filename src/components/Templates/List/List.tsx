@@ -79,7 +79,7 @@ const List = ({
           <div
             className={clsx(
               styles.paginationWrapper,
-              context === "blocks" && styles.blocksPaginationWrapper, // Ensure the context value matches
+              context === "blocks" && styles.blocksPaginationWrapper,
             )}
           >
             <Pagination

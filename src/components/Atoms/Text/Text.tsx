@@ -25,6 +25,7 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "heading2" /** font size 22 */
     | "heading3" /** font size 20 */
     | "subheading" /** font size 18 */
+    | "subheading1" /** font size 24 */
     | "body" /** font size 16 */
     | "smallBody" /** font size 14 */
     | "tinyBody" /** font size 12 */
@@ -105,6 +106,7 @@ const Text: FC<IText> = ({
         variant === "heading2" ||
         variant === "heading3" ||
         variant === "subheading" ||
+        variant === "subheading1" ||
         variant === "heading"
           ? tablet
             ? styles[`${variant}-tablet`]

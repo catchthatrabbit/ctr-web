@@ -5,7 +5,7 @@ import Link from "@docusaurus/Link";
 import { checkArrayObjectIsEmpty } from "@site/src/utils/checkIsEmpty";
 import LoadingSkeleton from "./LoadingSkeleton";
 import { IDataTable } from "./types";
-import { Pagination } from "@site/src/components/Molecules/Pagination"; // Import Pagination component
+import { Pagination } from "@site/src/components/Molecules/Pagination";
 
 import { CopyButtonSmall } from "../../Molecules/CopyButton";
 
@@ -18,7 +18,7 @@ const DataTable = ({
   emptyComponent = <></>,
   isLoading,
   loadingComp = <></>,
-  itemsPerPage = 10, // Add itemsPerPage prop
+  itemsPerPage = 10,
   context,
   hidePagination = false,
 }: IDataTable) => {
@@ -108,7 +108,7 @@ const DataTable = ({
                         >
                           {rowItem[`${colItem.value}_summarized`]?.toString() ||
                             ""}
-                        </Text>
+                        </Text> //wallet address
                       )
                     ) : (
                       <Text

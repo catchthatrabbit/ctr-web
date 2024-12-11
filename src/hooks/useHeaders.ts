@@ -17,8 +17,11 @@ export const useHeaders = ({
   onChangeRegion,
 }: HEADERS_PROPS) => {
   const [walletAddress, setWalletAddress] = useState<string>();
+
   const [region, setRegion] =
     useState<STANDARD_REGIONS_API_KEYS>(defaultRegion);
+
+  console.log("defaultRegion", defaultRegion);
 
   const { siteConfig } = useDocusaurusContext();
   const startMiningPoolConfigurations = siteConfig.customFields
@@ -42,8 +45,8 @@ export const useHeaders = ({
       value: POOL_NAME_ENUM.HK,
     },
     {
-      label: startMiningPoolConfigurations[REGIONS.AM][`DESCRIPTION`],
-      value: POOL_NAME_ENUM.AM,
+      label: startMiningPoolConfigurations[REGIONS.BR][`DESCRIPTION`],
+      value: POOL_NAME_ENUM.BR,
     },
     {
       label: startMiningPoolConfigurations[REGIONS.JP][`DESCRIPTION`],
@@ -54,7 +57,8 @@ export const useHeaders = ({
   useEffect(() => {
     if (typeof onSetWalletAddress === "function")
       onSetWalletAddress(walletAddress);
-  }, [onSetWalletAddress, walletAddress]);
+    setRegion(defaultRegion);
+  }, [onSetWalletAddress, walletAddress, defaultRegion]);
 
   const handleSearch = (searchQuery: string) => {
     setWalletAddress(searchQuery);
@@ -80,8 +84,8 @@ export const useHeaders = ({
         return startMiningPoolConfigurations[REGIONS.SG][`DESCRIPTION`];
       case "HK":
         return startMiningPoolConfigurations[REGIONS.HK][`DESCRIPTION`];
-      case "AM":
-        return startMiningPoolConfigurations[REGIONS.AM][`DESCRIPTION`];
+      case "BR":
+        return startMiningPoolConfigurations[REGIONS.BR][`DESCRIPTION`];
       case "JP":
         return startMiningPoolConfigurations[REGIONS.JP][`DESCRIPTION`];
       default:

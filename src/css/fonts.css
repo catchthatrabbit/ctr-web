@@ -54,6 +54,9 @@
   --subheading-font-size-desktop: 1rem; /* subheading 18px */
   --subheading-lineHeight-desktop: 1.1rem;
 
+  --subheading1-font-size-desktop: 1.5rem; /* subheading 24px */
+  --subheading1-lineHeight-desktop: 2.2rem;
+
   --subheading-font-size-tablet: 1.143rem; /* subheading 18px */
   --subheading-lineHeight-tablet: 1.4rem;
 

@@ -10,6 +10,7 @@ import { Search } from "@site/src/components/Molecules/Search";
 import { Board } from "@site/src/components/Atoms/Board";
 
 import clsx from "clsx";
+
 import styles from "./styles.module.css";
 
 interface IPayments extends IAnyPageAndWallet {}
@@ -18,6 +19,8 @@ const Payments = ({
   defaultRegion,
   onSetWalletAddress,
   onChangeRegion,
+  selectedPool,
+  setSelectedPool,
 }: IPayments) => {
   const {
     dataTableColumns,
@@ -30,7 +33,29 @@ const Payments = ({
     isLoadingPaymentList,
     dropdownItems,
     regionLabel,
-  } = useControls({ defaultRegion, onSetWalletAddress, onChangeRegion });
+    startMiningPoolConfigurations,
+  } = useControls({
+    defaultRegion,
+    onSetWalletAddress,
+    onChangeRegion,
+    selectedPool,
+  });
+
+  const handleDropdownChange = (selectedOption: {
+    label: string;
+    value: string;
+  }) => {
+    const poolConfig = startMiningPoolConfigurations[selectedOption.value];
+    const poolShortcut = poolConfig
+      ? poolConfig.SERVER.slice(0, 2)
+      : selectedOption.value.slice(0, 2);
+
+    setSelectedPool(poolShortcut);
+
+    console.log(selectedPool, poolShortcut, 1);
+
+    handleChangeRegion(selectedOption);
+  };
 
   return (
     <>
@@ -40,13 +65,14 @@ const Payments = ({
       <Header
         items={dropdownItems}
         defaultRegion={regionLabel}
-        onChangeRegion={handleChangeRegion}
+        onChangeRegion={handleDropdownChange}
         isLoading={isLoadingPaymentState}
         pageTitleComponent={<PaymentsTitle />}
         addComponent={
           <Search context="payments" onSearch={onSetWalletAddress} />
         }
         context="payments"
+        selectedPool={selectedPool}
         onSearch={handleSearch}
       />
       <List

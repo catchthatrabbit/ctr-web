@@ -37,11 +37,11 @@ const generateAllApiInstances = ({
           ? concatApiPath(urls.HK_API_ENDPOINT, apiPath)
           : concatApiPath(urls.NEXT_PUBLIC_HK_API_ENDPOINT, apiPath),
       }),
-      [POOL_NAME_ENUM.AM]: new AxiosInstance({
-        region: POOL_NAME_ENUM.AM,
-        url: urls.AM_API_ENDPOINT
-          ? concatApiPath(urls.AM_API_ENDPOINT, apiPath)
-          : concatApiPath(urls.NEXT_PUBLIC_AM_API_ENDPOINT, apiPath),
+      [POOL_NAME_ENUM.BR]: new AxiosInstance({
+        region: POOL_NAME_ENUM.BR,
+        url: urls.BR_API_ENDPOINT
+          ? concatApiPath(urls.BR_API_ENDPOINT, apiPath)
+          : concatApiPath(urls.NEXT_PUBLIC_BR_API_ENDPOINT, apiPath),
       }),
       [POOL_NAME_ENUM.JP]: new AxiosInstance({
         region: POOL_NAME_ENUM.JP,
