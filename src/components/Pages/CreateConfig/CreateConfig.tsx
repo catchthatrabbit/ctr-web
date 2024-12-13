@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { CreateConfigTitle } from "@site/src/components/Molecules/PictureTitles";
@@ -36,7 +36,8 @@ const CreateConfig = ({
   const [typePortal, setTypePortal] = useState({ value: "", isValid: true });
   const [uniqueId, setUniqueId] = useState("");
   const [dropdownValue1, setDropdownValue1] = useState(regionLabel);
-  const [dropdownValue2, setDropdownValue2] = useState(regionLabel);
+  const [dropdownValue2, setDropdownValue2] = useState(dropdownItems[1].label);
+  const [showError, setShowError] = useState(false);
 
   const formatWalletAddress = (value: string) => {
     return value.replace(/(.{4})/g, "$1 ").trim();
@@ -186,10 +187,30 @@ const CreateConfig = ({
     }
   };
 
-  const handleDownloadConfig = () => {
-    if (!isWalletValid || !minerName.isValid || !typePortal.isValid) {
-      return; // Prevent config generation if wallet, miner name, or portal is not valid
+  const areFieldsValid = () => {
+    if (inputType === "plain") {
+      return (
+        isWalletValid && minerName.isValid && walletAddress && minerName.value
+      );
+    } else if (inputType === "fediverse") {
+      return (
+        isWalletValid &&
+        minerName.isValid &&
+        typePortal.isValid &&
+        walletAddress &&
+        minerName.value &&
+        typePortal.value
+      );
     }
+    return false;
+  };
+
+  const handleDownloadConfig = () => {
+    if (!areFieldsValid()) {
+      setShowError(true);
+      return; // Prevent config generation if any field is empty or invalid
+    }
+    setShowError(false);
     let walletAddressFormat = walletAddress.replace(/\s+/g, "").toLowerCase();
     let workerName = "";
     if (inputType === "plain") {
@@ -198,7 +219,7 @@ const CreateConfig = ({
       const { href, caption } = convertWorkerName(
         `_${minerName.value}${typePortal.value}${uniqueId ? `-${uniqueId}` : ""}`,
       );
-      workerName = caption;
+      workerName = caption.replace(/\./g, "");
     }
     const regionKey1 = Object.keys(startMiningPoolConfigurations).find(
       (key) =>
@@ -278,7 +299,7 @@ const CreateConfig = ({
             <div className={styles.dropdownContainer}>
               <Dropdown
                 isLoading={isLoadingPaymentState}
-                defaultValue={regionLabel}
+                defaultValue={dropdownValue1}
                 className={clsx(styles.boardDropdown)}
                 items={dropdownItems}
                 onChange={handleDropdownChange1}
@@ -288,7 +309,7 @@ const CreateConfig = ({
             <div className={styles.dropdownContainer}>
               <Dropdown
                 isLoading={isLoadingPaymentState}
-                defaultValue={regionLabel}
+                defaultValue={dropdownValue2}
                 className={clsx(styles.boardDropdown)}
                 items={dropdownItems}
                 onChange={handleDropdownChange2}
@@ -348,6 +369,14 @@ const CreateConfig = ({
             context="config"
             onClick={handleDownloadConfig}
           />
+          {showError && (
+            <Text
+              variant="smallBody"
+              style={{ marginTop: "4px", color: "#E54E4E" }}
+            >
+              Please fill out all required fields correctly.
+            </Text>
+          )}
           <Spacer variant="xxxl" />
         </div>
       </div>
