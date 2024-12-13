@@ -37,6 +37,7 @@ const CreateConfig = ({
   const [uniqueId, setUniqueId] = useState("");
   const [dropdownValue1, setDropdownValue1] = useState(regionLabel);
   const [dropdownValue2, setDropdownValue2] = useState(dropdownItems[1].label);
+  const [showError, setShowError] = useState(false);
 
   const formatWalletAddress = (value: string) => {
     return value.replace(/(.{4})/g, "$1 ").trim();
@@ -206,8 +207,10 @@ const CreateConfig = ({
 
   const handleDownloadConfig = () => {
     if (!areFieldsValid()) {
+      setShowError(true);
       return; // Prevent config generation if any field is empty or invalid
     }
+    setShowError(false);
     let walletAddressFormat = walletAddress.replace(/\s+/g, "").toLowerCase();
     let workerName = "";
     if (inputType === "plain") {
@@ -366,6 +369,14 @@ const CreateConfig = ({
             context="config"
             onClick={handleDownloadConfig}
           />
+          {showError && (
+            <Text
+              variant="smallBody"
+              style={{ marginTop: "4px", color: "#E54E4E" }}
+            >
+              Please fill out all required fields correctly.
+            </Text>
+          )}
           <Spacer variant="xxxl" />
         </div>
       </div>
