@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { useEffect, useRef, ReactNode } from "react";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 import styles from "./styles.module.css";
 
 interface IRadialBarChartProps {
@@ -16,12 +17,13 @@ const RadialBarChart = ({
   emptyComponent,
 }: IRadialBarChartProps) => {
   const chartRef = useRef(null);
+  const { mobile } = useMediaQueries();
 
   useEffect(() => {
     if (chartRef.current) {
       updateChart();
     }
-  }, [data]);
+  }, [data, mobile]);
 
   const updateChart = () => {
     if (!data) {
@@ -31,13 +33,13 @@ const RadialBarChart = ({
     // Clear any existing chart
     d3.select(chartRef.current).selectAll("*").remove();
 
-    // Declare the chart dimensions and margins.
-    const width = 1185;
-    const height = 412; // Increased by 50px to accommodate the space above the chart
-    const marginTop = 80; // Increased by 50px to accommodate the space above the chart
+    // Determine the chart dimensions based on the screen size
+    const width = mobile ? 550 : 1185;
+    const height = mobile ? 300 : 412; // Adjust height for mobile
+    const marginTop = mobile ? 40 : 80; // Adjust margin for mobile
     const marginRight = 0;
-    const marginBottom = 30;
-    const marginLeft = 70;
+    const marginBottom = mobile ? 20 : 30; // Adjust margin for mobile
+    const marginLeft = mobile ? 40 : 70; // Adjust margin for mobile
 
     // Declare the x (horizontal position) scale.
     const x = d3
@@ -66,7 +68,7 @@ const RadialBarChart = ({
     svg
       .append("text")
       .attr("x", width / 2)
-      .attr("y", 20) // Position the text 20px from the top
+      .attr("y", mobile ? 10 : 20) // Adjust position for mobile
       .attr("fill", "rgba(128, 128, 128, 1)") // Set the text color using the fill attribute
       .attr("text-anchor", "middle")
       .attr("style", "font-size: 16px; margin-bottom: 56px") // Set the font size using the style attribute
@@ -128,10 +130,10 @@ const RadialBarChart = ({
       .data(data)
       .join("rect")
       .attr("x", (d) => x(d.hour))
-      .attr("x", (d) => x(d.hour) + 13) // Add 8px space from the y-axis
-      .attr("y", height - marginBottom) // Start 8px from the bottom
+      .attr("x", (d) => x(d.hour) + (mobile ? 5 : 13)) // Adjust spacing for mobile
+      .attr("y", height - marginBottom) // Start from the bottom
       .attr("height", 0) // Start with height 0
-      .attr("width", 16)
+      .attr("width", mobile ? 10 : 16) // Adjust width for mobile
       .attr("rx", 4) // Add horizontal radius
       .attr("ry", 4) // Add vertical radius
       .on("mouseover", onMouseover)
@@ -140,7 +142,7 @@ const RadialBarChart = ({
       .transition() // Add transition for animation
       .duration(800)
       .attr("y", (d) => y(d.value))
-      .attr("height", (d) => y(0) - y(d.value) - 8);
+      .attr("height", (d) => y(0) - y(d.value) - (mobile ? 5 : 8)); // Adjust height for mobile
 
     // Add the x-axis and label.
     svg
@@ -152,7 +154,7 @@ const RadialBarChart = ({
     svg
       .selectAll(".x-axis text")
       .style("fill", "rgba(128, 128, 128, 1)")
-      .style("font-size", "16px")
+      .style("font-size", mobile ? "12px" : "16px") // Adjust font size for mobile
       .attr("transform", "translate(0, 8)"); // Move the text 10px to the left
 
     // Add the y-axis and label, and remove the domain line.
@@ -171,7 +173,7 @@ const RadialBarChart = ({
     svg
       .selectAll(".y-axis text")
       .style("fill", "rgba(128, 128, 128, 1)")
-      .style("font-size", "16px")
+      .style("font-size", mobile ? "12px" : "16px") // Adjust font size for mobile
       .attr("transform", "translate(-15,0)"); // Move the text 10px to the left
 
     svg.selectAll(".domain").style("stroke", "rgba(128, 128, 128, 1)"); // Change the color of the axis lines

@@ -28,6 +28,7 @@ import styles from "./styles.module.css";
 
 import MainPageSearch from "@site/src/components/Molecules/PictureTitles/MainPageSearch";
 import { StartPanel } from "../../Molecules/StartPanel";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 interface IDashboard extends IAnyPageAndWallet {}
 
@@ -51,9 +52,10 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
     effectsShowLocation,
   } = useControls();
 
+  const { mobile } = useMediaQueries();
+
   return (
     <>
-      {/* <Spacer variant="xxxl" /> */}
       <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
         <div
           className={clsx([
@@ -62,94 +64,83 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
             styles.fullWidth,
           ])}
         >
-          <div
-            className={clsx([
-              styles.mapChartLocationPlace,
-
-              "lg-grid-span-col--4",
-              styles.directionLtr,
-            ])}
-          >
-            {isLoadingMapChart ? (
-              <div className={styles.loadingSkeleton}>
-                <LoadingPlaceholder className={styles.loadingPlaceholder} />
+          {mobile ? (
+            <>
+              <div
+                className={clsx([
+                  styles.directionLtr,
+                  "xs-text-center sm-text-center md-text-center",
+                ])}
+              >
+                <MainPageSearch flexStart={false} />
+                <Text
+                  variant="headingMobile"
+                  weight="extraBold"
+                  lineHeight="largeLineHeight"
+                  color="dashboardColor"
+                  style={{ textAlign: "center" }}
+                >
+                  {sLoganPrimary}
+                </Text>
+                <Spacer variant="sm" />
               </div>
-            ) : (
-              <>
-                <Locations>
-                  <span className="lg-hide md-hide" />
-                  {effectsShowLocation && (
-                    <>
-                      {/* <MapPin
-                        className="lg-grid-span-col--2 md-grid-span-col--3"
-                        mapButton={
-                          <MapButton
-                            value="US location"
-                            href={
-                              effectsShowActionIcons && usStarMiningPoolLocation
-                            }
-                          />
-                        }
-                      /> */}
-                      {/* <span className="lg-hide" />
-                      <MapPin
-                        className="xl-grid-span-col--2 lg-grid-span-col--2 md-grid-span-col--3 sm-grid-span-col--6"
-                        mapButton={
-                          <MapButton
-                            value="EU location"
-                            href={
-                              effectsShowActionIcons && euStarMiningPoolLocation
-                            }
-                          />
-                        }
-                      />
-                      <span className="lg-hide md-hide" /> */}
-                      {/* <MapPin
-                        className="lg-grid-span-col--2 md-grid-span-col--2"
-                        mapButton={
-                          <MapButton
-                            value="AP location"
-                            href={
-                              effectsShowActionIcons && asStarMiningPoolLocation
-                            }
-                          />
-                        }
-                      /> */}
-                    </>
-                  )}
-                </Locations>
-                <Mouse>
-                  <MouseContent />
-                </Mouse>
-              </>
-            )}
-          </div>
-          {/* <Spacer className="xl-hide lg-hide" variant="lg" /> */}
-          <div
-            className={clsx([
-              styles.directionLtr,
-              "xs-text-center sm-text-center md-text-center",
-            ])}
-          >
-            <MainPageSearch />
-            <Spacer variant="sm" />
-            <Text
-              variant="heading"
-              weight="extraBold"
-              lineHeight="largeLineHeight"
-              color="dashboardColor"
-              style={{ width: "43rem", display: "inline-block" }}
-            >
-              {sLoganPrimary}
-            </Text>
-            <Spacer variant="sm" />
-            <Text color="subheadingColor" variant="subheading1">
-              {SLoganSecondary}
-            </Text>
-            <br />
-            <Spacer variant="xxl" />
-            <Search onSearch={onSetWalletAddress} />
-          </div>
+              <Spacer variant="sm" />
+              <Locations>
+                <span className="lg-hide md-hide" />
+              </Locations>
+            </>
+          ) : (
+            <>
+              <div
+                className={clsx([
+                  styles.mapChartLocationPlace,
+
+                  "lg-grid-span-col--4",
+                  styles.directionLtr,
+                ])}
+              >
+                {isLoadingMapChart ? (
+                  <div className={styles.loadingSkeleton}>
+                    <LoadingPlaceholder className={styles.loadingPlaceholder} />
+                  </div>
+                ) : (
+                  <>
+                    <Locations>
+                      <span className="lg-hide md-hide" />
+                    </Locations>
+                    <Mouse>
+                      <MouseContent />
+                    </Mouse>
+                  </>
+                )}
+              </div>
+              <div
+                className={clsx([
+                  styles.directionLtr,
+                  "xs-text-center sm-text-center md-text-center",
+                ])}
+              >
+                <MainPageSearch flexStart={true} />
+                <Spacer variant="sm" />
+                <Text
+                  variant="heading"
+                  weight="extraBold"
+                  lineHeight="largeLineHeight"
+                  color="dashboardColor"
+                  style={{ width: "43rem", display: "inline-block" }}
+                >
+                  {sLoganPrimary}
+                </Text>
+                <Spacer variant="sm" />
+                <Text color="subheadingColor" variant="subheading1">
+                  {SLoganSecondary}
+                </Text>
+                <br />
+                <Spacer variant="xxl" />
+                <Search onSearch={onSetWalletAddress} />
+              </div>
+            </>
+          )}
         </div>
       </MapChart>
       <Spacer variant="xxxl" />

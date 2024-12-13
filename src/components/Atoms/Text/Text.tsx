@@ -22,6 +22,7 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
   variant?:
     | "heading" /** font size 50 */
     | "heading1" /** font size 38 */
+    | "headingMobile" /** font size 32 */
     | "heading2" /** font size 22 */
     | "heading3" /** font size 20 */
     | "subheading" /** font size 18 */

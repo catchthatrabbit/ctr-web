@@ -17,6 +17,7 @@
 
 .radialChart{
     position: relative;
+    overflow: auto;
     width: 100%;
     
 }
