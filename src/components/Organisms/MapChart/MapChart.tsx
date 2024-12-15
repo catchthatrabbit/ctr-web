@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TextFormatOutputType } from "@site/src/utils/textFormat";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { LoadingPlaceholder } from "@site/src/components/Atoms/LoadingPlaceholder";
@@ -19,30 +19,39 @@ const horClassName =
 
 const MapChart = ({ children, infoItems, isLoading }: IMapChart) => {
   const { mobile, tablet } = useMediaQueries();
+  const ConfiguredInfoBox = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-  const ConfiguredInfoBox = () => (
-    <>
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % infoItems.length);
+      }, 3000); // Change item every 3 seconds
+
+      return () => clearInterval(interval);
+    }, [infoItems.length]);
+
+    return (
       <InfoBox
         dir="hor"
         isLoading={isLoading}
-        items={infoItems}
+        items={[infoItems[currentIndex]]}
         loadingComponent={
           <InfoBoxLoadingSkeleton loadingPlaceholder={<LoadingPlaceholder />} />
         }
         applyFullWidthBorder={true}
       />
-    </>
-  );
+    );
+  };
 
   return (
     <div className={styles.mapRoot}>
-      <div className={styles.dashboardContainer}>{children}</div>
       {(mobile || tablet) && (
         <>
           <Spacer variant="lg" />
           <ConfiguredInfoBox />
         </>
       )}
+      <div className={styles.dashboardContainer}>{children}</div>
     </div>
   );
 };

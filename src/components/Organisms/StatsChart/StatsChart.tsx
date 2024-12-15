@@ -28,15 +28,14 @@ const StatsChart = ({ radialBarChart, infoItems, isLoading }: IStatsChart) => {
       <Spacer variant="md" />
 
       <div className={styles.flex}>
-        <div className={radialClassName}>
-          {isLoading ? (
-            <div className={styles.loadingSkeleton}>
-              <LoadingPlaceholder />
-            </div>
-          ) : (
-            radialBarChart
-          )}
-        </div>
+        {isLoading ? (
+          <div className={styles.loadingSkeleton}>
+            <LoadingPlaceholder />
+          </div>
+        ) : (
+          radialBarChart
+        )}
+
         <Spacer variant="xxxl" />
         <InfoBox
           dir="column"
