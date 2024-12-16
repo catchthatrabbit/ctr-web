@@ -52,7 +52,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
     effectsShowLocation,
   } = useControls();
 
-  const { mobile } = useMediaQueries();
+  const { mobile, desktop } = useMediaQueries();
 
   return (
     <>
@@ -73,10 +73,11 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 ])}
               >
                 <MainPageSearch flexStart={false} />
+                <Spacer variant="xs" />
                 <Text
                   variant="headingMobile"
                   weight="extraBold"
-                  lineHeight="largeLineHeight"
+                  lineHeight={desktop ? "largeLineHeight" : "normalLineHeight"}
                   color="dashboardColor"
                   style={{ textAlign: "center" }}
                 >
@@ -88,6 +89,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
               <Locations>
                 <span className="lg-hide md-hide" />
               </Locations>
+              <Spacer variant="sm" />
+              <Search onSearch={onSetWalletAddress} />
             </>
           ) : (
             <>

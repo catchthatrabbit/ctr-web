@@ -12,6 +12,7 @@ import NavbarLogo from "@theme/Navbar/Logo";
 import NavbarSearch from "@theme/Navbar/Search";
 import clsx from "clsx";
 import { useNav } from "@site/src/hooks/useNav";
+import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
 import customStyles from "./customStyles.module.css";
 import "./custom.css";
@@ -70,9 +71,15 @@ export default function NavbarContent() {
   const items = useNavbarItems();
   const [leftItems, rightItems] = splitNavbarItems(items);
   const searchBarItem = items.find((item) => item.type === "search");
+  const { mobile, tablet } = useMediaQueries();
+
   return (
     <div className={clsx("container content", customStyles.navBarContainer)}>
-      <div className={clsx(customStyles.flex, customStyles.fullWidth)}>
+      <div
+        className={clsx(customStyles.flex, customStyles.fullWidth, {
+          [customStyles.flexEnd]: mobile,
+        })}
+      >
         <div className={customStyles.navBarContainerLogo}>
           <NavbarLogo />
         </div>

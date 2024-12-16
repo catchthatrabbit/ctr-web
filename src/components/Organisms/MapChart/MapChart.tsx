@@ -39,6 +39,7 @@ const MapChart = ({ children, infoItems, isLoading }: IMapChart) => {
           <InfoBoxLoadingSkeleton loadingPlaceholder={<LoadingPlaceholder />} />
         }
         applyFullWidthBorder={true}
+        context="mapChart"
       />
     );
   };
@@ -47,11 +48,14 @@ const MapChart = ({ children, infoItems, isLoading }: IMapChart) => {
     <div className={styles.mapRoot}>
       {(mobile || tablet) && (
         <>
-          <Spacer variant="lg" />
           <ConfiguredInfoBox />
         </>
       )}
-      <div className={styles.dashboardContainer}>{children}</div>
+      <div
+        className={`${styles.dashboardContainer} ${mobile && styles.mobileDashboard}`}
+      >
+        {children}
+      </div>
     </div>
   );
 };

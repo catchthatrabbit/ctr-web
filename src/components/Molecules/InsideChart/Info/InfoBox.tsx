@@ -49,7 +49,7 @@ const InfoBox = ({
 
           [styles.justifySpaceBetween]: desktop || laptop,
           [styles.justifyCenter]: tablet || mobile,
-          [styles.fullWidthBorder]: applyFullWidthBorder && (desktop || laptop),
+          [styles.fullWidthBorder]: applyFullWidthBorder,
           [styles.fullWidth]: (applyFullWidth && desktop) || laptop,
         },
         className,
