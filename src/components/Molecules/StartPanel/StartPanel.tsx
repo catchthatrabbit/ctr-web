@@ -1,14 +1,23 @@
 import React from "react";
 import useControls from "../../Pages/Dashboard/controls";
 import { Text } from "../../Atoms/Text";
+import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
+import clsx from "clsx";
 import styles from "./styles.module.css";
 
 const StartPanel = () => {
   const { poolFee } = useControls();
+  const { mobile } = useMediaQueries();
   return (
-    <div className={styles.searchDivWrapper}>
-      <div className={styles.searchDiv}>
+    <div
+      className={clsx(styles.searchDivWrapper, {
+        [styles.searchDivWrapperMobile]: mobile,
+      })}
+    >
+      <div
+        className={clsx(styles.searchDiv, { [styles.searchDivMobile]: mobile })}
+      >
         <div className={styles.searchDivTitle}>
           <Text
             variant="heading3"
@@ -32,7 +41,12 @@ const StartPanel = () => {
             {poolFee ? `${poolFee}% fee` : "-"}
           </Text>
         </div>
-        <a href="/start-mining" className={styles.searchButton}>
+        <a
+          href="/start-mining"
+          className={clsx(styles.searchButton, {
+            [styles.searchButtonMobile]: mobile,
+          })}
+        >
           View guide
         </a>
       </div>

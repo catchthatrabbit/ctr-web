@@ -29,3 +29,9 @@
   position: relative;
   right: 13px;
 }
+
+.bgImageMobile{
+  right: 0px;
+  top: -18px;
+  width: 78%;
+}

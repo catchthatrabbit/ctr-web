@@ -60,7 +60,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
         <div
           className={clsx([
             "grid xl-grid-col--2 lg-grid-col--5 md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
-            styles.directionRtl,
+            desktop && styles.directionRtl,
             styles.fullWidth,
           ])}
         >
@@ -89,7 +89,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
               <Locations>
                 <span className="lg-hide md-hide" />
               </Locations>
-              <Spacer variant="sm" />
+              <Spacer variant="xs" />
               <Search onSearch={onSetWalletAddress} />
             </>
           ) : (
@@ -146,8 +146,14 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           )}
         </div>
       </MapChart>
-      <Spacer variant="xxxl" />
-      <Spacer variant="xxxl" />
+      {desktop ? (
+        <>
+          <Spacer variant="xxxl" />
+          <Spacer variant="xxxl" />
+        </>
+      ) : (
+        <Spacer variant="xxl" />
+      )}
       <StartPanel />
       <Spacer variant="md" />
       <Header

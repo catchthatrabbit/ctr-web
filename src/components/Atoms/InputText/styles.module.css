@@ -12,6 +12,11 @@
     
 }
 
+.mobileInputText{
+  height: 53px;
+  padding: 17px 0px 18px 44px;
+}
+
 .inputText:focus-visible{
     border: 1px solid var(--gray-100);
 }
@@ -24,6 +29,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 
   .searchDark{
@@ -51,6 +57,10 @@
     }
   }
 
+  .mobileIcon{
+    left: 9%;
+    top: 54%;
+  }
   
 .inputWithIcon {
     padding-left: 30px; 

@@ -9,12 +9,12 @@ interface ILocation {
 }
 
 const Locations = ({ children }: ILocation) => {
-  const { desktop } = useMediaQueries();
+  const { desktop, mobile } = useMediaQueries();
   return (
     <div className={clsx(styles.locations, { [styles.flexEnd]: desktop })}>
       <img
         src="/img/thatRabbitImg.png"
-        className={styles.bgImage}
+        className={clsx(styles.bgImage, { [styles.bgImageMobile]: mobile })}
         alt="BACKGROUND_IMAGE"
       />
       {/* <div

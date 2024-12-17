@@ -6,12 +6,12 @@ import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 import { Text } from "../../Atoms/Text";
 import SearchIcon from "@site/src/icons/SearchIcon";
 import { useHistory } from "react-router-dom";
-import styles from "./styles.module.css"; // Ensure this import is correct
+import styles from "./styles.module.css";
 
 interface ISearch extends InputHTMLAttributes<HTMLInputElement> {
   onSearch?: (searchQuery: string) => void;
   context?: "wallet" | "main" | "startMining" | "payments";
-  selectedPool?: string; // Add selectedPool prop
+  selectedPool?: string;
 }
 
 const Search = forwardRef<HTMLInputElement, ISearch>(
@@ -58,7 +58,12 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
         })}
       >
         {context !== "startMining" && (
-          <Text lineHeight="smallLineHeight" color="subheadingColor">
+          <Text
+            lineHeight="smallLineHeight"
+            color="subheadingColor"
+            variant={mobile ? "smallBody" : "subheading"}
+            className={clsx({ [styles.mobilePaddingLeft]: mobile })}
+          >
             {labelTextMap[context] || "Wallet address"}
           </Text>
         )}
@@ -71,7 +76,9 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
             placeholder={placeholderTextMap[context] || "Search your miners"}
             ref={ref || inputRef}
             onPressEnter={handleSearch}
-            icon={<SearchIcon />}
+            icon={
+              <SearchIcon width={mobile ? 16 : 24} height={mobile ? 16 : 24} />
+            }
             context={context}
             {...restProps}
           />
