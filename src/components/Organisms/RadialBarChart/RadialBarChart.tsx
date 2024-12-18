@@ -1,6 +1,8 @@
 import * as d3 from "d3";
 import { useEffect, useRef, ReactNode } from "react";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+
+import clx from "clsx";
 import styles from "./styles.module.css";
 
 interface IRadialBarChartProps {
@@ -34,8 +36,8 @@ const RadialBarChart = ({
     d3.select(chartRef.current).selectAll("*").remove();
 
     // Determine the chart dimensions based on the screen size
-    const width = mobile ? 550 : 1185;
-    const height = mobile ? 300 : 412; // Adjust height for mobile
+    const width = mobile ? 500 : 1185;
+    const height = mobile ? 412 : 412; // Adjust height for mobile
     const marginTop = mobile ? 40 : 80; // Adjust margin for mobile
     const marginRight = 0;
     const marginBottom = mobile ? 20 : 30; // Adjust margin for mobile
@@ -62,16 +64,16 @@ const RadialBarChart = ({
       .append("svg")
       .attr("width", width)
       .attr("height", height)
-      .attr("viewBox", [0, 0, width, height]);
+      .attr("viewBox", `0 -50 ${width} ${height + 50}`);
 
     // Add the title text element
     svg
       .append("text")
-      .attr("x", width / 2)
-      .attr("y", mobile ? 10 : 20) // Adjust position for mobile
+      .attr("x", mobile ? width / 3 : width / 2)
+      .attr("y", mobile ? -15 : 20) // Adjust position for mobile
       .attr("fill", "rgba(128, 128, 128, 1)") // Set the text color using the fill attribute
       .attr("text-anchor", "middle")
-      .attr("style", "font-size: 16px; margin-bottom: 56px") // Set the font size using the style attribute
+      .attr("style", `font-size:16px; margin-bottom: 56px`) // Set the font size using the style attribute
       .text("Pool Hash Rate — Last 24H");
 
     // Create the tooltip element
@@ -180,7 +182,12 @@ const RadialBarChart = ({
   };
 
   return data ? (
-    <div id="chart-container" ref={chartRef} className={styles.radialChart} />
+    <div
+      id="chart-container"
+      ref={chartRef}
+      className={styles.radialChart}
+      style={{ overflowY: "hidden", overflowX: mobile ? "auto" : "hidden" }}
+    />
   ) : (
     <div className={styles.emptySkeleton}>{emptyComponent}</div>
   );

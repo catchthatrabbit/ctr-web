@@ -39,6 +39,7 @@ const Board = ({
         className={clsx(styles.content, {
           [styles.boardClassNameHor]: dir === "hor",
           [styles.boardClassNameColumn]: dir === "column",
+          [styles.boardClassNameColumnMobile]: dir === "column" && mobile,
           [styles.boardTotal]: context === "payments",
         })}
       >

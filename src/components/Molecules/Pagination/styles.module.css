@@ -10,6 +10,15 @@
   
     background-color: var(--dark-rgb-400);
 }
+
+.containerMobile{
+    flex-direction: column-reverse;
+    background-color: transparent;
+}
+
+.containerMobile .paginationItem, .containerMobile .paginationNext, .containerMobile .paginationPrevious {
+    padding: 11px 23px; 
+}
 .pagination {
     display: flex;
 
@@ -38,7 +47,8 @@
 }
 
 .paginationWidthMobile {
-    width: 100%
+    width: 100%;
+    justify-content: center;
 }
 
 .disabled svg path  {

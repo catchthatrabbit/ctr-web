@@ -208,6 +208,10 @@
   line-height: var(--subheading-lineHeight-mobile);
 }
 
+.subheading1-mobile {
+  font-size: var(  --subheading-font-size-tablet);
+  line-height: var( --subheading-lineHeight-tablet);
+}
 
 
 .body {

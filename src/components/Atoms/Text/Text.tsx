@@ -52,6 +52,7 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "mediumLineHeight";
   letterSpacing: "letterSpacing";
   children: string;
+  disableMobileStyles?: boolean; // disable mobile styles
 }
 
 const CustomComponent: FC<
@@ -93,6 +94,7 @@ const Text: FC<IText> = ({
     "subheadingColor" ||
     "secondary" ||
     "black",
+  disableMobileStyles,
   ...restProps
 }) => {
   const { mobile, tablet } = useMediaQueries();
@@ -111,7 +113,7 @@ const Text: FC<IText> = ({
         variant === "heading"
           ? tablet
             ? styles[`${variant}-tablet`]
-            : mobile
+            : mobile && !disableMobileStyles
               ? styles[`${variant}-mobile`]
               : styles[variant]
           : styles[variant],

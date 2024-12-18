@@ -19,8 +19,11 @@
     position: relative;
     overflow: auto;
     width: 100%;
+
     
 }
+
+
 
 .radialChart svg text{
   

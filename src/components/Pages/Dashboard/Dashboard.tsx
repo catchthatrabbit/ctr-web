@@ -160,7 +160,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
         layout={{ boards: false, dropdown: false, search: true }}
         onSearch={onSetWalletAddress}
       />
-      <Spacer variant="xxs" />
+      {desktop && <Spacer variant="xxs" />}
       <StatsChart
         isLoading={isLoadingRadialBarChart}
         infoItems={infoBoxRadialData}
@@ -168,8 +168,15 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           <RadialBarChart emptyComponent={<Empty />} data={radialChartData} />
         }
       />
-      <Spacer variant="xxxl" />
-      <Spacer variant="xxxl" />
+
+      {desktop ? (
+        <>
+          <Spacer variant="xxxl" />
+          <Spacer variant="xxxl" />
+        </>
+      ) : (
+        <Spacer variant="xl" />
+      )}
       <RecentBlocksTitle />
       <Spacer variant="xl" />
 
@@ -181,7 +188,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       />
       <Spacer variant="xxxl" />
       <Spacer variant="xl" />
-
+      {mobile && <Spacer variant="xl" />}
       <StartMining />
     </>
   );

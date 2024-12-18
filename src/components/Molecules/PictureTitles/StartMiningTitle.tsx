@@ -7,6 +7,7 @@ const StartMiningTitle = () => {
       title="Start mining"
       image={<Dive />}
       secondaryText="Let's jump into it"
+      disableMobileStyles={true}
     />
   );
 };

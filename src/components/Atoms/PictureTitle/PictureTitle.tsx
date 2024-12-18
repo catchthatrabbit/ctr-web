@@ -10,6 +10,7 @@ interface IPictureTitle {
   flexStart?: boolean;
   secondaryText?: string;
   secondaryTextStyle?: React.CSSProperties;
+  disableMobileStyles?: boolean;
 }
 
 const PictureTitle = ({
@@ -19,6 +20,7 @@ const PictureTitle = ({
   flexStart,
   secondaryText,
   secondaryTextStyle,
+  disableMobileStyles,
 }: IPictureTitle) => {
   return (
     <div
@@ -26,6 +28,7 @@ const PictureTitle = ({
     >
       <div className={styles.pictureImg}>{image}</div>
       <Text
+        variant="heading1"
         type="exo"
         size="pictureTitle"
         weight="extraBold"
@@ -33,6 +36,7 @@ const PictureTitle = ({
         color="white"
         letterSpacing="letterSpacing"
         style={{ ...titleStyles }}
+        disableMobileStyles={disableMobileStyles}
       >
         {title}
       </Text>
@@ -40,8 +44,8 @@ const PictureTitle = ({
         <Text
           variant="subheading1"
           color="subheadingColor"
-          letterSpacing="letterSpacing"
           style={{ marginTop: "8px", ...secondaryTextStyle }}
+          disableMobileStyles={disableMobileStyles}
         >
           {secondaryText}
         </Text>
