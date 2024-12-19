@@ -5,12 +5,14 @@ import { Text } from "@site/src/components/Atoms/Text";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { DownloadAppStore } from "@site/src/icons";
 import googlePlayImage from "@site/static/img/GooglePlay.png";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 import customStyles from "./customStyles.module.css";
 
 export default function FooterLayout({ style, links, logo, copyright }) {
   const { siteConfig } = useDocusaurusContext();
   const estd = siteConfig.customFields.ESTD;
+  const { mobile, desktop } = useMediaQueries();
 
   return (
     <footer
@@ -19,9 +21,13 @@ export default function FooterLayout({ style, links, logo, copyright }) {
       })}
     >
       <div className="container content">
-        <div className={customStyles.footerLayout}>
+        <div
+          className={clsx(customStyles.footerLayout, {
+            [customStyles.mobileFooterLayout]: mobile,
+          })}
+        >
           <Spacer variant="sm" />
-          <div className="grid grid-col--2-5-1 grid-end">
+          <div className={clsx({ "grid grid-col--2-5-1 grid-end": desktop })}>
             <div className="flex-column md-center-items sm-center-items xs-center-items md-center-text sm-center-text xs-center-text">
               <div
                 className={clsx([
@@ -38,11 +44,13 @@ export default function FooterLayout({ style, links, logo, copyright }) {
                 {links}
               </div>
             </div>
+            {mobile && <Spacer variant="sm" />}
             <div className={customStyles.downloadBtns}>
               <Text variant="smallBody" type="regular" color="white">
                 Download the app
               </Text>
               <Spacer variant="xs" />
+              {mobile && <Spacer variant="xxs" />}
               <div className={customStyles.btns}>
                 <a
                   href="https://apps.apple.com"

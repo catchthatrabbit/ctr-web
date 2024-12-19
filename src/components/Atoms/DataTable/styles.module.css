@@ -1,8 +1,8 @@
 .table{
     width:100%;
-    /* border: 1px solid var(--blue-rgb-700); */
-    /* border-top-left-radius: var(--ifm-global-radius);
-    border-top-right-radius: var(--ifm-global-radius); */
+     border: 1px solid var(--blue-rgb-700); 
+     border-top-left-radius: var(--ifm-global-radius);
+    border-top-right-radius: var(--ifm-global-radius); 
     margin-bottom: 0;
 }
 
@@ -56,7 +56,7 @@
 
 .table th, .table td {
   
-    /* white-space: nowrap;  */
+    white-space: nowrap; 
 }
 
 .table th {
@@ -129,4 +129,13 @@
 
 .paginationWrapper{
     width: 100%;
+   
 }
+
+
+@media (max-width: 767px) {
+  table{
+    border-radius: var(--ifm-global-radius);
+  }
+
+  }

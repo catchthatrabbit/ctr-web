@@ -4,6 +4,12 @@
     margin-bottom: var(--space-md);
 }
 
+.mobileFooterLayout{
+    display: flex;
+    flex-direction: column;
+   
+}
+
 .customLogoText{
     margin-top:var(--space-lg);
    
@@ -56,4 +62,29 @@
     width: 119px; 
     height: 40px;
    
+  }
+
+  @media (min-width: 768px) {
+    .downloadBtns{
+    span {
+      width: 70%;
+    }
+}
+  }
+  
+  @media (max-width: 767px) {
+    .downloadBtns{
+    span {
+      width: auto;
+    }
+}
+.footerCopyWrite{
+    padding-block: var(--space-md);
+}
+.footerCopyWrite::before {
+    top: 7px;
+    left: 50%;
+    width: 91%;
+}
+
   }

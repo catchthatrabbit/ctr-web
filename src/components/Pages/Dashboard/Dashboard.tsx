@@ -190,6 +190,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       <Spacer variant="xl" />
       {mobile && <Spacer variant="xl" />}
       <StartMining />
+      {mobile && <Spacer variant="md" />}
     </>
   );
 };

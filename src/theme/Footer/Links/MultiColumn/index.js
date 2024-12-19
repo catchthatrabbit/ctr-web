@@ -2,6 +2,7 @@ import React from "react";
 import LinkItem from "@theme/Footer/LinkItem";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import clsx from "clsx";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 import customStyles from "./customStyles.module.css";
 
@@ -20,14 +21,22 @@ function ColumnLinkItem({ item }) {
   );
 }
 function Column({ column }) {
+  const { mobile, desktop } = useMediaQueries();
   return (
-    <div className={clsx("col footer__col", customStyles.removePaddingInline)}>
+    <div
+      className={clsx("col", customStyles.removePaddingInline, {
+        footer__col: desktop,
+        [customStyles.alignCenter]: mobile,
+      })}
+    >
       <Spacer variant="md" />
       <div className={clsx("footer__title", customStyles.title)}>
         {column.title}
       </div>
       <ul
-        className={clsx(["footer__items clean-list", customStyles.footerItem])}
+        className={clsx("footer__items clean-list", customStyles.footerItem, {
+          [customStyles.footerItemMobile]: mobile,
+        })}
       >
         {column.items.map((item, i) => (
           <ColumnLinkItem key={i} item={item} />
