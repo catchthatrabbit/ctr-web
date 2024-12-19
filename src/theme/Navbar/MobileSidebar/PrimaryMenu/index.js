@@ -11,6 +11,7 @@ function useNavbarItems() {
   // TODO temporary casting until ThemeConfig type is improved
   return useThemeConfig().navbar.items;
 }
+
 // The primary menu displays the navbar items
 export default function NavbarMobilePrimaryMenu() {
   const mobileSidebar = useNavbarMobileSidebar();
@@ -24,7 +25,7 @@ export default function NavbarMobilePrimaryMenu() {
       {items.map((item, i) => (
         <NavbarItem
           key={i}
-          className={clsx([
+          className={clsx(
             customStyles.navbarItem,
             { [customStyles.startMiningLink]: item.href === "/start-mining" },
             {
@@ -34,7 +35,7 @@ export default function NavbarMobilePrimaryMenu() {
               [customStyles.activeNavStartMiningItemLink]:
                 "/start-mining" === activatePageName,
             },
-          ])}
+          )}
           mobile
           {...item}
           onClick={() => mobileSidebar.toggle()}

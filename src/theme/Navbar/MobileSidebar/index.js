@@ -18,9 +18,9 @@ export default function NavbarMobileSidebar() {
   }
   return (
     <NavbarMobileSidebarLayout
-      header={<NavbarMobileSidebarHeader />}
+      // header={<NavbarMobileSidebarHeader />}
       primaryMenu={<NavbarMobileSidebarPrimaryMenu />}
-      secondaryMenu={<NavbarMobileSidebarSecondaryMenu />}
+      // secondaryMenu={<NavbarMobileSidebarSecondaryMenu />}
     />
   );
 }
