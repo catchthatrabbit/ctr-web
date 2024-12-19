@@ -1,6 +1,7 @@
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
 import React from "react";
+import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
 import styles from "./styles.module.css";
 
@@ -31,12 +32,14 @@ const Board = ({
   loaderComp = <Text variant="subheading">&nbsp;--&nbsp;</Text>,
   isLoading = false,
 }: IBoard) => {
+  const { desktop, laptop, mobile, tablet } = useMediaQueries();
   return (
     <div className={clsx([styles.boardContainer, className])}>
       <div
         className={clsx(styles.content, {
           [styles.boardClassNameHor]: dir === "hor",
           [styles.boardClassNameColumn]: dir === "column",
+          [styles.boardClassNameColumnMobile]: dir === "column" && mobile,
           [styles.boardTotal]: context === "payments",
         })}
       >
@@ -48,9 +51,11 @@ const Board = ({
           ) : (
             <Text
               variant={
-                context === "statsChart" || context === "payments"
-                  ? "heading2-mobile"
-                  : "subheading"
+                context === "mapChart" && mobile
+                  ? "tinyBody"
+                  : context === "statsChart" || context === "payments"
+                    ? "heading2-mobile"
+                    : "subheading"
               }
               weight={context === "payments" ? "extraBold" : "bold"}
               color={
@@ -66,7 +71,11 @@ const Board = ({
           )}
           <Text
             variant={
-              context === "statsChart" ? "heading2-mobile" : "subheading"
+              context === "mapChart" && mobile
+                ? "tinyBody"
+                : context === "statsChart"
+                  ? "heading2-mobile"
+                  : "subheading"
             }
             weight="bold"
             color={
@@ -79,7 +88,11 @@ const Board = ({
         <div className={styles.boardItem}>
           <Text
             variant={
-              context === "statsChart" ? "subheading-desktop" : "subheading"
+              context === "mapChart" && mobile
+                ? "tinyBody"
+                : context === "statsChart"
+                  ? "subheading-desktop"
+                  : "subheading"
             }
           >
             {description || ""}

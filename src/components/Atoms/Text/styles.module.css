@@ -155,6 +155,9 @@
   line-height: var(--h3-lineHeight-desktop);
 }
 
+.headingMobile{
+  font-size: var( --large-font-size);
+}
 .heading1-tablet {
   font-size: var(--h1-font-size-tablet);
   line-height: var(--h1-lineHeight-tablet);
@@ -205,6 +208,10 @@
   line-height: var(--subheading-lineHeight-mobile);
 }
 
+.subheading1-mobile {
+  font-size: var(  --subheading-font-size-tablet);
+  line-height: var( --subheading-lineHeight-tablet);
+}
 
 
 .body {

@@ -4,3 +4,13 @@
 .buttonAlignment{
     margin-left: auto;
 }
+
+.iconMenuCustom {
+    width: 24px;
+    height: 24px;
+    color: #16C784;
+  }
+  
+  .iconMenuCustom svg {
+    stroke-width: 5px; 
+  }

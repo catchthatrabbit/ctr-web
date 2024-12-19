@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import React from "react";
+import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
 import styles from "./styles.module.css";
 
@@ -8,11 +9,12 @@ interface ILocation {
 }
 
 const Locations = ({ children }: ILocation) => {
+  const { desktop, mobile } = useMediaQueries();
   return (
-    <div className={styles.locations}>
+    <div className={clsx(styles.locations, { [styles.flexEnd]: desktop })}>
       <img
         src="/img/thatRabbitImg.png"
-        className={styles.bgImage}
+        className={clsx(styles.bgImage, { [styles.bgImageMobile]: mobile })}
         alt="BACKGROUND_IMAGE"
       />
       {/* <div

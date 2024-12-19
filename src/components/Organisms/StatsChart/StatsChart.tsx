@@ -4,6 +4,7 @@ import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { LoadingPlaceholder } from "@site/src/components/Atoms/LoadingPlaceholder";
 import { InfoBox } from "@site/src/components/Molecules/InsideChart/Info";
 import { InfoBoxLoadingSkeleton } from "../../Atoms/InfoBoxLoadingSkeleton";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 import styles from "./styles.module.css";
 
@@ -20,23 +21,23 @@ const StatsChart = ({ radialBarChart, infoItems, isLoading }: IStatsChart) => {
     "xl-flex-col--9 lg-flex-col--9 md-flex-col--12 sm-flex-col--12 xs-flex-col--12";
   const infoBoxClassName =
     "xl-flex-col--3 lg-flex-col--3 md-flex-col--12 sm-flex-col--12 xs-flex-col--12";
+  const { mobile, desktop } = useMediaQueries();
 
   return (
     <div className={styles.statsChart}>
       <PoolStatisticsTitle />
       <Spacer variant="sm" />
-      <Spacer variant="md" />
+      {desktop && <Spacer variant="md" />}
 
       <div className={styles.flex}>
-        <div className={radialClassName}>
-          {isLoading ? (
-            <div className={styles.loadingSkeleton}>
-              <LoadingPlaceholder />
-            </div>
-          ) : (
-            radialBarChart
-          )}
-        </div>
+        {isLoading ? (
+          <div className={styles.loadingSkeleton}>
+            <LoadingPlaceholder />
+          </div>
+        ) : (
+          radialBarChart
+        )}
+
         <Spacer variant="xxxl" />
         <InfoBox
           dir="column"

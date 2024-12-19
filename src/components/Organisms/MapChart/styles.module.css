@@ -11,3 +11,7 @@
 .dashboardContainer{
   margin-top: 108px;
 }
+
+.mobileDashboard{
+  margin-top: 28px !important;
+}

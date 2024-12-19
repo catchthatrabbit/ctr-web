@@ -1,5 +1,6 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import { Text } from "../../Atoms/Text";
+import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
 import clsx from "clsx";
 
@@ -30,13 +31,14 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
         onPressEnter();
       }
     };
-
+    const { mobile } = useMediaQueries();
     return (
       <div className={`row ${styles.inputContainer}`}>
         {icon && (
           <span
             className={clsx(styles.icon, {
               [styles.smallIcon]: context === "payments",
+              [styles.mobileIcon]: mobile,
             })}
           >
             {icon}
@@ -54,6 +56,7 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
           className={clsx(styles.inputText, className, {
             [styles.searchWallet]: context === "wallet",
             [styles.searchDark]: context === "dark",
+            [styles.mobileInputText]: mobile,
           })}
           placeholder={placeholder}
         />

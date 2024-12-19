@@ -28,6 +28,7 @@ import styles from "./styles.module.css";
 
 import MainPageSearch from "@site/src/components/Molecules/PictureTitles/MainPageSearch";
 import { StartPanel } from "../../Molecules/StartPanel";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 interface IDashboard extends IAnyPageAndWallet {}
 
@@ -51,116 +52,115 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
     effectsShowLocation,
   } = useControls();
 
+  const { mobile, desktop } = useMediaQueries();
+
   return (
     <>
-      {/* <Spacer variant="xxxl" /> */}
       <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
         <div
           className={clsx([
             "grid xl-grid-col--2 lg-grid-col--5 md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
-            styles.directionRtl,
+            desktop && styles.directionRtl,
             styles.fullWidth,
           ])}
         >
-          <div
-            className={clsx([
-              styles.mapChartLocationPlace,
-
-              "lg-grid-span-col--4",
-              styles.directionLtr,
-            ])}
-          >
-            {isLoadingMapChart ? (
-              <div className={styles.loadingSkeleton}>
-                <LoadingPlaceholder className={styles.loadingPlaceholder} />
+          {mobile ? (
+            <>
+              <div
+                className={clsx([
+                  styles.directionLtr,
+                  "xs-text-center sm-text-center md-text-center",
+                ])}
+              >
+                <MainPageSearch flexStart={false} />
+                <Spacer variant="xs" />
+                <Text
+                  variant="headingMobile"
+                  weight="extraBold"
+                  lineHeight={desktop ? "largeLineHeight" : "normalLineHeight"}
+                  color="dashboardColor"
+                  style={{ textAlign: "center" }}
+                >
+                  {sLoganPrimary}
+                </Text>
+                <Spacer variant="sm" />
               </div>
-            ) : (
-              <>
-                <Locations>
-                  <span className="lg-hide md-hide" />
-                  {effectsShowLocation && (
-                    <>
-                      {/* <MapPin
-                        className="lg-grid-span-col--2 md-grid-span-col--3"
-                        mapButton={
-                          <MapButton
-                            value="US location"
-                            href={
-                              effectsShowActionIcons && usStarMiningPoolLocation
-                            }
-                          />
-                        }
-                      /> */}
-                      {/* <span className="lg-hide" />
-                      <MapPin
-                        className="xl-grid-span-col--2 lg-grid-span-col--2 md-grid-span-col--3 sm-grid-span-col--6"
-                        mapButton={
-                          <MapButton
-                            value="EU location"
-                            href={
-                              effectsShowActionIcons && euStarMiningPoolLocation
-                            }
-                          />
-                        }
-                      />
-                      <span className="lg-hide md-hide" /> */}
-                      {/* <MapPin
-                        className="lg-grid-span-col--2 md-grid-span-col--2"
-                        mapButton={
-                          <MapButton
-                            value="AP location"
-                            href={
-                              effectsShowActionIcons && asStarMiningPoolLocation
-                            }
-                          />
-                        }
-                      /> */}
-                    </>
-                  )}
-                </Locations>
-                <Mouse>
-                  <MouseContent />
-                </Mouse>
-              </>
-            )}
-          </div>
-          {/* <Spacer className="xl-hide lg-hide" variant="lg" /> */}
-          <div
-            className={clsx([
-              styles.directionLtr,
-              "xs-text-center sm-text-center md-text-center",
-            ])}
-          >
-            <MainPageSearch />
-            <Spacer variant="sm" />
-            <Text
-              variant="heading"
-              weight="extraBold"
-              lineHeight="largeLineHeight"
-              color="dashboardColor"
-              style={{ width: "43rem", display: "inline-block" }}
-            >
-              {sLoganPrimary}
-            </Text>
-            <Spacer variant="sm" />
-            <Text color="subheadingColor" variant="subheading1">
-              {SLoganSecondary}
-            </Text>
-            <br />
-            <Spacer variant="xxl" />
-            <Search onSearch={onSetWalletAddress} />
-          </div>
+              <Spacer variant="sm" />
+              <Locations>
+                <span className="lg-hide md-hide" />
+              </Locations>
+              <Spacer variant="xs" />
+              <Search onSearch={onSetWalletAddress} />
+            </>
+          ) : (
+            <>
+              <div
+                className={clsx([
+                  styles.mapChartLocationPlace,
+
+                  "lg-grid-span-col--4",
+                  styles.directionLtr,
+                ])}
+              >
+                {isLoadingMapChart ? (
+                  <div className={styles.loadingSkeleton}>
+                    <LoadingPlaceholder className={styles.loadingPlaceholder} />
+                  </div>
+                ) : (
+                  <>
+                    <Locations>
+                      <span className="lg-hide md-hide" />
+                    </Locations>
+                    <Mouse>
+                      <MouseContent />
+                    </Mouse>
+                  </>
+                )}
+              </div>
+              <div
+                className={clsx([
+                  styles.directionLtr,
+                  "xs-text-center sm-text-center md-text-center",
+                ])}
+              >
+                <MainPageSearch flexStart={true} />
+                <Spacer variant="sm" />
+                <Text
+                  variant="heading"
+                  weight="extraBold"
+                  lineHeight="largeLineHeight"
+                  color="dashboardColor"
+                  style={{ width: "43rem", display: "inline-block" }}
+                >
+                  {sLoganPrimary}
+                </Text>
+                <Spacer variant="sm" />
+                <Text color="subheadingColor" variant="subheading1">
+                  {SLoganSecondary}
+                </Text>
+                <br />
+                <Spacer variant="xxl" />
+                <Search onSearch={onSetWalletAddress} />
+              </div>
+            </>
+          )}
         </div>
       </MapChart>
-      <Spacer variant="xxxl" />
-      <Spacer variant="xxxl" />
+      {desktop ? (
+        <>
+          <Spacer variant="xxxl" />
+          <Spacer variant="xxxl" />
+        </>
+      ) : (
+        <Spacer variant="xxl" />
+      )}
       <StartPanel />
       <Spacer variant="md" />
       <Header
         layout={{ boards: false, dropdown: false, search: true }}
         onSearch={onSetWalletAddress}
       />
-      <Spacer variant="xxs" />
+      {desktop && <Spacer variant="xxs" />}
       <StatsChart
         isLoading={isLoadingRadialBarChart}
         infoItems={infoBoxRadialData}
@@ -168,8 +168,15 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           <RadialBarChart emptyComponent={<Empty />} data={radialChartData} />
         }
       />
-      <Spacer variant="xxxl" />
-      <Spacer variant="xxxl" />
+
+      {desktop ? (
+        <>
+          <Spacer variant="xxxl" />
+          <Spacer variant="xxxl" />
+        </>
+      ) : (
+        <Spacer variant="xl" />
+      )}
       <RecentBlocksTitle />
       <Spacer variant="xl" />
 
@@ -181,8 +188,9 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       />
       <Spacer variant="xxxl" />
       <Spacer variant="xl" />
-
+      {mobile && <Spacer variant="xl" />}
       <StartMining />
+      {mobile && <Spacer variant="md" />}
     </>
   );
 };

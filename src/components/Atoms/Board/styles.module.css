@@ -32,4 +32,9 @@
 
 .boardClassNameColumn{
     flex-direction: column !important;
+    
 }
+
+.boardClassNameColumnMobile {
+    height: 81px;
+  }

@@ -15,10 +15,21 @@
     
 }
 
+.alignCenter{
+    display: flex;
+    align-items: center;
+}
+
 .footerItem {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 84%;
     justify-content: space-between;
+}
+
+.footerItemMobile{
+    display: flex;
+    flex-direction: column;
+  
 }

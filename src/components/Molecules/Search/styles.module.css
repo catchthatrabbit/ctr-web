@@ -33,11 +33,16 @@
 
 
 .searchButtonMobile{
-    right: 0px;
+    right: 11px;
+    top: 28px;
+    height: 45px;
+    width: 71px;
+    font-size: var( --small-font-size) !important;
 }
 
 .searchInputMobile{
     margin-inline: 0px;
+    width: 97% !important;
 }
 
 .searchInput{
@@ -50,6 +55,10 @@
     position: relative;
     flex-direction: column;
 }
+
+.mobilePaddingLeft {
+    padding-left: 6px;
+  }
 
 /* styles for wallet overview page */
 

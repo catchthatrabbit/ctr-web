@@ -25,7 +25,7 @@ export default function MobileSidebarToggle() {
       )}
       type="button"
     >
-      <IconMenu />
+      <IconMenu className={customStyles.iconMenuCustom} />
     </button>
   );
 }

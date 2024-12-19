@@ -7,8 +7,18 @@
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
     list-style: none;
-  
+    border-bottom-left-radius: var(--ifm-global-radius);
+    border-bottom-right-radius: var(--ifm-global-radius); 
     background-color: var(--dark-rgb-400);
+}
+
+.containerMobile{
+    flex-direction: column-reverse;
+    background-color: transparent;
+}
+
+.containerMobile .paginationItem, .containerMobile .paginationNext, .containerMobile .paginationPrevious {
+    padding: 11px 23px; 
 }
 .pagination {
     display: flex;
@@ -38,7 +48,8 @@
 }
 
 .paginationWidthMobile {
-    width: 100%
+    width: 100%;
+    justify-content: center;
 }
 
 .disabled svg path  {

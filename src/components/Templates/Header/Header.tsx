@@ -5,6 +5,8 @@ import { Board } from "@site/src/components/Atoms/Board";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { IBan } from "@site/src/components/Molecules/IBan";
 import { Text } from "@site/src/components/Atoms/Text";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+
 import clsx from "clsx";
 
 import styles from "./styles.module.css";
@@ -48,7 +50,7 @@ const Header = ({
   context,
   selectedPool,
 }: IHeader) => {
-  console.log("region", defaultRegion);
+  const { mobile, desktop } = useMediaQueries();
 
   const columnClass =
     context === "blocks" || context === "payments"
@@ -104,6 +106,7 @@ const Header = ({
         </>
       )}
       {context !== "payments" &&
+        desktop &&
         (context === "blocks" ? (
           <Spacer variant="md" />
         ) : (
@@ -128,7 +131,7 @@ const Header = ({
         </>
       )}
       {children}
-      {context !== "blocks" && context !== "payments" ? (
+      {context !== "blocks" && context !== "payments" && desktop ? (
         <Spacer variant="md" />
       ) : null}
     </>
