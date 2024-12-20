@@ -25,7 +25,7 @@ export default function NavbarMobileSidebarSecondaryMenu() {
       {/* {!isPrimaryMenuEmpty && (
         <SecondaryMenuBackButton onClick={() => secondaryMenu.hide()} />
       )} */}
-      {secondaryMenu.content}
+      {/* {secondaryMenu.content} */}
     </>
   );
 }

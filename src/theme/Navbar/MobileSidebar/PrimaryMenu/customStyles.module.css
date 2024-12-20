@@ -3,9 +3,15 @@
   justify-content: left;
   margin-left: 25px;
   color: var(--white);
-  font-size: var(--subheading-font-size-desktop);
+  font-size: var( --subheading-font-size-tablet);
   list-style: var(--subheading-lineHeight-desktop);
   font-weight: var(--bold-font-weight);
+}
+
+.navbarItemMobile{
+  margin-left: 0px;
+  margin-top: 30px;
+ 
 }
 
 .navbarItem:hover {
@@ -14,6 +20,15 @@
 
 .startMiningLink{
   color: var(--ifm-color-primary)!important;
+  font-size: var( --subheading-font-size-desktop);
+  background-color: #062A1C;
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box; 
+ 
 }
 
 .activeNavStartMiningItemLink:before{
@@ -40,4 +55,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.menuList li:last-child {
+  width: 100% !important;
 }

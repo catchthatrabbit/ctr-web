@@ -3,6 +3,8 @@ import { useThemeConfig } from "@docusaurus/theme-common";
 import { useNavbarMobileSidebar } from "@docusaurus/theme-common/internal";
 import NavbarItem from "@theme/NavbarItem";
 import { useNav } from "@site/src/hooks/useNav";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+
 import clsx from "clsx";
 
 import customStyles from "./customStyles.module.css";
@@ -17,6 +19,7 @@ export default function NavbarMobilePrimaryMenu() {
   const mobileSidebar = useNavbarMobileSidebar();
   // TODO how can the order be defined for mobile?
   // Should we allow providing a different list of items?
+  const { mobile } = useMediaQueries();
   const items = useNavbarItems();
   const { activatePageName } = useNav(items);
 
@@ -34,6 +37,9 @@ export default function NavbarMobilePrimaryMenu() {
             {
               [customStyles.activeNavStartMiningItemLink]:
                 "/start-mining" === activatePageName,
+            },
+            {
+              [customStyles.navbarItemMobile]: mobile,
             },
           )}
           mobile

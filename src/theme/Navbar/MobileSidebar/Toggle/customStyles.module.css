@@ -11,6 +11,13 @@
     color: #16C784;
   }
   
-  .iconMenuCustom svg {
+  .iconMenuCustomClose {
+    width: 10px;
+    height: 10px;
+    color: #16C784;
+  }
+  
+.iconMenuCustom svg {
     stroke-width: 5px; 
   }
+
