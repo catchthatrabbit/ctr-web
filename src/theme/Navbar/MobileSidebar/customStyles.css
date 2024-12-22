@@ -2,11 +2,12 @@
   right: 0;
   width: 100%;
   transform: translate3d(100%, 0, 0);
-  top: 77px;
+  top: 72px;
   height: calc(100% - 60px); 
 }
 
 .navbar-sidebar--show .navbar-sidebar {
   transform: translate3d(0, 0, 0);
   width: 100%;
+  border-top: 1px solid rgba(54, 54, 54, 1);
 }
