@@ -22,3 +22,11 @@
 .directionLtr{
     direction: ltr;
 }
+
+.horizontalLine{
+    height: 1px;
+    background: linear-gradient(to right, #FFFFFF40 25%, #FFFFFF0D 75%);
+    width: 200%;
+    position: relative;
+    left: -50%;
+}
