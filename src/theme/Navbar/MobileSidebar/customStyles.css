@@ -1,11 +1,13 @@
 .navbar-sidebar {
-    right: 0px;
-    width: 0px;
-    transform: translate3d(80%, 0, 0);
-  }
-  
-  .navbar-sidebar--show .navbar-sidebar {
-    transform: translate3d(21%, 0, 0);
-    width: auto;
-  }
-  
+  right: 0;
+  width: 100%;
+  transform: translate3d(100%, 0, 0);
+  top: 72px;
+  height: calc(100% - 60px); 
+}
+
+.navbar-sidebar--show .navbar-sidebar {
+  transform: translate3d(0, 0, 0);
+  width: 100%;
+  border-top: 1px solid rgba(54, 54, 54, 1);
+}

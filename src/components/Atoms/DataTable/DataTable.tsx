@@ -39,105 +39,110 @@ const DataTable = ({
     emptyComponent
   ) : (
     <>
-      <table
-        className={clsx(
-          styles.table,
-          context === "wallet" && styles.walletTable,
-          context === "blocks" && styles.blocksTable,
-        )}
-        border={0}
-      >
-        <thead>
-          <tr>
-            {columns?.map((colItem, colIndex) => (
-              <th
-                key={colIndex}
-                className={clsx(
-                  colItem.alignToCenter && styles.tableCenteredText,
-                  colIndex === 0 && styles.tablePaddingLeft,
-                  context === "wallet" && styles.walletTableHeader,
-                )}
-              >
-                <Text
-                  variant="tinyBody"
-                  color="white"
-                  weight="bold"
-                  style={{ textTransform: "uppercase" }}
-                >
-                  {colItem.label || ""}
-                </Text>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {paginatedData?.map((rowItem, rowIndex) => (
-            <tr key={rowIndex} className={styles.tableRow}>
+      <div className={styles.tableWrapper}>
+        <table
+          className={clsx(
+            styles.table,
+            context === "wallet" && styles.walletTable,
+            context === "blocks" && styles.blocksTable,
+          )}
+          border={0}
+        >
+          <thead>
+            <tr>
               {columns?.map((colItem, colIndex) => (
-                <td
+                <th
                   key={colIndex}
                   className={clsx(
                     colItem.alignToCenter && styles.tableCenteredText,
                     colIndex === 0 && styles.tablePaddingLeft,
+                    context === "wallet" && styles.walletTableHeader,
                   )}
                 >
-                  <span className={styles.copyButton}>
-                    {colItem.isPrimary ? (
-                      colItem.href ? (
-                        <Link to={`${colItem.href}/${rowItem[colItem.value]}`}>
+                  <Text
+                    variant="tinyBody"
+                    color="white"
+                    weight="bold"
+                    style={{ textTransform: "uppercase" }}
+                  >
+                    {colItem.label || ""}
+                  </Text>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {paginatedData?.map((rowItem, rowIndex) => (
+              <tr key={rowIndex} className={styles.tableRow}>
+                {columns?.map((colItem, colIndex) => (
+                  <td
+                    key={colIndex}
+                    className={clsx(
+                      colItem.alignToCenter && styles.tableCenteredText,
+                      colIndex === 0 && styles.tablePaddingLeft,
+                    )}
+                  >
+                    <span className={styles.copyButton}>
+                      {colItem.isPrimary ? (
+                        colItem.href ? (
+                          <Link
+                            to={`${colItem.href}/${rowItem[colItem.value]}`}
+                          >
+                            <Text
+                              variant="smallBody"
+                              color="primary"
+                              type="value"
+                            >
+                              {rowItem[
+                                `${colItem.value}_summarized`
+                              ]?.toString() || ""}
+                            </Text>
+                          </Link>
+                        ) : (
                           <Text
-                            variant="smallBody"
+                            variant="body"
+                            className={styles.cursorPointer}
                             color="primary"
                             type="value"
+                            onClick={() =>
+                              typeof colItem?.fn === "function" &&
+                              colItem.fn(rowItem[colItem.value]?.toString())
+                            }
                           >
                             {rowItem[
                               `${colItem.value}_summarized`
                             ]?.toString() || ""}
-                          </Text>
-                        </Link>
+                          </Text> //wallet address
+                        )
                       ) : (
                         <Text
-                          variant="body"
-                          className={styles.cursorPointer}
-                          color="primary"
-                          type="value"
-                          onClick={() =>
-                            typeof colItem?.fn === "function" &&
-                            colItem.fn(rowItem[colItem.value]?.toString())
-                          }
+                          variant="smallBody"
+                          type="regular"
+                          weight="medium"
+                          color="white"
+                          className={clsx({
+                            [styles.runningText]:
+                              rowItem[colItem.value] === "Running",
+                            [styles.inactiveText]:
+                              rowItem[colItem.value] === "Inactive",
+                          })}
                         >
-                          {rowItem[`${colItem.value}_summarized`]?.toString() ||
-                            ""}
-                        </Text> //wallet address
-                      )
-                    ) : (
-                      <Text
-                        variant="smallBody"
-                        type="regular"
-                        weight="medium"
-                        color="white"
-                        className={clsx({
-                          [styles.runningText]:
-                            rowItem[colItem.value] === "Running",
-                          [styles.inactiveText]:
-                            rowItem[colItem.value] === "Inactive",
-                        })}
-                      >
-                        {rowItem[colItem.value]?.toString() || ""}
-                      </Text>
-                    )}
-                    {colItem.canBeCopied && (
-                      <CopyButtonSmall
-                        textToCopy={rowItem[colItem.value]?.toString() || ""}
-                      />
-                    )}
-                  </span>
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                          {rowItem[colItem.value]?.toString() || ""}
+                        </Text>
+                      )}
+                      {colItem.canBeCopied && (
+                        <CopyButtonSmall
+                          textToCopy={rowItem[colItem.value]?.toString() || ""}
+                        />
+                      )}
+                    </span>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {!hidePagination && (
         <Pagination
           limit={itemsPerPage}

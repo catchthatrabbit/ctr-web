@@ -2,6 +2,8 @@
     font-family: var(--ifm-font-family-base);
     font-size: var(--subheading-font-size-desktop);
     line-height: var(--subheading-lineHeight-desktop);
+    opacity: 1;
+    z-index: 1000;
 }
 
 .navBarContainerMiningItem {
