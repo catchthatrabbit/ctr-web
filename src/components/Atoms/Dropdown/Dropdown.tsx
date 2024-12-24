@@ -3,6 +3,7 @@ import Select, { ActionMeta } from "react-select";
 import { colourStyles } from "./styles";
 import CustomDropdownIndicator from "./DropdownIndicator";
 import { Text } from "@site/src/components/Atoms/Text";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 interface IDropdown {
   id?: string;
@@ -27,15 +28,21 @@ const Dropdown = ({
   text,
   context,
 }: IDropdown) => {
+  const { mobile, tablet, desktop } = useMediaQueries();
+
   return (
     <>
       {text && (
         <Text
-          variant="subheading"
+          variant={mobile ? "smallBody" : "subheading"}
           color="subheadingColor"
           style={{
             width:
-              context === "blocks" || context === "payments" ? "95%" : "50%",
+              context === "mobileWallet"
+                ? "95%"
+                : context === "blocks" || context === "payments"
+                  ? "100%"
+                  : "52%",
             marginBottom: "8px",
           }}
         >

@@ -29,6 +29,7 @@ const CopyButton = ({
   toastText,
   customStyles,
   icon = <Copy />,
+  context,
 }: ICopyButton) => {
   const mergedStyles = { ...styles, ...customStyles };
   const notify = () => {
@@ -52,6 +53,7 @@ const CopyButton = ({
       icon={icon}
       textColor="var(--ifm-color-primary)"
       style={mergedStyles}
+      context={context}
     />
   );
 };

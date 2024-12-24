@@ -38,11 +38,13 @@ const IBan = ({ iBan = "", pool = "de" }: IIBan) => {
           textToCopy={iBan}
           value="Copy wallet address"
           toastText="Wallet address copied to clipboard"
+          context={mobile ? "wallet" : ""}
         />
         <CopyButton
           textToCopy={permalink}
           value="Copy permalink"
           toastText="Permalink copied to clipboard"
+          context={mobile ? "wallet" : ""}
         />
       </div>
     </>

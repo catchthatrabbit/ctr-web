@@ -5,6 +5,7 @@ import {
   useFetchWallet,
   useFetchWorkersByWalletAddress,
 } from "@site/src/hooks/useWallet";
+import useMapChartData from "../Dashboard/hooks/useMapChartData";
 import { useFetchPaymentByWalletAddress } from "@site/src/hooks/usePayments";
 import { useMemo, useState } from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -131,6 +132,12 @@ const useControls = ({
     setCurrentPageWorkers(currentPage);
   };
 
+  const {
+    infoBoxItems: infoBoxMapData,
+    poolFee,
+    isLoading: isLoadingMapChart,
+  } = useMapChartData();
+
   return {
     workersTableColumn,
     paymentPayoutTableColumns,
@@ -148,6 +155,8 @@ const useControls = ({
     brbEmoji,
     dropdownItems,
     regionLabel,
+    infoBoxMapData,
+    isLoadingMapChart,
   };
 };
 
