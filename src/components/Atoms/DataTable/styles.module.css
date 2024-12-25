@@ -7,6 +7,12 @@
 }
 
 .walletTable {
+  
+        border-bottom-right-radius: 0;
+      border-top-right-radius:0;
+      border-top-left-radius:0;
+
+    
     .runningText {
         background-color: rgba(0, 191, 255, 0.2);
         padding: calc(var(--space-xs) / 2) var(--space-xxs);
@@ -150,6 +156,13 @@
    
    
     }
+
+    .walletTable{
+        border-bottom-right-radius: 0;
+        border-top-right-radius:0;
+        border-top-left-radius:0;
+  
+    }
   
     .table th,
     .table td {
@@ -159,14 +172,25 @@
       white-space: nowrap;
     }
   
-    .table th:first-child,
-    .table td:first-child {
+    .walletTable th:first-child,
+    .walletTable td:first-child {
       position: absolute;
       width: 8em;
       margin-left: -8em;
       z-index: 3;
       background-color: inherit;
-      border: 1px solid var(--blue-rgb-700); 
+      border-right: 1px solid var(--blue-rgb-700); 
+      border-bottom: 1px solid var(--blue-rgb-700); 
+      
+      height: -webkit-fill-available;
+      overflow: hidden;
+    }
+
+    .walletTable th:first-child > span,
+    .walletTable td:first-child > span {
+      display: block;
+      overflow-x: auto; 
+      white-space: nowrap; 
     }
   
     .table > tbody:last-child > tr:first-child {
@@ -177,6 +201,11 @@
       border-top-left-radius: var(--ifm-global-radius);
       background-color: var(--ifm-table-head-background);
     }
+
+    .walletTable th:first-child {
+        border-top-left-radius: 0;
+       
+      }
   
     .table th:not(:first-child),
     .table td:not(:first-child) {

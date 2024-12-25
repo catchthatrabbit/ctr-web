@@ -4,6 +4,7 @@ import React from "react";
 import { Panel } from "@site/src/components/Molecules/Panel";
 import LoadingSkeleton from "./LoadingSkeleton";
 import { Empty } from "../../Atoms/Empty";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 import styles from "./styles.module.css";
 
@@ -25,6 +26,8 @@ const TwoColumnsPanel = ({
   isLoading,
   loadingPlaceholder,
 }: IDetailsTable) => {
+  const { mobile, tablet, desktop } = useMediaQueries();
+
   if (isLoading)
     return <LoadingSkeleton loadingPlaceholder={loadingPlaceholder} />;
   else if (!data) return <Empty />;
@@ -36,7 +39,7 @@ const TwoColumnsPanel = ({
           <Text
             weight="bold"
             componentType="div"
-            variant="subheading"
+            variant={mobile ? "smallBody" : "subheading"}
             color="white"
             className={clsx(styles.detailsTableCaption)}
           >
@@ -45,7 +48,7 @@ const TwoColumnsPanel = ({
           <Text
             weight="bold"
             componentType="div"
-            variant="subheading"
+            variant={mobile ? "smallBody" : "subheading"}
             type="value"
             color="white"
             className={clsx(styles.detailsTableValue)}
