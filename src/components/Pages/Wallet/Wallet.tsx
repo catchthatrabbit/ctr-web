@@ -177,7 +177,7 @@ const Wallet = ({
           />
         </>
       )}
-      <Spacer variant="xl" />
+      {desktop ? <Spacer variant="xl" /> : <Spacer variant="xxxl" />}
     </>
   );
 };

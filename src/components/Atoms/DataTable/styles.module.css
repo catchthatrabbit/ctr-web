@@ -146,6 +146,11 @@
       position: relative;
       border-radius: 8px;
     }
+
+    .tableWrapperWallet{
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
   
     .table {
       border-bottom-right-radius: var(--ifm-global-radius);
@@ -173,8 +178,8 @@
       white-space: nowrap;
     }
   
-    .walletTable th:first-child,
-    .walletTable td:first-child {
+    .table th:first-child,
+    .table td:first-child {
       position: sticky;
       width: auto;  
       left: 0;  
