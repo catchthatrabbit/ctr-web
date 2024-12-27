@@ -118,14 +118,18 @@ const Wallet = ({
             >
               Wallet not found. No data to show.
             </Text>
-            <Spacer variant="xxxl" />
+            {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="md" />}
             <Spacer variant="sm" />
             <Spacer variant="xxs" />
           </div>
           <Search context="wallet" onSearch={onSetWalletAddress} />
           <Spacer variant="xxxl" />
-          <Spacer variant="sm" />
-          <Spacer variant="xxs" />
+          {desktop ? (
+            <>
+              <Spacer variant="sm" />
+              <Spacer variant="xxs" />{" "}
+            </>
+          ) : null}
         </>
       ) : (
         <>

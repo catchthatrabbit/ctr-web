@@ -37,7 +37,7 @@
     top: 28px;
     height: 45px;
     width: 71px;
-    font-size: var( --small-font-size) !important;
+    font-size: var( --small-font-size);
 }
 
 .searchInputMobile{
@@ -197,3 +197,25 @@
     left: 100%;
     top: 38%;
 }
+
+.searchWalletMobile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .searchContainerWalletMobile {
+    width: 98%;
+  }
+  
+  .searchInputWalletMobile {
+    width: 100%;
+  }
+  
+  .searchButtonWalletMobile {
+    width: 97%;
+    margin-top: var(--space-xs);
+    right: 6px;
+    top: 74px;
+    font-size: var(--regular-font-size);
+  }
