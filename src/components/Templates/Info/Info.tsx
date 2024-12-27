@@ -7,6 +7,8 @@ import {
 } from "./utils";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { WalletInfoTabs } from "@site/src/components/Organisms/WalletInfoTabs";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+
 import clsx from "clsx";
 
 interface IInfo {
@@ -27,6 +29,8 @@ const Info = ({
   loadingPlaceholder,
   handleFilterChange,
 }: IInfo) => {
+  const { mobile } = useMediaQueries();
+
   const generalStats = useMemo(
     () => convertWalletInfoResponse2GeneralState(data),
     [data],
@@ -49,6 +53,7 @@ const Info = ({
           isLoading={isLoading}
           loadingPlaceholder={loadingPlaceholder}
         />
+        {mobile && <Spacer variant="xxs" />}
         <TwoColumnsPanel
           data={generalStats}
           isLoading={isLoading}

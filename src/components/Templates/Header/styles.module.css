@@ -35,3 +35,6 @@
 .smallWidth {
     width: 384px;
   }
+.mobileWidth{
+    width: 96%;
+}

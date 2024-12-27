@@ -88,3 +88,8 @@
   width: 27%;
   padding: var(--space-xxs) var(--space-sm);
 }
+
+.mobileWalletButton{
+  padding: calc(var(--space-xs) / 2) var(--space-sm);
+
+}

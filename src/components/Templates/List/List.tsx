@@ -60,11 +60,7 @@ const List = ({
     >
       <div>
         <div className="row">
-          <div
-            className={clsx(styles.tableWrapper, {
-              [styles.listMarginInlineMobile]: mobile,
-            })}
-          >
+          <div className={clsx(styles.tableWrapper, {})}>
             <DataTable
               emptyComponent={<Empty />}
               columns={dataTableColumns}

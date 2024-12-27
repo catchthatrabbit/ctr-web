@@ -39,7 +39,11 @@ const DataTable = ({
     emptyComponent
   ) : (
     <>
-      <div className={styles.tableWrapper}>
+      <div
+        className={clsx(styles.tableWrapper, {
+          [styles.tableWrapperWallet]: context === "wallet",
+        })}
+      >
         <table
           className={clsx(
             styles.table,

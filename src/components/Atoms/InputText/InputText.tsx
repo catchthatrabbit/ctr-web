@@ -39,6 +39,7 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
             className={clsx(styles.icon, {
               [styles.smallIcon]: context === "payments",
               [styles.mobileIcon]: mobile,
+              [styles.mobileIconWallet]: mobile && context === "wallet",
             })}
           >
             {icon}

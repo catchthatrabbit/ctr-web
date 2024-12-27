@@ -47,3 +47,23 @@
   .Toastify__closeButton {
     align-self: center;
   } 
+
+
+  @media (max-width: 767px) {
+    .customToast {
+      width: 92%;
+      left: 4%;
+      top: 115px;
+    }
+
+    .customToastBody{
+      font-size: 15px;
+    }
+
+    .Toastify__toast-icon {
+      width: 13px;
+      height: 13px;
+    }
+    
+  
+}

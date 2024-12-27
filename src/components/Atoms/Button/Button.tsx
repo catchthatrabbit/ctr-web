@@ -15,7 +15,7 @@ interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   textColor?: string;
   customWidth?: string;
   weight?: "medium";
-  context?: "config";
+  context?: "config" | "wallet";
 }
 
 const Button = ({
@@ -47,6 +47,7 @@ const Button = ({
         styles.full && full,
         className,
         { [styles.configButton]: context === "config" },
+        { [styles.mobileWalletButton]: context === "wallet" },
       )}
       style={buttonStyle}
       {...restProps}

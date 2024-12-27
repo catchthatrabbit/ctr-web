@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
 import { Info } from "@site/src/components/Templates/Info";
 import { List } from "@site/src/components/Templates/List";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
@@ -17,6 +18,7 @@ import { IAnyPageAndWallet } from "../types";
 import useControls from "./controls";
 import { LoadingPlaceholder } from "../../Atoms/LoadingPlaceholder";
 import { CustomToastError } from "../../Molecules/CopyButton";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./styles.module.css";
@@ -50,11 +52,13 @@ const Wallet = ({
     brbEmoji,
     dropdownItems,
     regionLabel,
+    infoBoxMapData,
+    isLoadingMapChart,
   } = useControls({ walletAddress, defaultRegion, onChangeRegion });
   const [filterStatus, setFilterStatus] = useState("All");
   const [toastShown, setToastShown] = useState(false);
+  const { mobile, tablet, desktop } = useMediaQueries();
 
-  console.log("regionLabel:", regionLabel);
   const handleFilterChange = (status: string) => {
     setFilterStatus(status);
   };
@@ -76,8 +80,18 @@ const Wallet = ({
 
   return (
     <>
-      <Spacer variant="xxl" />
+      {(mobile || tablet) && (
+        <>
+          <ConfiguredInfoBox
+            infoItems={infoBoxMapData}
+            isLoading={isLoadingMapChart}
+          />
+        </>
+      )}
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="sm" />}
+
       {/* <Button value="Back" onClick={onClearWalletAddress} /> */}
+
       <div className={`flex items-center xl-center-items ${styles.fullWidth}`}>
         <Text
           type="exo"
@@ -85,6 +99,7 @@ const Wallet = ({
           lineHeight="mediumLineHeight"
           color="white"
           weight="extraBold"
+          variant={mobile ? "headingMobile" : undefined}
         >
           Wallet overview
         </Text>
@@ -103,14 +118,18 @@ const Wallet = ({
             >
               Wallet not found. No data to show.
             </Text>
-            <Spacer variant="xxxl" />
+            {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="md" />}
             <Spacer variant="sm" />
             <Spacer variant="xxs" />
           </div>
           <Search context="wallet" onSearch={onSetWalletAddress} />
           <Spacer variant="xxxl" />
-          <Spacer variant="sm" />
-          <Spacer variant="xxs" />
+          {desktop ? (
+            <>
+              <Spacer variant="sm" />
+              <Spacer variant="xxs" />{" "}
+            </>
+          ) : null}
         </>
       ) : (
         <>
@@ -121,6 +140,7 @@ const Wallet = ({
             onChangeRegion={handleChangeRegion}
             iban={walletAddress}
             layout={{ boards: true, search: false, dropdown: true }}
+            context={mobile ? "mobileWallet" : undefined}
           />
           <Info
             data={fetchedWalletInfo}
@@ -161,7 +181,7 @@ const Wallet = ({
           />
         </>
       )}
-      <Spacer variant="xl" />
+      {desktop ? <Spacer variant="xl" /> : <Spacer variant="xxxl" />}
     </>
   );
 };
