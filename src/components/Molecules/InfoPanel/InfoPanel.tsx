@@ -1,6 +1,7 @@
 import React from "react";
 import { Text } from "../../Atoms/Text";
 import { Spacer } from "../../Atoms/Spacer";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 import styles from "./styles.module.css"; // Ensure this import is correct
 
@@ -24,8 +25,12 @@ const InfoPanel: React.FC<BlockProps> = ({ title, text, link, linkText }) => {
     }
   };
 
+  const { mobile, tablet, desktop } = useMediaQueries();
+
   return (
-    <div className={`flex flex-column ${styles.block}`}>
+    <div
+      className={`flex flex-column ${styles.block} ${mobile ? styles.mobileBlock : ""}`}
+    >
       <Text
         variant="heading3"
         weight="semiBold"
