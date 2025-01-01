@@ -13,6 +13,11 @@
     border-bottom: 1px solid #292929;
     margin-bottom: var(--space-xs);
   }
+
+  .mobileStep{
+    width: 100%;
+    padding: 10px 8px 0px 11px;
+  }
   
   .stepNumber {
     font-weight: bold;
@@ -23,6 +28,10 @@
     margin: 0 0 10px 0;
     font-size: var(--medium-font-size);
     font-weight: var( --semi-bold-font-weight);
+  }
+
+  .mobileTitle{
+    font-size: var(--h2-font-size-mobile);
   }
   
   .text {

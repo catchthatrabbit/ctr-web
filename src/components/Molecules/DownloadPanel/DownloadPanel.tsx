@@ -3,19 +3,32 @@ import { Text } from "@site/src/components/Atoms/Text";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { DownloadAppStore } from "@site/src/icons";
 import googlePlayImage from "@site/static/img/GooglePlay.png";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 import { QR } from "@site/src/icons";
 
 import styles from "./styles.module.css";
+import clsx from "clsx";
 
 const DownloadPanel: React.FC = () => {
+  const { mobile, desktop } = useMediaQueries();
+
   return (
-    <div className={styles.downloadPanel}>
+    <div
+      className={clsx(styles.downloadPanel, {
+        [styles.downloadPanelMobile]: mobile,
+      })}
+    >
       <div className={styles.content}>
         <Spacer variant="xxs" />
-        <Text size="large" weight="semiBold" color="white">
+        <Text
+          size={desktop ? "large" : "mediumSize"}
+          weight="semiBold"
+          color="white"
+          disableMobileStyles
+        >
           Download now for free!
         </Text>
-        <Spacer variant="xs" />
+        {desktop ? <Spacer variant="xs" /> : <Spacer variant="xxs" />}
         <Text variant="heading3" color="white" weight="bold">
           Available worldwide.
         </Text>
@@ -36,17 +49,28 @@ const DownloadPanel: React.FC = () => {
             <img
               src={googlePlayImage}
               alt="Download on Google Play"
-              className={styles.googlePlayImage}
+              className={clsx(styles.googlePlayImage, {
+                [styles.googlePlayImageMobile]: mobile,
+              })}
             />
           </a>
         </div>
         <Spacer variant="md" />
-        <div className={styles.qrCode}>
-          <QR />
-        </div>
+
+        {desktop ? (
+          <div className={styles.qrCode}>
+            <QR />
+          </div>
+        ) : (
+          <Spacer variant="lg" />
+        )}
         <Spacer variant="xl" />
       </div>
-      <div className={styles.image}>
+      <div
+        className={clsx(styles.image, {
+          [styles.imageMobile]: mobile,
+        })}
+      >
         <img src="/img/downloadDoubleCell.svg" alt="App Preview" />
       </div>
     </div>

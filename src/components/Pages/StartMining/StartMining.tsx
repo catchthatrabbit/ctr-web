@@ -86,6 +86,7 @@ const StartMining = ({
           link="#steps"
           linkText="View section"
         />
+        {mobile && <Spacer variant="xxs" />}
         <InfoPanel
           title="Pools"
           text="View all geo-locations you can use."
@@ -93,11 +94,11 @@ const StartMining = ({
           linkText="View section"
         />
       </div>
-      <Spacer variant="xxxl" />
+      {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="sm" />}
       <Spacer variant="sm" />
       <span id="steps"></span>
       <GuideTitle />
-      <Spacer variant="xxl" />
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="lg" />}
 
       <Steps onSetWalletAddress={onSetWalletAddress} />
 

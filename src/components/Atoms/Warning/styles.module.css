@@ -16,3 +16,12 @@
   .warningText{
     margin: 0;
   }
+
+  @media screen and (max-width: 768px) {
+    .warning{
+      padding: 10px 12px 8px 15px;
+    }
+    .warningText{
+      font-size:var(--small-font-size);
+    }
+  }
