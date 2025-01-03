@@ -72,3 +72,11 @@
     flex: 3;
     padding: 14px 0;
   }
+
+
+  @media screen and (max-width: 768px) {
+    .labelValueContainer{
+      width: 77%;
+    }
+    
+  }

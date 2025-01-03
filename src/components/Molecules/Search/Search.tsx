@@ -55,7 +55,8 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
           [styles.searchWallet]: context === "wallet",
           [styles.searchStartMining]: context === "startMining",
           [styles.searchPayments]: context === "payments",
-          [styles.searchWalletMobile]: context === "wallet" && mobile,
+          [styles.searchWalletMobile]:
+            context === "wallet" || (context === "startMining" && mobile),
         })}
       >
         {context !== "startMining" && (
@@ -78,7 +79,8 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
             className={clsx(styles.searchInput, {
               [styles.searchInputMobile]: mobile,
               [styles.searchWallet]: context === "wallet",
-              [styles.searchInputWalletMobile]: context === "wallet" && mobile,
+              [styles.searchInputWalletMobile]:
+                context === "wallet" || (context === "startMining" && mobile),
             })}
             placeholder={placeholderTextMap[context] || "Search your miners"}
             ref={ref || inputRef}
@@ -94,7 +96,8 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
           className={clsx(styles.searchButton, {
             [styles.searchButtonMobile]: mobile,
             [styles.searchButtonDesktop]: !mobile,
-            [styles.searchButtonWalletMobile]: context === "wallet" && mobile,
+            [styles.searchButtonWalletMobile]:
+              context === "wallet" || (context === "startMining" && mobile),
           })}
           onClick={handleClickSearchButton}
         >

@@ -104,7 +104,7 @@ const StartMining = ({
 
       <Spacer variant="xl" />
       <span id="pools"></span>
-      <Spacer variant="md" />
+      {desktop ? <Spacer variant="md" /> : <Spacer variant="xxxl" />}
 
       <PoolTitle />
       <Spacer variant="xl" />

@@ -123,7 +123,7 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
                           {step.buttonTitle}
                         </Text>
                       ) : (
-                        <Spacer variant="sm" />
+                        <>{desktop ? <Spacer variant="sm" /> : null}</>
                       )}
                       <Spacer variant="xs" />
                       {step.buttonLink ? (
@@ -166,24 +166,25 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
                     </Text>
                   </a>
                 </div>
-                <Spacer variant="xxs" />
+                {desktop ? <Spacer variant="xxs" /> : <Spacer variant="xs" />}
               </div>
             </>
           )}
 
           {step.image && (
             <>
-              {desktop ? <Spacer variant="md" /> : <Spacer variant="sm" />}
+              {desktop ? <Spacer variant="md" /> : <Spacer variant="xs" />}
               <DownloadPanel />
+              {desktop ? null : <Spacer variant="md" />}
             </>
           )}
           {step.showSearch && (
             <>
-              <Spacer variant="lg" />
+              {desktop ? <Spacer variant="lg" /> : <Spacer variant="md" />}
               <Search context="startMining" onSearch={onSetWalletAddress} />
             </>
           )}
-          {desktop ? <Spacer variant="md" /> : <Spacer variant="sm" />}
+          {desktop ? <Spacer variant="md" /> : <Spacer variant="xxs" />}
         </div>
       ))}
     </div>
