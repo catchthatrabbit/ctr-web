@@ -13,6 +13,7 @@ import {
   Title,
 } from "@site/src/components/Molecules/Panel";
 import { Text } from "@site/src/components/Atoms/Text";
+import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
 import Link from "@docusaurus/Link";
 import clsx from "clsx";
 import { Search } from "@site/src/components/Molecules/Search";
@@ -23,6 +24,7 @@ import { useControls } from "./controls";
 import { InfoPanel } from "@site/src/components/Molecules/InfoPanel";
 import { Steps } from "../../Molecules/Steps";
 import { DropdownIconDown } from "@site/src/icons";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 import styles from "./styles.module.css";
 
@@ -33,8 +35,12 @@ const StartMining = ({
   onSetWalletAddress,
   onChangeRegion,
 }: IStartMining) => {
-  const { startMiningPoolConfigurations, githubReleaseDownloadUrl } =
-    useControls();
+  const {
+    startMiningPoolConfigurations,
+    githubReleaseDownloadUrl,
+    infoBoxMapData,
+    isLoadingMapChart,
+  } = useControls();
 
   const inputStartMiningRef = useRef<HTMLInputElement>();
 
@@ -47,6 +53,7 @@ const StartMining = ({
   const { data: fetchSettings } = useFetchSettings(region);
 
   const [openRegion, setOpenRegion] = useState<string | null>(null);
+  const { mobile, tablet, desktop } = useMediaQueries();
 
   const toggleRegion = (regionKey: string) => {
     setOpenRegion(openRegion === regionKey ? null : regionKey);
@@ -54,20 +61,32 @@ const StartMining = ({
 
   return (
     <>
+      {(mobile || tablet) && (
+        <>
+          <ConfiguredInfoBox
+            infoItems={infoBoxMapData}
+            isLoading={isLoadingMapChart}
+          />
+        </>
+      )}
       <Spacer variant="sm" />
-      <Spacer variant="md" />
+      {desktop ? <Spacer variant="md" /> : null}
 
       <span id="start"></span>
       <GetStartedTitle />
       <Spacer variant="sm" />
-      <Spacer variant="md" />
-      <div className={`flex ${styles.infoPanel}`}>
+      {desktop ? <Spacer variant="md" /> : null}
+
+      <div
+        className={`flex ${styles.infoPanel} ${mobile ? `flex-column ${styles.mobileInfoPanel}` : ""}`}
+      >
         <InfoPanel
           title="How to start minig"
           text="Step by step guide to get you hop on board."
           link="#steps"
           linkText="View section"
         />
+        {mobile && <Spacer variant="xxs" />}
         <InfoPanel
           title="Pools"
           text="View all geo-locations you can use."
@@ -75,17 +94,17 @@ const StartMining = ({
           linkText="View section"
         />
       </div>
-      <Spacer variant="xxxl" />
+      {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="sm" />}
       <Spacer variant="sm" />
       <span id="steps"></span>
       <GuideTitle />
-      <Spacer variant="xxl" />
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="lg" />}
 
       <Steps onSetWalletAddress={onSetWalletAddress} />
 
       <Spacer variant="xl" />
       <span id="pools"></span>
-      <Spacer variant="md" />
+      {desktop ? <Spacer variant="md" /> : <Spacer variant="xxxl" />}
 
       <PoolTitle />
       <Spacer variant="xl" />

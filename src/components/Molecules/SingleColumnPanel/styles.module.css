@@ -72,3 +72,20 @@
     flex: 3;
     padding: 14px 0;
   }
+
+
+  @media screen and (max-width: 768px) {
+    .labelValueContainer{
+      width: 100%;
+    }
+    .value{
+      word-wrap: break-word; 
+  word-break: break-all; 
+  white-space: normal; 
+  padding: 9px 57px 14px 0px;
+    }
+    .label{
+      flex: 2;
+    }
+    
+  }

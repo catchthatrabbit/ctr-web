@@ -8,7 +8,10 @@ import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { OpenInNew } from "@site/src/icons";
 import Button from "@site/src/components/Atoms/Button/Button";
 import { useWalletPage } from "@site/src/hooks/useWallet";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 import { Link } from "react-router-dom";
+
+import clsx from "clsx";
 
 interface Step {
   number: number;
@@ -66,24 +69,27 @@ const stepsData: Step[] = [
 ];
 
 const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
+  const { mobile, tablet, desktop } = useMediaQueries();
   return (
     <div className={`flex flex-column ${styles.stepsContainer}`}>
       {stepsData.map((step, index) => (
         <div
           key={step.number}
-          className={`flex flex-column ${styles.step}
+          className={`flex flex-column ${styles.step} ${mobile ? styles.mobileStep : ""}
          ${index === stepsData.length - 1 ? styles.lastStep : ""}
         `}
         >
-          <h2 className={styles.title}>
+          <h2 className={clsx(styles.title, { [styles.mobileTitle]: mobile })}>
             {step.number}.&nbsp;&nbsp;{step.title}
           </h2>
           <Text
-            size="regular"
+            variant={desktop ? "heading3" : "body"}
             weight="normal"
-            lineHeight="smallLineHeight"
             color="white"
-            style={{ marginLeft: "33px" }}
+            style={{
+              marginLeft: "33px",
+              lineHeight: "var(--small-line-height)",
+            }}
           >
             {step.text}
           </Text>
@@ -103,18 +109,21 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
               <div className={`flex ${styles.buttonLinkContainer}`}>
                 {step.button && (
                   <>
-                    {step.buttonTitle && <Spacer variant="lg" />}
+                    {step.buttonTitle && (
+                      <Spacer variant={desktop ? "lg" : "sm"} />
+                    )}
                     <div className={styles.button}>
                       {step.buttonTitle ? (
                         <Text
                           variant="heading3"
                           weight="semiBold"
                           color="white"
+                          disableMobileStyles
                         >
                           {step.buttonTitle}
                         </Text>
                       ) : (
-                        <Spacer variant="sm" />
+                        <>{desktop ? <Spacer variant="sm" /> : null}</>
                       )}
                       <Spacer variant="xs" />
                       {step.buttonLink ? (
@@ -138,7 +147,7 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
                 )}
 
                 <div className={styles.linkContainer}>
-                  {step.button && <Spacer variant="xl" />}
+                  {step.button && <Spacer variant={desktop ? "xl" : "sm"} />}
                   <a
                     href={step.link}
                     target="_blank"
@@ -151,29 +160,31 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
                       color="primary"
                       weight="bold"
                       style={{ marginLeft: "8px" }}
+                      disableMobileStyles
                     >
                       {step.linkText}
                     </Text>
                   </a>
                 </div>
-                <Spacer variant="xxs" />
+                {desktop ? <Spacer variant="xxs" /> : <Spacer variant="xs" />}
               </div>
             </>
           )}
 
           {step.image && (
             <>
-              <Spacer variant="md" />
+              {desktop ? <Spacer variant="md" /> : <Spacer variant="xs" />}
               <DownloadPanel />
+              {desktop ? null : <Spacer variant="md" />}
             </>
           )}
           {step.showSearch && (
             <>
-              <Spacer variant="lg" />
+              {desktop ? <Spacer variant="lg" /> : <Spacer variant="md" />}
               <Search context="startMining" onSearch={onSetWalletAddress} />
             </>
           )}
-          <Spacer variant="md" />
+          {desktop ? <Spacer variant="md" /> : <Spacer variant="xxs" />}
         </div>
       ))}
     </div>

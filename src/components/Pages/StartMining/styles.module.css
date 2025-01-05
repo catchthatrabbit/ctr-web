@@ -6,6 +6,10 @@
     justify-content: space-between;
 }
 
+.mobileInfoPanel{
+    align-items: center;
+}
+
 .lineFlex{
     display: flex;
     flex-wrap: wrap;
@@ -77,4 +81,16 @@
 .poolContainer{
     width: 65%;
     margin: 0 auto;
+}
+
+
+@media screen and (max-width: 768px) {
+    .poolContainer{
+        width: 96%;
+    }
+
+    /* .dropdownHeader{
+        width: 76%;
+    } */
+    
 }

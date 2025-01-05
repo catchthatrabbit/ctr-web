@@ -13,6 +13,12 @@
     border-bottom: 1px solid #292929;
     margin-bottom: var(--space-xs);
   }
+
+  .mobileStep{
+    width: 100%;
+    padding: 8px 8px 0px 11px;
+    margin-bottom: 10px;
+  }
   
   .stepNumber {
     font-weight: bold;
@@ -23,6 +29,10 @@
     margin: 0 0 10px 0;
     font-size: var(--medium-font-size);
     font-weight: var( --semi-bold-font-weight);
+  }
+
+  .mobileTitle{
+    font-size: var(--h2-font-size-mobile);
   }
   
   .text {
@@ -70,4 +80,16 @@
     left: 50%;
     
     transform: translateX(-50%);
+  }
+
+  @media screen and (max-width: 768px) {
+    .stepsContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .lastStep::after {
+      bottom: 0px;
+      top: 20rem;
+    }
   }

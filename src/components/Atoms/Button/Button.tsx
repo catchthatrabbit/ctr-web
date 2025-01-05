@@ -54,7 +54,7 @@ const Button = ({
     >
       {icon && <div className={styles.buttonIcon}>{icon}</div>}
       <Text
-        variant={size === "large" ? "body" : "smallBody"}
+        variant={size === "large" ? "smallBody" : "smallBody"}
         color={textColor}
         weight={weight}
       >

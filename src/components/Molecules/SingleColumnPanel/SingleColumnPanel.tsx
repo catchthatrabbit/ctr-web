@@ -45,7 +45,7 @@ const SingleColumnPanel = ({
                 context === "startMining",
             })}
           >
-            <Text type="value" variant="subheading">
+            <Text type="value" variant={desktop ? "subheading" : "body"}>
               {description}
             </Text>
           </div>
@@ -66,12 +66,22 @@ const SingleColumnPanel = ({
           {context === "startMining" ? (
             <div className={styles.labelValueContainer}>
               <div className={styles.label}>
-                <Text type="value" variant="smallBody" color="white">
+                <Text
+                  type="value"
+                  variant="smallBody"
+                  color="white"
+                  weight={desktop ? "normal" : "bold"}
+                >
                   {item.label}
                 </Text>
               </div>
               <div className={styles.value}>
-                <Text type="value" variant="smallBody" color="white">
+                <Text
+                  type="value"
+                  variant="smallBody"
+                  color="white"
+                  weight={desktop ? "normal" : "bold"}
+                >
                   {item.value || ""}
                 </Text>
               </div>
