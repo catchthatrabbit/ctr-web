@@ -6,6 +6,7 @@ import { POOL_NAME_ENUM } from "@site/src/enums/poolName.enum";
 import { useFetchAllBlocks } from "@site/src/hooks/useBlocks";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
+import useMapChartData from "../Dashboard/hooks/useMapChartData";
 
 const useControls = () => {
   const { region, regionLabel, handleChangeRegion, dropdownItems } = useHeaders(
@@ -45,6 +46,12 @@ const useControls = () => {
     [urlsConfigs.BLOCK_DETAILS_URL],
   );
 
+  const {
+    infoBoxItems: infoBoxMapData,
+    poolFee,
+    isLoading: isLoadingMapChart,
+  } = useMapChartData();
+
   return {
     regionLabel,
     dropdownItems,
@@ -58,6 +65,8 @@ const useControls = () => {
     isLoadingCandidatesBlocks: fetchCandidatesBlocks.isLoading,
     fetchCandidatesBlocks: fetchCandidatesBlocks?.data,
     rowCount: tablesConfig.PAGE_LIMIT,
+    infoBoxMapData,
+    isLoadingMapChart,
   };
 };
 

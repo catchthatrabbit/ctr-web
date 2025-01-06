@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Select, { ActionMeta } from "react-select";
 import { colourStyles } from "./styles";
 import CustomDropdownIndicator from "./DropdownIndicator";
 import { Text } from "@site/src/components/Atoms/Text";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import Modal from "@site/src/components/Atoms/Modal/Modal";
+import styles from "./styles.module.css";
 
 interface IDropdown {
   id?: string;
@@ -28,7 +30,27 @@ const Dropdown = ({
   text,
   context,
 }: IDropdown) => {
-  const { mobile, tablet, desktop } = useMediaQueries();
+  const { mobile } = useMediaQueries();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(
+    items.find((item) => item.value === defaultValue) || items[0],
+  );
+
+  const handleOpenModal = () => {
+    if (mobile) {
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSelectItem = (item: { value: string; label: string }) => {
+    setSelectedItem(item);
+    onChange?.(item, { action: "select-option" });
+    handleCloseModal();
+  };
 
   return (
     <>
@@ -49,18 +71,39 @@ const Dropdown = ({
           {text}
         </Text>
       )}
-      <Select
-        isLoading={isLoading}
-        isDisabled={isLoading}
-        className={className}
-        isSearchable={false}
-        isClearable={false}
-        options={items}
-        styles={colourStyles}
-        onChange={onChange}
-        defaultValue={{ value: defaultValue, label: defaultValue }}
-        components={{ DropdownIndicator: CustomDropdownIndicator }}
-      />
+      {mobile ? (
+        <>
+          <div onClick={handleOpenModal} className={className}>
+            {selectedItem.label}
+          </div>
+          <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+            <ul className={styles.dropdownList}>
+              {items.map((item) => (
+                <li
+                  key={item.value}
+                  className={styles.dropdownListItem}
+                  onClick={() => handleSelectItem(item)}
+                >
+                  {item.label}
+                </li>
+              ))}
+            </ul>
+          </Modal>
+        </>
+      ) : (
+        <Select
+          isLoading={isLoading}
+          isDisabled={isLoading}
+          className={className}
+          isSearchable={false}
+          isClearable={false}
+          options={items}
+          styles={colourStyles}
+          onChange={onChange}
+          defaultValue={{ value: defaultValue, label: defaultValue }}
+          components={{ DropdownIndicator: CustomDropdownIndicator }}
+        />
+      )}
     </>
   );
 };

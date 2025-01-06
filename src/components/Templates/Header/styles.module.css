@@ -36,5 +36,10 @@
     width: 384px;
   }
 .mobileWidth{
-    width: 96%;
+    width: 97%;
+}
+
+.mobileBlocksContainer{
+    justify-content: center;
+    gap: 32px;
 }

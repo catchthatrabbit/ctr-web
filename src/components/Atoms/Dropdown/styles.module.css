@@ -1,0 +1,15 @@
+.dropdownList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdownListItem {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .dropdownListItem:hover {
+    background-color: #f0f0f0;
+  }

@@ -74,11 +74,14 @@ const Header = ({
         <>
           {iban && <IBan iBan={iban} />}
           <Spacer variant="xxs" />
+
           {context === "blocks" && <Spacer variant="xl" />}
+          {context === "mobileWallet" && <Spacer variant="lg" />}
           <div
             className={clsx("flex", {
               [styles.blocksContainer]: context === "blocks",
               [styles.paymentsContainer]: context === "payments",
+              [styles.mobileBlocksContainer]: context === "mobileWallet",
             })}
           >
             <div
