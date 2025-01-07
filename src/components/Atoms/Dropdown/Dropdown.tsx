@@ -5,6 +5,8 @@ import CustomDropdownIndicator from "./DropdownIndicator";
 import { Text } from "@site/src/components/Atoms/Text";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 import Modal from "@site/src/components/Atoms/Modal/Modal";
+import PaginationRight from "@site/src/icons/PaginationRight";
+
 import styles from "./styles.module.css";
 
 interface IDropdown {
@@ -51,6 +53,7 @@ const Dropdown = ({
     onChange?.(item, { action: "select-option" });
     handleCloseModal();
   };
+  const controlStyles = colourStyles.control({});
 
   return (
     <>
@@ -83,8 +86,37 @@ const Dropdown = ({
                   key={item.value}
                   className={styles.dropdownListItem}
                   onClick={() => handleSelectItem(item)}
+                  style={{
+                    ...controlStyles,
+                    cursor: "pointer",
+                    boxShadow: "none",
+                    border: "none",
+                    marginBottom: "4px",
+                    padding: "17px 16px",
+                  }}
                 >
-                  {item.label}
+                  <span>{item.label}</span>
+                  {item.value === selectedItem.value ? (
+                    <Text
+                      variant="smallBody"
+                      color="subheadingColor"
+                      weight="bold"
+                    >
+                      Active
+                    </Text>
+                  ) : (
+                    <div>
+                      <Text
+                        variant="smallBody"
+                        color="primary"
+                        weight="bold"
+                        style={{ marginRight: "10px" }}
+                      >
+                        Select
+                      </Text>
+                      <PaginationRight />
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>

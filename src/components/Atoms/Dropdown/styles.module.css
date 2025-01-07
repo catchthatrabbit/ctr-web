@@ -7,7 +7,9 @@
   .dropdownListItem {
     padding: 10px;
     cursor: pointer;
-    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
   .dropdownListItem:hover {
