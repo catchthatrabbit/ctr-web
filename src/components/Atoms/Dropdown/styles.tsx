@@ -26,6 +26,7 @@ export const colourStyles: StylesConfig = {
     borderRadius: "8px",
     marginTop: "4px",
     zIndex: 100,
+    padding: "2px 8px",
   }),
   option: (styles) => ({
     ...styles,

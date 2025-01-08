@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Select, { ActionMeta } from "react-select";
 import { colourStyles } from "./styles";
 import CustomDropdownIndicator from "./DropdownIndicator";
+import MobileDropdownIndicator from "./MobileDropdownIndicator";
 import { Text } from "@site/src/components/Atoms/Text";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 import Modal from "@site/src/components/Atoms/Modal/Modal";
@@ -76,9 +77,22 @@ const Dropdown = ({
       )}
       {mobile ? (
         <>
-          <div onClick={handleOpenModal} className={className}>
+          <div
+            onClick={handleOpenModal}
+            className={className}
+            style={{
+              ...controlStyles,
+              display: "flex",
+
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "10px 20px 10px 16px",
+            }}
+          >
             {selectedItem.label}
+            <MobileDropdownIndicator menuIsOpen={isModalOpen} />
           </div>
+
           <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
             <ul className={styles.dropdownList}>
               {items.map((item) => (
