@@ -26,3 +26,14 @@
   .tabs .activeTab{ 
     background-color: #141414;
 }
+
+@media screen and (max-width: 768px) {
+    .tabs button {
+      padding: var(--space-xs) 29px;
+      min-width: 100px; 
+      flex: 1;
+      text-align: center;
+      white-space: nowrap;
+    }
+  
+}
