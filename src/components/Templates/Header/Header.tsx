@@ -63,7 +63,7 @@ const Header = ({
       {pageTitleComponent}
       {layout.search && (
         <>
-          <Spacer variant="xl" />
+          {context === "mobileWallet" ? null : <Spacer variant="xl" />}
           <div className="col col--12">
             {/* <Search context={context} onSearch={onSearch} /> */}
             {/* insert here start mining today! */}

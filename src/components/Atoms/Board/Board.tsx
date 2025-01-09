@@ -34,7 +34,13 @@ const Board = ({
 }: IBoard) => {
   const { desktop, laptop, mobile, tablet } = useMediaQueries();
   return (
-    <div className={clsx([styles.boardContainer, className])}>
+    <div
+      className={clsx([
+        styles.boardContainer,
+        className,
+        { [styles.boardContainerPayments]: context === "payments" },
+      ])}
+    >
       <div
         className={clsx(styles.content, {
           [styles.boardClassNameHor]: dir === "hor",
@@ -65,6 +71,7 @@ const Board = ({
                     ? "primaryColor"
                     : "valueChartColor"
               }
+              disableMobileStyles
             >
               {value || "0"}
             </Text>

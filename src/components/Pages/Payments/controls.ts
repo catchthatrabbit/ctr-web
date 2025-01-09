@@ -11,6 +11,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
 import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
 import { useHistory } from "@docusaurus/router";
+import useMapChartData from "../Dashboard/hooks/useMapChartData";
 
 const useControls = ({
   onSetWalletAddress,
@@ -66,6 +67,11 @@ const useControls = ({
     ],
     [setWalletAddress, push, selectedPool, urlsConfigs.TRANSACTION_DETAILS_URL],
   );
+  const {
+    infoBoxItems: infoBoxMapData,
+    poolFee,
+    isLoading: isLoadingMapChart,
+  } = useMapChartData();
 
   return {
     dataTableColumns,
@@ -80,6 +86,8 @@ const useControls = ({
     dropdownItems,
     regionLabel,
     startMiningPoolConfigurations,
+    infoBoxMapData,
+    isLoadingMapChart,
   };
 };
 
