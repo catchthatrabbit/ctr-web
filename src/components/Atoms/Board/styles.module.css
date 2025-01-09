@@ -6,6 +6,10 @@
 .boardContainer:not(:last-child) {
   padding-right: var(--space-md);
 }
+
+.boardContainer.boardContainerPayments{
+    padding: 10px 0;
+}
     
 .content{
     height: 37px;
@@ -23,6 +27,7 @@
 .boardTotal{
     flex-direction: column;
     justify-content: center;
+ 
 }
 
 .boardItem{

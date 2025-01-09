@@ -8,6 +8,9 @@ import useControls from "./controls";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { Search } from "@site/src/components/Molecules/Search";
 import { Board } from "@site/src/components/Atoms/Board";
+import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
+
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 import clsx from "clsx";
 
@@ -34,12 +37,15 @@ const Payments = ({
     dropdownItems,
     regionLabel,
     startMiningPoolConfigurations,
+    infoBoxMapData,
+    isLoadingMapChart,
   } = useControls({
     defaultRegion,
     onSetWalletAddress,
     onChangeRegion,
     selectedPool,
   });
+  const { mobile, tablet, desktop } = useMediaQueries();
 
   const handleDropdownChange = (selectedOption: {
     label: string;
@@ -59,8 +65,21 @@ const Payments = ({
 
   return (
     <>
-      <Spacer variant="lg" />
-      <Spacer variant="md" />
+      {(mobile || tablet) && (
+        <>
+          <ConfiguredInfoBox
+            infoItems={infoBoxMapData}
+            isLoading={isLoadingMapChart}
+          />
+        </>
+      )}
+      {desktop ? (
+        <>
+          <Spacer variant="lg" /> <Spacer variant="md" />
+        </>
+      ) : (
+        <Spacer variant="xs" />
+      )}
 
       <Header
         items={dropdownItems}
@@ -69,12 +88,17 @@ const Payments = ({
         isLoading={isLoadingPaymentState}
         pageTitleComponent={<PaymentsTitle />}
         addComponent={
-          <Search context="payments" onSearch={onSetWalletAddress} />
+          <Search
+            context={mobile ? "wallet" : "payments"}
+            onSearch={onSetWalletAddress}
+            overrideLabel={true}
+          />
         }
-        context="payments"
+        context={mobile ? "mobileWallet" : "payments"}
         selectedPool={selectedPool}
         onSearch={handleSearch}
       />
+      {desktop ? null : <Spacer variant="xxxl" />}
       <List
         isLoading={isLoadingPaymentList}
         data={convertPaymentsResponse2PaymentInfo(fetchedPaymentsList)}
@@ -97,7 +121,7 @@ const Payments = ({
           prefix=""
           suffix=""
         />
-        <Spacer variant="sm" />
+        {desktop ? <Spacer variant="sm" /> : <Spacer variant="lg" />}
         <Spacer variant="md" />
       </div>
     </>

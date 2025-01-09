@@ -181,10 +181,14 @@
     }
 
     .walletTable th,
-    .walletTable td {
-      padding: 10px;
+    .walletTable td,
+    .blocksTable th,
+    .blocksTable td {
+      padding: 11px 26px 13px 22px;
     
     }
+
+    
   
     .table th:first-child,
     .table td:first-child {

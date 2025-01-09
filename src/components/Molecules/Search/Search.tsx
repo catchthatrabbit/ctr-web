@@ -12,10 +12,20 @@ interface ISearch extends InputHTMLAttributes<HTMLInputElement> {
   onSearch?: (searchQuery: string) => void;
   context?: "wallet" | "main" | "startMining" | "payments";
   selectedPool?: string;
+  overrideLabel?: boolean;
 }
 
 const Search = forwardRef<HTMLInputElement, ISearch>(
-  ({ onSearch, context = "main", selectedPool = "de", ...restProps }, ref) => {
+  (
+    {
+      onSearch,
+      context = "main",
+      selectedPool = "de",
+      overrideLabel,
+      ...restProps
+    },
+    ref,
+  ) => {
     const inputRef = useRef<HTMLInputElement>();
     const { mobile } = useMediaQueries();
     const [walletAddress, setWalletAddress] = useState("");
@@ -66,7 +76,9 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
             variant={mobile ? "smallBody" : "subheading"}
             // className={clsx({ [styles.mobilePaddingLeft]: mobile })}
           >
-            {labelTextMap[context] || "Wallet address"}
+            {overrideLabel
+              ? labelTextMap.payments
+              : labelTextMap[context] || "Wallet address"}
           </Text>
         )}
         <div
