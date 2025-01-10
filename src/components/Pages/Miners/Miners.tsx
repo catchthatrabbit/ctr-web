@@ -8,7 +8,10 @@ import useControls from "./controls";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { Search } from "@site/src/components/Molecules/Search";
 import { Board } from "@site/src/components/Atoms/Board";
+import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
+
 import useControlsDashboard from "@site/src/components/Pages/Dashboard/controls";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 import clsx from "clsx";
 
@@ -39,6 +42,8 @@ const Miners = ({
     dropdownItems,
     regionLabel,
     startMiningPoolConfigurations,
+    infoBoxMapData,
+    isLoadingMapChart,
   } = useControls({
     onSetWalletAddress,
     defaultRegion,
@@ -46,7 +51,8 @@ const Miners = ({
     selectedPool,
   });
 
-  const { infoBoxMapData } = useControlsDashboard();
+  const { mobile, tablet, desktop } = useMediaQueries();
+
   const networkDifficultyItem = infoBoxMapData?.find((item) =>
     item.title.includes("Network difficulty"),
   );
@@ -69,7 +75,15 @@ const Miners = ({
 
   return (
     <>
-      <Spacer variant="xxxl" />
+      {(mobile || tablet) && (
+        <>
+          <ConfiguredInfoBox
+            infoItems={infoBoxMapData}
+            isLoading={isLoadingMapChart}
+          />
+        </>
+      )}
+      {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="sm" />}
       <Header
         defaultRegion={regionLabel}
         items={dropdownItems}
@@ -77,12 +91,17 @@ const Miners = ({
         isLoading={isLoadingMinerState}
         pageTitleComponent={<MinersTitle />}
         addComponent={
-          <Search context="payments" onSearch={onSetWalletAddress} />
+          <Search
+            context={mobile ? "wallet" : "payments"}
+            onSearch={onSetWalletAddress}
+            overrideLabel={true}
+          />
         }
-        context="payments"
+        context={mobile ? "mobileWallet" : "payments"}
         selectedPool={selectedPool}
         onSearch={handleSearch}
       />
+      {desktop ? null : <Spacer variant="xxxl" />}
       <List
         isLoading={isLoadingMinerList}
         dataTableColumns={dataTableColumns}
@@ -118,7 +137,7 @@ const Miners = ({
           />
         )}
       </div>
-      <Spacer variant="sm" />
+      {desktop ? <Spacer variant="sm" /> : <Spacer variant="md" />}
     </>
   );
 };
