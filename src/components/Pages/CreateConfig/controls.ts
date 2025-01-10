@@ -2,6 +2,7 @@ import { useHeaders } from "@site/src/hooks/useHeaders";
 import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
+import useMapChartData from "../Dashboard/hooks/useMapChartData";
 
 const useControls = ({
   onSetWalletAddress,
@@ -55,6 +56,12 @@ const useControls = ({
   const startMiningPoolConfigurations = siteConfig.customFields
     .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
 
+  const {
+    infoBoxItems: infoBoxMapData,
+    poolFee,
+    isLoading: isLoadingMapChart,
+  } = useMapChartData();
+
   return {
     handleSearch,
     handleChangeRegion,
@@ -62,6 +69,8 @@ const useControls = ({
     regionLabel,
     convertWorkerName,
     startMiningPoolConfigurations,
+    infoBoxMapData,
+    isLoadingMapChart,
   };
 };
 

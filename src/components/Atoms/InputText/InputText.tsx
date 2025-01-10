@@ -50,17 +50,38 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
             {text}
           </Text>
         )}
-        <input
-          ref={ref}
-          {...restProps}
-          onKeyDown={handleSearchOnPressEnter}
-          className={clsx(styles.inputText, className, {
-            [styles.searchWallet]: context === "wallet",
-            [styles.searchDark]: context === "dark",
-            [styles.mobileInputText]: mobile,
-          })}
-          placeholder={placeholder}
-        />
+        {mobile ? (
+          <textarea
+            ref={ref as React.Ref<HTMLTextAreaElement>}
+            {...restProps}
+            onKeyDown={handleSearchOnPressEnter}
+            className={clsx(styles.inputText, className, {
+              [styles.searchWallet]: context === "wallet",
+              [styles.searchDark]: context === "dark",
+              [styles.mobileInputText]: mobile,
+            })}
+            placeholder={placeholder}
+            rows={1}
+            style={{ resize: "none", overflow: "hidden" }}
+            onInput={(e) => {
+              const target = e.target as HTMLTextAreaElement;
+              target.style.height = "auto";
+              target.style.height = `${target.scrollHeight}px`;
+            }}
+          />
+        ) : (
+          <input
+            ref={ref as React.Ref<HTMLInputElement>}
+            {...restProps}
+            onKeyDown={handleSearchOnPressEnter}
+            className={clsx(styles.inputText, className, {
+              [styles.searchWallet]: context === "wallet",
+              [styles.searchDark]: context === "dark",
+              [styles.mobileInputText]: mobile,
+            })}
+            placeholder={placeholder}
+          />
+        )}
       </div>
     );
   },

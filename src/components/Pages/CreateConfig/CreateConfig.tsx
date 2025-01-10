@@ -9,6 +9,8 @@ import { Warning } from "@site/src/components/Atoms/Warning";
 import Button from "@site/src/components/Atoms/Button/Button";
 import Ican from "@blockchainhub/ican";
 import useControls from "./controls";
+import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 import clsx from "clsx";
 
@@ -27,6 +29,8 @@ const CreateConfig = ({
     regionLabel,
     convertWorkerName,
     startMiningPoolConfigurations,
+    infoBoxMapData,
+    isLoadingMapChart,
   } = useControls({ defaultRegion, onSetWalletAddress, onChangeRegion });
 
   const [walletAddress, setWalletAddress] = useState("");
@@ -38,6 +42,8 @@ const CreateConfig = ({
   const [dropdownValue1, setDropdownValue1] = useState(regionLabel);
   const [dropdownValue2, setDropdownValue2] = useState(dropdownItems[1].label);
   const [showError, setShowError] = useState(false);
+
+  const { mobile, tablet, desktop } = useMediaQueries();
 
   const formatWalletAddress = (value: string) => {
     return value.replace(/(.{4})/g, "$1 ").trim();
@@ -263,10 +269,18 @@ const CreateConfig = ({
 
   return (
     <>
-      <Spacer variant="xxl" />
+      {(mobile || tablet) && (
+        <>
+          <ConfiguredInfoBox
+            infoItems={infoBoxMapData}
+            isLoading={isLoadingMapChart}
+          />
+        </>
+      )}
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xs" />}
       <CreateConfigTitle />
 
-      <Spacer variant="xxl" />
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="lg" />}
 
       <div className="flex xl-center-items">
         <div className={`flex flex-column ${styles.mainContent}`}>
@@ -275,9 +289,10 @@ const CreateConfig = ({
           </Text>
           <Spacer variant="xs" />
           <Text
-            variant="smallBody"
+            variant={mobile ? "body" : "smallBody"}
             color="subheadingColor"
             style={{ marginBottom: "8px" }}
+            disableMobileStyles
           >
             Corepass wallet address
           </Text>
@@ -294,7 +309,7 @@ const CreateConfig = ({
               Wallet address is not valid
             </Text>
           )}
-          <Spacer variant="xs" />
+          {desktop ? <Spacer variant="xs" /> : <Spacer variant="md" />}
           <div className={styles.dropdowns}>
             <div className={styles.dropdownContainer}>
               <Dropdown
@@ -317,7 +332,7 @@ const CreateConfig = ({
               />
             </div>
           </div>
-          <Spacer variant="xs" />
+          {desktop ? <Spacer variant="xs" /> : <Spacer variant="xl" />}
           <Link to="/start-mining#pools" className={styles.viewPoolsLink}>
             <Text variant="subheading" color="primary" type="value">
               View pools

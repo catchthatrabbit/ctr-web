@@ -36,7 +36,7 @@ const Dropdown = ({
   const { mobile } = useMediaQueries();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(
-    items.find((item) => item.value === defaultValue) || items[0],
+    items.find((item) => item.label === defaultValue) || items[0],
   );
 
   const handleOpenModal = () => {

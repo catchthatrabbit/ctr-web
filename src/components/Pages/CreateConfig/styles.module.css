@@ -101,3 +101,62 @@
   .boldText {
     font-weight: 600;
   }
+
+
+@media screen and (max-width: 768px) {
+    .mainContent{
+        width: 100%;
+    }
+    .dropdownContainer {
+      flex: 0 0 78%;
+    }
+    .dropdowns{
+        flex-direction: column;
+    }
+    .smallWidth {
+        width: 100%;
+    }
+    .inputs {
+        flex-direction: column;
+        align-items: center;
+    }
+    .inputs::before,
+    .inputs::after {
+        width: 1px;
+        height: 50%;
+        background-color: #292929;
+    }
+    .inputs::before {
+        top: 0;
+    }
+    .inputs::after {
+        bottom: 0;
+    }
+    .linkText {
+        width: 100%;
+        max-width: 100%;
+    }
+    .linkText::before,
+    .linkText::after {
+        width: 1px;
+        height: 50%;
+        background-color: #292929;
+    }
+    .linkText::before {
+        top: -10px;
+        height: 100%;
+    }
+    .linkText::after {
+        bottom: 0;
+    }
+    .activeLink::before,
+    .activeLink::after {
+        position: absolute;
+        background-color: #16C784;
+        z-index: 2;
+    }
+    .boldText {
+        font-weight: 600;
+    }
+  
+}
