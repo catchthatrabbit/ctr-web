@@ -9,6 +9,7 @@ import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
 import { useMemo, useState } from "react";
 import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
 import { tablesConfig } from "@site/src/configs";
+import useMapChartData from "../Dashboard/hooks/useMapChartData";
 
 const useControls = ({
   onSetWalletAddress,
@@ -62,6 +63,12 @@ const useControls = ({
     [push, setWalletAddress, selectedPool],
   );
 
+  const {
+    infoBoxItems: infoBoxMapData,
+    poolFee,
+    isLoading: isLoadingMapChart,
+  } = useMapChartData();
+
   return {
     dataTableColumns,
     minerList,
@@ -76,6 +83,8 @@ const useControls = ({
     regionLabel,
     dropdownItems,
     startMiningPoolConfigurations,
+    infoBoxMapData,
+    isLoadingMapChart,
   };
 };
 

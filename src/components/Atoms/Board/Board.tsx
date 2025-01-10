@@ -101,6 +101,7 @@ const Board = ({
                   ? "subheading-desktop"
                   : "subheading"
             }
+            disableMobileStyles
           >
             {description || ""}
           </Text>
