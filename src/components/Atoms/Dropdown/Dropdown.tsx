@@ -60,7 +60,7 @@ const Dropdown = ({
     <>
       {text && (
         <Text
-          variant={mobile ? "smallBody" : "subheading"}
+          variant={mobile ? "body" : "subheading"}
           color="subheadingColor"
           style={{
             width:
@@ -70,6 +70,7 @@ const Dropdown = ({
                   ? "100%"
                   : "52%",
             marginBottom: "8px",
+            marginLeft: mobile ? "8px" : "0px",
           }}
         >
           {text}

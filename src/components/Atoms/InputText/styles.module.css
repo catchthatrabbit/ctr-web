@@ -22,7 +22,7 @@
 }
 
 .inputText::placeholder {
-    color: var(---ifm-subheading-color); 
+    color: var(--ifm-subheading-color); 
 }
 
 .inputContainer {

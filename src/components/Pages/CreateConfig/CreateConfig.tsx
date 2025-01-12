@@ -318,7 +318,7 @@ const CreateConfig = ({
                 className={clsx(styles.boardDropdown)}
                 items={dropdownItems}
                 onChange={handleDropdownChange1}
-                text="Mining pool"
+                text={mobile ? "Primary pool" : "Mining pool"}
               />
             </div>
             <div className={styles.dropdownContainer}>
@@ -328,21 +328,34 @@ const CreateConfig = ({
                 className={clsx(styles.boardDropdown)}
                 items={dropdownItems}
                 onChange={handleDropdownChange2}
-                text="Mining pool"
+                text={mobile ? "Secondary pool" : "Mining pool"}
               />
             </div>
           </div>
-          {desktop ? <Spacer variant="xs" /> : <Spacer variant="xl" />}
+          {desktop ? <Spacer variant="xs" /> : <Spacer variant="lg" />}
           <Link to="/start-mining#pools" className={styles.viewPoolsLink}>
-            <Text variant="subheading" color="primary" type="value">
+            <Text
+              variant={mobile ? "smallBody" : "subheading"}
+              color="primary"
+              type="value"
+              style={{
+                textDecoration: mobile ? "underline" : "none",
+                textUnderlineOffset: mobile ? "3px" : "0",
+              }}
+            >
               View pools
             </Text>
           </Link>
           <Spacer variant="sm" />
-          <Text variant="heading3" color="white" weight="semiBold">
+          <Text
+            variant="heading3"
+            color="white"
+            weight="semiBold"
+            style={{ marginLeft: mobile ? "7px" : "0px" }}
+          >
             Miner name
           </Text>
-          <Spacer variant="sm" />
+          {desktop ? <Spacer variant="sm" /> : <Spacer variant="xs" />}
           <div className={`row  ${styles.inputs}`}>
             <Text
               variant="smallBody"
@@ -356,7 +369,11 @@ const CreateConfig = ({
               Plain
             </Text>
 
-            <Spacer direction="hor" variant="sm" />
+            {desktop ? (
+              <Spacer direction="hor" variant="sm" />
+            ) : (
+              <Spacer direction="hor" variant="xxs" />
+            )}
             <Text
               variant="smallBody"
               color="primary"
