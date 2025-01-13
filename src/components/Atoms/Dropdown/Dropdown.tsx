@@ -36,7 +36,7 @@ const Dropdown = ({
   const { mobile } = useMediaQueries();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(
-    items.find((item) => item.value === defaultValue) || items[0],
+    items.find((item) => item.label === defaultValue) || items[0],
   );
 
   const handleOpenModal = () => {
@@ -60,7 +60,7 @@ const Dropdown = ({
     <>
       {text && (
         <Text
-          variant={mobile ? "smallBody" : "subheading"}
+          variant={mobile ? "body" : "subheading"}
           color="subheadingColor"
           style={{
             width:
@@ -69,7 +69,8 @@ const Dropdown = ({
                 : context === "blocks" || context === "payments"
                   ? "100%"
                   : "52%",
-            marginBottom: "8px",
+            position: "relative",
+            bottom: "8px",
           }}
         >
           {text}
