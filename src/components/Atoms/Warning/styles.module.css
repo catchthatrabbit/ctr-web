@@ -21,7 +21,7 @@
     .warning{
       padding: 10px 12px 8px 15px;
     }
-    .warningText{
+    /* .warningText{
       font-size:var(--small-font-size);
-    }
+    } */
   }

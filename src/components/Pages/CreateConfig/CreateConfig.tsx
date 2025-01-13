@@ -113,7 +113,7 @@ const CreateConfig = ({
             context="dark"
             value={minerName.value}
             onChange={handleMinerNameChange}
-            placeholder="Miner name"
+            placeholder={desktop ? "Miner name" : "Type name"}
           />
           {!minerName.isValid && (
             <Text
@@ -141,7 +141,7 @@ const CreateConfig = ({
             context="dark"
             value={minerName.value}
             onChange={handleMinerNameChange}
-            placeholder="Miner name"
+            placeholder={desktop ? "Miner name" : "Type name"}
           />
           {!minerName.isValid && (
             <Text
@@ -287,7 +287,7 @@ const CreateConfig = ({
           <Text variant="heading3" color="white" weight="semiBold">
             Miner details
           </Text>
-          <Spacer variant="xs" />
+          {desktop ? <Spacer variant="xs" /> : <Spacer variant="sm" />}
           <Text
             variant={mobile ? "body" : "smallBody"}
             color="subheadingColor"
@@ -332,7 +332,7 @@ const CreateConfig = ({
               />
             </div>
           </div>
-          {desktop ? <Spacer variant="xs" /> : <Spacer variant="lg" />}
+          {desktop ? <Spacer variant="xs" /> : <Spacer variant="xxl" />}
           <Link to="/start-mining#pools" className={styles.viewPoolsLink}>
             <Text
               variant={mobile ? "smallBody" : "subheading"}
@@ -347,12 +347,7 @@ const CreateConfig = ({
             </Text>
           </Link>
           <Spacer variant="sm" />
-          <Text
-            variant="heading3"
-            color="white"
-            weight="semiBold"
-            style={{ marginLeft: mobile ? "7px" : "0px" }}
-          >
+          <Text variant="heading3" color="white" weight="semiBold">
             Miner name
           </Text>
           {desktop ? <Spacer variant="sm" /> : <Spacer variant="xs" />}
@@ -386,7 +381,7 @@ const CreateConfig = ({
               Fediverse
             </Text>
           </div>
-          <Spacer variant="md" />
+          {desktop ? <Spacer variant="md" /> : <Spacer variant="sm" />}
           {renderInputs()}
           <Warning
             context="config"

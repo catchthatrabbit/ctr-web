@@ -69,8 +69,8 @@ const Dropdown = ({
                 : context === "blocks" || context === "payments"
                   ? "100%"
                   : "52%",
-            marginBottom: "8px",
-            marginLeft: mobile ? "8px" : "0px",
+            position: "relative",
+            bottom: "8px",
           }}
         >
           {text}
