@@ -332,7 +332,13 @@ const CreateConfig = ({
               />
             </div>
           </div>
-          {desktop ? <Spacer variant="xs" /> : <Spacer variant="xxl" />}
+          {desktop ? (
+            <Spacer variant="xs" />
+          ) : (
+            <>
+              <Spacer variant="lg" /> <Spacer variant="xxs" />
+            </>
+          )}
           <Link to="/start-mining#pools" className={styles.viewPoolsLink}>
             <Text
               variant={mobile ? "smallBody" : "subheading"}
