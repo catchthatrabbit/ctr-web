@@ -36,6 +36,26 @@
   .linkButton{
     padding: var(--space-xxs) var(--space-sm);
     background-color: var(--ifm-color-primary);
-    width: 35%;
+    width: 37%;
     border-radius: var(--ifm-global-radius);
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .leftContainer{
+      
+    --ifm-col-width: 97%;
+    margin-left: 7px;
+    }
+    .rightContainer{
+      width: 97%;
+      margin: 0 auto;
+  }
+    
+    .linkButton{
+      width: 100%;
+      text-align: center;
+
+    }
+    
   }

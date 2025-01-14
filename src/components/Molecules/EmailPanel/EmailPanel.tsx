@@ -94,7 +94,11 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
       >
         {title}
       </Text>
-      <Text variant="subheading" color="subheadingColor">
+      <Text
+        variant={desktop ? "subheading" : "body"}
+        color="subheadingColor"
+        style={{ lineHeight: "24px" }}
+      >
         {text}
       </Text>
 

@@ -5,6 +5,9 @@ import { EmailPanel } from "@site/src/components/Molecules/EmailPanel";
 import { useControls } from "./controls";
 import { Text } from "@site/src/components/Atoms/Text";
 import { Dropdown } from "@site/src/components/Atoms/Dropdown";
+import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+
 import clsx from "clsx";
 import styles from "./styles.module.css";
 
@@ -16,8 +19,11 @@ const Contact = () => {
     maintainersSecurityEmail,
     maintainersSupportDescription,
     maintainersSupportEmail,
+    infoBoxMapData,
+    isLoadingMapChart,
   } = useControls();
 
+  const { mobile, tablet, desktop } = useMediaQueries();
   const [selectedTitle, setSelectedTitle] = useState("Support");
   const [message, setMessage] = useState("");
   const [mailtoLink, setMailtoLink] = useState("");
@@ -66,13 +72,25 @@ const Contact = () => {
 
   return (
     <>
-      <Spacer variant="xxxl" />
+      {(mobile || tablet) && (
+        <>
+          <ConfiguredInfoBox
+            infoItems={infoBoxMapData}
+            isLoading={isLoadingMapChart}
+          />
+        </>
+      )}
+      {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="xs" />}
       <ContactTitle />
-      <Spacer variant="sm" />
+      {desktop ? <Spacer variant="sm" /> : <Spacer variant="xs" />}
       <Spacer variant="md" />
       <div className={clsx("row", styles.contactContainer)}>
         <div className={clsx("col col--6", styles.leftContainer)}>
-          <Text variant="smallBody" weight="normal" color="subheadingColor">
+          <Text
+            variant={desktop ? "smallBody" : "body"}
+            weight="normal"
+            color="subheadingColor"
+          >
             Select topic
           </Text>
           <Spacer variant="xxs" />
@@ -84,8 +102,12 @@ const Contact = () => {
             onChange={handleDropdownChange}
             defaultValue={selectedTitle}
           />
-          <Spacer variant="sm" />
-          <Text variant="smallBody" weight="normal" color="subheadingColor">
+          {desktop ? <Spacer variant="sm" /> : <Spacer variant="md" />}
+          <Text
+            variant={desktop ? "smallBody" : "body"}
+            weight="normal"
+            color="subheadingColor"
+          >
             Your message
           </Text>
           <Spacer variant="xxs" />
@@ -95,15 +117,25 @@ const Contact = () => {
             onChange={handleTextareaChange}
             placeholder="Write text here ..."
           />
-          <Spacer variant="md" />
+          {desktop ? <Spacer variant="md" /> : <Spacer variant="sm" />}
           <a href={mailtoLink} target="_blank" className={styles.linkButton}>
             <Text variant="body" color="black" weight="medium">
               Send via email client
             </Text>
           </a>
         </div>
+        {desktop ? null : (
+          <>
+            <Spacer variant="lg" /> <Spacer variant="xs" />
+          </>
+        )}
+
         <div className={styles.rightContainer}>
-          <Text variant="smallBody" weight="normal" color="subheadingColor">
+          <Text
+            variant={desktop ? "smallBody" : "body"}
+            weight="normal"
+            color="subheadingColor"
+          >
             Contact informations
           </Text>
           <Spacer variant="xxs" />

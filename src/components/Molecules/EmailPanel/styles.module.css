@@ -54,3 +54,10 @@
 .link:hover {
   color: var(--ifm-link-hover-color);
 }
+
+@media screen and (max-width: 768px) {
+  .block{
+    padding: var(--space-sm);
+  }
+  
+}
