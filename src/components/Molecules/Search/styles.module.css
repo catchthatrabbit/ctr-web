@@ -42,7 +42,6 @@
 
 .searchInputMobile{
     margin-inline: 0px;
-    width: 97% !important;
 }
 
 .searchInput{
@@ -213,9 +212,9 @@
   }
   
   .searchButtonWalletMobile {
-    width: 97%;
+    width: 100%;
     margin-top: var(--space-xs);
-    right: 6px;
+    right: 0px;
     top: 74px;
     font-size: var(--regular-font-size);
   }
@@ -225,6 +224,17 @@
     margin-top: 0px;
     width: 100%;
     right: 0px;
+   }
+
+   .searchContainer , .searchStartMining{
+    width: 100%;
+   }
+
+   
+
+
+   .searchStartMining  .searchInput{
+    width: 100%;
    }
     
   }

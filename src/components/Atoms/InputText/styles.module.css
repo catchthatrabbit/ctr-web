@@ -79,5 +79,9 @@
     left: 7%;
     top: 56%;
   }
+
+  .inputContainer{
+    width: 100%;
+   }
     
   }

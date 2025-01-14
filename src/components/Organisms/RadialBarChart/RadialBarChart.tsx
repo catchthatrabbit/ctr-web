@@ -36,7 +36,7 @@ const RadialBarChart = ({
     d3.select(chartRef.current).selectAll("*").remove();
 
     // Determine the chart dimensions based on the screen size
-    const width = mobile ? 500 : 1185;
+    const width = mobile ? 500 : 1105;
     const height = mobile ? 412 : 412; // Adjust height for mobile
     const marginTop = mobile ? 40 : 80; // Adjust margin for mobile
     const marginRight = 0;
@@ -182,12 +182,7 @@ const RadialBarChart = ({
   };
 
   return data ? (
-    <div
-      id="chart-container"
-      ref={chartRef}
-      className={styles.radialChart}
-      style={{ overflowY: "hidden", overflowX: mobile ? "auto" : "hidden" }}
-    />
+    <div id="chart-container" ref={chartRef} className={styles.radialChart} />
   ) : (
     <div className={styles.emptySkeleton}>{emptyComponent}</div>
   );
