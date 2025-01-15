@@ -15,3 +15,21 @@
   .dropdownListItem:hover {
     background-color: #f0f0f0;
   }
+
+
+  .dropdownTextContainer {
+    width: 49%;
+  }
+  
+  @media screen and (min-width: 1650px) {
+    .dropdownTextContainer {
+      width: 41%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .dropdownTextContainer {
+      width: 97%;
+    }
+    
+  }

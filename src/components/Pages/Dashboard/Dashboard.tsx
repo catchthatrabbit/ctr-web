@@ -187,8 +187,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
         data={convertMaturedResponseToRecentBlocksInfo(AllRegionsMaturedBlocks)}
       />
       <Spacer variant="xxxl" />
-      {mobile && <div className={styles.horizontalLine}></div>}
-      <Spacer variant="xl" />
+      <div className={styles.horizontalLine}></div>
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xl" />}
       {mobile && <Spacer variant="xl" />}
       <StartMining />
       {mobile && <Spacer variant="md" />}

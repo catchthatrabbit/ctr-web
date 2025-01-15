@@ -25,8 +25,16 @@
 
 .horizontalLine{
     height: 1px;
-    background: linear-gradient(to right, #FFFFFF40 25%, #FFFFFF0D 75%);
+    background:  #FFFFFF40;
     width: 200%;
     position: relative;
     left: -50%;
+}
+
+@media screen and (max-width: 768px){
+    .horizontalLine{
+        background: linear-gradient(to right, #FFFFFF40 25%, #FFFFFF0D 75%);
+
+    }
+    
 }

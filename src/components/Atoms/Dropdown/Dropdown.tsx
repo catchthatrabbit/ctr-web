@@ -59,22 +59,24 @@ const Dropdown = ({
   return (
     <>
       {text && (
-        <Text
-          variant={mobile ? "body" : "subheading"}
-          color="subheadingColor"
-          style={{
-            width:
-              context === "mobileWallet"
-                ? "95%"
-                : context === "blocks" || context === "payments"
-                  ? "100%"
-                  : "52%",
-            position: "relative",
-            bottom: "8px",
-          }}
-        >
-          {text}
-        </Text>
+        <div className={styles.dropdownTextContainer}>
+          <Text
+            variant={mobile ? "body" : "subheading"}
+            color="subheadingColor"
+            style={{
+              width:
+                context === "mobileWallet"
+                  ? "95%"
+                  : context === "blocks" || context === "payments"
+                    ? "100%"
+                    : "52%",
+              position: "relative",
+              bottom: "8px",
+            }}
+          >
+            {text}
+          </Text>
+        </div>
       )}
       {mobile ? (
         <>
