@@ -36,8 +36,8 @@ const RadialBarChart = ({
     d3.select(chartRef.current).selectAll("*").remove();
 
     // Determine the chart dimensions based on the screen size
-    const width = mobile ? 500 : 1105;
-    const height = mobile ? 412 : 412; // Adjust height for mobile
+    const width = mobile ? 500 : 1250;
+    const height = mobile ? 412 : 470; // Adjust height for mobile
     const marginTop = mobile ? 40 : 80; // Adjust margin for mobile
     const marginRight = 0;
     const marginBottom = mobile ? 20 : 30; // Adjust margin for mobile
