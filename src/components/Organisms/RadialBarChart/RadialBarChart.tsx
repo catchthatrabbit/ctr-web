@@ -99,8 +99,8 @@ const RadialBarChart = ({
     const onMousemove = (event) => {
       const [mouseX, mouseY] = d3.pointer(event);
       tooltip
-        .style("left", `${mouseX + 10}px`)
-        .style("top", `${mouseY + 10}px`);
+        .style("left", `${mouseX - 60}px`)
+        .style("top", `${mouseY - 60}px`);
     };
 
     const onMouseout = () => {
