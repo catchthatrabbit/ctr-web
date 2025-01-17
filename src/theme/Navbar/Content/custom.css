@@ -20,6 +20,7 @@
 
 .navbar__link {
     position: relative;
+    
 }
 
 .navbar__logo {
@@ -30,3 +31,5 @@
 .navbar__items{
     margin: 0px 0px 16px 0px;
 }
+
+

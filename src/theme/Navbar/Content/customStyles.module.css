@@ -4,6 +4,7 @@
     line-height: var(--subheading-lineHeight-desktop);
     opacity: 1;
     z-index: 1000;
+ 
 }
 
 .navBarContainerMiningItem {
@@ -66,3 +67,4 @@
 .flexEnd{
     align-items: flex-end;
 }
+

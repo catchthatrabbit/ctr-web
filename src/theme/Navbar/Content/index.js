@@ -58,10 +58,11 @@ ${JSON.stringify(item, null, 2)}`,
   );
 }
 function NavbarContentLayout({ left, right }) {
+  const { mobile, tablet, desktop } = useMediaQueries();
   return (
     <div className="navbar__inner">
       <div className={customStyles.grow} />
-      <div className="navbar__items">{left}</div>
+      {!desktop && <div className="navbar__items">{left}</div>}
       <div className="navbar__items navbar__items--right">{right}</div>
     </div>
   );
@@ -88,7 +89,7 @@ export default function NavbarContent() {
             // TODO stop hardcoding items?
             <>
               {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
-              <NavbarItems items={leftItems} />
+              {!mobileSidebar.disabled && <NavbarItems items={leftItems} />}
             </>
           }
           right={

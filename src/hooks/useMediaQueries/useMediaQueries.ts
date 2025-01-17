@@ -9,14 +9,14 @@ function useMediaQueries() {
 
   const result = {
     desktop: desktopQuery,
-    laptop: laptopQuery,
-    tablet: tabletQuery,
-    mobile: mobileQuery,
+    laptop: laptopQuery && !desktopQuery,
+    tablet: tabletQuery && !laptopQuery && !desktopQuery,
+    mobile: mobileQuery && !tabletQuery && !laptopQuery && !desktopQuery,
   };
 
-  if (result.tablet) result.mobile = false;
-  if (result.laptop) result.tablet = false;
-  if (result.desktop) result.laptop = false;
+  // if (result.tablet) result.mobile = false;
+  // if (result.laptop) result.tablet = false;
+  // if (result.desktop) result.laptop = false;
 
   return result;
 }
