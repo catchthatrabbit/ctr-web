@@ -2,7 +2,7 @@
     border: 1px solid var(--dark-rgb-border);
     border-radius: var(--ifm-global-radius);
     flex-grow: 1;
-    background-color: var(--blue-rgb-500);
+    /* background-color: var(--blue-rgb-500); */
     height: fit-content;
 }
 
