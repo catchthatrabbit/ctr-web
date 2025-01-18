@@ -97,7 +97,6 @@ const Header = ({
                 className={clsx(styles.boardDropdown, {
                   [styles.smallWidth]:
                     context === "blocks" || context === "payments",
-                  [styles.mobileWidth]: context === "mobileWallet",
                 })}
                 items={items}
                 onChange={onChangeRegion}

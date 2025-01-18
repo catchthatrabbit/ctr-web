@@ -33,3 +33,11 @@
     flex-direction: column;
   
 }
+
+@media screen and (max-width: 768px) {
+   .removePaddingInline{
+    flex-direction: column;
+    align-items: center;
+   }
+    
+}

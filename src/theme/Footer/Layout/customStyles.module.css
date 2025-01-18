@@ -1,6 +1,5 @@
 .footerLayout{
    
-    flex-direction: row;
     margin-bottom: var(--space-md);
 }
 
@@ -69,7 +68,9 @@
     span {
       width: 74%;
     }
+
 }
+
   }
   
   @media (max-width: 767px) {
