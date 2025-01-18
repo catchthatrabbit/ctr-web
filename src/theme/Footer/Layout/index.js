@@ -27,7 +27,12 @@ export default function FooterLayout({ style, links, logo, copyright }) {
           })}
         >
           <Spacer variant="sm" />
-          <div className={clsx({ "grid grid-col--2-5-1 grid-end": desktop })}>
+          <div
+            className={clsx({
+              "grid grid-col--2-5-1 grid-end": desktop,
+              [customStyles.footerLinks]: desktop,
+            })}
+          >
             <div className="flex-column md-center-items sm-center-items xs-center-items md-center-text sm-center-text xs-center-text">
               <div
                 className={clsx([
