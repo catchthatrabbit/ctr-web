@@ -13,6 +13,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    width: 99%;
     border-radius: 15px;
     padding: 1px; /* Adjust the padding to control the border thickness */
     background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 50%);
