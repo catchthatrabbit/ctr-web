@@ -74,7 +74,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
             lineHeight="smallLineHeight"
             color="subheadingColor"
             variant={mobile ? "smallBody" : "subheading"}
-            // className={clsx({ [styles.mobilePaddingLeft]: mobile })}
+            style={{ direction: "ltr" }}
           >
             {overrideLabel
               ? labelTextMap.payments
