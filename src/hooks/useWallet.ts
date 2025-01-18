@@ -30,7 +30,6 @@ export const useWalletPage = () => {
 
   const handleWalletAddress = (walletAddress: string) => {
     setWalletAddress(walletAddress);
-    console.log("Search query:", walletAddress);
   };
 
   const handleSelectedPool = (selectedPool: string) => {

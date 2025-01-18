@@ -18,7 +18,11 @@
 
 
   .dropdownTextContainer {
-    width: 49%;
+    width: 100%;
+  }
+
+  .walletContext{
+    width: 52%;
   }
   
   @media screen and (min-width: 1650px) {

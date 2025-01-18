@@ -9,6 +9,7 @@ import Modal from "@site/src/components/Atoms/Modal/Modal";
 import PaginationRight from "@site/src/icons/PaginationRight";
 
 import styles from "./styles.module.css";
+import clsx from "clsx";
 
 interface IDropdown {
   id?: string;
@@ -59,7 +60,12 @@ const Dropdown = ({
   return (
     <>
       {text && (
-        <div className={styles.dropdownTextContainer}>
+        <div
+          className={clsx(styles.dropdownTextContainer, {
+            [styles.walletContext]: context === "wallet",
+          })}
+        >
+          {" "}
           <Text
             variant={mobile ? "body" : "subheading"}
             color="subheadingColor"

@@ -49,11 +49,6 @@ const horClassName =
 export default function NavbarLayout({ children }) {
   const { mobile, tablet, desktop } = useMediaQueries();
 
-  useEffect(() => {
-    console.log("desktop:", desktop);
-    console.log("Tablet:", tablet);
-  }, [desktop, tablet]);
-
   const {
     infoBoxMapData,
     asStarMiningPoolLocation,
@@ -78,8 +73,6 @@ export default function NavbarLayout({ children }) {
   } = useThemeConfig();
   const mobileSidebar = useNavbarMobileSidebar();
   const { navbarRef, isNavbarVisible } = useHideableNavbar(hideOnScroll);
-
-  console.log("is mobile:", mobileSidebar);
 
   return (
     <>

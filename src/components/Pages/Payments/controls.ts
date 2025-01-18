@@ -53,7 +53,6 @@ const useControls = ({
         isPrimary: true,
         fn: (walletAddress) => {
           setWalletAddress(walletAddress);
-          console.log("controls", selectedPool);
           push(`/coreid/${walletAddress}/${selectedPool}`);
         },
       },

@@ -90,7 +90,6 @@ const CreateConfig = ({
   };
 
   const handleDropdownChange1 = (selectedOption: { label: string }) => {
-    console.log(selectedOption);
     setDropdownValue1(selectedOption.label);
   };
 

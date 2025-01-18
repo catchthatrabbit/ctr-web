@@ -68,8 +68,6 @@ const Miners = ({
 
     setSelectedPool(poolShortcut);
 
-    console.log(selectedPool, poolShortcut, 1);
-
     handleChangeRegion(selectedOption);
   };
 

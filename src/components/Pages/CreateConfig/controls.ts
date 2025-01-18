@@ -29,7 +29,6 @@ const useControls = ({
     const match = str.match(regex);
 
     if (match) {
-      console.log("match", match);
       const [, username, domainPart, tldPart, workerPart] = match;
 
       const domain = domainPart.toLowerCase();

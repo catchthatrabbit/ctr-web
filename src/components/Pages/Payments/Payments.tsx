@@ -58,8 +58,6 @@ const Payments = ({
 
     setSelectedPool(poolShortcut);
 
-    console.log(selectedPool, poolShortcut, 1);
-
     handleChangeRegion(selectedOption);
   };
 

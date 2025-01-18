@@ -140,7 +140,7 @@ const Wallet = ({
             onChangeRegion={handleChangeRegion}
             iban={walletAddress}
             layout={{ boards: true, search: false, dropdown: true }}
-            context={mobile ? "mobileWallet" : undefined}
+            context={mobile ? "mobileWallet" : "wallet"}
           />
           <Info
             data={fetchedWalletInfo}
