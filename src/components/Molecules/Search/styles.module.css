@@ -220,7 +220,7 @@
 
   @media screen and (max-width: 768px) {
    .searchStartMining .searchButtonWalletMobile{
-    margin-top: 0px;
+    margin-top: 86px;
     width: 100%;
     right: 0px;
    }

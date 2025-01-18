@@ -35,11 +35,16 @@
 .smallWidth {
     width: 384px;
   }
-.mobileWidth{
-    width: 97%;
-}
+
 
 .mobileBlocksContainer{
     justify-content: center;
     gap: 32px;
+}
+
+@media screen and (max-width: 768px) {
+   .boardDropdown{
+    width: 97%;
+   }
+    
 }
