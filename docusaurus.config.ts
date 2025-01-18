@@ -385,6 +385,7 @@ const config: Config = {
     //   },
     // ]
     path.resolve(__dirname, "./src/plugins/dynamic-router-plugin.ts"),
+    path.resolve(__dirname, "./src/plugins/custom-post-css-plugin.ts"),
   ],
 };
 

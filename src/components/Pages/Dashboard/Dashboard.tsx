@@ -52,16 +52,16 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
     effectsShowLocation,
   } = useControls();
 
-  const { mobile, desktop } = useMediaQueries();
+  const { mobile, tablet, desktop } = useMediaQueries();
 
   return (
     <>
       <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
         <div
           className={clsx([
-            "grid xl-grid-col--2 lg-grid-col--5 md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
-            desktop && styles.directionRtl,
-            styles.fullWidth,
+            mobile || tablet ? " " : "lg-grid-col--5  xl-grid-col--2",
+            "grid   md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
+            styles.directionRtl,
           ])}
         >
           {mobile ? (

@@ -1,5 +1,4 @@
-/* eslint-disable import/no-unresolved */
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import {
@@ -48,7 +47,13 @@ const horClassName =
   "xl-flex-col--2 lg-flex-col--2 md-flex-col--6 sm-flex-col--12 xs-flex-col--12";
 
 export default function NavbarLayout({ children }) {
-  const { mobile, tablet } = useMediaQueries();
+  const { mobile, tablet, desktop } = useMediaQueries();
+
+  useEffect(() => {
+    console.log("desktop:", desktop);
+    console.log("Tablet:", tablet);
+  }, [desktop, tablet]);
+
   const {
     infoBoxMapData,
     asStarMiningPoolLocation,
@@ -73,6 +78,8 @@ export default function NavbarLayout({ children }) {
   } = useThemeConfig();
   const mobileSidebar = useNavbarMobileSidebar();
   const { navbarRef, isNavbarVisible } = useHideableNavbar(hideOnScroll);
+
+  console.log("is mobile:", mobileSidebar);
 
   return (
     <>
