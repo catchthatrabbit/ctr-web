@@ -21,8 +21,6 @@ export const useHeaders = ({
   const [region, setRegion] =
     useState<STANDARD_REGIONS_API_KEYS>(defaultRegion);
 
-  console.log("defaultRegion", defaultRegion);
-
   const { siteConfig } = useDocusaurusContext();
   const startMiningPoolConfigurations = siteConfig.customFields
     .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;

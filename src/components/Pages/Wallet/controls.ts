@@ -114,13 +114,10 @@ const useControls = ({
     // change current url to reflect the selected region
 
     const splitted = location.pathname.split("/");
-    console.log("splitted", splitted);
     splitted[3] = id.value.toLowerCase();
     const newUrl = splitted.join("/");
     history.push(newUrl);
-    console.log("newUrl", newUrl);
     setRegion(id.value);
-    console.log("id", id);
     if (typeof onChangeRegion === "function") onChangeRegion(region);
   };
 

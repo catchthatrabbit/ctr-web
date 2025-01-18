@@ -16,16 +16,11 @@ const WalletOverviewPage = () => {
     pool: string;
   }>();
 
-  console.log("walletAddress:", walletAddress);
-  console.log("pool:", pool);
-
   const poolConfig = Object.values(START_MINING_POOL_CONFIGURATIONS).find(
     (siteConfig) => siteConfig.SERVER.startsWith(pool),
   );
 
   const poolDescription = poolConfig ? poolConfig.DESCRIPTION : "Unknown Pool";
-
-  console.log("Pool Description:", poolDescription);
 
   const {
     handleChangeRegion,

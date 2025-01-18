@@ -41,7 +41,6 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
       if (typeof onSearch === "function") {
         onSearch(address);
       }
-      console.log("walletAddress", address);
       history.push(`/coreid/${address}/${selectedPool}`);
     };
 
