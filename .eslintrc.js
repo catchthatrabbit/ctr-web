@@ -8,15 +8,21 @@ module.exports = {
         "plugin:@typescript-eslint/recommended",
         "plugin:import/recommended",
         "plugin:import/typescript",
-        "plugin:css-import-order/recommended",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
         "plugin:prettier/recommended",
+        "plugin:promise/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     parserOptions: { ecmaVersion: "latest", sourceType: "module" },
-    plugins: ["react-refresh", "prettier"],
+    plugins: [
+        "@typescript-eslint",
+        "import",
+        "promise",
+        "n",
+        "react-refresh"
+    ],
     settings: {
         "import/parsers": {
           "@typescript-eslint/parser": [".ts", ".tsx"],
@@ -35,7 +41,14 @@ module.exports = {
         "react/jsx-uses-react": "off",
         "react/prop-types": "off",
         "import/no-named-as-default": 'off',
-        "no-console": "off",
-        "sort-imports": "off"
+        "no-console": "warn",
+        "sort-imports": "off",
+        "indent": ["error", 2],
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],
+        "no-var": "error",
+        "prefer-const": "error",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["error"]
     }
 }
