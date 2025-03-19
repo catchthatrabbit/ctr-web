@@ -66,11 +66,9 @@
   font-size: var(--large-font-size);
 }
 
-
 .pictureTitle{
   font-size: var(--picture-title-font-size);
 }
-
 
 .text {
   /* letter-spacing: 0.05em; */
@@ -134,6 +132,10 @@
 
 .exo{
   font-family: var(--exo-font-family);
+}
+
+.zephirum{
+  font-family: var(--zephirum-font-family);
 }
 
 .heading{

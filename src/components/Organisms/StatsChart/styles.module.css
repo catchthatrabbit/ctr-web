@@ -1,17 +1,17 @@
-.infoBoxStatsChart{
-    display: flex;
-    flex-direction: column;
+.infoBoxStatsChart {
+  display: flex;
+  flex-direction: column;
 }
 
-.statsChart{
-    position: relative;
+.statsChart {
+  position: relative;
 }
 
-.loadingSkeleton{
-    height: 938px;
+.loadingSkeleton {
+  height: 938px;
 }
 
-.flex{
-    display: flex;
-    flex-direction: column;
+.flex {
+  display: flex;
+  flex-direction: column;
 }

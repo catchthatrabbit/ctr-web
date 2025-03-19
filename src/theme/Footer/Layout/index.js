@@ -40,9 +40,6 @@ export default function FooterLayout({ style, links, logo, copyright }) {
                 ])}
               >
                 {logo}
-                {/* <div className={customStyles.customLogoText}>
-                  <Text>Dedicated Pool for Core Coin and IoT devices.</Text>
-                </div> */}
               </div>
 
               <div className="xl-flex-col--8 lg-flex-col--6 md-flex-col--12 sm-flex-col--12 xs-flex-col--12">

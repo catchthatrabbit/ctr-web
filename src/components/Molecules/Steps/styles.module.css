@@ -1,95 +1,88 @@
 .stepsContainer {
   align-items: center;
-    gap: 20px;
- 
-    ;
-  }
-  
-  .step {
-    padding: 10px 8px 8px 8px;
-    border-radius: 5px;
-    width: 65%;
-    height: auto;
-    border-bottom: 1px solid #292929;
-    margin-bottom: var(--space-xs);
-  }
+  gap: 20px;
+}
 
-  .mobileStep{
-    width: 100%;
-    padding: 8px 8px 0px 11px;
-    margin-bottom: 10px;
-  }
-  
-  .stepNumber {
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .title {
-    margin: 0 0 10px 0;
-    font-size: var(--medium-font-size);
-    font-weight: var( --semi-bold-font-weight);
-  }
+.step {
+  padding: 10px 8px 8px 8px;
+  border-radius: 5px;
+  width: 65%;
+  height: auto;
+  border-bottom: 1px solid #292929;
+  margin-bottom: var(--space-xs);
+}
 
-  .mobileTitle{
-    font-size: var(--h2-font-size-mobile);
-  }
-  
-  .text {
-    margin: 0 0 10px 0;
-  }
+.mobileStep {
+  width: 100%;
+  padding: 8px 8px 0px 11px;
+  margin-bottom: 10px;
+}
 
-  .buttonLinkContainer{
-    margin-left: 29px;
-  }
-  
-  .linkSteps{
-    
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .link {
-    color: #007bff;
-    text-decoration: none;
-    /* padding-left: calc(var(--space-xs) / 2); */
-  }
-  
-  .image {
-    max-width: 100%;
-    height: auto;
-    margin: 10px 0;
-  }
-  
+.stepNumber {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
-  .lastStep {
-    position: relative; 
-    border-bottom: none;
-   
+.title {
+  margin: 0 0 10px 0;
+  font-size: var(--medium-font-size);
+  font-weight: var( --semi-bold-font-weight);
+}
+
+.mobileTitle {
+  font-size: var(--h2-font-size-mobile);
+}
+
+.text {
+  margin: 0 0 10px 0;
+}
+
+.buttonLinkContainer {
+  margin-left: 29px;
+}
+
+.linkSteps {
+  align-items: center;
+  cursor: pointer;
+}
+
+.link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
+}
+
+.lastStep {
+  position: relative;
+  border-bottom: none;
+}
+
+.lastStep::after {
+  content: "";
+  display: block;
+  width: 100vw;
+  height: 1px;
+  background-color: #292929;
+  position: absolute;
+  bottom: -48px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media screen and (max-width: 768px) {
+  .stepsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
-  
 
   .lastStep::after {
-    content: "";
-    display: block;
-    width: 100vw; 
-    height: 1px;
-    background-color: #292929;
-    position: absolute;
-    bottom: -48px;
-    left: 50%;
-    
-    transform: translateX(-50%);
+    bottom: 0px;
+    top: 20rem;
   }
-
-  @media screen and (max-width: 768px) {
-    .stepsContainer {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .lastStep::after {
-      bottom: 0px;
-      top: 20rem;
-    }
-  }
+}

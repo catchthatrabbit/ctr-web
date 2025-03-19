@@ -1,3 +1,4 @@
+import React from 'react';
 import { createContext, useState } from "react";
 import { MESSAGE } from "./types";
 import { DEFAULT_CONTEXT, DEFAULT_VALUE } from "./constants";

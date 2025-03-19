@@ -1,10 +1,8 @@
 import React from "react";
-import { Search } from "@site/src/components/Molecules/Search";
 import { Dropdown } from "@site/src/components/Atoms/Dropdown";
 import { Board } from "@site/src/components/Atoms/Board";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { IBan } from "@site/src/components/Molecules/IBan";
-import { Text } from "@site/src/components/Atoms/Text";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 import clsx from "clsx";
@@ -48,7 +46,6 @@ const Header = ({
   addComponent,
   layout = { boards: true, dropdown: true, search: true },
   context,
-  selectedPool,
 }: IHeader) => {
   const { mobile, desktop } = useMediaQueries();
 
@@ -59,14 +56,11 @@ const Header = ({
 
   return (
     <>
-      {/* <Spacer variant="xl" /> */}
       {pageTitleComponent}
       {layout.search && (
         <>
           {context === "mobileWallet" ? null : <Spacer variant="xl" />}
           <div className="col col--12">
-            {/* <Search context={context} onSearch={onSearch} /> */}
-            {/* insert here start mining today! */}
           </div>
         </>
       )}

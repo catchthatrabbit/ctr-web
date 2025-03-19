@@ -1,10 +1,10 @@
+import React from 'react';
 import useControls from "./controls";
 import { MapChart } from "@site/src/components/Organisms/MapChart";
 import {
   Locations,
   MapPin,
 } from "@site/src/components/Molecules/InsideChart/Locations";
-import { MapButton } from "@site/src/components/Molecules/InsideChart/MapButton";
 import { Text } from "@site/src/components/Atoms/Text";
 import {
   Mouse,
@@ -111,9 +111,11 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                     <Locations>
                       <span className="lg-hide md-hide" />
                     </Locations>
-                    <Mouse>
-                      <MouseContent />
-                    </Mouse>
+                    {desktop && (
+                      <Mouse>
+                        <MouseContent />
+                      </Mouse>
+                    )}
                   </>
                 )}
               </div>
@@ -135,7 +137,12 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                   {sLoganPrimary}
                 </Text>
                 <Spacer variant="sm" />
-                <Text color="subheadingColor" variant="subheading1">
+                <Text
+                  color="subheadingColor"
+                  variant="subheading1"
+                  lineHeight="normalLineHeight"
+                  letterSpacing="letterSpacing"
+                >
                   {SLoganSecondary}
                 </Text>
                 <br />

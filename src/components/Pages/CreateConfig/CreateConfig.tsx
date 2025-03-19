@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { CreateConfigTitle } from "@site/src/components/Molecules/PictureTitles";
@@ -11,10 +11,17 @@ import Ican from "@blockchainhub/ican";
 import useControls from "./controls";
 import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
 
 import clsx from "clsx";
 
 import styles from "./styles.module.css";
+
+interface IPayments {
+  defaultRegion?: STANDARD_REGIONS_API_KEYS;
+  onSetWalletAddress?: (address: string) => void;
+  onChangeRegion?: (region: any) => void;
+}
 
 const CreateConfig = ({
   defaultRegion,
@@ -24,7 +31,6 @@ const CreateConfig = ({
   const {
     handleChangeRegion,
     handleSearch,
-    isLoadingPaymentState,
     dropdownItems,
     regionLabel,
     convertWorkerName,
@@ -36,7 +42,7 @@ const CreateConfig = ({
   const [walletAddress, setWalletAddress] = useState("");
   const [isWalletValid, setIsWalletValid] = useState(true);
   const [inputType, setInputType] = useState("plain");
-  const [minerName, setMinerName] = useState({ value: "", isValid: true }); // Combined state for miner names
+  const [minerName, setMinerName] = useState({ value: "", isValid: true });
   const [typePortal, setTypePortal] = useState({ value: "", isValid: true });
   const [uniqueId, setUniqueId] = useState("");
   const [dropdownValue1, setDropdownValue1] = useState(regionLabel);
@@ -78,12 +84,6 @@ const CreateConfig = ({
     const isValid = regex.test(value);
     setTypePortal({ value, isValid });
   };
-  // Examples of Valid Domains
-  // example.com
-  // subdomain.example.com
-  // example.co.uk
-  // my-site.example.org
-  // another.subdomain.example.io
 
   const handleUniqueIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUniqueId(event.target.value);
@@ -312,7 +312,7 @@ const CreateConfig = ({
           <div className={styles.dropdowns}>
             <div className={styles.dropdownContainer}>
               <Dropdown
-                isLoading={isLoadingPaymentState}
+                isLoading={isLoadingMapChart}
                 defaultValue={dropdownValue1}
                 className={clsx(styles.boardDropdown)}
                 items={dropdownItems}
@@ -322,7 +322,7 @@ const CreateConfig = ({
             </div>
             <div className={styles.dropdownContainer}>
               <Dropdown
-                isLoading={isLoadingPaymentState}
+                isLoading={isLoadingMapChart}
                 defaultValue={dropdownValue2}
                 className={clsx(styles.boardDropdown)}
                 items={dropdownItems}

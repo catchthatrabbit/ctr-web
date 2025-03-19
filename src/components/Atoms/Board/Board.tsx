@@ -60,7 +60,7 @@ const Board = ({
                 context === "mapChart" && mobile
                   ? "tinyBody"
                   : context === "statsChart" || context === "payments"
-                    ? "heading2-mobile"
+                    ? "headingMobile"
                     : "subheading"
               }
               weight={context === "payments" ? "extraBold" : "bold"}
@@ -68,9 +68,11 @@ const Board = ({
                 context === "payments"
                   ? "white"
                   : context === "statsChart"
-                    ? "primaryColor"
+                    ? "primary"
                     : "valueChartColor"
               }
+              lineHeight="normalLineHeight"
+              letterSpacing="letterSpacing"
               disableMobileStyles
             >
               {value || "0"}
@@ -81,13 +83,15 @@ const Board = ({
               context === "mapChart" && mobile
                 ? "tinyBody"
                 : context === "statsChart"
-                  ? "heading2-mobile"
+                  ? "headingMobile"
                   : "subheading"
             }
             weight="bold"
             color={
-              context === "statsChart" ? "primaryColor" : "valueChartColor"
+              context === "statsChart" ? "primary" : "valueChartColor"
             }
+            lineHeight="normalLineHeight"
+            letterSpacing="letterSpacing"
           >
             {suffix}
           </Text>
@@ -98,9 +102,11 @@ const Board = ({
               context === "mapChart" && mobile
                 ? "tinyBody"
                 : context === "statsChart"
-                  ? "subheading-desktop"
+                  ? "subheading1"
                   : "subheading"
             }
+            lineHeight="normalLineHeight"
+            letterSpacing="letterSpacing"
             disableMobileStyles
           >
             {description || ""}

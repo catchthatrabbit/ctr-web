@@ -1,20 +1,15 @@
-
-.locations{
-    position: relative;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-   
-  }
-
-  .flexEnd{
-    justify-content: flex-end !important;
-  }
-
-.mapPin {
+.locations {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
-.pinWrapper{
+.flexEnd {
+  justify-content: flex-end !important;
+}
+
+.pinWrapper {
   position: absolute;
   top:30%;
   width: 100%;
@@ -22,7 +17,7 @@
   height: 126px;
 }
 
-.bgImage{
+.bgImage {
   height: 100%;
   width: 84%;
   top: -28px;
@@ -30,7 +25,7 @@
   right: 13px;
 }
 
-.bgImageMobile{
+.bgImageMobile {
   right: 0px;
   top: -18px;
   width: 78%;

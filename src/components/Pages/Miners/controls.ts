@@ -6,7 +6,7 @@ import { MINERS_RESPONSE } from "@site/src/Api/miners/types";
 import { useHistory } from "@docusaurus/router";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
 import { tablesConfig } from "@site/src/configs";
 import useMapChartData from "../Dashboard/hooks/useMapChartData";
@@ -51,7 +51,7 @@ const useControls = ({
         label: "Miner",
         canBeCopied: true,
         isPrimary: true,
-        fn: (walletAddress) => {
+        fn: (walletAddress: string) => {
           setWalletAddress(walletAddress);
           push(`/coreid/${walletAddress}/${selectedPool}`);
         },

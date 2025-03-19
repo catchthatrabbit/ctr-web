@@ -16,7 +16,13 @@ const Modal: React.FC<IModalProps> = ({ isOpen, onClose, children }) => {
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <div className={styles.modalHeader}>
-          <Text variant="heading3" weight="semiBold" color="white">
+          <Text
+            variant="heading3"
+            weight="semiBold"
+            color="white"
+            lineHeight="normalLineHeight"
+            letterSpacing="letterSpacing"
+          >
             Mining pool
           </Text>
           <button className={styles.closeButton} onClick={onClose}>

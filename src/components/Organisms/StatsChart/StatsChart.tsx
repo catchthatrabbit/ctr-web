@@ -1,3 +1,4 @@
+import React from 'react';
 import { TextFormatOutputType } from "@site/src/utils/textFormat";
 import { PoolStatisticsTitle } from "@site/src/components/Molecules/PictureTitles";
 import { Spacer } from "@site/src/components/Atoms/Spacer";

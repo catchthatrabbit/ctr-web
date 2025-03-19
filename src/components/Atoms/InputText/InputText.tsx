@@ -1,4 +1,4 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes, TextareaHTMLAttributes, FormEvent } from "react";
 import { Text } from "../../Atoms/Text";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
@@ -22,6 +22,7 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
       className,
       placeholder,
       text,
+      onChange,
       ...restProps
     },
     ref,
@@ -46,14 +47,13 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
           </span>
         )}
         {text && (
-          <Text lineHeight="smallLineHeight" color="subheadingColor">
+          <Text lineHeight="smallLineHeight" color="subheadingColor" letterSpacing="letterSpacing">
             {text}
           </Text>
         )}
         {mobile ? (
           <textarea
-            ref={ref as React.Ref<HTMLTextAreaElement>}
-            {...restProps}
+            ref={ref as unknown as React.Ref<HTMLTextAreaElement>}
             onKeyDown={handleSearchOnPressEnter}
             className={clsx(styles.inputText, className, {
               [styles.searchWallet]: context === "wallet",
@@ -68,7 +68,7 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
               direction: "ltr",
               textAlign: "left",
             }}
-            onInput={(e) => {
+            onInput={(e: FormEvent<HTMLTextAreaElement>) => {
               const target = e.target as HTMLTextAreaElement;
               target.style.height = "auto";
               target.style.height = `${target.scrollHeight}px`;
@@ -76,8 +76,9 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
           />
         ) : (
           <input
-            ref={ref as React.Ref<HTMLInputElement>}
+            ref={ref}
             {...restProps}
+            onChange={onChange}
             onKeyDown={handleSearchOnPressEnter}
             className={clsx(styles.inputText, className, {
               [styles.searchWallet]: context === "wallet",

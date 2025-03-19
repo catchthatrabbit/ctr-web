@@ -1,4 +1,6 @@
+import React from 'react';
 import PictureTitle from "@site/src/components/Atoms/PictureTitle/PictureTitle";
+import { HeadAndNeckAbove } from "@site/src/icons";
 
 const GuideTitle = () => {
   return (
@@ -10,6 +12,7 @@ const GuideTitle = () => {
         fontSize: "var(--regular-font-size)",
         marginTop: "0px",
       }}
+      image={<HeadAndNeckAbove />}
     />
   );
 };

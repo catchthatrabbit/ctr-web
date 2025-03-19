@@ -52,10 +52,29 @@ const Dropdown = ({
 
   const handleSelectItem = (item: { value: string; label: string }) => {
     setSelectedItem(item);
-    onChange?.(item, { action: "select-option" });
+    onChange?.(item, {
+      action: "select-option",
+      option: item,
+      name: "select"
+    } as ActionMeta<unknown>);
     handleCloseModal();
   };
-  const controlStyles = colourStyles.control({});
+  const controlStyles = {
+    ...colourStyles.control({
+      children: null,
+      innerRef: null,
+      innerProps: {},
+      isDisabled: false,
+      isFocused: false,
+      menuIsOpen: false,
+      selectProps: { classNamePrefix: '' }
+    } as any, {
+      isDisabled: false,
+      isFocused: false,
+      menuIsOpen: false
+    } as any),
+    accentColor: undefined
+  };
 
   return (
     <>
@@ -90,9 +109,8 @@ const Dropdown = ({
             onClick={handleOpenModal}
             className={className}
             style={{
-              ...controlStyles,
+              ...(controlStyles as React.CSSProperties),
               display: "flex",
-
               justifyContent: "space-between",
               alignItems: "center",
               padding: "10px 20px 10px 16px",
@@ -110,7 +128,7 @@ const Dropdown = ({
                   className={styles.dropdownListItem}
                   onClick={() => handleSelectItem(item)}
                   style={{
-                    ...controlStyles,
+                    ...(controlStyles as React.CSSProperties),
                     cursor: "pointer",
                     boxShadow: "none",
                     border: "none",

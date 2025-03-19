@@ -1,11 +1,11 @@
-.circle{
-    height: 24px;
-    width: 24px;
-    background: var(--white);
-    border-radius: 50%;
+.circle {
+  height: 24px;
+  width: 24px;
+  background: var(--white);
+  border-radius: 50%;
 }
 
-.cursorAuto{
+.cursorAuto {
   cursor: auto;
 }
 
@@ -19,59 +19,58 @@
 }
 
 @keyframes bordersAnimation{
-    0% {
-      border-color: var(--white);
-    }
-    33% {
-      border-color: var(--white);
-    }
-    66% {
-      border-color: var(--white-rgb-04);
-    }
-    100% {
-      border-color: var(--white-rgb-02);
-    }
-    
+  0% {
+    border-color: var(--white);
+  }
+  33% {
+    border-color: var(--white);
+  }
+  66% {
+    border-color: var(--white-rgb-04);
+  }
+  100% {
+    border-color: var(--white-rgb-02);
+  }
 }
 
-.border .border1{
-    border: 3px solid;
-    padding: 3px;
-    animation: bordersAnimation infinite normal 2s 0s;
+.border .border1 {
+  border: 3px solid;
+  padding: 3px;
+  animation: bordersAnimation infinite normal 2s 0s;
 }
 
 .border .border2 {
-    border: 2px solid;
-    padding: 4px;
-    animation: bordersAnimation infinite normal 2s 0.5s;
+  border: 2px solid;
+  padding: 4px;
+  animation: bordersAnimation infinite normal 2s 0.5s;
 }
 
-.border .border3{
-    display: inline-block;
-    border: 1px solid;
-    padding: 5px;
-    animation: bordersAnimation infinite normal 2s 1s;
+.border .border3 {
+  display: inline-block;
+  border: 1px solid;
+  padding: 5px;
+  animation: bordersAnimation infinite normal 2s 1s;
 }
 
 .mapButton {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 125px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 125px;
 }
 
 .button:hover{
-    background: none rgba(0, 0, 0, 0.75);
-    transform: scale(1.05);
-    backdrop-filter: blur(18px);
-    border: 1px solid rgb(66, 66, 89);
+  background: none rgba(0, 0, 0, 0.75);
+  transform: scale(1.05);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgb(66, 66, 89);
 }
 
 .button{
-    padding: var(--space-xs);
-    backdrop-filter: blur(18px);
-    background: none rgba(0, 0, 0, 0.75);
-    border: 1px solid rgba(66, 66, 89, 0.5);
-    transition: transform 0.3s ease 0s;
+  padding: var(--space-xs);
+  backdrop-filter: blur(18px);
+  background: none rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(66, 66, 89, 0.5);
+  transition: transform 0.3s ease 0s;
 }

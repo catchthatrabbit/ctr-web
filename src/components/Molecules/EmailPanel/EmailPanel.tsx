@@ -1,6 +1,5 @@
 import React from "react";
 import { Text } from "@site/src/components/Atoms/Text";
-import Link from "@docusaurus/Link";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 import clsx from "clsx";

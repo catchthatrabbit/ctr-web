@@ -1,5 +1,4 @@
 import React from "react";
-import { ITabs, Tabs } from "@site/src/components/Molecules/Tabs";
 
 interface IBlockListTabs {
   blocks?: React.ReactNode;
@@ -14,7 +13,6 @@ const BlockListTabs = ({
   immature,
   candidates,
   activeTab,
-  onTabChange,
 }: IBlockListTabs) => {
   const renderContent = () => {
     switch (activeTab) {

@@ -1,9 +1,10 @@
+import React from 'react';
 import { ConfiguredLayout } from "@site/src/components/Templates/ConfiguredLayout";
 import { Dashboard } from "@site/src/components/Pages/Dashboard";
 import { useWalletPage } from "@site/src/hooks/useWallet";
 import { Wallet } from "@site/src/components/Pages/Wallet";
 
-export default function Home(): JSX.Element {
+export default function Home(): React.ReactElement {
   const {
     walletAddress,
     handleChangeRegion,

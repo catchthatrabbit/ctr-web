@@ -1,3 +1,4 @@
+import React from 'react';
 import { Message } from "@site/src/components/Molecules/Message";
 import { useEffect, useState } from "react";
 

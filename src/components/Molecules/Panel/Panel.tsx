@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
 
@@ -19,7 +18,7 @@ interface IPanel {
     | "tinyBody"
     | "tag"
     | "CTA";
-  color?: "primary" | "white" | "gray";
+  color?: "primary" | "white" | "subheadingColor";
   titleClassName?: string;
   className?: string;
   weight?: "normal" | "bold" | "extraBold" | "semiBold";

@@ -5,6 +5,7 @@ import { ConfiguredLayout } from "@site/src/components/Templates/ConfiguredLayou
 import { useWalletPage } from "@site/src/hooks/useWallet";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
+import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
 
 const WalletOverviewPage = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -29,16 +30,17 @@ const WalletOverviewPage = () => {
     region,
   } = useWalletPage();
 
+  const defaultRegion = pool ? (pool.toUpperCase() as STANDARD_REGIONS_API_KEYS) : region;
+
   return (
     <ConfiguredLayout backgroundPos={40}>
       <Wallet
         onClearWalletAddress={handleClearWalletAddress}
-        defaultRegion={pool ? pool.toUpperCase() : region}
+        defaultRegion={defaultRegion}
         walletAddress={walletAddress}
         onChangeRegion={handleChangeRegion}
         onSetWalletAddress={handleWalletAddress}
         selectedPool={pool}
-        // poolDescription={poolDescription}
       />
     </ConfiguredLayout>
   );

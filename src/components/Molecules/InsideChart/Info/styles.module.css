@@ -1,35 +1,35 @@
-.justifyCenter{
-    justify-content: center;
+.justifyCenter {
+  justify-content: center;
 }
 
-.justifySpaceBetween{
-    justify-content: center;
+.justifySpaceBetween {
+  justify-content: center;
 }
 
-.justifySpaceAround{
-    justify-content: space-around;
+.justifySpaceAround {
+  justify-content: space-around;
 }
 
-.flexDirectionColumn{
-    flex-direction: column;
+.flexDirectionColumn {
+  flex-direction: column;
 }
 
-.fullWidth{
-    width: 100%;
+.fullWidth {
+  width: 100%;
 }
 
-.flexDirectionRow{
-    flex-direction: row;
-    flex-wrap: nowrap;
+.flexDirectionRow {
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
 
 .fullWidthBorder {
-    background-color: var(--black-800);
-    position: relative; 
-    width: calc(100vw );
-    left: 50%; 
-    top: 1px;
-    transform: translateX(-50%);
-    border-top: 1px solid rgba(54, 54, 54, 1); 
-    border-bottom: 1px solid rgba(54, 54, 54, 1); 
-  }
+  background-color: var(--black-800);
+  position: relative;
+  width: calc(100vw );
+  left: 50%;
+  top: 1px;
+  transform: translateX(-50%);
+  border-top: 1px solid rgba(54, 54, 54, 1);
+  border-bottom: 1px solid rgba(54, 54, 54, 1);
+}

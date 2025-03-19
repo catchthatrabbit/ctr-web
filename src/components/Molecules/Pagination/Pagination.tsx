@@ -4,7 +4,6 @@ import React from "react";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 import PaginationLeft from "@site/src/icons/PaginationLeft";
 import PaginationRight from "@site/src/icons/PaginationRight";
-import LeftDisabled from "@site/src/icons/LeftDisabled";
 import { Spacer } from "../../Atoms/Spacer";
 import styles from "./styles.module.css";
 import { Text } from "@site/src/components/Atoms/Text";

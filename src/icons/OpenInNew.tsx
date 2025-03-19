@@ -1,4 +1,6 @@
-const Magnifier = () => {
+import React from 'react';
+
+const OpenInNew = () => {
   return (
     <svg
       width="24"
@@ -28,4 +30,4 @@ const Magnifier = () => {
   );
 };
 
-export default Magnifier;
+export default OpenInNew;

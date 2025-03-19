@@ -1,39 +1,38 @@
 .dropdownList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .dropdownListItem {
-    padding: 10px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .dropdownListItem:hover {
-    background-color: #f0f0f0;
-  }
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdownListItem {
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdownListItem:hover {
+  background-color: #f0f0f0;
+}
 
 
+.dropdownTextContainer {
+  width: 100%;
+}
+
+.walletContext{
+  width: 52%;
+}
+
+@media screen and (min-width: 1650px) {
   .dropdownTextContainer {
-    width: 100%;
+    width: 41%;
   }
+}
 
-  .walletContext{
-    width: 52%;
+@media screen and (max-width: 768px) {
+  .dropdownTextContainer {
+    width: 97%;
   }
-  
-  @media screen and (min-width: 1650px) {
-    .dropdownTextContainer {
-      width: 41%;
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    .dropdownTextContainer {
-      width: 97%;
-    }
-    
-  }
+}

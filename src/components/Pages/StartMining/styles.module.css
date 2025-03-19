@@ -1,96 +1,86 @@
-.panelContent{
-    padding: var(--space-md) var(--space-lg);
+.panelContent {
+  padding: var(--space-md) var(--space-lg);
 }
 
-.infoPanel{
-    justify-content: space-between;
+.infoPanel {
+  justify-content: space-between;
 }
 
-.mobileInfoPanel{
-    align-items: center;
+.mobileInfoPanel {
+  align-items: center;
 }
 
-.lineFlex{
-    display: flex;
-    flex-wrap: wrap;
+.lineFlex {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.alignItemsCenter{
-    align-items: center;
+.alignItemsCenter {
+  align-items: center;
 }
 
-.justifyContentCenter{
-    justify-content: center;
+.justifyContentCenter {
+  justify-content: center;
 }
 
-.coreMiner{
-    margin: auto;
-    background-color: var(--blue-rgb-600);
-    padding: 0px;
+.coreMiner {
+  margin: auto;
+  background-color: var(--blue-rgb-600);
+  padding: 0px;
 }
 
-.input{
-    color:var(--ifm-color-primary)!important;
+.input {
+  color:var(--ifm-color-primary)!important;
 }
 
-.buttonConfigLessPadding{
-    padding-inline: calc(var(--space-xs) / 4);
+.buttonConfigLessPadding {
+  padding-inline: calc(var(--space-xs) / 4);
 }
 
-.buttonConfig{
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+.buttonConfig {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
-.buttonConfigAmong{
-    margin-inline: var(--space-md);
+.buttonConfigAmong {
+  margin-inline: var(--space-md);
 }
 
-.marginAuto{
-    margin:auto;
+.marginAuto {
+  margin:auto;
 }
 
-.dropdownHeader{
-    font-size: var( --h3-font-size-desktop);
-    color: var(--white);
-    justify-content: space-between;
-    cursor: pointer;
-  
-    padding: 8px 0 11px 0;
-   
+.dropdownHeader {
+  font-size: var( --h3-font-size-desktop);
+  color: var(--white);
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 8px 0 11px 0;
 }
 
-.poolTable{
-    position: relative;
+.poolTable {
+  position: relative;
 }
 
 .poolTable::after {
-    content: "";
-    position: absolute;
-   bottom: 10px;
-    width: 100%;
-    height: 1px;
-    background-color: #363636;
-  }
-
-  
-
-.poolContainer{
-    width: 65%;
-    margin: 0 auto;
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  height: 1px;
+  background-color: #363636;
 }
 
+.poolContainer {
+  width: 65%;
+  margin: 0 auto;
+}
 
 @media screen and (max-width: 768px) {
-    .poolContainer{
-        width: 96%;
-    }
-
-    /* .dropdownHeader{
-        width: 76%;
-    } */
-    
+  .poolContainer{
+    width: 96%;
+  }
 }

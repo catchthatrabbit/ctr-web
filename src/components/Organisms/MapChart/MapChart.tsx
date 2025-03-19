@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { TextFormatOutputType } from "@site/src/utils/textFormat";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 

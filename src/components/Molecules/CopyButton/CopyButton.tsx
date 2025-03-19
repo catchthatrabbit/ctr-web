@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from "@site/src/components/Atoms/Button";
 import { Copy } from "@site/src/icons";
 import { toast } from "react-toastify";
@@ -35,10 +36,9 @@ const CopyButton = ({
   const notify = () => {
     toast.success(toastText, {
       className: styles.customToast,
-      bodyClassName: styles.customToastBody,
-      progressClassName: styles.customToastProgress,
       closeButton: CustomCloseButton,
       theme: "dark",
+      style: { background: 'var(--ifm-color-primary-darkest)' },
     });
   };
   const handleCopy = () => {

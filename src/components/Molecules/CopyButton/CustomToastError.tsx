@@ -26,11 +26,10 @@ const CustomCloseButton = ({ closeToast }) => (
 const CustomToastError = ({ message }: { message: string }) => {
   toast.error(message, {
     className: styles.customToast,
-    bodyClassName: styles.customToastBody,
-
     closeButton: CustomCloseButton,
     theme: "dark",
     icon: <Cancel />,
+    style: { background: 'var(--ifm-color-error)' },
   });
 
   return null;

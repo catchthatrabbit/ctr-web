@@ -1,8 +1,8 @@
-.justifyCenter{
+.justifyCenter {
     justify-content: center;
 }
 
-.iBan{
+.iBan {
     white-space: normal;
     line-break: anywhere;
     font-family: var(--regular-font-family);
@@ -10,11 +10,11 @@
     padding-top: calc(var(--space-xs) / 2);
 }
 
-.iBanPaddingBottom{
+.iBanPaddingBottom {
     padding-bottom: var(--space-xs);
 }
 
-.iBanRoot{
+.iBanRoot {
     align-items: center;
     text-align: center;
 }

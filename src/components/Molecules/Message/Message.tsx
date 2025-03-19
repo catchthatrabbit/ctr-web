@@ -1,3 +1,4 @@
+import React from 'react';
 import { Text } from "@site/src/components/Atoms/Text";
 
 import styles from "./styles.module.css";

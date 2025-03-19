@@ -1,4 +1,4 @@
-.button{
+.button {
   box-sizing: border-box;
   display: flex;
   background: none;
@@ -15,7 +15,7 @@
 }
 
 
-.buttonIcon{
+.buttonIcon {
   vertical-align: baseline;
   padding-right: calc(var(--space-xs) / 2);
   svg path{
@@ -24,26 +24,22 @@
 
 }
 
-.buttonIcon:hover{
+.buttonIcon:hover {
   svg path{
     fill: var(--ifm-search-btn-hover);
   }
 }
 
-.small{
+.small {
   padding: calc(var(--space-xs) / 2);
 }
 
-.medium{
+.medium {
   padding: var(--space-md);
   min-width: 215px;
 }
 
-.large{
-  /* padding: var(--space-lg) var(--space-xs) */
-}
-
-.full{
+.full {
   width: 100%
 }
 
@@ -56,44 +52,43 @@
   background-color: transparent;
 }
 
-.outline{
+.outline {
   background-color: transparent;
 }
 
-.outline:hover{
+.outline:hover {
   background-color: transparent;
 }
 
-.transparent{
+.transparent {
   min-width: 0;
   background-color: var(--blue-rgb-900);
   backdrop-filter: blur(6px);
   transition: transform 0.3s;
 }
 
-.transparent:hover{
+.transparent:hover {
   transform: scale(1.05);
   backdrop-filter: blur(18px);
 }
 
-.email{
+.email {
   background-color: var(--blue-rgb-600);
 }
 
-.email:hover{
+.email:hover {
   background-color: var(--blue-rgb-700);
 }
 
-.configButton{
+.configButton {
   width: 27%;
   padding: var(--space-xxs) var(--space-sm);
 }
 
-.mobileWalletButton{
+.mobileWalletButton {
   padding: calc(var(--space-xs) / 2) var(--space-sm);
 
 }
-
 
 @media screen and (max-width: 768px) {
   .configButton{

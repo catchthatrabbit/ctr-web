@@ -1,4 +1,10 @@
-const DropdownIconDown = ({ style }) => {
+import React from 'react';
+
+interface DropdownIconDownProps {
+  style?: React.CSSProperties;
+}
+
+const DropdownIconDown = ({ style }: DropdownIconDownProps) => {
   return (
     <svg
       width="24"

@@ -1,242 +1,240 @@
-
-:root{
+:root {
     --gutter-x:var(--space-xs);
     --gutter-y:var(--space-xs);
 }
 
-.grid{
+.grid {
     display: grid;
 }
 
-.grid-end{
+.grid-end {
     align-items: end;
 }
 
-.grid-col-gap{
+.grid-col-gap {
     column-gap: var(--gutter-x);
 }
 
-.sm.grid-col-gap{
+.sm.grid-col-gap {
     column-gap: var(--space-sm);
 }
 
-.md.grid-col-gap{
+.md.grid-col-gap {
     column-gap: var(--space-md);
 }
 
-.lg.grid-col-gap{
+.lg.grid-col-gap {
     column-gap: var(--space-lg);
 }
 
-.xl.grid-col-gap{
+.xl.grid-col-gap {
     column-gap: var(--space-xl);
 }
 
-.grid-col--1{
+.grid-col--1 {
     grid-template-columns: repeat(1, 1fr);
 }
 
-.grid-col--2{
+.grid-col--2 {
     grid-template-columns: repeat(2, 1fr);
 }
 
-.grid-col--3{
+.grid-col--3 {
     grid-template-columns: repeat(3, 1fr);
 }
 
-.grid-col--4{
+.grid-col--4 {
     grid-template-columns: repeat(4, 1fr);
 }
 
-.grid-col--5{
+.grid-col--5 {
     grid-template-columns: repeat(5, 1fr);
 }
 
-.grid-col--6{
+.grid-col--6 {
     grid-template-columns: repeat(6, 1fr);
 }
 
-.grid-col--7{
+.grid-col--7 {
     grid-template-columns: repeat(7, 1fr);
 }
 
-.grid-col--8{
+.grid-col--8 {
     grid-template-columns: repeat(8, 1fr);
 }
 
-.grid-col--9{
+.grid-col--9 {
     grid-template-columns: repeat(9, 1fr);
 }
 
-.grid-col--10{
+.grid-col--10 {
     grid-template-columns: repeat(10, 1fr);
 }
 
-.grid-col--11{
+.grid-col--11 {
     grid-template-columns: repeat(11, 1fr);
 }
 
-.grid-col--12{
+.grid-col--12 {
     grid-template-columns: repeat(12, 1fr);
 }
 
 .grid-col--2-5-1 {
     grid-template-columns: 2.5fr 1fr;
-    
 }
 
-.grid-span-col--2{
+.grid-span-col--2 {
     grid-column: span 2;
 }
 
-.grid-span-col--3{
+.grid-span-col--3 {
     grid-column: span 3;
 }
 
-.grid-span-col--4{
+.grid-span-col--4 {
     grid-column: span 4;
 }
 
-.grid-span-col--5{
+.grid-span-col--5 {
     grid-column: span 5;
 }
 
-.grid-span-col--6{
+.grid-span-col--6 {
     grid-column: span 6;
 }
 
-.grid-span-col--7{
+.grid-span-col--7 {
     grid-column: span 7;
 }
 
-.grid-span-col--8{
+.grid-span-col--8 {
     grid-column: span 8;
 }
 
-.grid-span-col--9{
+.grid-span-col--9 {
     grid-column: span 9;
 }
 
-.grid-span-col--10{
+.grid-span-col--10 {
     grid-column: span 10;
 }
 
-.grid-span-col--11{
+.grid-span-col--11 {
     grid-column: span 11;
 }
 
-.grid-span-col--12{
+.grid-span-col--12 {
     grid-column: span 12;
 }
 
-.grid-row-gap{
+.grid-row-gap {
     row-gap: var(--gutter-y);
 }
 
-.sm.grid-row-gap{
+.sm.grid-row-gap {
     row-gap: var(--space-sm);
 }
 
-.md.grid-row-gap{
+.md.grid-row-gap {
     row-gap: var(--space-md);
 }
 
-.lg.grid-row-gap{
+.lg.grid-row-gap {
     row-gap: var(--space-lg);
 }
 
-.xl.grid-row-gap{
+.xl.grid-row-gap {
     row-gap: var(--space-xl);
 }
 
-.grid-row--1{
+.grid-row--1 {
     grid-template-rows: repeat(1, 1fr);
 }
 
-.grid-row--2{
+.grid-row--2 {
     grid-template-rows: repeat(2, 1fr);
 }
 
-.grid-row--3{
+.grid-row--3 {
     grid-template-rows: repeat(3, 1fr);
 }
 
-.grid-row--4{
+.grid-row--4 {
     grid-template-rows: repeat(4, 1fr);
 }
 
-.grid-row--5{
+.grid-row--5 {
     grid-template-rows: repeat(5, 1fr);
 }
 
-.grid-row--6{
+.grid-row--6 {
     grid-template-rows: repeat(6, 1fr);
 }
 
-.grid-row--7{
+.grid-row--7 {
     grid-template-rows: repeat(7, 1fr);
 }
 
-.grid-row--8{
+.grid-row--8 {
     grid-template-rows: repeat(8, 1fr);
 }
 
-.grid-row--9{
+.grid-row--9 {
     grid-template-rows: repeat(9, 1fr);
 }
 
-.grid-row--10{
+.grid-row--10 {
     grid-template-rows: repeat(10, 1fr);
 }
 
-.grid-row--11{
+.grid-row--11 {
     grid-template-rows: repeat(11, 1fr);
 }
 
-.grid-row--12{
+.grid-row--12 {
     grid-template-rows: repeat(12, 1fr);
 }
 
-.grid-span-row--2{
+.grid-span-row--2 {
     grid-row: span 2;
 }
 
-.grid-span-row--3{
+.grid-span-row--3 {
     grid-row: span 3;
 }
 
-.grid-span-row--4{
+.grid-span-row--4 {
     grid-row: span 4;
 }
 
-.grid-span-row--5{
+.grid-span-row--5 {
     grid-row: span 5;
 }
 
-.grid-span-row--6{
+.grid-span-row--6 {
     grid-row: span 6;
 }
 
-.grid-span-row--7{
+.grid-span-row--7 {
     grid-row: span 7;
 }
 
-.grid-span-row--8{
+.grid-span-row--8 {
     grid-row: span 8;
 }
 
-.grid-span-row--9{
+.grid-span-row--9 {
     grid-row: span 9;
 }
 
-.grid-span-row--10{
+.grid-span-row--10 {
     grid-row: span 10;
 }
 
-.grid-span-row--11{
+.grid-span-row--11 {
     grid-row: span 11;
 }
 
-.grid-span-row--12{
+.grid-span-row--12 {
     grid-row: span 12;
 }

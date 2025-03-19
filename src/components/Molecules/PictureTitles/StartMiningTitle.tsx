@@ -1,3 +1,4 @@
+import React from 'react';
 import PictureTitle from "@site/src/components/Atoms/PictureTitle/PictureTitle";
 import { Dive } from "@site/src/icons";
 

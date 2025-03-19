@@ -1,8 +1,6 @@
 import React from "react";
 import StartMiningTitle from "@site/src/components/Molecules/PictureTitles/StartMiningTitle";
-import { Text } from "@site/src/components/Atoms/Text";
 import { Spacer } from "../../Atoms/Spacer";
-import { Button } from "../../Atoms/Button";
 import Link from "@docusaurus/Link";
 
 import styles from "./styles.module.css";

@@ -1,4 +1,4 @@
-import { ITabs, Tabs } from "@site/src/components/Molecules/Tabs";
+import React from 'react';
 import { Panel } from "@site/src/components/Molecules/Panel";
 import { Spacer } from "../../Atoms/Spacer";
 
@@ -24,18 +24,15 @@ const WalletInfoTabs = ({
       value: "payouts",
       tabContent: payouts,
     },
-  ] as ITabs["items"];
+  ];
 
   return (
     <div>
-      {/* Render the workers table within a Panel */}
       <Panel title="Miners" handleFilterChange={handleFilterChange}>
         {workers}
       </Panel>
-
       <Spacer variant="sm" />
       <Spacer variant="md" />
-      {/* Render the payouts table within a Panel */}
       <Panel title="Payouts">{payouts}</Panel>
     </div>
   );

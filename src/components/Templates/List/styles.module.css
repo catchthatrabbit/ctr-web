@@ -1,28 +1,24 @@
-.listRoot{
-    position: relative;
-  
-    overflow: hidden; 
-}
-.blocksListRoot{
-    border-radius: var(--ifm-global-radius);
+.listRoot {
+  position: relative;
+  overflow: hidden;
 }
 
-.blocksContext{
-    border-radius: var(--ifm-global-radius);
+.blocksListRoot {
+  border-radius: var(--ifm-global-radius);
 }
 
-.tableWrapper{
-    width: 100%; 
-    /* max-width: 1200px; 
-    margin: 0 auto; */
-    /* overflow-x: auto; */
+.blocksContext {
+  border-radius: var(--ifm-global-radius);
 }
 
-.listMarginInlineMobile{
-    margin-inline: calc(var(--space-xs) / 2);
+.tableWrapper {
+  width: 100%;
 }
 
-.paginationWrapper{
-    width: 100%;
+.listMarginInlineMobile {
+  margin-inline: calc(var(--space-xs) / 2);
 }
 
+.paginationWrapper {
+  width: 100%;
+}

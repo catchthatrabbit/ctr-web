@@ -111,8 +111,6 @@ const useControls = ({
     label: string;
     value: STANDARD_REGIONS_API_KEYS;
   }) => {
-    // change current url to reflect the selected region
-
     const splitted = location.pathname.split("/");
     splitted[3] = id.value.toLowerCase();
     const newUrl = splitted.join("/");

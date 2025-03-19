@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { InfoBox } from "@site/src/components/Molecules/InsideChart/Info";
 import { LoadingPlaceholder } from "@site/src/components/Atoms/LoadingPlaceholder";
 import { InfoBoxLoadingSkeleton } from "@site/src/components/Atoms/InfoBoxLoadingSkeleton";
+import { TextFormatOutputType } from "@site/src/utils/textFormat";
 
 interface InfoItem {
   title: string;

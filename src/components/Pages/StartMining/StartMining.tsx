@@ -7,16 +7,7 @@ import {
   PoolTitle,
   GuideTitle,
 } from "@site/src/components/Molecules/PictureTitles";
-import {
-  Panel,
-  PanelContent,
-  Title,
-} from "@site/src/components/Molecules/Panel";
-import { Text } from "@site/src/components/Atoms/Text";
 import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
-import Link from "@docusaurus/Link";
-import clsx from "clsx";
-import { Search } from "@site/src/components/Molecules/Search";
 import { useFetchSettings } from "@site/src/hooks/useSettings";
 import { useHeaders } from "@site/src/hooks/useHeaders";
 import { IAnyPageAndWallet } from "../types";
@@ -42,7 +33,7 @@ const StartMining = ({
     isLoadingMapChart,
   } = useControls();
 
-  const inputStartMiningRef = useRef<HTMLInputElement>();
+  const inputStartMiningRef = useRef<HTMLInputElement>(null);
 
   const { region, handleSearch } = useHeaders({
     defaultRegion,
@@ -100,7 +91,36 @@ const StartMining = ({
       <GuideTitle />
       {desktop ? <Spacer variant="xxl" /> : <Spacer variant="lg" />}
 
-      <Steps onSetWalletAddress={onSetWalletAddress} />
+      <Steps
+        onSetWalletAddress={onSetWalletAddress}
+        steps={[
+          {
+            title: "Step 1",
+            text: "Download the mining software compatible with your hardware",
+            number: 1
+          },
+          {
+            title: "Step 2",
+            text: "Configure your wallet address in the mining software",
+            number: 2
+          },
+          {
+            title: "Step 3",
+            text: "Join a mining pool for consistent rewards",
+            number: 3
+          },
+          {
+            title: "Step 4",
+            text: "Start the mining process and monitor performance",
+            number: 4
+          },
+          {
+            title: "Step 5",
+            text: "Optimize settings for maximum efficiency",
+            number: 5
+          }
+        ]}
+      />
 
       <Spacer variant="xl" />
       <span id="pools"></span>

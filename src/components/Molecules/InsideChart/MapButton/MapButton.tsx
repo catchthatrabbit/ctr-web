@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from "@site/src/components/Atoms/Button";
 import MapCircle from "./MapCircle";
 import Link from "@docusaurus/Link";
@@ -11,7 +12,9 @@ interface IMapButton {
 }
 
 const MapButton = ({ value, href }: IMapButton) => {
-  const LinkComp = (children) => <Link to={href}>{children}</Link>;
+  const LinkComp: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <Link to={href}>{children}</Link>
+  );
   const MapButtonComp = ({ className }: { className?: string }) => (
     <Button
       className={clsx([styles.button, styles.wordWrap, className])}

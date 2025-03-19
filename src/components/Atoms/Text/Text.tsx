@@ -1,4 +1,4 @@
-import { FC, HtmlHTMLAttributes, createElement, ReactNode } from "react";
+import React, { FC, HtmlHTMLAttributes, createElement, ReactNode } from "react";
 import clsx from "clsx";
 import Translate from "@docusaurus/Translate";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
@@ -18,7 +18,7 @@ import styles from "./styles.module.css";
  * @returns React.Node
  */
 interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
-  type?: "label" | "value" | "regular" | "exo";
+  type?: "label" | "value" | "regular" | "exo" | "zephirum";
   variant?:
     | "heading" /** font size 50 */
     | "heading1" /** font size 38 */
@@ -42,15 +42,16 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "dashboardColor"
     | "valueChartColor"
     | "subheadingColor"
-    | "black";
-  componentType?: keyof JSX.IntrinsicElements;
+    | "black"
+    | "white";
+  componentType?: string;
   decorating?: "simple" | "underlined" | "link";
-  lineHeight:
+  lineHeight?:
     | "normalLineHeight"
     | "smallLineHeight"
     | "largeLineHeight"
     | "mediumLineHeight";
-  letterSpacing: "letterSpacing";
+  letterSpacing?: "letterSpacing" | "normal";
   children: string;
   disableMobileStyles?: boolean; // disable mobile styles
 }
@@ -58,42 +59,24 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
 const CustomComponent: FC<
   Omit<IText, "children"> & { children?: ReactNode }
 > = ({ variant, children, className, componentType, ...restProps }) => {
-  return variant === "heading1" ||
-    variant === "heading2" ||
-    variant === "heading3"
-    ? createElement(
-        (variant === "heading1" && "h1") ||
-          ("heading2" && "h2") ||
-          ("heading3" && "h3"),
-        { className, ...restProps },
-        children,
-      )
-    : createElement(componentType, { className, ...restProps }, children);
+  let element: string = componentType as string;
+  if (variant === "heading1") element = "h1";
+  else if (variant === "heading2") element = "h2";
+  else if (variant === "heading3") element = "h3";
+  return createElement(element, { className, ...restProps }, children);
 };
 
 const Text: FC<IText> = ({
   variant = "subheading",
-  weight = "normal" ||
-    "regular" ||
-    "extraBold" ||
-    "bold" ||
-    "semiBold" ||
-    "medium",
-  size = "regular" || "small" || "mediumSize" || "large" || "pictureTitle",
+  weight = "normal",
+  size = "regular",
   children,
   className,
-  lineHeight = "smallLineHeight" ||
-    "normalLineHeight" ||
-    "largeLineHeight" ||
-    "mediumLineHeight",
+  lineHeight = "smallLineHeight",
   letterSpacing,
-  type = "regular" || "exo",
+  type = "regular",
   componentType = "span",
-  color = "InsideChartColor" ||
-    "dashboardColor" ||
-    "subheadingColor" ||
-    "secondary" ||
-    "black",
+  color = "InsideChartColor",
   disableMobileStyles,
   ...restProps
 }) => {
@@ -102,6 +85,7 @@ const Text: FC<IText> = ({
     <CustomComponent
       variant={variant}
       componentType={componentType}
+      lineHeight={lineHeight}
       className={clsx([
         styles.text,
 

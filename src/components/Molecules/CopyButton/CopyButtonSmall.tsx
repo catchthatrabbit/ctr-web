@@ -1,3 +1,4 @@
+import React from 'react';
 import { Copy } from "@site/src/icons";
 import { toast } from "react-toastify";
 import { ICopyButton } from "./types";
@@ -25,10 +26,9 @@ const CopyButtonSmall = ({ textToCopy, onCopy }: ICopyButton) => {
   const notify = () => {
     toast.success("Wallet address copied to clipboard", {
       className: styles.customToast,
-      bodyClassName: styles.customToastBody,
-      progressClassName: styles.customToastProgress,
       closeButton: CustomCloseButton,
       theme: "dark",
+      style: { background: 'var(--ifm-color-primary-darkest)' },
     });
   };
   const handleCopy = () => {

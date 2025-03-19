@@ -1,9 +1,9 @@
-.footerLink{
-    font-family: var(--value-font-family);
-    font-size: var( --body-small-font-size);
-    color: var(--ifm-color-primary)
+.footerLink {
+  font-family: var(--value-font-family);
+  font-size: var(--body-small-font-size);
+  color: var(--ifm-color-primary);
 }
 
-.footerLink:hover{
-    color: var(--ifm-footerLink-hover)
+.footerLink:hover {
+  color: var(--ifm-footerLink-hover);
 }

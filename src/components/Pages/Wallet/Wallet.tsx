@@ -10,9 +10,6 @@ import {
   convertPaymentsResponse2PaymentInfo,
   convertWorkersResponse2Info,
 } from "./utils";
-import { Button } from "../../Atoms/Button";
-import Link from "@docusaurus/Link";
-import { Panel, PanelContent } from "@site/src/components/Molecules/Panel";
 import { Text } from "@site/src/components/Atoms/Text";
 import { IAnyPageAndWallet } from "../types";
 import useControls from "./controls";
@@ -90,8 +87,6 @@ const Wallet = ({
       )}
       {desktop ? <Spacer variant="xxl" /> : <Spacer variant="sm" />}
 
-      {/* <Button value="Back" onClick={onClearWalletAddress} /> */}
-
       <div className={`flex items-center xl-center-items ${styles.fullWidth}`}>
         <Text
           type="exo"
@@ -114,7 +109,7 @@ const Wallet = ({
               type="regular"
               variant="heading3"
               color="white"
-              weight="regular"
+              weight="normal"
             >
               Wallet not found. No data to show.
             </Text>
@@ -161,7 +156,7 @@ const Wallet = ({
                   total={fetchWorkersByWalletAddress?.workersTotal}
                   onPageChange={handleChangePageWorkers}
                   context="wallet"
-                  filterStatus={filterStatus} // Pass filterStatus prop
+                  filterStatus={filterStatus}
                 />
               </>
             }

@@ -1,23 +1,19 @@
-.pictureTitleRoot{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-   
+.pictureTitleRoot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.flexColumn{
-    display: flex;
-    flex-direction: column;
-    
-  
+.flexColumn {
+  display: flex;
+  flex-direction: column;
 }
 
-.pictureImg{
-    margin-bottom: 5px;
+.pictureImg {
+  margin-bottom: 5px;
 }
 
-.flexStart{
-    display: flex;
-    justify-content: flex-start !important;
-    
+.flexStart {
+  display: flex;
+  justify-content: flex-start !important;
 }

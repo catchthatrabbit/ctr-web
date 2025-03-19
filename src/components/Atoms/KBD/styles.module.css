@@ -1,11 +1,11 @@
-.kbd{
-    color: var(--ifm-color-primary);
-    border: 1px solid  var(--gray-700);
-    border-radius: var(--ifm--ifm-global-radius);
-    padding: var(--space-xs);
-    white-space: break-spaces;
-    font-size: var(--body-font-size);
-    background-color:transparent;
-    box-shadow:none;
-    display: inline-block;
+.kbd {
+  color: var(--ifm-color-primary);
+  border: 1px solid  var(--gray-700);
+  border-radius: var(--ifm--ifm-global-radius);
+  padding: var(--space-xs);
+  white-space: break-spaces;
+  font-size: var(--body-font-size);
+  background-color:transparent;
+  box-shadow:none;
+  display: inline-block;
 }

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
 import { HTMLAttributes } from "react";
@@ -55,8 +56,10 @@ const Button = ({
       {icon && <div className={styles.buttonIcon}>{icon}</div>}
       <Text
         variant={size === "large" ? "body" : "smallBody"}
-        color={textColor}
+        color={textColor as "black" | "white" | "primary" | "secondary" | "summary" | "InsideChartColor" | "dashboardColor" | "valueChartColor" | "subheadingColor"}
         weight={weight}
+        lineHeight="normalLineHeight"
+        letterSpacing="letterSpacing"
       >
         {value}
       </Text>

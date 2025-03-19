@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { List } from "@site/src/components/Templates/List";
 import { Header } from "@site/src/components/Templates/Header";
 import { TextFormat } from "@site/src/utils/textFormat";
@@ -9,13 +9,12 @@ import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { Search } from "@site/src/components/Molecules/Search";
 import { Board } from "@site/src/components/Atoms/Board";
 import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
-
-import useControlsDashboard from "@site/src/components/Pages/Dashboard/controls";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 import clsx from "clsx";
 
 import styles from "./styles.module.css";
+import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
 
 interface IMiners extends IAnyPageAndWallet {
   selectedPool: string;
@@ -68,7 +67,7 @@ const Miners = ({
 
     setSelectedPool(poolShortcut);
 
-    handleChangeRegion(selectedOption);
+    handleChangeRegion(selectedOption as { label: string; value: STANDARD_REGIONS_API_KEYS });
   };
 
   return (
@@ -93,10 +92,10 @@ const Miners = ({
             context={mobile ? "wallet" : "payments"}
             onSearch={onSetWalletAddress}
             overrideLabel={true}
+            selectedPool={selectedPool}
           />
         }
         context={mobile ? "mobileWallet" : "payments"}
-        selectedPool={selectedPool}
         onSearch={handleSearch}
       />
       {desktop ? null : <Spacer variant="xxxl" />}

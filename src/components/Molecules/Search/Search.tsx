@@ -1,4 +1,4 @@
-import { Magnifier } from "@site/src/icons";
+import React from 'react';
 import { InputHTMLAttributes, forwardRef, useRef, useState } from "react";
 import { InputText } from "@site/src/components/Atoms/InputText";
 import clsx from "clsx";
@@ -26,7 +26,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
     },
     ref,
   ) => {
-    const inputRef = useRef<HTMLInputElement>();
+    const inputRef = useRef<HTMLInputElement>(null);
     const { mobile } = useMediaQueries();
     const [walletAddress, setWalletAddress] = useState("");
     const history = useHistory();

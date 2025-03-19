@@ -2,12 +2,13 @@ import React from "react";
 import { Text } from "@site/src/components/Atoms/Text";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { DownloadAppStore } from "@site/src/icons";
-import googlePlayImage from "@site/static/img/GooglePlay.png";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 import { QR } from "@site/src/icons";
 
 import styles from "./styles.module.css";
 import clsx from "clsx";
+
+const googlePlayImage = "/img/GooglePlay.png";
 
 const DownloadPanel: React.FC = () => {
   const { mobile, desktop } = useMediaQueries();

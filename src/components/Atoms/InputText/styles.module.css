@@ -1,15 +1,14 @@
 .inputText {
-    width: 100%;
-    height: 72px;
-    padding: 15px 20px 18px 57px;
-    font-family: var(--regular-font-family);
-    font-size: var(--subheading-font-size-mobile);
-    border-radius: var(--ifm-global-radius);
-    border: 1px solid #363636;
-    color: var(--gray-700); 
-    background-color: var(--white);
-    transition: all 0.1s ease-in-out 0s;
-    
+  width: 100%;
+  height: 72px;
+  padding: 15px 20px 18px 57px;
+  font-family: var(--regular-font-family);
+  font-size: var(--subheading-font-size-mobile);
+  border-radius: var(--ifm-global-radius);
+  border: 1px solid #363636;
+  color: var(--gray-700);
+  background-color: var(--white);
+  transition: all 0.1s ease-in-out 0s;
 }
 
 .mobileInputText{
@@ -18,61 +17,61 @@
 }
 
 .inputText:focus-visible{
-    border: 1px solid var(--gray-100);
+  border: 1px solid var(--gray-100);
 }
 
 .inputText::placeholder {
-    color: var(--ifm-subheading-color); 
+  color: var(--ifm-subheading-color);
 }
 
 .inputContainer {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .searchDark{
-    background-color: var(--dark-rgb-600);
-    color: var(--white);
-    padding: 14px 16px;
-    height: 52px;
-  }
-  
-  .icon {
-    position: absolute;
-   left: 4%;
-  top: 50%; 
-  transform: translate(-50%, -50%); 
-    pointer-events: none; 
-    height: 30%;
-  }
+.searchDark{
+  background-color: var(--dark-rgb-600);
+  color: var(--white);
+  padding: 14px 16px;
+  height: 52px;
+}
 
-  .smallIcon{
-    left: 6%;
-    height: 25%;
-    svg{
-      width: 18px;
-      height: 18px;
-    }
-  }
+.icon {
+  position: absolute;
+  left: 4%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  height: 30%;
+}
 
-  .mobileIcon{
-    left: 9%;
-    top: 54%;
+.smallIcon{
+  left: 6%;
+  height: 25%;
+  svg {
+    width: 18px;
+    height: 18px;
   }
-  
+}
+
+.mobileIcon{
+  left: 9%;
+  top: 54%;
+}
+
 .inputWithIcon {
-    padding-left: 30px; 
+  padding-left: 30px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .inputText{
+    font-size: var( --regular-font-size);
   }
-
-
-  @media screen and (max-width: 768px) {
-    .inputText{
-      font-size: var( --regular-font-size);
-    }
-    .inputText::placeholder {
-     font-size: 16px;
+  .inputText::placeholder {
+    font-size: 16px;
   }
 
   .mobileIconWallet{
@@ -82,6 +81,5 @@
 
   .inputContainer{
     width: 100%;
-   }
-    
   }
+}

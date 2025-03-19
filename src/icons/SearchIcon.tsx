@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface SearchIconProps {
   width?: number;
   height?: number;

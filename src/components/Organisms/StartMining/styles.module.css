@@ -1,25 +1,22 @@
-.startMining{
-   
-    text-align: center;
-    border-radius: var(--ifm-global-radius);
+.startMining {
+  text-align: center;
+  border-radius: var(--ifm-global-radius);
 }
 
-.startMiningContent{
-    padding-top: var(--space-xxs);
-    margin:auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.startMiningContent {
+  padding-top: var(--space-xxs);
+  margin:auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.button{
-    padding:var(--space-xs)!important;
-    min-width:215px;
+.button {
+  padding: var(--space-xs)!important;
+  min-width: 215px;
 }
 
-.linkButton{
-    font-family: var(--regular-font-family);
-    font-weight: var(--bold-font-weight);
-    
-
+.linkButton {
+  font-family: var(--regular-font-family);
+  font-weight: var(--bold-font-weight);
 }

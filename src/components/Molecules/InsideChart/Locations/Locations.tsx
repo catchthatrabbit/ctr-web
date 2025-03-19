@@ -15,16 +15,8 @@ const Locations = ({ children }: ILocation) => {
       <img
         src="/img/thatRabbitImg.png"
         className={clsx(styles.bgImage, { [styles.bgImageMobile]: mobile })}
-        alt="BACKGROUND_IMAGE"
+        alt="Rabbit"
       />
-      {/* <div
-        className={clsx([
-          styles.pinWrapper,
-          "grid xl-grid-col--8 lg-grid-col--6 md-grid-col--10 sm-grid-col--10 sm-grid-col--12",
-        ])}
-      >
-        {children}
-      </div> */}
     </div>
   );
 };

@@ -1,94 +1,85 @@
-.footerLayout{
-   
-    margin-bottom: var(--space-md);
+.footerLayout {
+  margin-bottom: var(--space-md);
 }
 
-.mobileFooterLayout{
-    display: flex;
-    flex-direction: column;
-   
+.mobileFooterLayout {
+  display: flex;
+  flex-direction: column;
 }
 
-.customLogoText{
-    margin-top:var(--space-lg);
-   
+.customLogoText {
+  margin-top:var(--space-lg);
 }
 
-.footer{
-    background-color: transparent;
-    padding-bottom: 0px;
-    padding-inline: 0px;
+.footer {
+  background-color: transparent;
+  padding-bottom: 0px;
+  padding-inline: 0px;
 }
 
-.footerLinks{
-    position: relative;
+.footerLinks {
+  position: relative;
 }
 
-.footerLinks::after{
-    content: "";
-    position: absolute;
-    top: 118%;
-    left: 48%;
-    transform: translateX(-50%);
-    width: 100%;
-    border-top: 1px solid rgba(54, 54, 54, 1);
+.footerLinks::after {
+  content: "";
+  position: absolute;
+  top: 118%;
+  left: 48%;
+  transform: translateX(-50%);
+  width: 100%;
+  border-top: 1px solid rgba(54, 54, 54, 1);
 }
 
-.footerCopyWrite{
-    /* background-color: var(--blue-rgb-600); */
-    padding-block: var(--space-sm);
-    position: relative;
-    padding-top: 40px;
-    
+.footerCopyWrite {
+  padding-block: var(--space-sm);
+  position: relative;
+  padding-top: 40px;
 }
 
-
-.flex{
-    display: flex;
-    flex-direction: column;
+.flex {
+  display: flex;
+  flex-direction: column;
 }
 
-.downloadBtns{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-   
+.downloadBtns {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.btns{
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
+.btns {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .googlePlayImage {
-    width: 119px; 
-    height: 40px;
-   
-  }
-
-  @media (min-width: 768px) {
-    .downloadBtns{
-        width: max-content;
-
+  width: 119px;
+  height: 40px;
 }
 
+@media (min-width: 768px) {
+  .downloadBtns {
+    width: max-content;
   }
-  
-  @media (max-width: 767px) {
-    .downloadBtns{
+}
+
+@media (max-width: 767px) {
+  .downloadBtns {
     span {
       width: auto;
     }
     align-items: center;
-}
-.footerCopyWrite{
+  }
+
+  .footerCopyWrite {
     padding-block: var(--space-md);
-}
-.footerCopyWrite::before {
+  }
+
+  .footerCopyWrite::before {
     top: 7px;
     left: 50%;
     width: 91%;
-}
-
   }
+}

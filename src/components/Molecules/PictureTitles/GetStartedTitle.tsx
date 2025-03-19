@@ -1,3 +1,4 @@
+import React from 'react';
 import PictureTitle from "@site/src/components/Atoms/PictureTitle/PictureTitle";
 import { HeadAndNeckAbove } from "@site/src/icons";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
@@ -16,6 +17,7 @@ const GetStarted = () => {
       title="Start mining"
       titleStyles={titleStyles}
       disableMobileStyles={true}
+      image={<HeadAndNeckAbove />}
     />
   );
 };

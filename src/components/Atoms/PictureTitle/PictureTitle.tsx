@@ -44,6 +44,8 @@ const PictureTitle = ({
         <Text
           variant="subheading1"
           color="subheadingColor"
+          lineHeight="normalLineHeight"
+          letterSpacing="letterSpacing"
           style={{ marginTop: "8px", ...secondaryTextStyle }}
           disableMobileStyles={disableMobileStyles}
         >

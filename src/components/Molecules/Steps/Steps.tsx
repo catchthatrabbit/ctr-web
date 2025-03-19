@@ -7,7 +7,6 @@ import { DownloadPanel } from "@site/src/components/Molecules/DownloadPanel";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { OpenInNew } from "@site/src/icons";
 import Button from "@site/src/components/Atoms/Button/Button";
-import { useWalletPage } from "@site/src/hooks/useWallet";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 import { Link } from "react-router-dom";
 

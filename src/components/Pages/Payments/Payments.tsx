@@ -1,3 +1,4 @@
+import React from 'react';
 import { TextFormat } from "@site/src/utils/textFormat";
 import { Header } from "../../Templates/Header";
 import { List } from "@site/src/components/Templates/List";
@@ -15,8 +16,11 @@ import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 import clsx from "clsx";
 
 import styles from "./styles.module.css";
+import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 
-interface IPayments extends IAnyPageAndWallet {}
+interface IPayments extends IAnyPageAndWallet {
+  setSelectedPool?: (pool: string) => void;
+}
 
 const Payments = ({
   defaultRegion,
@@ -58,7 +62,7 @@ const Payments = ({
 
     setSelectedPool(poolShortcut);
 
-    handleChangeRegion(selectedOption);
+    handleChangeRegion(selectedOption as { label: string; value: STANDARD_REGIONS_API_KEYS });
   };
 
   return (
@@ -90,10 +94,10 @@ const Payments = ({
             context={mobile ? "wallet" : "payments"}
             onSearch={onSetWalletAddress}
             overrideLabel={true}
+            selectedPool={selectedPool}
           />
         }
         context={mobile ? "mobileWallet" : "payments"}
-        selectedPool={selectedPool}
         onSearch={handleSearch}
       />
       {desktop ? null : <Spacer variant="xxxl" />}

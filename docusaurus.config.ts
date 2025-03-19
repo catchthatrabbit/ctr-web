@@ -363,7 +363,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `© 2022—  ${new Date().getFullYear()} Catch that Rabbit. All rights reserved.`,
+      copyright: `<span style="font-size:1.3rem">⊛</span> 2022 — ${new Date().getFullYear()} Catch that Rabbit.`,
     },
     colorMode: {
       defaultMode: "dark",

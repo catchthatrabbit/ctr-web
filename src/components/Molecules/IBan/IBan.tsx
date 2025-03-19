@@ -1,3 +1,4 @@
+import React from 'react';
 import { Text } from "@site/src/components/Atoms/Text";
 import { generateIBan } from "@site/src/utils/generateIBan";
 import clsx from "clsx";
@@ -8,6 +9,7 @@ import styles from "./styles.module.css";
 
 interface IIBan {
   iBan?: string;
+  pool?: string;
 }
 
 const IBan = ({ iBan = "", pool = "de" }: IIBan) => {
@@ -38,13 +40,13 @@ const IBan = ({ iBan = "", pool = "de" }: IIBan) => {
           textToCopy={iBan}
           value="Copy wallet address"
           toastText="Wallet address copied to clipboard"
-          context={mobile ? "wallet" : ""}
+          context={mobile ? "wallet" : "config"}
         />
         <CopyButton
           textToCopy={permalink}
           value="Copy permalink"
           toastText="Permalink copied to clipboard"
-          context={mobile ? "wallet" : ""}
+          context={mobile ? "wallet" : "config"}
         />
       </div>
     </>

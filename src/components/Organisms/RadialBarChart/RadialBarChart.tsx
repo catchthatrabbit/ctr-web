@@ -1,8 +1,7 @@
+import React from 'react';
 import * as d3 from "d3";
 import { useEffect, useRef, ReactNode } from "react";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
-
-import clx from "clsx";
 import styles from "./styles.module.css";
 
 interface IRadialBarChartProps {
@@ -116,8 +115,8 @@ const RadialBarChart = ({
         d3
           .axisLeft(y)
           .tickSize(-width + marginLeft + marginRight) // Extend grid lines across the chart
-          .tickFormat("") // Remove the tick labels
-          .tickValues(y.ticks().slice(1)), // Exclude the bottom-most tick
+          .tickFormat(() => "") // Change this line to use a function that returns empty string
+          .tickValues(y.ticks().slice(1)) // Exclude the bottom-most tick
       )
       .call((g) => g.select(".domain").remove()) // Remove the axis line
       .selectAll(".tick line")

@@ -15,4 +15,7 @@ export interface IDataTable {
   isLoading?: boolean;
   loadingComp?: React.ReactNode;
   isWalletPage?: boolean;
+  itemsPerPage?: number;
+  context?: string;
+  hidePagination?: boolean;
 }

@@ -1,9 +1,9 @@
 .boardRoot {
-    display: flex;
-    justify-content: center;
-    margin: var(--space-lg) 0;
-  }
-  
-  .boardJustifyCenter {
-    justify-content: center;
-  }
+  display: flex;
+  justify-content: center;
+  margin: var(--space-lg) 0;
+}
+
+.boardJustifyCenter {
+  justify-content: center;
+}

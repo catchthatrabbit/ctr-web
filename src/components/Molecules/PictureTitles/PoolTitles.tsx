@@ -1,3 +1,4 @@
+import React from 'react';
 import PictureTitle from "@site/src/components/Atoms/PictureTitle/PictureTitle";
 import { Dive } from "@site/src/icons";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
@@ -14,6 +15,7 @@ const PoolTitle = () => {
         fontSize: "var(--regular-font-size)",
         marginTop: mobile ? "8px" : "0px",
       }}
+      image={<Dive />}
     />
   );
 };

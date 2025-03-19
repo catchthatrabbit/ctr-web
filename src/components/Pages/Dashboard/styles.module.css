@@ -1,41 +1,39 @@
-.mapChartLocationPlace{
-    position: relative;
+.mapChartLocationPlace {
+  position: relative;
 }
 
-.fullWidth{
-    width: 100%;
+.fullWidth {
+  width: 100%;
 }
 
-.loadingSkeleton{
-    min-height: 615px;
-    width: 100%;
+.loadingSkeleton {
+  min-height: 615px;
+  width: 100%;
 }
 
-.loadingPlaceholder{
-    position: static;
+.loadingPlaceholder {
+  position: static;
 }
 
-.directionRtl{
-    direction: rtl;
+.directionRtl {
+  direction: rtl;
 }
 
-.directionLtr{
-    direction: ltr;
+.directionLtr {
+  direction: ltr;
 }
 
-.horizontalLine{
-    height: 1px;
-    background:  #FFFFFF40;
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+.horizontalLine {
+  height: 1px;
+  background: #ffffff40;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-@media screen and (max-width: 768px){
-    .horizontalLine{
-        background: linear-gradient(to right, #FFFFFF40 25%, #FFFFFF0D 75%);
-
-    }
-    
+@media screen and (max-width: 768px) {
+  .horizontalLine {
+    background: linear-gradient(to right, #ffffff40 25%, #ffffff0d 75%);
+  }
 }

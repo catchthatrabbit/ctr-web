@@ -1,6 +1,6 @@
-.customLogoCopyWrite{
-    font-size: var( --body-small-font-size);
-    font-family: var(--regular-font-family);
-    font-weight: var(--regular-font-weight);
-    color: var(--ifm-subheading-color);
+.customLogoCopyWrite {
+  font-size: var( --body-small-font-size);
+  font-family: var(--regular-font-family);
+  font-weight: var(--regular-font-weight);
+  color: var(--ifm-subheading-color);
 }
