@@ -10,6 +10,9 @@ export const convertNumber2Currency = (
   const numberFormat = new ExchNumberFormat(location, {
     style: "currency",
     currency: type,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 4,
+    cropZeros: true,
   });
 
   // Check if the format method exists

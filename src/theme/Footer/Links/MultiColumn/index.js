@@ -1,6 +1,5 @@
 import React from "react";
 import LinkItem from "@theme/Footer/LinkItem";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
 import clsx from "clsx";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
@@ -29,7 +28,6 @@ function Column({ column }) {
         [customStyles.alignCenter]: mobile,
       })}
     >
-      <Spacer variant="md" />
       <div className={clsx("footer__title", customStyles.title)}>
         {column.title}
       </div>

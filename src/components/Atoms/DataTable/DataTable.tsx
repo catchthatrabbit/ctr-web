@@ -93,9 +93,9 @@ const DataTable = ({
                             to={`${colItem.href}/${rowItem[colItem.value]}`}
                           >
                             <Text
-                              variant="smallBody"
+                              variant="body"
                               color="primary"
-                              type="value"
+                              type="zephirum"
                             >
                               {rowItem[
                                 `${colItem.value}_summarized`
@@ -107,7 +107,7 @@ const DataTable = ({
                             variant="body"
                             className={styles.cursorPointer}
                             color="primary"
-                            type="value"
+                            type="zephirum"
                             onClick={() =>
                               typeof colItem?.fn === "function" &&
                               colItem.fn(rowItem[colItem.value]?.toString())

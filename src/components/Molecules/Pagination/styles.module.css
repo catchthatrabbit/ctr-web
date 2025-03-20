@@ -17,9 +17,6 @@
   background-color: transparent;
 }
 
-.containerMobile .paginationItem, .containerMobile .paginationNext, .containerMobile .paginationPrevious {
-  padding: 11px 23px;
-}
 .pagination {
   display: flex;
   justify-content: flex-end;
@@ -33,12 +30,19 @@
   flex-wrap: wrap;
 }
 
-.paginationWidthDesktop {
-  width: 50%;
+@media (max-width: 1268px) {
+  .paginationContainer ul {
+    justify-content: center;
+  }
 }
 
-.paginationWidthLaptop {
-  width: 55%;
+.pagination a {
+  display: inline-block;
+  padding: var(--space-xxs) var(--space-xs);
+}
+
+.paginationWidthDesktop, .paginationWidthLaptop {
+  width: 50%;
 }
 
 .paginationWidthTablet {
@@ -47,7 +51,6 @@
 
 .paginationWidthMobile {
   width: 100%;
-  justify-content: center;
 }
 
 .disabled svg path {

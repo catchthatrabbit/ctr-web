@@ -150,9 +150,8 @@ const config: Config = {
 
     EFFECTS_SHOW_LOCATIONS: true,
     EFFECTS_SHOW_ACTION_ICONS: false,
-    SLOGAN_PRIMARY: "Dedicated pool for Core Coin and IoT devices",
-    SLOGAN_SECONDARY: "Core mining pool in the lotusland of Ores",
-
+    SLOGAN_PRIMARY: "Mining pool for Core Blockchain",
+    SLOGAN_SECONDARY: "A mining pool in the lotusland of Ores",
     EFFECTS_EMOJI_OK: "Running",
     EFFECTS_EMOJI_BRB: "Inactive",
   },
@@ -186,7 +185,7 @@ const config: Config = {
           postsPerPage: 10,
           feedOptions: {
             type: "all",
-            copyright: `© 2022—  ${new Date().getFullYear()} Catch that Rabbit. All rights reserved.`,
+            copyright: `⊛ CORE 2022 - ${new Date().getFullYear()} Catch that Rabbit.`,
             createFeedItems: async (params) => {
               const { blogPosts, defaultCreateFeedItems, ...rest } = params;
               return defaultCreateFeedItems({
@@ -363,7 +362,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `<span style="font-size:1.3rem">⊛</span> 2022 — ${new Date().getFullYear()} Catch that Rabbit.`,
+      copyright: `<span style="font-size:1.3rem">⊛</span> CORE 2022 - ${new Date().getFullYear()} Catch that Rabbit.`,
     },
     colorMode: {
       defaultMode: "dark",

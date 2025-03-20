@@ -96,7 +96,7 @@ const Wallet = ({
           weight="extraBold"
           variant={mobile ? "headingMobile" : undefined}
         >
-          Wallet overview
+          Wallet Overview
         </Text>
       </div>
       {walletNotFound ? (
@@ -111,7 +111,7 @@ const Wallet = ({
               color="white"
               weight="normal"
             >
-              Wallet not found. No data to show.
+              Wallet not found. No data to display.
             </Text>
             {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="md" />}
             <Spacer variant="sm" />

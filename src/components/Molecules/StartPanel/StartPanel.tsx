@@ -11,40 +11,40 @@ const StartPanel = () => {
   const { mobile } = useMediaQueries();
   return (
     <div
-      className={clsx(styles.searchDivWrapper, {
-        [styles.searchDivWrapperMobile]: mobile,
+      className={clsx(styles.startDivWrapper, {
+        [styles.startDivWrapperMobile]: mobile,
       })}
     >
       <div
-        className={clsx(styles.searchDiv, { [styles.searchDivMobile]: mobile })}
+        className={clsx(styles.startDiv, { [styles.startDivMobile]: mobile })}
       >
-        <div className={styles.searchDivTitle}>
+        <div className={styles.startDivTitle}>
           <Text
             variant="heading3"
             weight="semiBold"
             color="white"
             type="regular"
           >
-            Start minig today
-          </Text>
-
-          <Text variant="body" color="subheadingColor" type="regular">
-            Pay-per-last-N-shares&nbsp;
+            Start mining today
           </Text>
           <Text variant="body" color="subheadingColor" type="regular">
-            (PPLNS)&nbsp;
+            Pay-per-last-N-shares (PPLNS) system
           </Text>
-          <Text variant="body" color="subheadingColor" type="regular">
-            system with only&nbsp;
-          </Text>
-          <Text variant="body" color="secondary" type="regular">
-            {poolFee ? `${poolFee}% fee` : "-"}
-          </Text>
+          {poolFee && (
+            <>
+              <Text variant="body" color="subheadingColor" type="regular">
+                &nbsp;with only
+              </Text>
+              <Text variant="body" color="secondary" type="regular">
+                {` ${poolFee}% fee`}
+              </Text>
+            </>
+          )}
         </div>
         <a
           href="/start-mining"
-          className={clsx(styles.searchButton, {
-            [styles.searchButtonMobile]: mobile,
+          className={clsx(styles.startButton, {
+            [styles.startButtonMobile]: mobile,
           })}
         >
           View guide

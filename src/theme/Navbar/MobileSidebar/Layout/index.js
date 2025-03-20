@@ -24,7 +24,6 @@ export default function NavbarMobileSidebarLayout({
         <div className={`navbar-sidebar__item menu ${customStyles.navbarItem}`}>
           {primaryMenu}
         </div>
-        {/* <div className="navbar-sidebar__item menu">{secondaryMenu}</div> */}
       </div>
     </div>
   );

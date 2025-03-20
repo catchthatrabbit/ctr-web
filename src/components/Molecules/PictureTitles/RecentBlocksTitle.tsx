@@ -11,7 +11,7 @@ const RecentBlocksTitle = () => {
     <PictureTitle
       title="Recent blocks"
       image={<HeadAndNeckAbove />}
-      secondaryText="Core mining pool in the lotusland of Ores"
+      secondaryText="Explore the flow and placement of blocks in the blockchain"
       secondaryTextStyle={secondaryTextStyle}
     />
   );

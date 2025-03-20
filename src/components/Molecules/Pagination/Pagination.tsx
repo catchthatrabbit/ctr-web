@@ -72,7 +72,7 @@ const Pagination = ({
         variant="smallBody"
         type="regular"
         color="summary"
-      >{`Showing ${startItem}-${endItem} of ${total}`}</Text>
+      >{`Showing ${startItem}-${endItem} of ${total}`}</Text>
       {!desktop && <Spacer variant="xs" />}
       <ReactPaginate
         initialPage={offset}
@@ -86,7 +86,7 @@ const Pagination = ({
         pageClassName={styles.paginationItem}
         disabledClassName={styles.disabled}
         breakClassName={styles.paginationItem}
-        breakLabel="..."
+        breakLabel="…"
         nextLabel={<PaginationRight />}
         nextClassName={styles.paginationNext}
         onPageChange={handleChangePage}

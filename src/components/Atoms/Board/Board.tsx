@@ -1,6 +1,6 @@
+import React from "react";
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
-import React from "react";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
 import styles from "./styles.module.css";
@@ -50,7 +50,7 @@ const Board = ({
         })}
       >
         <div className={`${styles.boardItem} ${styles.number}`}>
-          <Text>{prefix}</Text>
+          <Text type="zephirum">{prefix}</Text>
           &nbsp;
           {isLoading ? (
             loaderComp
@@ -63,7 +63,8 @@ const Board = ({
                     ? "headingMobile"
                     : "subheading"
               }
-              weight={context === "payments" ? "extraBold" : "bold"}
+              type="zephirum"
+              weight={context === "payments" ? "bold" : "normal"}
               color={
                 context === "payments"
                   ? "white"
@@ -75,7 +76,7 @@ const Board = ({
               letterSpacing="letterSpacing"
               disableMobileStyles
             >
-              {value || "0"}
+              {value || "N/D"}
             </Text>
           )}
           <Text
@@ -86,7 +87,8 @@ const Board = ({
                   ? "headingMobile"
                   : "subheading"
             }
-            weight="bold"
+            weight={context === "payments" ? "bold" : "normal"}
+            type="zephirum"
             color={
               context === "statsChart" ? "primary" : "valueChartColor"
             }

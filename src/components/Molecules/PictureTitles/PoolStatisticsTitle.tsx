@@ -7,7 +7,7 @@ const PoolStatisticsTitle = () => {
     <PictureTitle
       title="Pool statistics"
       image={<RabbitPoolStatistics />}
-      secondaryText="Core mining pool in the lotusland of Ores"
+      secondaryText="Explore the power and effort that miners put into the blockchain"
     />
   );
 };

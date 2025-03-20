@@ -5,7 +5,6 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import isInternalUrl from "@docusaurus/isInternalUrl";
 import IconExternalLink from "@theme/Icon/ExternalLink";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
 
 import clsx from "clsx";
 
@@ -32,7 +31,6 @@ export default function FooterLinkItem({ item }) {
         {label}
         {href && !isInternalUrl(href) && <IconExternalLink />}
       </Link>
-      {mobile && <Spacer variant="sm" />}
     </>
   );
 }

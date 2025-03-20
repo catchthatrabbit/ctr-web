@@ -15,5 +15,5 @@
 
 .flexStart {
   display: flex;
-  justify-content: flex-start !important;
+  justify-content: flex-start;
 }

@@ -34,16 +34,7 @@ export default function MobileSidebarToggle() {
       type="button"
     >
       {isMenuOpen ? (
-        <IconClose
-          style={{
-            width: "10px",
-            height: "10px",
-            color: "#16C784",
-            bottom: "22px",
-            position: "absolute",
-            right: "24px",
-          }}
-        />
+        <IconClose className={customStyles.iconMenuCustomClose} />
       ) : (
         <IconMenu className={customStyles.iconMenuCustom} />
       )}

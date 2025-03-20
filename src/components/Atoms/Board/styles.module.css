@@ -2,20 +2,16 @@
   width: auto;
 }
 
-.boardContainer:not(:last-child) {
-  padding-right: var(--space-md);
-}
-
 .boardContainer.boardContainerPayments {
   padding: 10px 0;
 }
 
 .content {
-  height: 37px;
   box-sizing: border-box;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
+  gap: var(--space-xxs);
   width: 100%;
 }
 

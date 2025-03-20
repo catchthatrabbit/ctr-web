@@ -4,7 +4,7 @@ import { Text } from "@site/src/components/Atoms/Text";
 import styles from "./styles.module.css";
 
 interface IPictureTitle {
-  title: string;
+  title?: string;
   titleStyles?: React.CSSProperties;
   image: React.ReactNode;
   flexStart?: boolean;
@@ -15,7 +15,7 @@ interface IPictureTitle {
 
 const PictureTitle = ({
   image,
-  title,
+  title = "",
   titleStyles,
   flexStart,
   secondaryText,
@@ -46,7 +46,7 @@ const PictureTitle = ({
           color="subheadingColor"
           lineHeight="normalLineHeight"
           letterSpacing="letterSpacing"
-          style={{ marginTop: "8px", ...secondaryTextStyle }}
+          style={{ marginTop: "0.5rem", ...secondaryTextStyle }}
           disableMobileStyles={disableMobileStyles}
         >
           {secondaryText}

@@ -45,17 +45,17 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
     };
 
     const placeholderTextMap = {
-      wallet: "Wallet address",
-      startMining: "Wallet address",
-      payments: "Wallet address",
-      main: "Search your miners",
+      wallet: "Wallet Address",
+      startMining: "Wallet Address",
+      payments: "Wallet Address",
+      main: "Search Miners",
     };
 
     const labelTextMap = {
-      wallet: "Corepass wallet address",
-      startMining: "Wallet address",
-      payments: "Wallet",
-      main: "Wallet address",
+      wallet: "CorePass Wallet Address",
+      startMining: "Wallet Address",
+      payments: "Wallet Address",
+      main: "Wallet Address",
     };
 
     return (
@@ -70,16 +70,18 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
         })}
       >
         {context !== "startMining" && (
-          <Text
-            lineHeight="smallLineHeight"
-            color="subheadingColor"
-            variant={mobile ? "smallBody" : "subheading"}
-            style={{ direction: "ltr" }}
-          >
-            {overrideLabel
-              ? labelTextMap.payments
-              : labelTextMap[context] || "Wallet address"}
-          </Text>
+          <label className={styles.searchLabel}>
+            <Text
+              lineHeight="smallLineHeight"
+              color="subheadingColor"
+              variant={mobile ? "smallBody" : "subheading"}
+              style={{ direction: "ltr" }}
+            >
+              {overrideLabel
+                ? labelTextMap.payments
+                : labelTextMap[context] || "Wallet Address"}
+            </Text>
+          </label>
         )}
         <div
           className={clsx(styles.searchContainer, {
@@ -87,36 +89,40 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
               context === "wallet" && mobile,
           })}
         >
+          <div className={styles.searchIconWrapper}>
+            <SearchIcon width={mobile ? 16 : 24} height={mobile ? 16 : 24} />
+          </div>
           <InputText
             className={clsx(styles.searchInput, {
               [styles.searchInputMobile]: mobile,
-              [styles.searchWallet]: context === "wallet",
+              [styles.searchInputWallet]: context === "wallet",
               [styles.searchInputWalletMobile]:
                 (context === "wallet" && mobile) ||
                 (context === "startMining" && mobile),
             })}
-            placeholder={placeholderTextMap[context] || "Search your miners"}
+            placeholder={placeholderTextMap[context] || "Search Miners"}
             ref={ref || inputRef}
             onPressEnter={handleSearch}
-            icon={
-              <SearchIcon width={mobile ? 16 : 24} height={mobile ? 16 : 24} />
-            }
             context={context}
             {...restProps}
           />
+          <button
+            type="button"
+            className={clsx(styles.searchButton, {
+              [styles.searchButtonMobile]: mobile,
+              [styles.searchButtonDesktop]: !mobile,
+              [styles.searchButtonWallet]: context === "wallet",
+              [styles.searchButtonStartMining]: context === "startMining",
+              [styles.searchButtonPayments]: context === "payments",
+              [styles.searchButtonWalletMobile]:
+                (context === "wallet" && mobile) ||
+                (context === "startMining" && mobile),
+            })}
+            onClick={handleClickSearchButton}
+          >
+            Search
+          </button>
         </div>
-        <button
-          className={clsx(styles.searchButton, {
-            [styles.searchButtonMobile]: mobile,
-            [styles.searchButtonDesktop]: !mobile,
-            [styles.searchButtonWalletMobile]:
-              (context === "wallet" && mobile) ||
-              (context === "startMining" && mobile),
-          })}
-          onClick={handleClickSearchButton}
-        >
-          Search
-        </button>
       </div>
     );
   },

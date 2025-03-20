@@ -7,3 +7,9 @@
 .footerLink:hover {
   color: var(--ifm-footerLink-hover);
 }
+
+@media (max-width: 767px) {
+  .footerLink {
+    font-size: var(--body-regular-font-size);
+  }
+}

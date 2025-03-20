@@ -5,8 +5,6 @@
 .iBan {
     white-space: normal;
     line-break: anywhere;
-    font-family: var(--regular-font-family);
-    padding-right: var(--space-xs);
     padding-top: calc(var(--space-xs) / 2);
 }
 

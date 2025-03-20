@@ -22,18 +22,3 @@
 .directionLtr {
   direction: ltr;
 }
-
-.horizontalLine {
-  height: 1px;
-  background: #ffffff40;
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-@media screen and (max-width: 768px) {
-  .horizontalLine {
-    background: linear-gradient(to right, #ffffff40 25%, #ffffff0d 75%);
-  }
-}

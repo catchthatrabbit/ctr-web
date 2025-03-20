@@ -37,17 +37,19 @@ const InfoBox = ({
 }: IInfoBox) => {
   const { desktop, laptop, mobile, tablet } = useMediaQueries();
 
+  // Convert 'around' to a valid Board dir value
+  const boardDir = dir === 'around' ? 'column' : dir;
+
   return isLoading ? (
     loadingComponent
   ) : (
     <div
       className={clsx([
         "flex",
+        styles.infoBoxContainer,
         {
           [styles.flexDirectionRow]: dir === "vert" && (desktop || laptop),
           [styles.justifySpaceAround]: (spaceAround && desktop) || laptop,
-
-          [styles.justifySpaceBetween]: desktop || laptop,
           [styles.justifyCenter]: tablet || mobile,
           [styles.fullWidthBorder]: applyFullWidthBorder,
           [styles.fullWidth]: (applyFullWidth && desktop) || laptop,
@@ -59,11 +61,10 @@ const InfoBox = ({
         <Board
           className={clsx("text-center", {
             [boardClassNameVert]: dir === "vert",
-            // [boardClassNameHor]: dir === "hor",
             [boardClassNameColumn]: dir === "column",
           })}
           context={context}
-          dir={dir}
+          dir={boardDir}
           boardClassNameColumn={boardClassNameColumn}
           isLoading={isLoading}
           key={index}

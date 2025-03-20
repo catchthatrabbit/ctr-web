@@ -1,8 +1,8 @@
-.justifyCenter {
-  justify-content: center;
+.infoBoxContainer {
+  gap: var(--space-xs);
 }
 
-.justifySpaceBetween {
+.justifyCenter {
   justify-content: center;
 }
 

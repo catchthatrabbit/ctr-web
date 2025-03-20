@@ -1,75 +1,88 @@
 .searchButton {
-  height: 48px;
-  width: 102px;
   cursor: pointer;
   user-select: none;
   border: none;
-  border-radius: 8px;
-  color: var( --black-800);
-  background: var( --ifm-search-btn-color);
+  border-radius: var(--ifm-global-radius);
+  color: var(--black-800);
+  background: var(--ifm-search-btn-color);
   transition: all 0.1s ease-in-out 0s;
   position: absolute;
   font-family: var(--regular-font-family);
   font-size: var(--regular-font-size);
   font-weight: var(--medium-font-weight);
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.5rem 1rem;
+  margin: 0;
+  height: calc(100% - 1rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
 }
 
 .searchButton:hover {
   background-color: var(--ifm-search-btn-hover);
 }
 
-.searchButtonDesktop {
-  right: 9px;
-  top: 42px;
-}
-
-.searchInputDesktop {
-  margin-inline: 69px;
-}
-
 .searchButtonMobile {
-  right: 11px;
-  top: 28px;
-  height: 45px;
-  width: 71px;
   font-size: var(--small-font-size);
+  padding: 0.4rem 0.8rem;
 }
 
 .searchInputMobile {
-  margin-inline: 0px;
+  margin-inline: 0;
 }
 
 .searchInput {
   border-radius: var(--ifm-global-radius);
-  padding-right: 90px;
-  margin-top: 8px;
+  padding: 0.75rem 5.5rem 0.75rem 3rem;
+  width: 100%;
+  height: 100%;
 }
 
 .search {
   position: relative;
   flex-direction: column;
+  width: 100%;
 }
 
-.mobilePaddingLeft {
-  padding-left: 6px;
+.searchContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.searchIconWrapper {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
 .searchWallet {
   display: flex;
-  width: 91%;
+  width: 100%;
   align-content: center;
+  flex-direction: column;
 }
 
 .searchWallet .searchContainer {
   display: flex;
   justify-content: center;
   position: relative;
+  width: 100%;
 }
 
 .searchWallet .searchInput {
   flex: 1;
-  width: 684px;
-  height: 52px;
   background-color: var(--dark-rgb-600);
   color: var(--white);
 }
@@ -82,7 +95,8 @@
   background-color: var(--ifm-guide-btn-color);
   color: var(--ifm-color-primary);
   border-radius: var(--ifm-global-radius);
-  height: 52px;
+  height: auto;
+  padding: 0.75rem 1rem;
 }
 
 .searchWallet .searchButton:hover {
@@ -90,33 +104,28 @@
   color: var(--gray-700);
 }
 
-.searchWallet .searchButtonDesktop {
-  left: 82%;
-  top: 38%;
-}
-
-.searchStartMining{
+.searchStartMining {
   display: flex;
-  width: 90%;
+  width: 100%;
   align-content: center;
+  flex-direction: column;
 }
 
 .searchStartMining .searchContainer {
   display: flex;
   justify-content: center;
   position: relative;
+  width: 100%;
 }
 
-.searchStartMining .searchButtonDesktop{
-  margin-left: 3px;
-  left: 98%;
-  top: 15%;
+.searchStartMining .searchButtonDesktop {
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .searchStartMining .searchInput {
-  width: 646px;
   flex: 1;
-  height: 52px;
   background-color: var(--dark-rgb-600);
   color: var(--white);
 }
@@ -129,7 +138,6 @@
   background-color: var(--ifm-guide-btn-color);
   color: var(--ifm-color-primary);
   border-radius: var(--ifm-global-radius);
-  height: 52px;
 }
 
 .searchStartMining .searchButton:hover {
@@ -137,24 +145,25 @@
   color: var(--gray-700);
 }
 
-.searchPayments{
+.searchPayments {
   display: flex;
   align-content: center;
+  width: 100%;
+  flex-direction: column;
 }
 
 .searchPayments .searchContainer {
   display: flex;
   justify-content: center;
   position: relative;
+  width: 100%;
 }
 
 .searchPayments .searchInput {
   flex: 1;
   background-color: var(--dark-rgb-600);
   color: var(--white);
-  height: 52px;
-  width: 474px;
-  padding: 15px 20px 18px 47px;
+  padding: 0.75rem 5.5rem 0.75rem 3rem;
 }
 
 .searchPayments .searchInput::placeholder {
@@ -173,19 +182,19 @@
 }
 
 .searchPayments .searchButtonDesktop {
-  margin-left: 10px;
-  left: 100%;
-  top: 38%;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .searchWalletMobile {
-  width: 98%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .searchContainerWalletMobile {
-  width: 98%;
+  width: 100%;
 }
 
 .searchInputWalletMobile {
@@ -195,16 +204,21 @@
 .searchButtonWalletMobile {
   width: 100%;
   margin-top: var(--space-xs);
-  right: 0px;
-  top: -8px;
+  position: relative;
+  right: auto;
+  top: auto;
+  transform: none;
   font-size: var(--regular-font-size);
 }
 
 @media screen and (max-width: 768px) {
-    .searchStartMining .searchButtonWalletMobile {
-    margin-top: 86px;
+  .searchStartMining .searchButtonWalletMobile {
+    margin-top: 1rem;
     width: 100%;
-    right: 0px;
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
   }
 
   .searchContainer, .searchStartMining {
@@ -221,13 +235,28 @@
 }
 
 @media screen and (min-width: 1600px) {
-  .searchWallet .searchButtonDesktop {
-    margin-left: 0px;
-    left: 77%;
-  }
-
+  .searchWallet .searchButtonDesktop,
   .searchStartMining .searchButtonDesktop {
-    margin-left: 5px;
-    left: 89%;
+    right: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .searchContainer {
+    position: relative;
+  }
+  
+  .searchButton {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .searchWallet .searchButton,
+  .searchStartMining .searchButton,
+  .searchPayments .searchButton {
+    position: absolute;
+    right: 0.5rem;
   }
 }

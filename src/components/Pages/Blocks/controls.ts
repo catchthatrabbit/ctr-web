@@ -32,7 +32,7 @@ const useControls = () => {
         href: urlsConfigs.BLOCK_DETAILS_URL,
       },
       { value: "type", label: "Type" },
-      { value: "minedOn", label: "Mined on" },
+      { value: "minedOn", label: "Found at" },
       {
         value: "blockHash",
         label: "Block hash",

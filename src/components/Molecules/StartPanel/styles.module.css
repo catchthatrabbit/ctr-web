@@ -1,20 +1,21 @@
-.searchDivWrapper {
+.startDivWrapper {
   display: flex;
   align-items: center;
   position: relative;
-  border-radius: 15px;
+  border-radius: var(--ifm-global-radius);
   overflow: hidden;
+  padding: var(--space-sm);
+  background-color: rgba(20, 20, 20, 1);
 }
 
-.searchDivWrapper::before {
+.startDivWrapper::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  width: 99%;
-  border-radius: 15px;
+  border-radius: var(--ifm-global-radius);
   padding: 1px;
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 50%);
   -webkit-mask:
@@ -25,54 +26,50 @@
   z-index: 0;
 }
 
-.searchDivWrapperMobile {
+.startDivWrapperMobile {
   margin: 0 auto;
-  width: 97%;
-  bottom: 7px;
+  bottom: var(--space-sm);
 }
 
-.searchDiv {
-  border-radius: 15px;
-  background-color: rgba(20, 20, 20, 1);
-  padding: 0px 39px 0 24px;
+.startDiv {
+  border-radius: var(--ifm-global-radius);
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-right: 10px;
-  height: 99px;
   align-items: center;
 }
 
-.searchDivMobile {
-  height: 195px;
-  padding: 24px 24px 27px 24px;
+.startDivMobile {
+  padding: var(--space-xs);
   display: flex;
   flex-direction: column;
   margin-right: 0px;
 }
 
-.searchButton {
-  padding: 10px 20px;
+.startDivMobile > div {
+  margin-bottom: var(--space-xs);
+}
+
+.startButton {
+  padding: var(--space-sm) var(--space-md);
   background-color: var(--ifm-guide-btn-color);
-  color: var( --ifm-search-btn-color);
-  border: none;
-  border-radius: 8px;
+  color: var(--ifm-start-btn-color);
+  border-radius: var(--ifm-global-radius);
   cursor: pointer;
-  z-index: 22;
   font-size: var(--body-small-font-size);
 }
 
-a:hover {
+.startButton:hover {
   text-decoration: none;
-  color: var( --ifm-search-btn-color);
+  color: var(--ifm-start-btn-color);
 }
 
-.searchButton:hover {
-  background-color: var( --ifm-guide-btn-hover)
+.startButton:hover {
+  background-color: var(--ifm-guide-btn-hover)
 }
 
-.searchButtonMobile {
+.startButtonMobile {
   width: 100%;
   text-align: center;
 }

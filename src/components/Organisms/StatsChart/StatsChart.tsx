@@ -55,6 +55,7 @@ const StatsChart = ({ radialBarChart, infoItems, isLoading }: IStatsChart) => {
             />
           }
         />
+        <Spacer variant="xxxl" />
       </div>
     </div>
   );

@@ -3,13 +3,8 @@ import useControls from "./controls";
 import { MapChart } from "@site/src/components/Organisms/MapChart";
 import {
   Locations,
-  MapPin,
 } from "@site/src/components/Molecules/InsideChart/Locations";
 import { Text } from "@site/src/components/Atoms/Text";
-import {
-  Mouse,
-  MouseContent,
-} from "@site/src/components/Molecules/InsideChart/Mouse";
 import clsx from "clsx";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { StatsChart } from "@site/src/components/Organisms/StatsChart";
@@ -46,7 +41,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
     isLoadingMapChart,
     isLoadingRadialBarChart,
     isLoadingAllRegionMaturedBlocks,
-    SLoganSecondary,
+    SLoganSecondary, // TODO: eh?
     sLoganPrimary,
     effectsShowActionIcons,
     effectsShowLocation,
@@ -59,8 +54,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
         <div
           className={clsx([
-            mobile || tablet ? " " : "lg-grid-col--5  xl-grid-col--2",
-            "grid   md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
+            mobile || tablet ? "" : "lg-grid-col--5  xl-grid-col--2",
+            "grid md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
             styles.directionRtl,
           ])}
         >
@@ -69,7 +64,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
               <div
                 className={clsx([
                   styles.directionLtr,
-                  "xs-text-center sm-text-center md-text-center",
+                  "text-center",
                 ])}
               >
                 <MainPageSearch flexStart={false} />
@@ -77,7 +72,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 <Text
                   variant="headingMobile"
                   weight="extraBold"
-                  lineHeight={desktop ? "largeLineHeight" : "normalLineHeight"}
+                  lineHeight="normalLineHeight"
                   color="dashboardColor"
                   style={{ textAlign: "center" }}
                 >
@@ -86,9 +81,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 <Spacer variant="sm" />
               </div>
               <Spacer variant="sm" />
-              <Locations>
-                <span className="lg-hide md-hide" />
-              </Locations>
+              <Locations />
               <Spacer variant="xs" />
               <Search onSearch={onSetWalletAddress} />
             </>
@@ -97,8 +90,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
               <div
                 className={clsx([
                   styles.mapChartLocationPlace,
-
-                  "lg-grid-span-col--4",
+                  "grid-span-col--4",
                   styles.directionLtr,
                 ])}
               >
@@ -108,21 +100,14 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                   </div>
                 ) : (
                   <>
-                    <Locations>
-                      <span className="lg-hide md-hide" />
-                    </Locations>
-                    {desktop && (
-                      <Mouse>
-                        <MouseContent />
-                      </Mouse>
-                    )}
+                    <Locations />
                   </>
                 )}
               </div>
               <div
                 className={clsx([
                   styles.directionLtr,
-                  "xs-text-center sm-text-center md-text-center",
+                  "grid-col--6 text-left",
                 ])}
               >
                 <MainPageSearch flexStart={true} />
@@ -132,7 +117,6 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                   weight="extraBold"
                   lineHeight="largeLineHeight"
                   color="dashboardColor"
-                  style={{ width: "43rem", display: "inline-block" }}
                 >
                   {sLoganPrimary}
                 </Text>
@@ -145,7 +129,6 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 >
                   {SLoganSecondary}
                 </Text>
-                <br />
                 <Spacer variant="xxl" />
                 <Search onSearch={onSetWalletAddress} />
               </div>
@@ -153,21 +136,14 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           )}
         </div>
       </MapChart>
-      {desktop ? (
-        <>
-          <Spacer variant="xxxl" />
-          <Spacer variant="xxxl" />
-        </>
-      ) : (
-        <Spacer variant="xxl" />
-      )}
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xl" />}
       <StartPanel />
       <Spacer variant="md" />
       <Header
         layout={{ boards: false, dropdown: false, search: true }}
         onSearch={onSetWalletAddress}
       />
-      {desktop && <Spacer variant="xxs" />}
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xl" />}
       <StatsChart
         isLoading={isLoadingRadialBarChart}
         infoItems={infoBoxRadialData}
@@ -175,30 +151,17 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           <RadialBarChart emptyComponent={<Empty />} data={radialChartData} />
         }
       />
-
-      {desktop ? (
-        <>
-          <Spacer variant="xxxl" />
-          <Spacer variant="xxxl" />
-        </>
-      ) : (
-        <Spacer variant="xl" />
-      )}
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xl" />}
       <RecentBlocksTitle />
-      <Spacer variant="xl" />
-
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xl" />}
       <List
         dataTableColumns={recentMatureBlockListColumns}
         hidePagination={false}
         isLoading={isLoadingAllRegionMaturedBlocks}
         data={convertMaturedResponseToRecentBlocksInfo(AllRegionsMaturedBlocks)}
       />
-      <Spacer variant="xxxl" />
-      <div className={styles.horizontalLine}></div>
       {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xl" />}
-      {mobile && <Spacer variant="xl" />}
       <StartMining />
-      {mobile && <Spacer variant="md" />}
     </>
   );
 };

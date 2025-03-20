@@ -1,9 +1,9 @@
 .centered{
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .navbarItem{
-    width: 95% !important;
+  width: 100%;
 }
 

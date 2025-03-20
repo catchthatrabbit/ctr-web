@@ -70,10 +70,6 @@
   font-size: var(--picture-title-font-size);
 }
 
-.text {
-  /* letter-spacing: 0.05em; */
-}
-
 .letterSpacing {
   letter-spacing: 0.02em;
 }
@@ -139,7 +135,7 @@
 }
 
 .heading{
-  font-size: var( --ifm-h1-font-size);
+  font-size: var(--ifm-h1-font-size);
 }
 
 .heading1 {
@@ -211,8 +207,8 @@
 }
 
 .subheading1-mobile {
-  font-size: var(  --subheading-font-size-tablet);
-  line-height: var( --subheading-lineHeight-tablet);
+  font-size: var(--subheading-font-size-tablet);
+  line-height: var(--subheading-lineHeight-tablet);
 }
 
 

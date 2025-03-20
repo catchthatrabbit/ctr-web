@@ -25,6 +25,7 @@ const IBan = ({ iBan = "", pool = "de" }: IIBan) => {
             })}
             variant="heading3"
             color="white"
+            type="zephirum"
           >
             {generateIBan(iBan)}
           </Text>
@@ -38,13 +39,13 @@ const IBan = ({ iBan = "", pool = "de" }: IIBan) => {
       >
         <CopyButton
           textToCopy={iBan}
-          value="Copy wallet address"
+          value="Copy Wallet Address"
           toastText="Wallet address copied to clipboard"
           context={mobile ? "wallet" : "config"}
         />
         <CopyButton
           textToCopy={permalink}
-          value="Copy permalink"
+          value="Copy Permalink"
           toastText="Permalink copied to clipboard"
           context={mobile ? "wallet" : "config"}
         />

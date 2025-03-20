@@ -4,7 +4,7 @@ import { RabbitMiners } from "@site/src/icons";
 
 const MainPageSearch = ({ flexStart }) => {
   return (
-    <PictureTitle title="" image={<RabbitMiners />} flexStart={flexStart} />
+    <PictureTitle image={<RabbitMiners />} flexStart={flexStart} />
   );
 };
 

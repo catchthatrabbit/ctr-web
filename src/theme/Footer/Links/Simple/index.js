@@ -1,8 +1,6 @@
 import React from "react";
 import LinkItem from "@theme/Footer/LinkItem";
-function Separator() {
-  return <span className="footer__link-separator">·</span>;
-}
+
 function SimpleLinkItem({ item }) {
   return item.html ? (
     <span
@@ -22,7 +20,6 @@ export default function FooterLinksSimple({ links }) {
         {links.map((item, i) => (
           <React.Fragment key={i}>
             <SimpleLinkItem item={item} />
-            {links.length !== i + 1 && <Separator />}
           </React.Fragment>
         ))}
       </div>
