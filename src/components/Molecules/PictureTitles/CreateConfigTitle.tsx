@@ -13,7 +13,7 @@ const CreateConfigTitle = () => {
   };
   return (
     <PictureTitle
-      title="Create config file"
+      title="Generate configuration file"
       image={<HeadDown />}
       titleStyles={titleStyles}
     />

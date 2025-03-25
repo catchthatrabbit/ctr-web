@@ -10,7 +10,7 @@
   transition: all 0.1s ease-in-out 0s;
 }
 
-.inputText:focus-visible{
+.inputText:focus-visible {
   border: 1px solid var(--gray-100);
 }
 
@@ -26,7 +26,7 @@
   width: 100%;
 }
 
-.searchDark{
+.searchDark {
   background-color: var(--dark-rgb-600);
   color: var(--white);
   padding: 14px 16px;
@@ -42,7 +42,7 @@
   height: 30%;
 }
 
-.smallIcon{
+.smallIcon {
   left: 6%;
   height: 25%;
   svg {
@@ -51,7 +51,7 @@
   }
 }
 
-.mobileIcon{
+.mobileIcon {
   left: 9%;
   top: 54%;
 }
@@ -59,7 +59,6 @@
 .inputWithIcon {
   padding-left: 30px;
 }
-
 
 @media screen and (max-width: 768px) {
   .inputText{
@@ -69,12 +68,12 @@
     font-size: 16px;
   }
 
-  .mobileIconWallet{
+  .mobileIconWallet {
     left: 7%;
     top: 56%;
   }
 
-  .inputContainer{
+  .inputContainer {
     width: 100%;
   }
 }

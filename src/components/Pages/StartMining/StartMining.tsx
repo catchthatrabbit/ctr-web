@@ -16,6 +16,7 @@ import { InfoPanel } from "@site/src/components/Molecules/InfoPanel";
 import { Steps } from "../../Molecules/Steps";
 import { DropdownIconDown } from "@site/src/icons";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import ICAN from '@blockchainhub/ican';
 
 import styles from "./styles.module.css";
 
@@ -72,17 +73,17 @@ const StartMining = ({
         className={`flex ${styles.infoPanel} ${mobile ? `flex-column ${styles.mobileInfoPanel}` : ""}`}
       >
         <InfoPanel
-          title="How to start minig"
-          text="Step by step guide to get you hop on board."
+          title="How to Start Mining"
+          text="A step-by-step guide to help you get started."
           link="#steps"
-          linkText="View section"
+          linkText="View Section"
         />
         {mobile && <Spacer variant="xxs" />}
         <InfoPanel
           title="Pools"
-          text="View all geo-locations you can use."
+          text="Explore all available geo-locations you can connect to."
           link="#pools"
-          linkText="View section"
+          linkText="View Section"
         />
       </div>
       {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="sm" />}
@@ -96,27 +97,27 @@ const StartMining = ({
         steps={[
           {
             title: "Step 1",
-            text: "Download the mining software compatible with your hardware",
+            text: "Download mining software compatible with your hardware.",
             number: 1
           },
           {
             title: "Step 2",
-            text: "Configure your wallet address in the mining software",
+            text: "Configure your wallet address in the mining software.",
             number: 2
           },
           {
             title: "Step 3",
-            text: "Join a mining pool for consistent rewards",
+            text: "Join a mining pool for consistent rewards.",
             number: 3
           },
           {
             title: "Step 4",
-            text: "Start the mining process and monitor performance",
+            text: "Start the mining process and monitor performance.",
             number: 4
           },
           {
             title: "Step 5",
-            text: "Optimize settings for maximum efficiency",
+            text: "Optimize your settings for maximum efficiency.",
             number: 5
           }
         ]}
@@ -181,11 +182,11 @@ const StartMining = ({
                       startMiningPoolConfigurations[REGION_KEY][`PASSWORD`],
                   },
                   {
-                    label: "Payouts from",
+                    label: "Payouts Address",
                     value: startMiningPoolConfigurations[REGION_KEY][`PAYOUT`]
-                      ? startMiningPoolConfigurations[REGION_KEY][
+                      ? ICAN.printFormat(startMiningPoolConfigurations[REGION_KEY][
                           `PAYOUT`
-                        ].toUpperCase()
+                        ])
                       : "",
                   },
                 ]}

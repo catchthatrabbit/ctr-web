@@ -1,9 +1,10 @@
-export const convert2kilo = (num: number): number => {
-  if (isNaN(num)) return 0;
-
-  return num / 1000;
-};
-
+/**
+ * Creates a summarized version of text by showing only the beginning and end
+ * @param text - The text to summarize
+ * @param fromChar - Number of characters to show from the beginning
+ * @param toChar - Position to start showing characters from the end
+ * @returns {string} The summarized text with ellipsis in the middle
+ */
 export const summarizedText = (
   text: string,
   fromChar: number,

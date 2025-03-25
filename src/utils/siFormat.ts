@@ -1,3 +1,9 @@
+/**
+ * Formats a number using SI (International System of Units) notation
+ * @param num - The number to format
+ * @param digits - The number of decimal places to include
+ * @returns {string} The formatted number with appropriate SI unit suffix
+ */
 export const siFormat = (num: number, digits: number): string => {
   const si = [
     { value: 1, symbol: "" },
@@ -18,4 +24,15 @@ export const siFormat = (num: number, digits: number): string => {
   return (
     (num / si[i].value).toFixed(digits).replace(rx, "$1") + " " + si[i].symbol
   );
+};
+
+/**
+ * Converts a number to kilos (divides by 1000)
+ * @param num - The number to convert
+ * @returns {number} The number divided by 1000, or 0 if input is NaN
+ */
+export const convert2kilo = (num: number): number => {
+  if (isNaN(num)) return 0;
+
+  return num / 1000;
 };

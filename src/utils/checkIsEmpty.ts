@@ -1,3 +1,8 @@
+/**
+ * Checks if an array of objects is empty or contains empty objects
+ * @param inputData - The array of objects to check
+ * @returns {boolean} True if the array is empty, undefined, null, or contains empty objects
+ */
 export const checkArrayObjectIsEmpty = (inputData): boolean => {
   let isEmpty = false;
 

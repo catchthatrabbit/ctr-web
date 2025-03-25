@@ -10,7 +10,7 @@ import { ChartItem } from "./types";
 import { BLOCK_TIME } from "./constants";
 import { SETTINGS_RESPONSE } from "@site/src/Api/settings/types";
 import { MATURED_RESPONSE } from "@site/src/Api/blocks/types";
-import { summarizedText } from "@site/src/utils";
+import { summarizedText } from "@site/src/utils/summarizedText";
 
 /**
  * Given a list of items, and a function that takes two items and returns a single item, return the
@@ -232,7 +232,7 @@ export const convertMaturedResponseToRecentBlocksInfo = (
       type: item.uncle ? "Uncle" : item.orphan ? "Orphan" : "Block",
       minedOn: convertTime2Date(item.timestamp),
       blockHash: item.hash,
-      blockHash_summarized: summarizedText(item.hash, 10, item.hash.length - 6),
+      blockHash_summarized: item.hash === "0x0" ? "❌" : summarizedText(item.hash, 10, item.hash.length - 6),
       reward: TextFormat.getXCBText(Number(item.reward || 0) / UNITS.CORE).text,
       variance: `${((100 * Number(item.shares)) / Number(item.difficulty)).toFixed(2)}%`,
     })),

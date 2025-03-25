@@ -9,7 +9,7 @@ import { siFormat } from "@site/src/utils/siFormat";
 import { PAYMENTS_BY_WALLET_ADDRESS_RESPONSE } from "@site/src/Api/payments/types";
 import { convertNumber2Currency } from "@site/src/utils/convertNumber2Currency";
 import { UNITS } from "@site/src/constants/units";
-import { summarizedText } from "@site/src/utils";
+import { summarizedText } from "@site/src/utils/summarizedText";
 import { convertWorkerName } from "@site/src/utils/convertWorkerName";
 
 export const convertWorkersResponse2Info = (
