@@ -12,6 +12,7 @@ import useControls from "./controls";
 import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
+import { constructWorkerName } from "@site/src/utils/convertWorkerName";
 
 import clsx from "clsx";
 
@@ -112,15 +113,14 @@ const CreateConfig = ({
             context="dark"
             value={minerName.value}
             onChange={handleMinerNameChange}
-            placeholder={desktop ? "Miner name" : "Type name"}
+            placeholder="Name of your worker"
           />
           {!minerName.isValid && (
             <Text
               variant="smallBody"
-              style={{ marginTop: "4px", color: "#E54E4E" }}
+              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
             >
-              Plain name is not valid. Only letters, numbers, underscores, and
-              hyphens are allowed.
+              Plain name is invalid. Use only letters, numbers, underscores (_), or hyphens (-).
             </Text>
           )}
           <Spacer variant="xs" />
@@ -134,20 +134,20 @@ const CreateConfig = ({
             color="subheadingColor"
             style={{ marginBottom: "8px" }}
           >
-            Username
+            Fediverse Username
           </Text>
           <InputText
             context="dark"
             value={minerName.value}
             onChange={handleMinerNameChange}
-            placeholder={desktop ? "Miner name" : "Type name"}
+            placeholder="username"
           />
           {!minerName.isValid && (
             <Text
               variant="smallBody"
-              style={{ marginTop: "4px", color: "#E54E4E" }}
+              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
             >
-              Username is not valid. Only letters and numbers are allowed.
+              Fediverse username is invalid. Use only letters and numbers.
             </Text>
           )}
           <Spacer variant="sm" />
@@ -156,20 +156,20 @@ const CreateConfig = ({
             color="subheadingColor"
             style={{ marginBottom: "8px" }}
           >
-            Portal
+            Fediverse portal
           </Text>
           <InputText
             context="dark"
             value={typePortal.value}
             onChange={handleTypePortalChange}
-            placeholder="Type portal"
+            placeholder="coretalk.space"
           />
           {!typePortal.isValid && (
             <Text
               variant="smallBody"
-              style={{ marginTop: "4px", color: "#E54E4E" }}
+              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
             >
-              Portal is not valid. Please enter a valid domain.
+              Portal is invalid. Enter a valid domain.
             </Text>
           )}
           <Spacer variant="sm" />
@@ -178,13 +178,13 @@ const CreateConfig = ({
             color="subheadingColor"
             style={{ marginBottom: "8px" }}
           >
-            Index (optional)
+            Worker ID (optional)
           </Text>
           <InputText
             context="dark"
             value={uniqueId}
             onChange={handleUniqueIdChange}
-            placeholder="Unique ID"
+            placeholder="worker1"
           />
           <Spacer variant="xs" />
         </>
@@ -213,7 +213,7 @@ const CreateConfig = ({
   const handleDownloadConfig = () => {
     if (!areFieldsValid()) {
       setShowError(true);
-      return; // Prevent config generation if any field is empty or invalid
+      return;
     }
     setShowError(false);
     let walletAddressFormat = walletAddress.replace(/\s+/g, "").toLowerCase();
@@ -221,10 +221,11 @@ const CreateConfig = ({
     if (inputType === "plain") {
       workerName = minerName.value;
     } else if (inputType === "fediverse") {
-      const { href, caption } = convertWorkerName(
-        `_${minerName.value}${typePortal.value}${uniqueId ? `-${uniqueId}` : ""}`,
+      workerName = constructWorkerName(
+        minerName.value,
+        [typePortal.value],
+        uniqueId ? uniqueId : undefined,
       );
-      workerName = caption.replace(/\./g, "");
     }
     const regionKey1 = Object.keys(startMiningPoolConfigurations).find(
       (key) =>
@@ -261,7 +262,7 @@ const CreateConfig = ({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "config.cfg";
+    a.download = "pool.cfg";
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -284,7 +285,7 @@ const CreateConfig = ({
       <div className="flex xl-center-items">
         <div className={`flex flex-column ${styles.mainContent}`}>
           <Text variant="heading3" color="white" weight="semiBold">
-            Miner details
+            Basic details
           </Text>
           {desktop ? <Spacer variant="xs" /> : <Spacer variant="sm" />}
           <Text
@@ -293,19 +294,20 @@ const CreateConfig = ({
             style={{ marginBottom: "8px" }}
             disableMobileStyles
           >
-            Corepass wallet address
+            Core ID (Wallet address)
           </Text>
           <InputText
             context="dark"
             value={walletAddress}
             onChange={handleWalletAddressChange}
+            className={styles.familyZephirum}
           />
           {!isWalletValid && (
             <Text
               variant="smallBody"
-              style={{ marginTop: "4px", color: "#E54E4E" }}
+              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
             >
-              Wallet address is not valid
+              Core ID is not valid!
             </Text>
           )}
           {desktop ? <Spacer variant="xs" /> : <Spacer variant="md" />}
@@ -317,7 +319,7 @@ const CreateConfig = ({
                 className={clsx(styles.boardDropdown)}
                 items={dropdownItems}
                 onChange={handleDropdownChange1}
-                text={mobile ? "Primary pool" : "Mining pool"}
+                text="Primary pool"
               />
             </div>
             <div className={styles.dropdownContainer}>
@@ -327,7 +329,7 @@ const CreateConfig = ({
                 className={clsx(styles.boardDropdown)}
                 items={dropdownItems}
                 onChange={handleDropdownChange2}
-                text={mobile ? "Secondary pool" : "Mining pool"}
+                text="Secondary pool"
               />
             </div>
           </div>
@@ -348,12 +350,12 @@ const CreateConfig = ({
                 textUnderlineOffset: mobile ? "3px" : "0",
               }}
             >
-              View pools
+              Mining Pools Overview
             </Text>
           </Link>
           <Spacer variant="sm" />
           <Text variant="heading3" color="white" weight="semiBold">
-            Miner name
+            Identification details
           </Text>
           {desktop ? <Spacer variant="sm" /> : <Spacer variant="xs" />}
           <div className={`row  ${styles.inputs}`}>
@@ -366,7 +368,7 @@ const CreateConfig = ({
                 [styles.activeLink]: inputType === "plain",
               })}
             >
-              Plain
+              Plain name
             </Text>
 
             {desktop ? (
@@ -390,23 +392,23 @@ const CreateConfig = ({
           {renderInputs()}
           <Warning
             context="config"
-            text={`By clicking download button, the file pool.cfg will be downloaded, <span class="${styles.boldText}"> which needs to be placed in the same folder where miner software resides. </span>`}
+            text={`Click the download button to get the <span class="${styles.boldText}">pool.cfg</span> file. Place it in the same folder as your miner software.`}
           />
           <Spacer variant="md" />
           <Button
-            backgroundColor="#16C784"
-            textColor="#020202"
+            backgroundColor="var(--ifm-color-primary)"
+            textColor="var(--ifm-button-color)"
             weight="medium"
-            value="Generate & Download"
+            value="Download"
             context="config"
             onClick={handleDownloadConfig}
           />
           {showError && (
             <Text
               variant="smallBody"
-              style={{ marginTop: "4px", color: "#E54E4E" }}
+              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
             >
-              Please fill out all required fields correctly.
+              All required fields need to be filled out correctly to proceed.
             </Text>
           )}
           <Spacer variant="xxxl" />

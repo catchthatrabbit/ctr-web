@@ -1,3 +1,8 @@
+/**
+ * Converts a numeric value to a corresponding rank title with emoji
+ * @param num - The numeric value to convert to a rank
+ * @returns {string} The rank title with emoji based on the input value
+ */
 export const convert2Rank = (
   num: number,
 ): string => {

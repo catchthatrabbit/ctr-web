@@ -1,6 +1,6 @@
 import { PAYMENTS_RESPONSE } from "@site/src/Api/payments/types";
 import { UNITS } from "@site/src/constants/units";
-import { summarizedText } from "@site/src/utils";
+import { summarizedText } from "@site/src/utils/summarizedText";
 import { convertNumber2Currency } from "@site/src/utils/convertNumber2Currency";
 import { convertTime2Date } from "@site/src/utils/convertTime2Date";
 

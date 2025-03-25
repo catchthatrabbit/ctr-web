@@ -1,5 +1,6 @@
 import { MINERS_RESPONSE } from "@site/src/Api/miners/types";
-import { convert2kilo, summarizedText } from "@site/src/utils";
+import { summarizedText } from "@site/src/utils/summarizedText";
+import { convert2kilo } from "@site/src/utils/siFormat";
 import { convertTime2Date } from "@site/src/utils/convertTime2Date";
 
 export const convertMinerResponse2MinerList = (

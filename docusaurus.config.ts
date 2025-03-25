@@ -362,7 +362,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `<span style="font-size:1.3rem">⊛</span> CORE 2022 - ${new Date().getFullYear()} Catch that Rabbit.`,
+      copyright: `<a href="https://github.com/bchainhub/core-license" target="_blank" rel="noopener noreferrer"><span style="font-size:1.3rem">⊛</span> CORE</a> 2022 - ${new Date().getFullYear()} Catch that Rabbit.`,
     },
     colorMode: {
       defaultMode: "dark",

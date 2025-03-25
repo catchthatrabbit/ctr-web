@@ -34,8 +34,7 @@
 }
 
 .viewPoolsLink {
-  display: flex;
-  justify-content: flex-end;
+  display: inline-block;
 }
 
 .inputs {
@@ -101,6 +100,10 @@
 
 .boldText {
   font-weight: 600;
+}
+
+.familyZephirum {
+  font-family: var(--zephirum-font-family);
 }
 
 @media screen and (max-width: 768px) {
