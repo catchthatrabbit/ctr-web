@@ -61,10 +61,10 @@
   --medium-font-weight: 500;
   --regular-font-weight: 400;
   --ifm-font-weight-semibold: var(--regular-font-weight);
-  --normal-line-height: 1.2rem;
-  --small-line-height: 1.1rem;
-  --medium-line-height: 1.3rem;
-  --large-line-height: 1.4rem;
+  --normal-line-height: 1.2em;
+  --small-line-height: 1.1em;
+  --medium-line-height: 1.3em;
+  --large-line-height: 1.4em;
   --ifm-h1-font-size: 3.15rem;
   --ifm-h2-font-size: 2rem;
   --ifm-h3-font-size: 1.2rem;

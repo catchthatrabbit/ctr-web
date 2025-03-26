@@ -4,34 +4,22 @@ import Translate from "@docusaurus/Translate";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
 import styles from "./styles.module.css";
-/**
- *
- * @param variant - heading1  font size 38
- * heading2  font size 22
- * heading3  font size 20
- * subheading  font size 18
- * body  font size 16
- * smallBody  font size 14
- * tinyBody  font size 12
- * tag  font size 11
- * CTA; font size 11
- * @returns React.Node
- */
+
 interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
   type?: "label" | "value" | "regular" | "exo" | "zephirum";
   variant?:
-    | "heading" /** font size 50 */
-    | "heading1" /** font size 38 */
-    | "headingMobile" /** font size 32 */
-    | "heading2" /** font size 22 */
-    | "heading3" /** font size 20 */
-    | "subheading" /** font size 18 */
-    | "subheading1" /** font size 24 */
-    | "body" /** font size 16 */
-    | "smallBody" /** font size 14 */
-    | "tinyBody" /** font size 12 */
-    | "tag" /** font size 11 */
-    | "CTA" /** font size 11 */;
+    | "heading"
+    | "heading1"
+    | "headingMobile"
+    | "heading2"
+    | "heading3"
+    | "subheading"
+    | "subheading1"
+    | "body"
+    | "smallBody"
+    | "tinyBody"
+    | "tag"
+    | "CTA";
   weight?: "normal" | "bold" | "extraBold" | "semiBold" | "medium";
   size?: "small" | "regular" | "mediumSize" | "large" | "pictureTitle";
   color?:
@@ -53,7 +41,7 @@ interface IText extends HtmlHTMLAttributes<HTMLSpanElement> {
     | "mediumLineHeight";
   letterSpacing?: "letterSpacing" | "normal";
   children: string;
-  disableMobileStyles?: boolean; // disable mobile styles
+  disableMobileStyles?: boolean;
 }
 
 const CustomComponent: FC<
@@ -85,10 +73,8 @@ const Text: FC<IText> = ({
     <CustomComponent
       variant={variant}
       componentType={componentType}
-      lineHeight={lineHeight}
       className={clsx([
         styles.text,
-
         variant === "heading1" ||
         variant === "heading2" ||
         variant === "heading3" ||

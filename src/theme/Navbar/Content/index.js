@@ -60,7 +60,12 @@ ${JSON.stringify(item, null, 2)}`,
 function NavbarContentLayout({ left, right }) {
   const { mobile, tablet, desktop } = useMediaQueries();
   return (
-    <div className="navbar__inner">
+    <div
+      className={clsx("navbar__inner", {
+        [customStyles.flexEnd]: desktop || tablet,
+      })}
+    >
+      {" "}
       <div className={customStyles.grow} />
       {!desktop && <div className="navbar__items">{left}</div>}
       <div className="navbar__items navbar__items--right">{right}</div>

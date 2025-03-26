@@ -89,9 +89,7 @@ const Board = ({
             }
             weight={context === "payments" ? "bold" : "normal"}
             type="zephirum"
-            color={
-              context === "statsChart" ? "primary" : "valueChartColor"
-            }
+            color={context === "statsChart" ? "primary" : "valueChartColor"}
             lineHeight="normalLineHeight"
             letterSpacing="letterSpacing"
           >

@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  border-radius: var(--ifm-global-radius);
+  border-radius: var(--ifm-global-radius-large);
   overflow: hidden;
   padding: var(--space-sm);
   background-color: rgba(20, 20, 20, 1);
@@ -52,7 +52,7 @@
 }
 
 .startButton {
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-xs) var(--space-sm);
   background-color: var(--ifm-guide-btn-color);
   color: var(--ifm-start-btn-color);
   border-radius: var(--ifm-global-radius);

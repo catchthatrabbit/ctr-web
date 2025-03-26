@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 import useControls from "./controls";
 import { MapChart } from "@site/src/components/Organisms/MapChart";
-import {
-  Locations,
-} from "@site/src/components/Molecules/InsideChart/Locations";
+import { Locations } from "@site/src/components/Molecules/InsideChart/Locations";
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
@@ -54,19 +52,16 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
         <div
           className={clsx([
-            mobile || tablet ? "" : "lg-grid-col--5  xl-grid-col--2",
+            mobile || tablet
+              ? ""
+              : "lg-grid-template-columns xl-grid-template-columns",
             "grid md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
             styles.directionRtl,
           ])}
         >
           {mobile ? (
             <>
-              <div
-                className={clsx([
-                  styles.directionLtr,
-                  "text-center",
-                ])}
-              >
+              <div className={clsx([styles.directionLtr, "text-center"])}>
                 <MainPageSearch flexStart={false} />
                 <Spacer variant="xs" />
                 <Text
@@ -90,7 +85,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
               <div
                 className={clsx([
                   styles.mapChartLocationPlace,
-                  "grid-span-col--4",
+                  "lg-grid-span-col--4",
                   styles.directionLtr,
                 ])}
               >
@@ -105,13 +100,10 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 )}
               </div>
               <div
-                className={clsx([
-                  styles.directionLtr,
-                  "grid-col--6 text-left",
-                ])}
+                className={clsx([styles.directionLtr, "grid-col--6 text-left"])}
               >
                 <MainPageSearch flexStart={true} />
-                <Spacer variant="sm" />
+                <Spacer variant="xxs" />
                 <Text
                   variant="heading"
                   weight="extraBold"
@@ -120,7 +112,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 >
                   {sLoganPrimary}
                 </Text>
-                <Spacer variant="sm" />
+                <Spacer variant="xxs" />
                 <Text
                   color="subheadingColor"
                   variant="subheading1"
@@ -136,14 +128,20 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           )}
         </div>
       </MapChart>
-      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xl" />}
+      {desktop ? (
+        <>
+          <Spacer variant="xxl" /> <Spacer variant="xxl" />
+        </>
+      ) : (
+        <Spacer variant="xl" />
+      )}
       <StartPanel />
       <Spacer variant="md" />
       <Header
         layout={{ boards: false, dropdown: false, search: true }}
         onSearch={onSetWalletAddress}
       />
-      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xl" />}
+      {desktop ? <Spacer variant="xs" /> : <Spacer variant="xl" />}
       <StatsChart
         isLoading={isLoadingRadialBarChart}
         infoItems={infoBoxRadialData}

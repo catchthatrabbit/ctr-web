@@ -38,7 +38,7 @@ const InfoBox = ({
   const { desktop, laptop, mobile, tablet } = useMediaQueries();
 
   // Convert 'around' to a valid Board dir value
-  const boardDir = dir === 'around' ? 'column' : dir;
+  const boardDir = dir === "around" ? "column" : dir;
 
   return isLoading ? (
     loadingComponent
@@ -50,7 +50,7 @@ const InfoBox = ({
         {
           [styles.flexDirectionRow]: dir === "vert" && (desktop || laptop),
           [styles.justifySpaceAround]: (spaceAround && desktop) || laptop,
-          [styles.justifyCenter]: tablet || mobile,
+          [styles.justifyCenter]: tablet || mobile || desktop,
           [styles.fullWidthBorder]: applyFullWidthBorder,
           [styles.fullWidth]: (applyFullWidth && desktop) || laptop,
         },
