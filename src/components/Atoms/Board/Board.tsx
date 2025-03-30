@@ -14,32 +14,71 @@ interface IBoard {
   loaderComp?: React.ReactNode;
   isLoading?: boolean;
   dir?: "vert" | "hor" | "column";
-  boardClassNameHor?: string;
-  boardClassNameColumn?: string;
   context?: "mapChart" | "statsChart" | "payments";
 }
 
-const Board = ({
-  description,
+const Board: React.FC<IBoard> = ({
   value,
-  suffix,
-  prefix,
-  className,
-  dir,
-  boardClassNameHor,
-  boardClassNameColumn,
-  context,
+  description = "",
+  prefix = "",
+  suffix = "",
+  className = "",
   loaderComp = <Text variant="subheading">&nbsp;--&nbsp;</Text>,
   isLoading = false,
-}: IBoard) => {
-  const { desktop, laptop, mobile, tablet } = useMediaQueries();
+  dir = "vert",
+  context,
+}) => {
+  const { mobile } = useMediaQueries();
+
+  const getTextProps = (type: "value" | "suffix" | "description") => {
+    const isMapChart = context === "mapChart" && mobile;
+    const isStatsChart = context === "statsChart";
+    const isPayments = context === "payments";
+
+    switch (type) {
+      case "value":
+        return {
+          variant: isMapChart
+            ? "tinyBody"
+            : isStatsChart || isPayments
+              ? "headingMobile"
+              : "subheading",
+          weight: isPayments ? "bold" : "normal",
+          color: isPayments
+            ? "white"
+            : isStatsChart
+              ? "primary"
+              : "valueChartColor",
+        };
+      case "suffix":
+        return {
+          variant: isMapChart
+            ? "tinyBody"
+            : isStatsChart
+              ? "headingMobile"
+              : "subheading",
+          weight: isPayments ? "bold" : "normal",
+          color: isStatsChart ? "primary" : "valueChartColor",
+        };
+      case "description":
+        return {
+          variant: isMapChart
+            ? "tinyBody"
+            : isStatsChart
+              ? "subheading1"
+              : "subheading",
+          color: "subheadingColor",
+        };
+      default:
+        return {};
+    }
+  };
+
   return (
     <div
-      className={clsx([
-        styles.boardContainer,
-        className,
-        { [styles.boardContainerPayments]: context === "payments" },
-      ])}
+      className={clsx(styles.boardContainer, className, {
+        [styles.boardContainerPayments]: context === "payments",
+      })}
     >
       <div
         className={clsx(styles.content, {
@@ -49,29 +88,14 @@ const Board = ({
           [styles.boardTotal]: context === "payments",
         })}
       >
-        <div className={`${styles.boardItem} ${styles.number}`}>
+        <div className={clsx(styles.boardItem, styles.number)}>
           <Text type="zephirum">{prefix}</Text>
           &nbsp;
           {isLoading ? (
             loaderComp
           ) : (
             <Text
-              variant={
-                context === "mapChart" && mobile
-                  ? "tinyBody"
-                  : context === "statsChart" || context === "payments"
-                    ? "headingMobile"
-                    : "subheading"
-              }
-              type="zephirum"
-              weight={context === "payments" ? "bold" : "normal"}
-              color={
-                context === "payments"
-                  ? "white"
-                  : context === "statsChart"
-                    ? "primary"
-                    : "valueChartColor"
-              }
+              {...getTextProps("value")}
               lineHeight="normalLineHeight"
               letterSpacing="letterSpacing"
               disableMobileStyles
@@ -80,16 +104,7 @@ const Board = ({
             </Text>
           )}
           <Text
-            variant={
-              context === "mapChart" && mobile
-                ? "tinyBody"
-                : context === "statsChart"
-                  ? "headingMobile"
-                  : "subheading"
-            }
-            weight={context === "payments" ? "bold" : "normal"}
-            type="zephirum"
-            color={context === "statsChart" ? "primary" : "valueChartColor"}
+            {...getTextProps("suffix")}
             lineHeight="normalLineHeight"
             letterSpacing="letterSpacing"
           >
@@ -98,18 +113,12 @@ const Board = ({
         </div>
         <div className={styles.boardItem}>
           <Text
-            variant={
-              context === "mapChart" && mobile
-                ? "tinyBody"
-                : context === "statsChart"
-                  ? "subheading1"
-                  : "subheading"
-            }
+            {...getTextProps("description")}
             lineHeight="normalLineHeight"
             letterSpacing="letterSpacing"
             disableMobileStyles
           >
-            {description || ""}
+            {description}
           </Text>
         </div>
       </div>

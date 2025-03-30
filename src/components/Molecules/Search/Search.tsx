@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { InputHTMLAttributes, forwardRef, useRef, useState } from "react";
 import { InputText } from "@site/src/components/Atoms/InputText";
 import clsx from "clsx";
@@ -75,7 +75,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
               lineHeight="smallLineHeight"
               color="subheadingColor"
               variant={mobile ? "smallBody" : "subheading"}
-              style={{ direction: "ltr" }}
+              style={{ direction: "ltr", display: "block" }}
             >
               {overrideLabel
                 ? labelTextMap.payments

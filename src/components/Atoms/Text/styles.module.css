@@ -38,10 +38,6 @@
   line-height: var(--medium-line-height);
 }
 
-.smallLineHeight {
-  line-height: var(--small-line-height);
-}
-
 .extraBold {
   font-weight: var(--extra-bold-font-weight);
 }

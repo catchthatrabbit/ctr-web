@@ -1,4 +1,9 @@
-import React, { forwardRef, InputHTMLAttributes, TextareaHTMLAttributes, FormEvent } from "react";
+import React, {
+  forwardRef,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+  FormEvent,
+} from "react";
 import { Text } from "../../Atoms/Text";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
@@ -47,7 +52,11 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
           </span>
         )}
         {text && (
-          <Text lineHeight="smallLineHeight" color="subheadingColor" letterSpacing="letterSpacing">
+          <Text
+            lineHeight="smallLineHeight"
+            color="subheadingColor"
+            letterSpacing="letterSpacing"
+          >
             {text}
           </Text>
         )}

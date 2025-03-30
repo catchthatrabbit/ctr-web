@@ -29,6 +29,7 @@ body {
   --ifm-footer-padding-vertical: 8px;
   --ifm-table-cell-padding: var(--space-xs);
   --ifm-color-primary-background:rgba(2, 2, 2, 1);
+  --table-odd-row-background-color: var(--blue-rgb-600);
 }
 
 :root nav.navbar {

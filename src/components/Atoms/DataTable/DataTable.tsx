@@ -10,7 +10,6 @@ import { Pagination } from "@site/src/components/Molecules/Pagination";
 import { CopyButtonSmall } from "../../Molecules/CopyButton";
 
 import styles from "./styles.module.css";
-import "./styles.css";
 
 const DataTable = ({
   data,
@@ -32,12 +31,58 @@ const DataTable = ({
     ? data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
     : [];
 
-  if (isLoading)
-    return <LoadingSkeleton columns={columns} loadingComp={loadingComp} />;
+  if (isLoading) return loadingComp;
 
-  return checkArrayObjectIsEmpty(data) ? (
-    emptyComponent
-  ) : (
+  if (checkArrayObjectIsEmpty(data)) return emptyComponent;
+
+  const renderCellContent = (rowItem: any, colItem: IColumn) => {
+    const cellValue = rowItem[colItem.value]?.toString() || "";
+    const summarizedValue =
+      rowItem[`${colItem.value}_summarized`]?.toString() || "";
+
+    if (colItem.isPrimary) {
+      if (colItem.href) {
+        return (
+          <Link to={`${colItem.href}/${rowItem[colItem.value]}`}>
+            <Text variant="body" color="primary" type="zephirum">
+              {summarizedValue}
+            </Text>
+          </Link>
+        );
+      }
+
+      return (
+        <Text
+          variant="body"
+          className={styles.cursorPointer}
+          color="primary"
+          type="zephirum"
+          onClick={() =>
+            typeof colItem.fn === "function" && colItem.fn(cellValue)
+          }
+        >
+          {summarizedValue}
+        </Text>
+      );
+    }
+
+    return (
+      <Text
+        variant="smallBody"
+        type="regular"
+        weight="medium"
+        color="white"
+        className={clsx({
+          [styles.runningText]: cellValue === "Running",
+          [styles.inactiveText]: cellValue === "Inactive",
+        })}
+      >
+        {cellValue}
+      </Text>
+    );
+  };
+
+  return (
     <>
       <div
         className={clsx(styles.tableWrapper, {
@@ -54,7 +99,7 @@ const DataTable = ({
         >
           <thead>
             <tr>
-              {columns?.map((colItem, colIndex) => (
+              {columns.map((colItem, colIndex) => (
                 <th
                   key={colIndex}
                   className={clsx(
@@ -76,9 +121,9 @@ const DataTable = ({
             </tr>
           </thead>
           <tbody>
-            {paginatedData?.map((rowItem, rowIndex) => (
+            {paginatedData.map((rowItem, rowIndex) => (
               <tr key={rowIndex} className={styles.tableRow}>
-                {columns?.map((colItem, colIndex) => (
+                {columns.map((colItem, colIndex) => (
                   <td
                     key={colIndex}
                     className={clsx(
@@ -87,57 +132,9 @@ const DataTable = ({
                     )}
                   >
                     <span className={styles.copyButton}>
-                      {colItem.isPrimary ? (
-                        colItem.href ? (
-                          <Link
-                            to={`${colItem.href}/${rowItem[colItem.value]}`}
-                          >
-                            <Text
-                              variant="body"
-                              color="primary"
-                              type="zephirum"
-                            >
-                              {rowItem[
-                                `${colItem.value}_summarized`
-                              ]?.toString() || ""}
-                            </Text>
-                          </Link>
-                        ) : (
-                          <Text
-                            variant="body"
-                            className={styles.cursorPointer}
-                            color="primary"
-                            type="zephirum"
-                            onClick={() =>
-                              typeof colItem?.fn === "function" &&
-                              colItem.fn(rowItem[colItem.value]?.toString())
-                            }
-                          >
-                            {rowItem[
-                              `${colItem.value}_summarized`
-                            ]?.toString() || ""}
-                          </Text> //wallet address
-                        )
-                      ) : (
-                        <Text
-                          variant="smallBody"
-                          type="regular"
-                          weight="medium"
-                          color="white"
-                          className={clsx({
-                            [styles.runningText]:
-                              rowItem[colItem.value] === "Running",
-                            [styles.inactiveText]:
-                              rowItem[colItem.value] === "Inactive",
-                          })}
-                        >
-                          {rowItem[colItem.value]?.toString() || ""}
-                        </Text>
-                      )}
+                      {renderCellContent(rowItem, colItem)}
                       {colItem.canBeCopied && (
-                        <CopyButtonSmall
-                          textToCopy={rowItem[colItem.value]?.toString() || ""}
-                        />
+                        <CopyButtonSmall textToCopy={rowItem[colItem.value]} />
                       )}
                     </span>
                   </td>
@@ -151,7 +148,7 @@ const DataTable = ({
         <Pagination
           limit={itemsPerPage}
           offset={currentPage}
-          total={data ? data.length : 0}
+          total={data.length}
           onPageChange={handlePageChange}
         />
       )}

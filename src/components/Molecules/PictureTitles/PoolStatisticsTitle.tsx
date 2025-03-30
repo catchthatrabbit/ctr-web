@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import PictureTitle from "@site/src/components/Atoms/PictureTitle/PictureTitle";
 import { RabbitPoolStatistics } from "@site/src/icons";
 

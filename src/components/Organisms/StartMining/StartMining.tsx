@@ -11,7 +11,7 @@ const StartMining = () => {
       <div className={styles.startMiningContent}>
         <StartMiningTitle />
 
-        <Spacer variant="lg" />
+        <Spacer variant="md" />
         <Link to={"/start-mining"} className="link-button">
           Start mining
         </Link>

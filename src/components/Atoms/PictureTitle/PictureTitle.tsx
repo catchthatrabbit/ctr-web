@@ -17,6 +17,7 @@ const PictureTitle = ({
   image,
   title = "",
   titleStyles,
+  lineHeight = "largeLineHeight",
   flexStart,
   secondaryText,
   secondaryTextStyle,
@@ -32,9 +33,9 @@ const PictureTitle = ({
         type="exo"
         size="pictureTitle"
         weight="extraBold"
-        lineHeight="mediumLineHeight"
         color="white"
         letterSpacing="letterSpacing"
+        lineHeight={lineHeight}
         style={{ ...titleStyles }}
         disableMobileStyles={disableMobileStyles}
       >
@@ -44,9 +45,13 @@ const PictureTitle = ({
         <Text
           variant="subheading1"
           color="subheadingColor"
-          lineHeight="normalLineHeight"
           letterSpacing="letterSpacing"
-          style={{ marginTop: "0.5rem", ...secondaryTextStyle }}
+          lineHeight={lineHeight}
+          style={{
+            marginTop: "1rem",
+            textAlign: "center",
+            ...secondaryTextStyle,
+          }}
           disableMobileStyles={disableMobileStyles}
         >
           {secondaryText}

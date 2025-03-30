@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { TextFormatOutputType } from "@site/src/utils/textFormat";
 import { PoolStatisticsTitle } from "@site/src/components/Molecules/PictureTitles";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
@@ -27,8 +27,7 @@ const StatsChart = ({ radialBarChart, infoItems, isLoading }: IStatsChart) => {
   return (
     <div className={styles.statsChart}>
       <PoolStatisticsTitle />
-      <Spacer variant="sm" />
-      {desktop && <Spacer variant="md" />}
+      <Spacer variant="xs" />
 
       <div className={styles.flex}>
         {isLoading ? (
@@ -39,7 +38,7 @@ const StatsChart = ({ radialBarChart, infoItems, isLoading }: IStatsChart) => {
           radialBarChart
         )}
 
-        <Spacer variant="xxxl" />
+        {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="lg" />}
         <InfoBox
           dir="column"
           spaceAround={true}
@@ -55,7 +54,7 @@ const StatsChart = ({ radialBarChart, infoItems, isLoading }: IStatsChart) => {
             />
           }
         />
-        <Spacer variant="xxxl" />
+        {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="xs" />}
       </div>
     </div>
   );

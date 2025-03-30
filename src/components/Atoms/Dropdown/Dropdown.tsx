@@ -25,15 +25,15 @@ interface IDropdown {
   context?: string;
 }
 
-const Dropdown = ({
+const Dropdown: React.FC<IDropdown> = ({
   items,
   onChange,
   defaultValue,
   className,
-  isLoading,
+  isLoading = false,
   text,
   context,
-}: IDropdown) => {
+}) => {
   const { mobile } = useMediaQueries();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(
@@ -55,26 +55,104 @@ const Dropdown = ({
     onChange?.(item, {
       action: "select-option",
       option: item,
-      name: "select"
+      name: "select",
     } as ActionMeta<unknown>);
     handleCloseModal();
   };
+
   const controlStyles = {
-    ...colourStyles.control({
-      children: null,
-      innerRef: null,
-      innerProps: {},
-      isDisabled: false,
-      isFocused: false,
-      menuIsOpen: false,
-      selectProps: { classNamePrefix: '' }
-    } as any, {
-      isDisabled: false,
-      isFocused: false,
-      menuIsOpen: false
-    } as any),
-    accentColor: undefined
+    ...colourStyles.control(
+      {
+        children: null,
+        innerRef: null,
+        innerProps: {},
+        isDisabled: false,
+        isFocused: false,
+        menuIsOpen: false,
+        selectProps: { classNamePrefix: "" },
+      } as any,
+      {
+        isDisabled: false,
+        isFocused: false,
+        menuIsOpen: false,
+      } as any,
+    ),
+    accentColor: undefined,
   };
+
+  const renderMobileDropdown = () => (
+    <>
+      <div
+        onClick={handleOpenModal}
+        className={clsx(styles.dropdownTrigger, className)}
+        style={{
+          ...(controlStyles as React.CSSProperties),
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "10px 20px 10px 16px",
+          boxSizing: "border-box",
+        }}
+      >
+        {selectedItem.label}
+        <MobileDropdownIndicator menuIsOpen={isModalOpen} />
+      </div>
+
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <ul className={styles.dropdownList}>
+          {items.map((item) => (
+            <li
+              key={item.value}
+              className={styles.dropdownListItem}
+              onClick={() => handleSelectItem(item)}
+              style={{
+                ...(controlStyles as React.CSSProperties),
+                cursor: "pointer",
+                boxShadow: "none",
+                border: "none",
+                marginBottom: "4px",
+                padding: "17px 16px",
+              }}
+            >
+              <span>{item.label}</span>
+              {item.value === selectedItem.value ? (
+                <Text variant="smallBody" color="subheadingColor" weight="bold">
+                  Active
+                </Text>
+              ) : (
+                <div>
+                  <Text
+                    variant="smallBody"
+                    color="primary"
+                    weight="bold"
+                    style={{ marginRight: "10px" }}
+                  >
+                    Select
+                  </Text>
+                  <PaginationRight />
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </Modal>
+    </>
+  );
+
+  const renderDesktopDropdown = () => (
+    <Select
+      isLoading={isLoading}
+      isDisabled={isLoading}
+      className={className}
+      isSearchable={false}
+      isClearable={false}
+      options={items}
+      styles={colourStyles}
+      onChange={onChange}
+      defaultValue={{ value: defaultValue, label: defaultValue }}
+      components={{ DropdownIndicator: CustomDropdownIndicator }}
+    />
+  );
 
   return (
     <>
@@ -84,7 +162,6 @@ const Dropdown = ({
             [styles.walletContext]: context === "wallet",
           })}
         >
-          {" "}
           <Text
             variant={mobile ? "body" : "subheading"}
             color="subheadingColor"
@@ -103,80 +180,7 @@ const Dropdown = ({
           </Text>
         </div>
       )}
-      {mobile ? (
-        <>
-          <div
-            onClick={handleOpenModal}
-            className={className}
-            style={{
-              ...(controlStyles as React.CSSProperties),
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "10px 20px 10px 16px",
-            }}
-          >
-            {selectedItem.label}
-            <MobileDropdownIndicator menuIsOpen={isModalOpen} />
-          </div>
-
-          <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-            <ul className={styles.dropdownList}>
-              {items.map((item) => (
-                <li
-                  key={item.value}
-                  className={styles.dropdownListItem}
-                  onClick={() => handleSelectItem(item)}
-                  style={{
-                    ...(controlStyles as React.CSSProperties),
-                    cursor: "pointer",
-                    boxShadow: "none",
-                    border: "none",
-                    marginBottom: "4px",
-                    padding: "17px 16px",
-                  }}
-                >
-                  <span>{item.label}</span>
-                  {item.value === selectedItem.value ? (
-                    <Text
-                      variant="smallBody"
-                      color="subheadingColor"
-                      weight="bold"
-                    >
-                      Active
-                    </Text>
-                  ) : (
-                    <div>
-                      <Text
-                        variant="smallBody"
-                        color="primary"
-                        weight="bold"
-                        style={{ marginRight: "10px" }}
-                      >
-                        Select
-                      </Text>
-                      <PaginationRight />
-                    </div>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </Modal>
-        </>
-      ) : (
-        <Select
-          isLoading={isLoading}
-          isDisabled={isLoading}
-          className={className}
-          isSearchable={false}
-          isClearable={false}
-          options={items}
-          styles={colourStyles}
-          onChange={onChange}
-          defaultValue={{ value: defaultValue, label: defaultValue }}
-          components={{ DropdownIndicator: CustomDropdownIndicator }}
-        />
-      )}
+      {mobile ? renderMobileDropdown() : renderDesktopDropdown()}
     </>
   );
 };

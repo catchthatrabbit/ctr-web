@@ -28,21 +28,15 @@ interface IDashboard extends IAnyPageAndWallet {}
 const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
   const {
     infoBoxMapData,
-    asStarMiningPoolLocation,
-    euStarMiningPoolLocation,
-    usStarMiningPoolLocation,
-    poolFee,
+    isLoadingMapChart,
+    sLoganPrimary,
+    SLoganSecondary,
     infoBoxRadialData,
     radialChartData,
     recentMatureBlockListColumns,
     AllRegionsMaturedBlocks,
-    isLoadingMapChart,
     isLoadingRadialBarChart,
     isLoadingAllRegionMaturedBlocks,
-    SLoganSecondary, // TODO: eh?
-    sLoganPrimary,
-    effectsShowActionIcons,
-    effectsShowLocation,
   } = useControls();
 
   const { mobile, tablet, desktop } = useMediaQueries();
@@ -52,22 +46,26 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
         <div
           className={clsx([
-            mobile || tablet
-              ? ""
-              : "lg-grid-template-columns xl-grid-template-columns",
-            "grid md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
+            "grid",
             styles.directionRtl,
+            mobile || tablet ? "xs-grid-col--12" : "xl-grid-template-columns",
           ])}
         >
           {mobile ? (
             <>
-              <div className={clsx([styles.directionLtr, "text-center"])}>
+              <div
+                className={clsx([
+                  "xs-grid-col--12",
+                  styles.directionLtr,
+                  "text-center",
+                ])}
+              >
                 <MainPageSearch flexStart={false} />
                 <Spacer variant="xs" />
                 <Text
                   variant="headingMobile"
                   weight="extraBold"
-                  lineHeight="normalLineHeight"
+                  lineHeight="largeLineHeight"
                   color="dashboardColor"
                   style={{ textAlign: "center" }}
                 >
@@ -76,16 +74,20 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 <Spacer variant="sm" />
               </div>
               <Spacer variant="sm" />
-              <Locations />
-              <Spacer variant="xs" />
-              <Search onSearch={onSetWalletAddress} />
+              <div className="xs-grid-col--12">
+                <Locations />
+              </div>
+              {desktop ? <Spacer variant="xs" /> : <Spacer variant="xxs" />}
+              <div className="xs-grid-col--12">
+                <Search onSearch={onSetWalletAddress} />
+              </div>
             </>
           ) : (
             <>
               <div
                 className={clsx([
+                  "xl-grid-col--6",
                   styles.mapChartLocationPlace,
-                  "lg-grid-span-col--4",
                   styles.directionLtr,
                 ])}
               >
@@ -94,21 +96,23 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                     <LoadingPlaceholder className={styles.loadingPlaceholder} />
                   </div>
                 ) : (
-                  <>
-                    <Locations />
-                  </>
+                  <Locations />
                 )}
               </div>
               <div
-                className={clsx([styles.directionLtr, "grid-col--6 text-left"])}
+                className={clsx([
+                  "xl-grid-col--6",
+                  styles.directionLtr,
+                  "text-left",
+                ])}
               >
                 <MainPageSearch flexStart={true} />
                 <Spacer variant="xxs" />
                 <Text
                   variant="heading"
                   weight="extraBold"
-                  lineHeight="largeLineHeight"
                   color="dashboardColor"
+                  lineHeight="largeLineHeight"
                 >
                   {sLoganPrimary}
                 </Text>
@@ -116,7 +120,6 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 <Text
                   color="subheadingColor"
                   variant="subheading1"
-                  lineHeight="normalLineHeight"
                   letterSpacing="letterSpacing"
                 >
                   {SLoganSecondary}
@@ -133,15 +136,15 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           <Spacer variant="xxl" /> <Spacer variant="xxl" />
         </>
       ) : (
-        <Spacer variant="xl" />
+        <Spacer variant="xxxl" />
       )}
       <StartPanel />
-      <Spacer variant="md" />
+      {desktop ? <Spacer variant="md" /> : null}
       <Header
         layout={{ boards: false, dropdown: false, search: true }}
         onSearch={onSetWalletAddress}
       />
-      {desktop ? <Spacer variant="xs" /> : <Spacer variant="xl" />}
+
       <StatsChart
         isLoading={isLoadingRadialBarChart}
         infoItems={infoBoxRadialData}
@@ -151,15 +154,29 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       />
       {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xl" />}
       <RecentBlocksTitle />
-      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xl" />}
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="lg" />}
       <List
         dataTableColumns={recentMatureBlockListColumns}
         hidePagination={false}
         isLoading={isLoadingAllRegionMaturedBlocks}
         data={convertMaturedResponseToRecentBlocksInfo(AllRegionsMaturedBlocks)}
       />
-      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xl" />}
+
+      {desktop ? (
+        <>
+          <Spacer variant="xl" />
+          <Spacer variant="md" />
+        </>
+      ) : (
+        <>
+          <Spacer variant="xl" />
+          <Spacer variant="lg" />
+        </>
+      )}
+      <div className={styles.horizontalLine}></div>
+      {desktop ? <Spacer variant="xl" /> : <Spacer variant="xxxl" />}
       <StartMining />
+      {desktop ? null : <Spacer variant="sm" />}
     </>
   );
 };
