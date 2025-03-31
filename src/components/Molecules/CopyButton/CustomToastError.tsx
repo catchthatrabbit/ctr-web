@@ -1,37 +1,15 @@
 import React from "react";
-import { toast } from "react-toastify";
-import { Cancel } from "@site/src/icons";
+import { showErrorToast } from "@site/src/utils/toastUtils";
 
 import "react-toastify/dist/ReactToastify.css";
 
-import styles from "./styles.module.css";
-
-const CustomCloseButton = ({ closeToast }) => (
-  <button
-    onClick={closeToast}
-    style={{
-      alignSelf: "center",
-      background: "none",
-      border: "none",
-      cursor: "pointer",
-      color: "#fff",
-      fontSize: "15px",
-      padding: "0 20px",
-    }}
-  >
-    ✖
-  </button>
-);
-
-const CustomToastError = ({ message }: { message: string }) => {
-  toast.error(message, {
-    className: styles.customToast,
-    closeButton: CustomCloseButton,
-    theme: "dark",
-    icon: <Cancel />,
-    style: { background: 'var(--ifm-color-error)' },
+const CustomToastError: React.FC<{ message: string }> = ({ message }) => {
+  showErrorToast(message, {
+    style: {
+      background: "#363636",
+      display: "flex",
+    },
   });
-
   return null;
 };
 

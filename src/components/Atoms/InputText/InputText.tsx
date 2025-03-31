@@ -1,9 +1,4 @@
-import React, {
-  forwardRef,
-  InputHTMLAttributes,
-  TextareaHTMLAttributes,
-  FormEvent,
-} from "react";
+import React, { forwardRef, InputHTMLAttributes, FormEvent } from "react";
 import { Text } from "../../Atoms/Text";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
@@ -38,65 +33,71 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
       }
     };
     const { mobile } = useMediaQueries();
+    const renderIcon = () => {
+      if (!icon) return null;
+      return (
+        <span
+          className={clsx(styles.icon, {
+            [styles.smallIcon]: context === "payments",
+            [styles.mobileIcon]: mobile,
+            [styles.mobileIconWallet]: mobile && context === "wallet",
+          })}
+        >
+          {icon}
+        </span>
+      );
+    };
+    const renderTextLabel = () => {
+      if (!text) return null;
+      return (
+        <Text
+          lineHeight="smallLineHeight"
+          color="subheadingColor"
+          letterSpacing="letterSpacing"
+        >
+          {text}
+        </Text>
+      );
+    };
+    const renderTextarea = () => (
+      <textarea
+        ref={ref as unknown as React.Ref<HTMLTextAreaElement>}
+        onKeyDown={handleSearchOnPressEnter}
+        className={clsx(styles.inputText, className, {
+          [styles.searchWallet]: context === "wallet",
+          [styles.searchDark]: context === "dark",
+          [styles.mobileInputText]: mobile,
+        })}
+        placeholder={placeholder}
+        rows={1}
+        style={{ resize: "none", overflow: "hidden", direction: "ltr" }}
+        onInput={(e: FormEvent<HTMLTextAreaElement>) => {
+          const target = e.target as HTMLTextAreaElement;
+          target.style.height = "auto";
+          target.style.height = `${target.scrollHeight}px`;
+        }}
+      />
+    );
+    const renderInput = () => (
+      <input
+        ref={ref}
+        {...restProps}
+        onChange={onChange}
+        onKeyDown={handleSearchOnPressEnter}
+        className={clsx(styles.inputText, className, {
+          [styles.searchWallet]: context === "wallet",
+          [styles.searchDark]: context === "dark",
+          [styles.mobileInputText]: mobile,
+        })}
+        placeholder={placeholder}
+      />
+    );
+
     return (
-      <div className={`row ${styles.inputContainer}`}>
-        {icon && (
-          <span
-            className={clsx(styles.icon, {
-              [styles.smallIcon]: context === "payments",
-              [styles.mobileIcon]: mobile,
-              [styles.mobileIconWallet]: mobile && context === "wallet",
-            })}
-          >
-            {icon}
-          </span>
-        )}
-        {text && (
-          <Text
-            lineHeight="smallLineHeight"
-            color="subheadingColor"
-            letterSpacing="letterSpacing"
-          >
-            {text}
-          </Text>
-        )}
-        {mobile ? (
-          <textarea
-            ref={ref as unknown as React.Ref<HTMLTextAreaElement>}
-            onKeyDown={handleSearchOnPressEnter}
-            className={clsx(styles.inputText, className, {
-              [styles.searchWallet]: context === "wallet",
-              [styles.searchDark]: context === "dark",
-              [styles.mobileInputText]: mobile,
-            })}
-            placeholder={placeholder}
-            rows={1}
-            style={{
-              resize: "none",
-              overflow: "hidden",
-              direction: "ltr",
-              textAlign: "left",
-            }}
-            onInput={(e: FormEvent<HTMLTextAreaElement>) => {
-              const target = e.target as HTMLTextAreaElement;
-              target.style.height = "auto";
-              target.style.height = `${target.scrollHeight}px`;
-            }}
-          />
-        ) : (
-          <input
-            ref={ref}
-            {...restProps}
-            onChange={onChange}
-            onKeyDown={handleSearchOnPressEnter}
-            className={clsx(styles.inputText, className, {
-              [styles.searchWallet]: context === "wallet",
-              [styles.searchDark]: context === "dark",
-              [styles.mobileInputText]: mobile,
-            })}
-            placeholder={placeholder}
-          />
-        )}
+      <div className={clsx("row", styles.inputContainer)}>
+        {renderIcon()}
+        {renderTextLabel()}
+        {mobile ? renderTextarea() : renderInput()}
       </div>
     );
   },
