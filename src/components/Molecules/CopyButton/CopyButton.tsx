@@ -3,6 +3,7 @@ import { Button } from "@site/src/components/Atoms/Button";
 import { Copy } from "@site/src/icons";
 import { ICopyButton } from "./types";
 import { showSuccessToast } from "@site/src/utils/toastUtils";
+import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 
 import styles from "./styles.module.css";
 
@@ -15,12 +16,13 @@ const CopyButton: React.FC<ICopyButton> = ({
   icon = <Copy />,
   context,
 }) => {
+  const { mobile } = useMediaQueries();
   const mergedStyles = { ...styles, ...customStyles };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(textToCopy);
     if (typeof onCopy === "function") onCopy();
-    showSuccessToast(toastText);
+    showSuccessToast(toastText, mobile);
   };
 
   return (

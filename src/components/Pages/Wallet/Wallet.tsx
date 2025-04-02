@@ -64,7 +64,7 @@ const Wallet = ({
 
   useEffect(() => {
     if (walletNotFound && !toastShown && !isLoadingFetchWallet) {
-      CustomToastError({ message: "Wallet not found" });
+      CustomToastError({ message: "Wallet not found", mobile });
       setToastShown(true);
     }
   }, [walletNotFound, toastShown, isLoadingFetchWallet]);
