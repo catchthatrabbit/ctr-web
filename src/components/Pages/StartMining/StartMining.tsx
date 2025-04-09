@@ -16,7 +16,7 @@ import { InfoPanel } from "@site/src/components/Molecules/InfoPanel";
 import { Steps } from "../../Molecules/Steps";
 import { DropdownIconDown } from "@site/src/icons";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
-import ICAN from '@blockchainhub/ican';
+import ICAN from "@blockchainhub/ican";
 
 import styles from "./styles.module.css";
 
@@ -98,37 +98,37 @@ const StartMining = ({
           {
             title: "Step 1",
             text: "Download mining software compatible with your hardware.",
-            number: 1
+            number: 1,
           },
           {
             title: "Step 2",
             text: "Configure your wallet address in the mining software.",
-            number: 2
+            number: 2,
           },
           {
             title: "Step 3",
             text: "Join a mining pool for consistent rewards.",
-            number: 3
+            number: 3,
           },
           {
             title: "Step 4",
             text: "Start the mining process and monitor performance.",
-            number: 4
+            number: 4,
           },
           {
             title: "Step 5",
             text: "Optimize your settings for maximum efficiency.",
-            number: 5
-          }
+            number: 5,
+          },
         ]}
       />
 
       <Spacer variant="xl" />
       <span id="pools"></span>
-      {desktop ? <Spacer variant="md" /> : <Spacer variant="xxxl" />}
+      {desktop ? <Spacer variant="md" /> : <Spacer variant="lg" />}
 
       <PoolTitle />
-      <Spacer variant="xl" />
+      {desktop ? <Spacer variant="xl" /> : <Spacer variant="md" />}
       <div className={`flex flex-column ${styles.poolContainer}`}>
         {Object.keys(REGIONS).map((REGION_KEY, index) => (
           <div key={index} className={styles.poolTable}>
@@ -184,9 +184,9 @@ const StartMining = ({
                   {
                     label: "Payouts Address",
                     value: startMiningPoolConfigurations[REGION_KEY][`PAYOUT`]
-                      ? ICAN.printFormat(startMiningPoolConfigurations[REGION_KEY][
-                          `PAYOUT`
-                        ])
+                      ? ICAN.printFormat(
+                          startMiningPoolConfigurations[REGION_KEY][`PAYOUT`],
+                        )
                       : "",
                   },
                 ]}

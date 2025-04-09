@@ -1,11 +1,10 @@
 .stepsContainer {
   align-items: center;
-  gap: 20px;
+  gap: 30px;
 }
 
 .step {
-  padding: 10px 8px 8px 8px;
-  border-radius: 5px;
+  padding: 6px 0;
   width: 65%;
   height: auto;
   border-bottom: 1px solid #292929;
@@ -84,5 +83,8 @@
   .lastStep::after {
     bottom: 0px;
     top: 20rem;
+  }
+  .title{
+    margin: 0 0 13px 0;
   }
 }

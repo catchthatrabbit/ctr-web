@@ -87,7 +87,8 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
             color="white"
             style={{
               marginLeft: "33px",
-              lineHeight: "var(--small-line-height)",
+              lineHeight: "var(--large-line-height)",
+              paddingRight: "15px",
             }}
           >
             {step.text}
@@ -104,7 +105,7 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
 
           {step.link && step.linkText && (
             <>
-              {!step.buttonTitle && <Spacer variant="xxs" />}
+              {!step.buttonTitle && <Spacer variant={desktop ? "sm" : "xs"} />}
               <div className={`flex ${styles.buttonLinkContainer}`}>
                 {step.button && (
                   <>
@@ -122,7 +123,7 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
                           {step.buttonTitle}
                         </Text>
                       ) : (
-                        <>{desktop ? <Spacer variant="sm" /> : null}</>
+                        <>{desktop ? null : null}</>
                       )}
                       <Spacer variant="xs" />
                       {step.buttonLink ? (
@@ -146,7 +147,11 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
                 )}
 
                 <div className={styles.linkContainer}>
-                  {step.button && <Spacer variant={desktop ? "xl" : "sm"} />}
+                  {step.button && (
+                    <Spacer
+                      variant={step.buttonTitle ? (mobile ? "sm" : "xl") : "sm"}
+                    />
+                  )}
                   <a
                     href={step.link}
                     target="_blank"
@@ -172,14 +177,14 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
 
           {step.image && (
             <>
-              {desktop ? <Spacer variant="md" /> : <Spacer variant="xs" />}
+              {desktop ? <Spacer variant="sm" /> : null}
               <DownloadPanel />
               {desktop ? null : <Spacer variant="md" />}
             </>
           )}
           {step.showSearch && (
             <>
-              {desktop ? <Spacer variant="lg" /> : <Spacer variant="md" />}
+              {desktop ? <Spacer variant="lg" /> : <Spacer variant="lg" />}
               <Search context="startMining" onSearch={onSetWalletAddress} />
             </>
           )}

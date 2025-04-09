@@ -214,7 +214,7 @@ export const convertPoolChartDataToChartData = (
 };
 
 export const convertMaturedResponseToRecentBlocksInfo = (
-  data: MATURED_RESPONSE[],
+  data: MATURED_RESPONSE[] = [],
 ): Array<{
   height: string;
   type: string;
@@ -223,23 +223,53 @@ export const convertMaturedResponseToRecentBlocksInfo = (
   reward: string;
   variance: string;
 }> => {
-  if (!data) return null;
+  // Ensure data is an array
+  if (!Array.isArray(data)) {
+    console.warn("Matured blocks data is not an array. Returning empty array.");
+    return [];
+  }
 
-  const result = data?.map((items) =>
-    items.matured.map((item) => ({
-      height_summarized: String(item.height),
-      height: String(item.height),
-      type: item.uncle ? "Uncle" : item.orphan ? "Orphan" : "Block",
-      minedOn: convertTime2Date(item.timestamp),
-      blockHash: item.hash,
-      blockHash_summarized: item.hash === "0x0" ? "❌" : summarizedText(item.hash, 10, item.hash.length - 6),
-      reward: TextFormat.getXCBText(Number(item.reward || 0) / UNITS.CORE).text,
-      variance: `${((100 * Number(item.shares)) / Number(item.difficulty)).toFixed(2)}%`,
-    })),
-  );
+  try {
+    const result = data.map((items) =>
+      Array.isArray(items.matured)
+        ? items.matured.map((item) => ({
+            height_summarized: String(item.height || "N/A"),
+            height: String(item.height || "N/A"),
+            type: item.uncle ? "Uncle" : item.orphan ? "Orphan" : "Block",
+            minedOn: item.timestamp
+              ? convertTime2Date(item.timestamp)
+              : "Unknown",
+            blockHash: item.hash || "N/A",
+            blockHash_summarized:
+              item.hash === "0x0"
+                ? "❌"
+                : summarizedText(
+                    item.hash || "N/A",
+                    10,
+                    (item.hash || "").length - 6,
+                  ),
+            reward: TextFormat.getXCBText(Number(item.reward || 0) / UNITS.CORE)
+              .text,
+            variance:
+              item.shares && item.difficulty
+                ? `${(
+                    (100 * Number(item.shares)) /
+                    Number(item.difficulty)
+                  ).toFixed(2)}%`
+                : "N/A",
+          }))
+        : [],
+    );
 
-  // eslint-disable-next-line prefer-spread
-  return [].concat
-    .apply([], result)
-    .sort((a, b) => (a["minedOn"] < b["minedOn"] ? 1 : -1));
+    // Flatten the result and sort by minedOn
+    return []
+      .concat(...result)
+      .sort((a, b) => (a["minedOn"] < b["minedOn"] ? 1 : -1));
+  } catch (error) {
+    console.error(
+      "Error processing matured blocks data. Returning empty array:",
+      error,
+    );
+    return [];
+  }
 };

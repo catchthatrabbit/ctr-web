@@ -27,16 +27,16 @@ interface IDashboard extends IAnyPageAndWallet {}
 
 const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
   const {
-    infoBoxMapData,
-    isLoadingMapChart,
-    sLoganPrimary,
-    SLoganSecondary,
-    infoBoxRadialData,
-    radialChartData,
-    recentMatureBlockListColumns,
-    AllRegionsMaturedBlocks,
-    isLoadingRadialBarChart,
-    isLoadingAllRegionMaturedBlocks,
+    infoBoxMapData = [],
+    isLoadingMapChart = false,
+    sLoganPrimary = "Default Primary Text",
+    SLoganSecondary = "Default Secondary Text",
+    infoBoxRadialData = [],
+    radialChartData = [],
+    recentMatureBlockListColumns = [],
+    AllRegionsMaturedBlocks = [],
+    isLoadingRadialBarChart = false,
+    isLoadingAllRegionMaturedBlocks = false,
   } = useControls();
 
   const { mobile, tablet, desktop } = useMediaQueries();
@@ -159,7 +159,9 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
         dataTableColumns={recentMatureBlockListColumns}
         hidePagination={false}
         isLoading={isLoadingAllRegionMaturedBlocks}
-        data={convertMaturedResponseToRecentBlocksInfo(AllRegionsMaturedBlocks)}
+        data={convertMaturedResponseToRecentBlocksInfo(
+          AllRegionsMaturedBlocks || [],
+        )}
       />
 
       {desktop ? (

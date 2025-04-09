@@ -65,7 +65,7 @@ const DownloadPanel: React.FC = () => {
         ) : (
           <Spacer variant="lg" />
         )}
-        <Spacer variant="xl" />
+        {desktop ? <Spacer variant="md" /> : <Spacer variant="xl" />}
       </div>
       <div
         className={clsx(styles.image, {

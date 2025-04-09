@@ -2,10 +2,11 @@
   background-color: #1B190C;
   border: 1px solid #746010;
   color: #FACA15;
-  padding: 0.8125rem 0.75rem; 
+  padding: 0.81rem 0.25rem 0.81rem 0.75rem;
   border-radius: 0.5rem; 
   margin-left: 2rem; 
   margin-top: -0.6rem; 
+  width: 97%;
 }
 
 .configWarning {
@@ -18,6 +19,10 @@
 
 @media screen and (max-width: 768px) {
   .warning {
-    padding: 0.6rem 0.7rem 0.5rem 0.9rem; 
+    padding: 1rem;
+    width: 91%;
+  }
+  .warningText{
+    font-size: var( --body-tiny-font-size);
   }
 }

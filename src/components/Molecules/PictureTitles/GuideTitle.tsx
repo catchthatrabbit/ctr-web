@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import PictureTitle from "@site/src/components/Atoms/PictureTitle/PictureTitle";
 import { HeadAndNeckAbove } from "@site/src/icons";
 
@@ -10,7 +10,7 @@ const GuideTitle = () => {
       secondaryText="Step by step guide to mine your first XCB."
       secondaryTextStyle={{
         fontSize: "var(--regular-font-size)",
-        marginTop: "0px",
+        marginTop: "6px",
       }}
       image={<HeadAndNeckAbove />}
     />
