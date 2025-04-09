@@ -4,7 +4,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { Text } from "@site/src/components/Atoms/Text";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { DownloadAppStore } from "@site/src/icons";
-import googlePlayImage from "@site/static/img/google-play-badge.png";
+import googlePlayImage from "@site/static/img/GooglePlay.png";
 
 import customStyles from "./customStyles.module.css";
 
