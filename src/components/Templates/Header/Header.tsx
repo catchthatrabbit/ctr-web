@@ -60,8 +60,7 @@ const Header = ({
       {layout.search && (
         <>
           {context === "mobileWallet" ? null : <Spacer variant="xl" />}
-          <div className="col col--12">
-          </div>
+          <div className="col col--12"></div>
         </>
       )}
       {layout.dropdown && (
@@ -69,7 +68,7 @@ const Header = ({
           {iban && <IBan iBan={iban} />}
           <Spacer variant="xxs" />
 
-          {context === "blocks" && <Spacer variant="xl" />}
+          {context === "blocks" && <Spacer variant="xxl" />}
           {context === "mobileWallet" && <Spacer variant="lg" />}
           <div
             className={clsx("flex", {

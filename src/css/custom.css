@@ -10,7 +10,7 @@ body {
 }
 
 :root {
-  --ifm-table-cell-padding: var(--space-sm) var(--space-xs) var(--space-sm);
+  --ifm-table-cell-padding: 13px var(--space-xs);
   --ifm-global-spacing: var(--space-md);
   --ifm-navbar-item-padding-vertical:var(--space-xs);
   --ifm-navbar-item-padding-horizontal:var(--space-xs);
@@ -27,7 +27,6 @@ body {
   --content-width-xl: 79%;
   --ifm-footer-logo-max-width: 256px;
   --ifm-footer-padding-vertical: 8px;
-  --ifm-table-cell-padding: var(--space-xs);
   --ifm-color-primary-background:rgba(2, 2, 2, 1);
   --table-odd-row-background-color: var(--blue-rgb-600);
   --toastify-icon-color-success: var(--ifm-color-primary) !important; 

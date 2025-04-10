@@ -47,10 +47,11 @@
 
 .table th, .table td {
   white-space: nowrap;
+ 
 }
 
 .table th {
-  width: 1%;
+  width: 10%;
 }
 
 .table .walletTableHeader {
