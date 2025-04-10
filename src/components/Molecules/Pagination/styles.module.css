@@ -17,9 +17,6 @@
   background-color: transparent;
 }
 
-.containerMobile .paginationItem, .containerMobile .paginationNext, .containerMobile .paginationPrevious {
-    padding: 11px 23px; 
-}
 
 .pagination {
   display: flex;
@@ -39,6 +36,7 @@
 @media (max-width: 1268px) {
   .paginationContainer ul {
     justify-content: center;
+        flex-wrap: nowrap;
   }
 }
 
@@ -95,6 +93,7 @@
   
 }
 
+
 .selectedPage {
   background-color: transparent;
  
@@ -140,3 +139,18 @@
   border-bottom-left-radius:  calc(var(--ifm-global-radius) / 2);
 
 }
+
+
+
+@media screen and (max-width: 768px) {
+  .paginationNext, .paginationPrevious, .paginationItem:not(.selectedPage) a, .selectedPage{
+    padding: var(--space-xxs) var(--space-xs)
+  }
+   
+  .containerMobile .selectedPage a {
+    padding:0;
+  }
+  
+}
+
+

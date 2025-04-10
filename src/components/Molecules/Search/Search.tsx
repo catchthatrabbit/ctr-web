@@ -54,7 +54,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
     const labelTextMap = {
       wallet: "CorePass Wallet Address",
       startMining: "Wallet Address",
-      payments: "Wallet Address",
+      payments: "Wallet",
       main: "Wallet Address",
     };
 

@@ -35,6 +35,7 @@
 
 .viewPoolsLink {
   display: inline-block;
+  direction: rtl;
 }
 
 .inputs {

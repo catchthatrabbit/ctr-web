@@ -120,7 +120,8 @@ const CreateConfig = ({
               variant="smallBody"
               style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
             >
-              Plain name is invalid. Use only letters, numbers, underscores (_), or hyphens (-).
+              Plain name is invalid. Use only letters, numbers, underscores (_),
+              or hyphens (-).
             </Text>
           )}
           <Spacer variant="xs" />
@@ -310,7 +311,7 @@ const CreateConfig = ({
               Core ID is not valid!
             </Text>
           )}
-          {desktop ? <Spacer variant="xs" /> : <Spacer variant="md" />}
+          {desktop ? <Spacer variant="sm" /> : <Spacer variant="md" />}
           <div className={styles.dropdowns}>
             <div className={styles.dropdownContainer}>
               <Dropdown
@@ -357,7 +358,7 @@ const CreateConfig = ({
           <Text variant="heading3" color="white" weight="semiBold">
             Identification details
           </Text>
-          {desktop ? <Spacer variant="sm" /> : <Spacer variant="xs" />}
+          {desktop ? <Spacer variant="xxs" /> : <Spacer variant="xs" />}
           <div className={`row  ${styles.inputs}`}>
             <Text
               variant="smallBody"
@@ -394,7 +395,7 @@ const CreateConfig = ({
             context="config"
             text={`Click the download button to get the <span class="${styles.boldText}">pool.cfg</span> file. Place it in the same folder as your miner software.`}
           />
-          <Spacer variant="md" />
+          <Spacer variant="sm" />
           <Button
             backgroundColor="var(--ifm-color-primary)"
             textColor="var(--ifm-button-color)"

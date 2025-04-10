@@ -61,7 +61,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 ])}
               >
                 <MainPageSearch flexStart={false} />
-                <Spacer variant="xs" />
+                {desktop ? <Spacer variant="xs" /> : null}
                 <Text
                   variant="headingMobile"
                   weight="extraBold"

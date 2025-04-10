@@ -34,7 +34,7 @@
 .linkButton {
   padding: var(--space-xxs) var(--space-sm);
   background-color: var(--ifm-color-primary);
-  width: 37%;
+  width: 35%;
   border-radius: var(--ifm-global-radius);
 }
 

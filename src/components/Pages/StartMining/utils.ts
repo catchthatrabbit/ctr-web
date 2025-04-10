@@ -16,7 +16,7 @@ export const convertSettingsResponse2SettingsInfo = (
     {
       key: "3",
       title: "Payout threshold",
-      value: (settingsResponse.PayoutThreshold / UNITS.NUCLE).toString() + "₡",
+      value: "₡" + (settingsResponse.PayoutThreshold / UNITS.NUCLE).toString(),
     },
     { key: "4", title: "Mining algorithm", value: "RandomY" },
   ];
