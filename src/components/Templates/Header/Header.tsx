@@ -66,7 +66,7 @@ const Header = ({
       {layout.dropdown && (
         <>
           {iban && <IBan iBan={iban} />}
-          <Spacer variant="xs" />
+          {desktop ? <Spacer variant="xs" /> : <Spacer variant="xxs" />}
 
           {context === "blocks" && <Spacer variant="xxl" />}
           {context === "mobileWallet" && <Spacer variant="lg" />}

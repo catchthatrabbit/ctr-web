@@ -233,15 +233,15 @@
   .searchInput{
     padding: 1rem 5rem 1rem 2.6rem;
   }
-  .searchStartMining .searchContainer{
+  .searchStartMining .searchContainer, .searchWallet .searchContainer{
     flex-direction: column ;
   }
 
-  .searchStartMining .searchIconWrapper{
+  .searchStartMining .searchIconWrapper, .searchWallet .searchIconWrapper{
     top: 24%;
 
   }
-  .searchStartMining .searchButtonWalletMobile {
+  .searchStartMining .searchWallet {
     margin-top: 0.3rem;
     padding: 1rem 1.5rem;
     width: 100%;
@@ -252,7 +252,8 @@
   }
 
   .searchContainer, .searchStartMining {
-    width: 100%;
+ 
+    margin-left: 0;
   }
 
   .searchStartMining{
