@@ -39,7 +39,7 @@
   border-bottom: 1px solid var(--ifm-color-primary)!important;
 }
 
-.activeNavItemLink:before {
+/* .activeNavItemLink:before {
   content: '';
   border-bottom: 1px solid var(--white);
   position: absolute;
@@ -48,7 +48,7 @@
   height: 100%;
   width: 100%;
   top:-1px;
-}
+} */
 
 .grow {
   flex-grow: 1;

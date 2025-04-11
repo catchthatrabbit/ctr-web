@@ -34,14 +34,7 @@
   position: relative;
 }
 
-.activeNavItemLink:before{
-  content: '';
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
-}
+
 
 .menuList {
   display: flex;
@@ -50,7 +43,11 @@
   justify-content: center;
 }
 
-.menuList li:last-child {
+.menuList li, .menuList li a{
   width: 100%;
-}
+  display: flex;    
+  justify-content: center;
+} 
+
+
 
