@@ -66,3 +66,7 @@
 .flexEnd{
   align-items: flex-end;
 }
+
+.flexCenter{
+  align-items: center;
+}

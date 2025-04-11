@@ -19,7 +19,7 @@
 }
 
 .detailsTableCaption {
-  padding:calc(var(--space-sm)-9px) var(--space-xs);
+  padding:var(--space-xs);
   border-right: 1px solid var(--dark-rgb-border);
   width: 50%;
 }

@@ -29,7 +29,7 @@ const Info = ({
   loadingPlaceholder,
   handleFilterChange,
 }: IInfo) => {
-  const { mobile } = useMediaQueries();
+  const { desktop, mobile } = useMediaQueries();
 
   const generalStats = useMemo(
     () => convertWalletInfoResponse2GeneralState(data),
@@ -60,7 +60,7 @@ const Info = ({
           loadingPlaceholder={loadingPlaceholder}
         />
       </div>
-      <Spacer variant="xl" />
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xl" />}
       <WalletInfoTabs
         payouts={payouts}
         workers={workers}

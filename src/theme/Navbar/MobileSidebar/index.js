@@ -20,7 +20,7 @@ export default function NavbarMobileSidebar() {
     <NavbarMobileSidebarLayout
       // header={<NavbarMobileSidebarHeader />}
       primaryMenu={<NavbarMobileSidebarPrimaryMenu />}
-      // secondaryMenu={<NavbarMobileSidebarSecondaryMenu />}
+      secondaryMenu={<NavbarMobileSidebarSecondaryMenu />}
     />
   );
 }

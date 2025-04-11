@@ -131,7 +131,7 @@
   }
 
   .inputs::before, .inputs::after {
-    bottom: -7px;
+    display: none;
   }
 
   .inputs::after {

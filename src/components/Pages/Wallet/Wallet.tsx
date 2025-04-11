@@ -113,7 +113,7 @@ const Wallet = ({
             >
               Wallet not found. No data to display.
             </Text>
-            {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="md" />}
+            {desktop ? <Spacer variant="md" /> : <Spacer variant="md" />}
             <Spacer variant="sm" />
             <Spacer variant="xxs" />
           </div>
@@ -122,7 +122,7 @@ const Wallet = ({
           {desktop ? (
             <>
               <Spacer variant="sm" />
-              <Spacer variant="xxs" />{" "}
+              {/* <Spacer variant="xxs" />{" "} */}
             </>
           ) : null}
         </>
@@ -176,7 +176,7 @@ const Wallet = ({
           />
         </>
       )}
-      {desktop ? <Spacer variant="xl" /> : <Spacer variant="xxxl" />}
+      {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="xxxl" />}
     </>
   );
 };

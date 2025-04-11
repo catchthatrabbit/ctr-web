@@ -171,7 +171,7 @@ const Dropdown: React.FC<IDropdown> = ({
                   ? "95%"
                   : context === "blocks" || context === "payments"
                     ? "100%"
-                    : "52%",
+                    : "50%",
               position: "relative",
               bottom: "8px",
             }}

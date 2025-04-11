@@ -17,9 +17,14 @@ export default function NavbarMobileSidebarLayout({
       <Spacer variant="xxl" />
 
       <div
-        className={clsx("navbar-sidebar__items", customStyles.centered, {
-          "navbar-sidebar__items--show-secondary": secondaryMenuShown,
-        })}
+        className={clsx(
+          "navbar-sidebar__items",
+          customStyles.centered,
+          customStyles.navbarItems,
+          {
+            "navbar-sidebar__items--show-secondary": secondaryMenuShown,
+          },
+        )}
       >
         <div className={`navbar-sidebar__item menu ${customStyles.navbarItem}`}>
           {primaryMenu}
