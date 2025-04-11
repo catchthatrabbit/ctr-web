@@ -42,7 +42,7 @@
 
 .label {
   flex: 1;
-  padding: 14px;
+  padding: 0.88rem; 
   position: relative;
 }
 
@@ -58,7 +58,7 @@
 
 .value {
   flex: 3;
-  padding: 14px 0;
+  padding: 0.88rem 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -70,7 +70,7 @@
     word-wrap: break-word;
     word-break: break-all;
     white-space: normal;
-    padding: 9px 57px 14px 0px;
+    padding: 0.6rem 3.6rem 0.9rem 0;
   }
 
   .label{

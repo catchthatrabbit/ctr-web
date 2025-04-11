@@ -90,7 +90,7 @@ const Dropdown: React.FC<IDropdown> = ({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "10px 20px 10px 16px",
+          padding: "0.6rem 1.2rem 0.6rem 1rem",
           boxSizing: "border-box",
         }}
       >
@@ -110,8 +110,8 @@ const Dropdown: React.FC<IDropdown> = ({
                 cursor: "pointer",
                 boxShadow: "none",
                 border: "none",
-                marginBottom: "4px",
-                padding: "17px 16px",
+                marginBottom: "0.25rem",
+                padding: "1rem",
               }}
             >
               <span>{item.label}</span>
@@ -125,7 +125,7 @@ const Dropdown: React.FC<IDropdown> = ({
                     variant="smallBody"
                     color="primary"
                     weight="bold"
-                    style={{ marginRight: "10px" }}
+                    style={{ marginRight: "0.6rem" }}
                   >
                     Select
                   </Text>
@@ -173,7 +173,7 @@ const Dropdown: React.FC<IDropdown> = ({
                     ? "100%"
                     : "50%",
               position: "relative",
-              bottom: "8px",
+              bottom: "0.5rem",
             }}
           >
             {text}

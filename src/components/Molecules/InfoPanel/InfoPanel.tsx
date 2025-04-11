@@ -3,7 +3,7 @@ import { Text } from "../../Atoms/Text";
 import { Spacer } from "../../Atoms/Spacer";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
-import styles from "./styles.module.css"; // Ensure this import is correct
+import styles from "./styles.module.css";
 
 interface BlockProps {
   title: string;

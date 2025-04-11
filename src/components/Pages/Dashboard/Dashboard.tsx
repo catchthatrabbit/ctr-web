@@ -1,7 +1,7 @@
 import React from "react";
 import useControls from "./controls";
 import { MapChart } from "@site/src/components/Organisms/MapChart";
-import { Locations } from "@site/src/components/Molecules/InsideChart/Locations";
+import { DashboardImage } from "@site/src/components/Molecules/InsideChart/DashboardImage";
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
@@ -75,7 +75,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
               </div>
               <Spacer variant="sm" />
               <div className="xs-grid-col--12">
-                <Locations />
+                <DashboardImage />
               </div>
               {desktop ? <Spacer variant="xs" /> : <Spacer variant="xxs" />}
               <div className="xs-grid-col--12">
@@ -96,7 +96,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                     <LoadingPlaceholder className={styles.loadingPlaceholder} />
                   </div>
                 ) : (
-                  <Locations />
+                  <DashboardImage />
                 )}
               </div>
               <div

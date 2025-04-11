@@ -23,7 +23,7 @@ const SingleColumnPanel = ({
   description,
   context = "default",
 }: ISingleColumnPanel) => {
-  const { desktop, laptop, mobile, tablet } = useMediaQueries();
+  const { desktop, mobile, tablet } = useMediaQueries();
   return (
     <Panel
       id={id || ""}
@@ -38,7 +38,6 @@ const SingleColumnPanel = ({
           <Spacer variant="xxs" />
           <div
             className={clsx(styles.singleColumnValue, {
-              // [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
               [styles.singleColumnValuePaddingTablet]: tablet,
               [styles.singleColumnValuePaddingMobile]: mobile,
               [styles.singleColumnValuePaddingStartMining]:
@@ -56,7 +55,6 @@ const SingleColumnPanel = ({
         <div
           key={index}
           className={clsx(styles.singleColumnValue, {
-            // [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
             [styles.singleColumnValuePaddingTablet]: tablet,
             [styles.singleColumnValuePaddingMobile]: mobile,
             [styles.singleColumnValuePaddingStartMining]:

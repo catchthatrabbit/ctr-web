@@ -14,17 +14,17 @@
   top:30%;
   width: 100%;
   left:0px;
-  height: 126px;
+  height: 7.9rem;
 }
 
 .bgImage {
   height: 100%;
-  top: -28px;
+  top: -1.75rem;
   position: relative;
 }
 
 .bgImageMobile {
   right: 0px;
-  top: -18px;
+  top: -1.125rem; 
   width: 78%;
 }

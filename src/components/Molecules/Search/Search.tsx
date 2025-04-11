@@ -1,5 +1,9 @@
-import React from "react";
-import { InputHTMLAttributes, forwardRef, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  useRef,
+  useState,
+  InputHTMLAttributes,
+} from "react";
 import { InputText } from "@site/src/components/Atoms/InputText";
 import clsx from "clsx";
 import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
@@ -21,7 +25,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
       onSearch,
       context = "main",
       selectedPool = "de",
-      overrideLabel,
+      overrideLabel = false,
       ...restProps
     },
     ref,
@@ -31,12 +35,8 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
     const [walletAddress, setWalletAddress] = useState("");
     const history = useHistory();
 
-    const handleClickSearchButton = () => {
-      handleSearch();
-    };
-
     const handleSearch = () => {
-      const address = inputRef.current.value;
+      const address = inputRef.current?.value || "";
       setWalletAddress(address);
       if (typeof onSearch === "function") {
         onSearch(address);
@@ -44,14 +44,18 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
       history.push(`/coreid/${address}/${selectedPool}`);
     };
 
-    const placeholderTextMap = {
+    const handleClickSearchButton = () => {
+      handleSearch();
+    };
+
+    const placeholderTextMap: Record<string, string> = {
       wallet: "Wallet Address",
       startMining: "Wallet Address",
       payments: "Wallet Address",
       main: "Search Miners",
     };
 
-    const labelTextMap = {
+    const labelTextMap: Record<string, string> = {
       wallet: "CorePass Wallet Address",
       startMining: "Wallet Address",
       payments: "Wallet",

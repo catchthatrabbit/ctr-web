@@ -22,11 +22,11 @@ interface IPanel {
   titleClassName?: string;
   className?: string;
   weight?: "normal" | "bold" | "extraBold" | "semiBold";
-  handleFilterChange?: (status: string) => void;
+  handleFilterChange?: (status: "All" | "Running" | "Inactive") => void;
   context?: "default" | "startMining";
 }
 
-const Panel = ({
+const Panel: React.FC<IPanel> = ({
   id,
   title = "",
   variant = "heading3",
@@ -37,13 +37,31 @@ const Panel = ({
   weight = "bold",
   handleFilterChange,
   context = "default",
-}: IPanel) => {
-  const [activeButton, setActiveButton] = useState("All");
+}) => {
+  const [activeButton, setActiveButton] = useState<
+    "All" | "Running" | "Inactive"
+  >("All");
 
-  const handleButtonClick = (status: string) => {
+  const handleButtonClick = (status: "All" | "Running" | "Inactive") => {
     setActiveButton(status);
     handleFilterChange?.(status);
   };
+
+  const renderFilterButtons = () => (
+    <div className={styles.panelTitleBtns}>
+      {["All", "Running", "Inactive"].map((status) => (
+        <button
+          key={status}
+          className={clsx({ [styles.activeButton]: activeButton === status })}
+          onClick={() =>
+            handleButtonClick(status as "All" | "Running" | "Inactive")
+          }
+        >
+          {status}
+        </button>
+      ))}
+    </div>
+  );
 
   return (
     <div
@@ -64,37 +82,9 @@ const Panel = ({
           >
             {title}
           </Text>
-          {handleFilterChange && (
-            <div className={styles.panelTitleBtns}>
-              <button
-                className={clsx({
-                  [styles.activeButton]: activeButton === "All",
-                })}
-                onClick={() => handleButtonClick("All")}
-              >
-                All
-              </button>
-              <button
-                className={clsx({
-                  [styles.activeButton]: activeButton === "Running",
-                })}
-                onClick={() => handleButtonClick("Running")}
-              >
-                Running
-              </button>
-              <button
-                className={clsx({
-                  [styles.activeButton]: activeButton === "Inactive",
-                })}
-                onClick={() => handleButtonClick("Inactive")}
-              >
-                Inactive
-              </button>
-            </div>
-          )}
+          {handleFilterChange && renderFilterButtons()}
         </div>
       )}
-
       {children}
     </div>
   );

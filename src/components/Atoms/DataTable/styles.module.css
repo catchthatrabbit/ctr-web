@@ -125,7 +125,7 @@
     width: 100%;
     overflow-x: auto;
     position: relative;
-    border-radius: 8px;
+    border-radius: var(--ifm-global-radius);
     margin-left: 0px;
   }
 
@@ -152,8 +152,8 @@
   .table th,
   .table td {
     vertical-align: top;
-    padding: 10px 92px 10px 10px;
-    width: 100px;
+    padding: 0.6rem 5.7rem 0.6rem 0.6rem;
+    width: 6.25rem;
     white-space: nowrap;
   }
 
@@ -161,7 +161,7 @@
   .walletTable td,
   .blocksTable th,
   .blocksTable td {
-    padding: 11px 26px 13px 22px;
+    padding: 0.7rem 1.6rem 0.8rem 1.4rem;
   }
 
   .table th:first-child,

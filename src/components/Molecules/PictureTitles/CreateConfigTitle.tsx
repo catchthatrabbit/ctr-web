@@ -9,7 +9,7 @@ const CreateConfigTitle = () => {
     fontWeight: "800",
     fontFamily: "Exo",
 
-    ...(mobile && { fontSize: "32px" }),
+    ...(mobile && { fontSize: "var(--large-font-size)" }),
   };
   return (
     <PictureTitle

@@ -8,7 +8,7 @@ interface ILocation {
   children?: React.ReactNode;
 }
 
-const Locations = ({ children }: ILocation) => {
+const DashboardImage = ({ children }: ILocation) => {
   const { desktop, mobile } = useMediaQueries();
   return (
     <div className={clsx(styles.locations, { [styles.flexEnd]: desktop })}>
@@ -21,4 +21,4 @@ const Locations = ({ children }: ILocation) => {
   );
 };
 
-export default Locations;
+export default DashboardImage;
