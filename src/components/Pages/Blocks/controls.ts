@@ -1,35 +1,35 @@
-import { useHeaders } from "@site/src/hooks/useHeaders";
-import { usePaginate } from "@site/src/hooks/usePaginate";
 import { useMemo } from "react";
+import usePageControls from "@site/src/hooks/usePageControls";
 import { tablesConfig } from "@site/src/configs";
-import { POOL_NAME_ENUM } from "@site/src/enums/poolName.enum";
-import { useFetchAllBlocks } from "@site/src/hooks/useBlocks";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
-import useMapChartData from "../Dashboard/hooks/useMapChartData";
 
 const useControls = () => {
-  const { region, regionLabel, handleChangeRegion, dropdownItems } = useHeaders(
-    {
-      defaultRegion: POOL_NAME_ENUM.DE,
-    },
-  );
-  const { siteConfig } = useDocusaurusContext();
+  // Use shared logic from usePageControls
+  const {
+    regionLabel,
+    dropdownItems,
+    handleChangeRegion,
+    handlePageChange,
+    multipleData: [
+      fetchedMaturedBlocks,
+      fetchedImMatureBlocks,
+      fetchCandidatesBlocks,
+    ],
+    infoBoxMapData,
+    isLoadingMapChart,
+  } = usePageControls({
+    defaultRegion: "DE",
+    fetchMultipleData: true,
+    includeInfoBox: true,
+  });
 
-  const { currentPageNumber, handlePageChange } = usePaginate();
-
-  const [fetchedMaturedBlocks, fetchedImMatureBlocks, fetchCandidatesBlocks] =
-    useFetchAllBlocks(region, 10, currentPageNumber);
-
-  const urlsConfigs = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
-
-  const dataTableColumns = useMemo(
+  // Page-specific logic for table columns
+  const tableColumns = useMemo(
     () => [
       {
         value: "height",
         label: "Height",
         isPrimary: true,
-        href: urlsConfigs.BLOCK_DETAILS_URL,
+        href: "/block-details",
       },
       { value: "type", label: "Type" },
       { value: "minedOn", label: "Found at" },
@@ -38,24 +38,18 @@ const useControls = () => {
         label: "Block hash",
         canBeCopied: true,
         isPrimary: true,
-        href: urlsConfigs.BLOCK_DETAILS_URL,
+        href: "/block-details",
       },
       { value: "reward", label: "Reward" },
       { value: "variance", label: "Variance" },
     ],
-    [urlsConfigs.BLOCK_DETAILS_URL],
+    [],
   );
-
-  const {
-    infoBoxItems: infoBoxMapData,
-    poolFee,
-    isLoading: isLoadingMapChart,
-  } = useMapChartData();
 
   return {
     regionLabel,
     dropdownItems,
-    dataTableColumns,
+    tableColumns,
     handleChangeRegion,
     handlePageChange,
     isLoadingMaturedBlocks: fetchedMaturedBlocks.isLoading,

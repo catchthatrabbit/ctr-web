@@ -1,9 +1,10 @@
 .mainContent {
   width: 67%;
+  margin: 0 auto;
 }
 
 .boardDropdown {
-  width: 588px;
+  width: 100%;
   margin: auto;
 }
 
@@ -29,9 +30,6 @@
   flex: 0 0 48%;
 }
 
-.boardDropdown {
-  width: 100%;
-}
 
 .viewPoolsLink {
   display: inline-block;

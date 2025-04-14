@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { ContactTitle } from "@site/src/components/Molecules/PictureTitles";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { EmailPanel } from "@site/src/components/Molecules/EmailPanel";
-import { useControls } from "./controls";
+import useControls from "./controls";
 import { Text } from "@site/src/components/Atoms/Text";
 import { Dropdown } from "@site/src/components/Atoms/Dropdown";
 import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import usePageControls from "@site/src/hooks/usePageControls";
 
 import clsx from "clsx";
 import styles from "./styles.module.css";

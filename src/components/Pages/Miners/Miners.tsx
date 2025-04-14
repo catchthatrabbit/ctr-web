@@ -52,63 +52,39 @@ const Miners = ({
 
   const { mobile, tablet, desktop } = useMediaQueries();
 
-  const networkDifficultyItem = infoBoxMapData?.find((item) =>
-    item.title.includes("Network difficulty"),
+  const renderInfoBox = () =>
+    (mobile || tablet) && (
+      <ConfiguredInfoBox
+        infoItems={infoBoxMapData}
+        isLoading={isLoadingMapChart}
+      />
+    );
+
+  const renderHeader = () => (
+    <Header
+      defaultRegion={regionLabel}
+      items={dropdownItems}
+      onChangeRegion={handleDropdownChange}
+      isLoading={isLoadingMinerState}
+      pageTitleComponent={<MinersTitle />}
+      addComponent={
+        <Search
+          context={mobile ? "wallet" : "payments"}
+          onSearch={onSetWalletAddress}
+          overrideLabel={true}
+          selectedPool={selectedPool}
+        />
+      }
+      context={mobile ? "mobileWallet" : "payments"}
+      onSearch={handleSearch}
+    />
   );
+  const renderBoards = () => {
+    const networkDifficultyItem = infoBoxMapData?.find((item) =>
+      item.title.includes("Network difficulty"),
+    );
 
-  const handleDropdownChange = (selectedOption: {
-    label: string;
-    value: string;
-  }) => {
-    const poolConfig = startMiningPoolConfigurations[selectedOption.value];
-    const poolShortcut = poolConfig
-      ? poolConfig.SERVER.slice(0, 2)
-      : selectedOption.value.slice(0, 2);
-
-    setSelectedPool(poolShortcut);
-
-    handleChangeRegion(selectedOption as { label: string; value: STANDARD_REGIONS_API_KEYS });
-  };
-
-  return (
-    <>
-      {(mobile || tablet) && (
-        <>
-          <ConfiguredInfoBox
-            infoItems={infoBoxMapData}
-            isLoading={isLoadingMapChart}
-          />
-        </>
-      )}
-      {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="sm" />}
-      <Header
-        defaultRegion={regionLabel}
-        items={dropdownItems}
-        onChangeRegion={handleDropdownChange}
-        isLoading={isLoadingMinerState}
-        pageTitleComponent={<MinersTitle />}
-        addComponent={
-          <Search
-            context={mobile ? "wallet" : "payments"}
-            onSearch={onSetWalletAddress}
-            overrideLabel={true}
-            selectedPool={selectedPool}
-          />
-        }
-        context={mobile ? "mobileWallet" : "payments"}
-        onSearch={handleSearch}
-      />
-      {desktop ? null : <Spacer variant="xxxl" />}
-      <List
-        isLoading={isLoadingMinerList}
-        dataTableColumns={dataTableColumns}
-        data={minerList}
-        onPageChange={handlePageChange}
-        total={fetchedMinerList?.minersTotal}
-        hidePagination
-        context="blocks"
-      />
-      <Spacer variant="xs" />
+    return (
       <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
         <Board
           isLoading={isLoadingMinerState}
@@ -134,6 +110,46 @@ const Miners = ({
           />
         )}
       </div>
+    );
+  };
+  const networkDifficultyItem = infoBoxMapData?.find((item) =>
+    item.title.includes("Network difficulty"),
+  );
+
+  const handleDropdownChange = (selectedOption: {
+    label: string;
+    value: string;
+  }) => {
+    const poolConfig = startMiningPoolConfigurations[selectedOption.value];
+    const poolShortcut = poolConfig
+      ? poolConfig.SERVER.slice(0, 2)
+      : selectedOption.value.slice(0, 2);
+
+    setSelectedPool(poolShortcut);
+
+    handleChangeRegion(
+      selectedOption as { label: string; value: STANDARD_REGIONS_API_KEYS },
+    );
+  };
+
+  return (
+    <>
+      {renderInfoBox()}
+
+      {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="sm" />}
+      {renderHeader()}
+      {desktop ? null : <Spacer variant="xxxl" />}
+      <List
+        isLoading={isLoadingMinerList}
+        dataTableColumns={dataTableColumns}
+        data={minerList}
+        onPageChange={handlePageChange}
+        total={fetchedMinerList?.minersTotal}
+        hidePagination
+        context="blocks"
+      />
+      <Spacer variant="xs" />
+      {renderBoards()}
       {desktop ? <Spacer variant="sm" /> : <Spacer variant="md" />}
     </>
   );

@@ -27,22 +27,8 @@ const StartMining = ({
   onSetWalletAddress,
   onChangeRegion,
 }: IStartMining) => {
-  const {
-    startMiningPoolConfigurations,
-    githubReleaseDownloadUrl,
-    infoBoxMapData,
-    isLoadingMapChart,
-  } = useControls();
-
-  const inputStartMiningRef = useRef<HTMLInputElement>(null);
-
-  const { region, handleSearch } = useHeaders({
-    defaultRegion,
-    onSetWalletAddress,
-    onChangeRegion,
-  });
-
-  const { data: fetchSettings } = useFetchSettings(region);
+  const { startMiningPoolConfigurations, infoBoxMapData, isLoadingMapChart } =
+    useControls();
 
   const [openRegion, setOpenRegion] = useState<string | null>(null);
   const { mobile, tablet, desktop } = useMediaQueries();
@@ -50,7 +36,6 @@ const StartMining = ({
   const toggleRegion = (regionKey: string) => {
     setOpenRegion(openRegion === regionKey ? null : regionKey);
   };
-
   return (
     <>
       {(mobile || tablet) && (

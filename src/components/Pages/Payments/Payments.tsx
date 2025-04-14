@@ -51,6 +51,56 @@ const Payments = ({
   });
   const { mobile, tablet, desktop } = useMediaQueries();
 
+  // Helper function to render the ConfiguredInfoBox
+  const renderInfoBox = () =>
+    (mobile || tablet) && (
+      <ConfiguredInfoBox
+        infoItems={infoBoxMapData}
+        isLoading={isLoadingMapChart}
+      />
+    );
+
+  // Helper function to render the Header
+  const renderHeader = () => (
+    <Header
+      items={dropdownItems}
+      defaultRegion={regionLabel}
+      onChangeRegion={handleDropdownChange}
+      isLoading={isLoadingPaymentState}
+      pageTitleComponent={<PaymentsTitle />}
+      addComponent={
+        <Search
+          context={mobile ? "wallet" : "payments"}
+          onSearch={onSetWalletAddress}
+          overrideLabel={true}
+          selectedPool={selectedPool}
+        />
+      }
+      context={mobile ? "mobileWallet" : "payments"}
+      onSearch={handleSearch}
+    />
+  );
+
+  // Helper function to render the Board components
+  const renderBoards = () => (
+    <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
+      <Spacer variant="sm" />
+      <Spacer variant="md" />
+      <Board
+        isLoading={isLoadingPaymentState}
+        description="Sent payments"
+        value={
+          TextFormat.getNumberText(fetchedPaymentsState?.paymentsTotal).text
+        }
+        context="payments"
+        prefix=""
+        suffix=""
+      />
+      {desktop ? <Spacer variant="sm" /> : <Spacer variant="lg" />}
+      <Spacer variant="md" />
+    </div>
+  );
+
   const handleDropdownChange = (selectedOption: {
     label: string;
     value: string;
@@ -69,14 +119,7 @@ const Payments = ({
 
   return (
     <>
-      {(mobile || tablet) && (
-        <>
-          <ConfiguredInfoBox
-            infoItems={infoBoxMapData}
-            isLoading={isLoadingMapChart}
-          />
-        </>
-      )}
+      {renderInfoBox()}
       {desktop ? (
         <>
           <Spacer variant="lg" /> <Spacer variant="md" />
@@ -84,24 +127,7 @@ const Payments = ({
       ) : (
         <Spacer variant="xs" />
       )}
-
-      <Header
-        items={dropdownItems}
-        defaultRegion={regionLabel}
-        onChangeRegion={handleDropdownChange}
-        isLoading={isLoadingPaymentState}
-        pageTitleComponent={<PaymentsTitle />}
-        addComponent={
-          <Search
-            context={mobile ? "wallet" : "payments"}
-            onSearch={onSetWalletAddress}
-            overrideLabel={true}
-            selectedPool={selectedPool}
-          />
-        }
-        context={mobile ? "mobileWallet" : "payments"}
-        onSearch={handleSearch}
-      />
+      {renderHeader()}
       {desktop ? null : <Spacer variant="xxxl" />}
       <List
         isLoading={isLoadingPaymentList}
@@ -112,22 +138,7 @@ const Payments = ({
         hidePagination
         context="blocks"
       />
-      <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
-        <Spacer variant="sm" />
-        <Spacer variant="md" />
-        <Board
-          isLoading={isLoadingPaymentState}
-          description="Sent payments"
-          value={
-            TextFormat.getNumberText(fetchedPaymentsState?.paymentsTotal).text
-          }
-          context="payments"
-          prefix=""
-          suffix=""
-        />
-        {desktop ? <Spacer variant="sm" /> : <Spacer variant="lg" />}
-        <Spacer variant="md" />
-      </div>
+      {renderBoards()}
     </>
   );
 };

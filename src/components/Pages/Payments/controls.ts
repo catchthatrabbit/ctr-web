@@ -12,6 +12,7 @@ import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
 import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
 import { useHistory } from "@docusaurus/router";
 import useMapChartData from "../Dashboard/hooks/useMapChartData";
+import usePageControls from "@site/src/hooks/usePageControls";
 
 const useControls = ({
   onSetWalletAddress,
@@ -22,12 +23,18 @@ const useControls = ({
   const {
     handleChangeRegion,
     handleSearch,
-    region,
-    setWalletAddress,
-    dropdownItems,
+    handlePageChange,
     regionLabel,
-  } = useHeaders({ defaultRegion, onSetWalletAddress, onChangeRegion });
-  const { currentPageNumber, handlePageChange } = usePaginate();
+    dropdownItems,
+    currentPageNumber,
+    infoBoxMapData,
+    isLoadingMapChart,
+    setWalletAddress,
+    region,
+  } = usePageControls({
+    defaultRegion,
+    includeInfoBox: true,
+  });
 
   const { siteConfig } = useDocusaurusContext();
   const { push } = useHistory();
@@ -66,11 +73,6 @@ const useControls = ({
     ],
     [setWalletAddress, push, selectedPool, urlsConfigs.TRANSACTION_DETAILS_URL],
   );
-  const {
-    infoBoxItems: infoBoxMapData,
-    poolFee,
-    isLoading: isLoadingMapChart,
-  } = useMapChartData();
 
   return {
     dataTableColumns,

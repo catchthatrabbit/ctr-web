@@ -27,124 +27,97 @@ interface IDashboard extends IAnyPageAndWallet {}
 
 const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
   const {
-    infoBoxMapData = [],
-    isLoadingMapChart = false,
-    sLoganPrimary = "Default Primary Text",
-    SLoganSecondary = "Default Secondary Text",
-    infoBoxRadialData = [],
-    radialChartData = [],
-    recentMatureBlockListColumns = [],
-    AllRegionsMaturedBlocks = [],
-    isLoadingRadialBarChart = false,
-    isLoadingAllRegionMaturedBlocks = false,
+    infoBoxMapData,
+    isLoadingMapChart,
+    sLoganPrimary,
+    SLoganSecondary,
+    infoBoxRadialData,
+    radialChartData,
+    recentMatureBlockListColumns,
+    AllRegionsMaturedBlocks,
+    isLoadingRadialBarChart,
+    isLoadingAllRegionMaturedBlocks,
   } = useControls();
 
   const { mobile, tablet, desktop } = useMediaQueries();
 
+  // Helper function to render the search component
+  const renderSearch = () => <Search onSearch={onSetWalletAddress} />;
+
+  // Helper function to render the map chart section
+  const renderMapChartSection = () => (
+    <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
+      <div
+        className={clsx([
+          "grid",
+          styles.directionRtl,
+          mobile || tablet ? "xs-grid-col--12" : "xl-grid-template-columns",
+        ])}
+      >
+        {mobile ? (
+          <>
+            <Spacer variant="sm" />
+            <div className="xs-grid-col--12">
+              <DashboardImage />
+            </div>
+            {desktop ? <Spacer variant="xs" /> : <Spacer variant="xxs" />}
+            <div className="xs-grid-col--12">{renderSearch()}</div>
+          </>
+        ) : (
+          <>
+            <div
+              className={clsx([
+                "xl-grid-col--6",
+                styles.mapChartLocationPlace,
+                styles.directionLtr,
+              ])}
+            >
+              {isLoadingMapChart ? null : <DashboardImage />}
+            </div>
+            <div
+              className={clsx([
+                "xl-grid-col--6",
+                styles.directionLtr,
+                "text-left",
+              ])}
+            >
+              <MainPageSearch flexStart={true} />
+              <Spacer variant="xxs" />
+              <Text
+                variant="heading"
+                weight="extraBold"
+                color="dashboardColor"
+                lineHeight="largeLineHeight"
+              >
+                {sLoganPrimary}
+              </Text>
+              <Spacer variant="xxs" />
+              <Text
+                color="subheadingColor"
+                variant="subheading1"
+                letterSpacing="letterSpacing"
+              >
+                {SLoganSecondary}
+              </Text>
+              <Spacer variant="xxl" />
+              {renderSearch()}
+            </div>
+          </>
+        )}
+      </div>
+    </MapChart>
+  );
+
   return (
     <>
-      <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
-        <div
-          className={clsx([
-            "grid",
-            styles.directionRtl,
-            mobile || tablet ? "xs-grid-col--12" : "xl-grid-template-columns",
-          ])}
-        >
-          {mobile ? (
-            <>
-              <div
-                className={clsx([
-                  "xs-grid-col--12",
-                  styles.directionLtr,
-                  "text-center",
-                ])}
-              >
-                <MainPageSearch flexStart={false} />
-                {desktop ? <Spacer variant="xs" /> : null}
-                <Text
-                  variant="headingMobile"
-                  weight="extraBold"
-                  lineHeight="largeLineHeight"
-                  color="dashboardColor"
-                  style={{ textAlign: "center" }}
-                >
-                  {sLoganPrimary}
-                </Text>
-                <Spacer variant="sm" />
-              </div>
-              <Spacer variant="sm" />
-              <div className="xs-grid-col--12">
-                <DashboardImage />
-              </div>
-              {desktop ? <Spacer variant="xs" /> : <Spacer variant="xxs" />}
-              <div className="xs-grid-col--12">
-                <Search onSearch={onSetWalletAddress} />
-              </div>
-            </>
-          ) : (
-            <>
-              <div
-                className={clsx([
-                  "xl-grid-col--6",
-                  styles.mapChartLocationPlace,
-                  styles.directionLtr,
-                ])}
-              >
-                {isLoadingMapChart ? (
-                  <div className={styles.loadingSkeleton}>
-                    <LoadingPlaceholder className={styles.loadingPlaceholder} />
-                  </div>
-                ) : (
-                  <DashboardImage />
-                )}
-              </div>
-              <div
-                className={clsx([
-                  "xl-grid-col--6",
-                  styles.directionLtr,
-                  "text-left",
-                ])}
-              >
-                <MainPageSearch flexStart={true} />
-                <Spacer variant="xxs" />
-                <Text
-                  variant="heading"
-                  weight="extraBold"
-                  color="dashboardColor"
-                  lineHeight="largeLineHeight"
-                >
-                  {sLoganPrimary}
-                </Text>
-                <Spacer variant="xxs" />
-                <Text
-                  color="subheadingColor"
-                  variant="subheading1"
-                  letterSpacing="letterSpacing"
-                >
-                  {SLoganSecondary}
-                </Text>
-                <Spacer variant="xxl" />
-                <Search onSearch={onSetWalletAddress} />
-              </div>
-            </>
-          )}
-        </div>
-      </MapChart>
-      {desktop ? (
-        <>
-          <Spacer variant="xxl" /> <Spacer variant="xxl" />
-        </>
-      ) : (
-        <Spacer variant="xxxl" />
-      )}
+      {renderMapChartSection()}
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xxxl" />}
       <StartPanel />
       {desktop ? <Spacer variant="md" /> : null}
       <Header
         layout={{ boards: false, dropdown: false, search: true }}
         onSearch={onSetWalletAddress}
       />
-
       <StatsChart
         isLoading={isLoadingRadialBarChart}
         infoItems={infoBoxRadialData}
@@ -163,19 +136,6 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           AllRegionsMaturedBlocks || [],
         )}
       />
-
-      {desktop ? (
-        <>
-          <Spacer variant="xl" />
-          <Spacer variant="md" />
-        </>
-      ) : (
-        <>
-          <Spacer variant="xl" />
-          <Spacer variant="lg" />
-        </>
-      )}
-      <div className={styles.horizontalLine}></div>
       {desktop ? <Spacer variant="xl" /> : <Spacer variant="xxxl" />}
       <StartMining />
       {desktop ? null : <Spacer variant="sm" />}

@@ -1,36 +1,46 @@
 import React, { useState } from "react";
 import { Tabs } from "@site/src/components/Molecules/Tabs";
-
 import { Header } from "@site/src/components/Templates/Header";
 import { BlockListTabs } from "@site/src/components/Organisms/BlocksListTabs";
 import { List } from "@site/src/components/Templates/List";
 import { convertAnyBlocksResponse2AnyBlocksInfo } from "./utils";
 import { BlockTitle } from "@site/src/components/Molecules/PictureTitles";
+import usePageControls from "@site/src/hooks/usePageControls";
 import useControls from "./controls";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 const Blocks = () => {
+  // Use shared logic from usePageControls
   const {
     regionLabel,
-    dataTableColumns,
-    fetchCandidatesBlocks,
-    fetchedImMatureBlocks,
-    fetchedMaturedBlocks,
-    isLoadingCandidatesBlocks,
-    isLoadingImMatureBlocks,
-    isLoadingMaturedBlocks,
+    dropdownItems,
     handleChangeRegion,
     handlePageChange,
-    dropdownItems,
+    multipleData: [
+      fetchedMaturedBlocks,
+      fetchedImMatureBlocks,
+      fetchCandidatesBlocks,
+    ],
     infoBoxMapData,
     isLoadingMapChart,
-  } = useControls();
+  } = usePageControls({
+    defaultRegion: "DE",
+    fetchMultipleData: true,
+    includeInfoBox: true,
+  });
 
+  // Use unique logic from useControls
+  const { tableColumns } = useControls();
+
+  // State for active tab
   const [activeTab, setActiveTab] = useState("blocks");
+
+  // Media queries for responsive design
   const { mobile, tablet, desktop } = useMediaQueries();
 
+  // Define tabs for the page
   const tabs = [
     { label: "Blocks", value: "blocks" },
     { label: "Immature", value: "immature" },
@@ -39,16 +49,16 @@ const Blocks = () => {
 
   return (
     <>
+      {/* InfoBox for mobile and tablet */}
       {(mobile || tablet) && (
-        <>
-          <ConfiguredInfoBox
-            infoItems={infoBoxMapData}
-            isLoading={isLoadingMapChart}
-          />
-        </>
+        <ConfiguredInfoBox
+          infoItems={infoBoxMapData}
+          isLoading={isLoadingMapChart}
+        />
       )}
       {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="sm" />}
 
+      {/* Header with dropdown and tabs */}
       <Header
         items={dropdownItems}
         defaultRegion={regionLabel}
@@ -59,25 +69,21 @@ const Blocks = () => {
         context={mobile ? "mobileWallet" : "blocks"}
         onChangeRegion={handleChangeRegion}
         layout={{ boards: false, search: false, dropdown: true }}
-        isLoading={
-          isLoadingCandidatesBlocks ||
-          isLoadingImMatureBlocks ||
-          isLoadingMaturedBlocks
-        }
       />
       {desktop ? null : <Spacer variant="md" />}
 
+      {/* Block List Tabs */}
       <BlockListTabs
         blocks={
           <List
             data={convertAnyBlocksResponse2AnyBlocksInfo(
-              fetchedMaturedBlocks,
+              fetchedMaturedBlocks?.data,
               "matured",
             )}
-            isLoading={isLoadingMaturedBlocks}
+            isLoading={fetchedMaturedBlocks?.isLoading}
             onPageChange={handlePageChange}
-            dataTableColumns={dataTableColumns}
-            total={fetchedMaturedBlocks?.maturedTotal}
+            dataTableColumns={tableColumns}
+            total={fetchedMaturedBlocks?.data?.maturedTotal}
             hidePagination={true}
             context="blocks"
           />
@@ -85,13 +91,13 @@ const Blocks = () => {
         immature={
           <List
             data={convertAnyBlocksResponse2AnyBlocksInfo(
-              fetchedImMatureBlocks,
+              fetchedImMatureBlocks?.data,
               "immature",
             )}
-            isLoading={isLoadingImMatureBlocks}
+            isLoading={fetchedImMatureBlocks?.isLoading}
             onPageChange={handlePageChange}
-            dataTableColumns={dataTableColumns}
-            total={fetchedImMatureBlocks?.immatureTotal}
+            dataTableColumns={tableColumns}
+            total={fetchedImMatureBlocks?.data?.immatureTotal}
             hidePagination={true}
             context="blocks"
           />
@@ -99,13 +105,13 @@ const Blocks = () => {
         candidates={
           <List
             data={convertAnyBlocksResponse2AnyBlocksInfo(
-              fetchCandidatesBlocks,
+              fetchCandidatesBlocks?.data,
               "candidates",
             )}
-            isLoading={isLoadingCandidatesBlocks}
+            isLoading={fetchCandidatesBlocks?.isLoading}
             onPageChange={handlePageChange}
-            dataTableColumns={dataTableColumns}
-            total={fetchCandidatesBlocks?.candidatesTotal}
+            dataTableColumns={tableColumns}
+            total={fetchCandidatesBlocks?.data?.candidatesTotal}
             hidePagination={true}
             context="blocks"
           />

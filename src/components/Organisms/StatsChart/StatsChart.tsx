@@ -18,8 +18,6 @@ interface IStatsChart {
 const StatsChart = ({ radialBarChart, infoItems, isLoading }: IStatsChart) => {
   const vertClassName =
     "xl-flex-col--12 lg-flex-col--12 md-flex-col--6 sm-flex-col--12 xs-flex-col--12";
-  const radialClassName =
-    "xl-flex-col--9 lg-flex-col--9 md-flex-col--12 sm-flex-col--12 xs-flex-col--12";
   const infoBoxClassName =
     "xl-flex-col--3 lg-flex-col--3 md-flex-col--12 sm-flex-col--12 xs-flex-col--12";
   const { mobile, desktop } = useMediaQueries();

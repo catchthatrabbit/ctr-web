@@ -10,6 +10,7 @@ import { useMemo } from "react";
 import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
 import { tablesConfig } from "@site/src/configs";
 import useMapChartData from "../Dashboard/hooks/useMapChartData";
+import usePageControls from "@site/src/hooks/usePageControls";
 
 const useControls = ({
   onSetWalletAddress,
@@ -26,11 +27,17 @@ const useControls = ({
     regionLabel,
     dropdownItems,
     handleChangeRegion,
-    handleSearch,
+    handlePageChange,
+    currentPageNumber,
+    infoBoxMapData,
+    isLoadingMapChart,
     setWalletAddress,
-  } = useHeaders({ defaultRegion, onSetWalletAddress, onChangeRegion });
+    handleSearch,
+  } = usePageControls({
+    defaultRegion,
+    includeInfoBox: true,
+  });
 
-  const { currentPageNumber, handlePageChange } = usePaginate();
   const { data: fetchedMinerState, isLoading: isLoadingMinerState } =
     useFetchMinersState(region);
   const { data: fetchedMinerList, isLoading: isLoadingMinerList } =
@@ -61,12 +68,6 @@ const useControls = ({
     ],
     [push, setWalletAddress, selectedPool],
   );
-
-  const {
-    infoBoxItems: infoBoxMapData,
-    poolFee,
-    isLoading: isLoadingMapChart,
-  } = useMapChartData();
 
   return {
     dataTableColumns,

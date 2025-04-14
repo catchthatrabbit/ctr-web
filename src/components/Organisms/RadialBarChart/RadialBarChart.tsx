@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import * as d3 from "d3";
 import { useEffect, useRef, ReactNode } from "react";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
@@ -115,8 +115,8 @@ const RadialBarChart = ({
         d3
           .axisLeft(y)
           .tickSize(-width + marginLeft + marginRight) // Extend grid lines across the chart
-          .tickFormat(() => "") // Change this line to use a function that returns empty string
-          .tickValues(y.ticks().slice(1)) // Exclude the bottom-most tick
+          .tickFormat(() => "")
+          .tickValues(y.ticks().slice(1)), // Exclude the bottom-most tick
       )
       .call((g) => g.select(".domain").remove()) // Remove the axis line
       .selectAll(".tick line")

@@ -13,7 +13,7 @@
 
 .button {
   padding: var(--space-xs)!important;
-  min-width: 215px;
+  min-width: 13.4rem;
 }
 
 .linkButton {
