@@ -1,5 +1,4 @@
 .mainContent {
-  width: 67%;
   margin: 0 auto;
 }
 
@@ -8,10 +7,6 @@
   margin: auto;
 }
 
-.blocksDropdown {
-  align-items: flex-start;
-  align-content: flex-end;
-}
 
 .boardJustifyCenter{
   justify-content: center;
@@ -82,7 +77,7 @@
 }
 
 .linkText::before {
-  left: -10px;
+ 
   width: 100%;
 }
 
@@ -107,8 +102,8 @@
 
 @media screen and (max-width: 768px) {
   .mainContent {
-    width: 96%;
-    margin-left: 8px;
+    width: 100%;
+
   }
 
   .dropdownContainer {
@@ -132,24 +127,7 @@
     display: none;
   }
 
-  .inputs::after {
-    right: 12px;
-  }
 
-  .linkText {
-    width: 47%;
-    max-width: 100%;
-  }
 
-  .linkText::after {
-    right: 37px;
-  }
 
-  .linkText::before {
-    left: 25px;
-  }
-
-  .linkText::before, .linkText::after {
-    width: 80%;
-  }
 }

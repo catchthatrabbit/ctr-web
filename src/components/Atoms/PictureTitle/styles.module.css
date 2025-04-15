@@ -9,9 +9,6 @@
   flex-direction: column;
 }
 
-.pictureImg {
-  margin-bottom: 1rem;
-}
 
 .flexStart {
   display: flex;

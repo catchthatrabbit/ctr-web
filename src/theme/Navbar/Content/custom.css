@@ -18,9 +18,6 @@
   transition: width 0.3s ease-out;
 }  UNDERLINED EFFECTS ON HOVER IN NAVBAR */
 
-.navbar__link {
-  position: relative;
-}
 
 .navbar__logo {
   margin: 1.1rem 0.7rem;

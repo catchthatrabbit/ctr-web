@@ -8,6 +8,7 @@ const CreateConfigTitle = () => {
   const titleStyles = {
     fontWeight: "800",
     fontFamily: "Exo",
+    textAlign: "center",
 
     ...(mobile && { fontSize: "var(--large-font-size)" }),
   };

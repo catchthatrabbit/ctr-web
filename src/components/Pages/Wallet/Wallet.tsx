@@ -52,40 +52,78 @@ const Wallet = ({
     infoBoxMapData,
     isLoadingMapChart,
   } = useControls({ walletAddress, defaultRegion, onChangeRegion });
+
   const [filterStatus, setFilterStatus] = useState("All");
   const [toastShown, setToastShown] = useState(false);
   const { mobile, tablet, desktop } = useMediaQueries();
 
-  const handleFilterChange = (status: string) => {
-    setFilterStatus(status);
-  };
-
   const walletNotFound = !walletAddress || !fetchedWalletInfo;
 
+  // Handle toast notifications
   useEffect(() => {
     if (walletNotFound && !toastShown && !isLoadingFetchWallet) {
       CustomToastError({ message: "Wallet not found", mobile });
       setToastShown(true);
-    }
-  }, [walletNotFound, toastShown, isLoadingFetchWallet]);
-
-  useEffect(() => {
-    if (!walletNotFound && toastShown) {
+    } else if (!walletNotFound && toastShown) {
       setToastShown(false);
     }
   }, [walletNotFound, toastShown, isLoadingFetchWallet]);
 
+  // Helper function to render workers
+  const renderWorkers = () => (
+    <List
+      isLoading={isLoadingFetchWorkerByWalletAddress}
+      data={convertWorkersResponse2Info(
+        fetchWorkersByWalletAddress,
+        okEmoji,
+        brbEmoji,
+      )}
+      hidePagination
+      dataTableColumns={workersTableColumn}
+      total={fetchWorkersByWalletAddress?.workersTotal}
+      onPageChange={handleChangePageWorkers}
+      context="wallet"
+      filterStatus={filterStatus}
+    />
+  );
+
+  // Helper function to render payouts
+  const renderPayouts = () => (
+    <List
+      dataTableColumns={paymentPayoutTableColumns}
+      hidePagination
+      isLoading={isLoadingFetchPaymentByWalletAddress}
+      data={convertPaymentsResponse2PaymentInfo(fetchPaymentsByWalletAddress)}
+      total={fetchedWalletInfo?.paymentsTotal}
+      onPageChange={handleChangePagePayouts}
+      context="wallet"
+    />
+  );
+
+  // Helper function to render wallet not found message
+  const renderWalletNotFound = () => (
+    <div
+      className={`flex flex-column items-center xl-center-items ${styles.fullWidth}`}
+    >
+      <Spacer variant="xxs" />
+      <Text type="regular" variant="heading3" color="white" weight="normal">
+        Wallet not found. No data to display.
+      </Text>
+      <Spacer variant="md" />
+      <Search context="wallet" onSearch={onSetWalletAddress} />
+      <Spacer variant="xxxl" />
+    </div>
+  );
+
   return (
     <>
       {(mobile || tablet) && (
-        <>
-          <ConfiguredInfoBox
-            infoItems={infoBoxMapData}
-            isLoading={isLoadingMapChart}
-          />
-        </>
+        <ConfiguredInfoBox
+          infoItems={infoBoxMapData}
+          isLoading={isLoadingMapChart}
+        />
       )}
-      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="sm" />}
+      <Spacer variant={desktop ? "xxl" : "sm"} />
 
       <div className={`flex items-center xl-center-items ${styles.fullWidth}`}>
         <Text
@@ -99,33 +137,9 @@ const Wallet = ({
           Wallet Overview
         </Text>
       </div>
+
       {walletNotFound ? (
-        <>
-          <div
-            className={`flex flex-column items-center xl-center-items ${styles.fullWidth}`}
-          >
-            <Spacer variant="xxs" />
-            <Text
-              type="regular"
-              variant="heading3"
-              color="white"
-              weight="normal"
-            >
-              Wallet not found. No data to display.
-            </Text>
-            {desktop ? <Spacer variant="md" /> : <Spacer variant="md" />}
-            <Spacer variant="sm" />
-            <Spacer variant="xxs" />
-          </div>
-          <Search context="wallet" onSearch={onSetWalletAddress} />
-          <Spacer variant="xxxl" />
-          {desktop ? (
-            <>
-              <Spacer variant="sm" />
-              {/* <Spacer variant="xxs" />{" "} */}
-            </>
-          ) : null}
-        </>
+        renderWalletNotFound()
       ) : (
         <>
           <Header
@@ -141,42 +155,14 @@ const Wallet = ({
             data={fetchedWalletInfo}
             isLoading={isLoadingFetchWallet}
             loadingPlaceholder={<LoadingPlaceholder />}
-            handleFilterChange={handleFilterChange}
-            workers={
-              <>
-                <List
-                  isLoading={isLoadingFetchWorkerByWalletAddress}
-                  data={convertWorkersResponse2Info(
-                    fetchWorkersByWalletAddress,
-                    okEmoji,
-                    brbEmoji,
-                  )}
-                  hidePagination
-                  dataTableColumns={workersTableColumn}
-                  total={fetchWorkersByWalletAddress?.workersTotal}
-                  onPageChange={handleChangePageWorkers}
-                  context="wallet"
-                  filterStatus={filterStatus}
-                />
-              </>
-            }
-            payouts={
-              <List
-                dataTableColumns={paymentPayoutTableColumns}
-                hidePagination
-                isLoading={isLoadingFetchPaymentByWalletAddress}
-                data={convertPaymentsResponse2PaymentInfo(
-                  fetchPaymentsByWalletAddress,
-                )}
-                total={fetchedWalletInfo?.paymentsTotal}
-                onPageChange={handleChangePagePayouts}
-                context="wallet"
-              />
-            }
+            handleFilterChange={setFilterStatus}
+            workers={renderWorkers()}
+            payouts={renderPayouts()}
           />
         </>
       )}
-      {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="xxxl" />}
+
+      <Spacer variant="xxxl" />
     </>
   );
 };

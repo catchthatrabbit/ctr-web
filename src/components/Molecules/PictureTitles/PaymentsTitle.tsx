@@ -9,7 +9,6 @@ const PaymentsTitle = () => {
   const titleStyles = {
     fontWeight: "800",
     fontFamily: "Exo",
-    marginTop: "8px",
     ...(mobile && { fontSize: "var(--large-font-size)" }),
   };
   return (

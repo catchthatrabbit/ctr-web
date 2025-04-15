@@ -1,9 +1,6 @@
 .startDivWrapper {
-  display: flex;
-  align-items: center;
   position: relative;
   border-radius: var(--ifm-global-radius-large);
-  overflow: hidden;
   padding: var(--space-sm);
   background-color: rgba(20, 20, 20, 1);
 }
@@ -27,13 +24,11 @@
 }
 
 .startDivWrapperMobile {
-  margin: 0 auto;
   bottom: var(--space-sm);
 }
 
 .startDiv {
-  border-radius: var(--ifm-global-radius);
-  width: 100%;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -44,7 +39,6 @@
   padding: var(--space-xs);
   display: flex;
   flex-direction: column;
-  margin-right: 0px;
 }
 
 .startDivMobile > div {

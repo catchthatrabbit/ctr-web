@@ -3,10 +3,6 @@ import { usePaginate } from "@site/src/hooks/usePaginate";
 import useMapChartData from "@site/src/components/Pages/Dashboard/hooks/useMapChartData";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { useFetchAllBlocks } from "@site/src/hooks/useBlocks";
-import {
-  START_MINING_POOL_CONFIGURATIONS,
-  URLS_CONFIG_TYPE,
-} from "@site/src/configs/types";
 
 interface IPageControls {
   defaultRegion: string;
@@ -19,8 +15,6 @@ const usePageControls = ({
   includeInfoBox = false,
   fetchMultipleData = false,
 }: IPageControls) => {
-  const { siteConfig } = useDocusaurusContext();
-
   // Region handling
   const {
     region,

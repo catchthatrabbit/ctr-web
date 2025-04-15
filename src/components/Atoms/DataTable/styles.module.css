@@ -42,7 +42,6 @@
 
 .table thead {
   text-align: left;
-  background-color: var(--ifm-table-stripe-background);
 }
 
 .table th, .table td {
@@ -107,11 +106,6 @@
   position: relative;
 }
 
-.tableWrapper {
-  width: 100%;
-  overflow-x: auto;
-}
-
 .listMarginInlineMobile {
   margin-inline: calc(var(--space-xs) / 2);
 }
@@ -122,11 +116,8 @@
 
 @media (max-width: 767px) {
   .tableWrapper {
-    width: 100%;
     overflow-x: auto;
-    position: relative;
     border-radius: var(--ifm-global-radius);
-    margin-left: 0px;
   }
 
   .tableWrapperWallet {

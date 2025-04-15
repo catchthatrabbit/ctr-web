@@ -70,7 +70,7 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
         })}
         placeholder={placeholder}
         rows={1}
-        style={{ resize: "none", overflow: "hidden", direction: "ltr" }}
+        style={{ direction: "ltr" }}
         onInput={(e: FormEvent<HTMLTextAreaElement>) => {
           const target = e.target as HTMLTextAreaElement;
           target.style.height = "auto";

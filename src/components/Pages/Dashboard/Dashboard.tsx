@@ -57,11 +57,11 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
         {mobile ? (
           <>
             <Spacer variant="sm" />
-            <div className="xs-grid-col--12">
+            <div>
               <DashboardImage />
             </div>
             {desktop ? <Spacer variant="xs" /> : <Spacer variant="xxs" />}
-            <div className="xs-grid-col--12">{renderSearch()}</div>
+            <div>{renderSearch()}</div>
           </>
         ) : (
           <>

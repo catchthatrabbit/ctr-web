@@ -83,7 +83,7 @@ const Contact = () => {
       )}
       {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="xs" />}
       <ContactTitle />
-      {desktop ? <Spacer variant="md" /> : <Spacer variant="xs" />}
+      {desktop ? <Spacer variant="xs" /> : <Spacer variant="xs" />}
       <Spacer variant="md" />
       <div className={clsx("row", styles.contactContainer)}>
         <div className={clsx("col col--6", styles.leftContainer)}>
@@ -103,7 +103,7 @@ const Contact = () => {
             onChange={handleDropdownChange}
             defaultValue={selectedTitle}
           />
-          {desktop ? <Spacer variant="sm" /> : <Spacer variant="md" />}
+          <Spacer variant="md" />
           <Text
             variant={desktop ? "smallBody" : "body"}
             weight="normal"

@@ -5,14 +5,13 @@ import {
   useFetchWallet,
   useFetchWorkersByWalletAddress,
 } from "@site/src/hooks/useWallet";
-import useMapChartData from "../Dashboard/hooks/useMapChartData";
 import { useFetchPaymentByWalletAddress } from "@site/src/hooks/usePayments";
 import { useMemo, useState } from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
-import { useHeaders } from "@site/src/hooks/useHeaders";
 import { useLocation } from "@docusaurus/router";
 import { useHistory } from "react-router-dom";
+import usePageControls from "@site/src/hooks/usePageControls";
 
 interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
   walletAddress: string;
@@ -23,11 +22,21 @@ const useControls = ({
   onChangeRegion,
   walletAddress,
 }: IWallet) => {
-  const [region, setRegion] =
-    useState<STANDARD_REGIONS_API_KEYS>(defaultRegion);
+  const {
+    region,
+    regionLabel,
+    dropdownItems,
+    handleChangeRegion: sharedHandleChangeRegion,
+    infoBoxMapData,
+    isLoadingMapChart,
+  } = usePageControls({
+    defaultRegion,
+    includeInfoBox: true,
+  });
+
   const [currentPagePayouts, setCurrentPagePayouts] = useState<number>(1);
   const [currentPageWorkers, setCurrentPageWorkers] = useState<number>(1);
-  const { dropdownItems, regionLabel } = useHeaders({ defaultRegion });
+
   const { siteConfig } = useDocusaurusContext();
   const location = useLocation();
   const history = useHistory();
@@ -115,8 +124,7 @@ const useControls = ({
     splitted[3] = id.value.toLowerCase();
     const newUrl = splitted.join("/");
     history.push(newUrl);
-    setRegion(id.value);
-    if (typeof onChangeRegion === "function") onChangeRegion(region);
+    sharedHandleChangeRegion(id);
   };
 
   const handleChangePagePayouts = (currentPage: number) => {
@@ -126,12 +134,6 @@ const useControls = ({
   const handleChangePageWorkers = (currentPage: number) => {
     setCurrentPageWorkers(currentPage);
   };
-
-  const {
-    infoBoxItems: infoBoxMapData,
-    poolFee,
-    isLoading: isLoadingMapChart,
-  } = useMapChartData();
 
   return {
     workersTableColumn,

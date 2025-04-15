@@ -17,12 +17,6 @@ const WalletOverviewPage = () => {
     pool: string;
   }>();
 
-  const poolConfig = Object.values(START_MINING_POOL_CONFIGURATIONS).find(
-    (siteConfig) => siteConfig.SERVER.startsWith(pool),
-  );
-
-  const poolDescription = poolConfig ? poolConfig.DESCRIPTION : "Unknown Pool";
-
   const {
     handleChangeRegion,
     handleClearWalletAddress,
@@ -30,7 +24,9 @@ const WalletOverviewPage = () => {
     region,
   } = useWalletPage();
 
-  const defaultRegion = pool ? (pool.toUpperCase() as STANDARD_REGIONS_API_KEYS) : region;
+  const defaultRegion = pool
+    ? (pool.toUpperCase() as STANDARD_REGIONS_API_KEYS)
+    : region;
 
   return (
     <ConfiguredLayout backgroundPos={40}>

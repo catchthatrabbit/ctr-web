@@ -150,7 +150,7 @@ const Miners = ({
       />
       <Spacer variant="xs" />
       {renderBoards()}
-      {desktop ? <Spacer variant="sm" /> : <Spacer variant="md" />}
+      {desktop ? <Spacer variant="xs" /> : <Spacer variant="md" />}
     </>
   );
 };

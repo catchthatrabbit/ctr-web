@@ -11,9 +11,6 @@ interface IMapChart {
   isLoading?: boolean;
 }
 
-const horClassName =
-  "xl-flex-col--2 lg-flex-col--2 md-flex-col--6 sm-flex-col--12 xs-flex-col--12";
-
 const MapChart = ({ children, infoItems, isLoading }: IMapChart) => {
   const { mobile, tablet } = useMediaQueries();
 

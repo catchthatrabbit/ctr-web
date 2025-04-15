@@ -12,7 +12,6 @@ import styles from "./styles.module.css";
 interface IHeader {
   items?: Array<{ label: string; value: string }>;
   defaultRegion?: string;
-  onSearch?: (searchQuery: string) => void;
   children?: React.ReactNode;
   iban?: string;
   isLoading?: boolean;
@@ -35,7 +34,7 @@ interface IHeader {
 
 const Header = ({
   items,
-  onSearch,
+
   boardItems,
   onChangeRegion,
   defaultRegion,
@@ -47,12 +46,50 @@ const Header = ({
   layout = { boards: true, dropdown: true, search: true },
   context,
 }: IHeader) => {
-  const { mobile, desktop } = useMediaQueries();
+  const { desktop } = useMediaQueries();
 
-  const columnClass =
-    context === "blocks" || context === "payments"
-      ? "flex-col--4"
-      : "flex-col--12";
+  const columnClass = clsx({
+    "flex-col--4": context === "blocks" || context === "payments",
+    "flex-col--5":
+      context !== "blocks" &&
+      context !== "payments" &&
+      context !== "mobileWallet",
+    "flex-col--12": context === "mobileWallet",
+  });
+  const renderDropdown = () => (
+    <div
+      className={clsx("flex flex-column flex-column-center", columnClass, {
+        [styles.blocksDropdown]: context === "blocks",
+      })}
+    >
+      <Dropdown
+        isLoading={isLoading}
+        defaultValue={defaultRegion}
+        className={clsx(styles.boardDropdown, {
+          [styles.smallWidth]: context === "blocks" || context === "payments",
+        })}
+        items={items}
+        onChange={onChangeRegion}
+        text="Mining pool"
+        context={context}
+      />
+    </div>
+  );
+
+  const renderBoards = () => (
+    <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
+      {boardItems?.map((boardItem, index) => (
+        <Board
+          isLoading={isLoading}
+          key={index}
+          description={boardItem.desc}
+          value={boardItem.value}
+          suffix={boardItem.suffix}
+          prefix={boardItem.prefix}
+        />
+      ))}
+    </div>
+  );
 
   return (
     <>
@@ -66,64 +103,28 @@ const Header = ({
       {layout.dropdown && (
         <>
           {iban && <IBan iBan={iban} />}
-          {desktop ? <Spacer variant="xs" /> : <Spacer variant="xxs" />}
+          {desktop ? null : <Spacer variant="xxs" />}
 
-          {context === "blocks" && <Spacer variant="xxl" />}
+          {context === "blocks" && <Spacer variant="xl" />}
           {context === "mobileWallet" && <Spacer variant="lg" />}
           <div
-            className={clsx("flex", {
+            className={clsx("flex  xl-center-items", {
               [styles.blocksContainer]: context === "blocks",
               [styles.paymentsContainer]: context === "payments",
               [styles.mobileBlocksContainer]: context === "mobileWallet",
             })}
           >
-            <div
-              className={clsx(
-                "flex flex-column flex-column-center",
-                columnClass,
-                { [styles.blocksDropdown]: context === "blocks" },
-              )}
-            >
-              <Dropdown
-                isLoading={isLoading}
-                defaultValue={defaultRegion}
-                className={clsx(styles.boardDropdown, {
-                  [styles.smallWidth]:
-                    context === "blocks" || context === "payments",
-                })}
-                items={items}
-                onChange={onChangeRegion}
-                text="Mining pool"
-                context={context}
-              />
-            </div>
+            {renderDropdown()}
             {addComponent}
           </div>
         </>
       )}
-      {context !== "payments" &&
-        desktop &&
-        (context === "blocks" ? (
-          <Spacer variant="md" />
-        ) : (
-          <Spacer variant="xl" />
-        ))}
+      {context !== "payments" && desktop && <Spacer variant="xl" />}
 
       {layout.boards && (
         <>
           <Spacer variant="lg" />
-          <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
-            {boardItems?.map((boardItem, index) => (
-              <Board
-                isLoading={isLoading}
-                key={index}
-                description={boardItem.desc}
-                value={boardItem.value}
-                suffix={boardItem.suffix}
-                prefix={boardItem.prefix}
-              />
-            ))}
-          </div>
+          {renderBoards()}
         </>
       )}
       {children}

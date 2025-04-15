@@ -499,7 +499,7 @@
      }
 
      .lg-grid-template-columns {
-        grid-template-columns: 2fr 3fr; /* Adjust the values to make the left container slightly wider */
+        grid-template-columns: 2fr 3fr;
       }
 
     .lg-grid-col--1{
@@ -662,7 +662,7 @@
     }
 
     .xl-grid-template-columns {
-        grid-template-columns: 3fr 4fr; /* Adjust the values to make the left container slightly wider */
+        grid-template-columns: 3fr 4fr; 
       }
 
     .xl-grid-col--1{

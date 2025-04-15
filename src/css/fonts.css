@@ -20,43 +20,43 @@
   --extra-large-font-size: 50px;
   --picture-title-font-size: 36px;
   --h1-font-size-desktop: 2.1rem; /* heading 1 33px */
-  --h1-lineHeight-desktop: 2.3rem;
+  --h1-lineHeight-desktop: 2.3em;
   --h2-font-size-desktop: 1.4rem; /* heading 2  22px*/
-  --h2-lineHeight-desktop: 1.6rem;
+  --h2-lineHeight-desktop: 1.6em;
   --h3-font-size-desktop: 1.1rem; /* heading 3 */
-  --h3-lineHeight-desktop: 1.3rem;
+  --h3-lineHeight-desktop: 1.3em;
   --h1-font-size-tablet: 1.6rem; /* heading 1 */
-  --h1-lineHeight-tablet: 1.8rem;
+  --h1-lineHeight-tablet: 1.8em;
   --h2-font-size-tablet: 1.4rem; /* heading 2 */
-  --h2-lineHeight-tablet: 1.6rem;
+  --h2-lineHeight-tablet: 1.6em;
   --h3-font-size-tablet: 1.1rem; /* heading 3 */
-  --h3-lineHeight-tablet: 1.3rem;
+  --h3-lineHeight-tablet: 1.3em;
   --h1-font-size-mobile: 1.6rem;
-  --h1-lineHeight-mobile: 1.8rem;
+  --h1-lineHeight-mobile: 1.8em;
   --h2-font-size-mobile: 1.3rem;
-  --h2-lineHeight-mobile: 1.5rem;
+  --h2-lineHeight-mobile: 1.5em;
   --h3-font-size-mobile: 1.1rem;
-  --h3-lineHeight-mobile: 1.3rem;
+  --h3-lineHeight-mobile: 1.3em;
   --subheading-font-size-desktop: 1rem; /* subheading 18px */
-  --subheading-lineHeight-desktop: 1.1rem;
+  --subheading-lineHeight-desktop: 1.1em;
   --subheading1-font-size-desktop: 1.5rem; /* subheading 24px */
-  --subheading1-lineHeight-desktop: 2.2rem;
+  --subheading1-lineHeight-desktop: 2.2em;
   --subheading-font-size-tablet: 1.143rem; /* subheading 18px */
-  --subheading-lineHeight-tablet: 1.4rem;
+  --subheading-lineHeight-tablet: 1.4em;
   --subheading-font-size-mobile: 1.2rem; /* subheading 16px */
-  --subheading-lineHeight-mobile: 1.2rem;
+  --subheading-lineHeight-mobile: 1.2em;
   --body-font-size: 1rem; /* Body 1 16px */
-  --body-lineHeight: 1.1rem;
+  --body-lineHeight: 1.1em;
   --body-small-font-size: 0.9rem; /* Body 2 */
-  --body-small-lineHeight: 1rem;
+  --body-small-lineHeight: 1em;
   --body-tiny-font-size: 0.8rem; /* Body 3 13px */
-  --body-tiny-lineHeight: 0.9rem;
+  --body-tiny-lineHeight: 0.9em;
   --body-large-font-size: 1.2rem; /* Body 1 16px */
-  --body-large-lineHeight: 1.3rem;
+  --body-large-lineHeight: 1.3em;
   --tag-font-size: 0.8rem; /* tag */
-  --tag-lineHeight: 0.9rem;
+  --tag-lineHeight: 0.9em;
   --cta-font-size: 0.8rem; /* cta */
-  --cta-lineHeight: 0.9rem;
+  --cta-lineHeight: 0.9em;
   --extra-bold-font-weight: 800;
   --semi-bold-font-weight: 700;
   --bold-font-weight: 600;
@@ -67,7 +67,7 @@
   --small-line-height: 1.1em;
   --medium-line-height: 1.3em;
   --large-line-height: 1.4em;
-  --ifm-h1-font-size: 3.15rem;
+  --ifm-h1-font-size: 3.15em;
   --ifm-h2-font-size: 2rem;
   --ifm-h3-font-size: 1.2rem;
 }

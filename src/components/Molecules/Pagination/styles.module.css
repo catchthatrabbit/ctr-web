@@ -3,10 +3,6 @@
   justify-content: space-between;
   align-items: center;
   padding: calc(var(--space-xxs) / 2) var(--space-xxs);
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
-  list-style: none;
   border-bottom-left-radius: var(--ifm-global-radius);
   border-bottom-right-radius: var(--ifm-global-radius);
   background-color: var(--dark-rgb-400);
