@@ -128,7 +128,7 @@ const Payments = ({
         <Spacer variant="xs" />
       )}
       {renderHeader()}
-      {desktop ? null : <Spacer variant="xxxl" />}
+      {desktop ? null : <Spacer variant="xxs" />}
       <List
         isLoading={isLoadingPaymentList}
         data={convertPaymentsResponse2PaymentInfo(fetchedPaymentsList)}
@@ -139,6 +139,7 @@ const Payments = ({
         context="blocks"
       />
       {renderBoards()}
+      {mobile && <Spacer variant="sm" />}
     </>
   );
 };

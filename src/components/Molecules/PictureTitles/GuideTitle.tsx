@@ -10,7 +10,7 @@ const GuideTitle = () => {
       secondaryText="Step by step guide to mine your first XCB."
       secondaryTextStyle={{
         fontSize: "var(--regular-font-size)",
-        marginTop: "6px",
+        marginTop: "0",
       }}
       image={<HeadAndNeckAbove />}
     />

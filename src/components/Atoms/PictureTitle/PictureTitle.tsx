@@ -48,7 +48,6 @@ const PictureTitle = ({
           letterSpacing="letterSpacing"
           lineHeight={lineHeight}
           style={{
-            marginTop: "1rem",
             textAlign: "center",
             ...secondaryTextStyle,
           }}

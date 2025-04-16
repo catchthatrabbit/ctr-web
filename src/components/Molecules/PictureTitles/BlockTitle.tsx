@@ -9,7 +9,7 @@ const BlockTitle = () => {
   const titleStyles = {
     fontWeight: "800",
     fontFamily: "Exo",
-    ...(mobile && { fontSize: "var(--large-font-size)" }),
+    ...(mobile && { fontSize: "var(--large-font-size)", marginTop: "8px" }),
   };
 
   return (

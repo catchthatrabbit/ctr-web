@@ -52,7 +52,7 @@ const StartMining = ({
       <span id="start"></span>
       <GetStartedTitle />
       <Spacer variant="sm" />
-      {desktop ? <Spacer variant="md" /> : null}
+      {desktop ? <Spacer variant="xs" /> : null}
 
       <div
         className={`flex ${styles.infoPanel} ${mobile ? `flex-column ${styles.mobileInfoPanel}` : ""}`}
@@ -113,7 +113,7 @@ const StartMining = ({
       {desktop ? <Spacer variant="md" /> : <Spacer variant="lg" />}
 
       <PoolTitle />
-      {desktop ? <Spacer variant="xl" /> : <Spacer variant="md" />}
+      {desktop ? <Spacer variant="lg" /> : <Spacer variant="md" />}
       <div className={`flex flex-column ${styles.poolContainer}`}>
         {Object.keys(REGIONS).map((REGION_KEY, index) => (
           <div key={index} className={styles.poolTable}>

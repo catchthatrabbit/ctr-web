@@ -56,15 +56,31 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       >
         {mobile ? (
           <>
-            <Spacer variant="sm" />
+            {/* Texts appear above the image in mobile view */}
+            <div className={clsx(styles.textContainer, "text-center")}>
+              <MainPageSearch flexStart={false} />
+
+              <Spacer variant="xxs" />
+              <Text
+                variant="heading1"
+                weight="extraBold"
+                color="dashboardColor"
+                lineHeight="largeLineHeight"
+                disableMobileStyles={true}
+              >
+                {sLoganPrimary}
+              </Text>
+              <Spacer variant="xl" />
+            </div>
             <div>
               <DashboardImage />
             </div>
-            {desktop ? <Spacer variant="xs" /> : <Spacer variant="xxs" />}
+            <Spacer variant="xxs" />
             <div>{renderSearch()}</div>
           </>
         ) : (
           <>
+            {/* Desktop layout */}
             <div
               className={clsx([
                 "xl-grid-col--6",
@@ -136,6 +152,11 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           AllRegionsMaturedBlocks || [],
         )}
       />
+      <Spacer variant="xxxl" />
+      <Spacer variant="xs" />
+
+      <div className={styles.horizontalLine}></div>
+
       {desktop ? <Spacer variant="xl" /> : <Spacer variant="xxxl" />}
       <StartMining />
       {desktop ? null : <Spacer variant="sm" />}

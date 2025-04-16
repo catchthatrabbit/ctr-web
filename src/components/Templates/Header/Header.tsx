@@ -106,7 +106,7 @@ const Header = ({
           {desktop ? null : <Spacer variant="xxs" />}
 
           {context === "blocks" && <Spacer variant="xl" />}
-          {context === "mobileWallet" && <Spacer variant="lg" />}
+          {context === "mobileWallet" && <Spacer variant="sm" />}
           <div
             className={clsx("flex  xl-center-items", {
               [styles.blocksContainer]: context === "blocks",

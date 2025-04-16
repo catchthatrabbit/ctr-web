@@ -92,7 +92,7 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
                 {step.buttonTitle}
               </Text>
             )}
-            <Spacer variant="xs" />
+            {step.warning ? <Spacer variant="xs" /> : <Spacer variant="md" />}
 
             {step.buttonLink ? (
               <Link to={step.buttonLink}>
@@ -115,9 +115,9 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
       )}
       <div className={styles.linkContainer}>
         {step.button && (
-          <Spacer variant={step.buttonTitle ? (mobile ? "sm" : "xl") : "sm"} />
+          <Spacer variant={step.buttonTitle ? (mobile ? "sm" : "xl") : "lg"} />
         )}
-        {!step.button && <Spacer variant="xs" />}
+        {!step.button && <Spacer variant="sm" />}
         <a
           href={step.link}
           target="_blank"
@@ -152,30 +152,31 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
           <h2 className={clsx(styles.title, { [styles.mobileTitle]: mobile })}>
             {step.number}.&nbsp;&nbsp;{step.title}
           </h2>
-          <Text
-            variant={desktop ? "heading3" : "body"}
-            weight="normal"
-            color="white"
-            style={{
-              marginLeft: "33px",
-              lineHeight: "var(--large-line-height)",
-              paddingRight: "15px",
-            }}
-          >
-            {step.text}
-          </Text>
-          {step.warning &&
-            renderWarning(
-              "In case you do not own a Linux device, we recommend using the Linux virtual operating system.",
+          <div className={styles.stepsMargin}>
+            <Text
+              variant={desktop ? "heading3" : "body"}
+              weight="normal"
+              color="white"
+              style={{
+                lineHeight: "var(--large-line-height)",
+                paddingRight: "15px",
+              }}
+            >
+              {step.text}
+            </Text>
+            {step.warning &&
+              renderWarning(
+                "In case you do not own a Linux device, we recommend using the Linux virtual operating system.",
+              )}
+            {step.link && step.linkText && renderButtonAndLink(step)}
+            {step.image && (
+              <>
+                {desktop ? <Spacer variant="sm" /> : null}
+                <DownloadPanel />
+                {desktop ? null : <Spacer variant="md" />}
+              </>
             )}
-          {step.link && step.linkText && renderButtonAndLink(step)}
-          {step.image && (
-            <>
-              {desktop ? <Spacer variant="sm" /> : null}
-              <DownloadPanel />
-              {desktop ? null : <Spacer variant="md" />}
-            </>
-          )}
+          </div>
           {step.showSearch && (
             <>
               <Spacer variant="lg" />

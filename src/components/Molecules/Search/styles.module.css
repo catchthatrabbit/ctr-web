@@ -103,10 +103,10 @@
 
 .searchStartMining {
   display: flex;
-  width: 96%;
+  width: 100%;
   align-content: center;
   flex-direction: column;
-  margin-left: 28px;
+  margin-left: 2rem;
 }
 
 .searchStartMining .searchContainer {

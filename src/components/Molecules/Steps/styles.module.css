@@ -1,14 +1,18 @@
 .stepsContainer {
   align-items: center;
-  gap: 30px;
+  gap: 2rem;
 }
 
 .step {
   padding: 0.4rem 0; 
   width: 65%;
-  height: auto;
   border-bottom: 1px solid #292929;
-  margin-bottom: var(--space-xs);
+  margin-bottom: var(--space-sm);
+
+}
+
+.stepsMargin{
+  margin-left: 2rem;
 }
 
 .mobileStep {
@@ -36,9 +40,7 @@
   margin: 0 0 0.6rem 0;
 }
 
-.buttonLinkContainer {
-  margin-left: 1.8rem; 
-}
+
 
 .linkSteps {
   align-items: center;
@@ -86,5 +88,9 @@
   }
   .title{
     margin: 0 0 0.8rem 0;
+  }
+
+  .stepsMargin{
+    margin-left: 1.7rem;
   }
 }
