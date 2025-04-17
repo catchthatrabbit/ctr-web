@@ -92,7 +92,13 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
                 {step.buttonTitle}
               </Text>
             )}
-            {step.warning ? <Spacer variant="xs" /> : <Spacer variant="md" />}
+            {step.warning ? (
+              <Spacer variant="xs" />
+            ) : mobile ? (
+              <Spacer variant="sm" />
+            ) : (
+              <Spacer variant="md" />
+            )}
 
             {step.buttonLink ? (
               <Link to={step.buttonLink}>
@@ -115,9 +121,13 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
       )}
       <div className={styles.linkContainer}>
         {step.button && (
-          <Spacer variant={step.buttonTitle ? (mobile ? "sm" : "xl") : "lg"} />
+          <Spacer
+            variant={
+              step.buttonTitle ? (mobile ? "sm" : "xl") : mobile ? "sm" : "lg"
+            }
+          />
         )}
-        {!step.button && <Spacer variant="sm" />}
+        {!step.button && <Spacer variant="xs" />}
         <a
           href={step.link}
           target="_blank"
@@ -169,14 +179,14 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
                 "In case you do not own a Linux device, we recommend using the Linux virtual operating system.",
               )}
             {step.link && step.linkText && renderButtonAndLink(step)}
-            {step.image && (
-              <>
-                {desktop ? <Spacer variant="sm" /> : null}
-                <DownloadPanel />
-                {desktop ? null : <Spacer variant="md" />}
-              </>
-            )}
           </div>
+          {step.image && (
+            <>
+              {desktop ? <Spacer variant="sm" /> : null}
+              <DownloadPanel />
+              {desktop ? null : <Spacer variant="md" />}
+            </>
+          )}
           {step.showSearch && (
             <>
               <Spacer variant="lg" />

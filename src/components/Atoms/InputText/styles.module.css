@@ -10,7 +10,15 @@
   transition: all 0.1s ease-in-out 0s;
   box-sizing: border-box; 
 }
+.inputText {
+  resize: none; /* Prevent manual resizing */
+  overflow: hidden; /* Hide scrollbars */
+}
 
+.mobileInputText {
+  width: 100%; /* Ensure it takes full width */
+  font-size: 1rem; /* Adjust font size for mobile */
+}
 .inputText:focus-visible {
   border: 1px solid var(--gray-100);
 }

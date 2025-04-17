@@ -281,7 +281,7 @@ const CreateConfig = ({
       {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xs" />}
       <CreateConfigTitle />
 
-      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="lg" />}
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="sm" />}
 
       <div className="flex xl-center-items">
         <div className={`flex flex-column ${styles.mainContent}`}>
@@ -354,11 +354,11 @@ const CreateConfig = ({
               Mining Pools Overview
             </Text>
           </Link>
-          <Spacer variant="sm" />
+          {mobile ? <Spacer variant="xs" /> : <Spacer variant="sm" />}
           <Text variant="heading3" color="white" weight="semiBold">
             Identification details
           </Text>
-          {desktop ? <Spacer variant="xxs" /> : <Spacer variant="xs" />}
+          <Spacer variant="xxs" />
           <div className={`row  ${styles.inputs}`}>
             <Text
               variant="smallBody"

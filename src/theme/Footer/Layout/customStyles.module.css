@@ -90,7 +90,7 @@
   .logoContainer {
     justify-content: center;
     width: 100%;
-    margin-bottom: var(--space-sm);
+  
   }
 
 
@@ -114,6 +114,7 @@
     position: static;
     align-items: center;
     margin-top: var(--space-xl);
+    gap: var(--space-sm);
   }
 
   .footerCopyWrite {

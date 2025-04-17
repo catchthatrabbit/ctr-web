@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import PictureTitle from "@site/src/components/Atoms/PictureTitle/PictureTitle";
 import { Dive } from "@site/src/icons";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
@@ -13,7 +13,7 @@ const PoolTitle = () => {
       secondaryText="We have several geo-locations to choose from:"
       secondaryTextStyle={{
         fontSize: "var(--regular-font-size)",
-        marginTop: mobile ? "8px" : "0px",
+        textWrap: "nowrap",
       }}
       image={<Dive />}
     />

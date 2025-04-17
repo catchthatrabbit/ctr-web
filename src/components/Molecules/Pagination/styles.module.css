@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: calc(var(--space-xxs) / 2) var(--space-xxs);
+  padding: calc(var(--space-sm) / 2) var(--space-xxs);
   border-bottom-left-radius: var(--ifm-global-radius);
   border-bottom-right-radius: var(--ifm-global-radius);
   background-color: var(--dark-rgb-400);

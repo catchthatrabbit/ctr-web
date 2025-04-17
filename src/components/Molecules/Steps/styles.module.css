@@ -17,7 +17,7 @@
 
 .mobileStep {
   width: 100%;
-  padding: 0.5rem 0.5rem 0 0.7rem;
+  padding: 0.3rem 0.3rem 0 0.4rem;
   margin-bottom: 0.6rem;
 }
 
@@ -87,7 +87,7 @@
     top: 20rem;
   }
   .title{
-    margin: 0 0 0.8rem 0;
+    margin-bottom: 0.5rem;
   }
 
   .stepsMargin{

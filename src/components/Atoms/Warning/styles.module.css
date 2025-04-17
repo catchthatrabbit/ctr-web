@@ -27,6 +27,6 @@
   }
 
   .warningText{
-    font-size: var( --body-tiny-font-size);
+    font-size: var( --body-font-size);
   }
 }

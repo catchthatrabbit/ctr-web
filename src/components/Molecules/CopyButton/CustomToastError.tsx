@@ -9,6 +9,7 @@ const getToastStyles = (mobile: boolean) => ({
   margin: mobile ? "0 auto" : undefined,
   marginTop: mobile ? "0.6rem" : undefined,
   borderRadius: mobile ? "8px" : undefined,
+  backgroundColor: "rgb(54, 54, 54)",
 });
 
 const CustomToastError: React.FC<{ message: string }> = ({

@@ -37,6 +37,17 @@
   border-radius: var(--ifm-global-radius);
 }
 
+
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+  /* Tablet-specific styles */
+  .rightContainer {
+    width: 100%; /* Full width on tablets */
+    margin: 0 auto; /* Center the container */
+  }
+}
+
+
+
 @media screen and (max-width: 768px) {
   .leftContainer {
     --ifm-col-width: 97%;
@@ -53,3 +64,5 @@
     text-align: center;
   }
 }
+
+

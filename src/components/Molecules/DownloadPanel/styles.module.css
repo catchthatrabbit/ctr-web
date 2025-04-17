@@ -8,6 +8,7 @@
   border-radius: var(--ifm-global-radius);
   position: relative;
   flex: 1;
+  margin-left: 2rem;
 
 }
 
@@ -85,9 +86,14 @@
   justify-content: space-between;
 }
 
-.downloadPanelMobile .btns {
-  width: 74%;
+.downloadPanelMobile{
+  margin-left: 0;
 }
+
+.downloadPanelMobile .btns {
+  width: 75%;
+}
+
 
 .googlePlayImage{
   width: 135px;

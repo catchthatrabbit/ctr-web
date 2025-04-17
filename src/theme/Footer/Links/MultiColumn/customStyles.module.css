@@ -27,6 +27,7 @@
 .footerItemMobile {
   display: flex;
   flex-direction: column;
+  gap: var(--space-sm);
 }
 
 @media screen and (max-width: 767px) {
@@ -38,7 +39,7 @@
   }
 
   .title {
-    margin-top: var(--space-sm);
-    font-size: var(--body-large-font-size);
+    margin-top: var(--space-xs);
+    font-size: var(--body-small-font-size);
   }
 }

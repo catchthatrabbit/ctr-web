@@ -138,7 +138,7 @@ const Miners = ({
 
       {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="sm" />}
       {renderHeader()}
-      {desktop ? null : <Spacer variant="xxxl" />}
+      {desktop ? null : <Spacer variant="xxs" />}
       <List
         isLoading={isLoadingMinerList}
         dataTableColumns={dataTableColumns}

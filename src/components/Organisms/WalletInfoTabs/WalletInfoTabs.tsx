@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
 import { Panel } from "@site/src/components/Molecules/Panel";
 import { Spacer } from "../../Atoms/Spacer";
+import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
 interface IWalletInfoTabs {
   workers?: React.ReactNode;
@@ -25,14 +26,14 @@ const WalletInfoTabs = ({
       tabContent: payouts,
     },
   ];
-
+  const { mobile } = useMediaQueries();
   return (
     <div>
       <Panel title="Miners" handleFilterChange={handleFilterChange}>
         {workers}
       </Panel>
       <Spacer variant="sm" />
-      <Spacer variant="md" />
+      {mobile ? <Spacer variant="xs" /> : <Spacer variant="md" />}
       <Panel title="Payouts">{payouts}</Panel>
     </div>
   );
