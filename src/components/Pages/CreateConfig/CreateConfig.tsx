@@ -266,6 +266,8 @@ const CreateConfig = ({
     a.download = "pool.cfg";
     a.click();
     URL.revokeObjectURL(url);
+
+    console.log(server1, port1, server2, port2);
   };
 
   return (
