@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Navbar from "@theme-original/Navbar";
 import clsx from "clsx";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import {
@@ -47,33 +48,15 @@ const horClassName =
   "xl-flex-col--2 lg-flex-col--2 md-flex-col--6 sm-flex-col--12 xs-flex-col--12";
 
 export default function NavbarLayout({ children }) {
-  const { mobile, tablet, desktop } = useMediaQueries();
+  const { mobile, tablet } = useMediaQueries();
 
-  const {
-    infoBoxMapData,
-    asStarMiningPoolLocation,
-    euStarMiningPoolLocation,
-    usStarMiningPoolLocation,
-    poolFee,
-    infoBoxRadialData,
-    radialChartData,
-    recentMatureBlockListColumns,
-    AllRegionsMaturedBlocks,
-    isLoadingMapChart,
-    isLoadingRadialBarChart,
-    isLoadingAllRegionMaturedBlocks,
-    SLoganSecondary,
-    sLoganPrimary,
-    effectsShowActionIcons,
-    effectsShowLocation,
-  } = useControls();
+  const { infoBoxMapData, isLoadingMapChart } = useControls();
 
   const {
     navbar: { hideOnScroll, style },
   } = useThemeConfig();
   const mobileSidebar = useNavbarMobileSidebar();
   const { navbarRef, isNavbarVisible } = useHideableNavbar(hideOnScroll);
-
   return (
     <>
       <nav
@@ -85,17 +68,14 @@ export default function NavbarLayout({ children }) {
         })}
         className={clsx(
           "navbar",
-          "navbar--fixed-top",
+          hideOnScroll
+            ? [
+                "navbar--fixed-top",
+                styles.navbarHideable,
+                !isNavbarVisible && styles.navbarHidden,
+              ]
+            : styles.navbarRelative,
           "flex-column",
-          hideOnScroll && [
-            styles.navbarHideable,
-            !isNavbarVisible && styles.navbarHidden,
-          ],
-          {
-            "navbar--dark": style === "dark",
-            "navbar--primary": style === "primary",
-            "navbar-sidebar--show": mobileSidebar.shown,
-          },
         )}
       >
         {children}

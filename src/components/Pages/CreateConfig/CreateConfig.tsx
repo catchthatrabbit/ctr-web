@@ -285,7 +285,7 @@ const CreateConfig = ({
 
       {desktop ? <Spacer variant="xxl" /> : <Spacer variant="sm" />}
 
-      <div className="flex xl-center-items">
+      <div className="flex">
         <div className={`flex flex-column ${styles.mainContent}`}>
           <Text variant="heading3" color="white" weight="semiBold">
             Basic details

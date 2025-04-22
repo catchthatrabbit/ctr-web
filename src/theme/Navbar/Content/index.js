@@ -58,7 +58,7 @@ ${JSON.stringify(item, null, 2)}`,
   );
 }
 function NavbarContentLayout({ left, right }) {
-  const { mobile, tablet, desktop } = useMediaQueries();
+  const { desktop } = useMediaQueries();
   return (
     <div className={clsx("navbar__inner", {})}>
       {" "}
@@ -73,7 +73,7 @@ export default function NavbarContent() {
   const items = useNavbarItems();
   const [leftItems, rightItems] = splitNavbarItems(items);
   const searchBarItem = items.find((item) => item.type === "search");
-  const { mobile, tablet } = useMediaQueries();
+  const { mobile } = useMediaQueries();
 
   return (
     <div className={clsx("container content", customStyles.navBarContainer)}>
@@ -87,15 +87,12 @@ export default function NavbarContent() {
         </div>
         <NavbarContentLayout
           left={
-            // TODO stop hardcoding items?
             <>
               {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
               {!mobileSidebar.disabled && <NavbarItems items={leftItems} />}
             </>
           }
           right={
-            // TODO stop hardcoding items?
-            // Ask the user to add the respective navbar items => more flexible
             <>
               <NavbarItems items={rightItems} />
               {!searchBarItem && (

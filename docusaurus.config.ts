@@ -154,6 +154,9 @@ const config: Config = {
     SLOGAN_SECONDARY: "A mining pool in the lotusland of Ores",
     EFFECTS_EMOJI_OK: "Running",
     EFFECTS_EMOJI_BRB: "Inactive",
+    APP_STORE_URL: "https://apps.apple.com/app/corepass-id/id1644928641",
+    GOOGLE_PLAY_URL:
+      "https://play.google.com/store/apps/details?id=net.corepass.app",
   },
 
   presets: [

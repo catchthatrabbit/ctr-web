@@ -50,10 +50,7 @@ const Header = ({
 
   const columnClass = clsx({
     "flex-col--4": context === "blocks" || context === "payments",
-    "flex-col--5":
-      context !== "blocks" &&
-      context !== "payments" &&
-      context !== "mobileWallet",
+    "flex-col--6": context === "wallet",
     "flex-col--12": context === "mobileWallet",
   });
   const renderDropdown = () => (
@@ -107,11 +104,13 @@ const Header = ({
 
           {context === "blocks" && <Spacer variant="xl" />}
           {context === "mobileWallet" && <Spacer variant="xs" />}
+          {context === "wallet" && <Spacer variant="sm" />}
           <div
-            className={clsx("flex  xl-center-items", {
+            className={clsx("flex", {
               [styles.blocksContainer]: context === "blocks",
               [styles.paymentsContainer]: context === "payments",
               [styles.mobileBlocksContainer]: context === "mobileWallet",
+              "xl-center-items": context === "wallet",
             })}
           >
             {renderDropdown()}

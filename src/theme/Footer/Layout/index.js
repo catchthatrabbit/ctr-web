@@ -10,8 +10,8 @@ import customStyles from "./customStyles.module.css";
 
 export default function FooterLayout({ style, links, logo, copyright }) {
   const { siteConfig } = useDocusaurusContext();
-  const estd = siteConfig.customFields.ESTD;
-
+  const { APP_STORE_URL, GOOGLE_PLAY_URL, GOOGLE_PLAY_IMAGE } =
+    siteConfig.customFields;
   return (
     <footer
       className={clsx("footer", customStyles.footer, {
@@ -35,14 +35,14 @@ export default function FooterLayout({ style, links, logo, copyright }) {
               </Text>
               <div className={customStyles.downloadBtns}>
                 <a
-                  href="https://apps.apple.com/app/corepass-id/id1644928641"
+                  href={APP_STORE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <DownloadAppStore />
                 </a>
                 <a
-                  href="https://play.google.com/store/apps/details?id=net.corepass.app"
+                  href={GOOGLE_PLAY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

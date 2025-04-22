@@ -151,6 +151,7 @@ const Wallet = ({
             layout={{ boards: true, search: false, dropdown: true }}
             context={mobile ? "mobileWallet" : "wallet"}
           />
+
           <Info
             data={fetchedWalletInfo}
             isLoading={isLoadingFetchWallet}

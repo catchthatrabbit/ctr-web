@@ -122,7 +122,7 @@
   background: var(--ifm-color-primary);
 }
 
-.exo{
+.exo {
   font-family: var(--exo-font-family);
 }
 
@@ -130,8 +130,8 @@
   font-family: var(--zephirum-font-family);
 }
 
-.heading{
-  font-size: var(--ifm-h1-font-size);
+.heading {
+  font-size: var(--ifm-h-font-size);
 }
 
 .heading1 {

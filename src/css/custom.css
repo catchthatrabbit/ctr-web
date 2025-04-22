@@ -33,6 +33,7 @@ body {
   --toastify-toast-top: calc(var(--navbar-height, 60px) + var(--infobox-height, 50px)) !important;
   --toastify-color-progress-success: var(--ifm-color-primary) !important;
   --toastify-toast-width: 25rem !important;
+  --ifm-navbar-z-index: 1000;
   
 }
 
