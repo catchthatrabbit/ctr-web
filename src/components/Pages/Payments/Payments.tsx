@@ -120,13 +120,8 @@ const Payments = ({
   return (
     <>
       {renderInfoBox()}
-      {desktop ? (
-        <>
-          <Spacer variant="lg" /> <Spacer variant="md" />
-        </>
-      ) : (
-        <Spacer variant="xs" />
-      )}
+      <Spacer variant={desktop ? "xxxxl" : "xxxl"} />
+      {mobile && <Spacer variant="xs" />}
       {renderHeader()}
       {desktop ? null : <Spacer variant="xxs" />}
       <List

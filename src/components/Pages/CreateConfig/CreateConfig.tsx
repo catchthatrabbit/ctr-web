@@ -280,11 +280,11 @@ const CreateConfig = ({
           />
         </>
       )}
-      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xs" />}
+      <Spacer variant={desktop ? "xxxl" : "xxxl"} />
+      <Spacer variant={desktop ? "xxl" : "xxs"} />
+
       <CreateConfigTitle />
-
       {desktop ? <Spacer variant="xxl" /> : <Spacer variant="sm" />}
-
       <div className="flex">
         <div className={`flex flex-column ${styles.mainContent}`}>
           <Text variant="heading3" color="white" weight="semiBold">

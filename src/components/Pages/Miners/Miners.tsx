@@ -135,8 +135,8 @@ const Miners = ({
   return (
     <>
       {renderInfoBox()}
-
-      {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="sm" />}
+      <Spacer variant={desktop ? "xxxxl" : "xxxl"} />
+      {mobile && <Spacer variant="xs" />}
       {renderHeader()}
       {desktop ? null : <Spacer variant="xxs" />}
       <List

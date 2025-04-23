@@ -56,8 +56,8 @@ const Blocks = () => {
           isLoading={isLoadingMapChart}
         />
       )}
-      {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="sm" />}
-
+      <Spacer variant={desktop ? "xxxxl" : "xxxl"} />
+      {mobile && <Spacer variant="xs" />}
       {/* Header with dropdown and tabs */}
       <Header
         items={dropdownItems}

@@ -46,8 +46,8 @@ const StartMining = ({
           />
         </>
       )}
-      <Spacer variant="sm" />
-      {desktop ? <Spacer variant="md" /> : null}
+      <Spacer variant={desktop ? "xxxl" : "xxxl"} />
+      <Spacer variant={desktop ? "xl" : "sm"} />
 
       <span id="start"></span>
       <GetStartedTitle />

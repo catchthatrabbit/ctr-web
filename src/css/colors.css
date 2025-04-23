@@ -35,6 +35,7 @@
   --dark-rgb-border: rgba(41, 41, 41, 1);
   --dark-rgb-400: rgba(20,20,20,255);
   --dark-rgb-600: rgba(27, 28, 28, 1);
+  --dark-300: #363636;
 
   --ifm-color-emphasis-0:var(--white);
   --ifm-color-emphasis-500:var(--gray-100);

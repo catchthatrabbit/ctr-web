@@ -102,7 +102,8 @@ const Header = ({
           {iban && <IBan iBan={iban} />}
           {desktop ? null : <Spacer variant="xxs" />}
 
-          {context === "blocks" && <Spacer variant="xl" />}
+          {context === "blocks" && <Spacer variant="xxl" />}
+          {context === "payments" && <Spacer variant="xs" />}
           {context === "mobileWallet" && <Spacer variant="xs" />}
           {context === "wallet" && <Spacer variant="sm" />}
           <div

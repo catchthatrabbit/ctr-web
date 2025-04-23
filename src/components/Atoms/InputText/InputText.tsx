@@ -87,6 +87,7 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
         className={clsx(styles.inputText, className, {
           [styles.searchWallet]: context === "wallet",
           [styles.searchDark]: context === "dark",
+          [styles.searchStartMining]: context === "startMining",
           [styles.mobileInputText]: mobile,
         })}
         placeholder={placeholder}

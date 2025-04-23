@@ -109,9 +109,11 @@ const Wallet = ({
       <Text type="regular" variant="heading3" color="white" weight="normal">
         Wallet not found. No data to display.
       </Text>
-      <Spacer variant="md" />
+      <Spacer variant="xl" />
+      <Spacer variant={desktop ? "xxxl" : "xs"} />
+
       <Search context="wallet" onSearch={onSetWalletAddress} />
-      <Spacer variant="xxxl" />
+      <Spacer variant="lg" />
     </div>
   );
 
@@ -123,7 +125,8 @@ const Wallet = ({
           isLoading={isLoadingMapChart}
         />
       )}
-      <Spacer variant={desktop ? "xxl" : "sm"} />
+      <Spacer variant="xxl" />
+      <Spacer variant={desktop ? "xxl" : "md"} />
 
       <div className={`flex items-center xl-center-items ${styles.fullWidth}`}>
         <Text

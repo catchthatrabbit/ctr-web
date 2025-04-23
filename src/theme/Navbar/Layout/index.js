@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Navbar from "@theme-original/Navbar";
 import clsx from "clsx";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import {
@@ -76,6 +75,11 @@ export default function NavbarLayout({ children }) {
               ]
             : styles.navbarRelative,
           "flex-column",
+          {
+            "navbar--dark": style === "dark",
+            "navbar--primary": style === "primary",
+            "navbar-sidebar--show": mobileSidebar.shown,
+          },
         )}
       >
         {children}
@@ -84,7 +88,6 @@ export default function NavbarLayout({ children }) {
       </nav>
       {!mobile && !tablet && (
         <>
-          {/* <Spacer variant="lg" /> */}
           <ConfiguredInfoBox
             horClassName={horClassName}
             isLoading={isLoadingMapChart}

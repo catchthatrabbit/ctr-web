@@ -106,14 +106,14 @@
   width: 100%;
   align-content: center;
   flex-direction: column;
-  margin-left: 2rem;
+  margin-left: 1rem;
 }
 
 .searchStartMining .searchContainer {
   display: flex;
   justify-content: space-between; 
   align-items: stretch;
-  width: 100%;
+  width: 96%;
   gap: 0;
 }
 

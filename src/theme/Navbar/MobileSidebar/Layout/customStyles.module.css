@@ -11,5 +11,5 @@
 }
 
 .navbarItems{
-  border-top: 1px solid #363636;
+  border-top: 1px solid var(--dark-300);
 }

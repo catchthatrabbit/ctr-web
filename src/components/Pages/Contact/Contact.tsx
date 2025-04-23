@@ -81,10 +81,11 @@ const Contact = () => {
           />
         </>
       )}
-      {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="xs" />}
+      <Spacer variant={desktop ? "xxxxl" : "xxxl"} />
+      {mobile && <Spacer variant="xs" />}
       <ContactTitle />
-      {desktop ? <Spacer variant="xs" /> : null}
-      <Spacer variant="md" />
+      {desktop ? <Spacer variant="sm" /> : null}
+      {desktop ? <Spacer variant="md" /> : <Spacer variant="xs" />}
       <div className={clsx("row", styles.contactContainer)}>
         <div className={clsx("col col--6", styles.leftContainer)}>
           <Text
