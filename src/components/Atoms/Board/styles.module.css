@@ -9,6 +9,10 @@
   gap: var(--space-xxs);
 }
 
+.boardContainer.boardContainerPayments .content {
+  flex-direction: column;
+}
+
 .boardTotal {
   flex-direction: column;
 

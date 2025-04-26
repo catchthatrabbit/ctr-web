@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import { CreateConfigTitle } from "@site/src/components/Molecules/PictureTitles";
@@ -52,6 +52,11 @@ const CreateConfig = ({
 
   const { mobile, tablet, desktop } = useMediaQueries();
 
+  const walletAddressRef = useRef(null);
+  const minerNameRef = useRef(null);
+  const workerIdRef = useRef(null);
+  const typePortalRef = useRef(null);
+
   const formatWalletAddress = (value: string) => {
     return value.replace(/(.{4})/g, "$1 ").trim();
   };
@@ -65,6 +70,11 @@ const CreateConfig = ({
     const isValid = Ican.isValid(formattedValue, true);
     setIsWalletValid(isValid);
     setWalletAddress(formattedValue);
+
+    // Update the ref value manually
+    if (walletAddressRef.current) {
+      walletAddressRef.current.value = formattedValue;
+    }
   };
 
   const handleMinerNameChange = (
@@ -74,8 +84,12 @@ const CreateConfig = ({
     const regex = inputType === "plain" ? /^[A-Za-z0-9_-]+$/ : /^[A-Za-z0-9]+$/;
     const isValid = regex.test(value);
     setMinerName({ value, isValid });
-  };
 
+    // Update the ref value manually
+    if (minerNameRef.current) {
+      minerNameRef.current.value = value;
+    }
+  };
   const handleTypePortalChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -84,10 +98,18 @@ const CreateConfig = ({
       /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$/;
     const isValid = regex.test(value);
     setTypePortal({ value, isValid });
+
+    // Update the ref value manually
+    if (typePortalRef.current) {
+      typePortalRef.current.value = value;
+    }
   };
 
   const handleUniqueIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUniqueId(event.target.value);
+    if (workerIdRef.current) {
+      workerIdRef.current.value = event.target.value;
+    }
   };
 
   const handleDropdownChange1 = (selectedOption: { label: string }) => {
@@ -114,6 +136,7 @@ const CreateConfig = ({
             value={minerName.value}
             onChange={handleMinerNameChange}
             placeholder="Name of your worker"
+            ref={minerNameRef}
           />
           {!minerName.isValid && (
             <Text
@@ -142,6 +165,7 @@ const CreateConfig = ({
             value={minerName.value}
             onChange={handleMinerNameChange}
             placeholder="username"
+            ref={minerNameRef}
           />
           {!minerName.isValid && (
             <Text
@@ -164,6 +188,7 @@ const CreateConfig = ({
             value={typePortal.value}
             onChange={handleTypePortalChange}
             placeholder="coretalk.space"
+            ref={typePortalRef}
           />
           {!typePortal.isValid && (
             <Text
@@ -184,6 +209,7 @@ const CreateConfig = ({
           <InputText
             context="dark"
             value={uniqueId}
+            ref={workerIdRef}
             onChange={handleUniqueIdChange}
             placeholder="worker1"
           />
@@ -195,17 +221,42 @@ const CreateConfig = ({
 
   const areFieldsValid = () => {
     if (inputType === "plain") {
+      const walletAddressValue = walletAddressRef.current?.value.trim() || "";
+      const minerNameValue = minerNameRef.current?.value.trim() || "";
+
+      console.log("Validation Check (Plain) - Using Refs:");
+      console.log("isWalletValid:", isWalletValid);
+      console.log("minerName.isValid:", minerName.isValid);
+      console.log("walletAddress:", walletAddressValue);
+      console.log("minerName:", minerNameValue);
+
       return (
-        isWalletValid && minerName.isValid && walletAddress && minerName.value
+        isWalletValid &&
+        minerName.isValid &&
+        walletAddressValue !== "" &&
+        minerNameValue !== ""
       );
     } else if (inputType === "fediverse") {
+      const walletAddressValue = walletAddressRef.current?.value.trim() || "";
+      const minerNameValue = minerNameRef.current?.value.trim() || "";
+      const typePortalValue = typePortalRef.current?.value.trim() || "";
+      const workerIdValue = workerIdRef.current?.value.trim() || "";
+
+      console.log("Validation Check (Fediverse) - Using Refs:");
+      console.log("isWalletValid:", isWalletValid);
+      console.log("minerName.isValid:", minerName.isValid);
+      console.log("typePortal.isValid:", typePortal.isValid);
+      console.log("walletAddress:", walletAddressValue);
+      console.log("minerName:", minerNameValue);
+      console.log("typePortal:", typePortalValue);
+
       return (
         isWalletValid &&
         minerName.isValid &&
         typePortal.isValid &&
-        walletAddress &&
-        minerName.value &&
-        typePortal.value
+        walletAddressValue !== "" &&
+        minerNameValue !== "" &&
+        typePortalValue !== ""
       );
     }
     return false;
@@ -217,17 +268,35 @@ const CreateConfig = ({
       return;
     }
     setShowError(false);
-    let walletAddressFormat = walletAddress.replace(/\s+/g, "").toLowerCase();
+
+    const walletAddressFormat = walletAddressRef.current?.value
+      .replace(/\s+/g, "")
+      .toLowerCase();
     let workerName = "";
+
     if (inputType === "plain") {
-      workerName = minerName.value;
+      workerName = minerNameRef.current?.value || "";
     } else if (inputType === "fediverse") {
-      workerName = constructWorkerName(
-        minerName.value,
-        [typePortal.value],
-        uniqueId ? uniqueId : undefined,
-      );
+      const minerNameValue = minerNameRef.current?.value || "";
+      const typePortalValue = typePortalRef.current?.value || "";
+
+      // Process typePortal to extract domain and capitalize TLD
+      const processedPortal = typePortalValue
+        .split(".")
+        .map((part, index) =>
+          index === 1 ? part.charAt(0).toUpperCase() + part.slice(1) : part,
+        ) // Capitalize the TLD
+        .join("");
+
+      workerName = `${minerNameValue}${processedPortal}`;
     }
+
+    // Append `-workerIdValue` to the worker name if `workerIdValue` is provided
+    const workerIdValue = workerIdRef.current?.value.trim() || "";
+    if (workerIdValue !== "") {
+      workerName = `${workerName}-${workerIdValue}`;
+    }
+
     const regionKey1 = Object.keys(startMiningPoolConfigurations).find(
       (key) =>
         startMiningPoolConfigurations[key]["DESCRIPTION"] === dropdownValue1,
@@ -246,7 +315,8 @@ const CreateConfig = ({
     const port2 =
       regionKey2 && startMiningPoolConfigurations[regionKey2]["PORT"];
 
-    const configData = {
+    // Build the config data object
+    const configData: Record<string, string | undefined> = {
       wallet: walletAddressFormat,
       worker: workerName,
       [`server[1]`]: server1,
@@ -267,9 +337,9 @@ const CreateConfig = ({
     a.click();
     URL.revokeObjectURL(url);
 
-    console.log(server1, port1, server2, port2);
+    console.log("Config file generated with the following data:");
+    console.log(configContent);
   };
-
   return (
     <>
       {(mobile || tablet) && (
@@ -302,6 +372,7 @@ const CreateConfig = ({
           <InputText
             context="dark"
             value={walletAddress}
+            ref={walletAddressRef}
             onChange={handleWalletAddressChange}
             className={styles.familyZephirum}
           />

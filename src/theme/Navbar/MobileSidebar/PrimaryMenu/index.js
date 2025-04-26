@@ -10,15 +10,12 @@ import clsx from "clsx";
 import customStyles from "./customStyles.module.css";
 
 function useNavbarItems() {
-  // TODO temporary casting until ThemeConfig type is improved
   return useThemeConfig().navbar.items;
 }
 
 // The primary menu displays the navbar items
 export default function NavbarMobilePrimaryMenu() {
   const mobileSidebar = useNavbarMobileSidebar();
-  // TODO how can the order be defined for mobile?
-  // Should we allow providing a different list of items?
   const { mobile } = useMediaQueries();
   const items = useNavbarItems();
   const { activatePageName } = useNav(items);

@@ -17,7 +17,6 @@ import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
 import customStyles from "./customStyles.module.css";
 import "./custom.css";
 function useNavbarItems() {
-  // TODO temporary casting until ThemeConfig type is improved
   return useThemeConfig().navbar.items;
 }
 function NavbarItems({ items }) {

@@ -18,12 +18,14 @@
 
 @media screen and (max-width: 768px) {
 
+  .configWarning{
+    width: 100%;
+  }
+
+
   .warning {
     padding: 1rem;
     width: 91%;
-  }
-  .configWarning{
-    width: 100%;
   }
 
   .warningText{
