@@ -93,13 +93,13 @@ const CreateConfig = ({
   const handleTypePortalChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const value = event.target.value;
+    let value = event.target.value;
     const regex =
       /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$/;
     const isValid = regex.test(value);
+    console.log("TypePortal Change - Value:", value, "IsValid:", isValid);
     setTypePortal({ value, isValid });
 
-    // Update the ref value manually
     if (typePortalRef.current) {
       typePortalRef.current.value = value;
     }
@@ -191,12 +191,15 @@ const CreateConfig = ({
             ref={typePortalRef}
           />
           {!typePortal.isValid && (
-            <Text
-              variant="smallBody"
-              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
-            >
-              Portal is invalid. Enter a valid domain.
-            </Text>
+            <>
+              {console.log("Validation message is being rendered")}
+              <Text
+                variant="smallBody"
+                style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+              >
+                Portal is invalid. Enter a valid domain.
+              </Text>
+            </>
           )}
           <Spacer variant="sm" />
           <Text
@@ -224,39 +227,22 @@ const CreateConfig = ({
       const walletAddressValue = walletAddressRef.current?.value.trim() || "";
       const minerNameValue = minerNameRef.current?.value.trim() || "";
 
-      console.log("Validation Check (Plain) - Using Refs:");
-      console.log("isWalletValid:", isWalletValid);
-      console.log("minerName.isValid:", minerName.isValid);
-      console.log("walletAddress:", walletAddressValue);
-      console.log("minerName:", minerNameValue);
-
-      return (
-        isWalletValid &&
-        minerName.isValid &&
-        walletAddressValue !== "" &&
-        minerNameValue !== ""
-      );
+      return walletAddressValue !== "" && minerNameValue !== "";
     } else if (inputType === "fediverse") {
       const walletAddressValue = walletAddressRef.current?.value.trim() || "";
       const minerNameValue = minerNameRef.current?.value.trim() || "";
       const typePortalValue = typePortalRef.current?.value.trim() || "";
       const workerIdValue = workerIdRef.current?.value.trim() || "";
 
-      console.log("Validation Check (Fediverse) - Using Refs:");
-      console.log("isWalletValid:", isWalletValid);
-      console.log("minerName.isValid:", minerName.isValid);
-      console.log("typePortal.isValid:", typePortal.isValid);
-      console.log("walletAddress:", walletAddressValue);
-      console.log("minerName:", minerNameValue);
-      console.log("typePortal:", typePortalValue);
+      const regex =
+        /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$/;
+      const isPortalValid = regex.test(typePortalValue);
 
       return (
-        isWalletValid &&
-        minerName.isValid &&
-        typePortal.isValid &&
         walletAddressValue !== "" &&
         minerNameValue !== "" &&
-        typePortalValue !== ""
+        typePortalValue !== "" &&
+        isPortalValid
       );
     }
     return false;
