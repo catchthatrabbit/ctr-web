@@ -12,7 +12,6 @@ import useControls from "./controls";
 import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
-import { constructWorkerName } from "@site/src/utils/convertWorkerName";
 
 import clsx from "clsx";
 
@@ -30,11 +29,8 @@ const CreateConfig = ({
   onChangeRegion,
 }: IPayments) => {
   const {
-    handleChangeRegion,
-    handleSearch,
     dropdownItems,
     regionLabel,
-    convertWorkerName,
     startMiningPoolConfigurations,
     infoBoxMapData,
     isLoadingMapChart,
@@ -71,7 +67,6 @@ const CreateConfig = ({
     setIsWalletValid(isValid);
     setWalletAddress(formattedValue);
 
-    // Update the ref value manually
     if (walletAddressRef.current) {
       walletAddressRef.current.value = formattedValue;
     }
@@ -85,7 +80,6 @@ const CreateConfig = ({
     const isValid = regex.test(value);
     setMinerName({ value, isValid });
 
-    // Update the ref value manually
     if (minerNameRef.current) {
       minerNameRef.current.value = value;
     }
@@ -97,7 +91,6 @@ const CreateConfig = ({
     const regex =
       /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$/;
     const isValid = regex.test(value);
-    console.log("TypePortal Change - Value:", value, "IsValid:", isValid);
     setTypePortal({ value, isValid });
 
     if (typePortalRef.current) {
@@ -191,15 +184,12 @@ const CreateConfig = ({
             ref={typePortalRef}
           />
           {!typePortal.isValid && (
-            <>
-              {console.log("Validation message is being rendered")}
-              <Text
-                variant="smallBody"
-                style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
-              >
-                Portal is invalid. Enter a valid domain.
-              </Text>
-            </>
+            <Text
+              variant="smallBody"
+              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+            >
+              Portal is invalid. Enter a valid domain.
+            </Text>
           )}
           <Spacer variant="sm" />
           <Text
@@ -232,7 +222,6 @@ const CreateConfig = ({
       const walletAddressValue = walletAddressRef.current?.value.trim() || "";
       const minerNameValue = minerNameRef.current?.value.trim() || "";
       const typePortalValue = typePortalRef.current?.value.trim() || "";
-      const workerIdValue = workerIdRef.current?.value.trim() || "";
 
       const regex =
         /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$/;
@@ -261,12 +250,11 @@ const CreateConfig = ({
     let workerName = "";
 
     if (inputType === "plain") {
-      workerName = minerNameRef.current?.value || "";
+      workerName = `_${minerNameRef.current?.value}` || "";
     } else if (inputType === "fediverse") {
       const minerNameValue = minerNameRef.current?.value || "";
       const typePortalValue = typePortalRef.current?.value || "";
 
-      // Process typePortal to extract domain and capitalize TLD
       const processedPortal = typePortalValue
         .split(".")
         .map((part, index) =>
@@ -274,13 +262,12 @@ const CreateConfig = ({
         ) // Capitalize the TLD
         .join("");
 
-      workerName = `${minerNameValue}${processedPortal}`;
+      workerName = `_${minerNameValue}${processedPortal}`;
     }
 
-    // Append `-workerIdValue` to the worker name if `workerIdValue` is provided
     const workerIdValue = workerIdRef.current?.value.trim() || "";
     if (workerIdValue !== "") {
-      workerName = `${workerName}-${workerIdValue}`;
+      workerName = `_${workerName}-${workerIdValue}`;
     }
 
     const regionKey1 = Object.keys(startMiningPoolConfigurations).find(
@@ -301,7 +288,6 @@ const CreateConfig = ({
     const port2 =
       regionKey2 && startMiningPoolConfigurations[regionKey2]["PORT"];
 
-    // Build the config data object
     const configData: Record<string, string | undefined> = {
       wallet: walletAddressFormat,
       worker: workerName,
@@ -336,7 +322,7 @@ const CreateConfig = ({
           />
         </>
       )}
-      <Spacer variant={desktop ? "xxxl" : "xxxl"} />
+      <Spacer variant="xxxl" />
       <Spacer variant={desktop ? "xxl" : "xxs"} />
 
       <CreateConfigTitle />

@@ -12,7 +12,6 @@ import { List } from "@site/src/components/Templates/List";
 import { convertMaturedResponseToRecentBlocksInfo } from "./utils";
 import { IAnyPageAndWallet } from "../types";
 import { Header } from "@site/src/components/Templates/Header";
-import { LoadingPlaceholder } from "@site/src/components/Atoms/LoadingPlaceholder";
 import { StartMining } from "@site/src/components/Organisms/StartMining";
 
 import { Empty } from "@site/src/components/Atoms/Empty";
@@ -56,7 +55,6 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       >
         {mobile ? (
           <>
-            {/* Texts appear above the image in mobile view */}
             <div className={clsx(styles.textContainer, "text-center")}>
               <MainPageSearch flexStart={false} />
 

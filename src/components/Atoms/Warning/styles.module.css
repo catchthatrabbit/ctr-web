@@ -18,7 +18,7 @@
 
 @media screen and (max-width: 768px) {
 
-  .configWarning{
+  .warning.configWarning {
     width: 100%;
   }
 

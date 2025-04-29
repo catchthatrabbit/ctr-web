@@ -117,6 +117,7 @@ const StartMining = ({
       <div className={`flex flex-column ${styles.poolContainer}`}>
         {Object.keys(REGIONS).map((REGION_KEY, index) => (
           <div key={index} className={styles.poolTable}>
+            <Spacer variant="xs" />
             <div
               className={`flex ${styles.dropdownHeader}`}
               onClick={() => toggleRegion(REGION_KEY)}
@@ -177,7 +178,7 @@ const StartMining = ({
                 ]}
               />
             )}
-            <Spacer variant="lg" />
+            <Spacer variant="md" />
           </div>
         ))}
       </div>

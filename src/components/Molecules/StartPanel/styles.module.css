@@ -52,6 +52,8 @@
   border-radius: var(--ifm-global-radius);
   cursor: pointer;
   font-size: var(--body-small-font-size);
+  z-index: 1000;
+  position: relative;
 }
 
 .startButton:hover {
