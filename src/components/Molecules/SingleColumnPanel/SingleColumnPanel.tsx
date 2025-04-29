@@ -39,7 +39,6 @@ const SingleColumnPanel = ({
           <div
             className={clsx(styles.singleColumnValue, {
               [styles.singleColumnValuePaddingTablet]: tablet,
-              [styles.singleColumnValuePaddingMobile]: mobile,
               [styles.singleColumnValuePaddingStartMining]:
                 context === "startMining",
             })}
@@ -48,15 +47,14 @@ const SingleColumnPanel = ({
               {description}
             </Text>
           </div>
-          <Spacer variant="sm" />
         </>
       )}
+      <Spacer variant="sm" />
       {data?.map((item, index) => (
         <div
           key={index}
           className={clsx(styles.singleColumnValue, {
             [styles.singleColumnValuePaddingTablet]: tablet,
-            [styles.singleColumnValuePaddingMobile]: mobile,
             [styles.singleColumnValuePaddingStartMining]:
               context === "startMining",
           })}
