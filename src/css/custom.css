@@ -29,12 +29,11 @@ body {
   --ifm-footer-padding-vertical: 8px;
   --ifm-color-primary-background:rgba(2, 2, 2, 1);
   --table-odd-row-background-color: var(--blue-rgb-600);
-  --toastify-icon-color-success: var(--ifm-color-primary) !important; 
+  --toastify-icon-color-success: var(--ifm-color-primary) !important;
   --toastify-toast-top: calc(var(--navbar-height, 60px) + var(--infobox-height, 50px)) !important;
   --toastify-color-progress-success: var(--ifm-color-primary) !important;
   --toastify-toast-width: 25rem !important;
   --ifm-navbar-z-index: 1000;
-  
 }
 
 :root nav.navbar {
@@ -47,6 +46,10 @@ body {
 
 h1, h2, h3 {
   margin: 0px;
+}
+
+button {
+  cursor: pointer;
 }
 
 .content {

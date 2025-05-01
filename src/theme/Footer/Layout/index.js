@@ -31,7 +31,7 @@ export default function FooterLayout({ style, links, logo, copyright }) {
                 color="white"
                 className={customStyles.downloadText}
               >
-                Wallet with XCB, CTN, USDX support
+                Wallet with XCB, CTN, Money𐆖 support
               </Text>
               <div className={customStyles.downloadBtns}>
                 <a

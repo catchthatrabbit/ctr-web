@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import Navbar from "@theme-original/Navbar";
+import React from "react";
 import clsx from "clsx";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import {
@@ -49,14 +48,13 @@ const horClassName =
 
 export default function NavbarLayout({ children }) {
   const { mobile, tablet } = useMediaQueries();
-
   const { infoBoxMapData, isLoadingMapChart } = useControls();
-
   const {
     navbar: { hideOnScroll, style },
   } = useThemeConfig();
   const mobileSidebar = useNavbarMobileSidebar();
   const { navbarRef, isNavbarVisible } = useHideableNavbar(hideOnScroll);
+
   return (
     <>
       <nav
@@ -84,7 +82,6 @@ export default function NavbarLayout({ children }) {
       </nav>
       {!mobile && !tablet && (
         <>
-          {/* <Spacer variant="lg" /> */}
           <ConfiguredInfoBox
             horClassName={horClassName}
             isLoading={isLoadingMapChart}

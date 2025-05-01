@@ -12,7 +12,12 @@ const getToastStyles = (mobile: boolean) => ({
   backgroundColor: "rgb(54, 54, 54)",
 });
 
-const CustomToastError: React.FC<{ message: string }> = ({
+interface CustomToastErrorProps {
+  message: string;
+  mobile: boolean;
+}
+
+const CustomToastError: React.FC<CustomToastErrorProps> = ({
   message,
   mobile,
 }) => {

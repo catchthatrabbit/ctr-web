@@ -39,17 +39,6 @@
   border-bottom: 1px solid var(--ifm-color-primary)!important;
 }
 
-/* .activeNavItemLink:before {
-  content: '';
-  border-bottom: 1px solid var(--white);
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
-  top:-1px;
-} */
-
 .grow {
   flex-grow: 1;
 }

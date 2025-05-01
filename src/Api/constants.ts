@@ -13,3 +13,5 @@ export const STANDARD_REGIONS_API: {
   BR: "br",
   JP: "jp",
 };
+
+export const EXCHANGE_RATES_API = "https://coreport.pages.dev/api/v1";

@@ -16,7 +16,7 @@ export const useFetchStats = ({
 export const useFetchStatsCharts = ({
   urls,
   apiPath,
-}: Parameters<typeof fetchStats>[0]) => {
+}: Parameters<typeof fetchStatsCharts>[0]) => {
   return useQuery({
     queryKey: [QUERY_KEYS.STATS_CHART],
     queryFn: () => fetchStatsCharts({ urls, apiPath }),

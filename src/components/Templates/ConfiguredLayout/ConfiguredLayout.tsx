@@ -13,19 +13,21 @@ interface IConfiguredLayout {
   children: React.ReactNode;
   hideBackground?: boolean;
   backgroundPos?: number;
+  customTitle?: string;
 }
 
 const ConfiguredLayout = ({
   children,
   hideBackground,
   backgroundPos = 10,
+  customTitle,
 }: IConfiguredLayout) => {
   const { siteConfig } = useDocusaurusContext();
   const queryClient = new QueryClient();
 
   return (
     <Layout
-      title={`${siteConfig.title} — ${siteConfig.tagline}`}
+      title={customTitle || `${siteConfig.title} — ${siteConfig.tagline}`}
       description={siteConfig.tagline}
     >
       <QueryClientProvider client={queryClient}>

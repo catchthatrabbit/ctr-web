@@ -3,7 +3,7 @@ import { filterAllSettled } from "@site/src/utils/filterAllSettled";
 import { getAllStatsCharts } from "./utils";
 import { AxiosError } from "axios";
 
-export const fetchStatsCharts = async ({ apiPath, urls }: GET_ALL_PROPS) => {
+export const fetchStatsCharts = async ({ urls, apiPath }: GET_ALL_PROPS) => {
   try {
     const instanceArray = getAllStatsCharts({ urls, apiPath });
     const statsResponses = await filterAllSettled<{

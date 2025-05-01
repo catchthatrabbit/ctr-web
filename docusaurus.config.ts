@@ -8,8 +8,8 @@ import remarkFediverseUser from "remark-fediverse-user";
 import path from "path";
 
 const config: Config = {
-  title: "Catch that Rabbit",
-  tagline: "Catch that Rabbit — ₡ORE mining pool",
+  title: "Catch That Rabbit",
+  tagline: "Catch That Rabbit — ₡ORE mining pool",
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
@@ -37,34 +37,21 @@ const config: Config = {
 
   customFields: {
     API_ENDPOINTS: {
-      DE_API_ENDPOINT: "https://eu-api.catchthatrabbit.com/",
-      NEXT_PUBLIC_DE_API_ENDPOINT: "",
-      FI_API_ENDPOINT: "https://eu1-api.catchthatrabbit.com/",
-      NEXT_PUBLIC_FI_API_ENDPOINT: "",
-      SG_API_ENDPOINT: "https://as1-api.catchthatrabbit.com/",
-      NEXT_PUBLIC_SG_API_ENDPOINT: "",
-      HK_API_ENDPOINT: "https://as-api.catchthatrabbit.com/",
-      NEXT_PUBLIC_HK_API_ENDPOINT: "",
-      BR_API_ENDPOINT: "https://us-api.catchthatrabbit.com/",
-      NEXT_PUBLIC_BR_API_ENDPOINT: "",
-      JP_API_ENDPOINT: "https://us1-api.catchthatrabbit.com/",
-      NEXT_PUBLIC_JP_API_ENDPOINT: "",
+      DE_API_ENDPOINT: "https://eu-api.catchthatrabbit.com",
+      FI_API_ENDPOINT: "https://eu-api.catchthatrabbit.com",
+      SG_API_ENDPOINT: "https://as1-api.catchthatrabbit.com",
+      HK_API_ENDPOINT: "https://as-api.catchthatrabbit.com",
+      BR_API_ENDPOINT: "https://us-api.catchthatrabbit.com",
+      JP_API_ENDPOINT: "https://us1-api.catchthatrabbit.com",
     },
     API_PATH: "v2/api/",
     URLS: {
       TRANSACTION_DETAILS_URL: "https://blockindex.net/tx",
       BLOCK_DETAILS_URL: "https://blockindex.net/block",
-      CORE_CLIENT_URL: "https://github.com/core-coin/go-core/releases",
-      CORE_TALK_SPACE_URL: "https://coretalk.space",
-      ICAN_WALLET_URL: "https://github.com/core-coin/wallet-generator/releases",
-      GITHUB_RELEASE_DOWNLOAD_URL:
-        "https://github.com/catchthatrabbit/coreminer/releases",
-      GITHUB_RAW_MINE_SH:
-        "bash <(curl -s https://raw.githubusercontent.com/catchthatrabbit/coreminer/master/mine.sh)",
     },
-    START_MINING_POOL_CONFIGURATIONS: {
+    POOLS_LIST: {
       DE: {
-        NAME: "Central Europe",
+        NAME: "DACH",
         DESCRIPTION: "DACH Pool 🇩🇪🇦🇹🇨🇭",
         SERVER: "de.catchthatrabbit.com",
         PORT: "8008",
@@ -75,8 +62,8 @@ const config: Config = {
         PAYOUT: "cb11ca5aa7cf5ffa5ed333e962310b3922b48af68698",
       },
       FI: {
-        NAME: "Backup European Pool",
-        DESCRIPTION: "Northeast EU Pool 🇫🇮🇪🇺",
+        NAME: "Nordic",
+        DESCRIPTION: "Nordic Pool 🇫🇮🇳🇴🇸🇪",
         SERVER: "fi.catchthatrabbit.com",
         PORT: "8008",
         WORKER_NAME:
@@ -86,7 +73,7 @@ const config: Config = {
         PAYOUT: "cb806ca47e07b803e598ea9bf7413355486723270f71",
       },
       SG: {
-        NAME: "Asian Pool",
+        NAME: "ASEAN",
         DESCRIPTION: "ASEAN Pool 🇸🇬🇹🇭🇵🇭",
         SERVER: "sg.catchthatrabbit.com",
         PORT: "8008",
@@ -97,8 +84,8 @@ const config: Config = {
         PAYOUT: "cb060ea54cce80fcb689f8824b238118cb5005572a36",
       },
       HK: {
-        NAME: "Backup Asian Pool",
-        DESCRIPTION: "East Asian Pool 🇭🇰🇰🇷",
+        NAME: "Far-East",
+        DESCRIPTION: "Far-East Pool 🇭🇰🇨🇳🇰🇷",
         SERVER: "hk.catchthatrabbit.com",
         PORT: "8008",
         WORKER_NAME:
@@ -108,7 +95,7 @@ const config: Config = {
         PAYOUT: "cb6242d8b1903db52f99813f79fe4dff2b85fd7c1fdd",
       },
       BR: {
-        NAME: "US Pool",
+        NAME: "America",
         DESCRIPTION: "American Pool 🇧🇷🇲🇽🇺🇸",
         SERVER: "br.catchthatrabbit.com",
         PORT: "8008",
@@ -119,7 +106,7 @@ const config: Config = {
         PAYOUT: "cb532b4658c0077fe257c44fbd3ee89f8c85ce5c68e3",
       },
       JP: {
-        NAME: "Backup US Pool",
+        NAME: "Japan",
         DESCRIPTION: "Japanese Pool 🇯🇵",
         SERVER: "jp.catchthatrabbit.com",
         PORT: "8008",
@@ -283,6 +270,11 @@ const config: Config = {
           position: "right",
         },
         {
+          href: "/go-live",
+          label: "Launch Miner",
+          position: "right",
+        },
+        {
           href: "/contact",
           label: "Contact",
           position: "right",
@@ -309,8 +301,12 @@ const config: Config = {
               to: "/start-mining",
             },
             {
-              label: "Pool statistics",
-              to: "/",
+              label: "Launch Miner",
+              to: "/go-live",
+            },
+            {
+              label: "Profit Calculator",
+              to: "/calculator",
             },
             {
               label: "Miners",
@@ -324,18 +320,6 @@ const config: Config = {
               label: "Blocks",
               href: "/blocks",
             },
-            // {
-            //   label: "Mining software",
-            //   href: "/docs/intro",
-            // },
-            // {
-            //   label: "Download mining config",
-            //   href: "/docs/intro",
-            // },
-            // {
-            //   label: "Mobile App",
-            //   href: "/docs/intro",
-            // },
           ],
         },
 
@@ -351,21 +335,25 @@ const config: Config = {
               href: "/",
             },
             {
-              label: "Coreblockchain",
-              href: "/docs/intro",
+              label: "Core Talk",
+              href: "https://coretalk.space/@catchthatrabbit",
             },
             {
-              label: "Corecoin",
-              href: "/docs/intro",
+              label: "Core Blockchain",
+              href: "https://coreblockchain.net",
             },
             {
-              label: "Coretoken",
-              href: "/docs/intro",
+              label: "Mining Software",
+              href: "https://github.com/catchthatrabbit/coreminer",
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/catchthatrabbit",
             },
           ],
         },
       ],
-      copyright: `<a href="https://github.com/bchainhub/core-license" target="_blank" rel="noopener noreferrer"><span style="font-size:1.3rem">⊛</span> CORE</a> 2022 - ${new Date().getFullYear()} Catch that Rabbit.`,
+      copyright: `<a href="https://github.com/bchainhub/core-license" target="_blank" rel="noopener noreferrer"><span style="font-size:1.3rem">⊛</span> CORE</a> 2022 - ${new Date().getFullYear()} Catch That Rabbit.`,
     },
     colorMode: {
       defaultMode: "dark",

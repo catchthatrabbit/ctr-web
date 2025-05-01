@@ -15,6 +15,7 @@ interface IBoard {
   isLoading?: boolean;
   dir?: "vert" | "hor" | "column";
   context?: "mapChart" | "statsChart" | "payments";
+  boardClassNameColumn?: string;
 }
 
 const Board: React.FC<IBoard> = ({
@@ -23,7 +24,7 @@ const Board: React.FC<IBoard> = ({
   prefix = "",
   suffix = "",
   className = "",
-  loaderComp = <Text variant="subheading">&nbsp;--&nbsp;</Text>,
+  loaderComp = <Text variant="subheading">———</Text>,
   isLoading = false,
   dir = "vert",
   context,
@@ -31,46 +32,30 @@ const Board: React.FC<IBoard> = ({
   const { mobile } = useMediaQueries();
 
   const getTextProps = (type: "value" | "suffix" | "description") => {
-    const isMapChart = context === "mapChart" && mobile;
-    const isStatsChart = context === "statsChart";
-    const isPayments = context === "payments";
-
     switch (type) {
       case "value":
         return {
-          variant: isMapChart
-            ? "tinyBody"
-            : isStatsChart || isPayments
-              ? "headingMobile"
-              : "subheading",
-          weight: isPayments ? "bold" : "normal",
-          color: isPayments
-            ? "white"
-            : isStatsChart
-              ? "primary"
-              : "valueChartColor",
+          children: value,
+          variant: "heading" as const,
+          weight: "bold" as const,
+          color: "white" as const,
+          type: "zephirum" as const,
         };
       case "suffix":
         return {
-          variant: isMapChart
-            ? "tinyBody"
-            : isStatsChart
-              ? "headingMobile"
-              : "subheading",
-          weight: isPayments ? "bold" : "normal",
-          color: isStatsChart ? "primary" : "valueChartColor",
+          children: suffix,
+          variant: "subheading" as const,
+          weight: "normal" as const,
+          color: "white" as const,
         };
       case "description":
         return {
-          variant: isMapChart
-            ? "tinyBody"
-            : isStatsChart
-              ? "subheading1"
-              : "subheading",
-          color: "subheadingColor",
+          children: description,
+          variant: "subheading" as const,
+          weight: "normal" as const,
+          color: "white" as const,
+          disableMobileStyles: true,
         };
-      default:
-        return {};
     }
   };
 
@@ -89,8 +74,7 @@ const Board: React.FC<IBoard> = ({
         })}
       >
         <div className={clsx(styles.boardItem, styles.number)}>
-          <Text type="zephirum">{prefix}</Text>
-          &nbsp;
+          <Text type="regular">{prefix}</Text>
           {isLoading ? (
             loaderComp
           ) : (
@@ -98,20 +82,26 @@ const Board: React.FC<IBoard> = ({
               {...getTextProps("value")}
               lineHeight="normalLineHeight"
               letterSpacing="letterSpacing"
-              disableMobileStyles
+              disableMobileStyles={true}
+              variant="body"
+              weight="medium"
+              color="valueChartColor"
+              type="regular"
             >
-              {value || "N/D"}
+              {value || "×"}
             </Text>
           )}
           <Text
             {...getTextProps("suffix")}
             lineHeight="normalLineHeight"
             letterSpacing="letterSpacing"
+            color="valueChartColor"
+            type="regular"
           >
             {suffix}
           </Text>
         </div>
-        <div className={styles.boardItem}>
+        <div className={styles.boardTitle}>
           <Text
             {...getTextProps("description")}
             lineHeight="normalLineHeight"

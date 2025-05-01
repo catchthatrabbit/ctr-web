@@ -89,7 +89,6 @@ const SingleColumnPanel = ({
               <Text type="value" variant="subheading">
                 {`${item.label}:`}
               </Text>
-              &nbsp;&nbsp;
               <Text type="value" variant="subheading">
                 {item.value || ""}
               </Text>

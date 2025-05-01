@@ -16,36 +16,27 @@ export const customPoolAndApiUrlSwitch = (
   let resultUrl;
   switch (region) {
     case "DE":
-      resultUrl = poolUrl["DE_API_ENDPOINT"]
-        ? poolUrl["DE_API_ENDPOINT"]
-        : poolUrl["NEXT_PUBLIC_DE_API_ENDPOINT"];
+      resultUrl = poolUrl["DE_API_ENDPOINT"];
       break;
     case "FI":
-      resultUrl = poolUrl["FI_API_ENDPOINT"]
-        ? poolUrl["FI_API_ENDPOINT"]
-        : poolUrl["NEXT_PUBLIC_FI_API_ENDPOINT"];
+      resultUrl = poolUrl["FI_API_ENDPOINT"];
       break;
     case "SG":
-      resultUrl = poolUrl["SG_API_ENDPOINT"]
-        ? poolUrl["SG_API_ENDPOINT"]
-        : poolUrl["NEXT_PUBLIC_SG_API_ENDPOINT"];
+      resultUrl = poolUrl["SG_API_ENDPOINT"];
       break;
     case "HK":
-      resultUrl = poolUrl["HK_API_ENDPOINT"]
-        ? poolUrl["HK_API_ENDPOINT"]
-        : poolUrl["NEXT_PUBLIC_HK_API_ENDPOINT"];
+      resultUrl = poolUrl["HK_API_ENDPOINT"];
       break;
     case "BR":
-      resultUrl = poolUrl["BR_API_ENDPOINT"]
-        ? poolUrl["BR_API_ENDPOINT"]
-        : poolUrl["NEXT_PUBLIC_BR_API_ENDPOINT"];
+      resultUrl = poolUrl["BR_API_ENDPOINT"];
       break;
     case "JP":
-      resultUrl = poolUrl["JP_API_ENDPOINT"]
-        ? poolUrl["JP_API_ENDPOINT"]
-        : poolUrl["NEXT_PUBLIC_JP_API_ENDPOINT"];
+      resultUrl = poolUrl["JP_API_ENDPOINT"];
       break;
   }
-  if (apiPath) return `${resultUrl}${apiPath}`;
+  if (apiPath) {
+    if (resultUrl.endsWith("/")) return `${resultUrl}${apiPath}`;
+    return `${resultUrl}/${apiPath}`;
+  }
   return resultUrl;
 };

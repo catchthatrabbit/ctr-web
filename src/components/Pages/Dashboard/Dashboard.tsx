@@ -12,7 +12,6 @@ import { List } from "@site/src/components/Templates/List";
 import { convertMaturedResponseToRecentBlocksInfo } from "./utils";
 import { IAnyPageAndWallet } from "../types";
 import { Header } from "@site/src/components/Templates/Header";
-import { LoadingPlaceholder } from "@site/src/components/Atoms/LoadingPlaceholder";
 import { StartMining } from "@site/src/components/Organisms/StartMining";
 
 import { Empty } from "@site/src/components/Atoms/Empty";
@@ -29,14 +28,15 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
   const {
     infoBoxMapData,
     isLoadingMapChart,
-    sLoganPrimary,
-    SLoganSecondary,
+    SloganPrimary,
+    SloganSecondary,
     infoBoxRadialData,
     radialChartData,
     recentMatureBlockListColumns,
     AllRegionsMaturedBlocks,
     isLoadingRadialBarChart,
     isLoadingAllRegionMaturedBlocks,
+    startMiningPoolConfigurations,
   } = useControls();
 
   const { mobile, tablet, desktop } = useMediaQueries();
@@ -56,7 +56,6 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       >
         {mobile ? (
           <>
-            {/* Texts appear above the image in mobile view */}
             <div className={clsx(styles.textContainer, "text-center")}>
               <MainPageSearch flexStart={false} />
 
@@ -68,7 +67,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 lineHeight="largeLineHeight"
                 disableMobileStyles={true}
               >
-                {sLoganPrimary}
+                {SloganPrimary}
               </Text>
               <Spacer variant="xl" />
             </div>
@@ -80,7 +79,6 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           </>
         ) : (
           <>
-            {/* Desktop layout */}
             <div
               className={clsx([
                 "xl-grid-col--6",
@@ -105,7 +103,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 color="dashboardColor"
                 lineHeight="largeLineHeight"
               >
-                {sLoganPrimary}
+                {SloganPrimary}
               </Text>
               <Spacer variant="xxs" />
               <Text
@@ -113,8 +111,16 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 variant="subheading1"
                 letterSpacing="letterSpacing"
               >
-                {SLoganSecondary}
+                {SloganSecondary}
               </Text>
+              <div className={styles.poolDescriptions}>
+                <span className={styles.poolDescriptionTitle}>XCB Pools:</span>
+                <Text variant="subheading" color="subheadingColor">
+                  {Object.values(startMiningPoolConfigurations)
+                    .map((pool) => pool.NAME)
+                    .join(", ")}
+                </Text>
+              </div>
               <Spacer variant="xxl" />
               {renderSearch()}
             </div>

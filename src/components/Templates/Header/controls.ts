@@ -1,10 +1,10 @@
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
+import { POOLS_LIST } from "@site/src/configs/types";
 
 const useControls = () => {
   const { siteConfig } = useDocusaurusContext();
   const startMiningPoolConfigurations = siteConfig.customFields
-    .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
+    .POOLS_LIST as POOLS_LIST;
 
   return {
     startMiningPoolConfigurations,

@@ -31,7 +31,7 @@ const useRadialBarChartData = () => {
       allLastBlockFound: number[];
     }>(
       (acc, item) => {
-        const { poolCharts = [], stats = {} } = item || {};
+        const { poolCharts = [], stats = { lastBlockFound: 0 } } = item || {};
 
         acc.allPoolChartsData.push({ poolCharts });
 

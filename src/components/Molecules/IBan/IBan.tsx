@@ -39,8 +39,8 @@ const IBan = ({ iBan = "", pool = "de" }: IIBan) => {
       >
         <CopyButton
           textToCopy={iBan}
-          value="Copy Wallet Address"
-          toastText="Wallet address copied to clipboard"
+          value="Copy Core ID"
+          toastText="Core ID copied to clipboard"
           context={mobile ? "wallet" : "config"}
         />
         <CopyButton

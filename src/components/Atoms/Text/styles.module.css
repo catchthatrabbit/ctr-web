@@ -79,11 +79,11 @@
 }
 
 .dashboardColor {
-  color: var( --ifm-primary-color);
+  color: var(--ifm-primary-color);
 }
 
 .summary{
-  color: var( --if-secondary-color)
+  color: var(--if-secondary-color)
 }
 
 .subheadingColor {

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { SingleColumnPanel } from "@site/src/components/Molecules/SingleColumnPanel";
 import { REGIONS } from "@site/src/constants/regions";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
@@ -8,8 +8,6 @@ import {
   GuideTitle,
 } from "@site/src/components/Molecules/PictureTitles";
 import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
-import { useFetchSettings } from "@site/src/hooks/useSettings";
-import { useHeaders } from "@site/src/hooks/useHeaders";
 import { IAnyPageAndWallet } from "../types";
 import { useControls } from "./controls";
 import { InfoPanel } from "@site/src/components/Molecules/InfoPanel";

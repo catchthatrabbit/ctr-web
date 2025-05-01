@@ -54,7 +54,7 @@ const stepsData: Step[] = [
     title: "Create configuration file",
     text: "It's time to configure the miner so that everything works as it should.",
     button: "Create config file",
-    buttonLink: "/create-config",
+    buttonLink: "/go-live",
     link: "#",
     linkText: "Open configuration manual (github)",
   },

@@ -3,7 +3,6 @@
   padding-right: 0;
   background-color: var(--ifm-background-color);
   border-radius: var(--ifm-global-radius);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .emailValueDesktop {
@@ -26,17 +25,6 @@
   color: var(--ifm-link-color);
   transition: color 0.3s ease;
   position: relative;
-}
-
-.linkKey::before {
-  content: "";
-  position: absolute;
-  top: -0.75rem;
-  width: 96%;
-  left: -1%;
-  right: 0%;
-  height: 1px;
-  background-color: #363636;
 }
 
 .link:hover {

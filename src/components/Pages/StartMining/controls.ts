@@ -1,7 +1,7 @@
 import usePageControls from "@site/src/hooks/usePageControls";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
-  START_MINING_POOL_CONFIGURATIONS,
+  POOLS_LIST,
   URLS_CONFIG_TYPE,
 } from "@site/src/configs/types";
 
@@ -15,7 +15,7 @@ const useControls = () => {
   const urlsConfig = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
 
   const startMiningPoolConfigurations = siteConfig.customFields
-    .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
+    .POOLS_LIST as POOLS_LIST;
 
   return {
     coreClientUrl: String(urlsConfig.CORE_CLIENT_URL),

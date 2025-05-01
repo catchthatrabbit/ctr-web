@@ -20,3 +20,10 @@
   font-family: var(--regular-font-family);
   font-weight: var(--bold-font-weight);
 }
+
+.buttonContainer {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}

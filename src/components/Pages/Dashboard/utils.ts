@@ -11,6 +11,7 @@ import { BLOCK_TIME } from "./constants";
 import { SETTINGS_RESPONSE } from "@site/src/Api/settings/types";
 import { MATURED_RESPONSE } from "@site/src/Api/blocks/types";
 import { summarizedText } from "@site/src/utils/summarizedText";
+import { profitabilityCalculation } from "@site/src/utils/profitabilityCalculation";
 
 /**
  * Given a list of items, and a function that takes two items and returns a single item, return the
@@ -100,9 +101,10 @@ export const aggregateNumbers =
     return result;
   };
 
-export const convertPoolChartDataToMapChartInfoBox = (
+export const convertPoolChartDataToMapChartInfoBox = async (
   data: STATS_RESPONSE,
   settings: SETTINGS_RESPONSE,
+  profitabilityData?: { revenue: number }
 ) => {
   if (!data || !settings) {
     return {
@@ -118,26 +120,30 @@ export const convertPoolChartDataToMapChartInfoBox = (
     poolFee: settings.PoolFee,
     infoBoxItems: [
       {
-        title: "Pools hashrate: ",
-        value: TextFormat.getHashText(data.hashrate),
+        title: "CTR hashrate:",
+        value: data.hashrate ? TextFormat.getHashText(data.hashrate) : TextFormat.getDefaultText("×"),
       },
       {
-        title: "Network hashrate: ",
-        value: TextFormat.getHashText(Number(node.difficulty) / BLOCK_TIME),
+        title: "XCB hashrate:",
+        value: node.difficulty ? TextFormat.getHashText(Number(node.difficulty) / BLOCK_TIME) : TextFormat.getDefaultText("×"),
       },
       {
-        title: "Network difficulty: ",
-        value: TextFormat.getHashText(Number(node.difficulty), ""),
+        title: "Difficulty:",
+        value: node.difficulty ? TextFormat.getHashText(Number(node.difficulty), "") : TextFormat.getDefaultText("×"),
       },
       {
-        title: "Active miners: ",
-        value: TextFormat.getNumberText(data.minersTotal),
+        title: "Miners:",
+        value: data.minersTotal ? TextFormat.getNumberText(data.minersTotal) : TextFormat.getDefaultText("×"),
       },
       {
-        title: "Round variance: ",
-        value: TextFormat.getPercentText(
+        title: "Variance:",
+        value: roundShares && node.difficulty ? TextFormat.getPercentText(
           ((100 * Number(roundShares)) / Number(node.difficulty)).toFixed(2),
-        ),
+        ) : TextFormat.getDefaultText("×"),
+      },
+      {
+        title: "Profit:",
+        value: profitabilityData?.revenue !== undefined ? TextFormat.getProfitabilityText(profitabilityData.revenue.toFixed(2), "1kh/s", "monthly", false) : TextFormat.getDefaultText("×"),
       },
     ],
   };

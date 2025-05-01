@@ -8,13 +8,13 @@ const CreateConfigTitle = () => {
   const titleStyles = {
     fontWeight: "800",
     fontFamily: "Exo",
-    textAlign: "center",
+    textAlign: "center" as const,
 
     ...(mobile && { fontSize: "var(--large-font-size)" }),
   };
   return (
     <PictureTitle
-      title="Generate configuration file"
+      title="Launch Miner"
       image={<HeadDown />}
       titleStyles={titleStyles}
     />

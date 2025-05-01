@@ -1,11 +1,11 @@
 import { useHeaders } from "@site/src/hooks/useHeaders";
 import { usePaginate } from "@site/src/hooks/usePaginate";
 import useMapChartData from "@site/src/components/Pages/Dashboard/hooks/useMapChartData";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { useFetchAllBlocks } from "@site/src/hooks/useBlocks";
+import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
 
 interface IPageControls {
-  defaultRegion: string;
+  defaultRegion: STANDARD_REGIONS_API_KEYS;
   includeInfoBox?: boolean; // Include infoBoxMapData
   fetchMultipleData?: boolean; // Fetch multiple datasets (e.g., blocks)
 }

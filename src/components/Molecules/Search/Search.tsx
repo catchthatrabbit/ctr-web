@@ -56,10 +56,10 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
     };
 
     const labelTextMap: Record<string, string> = {
-      wallet: "CorePass Wallet Address",
+      wallet: "Core ID",
       startMining: "Wallet Address",
-      payments: "Wallet",
-      main: "Wallet Address",
+      payments: "Core ID",
+      main: "Core ID",
     };
 
     return (

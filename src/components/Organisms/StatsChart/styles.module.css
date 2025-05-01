@@ -7,10 +7,6 @@
   position: relative;
 }
 
-.loadingSkeleton {
-  height: 58.6rem;
-}
-
 .flex {
   display: flex;
   flex-direction: column;

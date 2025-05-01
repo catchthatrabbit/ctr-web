@@ -1,5 +1,5 @@
 .infoBoxContainer {
-  gap: var(--space-xs);
+  gap: var(--space-sm);
 }
 
 .justifyCenter {
@@ -27,9 +27,10 @@
   background-color: var(--black-800);
   position: relative;
   width: calc(100vw);
+  margin-bottom: 4.5em;
   left: 50%;
   z-index: 900;
-  top: 4.5em;
+  top: 4.6em;
   transform: translateX(-50%);
   border-top: 1px solid rgba(54, 54, 54, 1);
   border-bottom: 1px solid rgba(54, 54, 54, 1);

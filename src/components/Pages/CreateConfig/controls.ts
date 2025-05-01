@@ -1,7 +1,7 @@
 import { useHeaders } from "@site/src/hooks/useHeaders";
 import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
+import { POOLS_LIST } from "@site/src/configs/types";
 import useMapChartData from "../Dashboard/hooks/useMapChartData";
 
 const useControls = ({
@@ -9,10 +9,10 @@ const useControls = ({
   defaultRegion,
   onChangeRegion,
 }: IAnyPageAndWallet) => {
+  const { siteConfig } = useDocusaurusContext();
   const { handleChangeRegion, handleSearch, dropdownItems, regionLabel } =
     useHeaders({ defaultRegion, onSetWalletAddress, onChangeRegion });
-
-  const { siteConfig } = useDocusaurusContext();
+  const mapChartData = useMapChartData();
 
   const convertWorkerName = (
     str: string,
@@ -38,7 +38,6 @@ const useControls = ({
         caption,
       };
     } else {
-      console.log("not match");
       return {
         href: null,
         caption: str,
@@ -47,12 +46,7 @@ const useControls = ({
   };
 
   const startMiningPoolConfigurations = siteConfig.customFields
-    .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
-  const {
-    infoBoxItems: infoBoxMapData,
-    poolFee,
-    isLoading: isLoadingMapChart,
-  } = useMapChartData();
+    .POOLS_LIST as POOLS_LIST;
 
   return {
     handleSearch,
@@ -61,9 +55,9 @@ const useControls = ({
     regionLabel,
     convertWorkerName,
     startMiningPoolConfigurations,
-    infoBoxMapData,
-    poolFee,
-    isLoadingMapChart,
+    infoBoxMapData: mapChartData.infoBoxItems,
+    poolFee: mapChartData.poolFee,
+    isLoadingMapChart: mapChartData.isLoading,
   };
 };
 

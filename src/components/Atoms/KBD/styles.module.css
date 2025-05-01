@@ -5,7 +5,7 @@
   padding: var(--space-xs);
   white-space: break-spaces;
   font-size: var(--body-font-size);
-  background-color:transparent;
-  box-shadow:none;
+  background-color: transparent;
+  box-shadow: none;
   display: inline-block;
 }

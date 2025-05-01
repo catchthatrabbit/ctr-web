@@ -28,8 +28,8 @@ export const fetchMatured = async (
 };
 
 export const fetchAllRegionsMatured = async ({
-  apiPath,
   urls,
+  apiPath,
 }: Parameters<typeof getAllRegionsMaturedBlocks>[0]) => {
   try {
     const instanceArray = getAllRegionsMaturedBlocks({ urls, apiPath });

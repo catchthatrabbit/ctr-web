@@ -1,12 +1,11 @@
 .boardContainer.boardContainerPayments {
-  padding: 10px 0;
+  padding: 1em 0;
 }
 
 .content {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  gap: var(--space-xxs);
 }
 
 .boardTotal {
@@ -14,11 +13,10 @@
 
 }
 
+.boardTitle {
+  margin-right: 0.2em;
+}
 
 .boardClassNameColumn {
   flex-direction: column !important;
-}
-
-.boardClassNameColumnMobile {
-  height: 81px;
 }

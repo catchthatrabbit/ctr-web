@@ -4,14 +4,15 @@ import { Wallet } from "@site/src/components/Pages/Wallet";
 import { ConfiguredLayout } from "@site/src/components/Templates/ConfiguredLayout";
 import { useWalletPage } from "@site/src/hooks/useWallet";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
+import { POOLS_LIST } from "@site/src/configs/types";
 import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
+import ICAN from "@blockchainhub/ican";
 
 const WalletOverviewPage = () => {
   const { siteConfig } = useDocusaurusContext();
 
-  const START_MINING_POOL_CONFIGURATIONS = siteConfig.customFields
-    .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
+  const POOLS_LIST = siteConfig.customFields
+    .POOLS_LIST as POOLS_LIST;
   const { walletAddress, pool } = useParams<{
     walletAddress: string;
     pool: string;
@@ -29,7 +30,7 @@ const WalletOverviewPage = () => {
     : region;
 
   return (
-    <ConfiguredLayout backgroundPos={40}>
+    <ConfiguredLayout backgroundPos={40} customTitle={`${ICAN.shortFormat(walletAddress, '⋯')} - ${POOLS_LIST[pool?.toUpperCase() as keyof typeof POOLS_LIST]?.DESCRIPTION}`}>
       <Wallet
         onClearWalletAddress={handleClearWalletAddress}
         defaultRegion={defaultRegion}

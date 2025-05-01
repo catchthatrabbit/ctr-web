@@ -1,6 +1,6 @@
 import { Text } from "@site/src/components/Atoms/Text";
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Panel } from "@site/src/components/Molecules/Panel";
 import LoadingSkeleton from "./LoadingSkeleton";
 import { Empty } from "../../Atoms/Empty";
@@ -17,6 +17,7 @@ interface IDetailsTable {
       key: string;
       title: string;
       value: number | string;
+      asyncValue?: Promise<string>;
     }[];
   };
 }
@@ -27,6 +28,22 @@ const TwoColumnsPanel = ({
   loadingPlaceholder,
 }: IDetailsTable) => {
   const { mobile, tablet, desktop } = useMediaQueries();
+  const [asyncValues, setAsyncValues] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    if (data?.data) {
+      data.data.forEach((item) => {
+        if (item.asyncValue) {
+          item.asyncValue.then((value) => {
+            setAsyncValues((prev) => ({
+              ...prev,
+              [item.key]: value,
+            }));
+          });
+        }
+      });
+    }
+  }, [data]);
 
   if (isLoading)
     return <LoadingSkeleton loadingPlaceholder={loadingPlaceholder} />;
@@ -53,7 +70,7 @@ const TwoColumnsPanel = ({
             color="white"
             className={clsx(styles.detailsTableValue)}
           >
-            {item.value?.toString() || ""}
+            {asyncValues[item.key] || item.value?.toString() || ""}
           </Text>
         </div>
       ))}

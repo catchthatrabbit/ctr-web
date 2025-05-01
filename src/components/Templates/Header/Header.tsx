@@ -30,11 +30,11 @@ interface IHeader {
     boards: boolean;
   };
   context?: string;
+  onSearch?: (searchQuery: string) => void;
 }
 
 const Header = ({
   items,
-
   boardItems,
   onChangeRegion,
   defaultRegion,

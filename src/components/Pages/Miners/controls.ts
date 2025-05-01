@@ -1,15 +1,12 @@
 import { useFetchMiners, useFetchMinersState } from "@site/src/hooks/useMiners";
 import { convertMinerResponse2MinerList } from "./utils";
-import { useHeaders } from "@site/src/hooks/useHeaders";
-import { usePaginate } from "@site/src/hooks/usePaginate";
 import { MINERS_RESPONSE } from "@site/src/Api/miners/types";
 import { useHistory } from "@docusaurus/router";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
+import { POOLS_LIST } from "@site/src/configs/types";
 import { useMemo } from "react";
 import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
 import { tablesConfig } from "@site/src/configs";
-import useMapChartData from "../Dashboard/hooks/useMapChartData";
 import usePageControls from "@site/src/hooks/usePageControls";
 
 const useControls = ({
@@ -44,7 +41,7 @@ const useControls = ({
     useFetchMiners(region, 10, currentPageNumber);
 
   const startMiningPoolConfigurations = siteConfig.customFields
-    .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
+    .POOLS_LIST as POOLS_LIST;
 
   const minerList = useMemo(
     () => convertMinerResponse2MinerList(fetchedMinerList as MINERS_RESPONSE),

@@ -79,8 +79,8 @@ export const useFetchAllBlocks = (
 };
 
 export const useFetchAllRegionsMaturedBlocks = ({
-  apiPath,
   urls,
+  apiPath,
 }: Parameters<typeof fetchAllRegionsMatured>[0]) => {
   return useQueryConfigured<MATURED_RESPONSE[]>(
     { urls, apiPath },

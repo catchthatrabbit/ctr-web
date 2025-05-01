@@ -9,7 +9,6 @@ export const colourStyles: StylesConfig = {
     border: "1px solid rgba(54, 54, 54, 1)",
     borderRadius: "8px",
     cursor: "context-menu",
-    boxShadow: "0 0 5px rgba(128, 128, 128, 0.5)",
     ":hover": { border: "1px solid rgba(128, 128, 128, 1)" },
   }),
   singleValue: (styles) => ({

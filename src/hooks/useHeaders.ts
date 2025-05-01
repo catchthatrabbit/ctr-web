@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { STANDARD_REGIONS_API_KEYS } from "../Api/types";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { START_MINING_POOL_CONFIGURATIONS } from "../configs/types";
+import { POOLS_LIST } from "../configs/types";
 import { REGIONS } from "../constants/regions";
 import { POOL_NAME_ENUM } from "../enums/poolName.enum";
 
@@ -23,34 +23,19 @@ export const useHeaders = ({
 
   const { siteConfig } = useDocusaurusContext();
   const startMiningPoolConfigurations = siteConfig.customFields
-    .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
+    .POOLS_LIST as POOLS_LIST;
 
-  const dropdownItems = [
-    {
-      label: startMiningPoolConfigurations[REGIONS.DE][`DESCRIPTION`],
-      value: POOL_NAME_ENUM.DE,
-    },
-    {
-      label: startMiningPoolConfigurations[REGIONS.FI][`DESCRIPTION`],
-      value: POOL_NAME_ENUM.FI,
-    },
-    {
-      label: startMiningPoolConfigurations[REGIONS.SG][`DESCRIPTION`],
-      value: POOL_NAME_ENUM.SG,
-    },
-    {
-      label: startMiningPoolConfigurations[REGIONS.HK][`DESCRIPTION`],
-      value: POOL_NAME_ENUM.HK,
-    },
-    {
-      label: startMiningPoolConfigurations[REGIONS.BR][`DESCRIPTION`],
-      value: POOL_NAME_ENUM.BR,
-    },
-    {
-      label: startMiningPoolConfigurations[REGIONS.JP][`DESCRIPTION`],
-      value: POOL_NAME_ENUM.JP,
-    },
-  ];
+  const dropdownItems = Object.entries(startMiningPoolConfigurations)
+    .filter(([key, config]) =>
+      key in REGIONS &&
+      config &&
+      typeof config === 'object' &&
+      'DESCRIPTION' in config
+    )
+    .map(([key, config]) => ({
+      label: config.DESCRIPTION,
+      value: key as POOL_NAME_ENUM
+    }));
 
   useEffect(() => {
     if (typeof onSetWalletAddress === "function")

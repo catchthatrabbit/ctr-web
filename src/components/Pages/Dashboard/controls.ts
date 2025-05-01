@@ -12,6 +12,7 @@ import { IDataTable } from "@site/src/components/Atoms/DataTable/types";
 import {
   POOLS_API_CONFIG_TYPE,
   URLS_CONFIG_TYPE,
+  POOLS_LIST,
 } from "@site/src/configs/types";
 
 const useControls = () => {
@@ -36,6 +37,9 @@ const useControls = () => {
   });
 
   const urlsConfigs = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
+  const startMiningPoolConfigurations = siteConfig.customFields
+    .POOLS_LIST as POOLS_LIST;
+
   const dataTableColumns = useMemo(
     () => [
       {
@@ -59,8 +63,8 @@ const useControls = () => {
     [urlsConfigs.BLOCK_DETAILS_URL],
   ) as IDataTable["columns"];
 
-  const sLoganPrimary: string = String(siteConfig.customFields.SLOGAN_PRIMARY);
-  const SLoganSecondary: string = String(
+  const SloganPrimary: string = String(siteConfig.customFields.SLOGAN_PRIMARY);
+  const SloganSecondary: string = String(
     siteConfig.customFields.SLOGAN_SECONDARY,
   );
   const effectsShowLocation: boolean =
@@ -89,8 +93,9 @@ const useControls = () => {
     isLoadingAllRegionMaturedBlocks,
     effectsShowLocation,
     effectsShowActionIcons,
-    sLoganPrimary,
-    SLoganSecondary,
+    SloganPrimary,
+    SloganSecondary,
+    startMiningPoolConfigurations,
   };
 };
 

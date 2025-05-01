@@ -28,10 +28,13 @@
   transform: translateX(-50%);
 }
 
+.poolDescriptionTitle {
+  margin-right: 0.5em;
+}
+
 @media screen and (max-width: 768px){
   .horizontalLine{
       background: linear-gradient(to right, #1F1F1F 25%, #FFFFFF0D 75%);
 
   }
-  
 }

@@ -2,24 +2,6 @@
   box-shadow: none;
 }
 
-/* .navbar__link:hover:after {
-  width: 100%;
-}
-
-.navbar__link:after {
-  content: '';
-  border-bottom: 1px solid var(--white);
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  height: 100%;
-  width: 0px;
-  top:-1px;
-  transition: width 0.3s ease-out;
-}  UNDERLINED EFFECTS ON HOVER IN NAVBAR */
-
-
 .navbar__logo {
   margin: 1.1rem 0.7rem;
 }
-

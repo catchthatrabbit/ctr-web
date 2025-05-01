@@ -16,7 +16,9 @@ const StartPanel = () => {
       })}
     >
       <div
-        className={clsx(styles.startDiv, { [styles.startDivMobile]: mobile })}
+        className={clsx(styles.startDiv, {
+          [styles.startDivMobile]: mobile,
+        })}
       >
         <div className={styles.startDivTitle}>
           <Text
@@ -41,14 +43,26 @@ const StartPanel = () => {
             </>
           )}
         </div>
-        <a
-          href="/start-mining"
-          className={clsx(styles.startButton, {
-            [styles.startButtonMobile]: mobile,
-          })}
-        >
-          View guide
-        </a>
+        <div className={styles.buttonContainer}>
+          <a
+            href="/go-live"
+            className={styles.startButton}
+          >
+            Launch Miner
+          </a>
+          <a
+            href="/calculator"
+            className={styles.startButton}
+          >
+            Profit Calculator
+          </a>
+          <a
+            href="/start-mining"
+            className={styles.startButton}
+          >
+            View Guide
+          </a>
+        </div>
       </div>
     </div>
   );

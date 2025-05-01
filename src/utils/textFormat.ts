@@ -50,8 +50,8 @@ export class TextFormat {
    * @param value - The value to format as Euro
    * @returns {TextFormatOutputType} Object containing formatted Euro text
    */
-  static getEuroText = (value: number): TextFormatOutputType => ({
-    text: convertNumber2String(convertNumber2Currency(value, "EUR")),
+  static getCurrencyText = (value: number, currency: string = "EUR"): TextFormatOutputType => ({
+    text: convertNumber2String(convertNumber2Currency(value, currency)),
     prefix: "",
     suffix: "",
   });
@@ -109,5 +109,16 @@ export class TextFormat {
     text: convertNumber2String(value),
     prefix: "",
     suffix: "",
+  });
+
+  /**
+   * Formats a value as a profitability text
+   * @param value - The value to format as a profitability text
+   * @returns {TextFormatOutputType} Object containing formatted profitability text
+   */
+  static getProfitabilityText = (value: string | number, prefix: string | null = null, period: string = "daily", fullName: boolean = true): TextFormatOutputType => ({
+    text: convertNumber2String(value),
+    prefix: prefix !== null ? prefix + " " : "",
+    suffix: period === "daily" ? (fullName ? " $/day" : " $/d") : period === "weekly" ? (fullName ? " $/week" : " $/w") : period === "monthly" ? (fullName ? " $/month" : " $/m") : (fullName ? " $/year" : " $/y"),
   });
 }
