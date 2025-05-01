@@ -267,7 +267,7 @@ const CreateConfig = ({
 
     const workerIdValue = workerIdRef.current?.value.trim() || "";
     if (workerIdValue !== "") {
-      workerName = `_${workerName}-${workerIdValue}`;
+      workerName = `${workerName}-${workerIdValue}`;
     }
 
     const regionKey1 = Object.keys(startMiningPoolConfigurations).find(

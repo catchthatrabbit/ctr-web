@@ -11,6 +11,7 @@
 
 .boardContainer.boardContainerPayments .content {
   flex-direction: column;
+  gap: 0;
 }
 
 .boardTotal {

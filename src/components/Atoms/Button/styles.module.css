@@ -81,7 +81,8 @@
 }
 
 .configButton {
-  width: auto
+  width: calc((3 / 12) * 100%);
+  padding: var(--space-xs) var(--space-sm);
 }
 
 .mobileWalletButton {

@@ -125,7 +125,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
   return (
     <>
       {renderMapChartSection()}
-      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xxxl" />}
+      <Spacer variant="xxxl" />
+      {desktop && <Spacer variant="xxl" />}
       <StartPanel />
       {desktop ? <Spacer variant="md" /> : null}
       <Header

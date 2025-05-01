@@ -42,7 +42,7 @@ const InfoPanel: React.FC<BlockProps> = ({ title, text, link, linkText }) => {
       <Text variant="body" color="subheadingColor">
         {text}
       </Text>
-      {desktop ? <Spacer variant="xs" /> : <Spacer variant="sm" />}
+      {mobile && <Spacer variant="sm" />}
 
       <a href={link} className={styles.link} onClick={handleLinkClick}>
         <Text variant="smallBody" color="primary" weight="bold">
