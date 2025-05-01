@@ -11,9 +11,9 @@
 
 .pinWrapper {
   position: absolute;
-  top:30%;
+  top: 30%;
   width: 100%;
-  left:0px;
+  left: 0px;
   height: 7.9rem;
 }
 
@@ -24,6 +24,6 @@
 
 .bgImageMobile {
   right: 0px;
-  top: -1.125rem; 
+  top: -1.125rem;
   width: 78%;
 }

@@ -1,10 +1,10 @@
-import { MINERS_RESPONSE } from "@site/src/Api/miners/types";
-import { summarizedText } from "@site/src/utils/summarizedText";
-import { convert2kilo } from "@site/src/utils/siFormat";
-import { convertTime2Date } from "@site/src/utils/convertTime2Date";
+import { MINERS_RESPONSE } from '@site/src/Api/miners/types';
+import { summarizedText } from '@site/src/utils/summarizedText';
+import { convert2kilo } from '@site/src/utils/siFormat';
+import { convertTime2Date } from '@site/src/utils/convertTime2Date';
 
 export const convertMinerResponse2MinerList = (
-  minerResponse?: MINERS_RESPONSE,
+  minerResponse?: MINERS_RESPONSE
 ): Array<{
   id: string;
   id_summarized: string;

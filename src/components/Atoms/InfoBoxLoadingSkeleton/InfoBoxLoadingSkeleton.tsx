@@ -1,12 +1,12 @@
-import React from "react";
-import clsx from "clsx";
-import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
+import React from 'react';
+import clsx from 'clsx';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IInfoBoxLoadingSkeleton {
   loadingPlaceholder?: React.ReactNode;
-  direction?: "vert" | "hor";
+  direction?: 'vert' | 'hor';
   itemNum?: number;
   className?: string;
   boardClassNameVert?: string;
@@ -15,7 +15,7 @@ interface IInfoBoxLoadingSkeleton {
 
 const InfoBoxLoadingSkeleton = ({
   loadingPlaceholder,
-  direction = "hor",
+  direction = 'hor',
   itemNum = 5,
   className,
   boardClassNameHor,
@@ -27,7 +27,7 @@ const InfoBoxLoadingSkeleton = ({
     <div
       className={clsx([
         className,
-        "flex",
+        'flex',
         {
           [styles.justifySpaceBetween]: desktop || laptop,
           [styles.justifyCenter]: tablet || mobile,
@@ -40,8 +40,8 @@ const InfoBoxLoadingSkeleton = ({
           className={clsx([
             styles.borderRadius,
             {
-              [boardClassNameVert]: direction === "vert",
-              [boardClassNameHor]: direction === "hor",
+              [boardClassNameVert]: direction === 'vert',
+              [boardClassNameHor]: direction === 'hor',
             },
             styles.skeletonBorderItem,
           ])}

@@ -1,7 +1,7 @@
-import { AxiosError, AxiosResponse } from "axios";
-import { AxiosInstance } from "../api";
-import { STANDARD_REGIONS_API_KEYS } from "../types";
-import { WALLET_INFO_RESPONSE } from "./types";
+import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosInstance } from '../api';
+import { STANDARD_REGIONS_API_KEYS } from '../types';
+import { WALLET_INFO_RESPONSE } from './types';
 
 export const fetchWalletInfo = async ({
   region,

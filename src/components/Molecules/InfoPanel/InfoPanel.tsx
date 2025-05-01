@@ -1,9 +1,9 @@
-import React from "react";
-import { Text } from "../../Atoms/Text";
-import { Spacer } from "../../Atoms/Spacer";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import React from 'react';
+import { Text } from '../../Atoms/Text';
+import { Spacer } from '../../Atoms/Spacer';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface BlockProps {
   title: string;
@@ -14,13 +14,13 @@ interface BlockProps {
 
 const InfoPanel: React.FC<BlockProps> = ({ title, text, link, linkText }) => {
   const handleLinkClick = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
-    if (link.startsWith("#")) {
+    if (link.startsWith('#')) {
       event.preventDefault();
       const targetElement = document.getElementById(link.substring(1));
       if (targetElement) {
-        targetElement.scrollIntoView({ behavior: "smooth" });
+        targetElement.scrollIntoView({ behavior: 'smooth' });
       }
     }
   };
@@ -29,13 +29,13 @@ const InfoPanel: React.FC<BlockProps> = ({ title, text, link, linkText }) => {
 
   return (
     <div
-      className={`flex flex-column ${styles.block} ${mobile ? styles.mobileBlock : ""}`}
+      className={`flex flex-column ${styles.block} ${mobile ? styles.mobileBlock : ''}`}
     >
       <Text
         variant="heading3"
         weight="semiBold"
         color="white"
-        style={{ marginBottom: "4px" }}
+        style={{ marginBottom: '4px' }}
       >
         {title}
       </Text>

@@ -1,20 +1,20 @@
-import React from "react";
-import { List } from "@site/src/components/Templates/List";
-import { Header } from "@site/src/components/Templates/Header";
-import { TextFormat } from "@site/src/utils/textFormat";
-import { MinersTitle } from "@site/src/components/Molecules/PictureTitles";
-import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
-import useControls from "./controls";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { Search } from "@site/src/components/Molecules/Search";
-import { Board } from "@site/src/components/Atoms/Board";
-import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import React from 'react';
+import { List } from '@site/src/components/Templates/List';
+import { Header } from '@site/src/components/Templates/Header';
+import { TextFormat } from '@site/src/utils/textFormat';
+import { MinersTitle } from '@site/src/components/Molecules/PictureTitles';
+import { IAnyPageAndWallet } from '@site/src/components/Pages/types';
+import useControls from './controls';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { Search } from '@site/src/components/Molecules/Search';
+import { Board } from '@site/src/components/Atoms/Board';
+import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import styles from "./styles.module.css";
-import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
+import styles from './styles.module.css';
+import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 
 interface IMiners extends IAnyPageAndWallet {
   selectedPool: string;
@@ -69,19 +69,19 @@ const Miners = ({
       pageTitleComponent={<MinersTitle />}
       addComponent={
         <Search
-          context={mobile ? "wallet" : "payments"}
+          context={mobile ? 'wallet' : 'payments'}
           onSearch={onSetWalletAddress}
           overrideLabel={true}
           selectedPool={selectedPool}
         />
       }
-      context={mobile ? "mobileWallet" : "payments"}
+      context={mobile ? 'mobileWallet' : 'payments'}
       onSearch={handleSearch}
     />
   );
   const renderBoards = () => {
     const networkDifficultyItem = infoBoxMapData?.find((item) =>
-      item.title.includes("Network difficulty"),
+      item.title.includes('Network difficulty')
     );
 
     return (
@@ -113,7 +113,7 @@ const Miners = ({
     );
   };
   const networkDifficultyItem = infoBoxMapData?.find((item) =>
-    item.title.includes("Network difficulty"),
+    item.title.includes('Network difficulty')
   );
 
   const handleDropdownChange = (selectedOption: {
@@ -128,14 +128,14 @@ const Miners = ({
     setSelectedPool(poolShortcut);
 
     handleChangeRegion(
-      selectedOption as { label: string; value: STANDARD_REGIONS_API_KEYS },
+      selectedOption as { label: string; value: STANDARD_REGIONS_API_KEYS }
     );
   };
 
   return (
     <>
       {renderInfoBox()}
-      <Spacer variant={desktop ? "xxxxl" : "xxxl"} />
+      <Spacer variant={desktop ? 'xxxxl' : 'xxxl'} />
       {mobile && <Spacer variant="xs" />}
       {renderHeader()}
       {desktop ? null : <Spacer variant="xxs" />}

@@ -1,13 +1,13 @@
-import React from "react";
-import { Text } from "@site/src/components/Atoms/Text";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { DownloadAppStore, QR } from "@site/src/icons";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
-import clsx from "clsx";
+import React from 'react';
+import { Text } from '@site/src/components/Atoms/Text';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { DownloadAppStore, QR } from '@site/src/icons';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
+import clsx from 'clsx';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
-const googlePlayImage = "/img/GooglePlay.png";
+const googlePlayImage = '/img/GooglePlay.png';
 
 const DownloadPanel: React.FC = () => {
   const { mobile, desktop } = useMediaQueries();
@@ -55,7 +55,7 @@ const DownloadPanel: React.FC = () => {
       <div className={styles.content}>
         <Spacer variant="xxs" />
         <Text
-          size={desktop ? "large" : "mediumSize"}
+          size={desktop ? 'large' : 'mediumSize'}
           weight="semiBold"
           color="white"
           disableMobileStyles

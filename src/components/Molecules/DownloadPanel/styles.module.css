@@ -3,13 +3,12 @@
   justify-content: space-between;
   align-items: flex-end;
   width: 97%;
-  background-color: #1B1C1C; 
+  background-color: #1b1c1c;
   padding: 2.8rem 0 0 3.1rem;
   border-radius: var(--ifm-global-radius);
   position: relative;
   flex: 1;
   margin-left: 2rem;
-
 }
 
 .downloadPanelMobile {
@@ -27,7 +26,6 @@
 
 .downloadPanelMobile .content {
   align-items: center;
-
 }
 
 .title {
@@ -37,7 +35,7 @@
 }
 
 .text {
-  font-size: var( --body-font-size);
+  font-size: var(--body-font-size);
   margin-bottom: 1.3rem;
 }
 
@@ -71,7 +69,7 @@
   right: 0px;
 }
 
-.imageMobile img{
+.imageMobile img {
   width: 92%;
 }
 
@@ -86,7 +84,7 @@
   justify-content: space-between;
 }
 
-.downloadPanelMobile{
+.downloadPanelMobile {
   margin-left: 0;
 }
 
@@ -94,9 +92,7 @@
   width: 75%;
 }
 
-
-.googlePlayImage{
+.googlePlayImage {
   width: 135px;
- height: 40px;
+  height: 40px;
 }
-

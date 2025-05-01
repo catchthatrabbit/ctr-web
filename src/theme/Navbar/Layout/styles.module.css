@@ -1,18 +1,17 @@
 .navbarRelative {
   /* override the theme’s fixed rule */
   position: relative !important;
-  top: auto           !important;
-  transform: none     !important;
+  top: auto !important;
+  transform: none !important;
 }
 
 .navbarHideable {
-  position: fixed;   
-  top: 0;         
+  position: fixed;
+  top: 0;
   width: 100%;
   z-index: var(--ifm-navbar-z-index);
-  transition: transform var(--ifm-transition-fast) ease; 
+  transition: transform var(--ifm-transition-fast) ease;
 }
 .navbarHideable.navbarHidden {
   transform: translate3d(0, calc(-100% - 2px), 0);
 }
-

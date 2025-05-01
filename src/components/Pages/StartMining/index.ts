@@ -1,1 +1,1 @@
-export { default as StartMining } from "./StartMining";
+export { default as StartMining } from './StartMining';

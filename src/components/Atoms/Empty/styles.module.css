@@ -1,5 +1,5 @@
 .emptyRoot {
-width: 100%;
+  width: 100%;
   border: 1px solid var(--gray-700);
   background-color: var(--blue-rgb-650);
   display: flex;

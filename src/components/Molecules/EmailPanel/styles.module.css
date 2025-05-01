@@ -29,7 +29,7 @@
 }
 
 .linkKey::before {
-  content: "";
+  content: '';
   position: absolute;
   top: -0.75rem;
   width: 96%;
@@ -44,7 +44,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .block{
+  .block {
     padding: var(--space-sm);
   }
 }

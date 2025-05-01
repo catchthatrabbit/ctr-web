@@ -1,15 +1,15 @@
-import { useFetchStatsCharts } from "@site/src/hooks/useStats";
+import { useFetchStatsCharts } from '@site/src/hooks/useStats';
 import {
   aggregateNumbers,
   convertPoolChartDataToChartData,
   convertPoolChartDataToRadialInfoBox,
   reduceList,
-} from "../utils";
-import { WHITELIST_AGGREGATE_KEYS } from "@site/src/configs/aggregate-keys.config";
-import { ChartItem } from "../types";
-import { TextFormatOutputType } from "@site/src/utils/textFormat";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
+} from '../utils';
+import { WHITELIST_AGGREGATE_KEYS } from '@site/src/configs/aggregate-keys.config';
+import { ChartItem } from '../types';
+import { TextFormatOutputType } from '@site/src/utils/textFormat';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
 
 const useRadialBarChartData = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -41,7 +41,7 @@ const useRadialBarChartData = () => {
 
         return acc;
       },
-      { allPoolChartsData: [], allLastBlockFound: [] },
+      { allPoolChartsData: [], allLastBlockFound: [] }
     );
 
     // Calculate the last block found
@@ -63,7 +63,7 @@ const useRadialBarChartData = () => {
     }
     chart = convertPoolChartDataToChartData(stats?.poolCharts || []);
   } catch (error) {
-    console.error("Error processing radial bar chart data:", error);
+    console.error('Error processing radial bar chart data:', error);
     // Fallback to empty data in case of an error
     infoBox = [];
     chart = [];

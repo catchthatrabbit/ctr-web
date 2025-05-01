@@ -11,7 +11,7 @@
 .rightContainer {
   display: flex;
   flex-direction: column;
-  width: calc((5.1/12) * 100%);
+  width: calc((5.1 / 12) * 100%);
 }
 
 .textarea {
@@ -27,7 +27,7 @@
 .textarea::placeholder {
   color: var(--ifm-subheading-color);
   font-family: var(--regular-font-family);
-  font-size: var(  --regular-font-size);
+  font-size: var(--regular-font-size);
 }
 
 .linkButton {
@@ -37,7 +37,6 @@
   border-radius: var(--ifm-global-radius);
 }
 
-
 @media screen and (max-width: 1270px) and (min-width: 769px) {
   /* Tablet-specific styles */
   .rightContainer {
@@ -46,11 +45,8 @@
   }
   .leftContainer {
     --ifm-col-width: 97%;
-   
   }
 }
-
-
 
 @media screen and (max-width: 768px) {
   .leftContainer {
@@ -68,5 +64,3 @@
     text-align: center;
   }
 }
-
-

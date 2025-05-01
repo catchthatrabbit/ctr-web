@@ -1,18 +1,18 @@
-import { useHeaders } from "@site/src/hooks/useHeaders";
-import { usePaginate } from "@site/src/hooks/usePaginate";
-import { useMemo } from "react";
-import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
-import { tablesConfig } from "@site/src/configs";
+import { useHeaders } from '@site/src/hooks/useHeaders';
+import { usePaginate } from '@site/src/hooks/usePaginate';
+import { useMemo } from 'react';
+import { IAnyPageAndWallet } from '@site/src/components/Pages/types';
+import { tablesConfig } from '@site/src/configs';
 import {
   useFetchPayments,
   useFetchPaymentsState,
-} from "@site/src/hooks/usePayments";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
-import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
-import { useHistory } from "@docusaurus/router";
-import useMapChartData from "../Dashboard/hooks/useMapChartData";
-import usePageControls from "@site/src/hooks/usePageControls";
+} from '@site/src/hooks/usePayments';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { URLS_CONFIG_TYPE } from '@site/src/configs/types';
+import { START_MINING_POOL_CONFIGURATIONS } from '@site/src/configs/types';
+import { useHistory } from '@docusaurus/router';
+import useMapChartData from '../Dashboard/hooks/useMapChartData';
+import usePageControls from '@site/src/hooks/usePageControls';
 
 const useControls = ({
   onSetWalletAddress,
@@ -51,11 +51,11 @@ const useControls = ({
 
   const dataTableColumns = useMemo(
     () => [
-      { value: "timestamp", label: "Time" },
-      { value: "amount", label: "Amount" },
+      { value: 'timestamp', label: 'Time' },
+      { value: 'amount', label: 'Amount' },
       {
-        value: "address",
-        label: "Address",
+        value: 'address',
+        label: 'Address',
         canBeCopied: true,
         isPrimary: true,
         fn: (walletAddress) => {
@@ -64,14 +64,14 @@ const useControls = ({
         },
       },
       {
-        value: "tx",
-        label: "Tx id",
+        value: 'tx',
+        label: 'Tx id',
         canBeCopied: true,
         isPrimary: true,
         href: urlsConfigs.TRANSACTION_DETAILS_URL,
       },
     ],
-    [setWalletAddress, push, selectedPool, urlsConfigs.TRANSACTION_DETAILS_URL],
+    [setWalletAddress, push, selectedPool, urlsConfigs.TRANSACTION_DETAILS_URL]
   );
 
   return {

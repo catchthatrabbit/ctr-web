@@ -15,12 +15,9 @@
   background-color: #f0f0f0;
 }
 
-
 .dropdownTextContainer {
   width: 100%;
 }
-
-
 
 @media screen and (max-width: 768px) {
   .dropdownTextContainer {

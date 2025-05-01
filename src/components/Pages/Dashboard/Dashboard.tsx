@@ -1,26 +1,26 @@
-import React from "react";
-import useControls from "./controls";
-import { MapChart } from "@site/src/components/Organisms/MapChart";
-import { DashboardImage } from "@site/src/components/Molecules/InsideChart/DashboardImage";
-import { Text } from "@site/src/components/Atoms/Text";
-import clsx from "clsx";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { StatsChart } from "@site/src/components/Organisms/StatsChart";
-import { RadialBarChart } from "@site/src/components/Organisms/RadialBarChart";
-import { RecentBlocksTitle } from "@site/src/components/Molecules/PictureTitles";
-import { List } from "@site/src/components/Templates/List";
-import { convertMaturedResponseToRecentBlocksInfo } from "./utils";
-import { IAnyPageAndWallet } from "../types";
-import { Header } from "@site/src/components/Templates/Header";
-import { StartMining } from "@site/src/components/Organisms/StartMining";
+import React from 'react';
+import useControls from './controls';
+import { MapChart } from '@site/src/components/Organisms/MapChart';
+import { DashboardImage } from '@site/src/components/Molecules/InsideChart/DashboardImage';
+import { Text } from '@site/src/components/Atoms/Text';
+import clsx from 'clsx';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { StatsChart } from '@site/src/components/Organisms/StatsChart';
+import { RadialBarChart } from '@site/src/components/Organisms/RadialBarChart';
+import { RecentBlocksTitle } from '@site/src/components/Molecules/PictureTitles';
+import { List } from '@site/src/components/Templates/List';
+import { convertMaturedResponseToRecentBlocksInfo } from './utils';
+import { IAnyPageAndWallet } from '../types';
+import { Header } from '@site/src/components/Templates/Header';
+import { StartMining } from '@site/src/components/Organisms/StartMining';
 
-import { Empty } from "@site/src/components/Atoms/Empty";
-import { Search } from "../../Molecules/Search";
-import styles from "./styles.module.css";
+import { Empty } from '@site/src/components/Atoms/Empty';
+import { Search } from '../../Molecules/Search';
+import styles from './styles.module.css';
 
-import MainPageSearch from "@site/src/components/Molecules/PictureTitles/MainPageSearch";
-import { StartPanel } from "../../Molecules/StartPanel";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import MainPageSearch from '@site/src/components/Molecules/PictureTitles/MainPageSearch';
+import { StartPanel } from '../../Molecules/StartPanel';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
 interface IDashboard extends IAnyPageAndWallet {}
 
@@ -48,14 +48,14 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
     <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
       <div
         className={clsx([
-          "grid",
+          'grid',
           styles.directionRtl,
-          mobile || tablet ? "xs-grid-col--12" : "xl-grid-template-columns",
+          mobile || tablet ? 'xs-grid-col--12' : 'xl-grid-template-columns',
         ])}
       >
         {mobile ? (
           <>
-            <div className={clsx(styles.textContainer, "text-center")}>
+            <div className={clsx(styles.textContainer, 'text-center')}>
               <MainPageSearch flexStart={false} />
 
               <Spacer variant="xxs" />
@@ -81,7 +81,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
             {/* Desktop layout */}
             <div
               className={clsx([
-                "xl-grid-col--6",
+                'xl-grid-col--6',
                 styles.mapChartLocationPlace,
                 styles.directionLtr,
               ])}
@@ -90,9 +90,9 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
             </div>
             <div
               className={clsx([
-                "xl-grid-col--6",
+                'xl-grid-col--6',
                 styles.directionLtr,
-                "text-left",
+                'text-left',
               ])}
             >
               <MainPageSearch flexStart={true} />
@@ -148,7 +148,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
         hidePagination={false}
         isLoading={isLoadingAllRegionMaturedBlocks}
         data={convertMaturedResponseToRecentBlocksInfo(
-          AllRegionsMaturedBlocks || [],
+          AllRegionsMaturedBlocks || []
         )}
       />
       <Spacer variant="xxxl" />

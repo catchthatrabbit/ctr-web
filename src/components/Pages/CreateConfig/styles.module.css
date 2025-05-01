@@ -7,8 +7,7 @@
   margin: auto;
 }
 
-
-.boardJustifyCenter{
+.boardJustifyCenter {
   justify-content: center;
 }
 
@@ -25,7 +24,6 @@
   flex: 0 0 48%;
 }
 
-
 .viewPoolsLink {
   display: inline-block;
   direction: rtl;
@@ -39,7 +37,7 @@
 
 .inputs::before,
 .inputs::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -15px;
   width: 50%;
@@ -67,7 +65,7 @@
 
 .linkText::before,
 .linkText::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -15px;
   width: 100%;
@@ -77,7 +75,6 @@
 }
 
 .linkText::before {
- 
   width: 100%;
 }
 
@@ -88,7 +85,7 @@
 .activeLink::before,
 .activeLink::after {
   position: absolute;
-  background-color: #16C784;
+  background-color: #16c784;
   z-index: 2;
 }
 
@@ -103,7 +100,6 @@
 @media screen and (max-width: 768px) {
   .mainContent {
     width: 100%;
-
   }
 
   .dropdownContainer {
@@ -123,11 +119,8 @@
     align-items: center;
   }
 
-  .inputs::before, .inputs::after {
+  .inputs::before,
+  .inputs::after {
     display: none;
   }
-
-
-
-
 }

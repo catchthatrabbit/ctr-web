@@ -6,5 +6,5 @@ export interface ICopyButton {
   styles?: React.CSSProperties;
   icon?: React.ReactNode;
   customStyles?: { [key: string]: string };
-  context?: "config" | "wallet";
+  context?: 'config' | 'wallet';
 }

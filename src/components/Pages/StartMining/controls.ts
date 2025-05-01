@@ -1,13 +1,13 @@
-import usePageControls from "@site/src/hooks/usePageControls";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import usePageControls from '@site/src/hooks/usePageControls';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {
   START_MINING_POOL_CONFIGURATIONS,
   URLS_CONFIG_TYPE,
-} from "@site/src/configs/types";
+} from '@site/src/configs/types';
 
 const useControls = () => {
   const { infoBoxMapData, isLoadingMapChart } = usePageControls({
-    defaultRegion: "DE",
+    defaultRegion: 'DE',
     includeInfoBox: true,
   });
 

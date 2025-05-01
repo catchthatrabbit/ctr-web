@@ -1,19 +1,19 @@
-import React from "react";
-import clsx from "clsx";
-import { HTMLAttributes } from "react";
+import React from 'react';
+import clsx from 'clsx';
+import { HTMLAttributes } from 'react';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IWarningProps extends HTMLAttributes<HTMLDivElement> {
   text: string;
-  context?: "config";
+  context?: 'config';
 }
 
 const Warning = ({ text, context }: IWarningProps) => {
   return (
     <div
       className={clsx(styles.warning, {
-        [styles.configWarning]: context === "config",
+        [styles.configWarning]: context === 'config',
       })}
     >
       <p

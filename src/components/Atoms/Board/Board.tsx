@@ -1,9 +1,9 @@
-import React from "react";
-import { Text } from "@site/src/components/Atoms/Text";
-import clsx from "clsx";
-import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
+import React from 'react';
+import { Text } from '@site/src/components/Atoms/Text';
+import clsx from 'clsx';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IBoard {
   value: string;
@@ -13,61 +13,61 @@ interface IBoard {
   className?: string;
   loaderComp?: React.ReactNode;
   isLoading?: boolean;
-  dir?: "vert" | "hor" | "column";
-  context?: "mapChart" | "statsChart" | "payments";
+  dir?: 'vert' | 'hor' | 'column';
+  context?: 'mapChart' | 'statsChart' | 'payments';
 }
 
 const Board: React.FC<IBoard> = ({
   value,
-  description = "",
-  prefix = "",
-  suffix = "",
-  className = "",
+  description = '',
+  prefix = '',
+  suffix = '',
+  className = '',
   loaderComp = <Text variant="subheading">&nbsp;--&nbsp;</Text>,
   isLoading = false,
-  dir = "vert",
+  dir = 'vert',
   context,
 }) => {
   const { mobile } = useMediaQueries();
 
-  const getTextProps = (type: "value" | "suffix" | "description") => {
-    const isMapChart = context === "mapChart" && mobile;
-    const isStatsChart = context === "statsChart";
-    const isPayments = context === "payments";
+  const getTextProps = (type: 'value' | 'suffix' | 'description') => {
+    const isMapChart = context === 'mapChart' && mobile;
+    const isStatsChart = context === 'statsChart';
+    const isPayments = context === 'payments';
 
     switch (type) {
-      case "value":
+      case 'value':
         return {
           variant: isMapChart
-            ? "tinyBody"
+            ? 'tinyBody'
             : isStatsChart || isPayments
-              ? "headingMobile"
-              : "subheading",
-          weight: isPayments ? "bold" : "normal",
+              ? 'headingMobile'
+              : 'subheading',
+          weight: isPayments ? 'bold' : 'normal',
           color: isPayments
-            ? "white"
+            ? 'white'
             : isStatsChart
-              ? "primary"
-              : "valueChartColor",
+              ? 'primary'
+              : 'valueChartColor',
         };
-      case "suffix":
+      case 'suffix':
         return {
           variant: isMapChart
-            ? "tinyBody"
+            ? 'tinyBody'
             : isStatsChart
-              ? "headingMobile"
-              : "subheading",
-          weight: isPayments ? "bold" : "normal",
-          color: isStatsChart ? "primary" : "valueChartColor",
+              ? 'headingMobile'
+              : 'subheading',
+          weight: isPayments ? 'bold' : 'normal',
+          color: isStatsChart ? 'primary' : 'valueChartColor',
         };
-      case "description":
+      case 'description':
         return {
           variant: isMapChart
-            ? "tinyBody"
+            ? 'tinyBody'
             : isStatsChart
-              ? "subheading1"
-              : "subheading",
-          color: "subheadingColor",
+              ? 'subheading1'
+              : 'subheading',
+          color: 'subheadingColor',
         };
       default:
         return {};
@@ -77,15 +77,15 @@ const Board: React.FC<IBoard> = ({
   return (
     <div
       className={clsx(styles.boardContainer, className, {
-        [styles.boardContainerPayments]: context === "payments",
+        [styles.boardContainerPayments]: context === 'payments',
       })}
     >
       <div
         className={clsx(styles.content, {
-          [styles.boardClassNameHor]: dir === "hor",
-          [styles.boardClassNameColumn]: dir === "column",
-          [styles.boardClassNameColumnMobile]: dir === "column" && mobile,
-          [styles.boardTotal]: context === "payments",
+          [styles.boardClassNameHor]: dir === 'hor',
+          [styles.boardClassNameColumn]: dir === 'column',
+          [styles.boardClassNameColumnMobile]: dir === 'column' && mobile,
+          [styles.boardTotal]: context === 'payments',
         })}
       >
         <div className={clsx(styles.boardItem, styles.number)}>
@@ -95,16 +95,16 @@ const Board: React.FC<IBoard> = ({
             loaderComp
           ) : (
             <Text
-              {...getTextProps("value")}
+              {...getTextProps('value')}
               lineHeight="normalLineHeight"
               letterSpacing="letterSpacing"
               disableMobileStyles
             >
-              {value || "N/D"}
+              {value || 'N/D'}
             </Text>
           )}
           <Text
-            {...getTextProps("suffix")}
+            {...getTextProps('suffix')}
             lineHeight="normalLineHeight"
             letterSpacing="letterSpacing"
           >
@@ -113,7 +113,7 @@ const Board: React.FC<IBoard> = ({
         </div>
         <div className={styles.boardItem}>
           <Text
-            {...getTextProps("description")}
+            {...getTextProps('description')}
             lineHeight="normalLineHeight"
             letterSpacing="letterSpacing"
             disableMobileStyles

@@ -1,18 +1,18 @@
-import { STANDARD_REGIONS_API_KEYS } from "../Api/types";
+import { STANDARD_REGIONS_API_KEYS } from '../Api/types';
 
 const POOL_CATCH_THE_RABBIT_SUB_DOMAINS: Record<
   STANDARD_REGIONS_API_KEYS,
   string
 > = {
-  DE: "eu-api.catchthatrabbit.com",
-  FI: "eu1-api.catchthatrabbit.com",
-  SG: "as-api.catchthatrabbit.com",
-  HK: "as1-api.catchthatrabbit.com",
-  BR: "us-api.catchthatrabbit.com",
-  JP: "us1-api.catchthatrabbit.com",
+  DE: 'eu-api.catchthatrabbit.com',
+  FI: 'eu1-api.catchthatrabbit.com',
+  SG: 'as-api.catchthatrabbit.com',
+  HK: 'as1-api.catchthatrabbit.com',
+  BR: 'us-api.catchthatrabbit.com',
+  JP: 'us1-api.catchthatrabbit.com',
 };
 
-const API_BASE_PATH = "v2/api/";
+const API_BASE_PATH = 'v2/api/';
 
 export const DEFAULT_API_URL: Record<STANDARD_REGIONS_API_KEYS, string> = {
   DE: `https://${POOL_CATCH_THE_RABBIT_SUB_DOMAINS.DE}/${API_BASE_PATH}`,

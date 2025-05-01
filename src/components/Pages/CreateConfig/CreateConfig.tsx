@@ -1,21 +1,21 @@
-import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { CreateConfigTitle } from "@site/src/components/Molecules/PictureTitles";
-import { InputText } from "@site/src/components/Atoms/InputText";
-import { Dropdown } from "../../Atoms/Dropdown";
-import { Text } from "@site/src/components/Atoms/Text";
-import { Warning } from "@site/src/components/Atoms/Warning";
-import Button from "@site/src/components/Atoms/Button/Button";
-import Ican from "@blockchainhub/ican";
-import useControls from "./controls";
-import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
-import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
+import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { CreateConfigTitle } from '@site/src/components/Molecules/PictureTitles';
+import { InputText } from '@site/src/components/Atoms/InputText';
+import { Dropdown } from '../../Atoms/Dropdown';
+import { Text } from '@site/src/components/Atoms/Text';
+import { Warning } from '@site/src/components/Atoms/Warning';
+import Button from '@site/src/components/Atoms/Button/Button';
+import Ican from '@blockchainhub/ican';
+import useControls from './controls';
+import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
+import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IPayments {
   defaultRegion?: STANDARD_REGIONS_API_KEYS;
@@ -36,12 +36,12 @@ const CreateConfig = ({
     isLoadingMapChart,
   } = useControls({ defaultRegion, onSetWalletAddress, onChangeRegion });
 
-  const [walletAddress, setWalletAddress] = useState("");
+  const [walletAddress, setWalletAddress] = useState('');
   const [isWalletValid, setIsWalletValid] = useState(true);
-  const [inputType, setInputType] = useState("plain");
-  const [minerName, setMinerName] = useState({ value: "", isValid: true });
-  const [typePortal, setTypePortal] = useState({ value: "", isValid: true });
-  const [uniqueId, setUniqueId] = useState("");
+  const [inputType, setInputType] = useState('plain');
+  const [minerName, setMinerName] = useState({ value: '', isValid: true });
+  const [typePortal, setTypePortal] = useState({ value: '', isValid: true });
+  const [uniqueId, setUniqueId] = useState('');
   const [dropdownValue1, setDropdownValue1] = useState(regionLabel);
   const [dropdownValue2, setDropdownValue2] = useState(dropdownItems[1].label);
   const [showError, setShowError] = useState(false);
@@ -54,14 +54,14 @@ const CreateConfig = ({
   const typePortalRef = useRef(null);
 
   const formatWalletAddress = (value: string) => {
-    return value.replace(/(.{4})/g, "$1 ").trim();
+    return value.replace(/(.{4})/g, '$1 ').trim();
   };
 
   const handleWalletAddressChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const formattedValue = formatWalletAddress(
-      event.target.value.replace(/\s+/g, ""),
+      event.target.value.replace(/\s+/g, '')
     );
     const isValid = Ican.isValid(formattedValue, true);
     setIsWalletValid(isValid);
@@ -73,10 +73,10 @@ const CreateConfig = ({
   };
 
   const handleMinerNameChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const value = event.target.value;
-    const regex = inputType === "plain" ? /^[A-Za-z0-9_-]+$/ : /^[A-Za-z0-9]+$/;
+    const regex = inputType === 'plain' ? /^[A-Za-z0-9_-]+$/ : /^[A-Za-z0-9]+$/;
     const isValid = regex.test(value);
     setMinerName({ value, isValid });
 
@@ -85,7 +85,7 @@ const CreateConfig = ({
     }
   };
   const handleTypePortalChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     let value = event.target.value;
     const regex =
@@ -114,13 +114,13 @@ const CreateConfig = ({
   };
 
   const renderInputs = () => {
-    if (inputType === "plain") {
+    if (inputType === 'plain') {
       return (
         <>
           <Text
             variant="smallBody"
             color="subheadingColor"
-            style={{ marginBottom: "8px" }}
+            style={{ marginBottom: '8px' }}
           >
             Plain name
           </Text>
@@ -134,7 +134,7 @@ const CreateConfig = ({
           {!minerName.isValid && (
             <Text
               variant="smallBody"
-              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+              style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
             >
               Plain name is invalid. Use only letters, numbers, underscores (_),
               or hyphens (-).
@@ -143,13 +143,13 @@ const CreateConfig = ({
           <Spacer variant="xs" />
         </>
       );
-    } else if (inputType === "fediverse") {
+    } else if (inputType === 'fediverse') {
       return (
         <>
           <Text
             variant="smallBody"
             color="subheadingColor"
-            style={{ marginBottom: "8px" }}
+            style={{ marginBottom: '8px' }}
           >
             Fediverse Username
           </Text>
@@ -163,7 +163,7 @@ const CreateConfig = ({
           {!minerName.isValid && (
             <Text
               variant="smallBody"
-              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+              style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
             >
               Fediverse username is invalid. Use only letters and numbers.
             </Text>
@@ -172,7 +172,7 @@ const CreateConfig = ({
           <Text
             variant="smallBody"
             color="subheadingColor"
-            style={{ marginBottom: "8px" }}
+            style={{ marginBottom: '8px' }}
           >
             Fediverse portal
           </Text>
@@ -186,7 +186,7 @@ const CreateConfig = ({
           {!typePortal.isValid && (
             <Text
               variant="smallBody"
-              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+              style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
             >
               Portal is invalid. Enter a valid domain.
             </Text>
@@ -195,7 +195,7 @@ const CreateConfig = ({
           <Text
             variant="smallBody"
             color="subheadingColor"
-            style={{ marginBottom: "8px" }}
+            style={{ marginBottom: '8px' }}
           >
             Worker ID (optional)
           </Text>
@@ -213,24 +213,24 @@ const CreateConfig = ({
   };
 
   const areFieldsValid = () => {
-    if (inputType === "plain") {
-      const walletAddressValue = walletAddressRef.current?.value.trim() || "";
-      const minerNameValue = minerNameRef.current?.value.trim() || "";
+    if (inputType === 'plain') {
+      const walletAddressValue = walletAddressRef.current?.value.trim() || '';
+      const minerNameValue = minerNameRef.current?.value.trim() || '';
 
-      return walletAddressValue !== "" && minerNameValue !== "";
-    } else if (inputType === "fediverse") {
-      const walletAddressValue = walletAddressRef.current?.value.trim() || "";
-      const minerNameValue = minerNameRef.current?.value.trim() || "";
-      const typePortalValue = typePortalRef.current?.value.trim() || "";
+      return walletAddressValue !== '' && minerNameValue !== '';
+    } else if (inputType === 'fediverse') {
+      const walletAddressValue = walletAddressRef.current?.value.trim() || '';
+      const minerNameValue = minerNameRef.current?.value.trim() || '';
+      const typePortalValue = typePortalRef.current?.value.trim() || '';
 
       const regex =
         /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$/;
       const isPortalValid = regex.test(typePortalValue);
 
       return (
-        walletAddressValue !== "" &&
-        minerNameValue !== "" &&
-        typePortalValue !== "" &&
+        walletAddressValue !== '' &&
+        minerNameValue !== '' &&
+        typePortalValue !== '' &&
         isPortalValid
       );
     }
@@ -245,48 +245,48 @@ const CreateConfig = ({
     setShowError(false);
 
     const walletAddressFormat = walletAddressRef.current?.value
-      .replace(/\s+/g, "")
+      .replace(/\s+/g, '')
       .toLowerCase();
-    let workerName = "";
+    let workerName = '';
 
-    if (inputType === "plain") {
-      workerName = `_${minerNameRef.current?.value}` || "";
-    } else if (inputType === "fediverse") {
-      const minerNameValue = minerNameRef.current?.value || "";
-      const typePortalValue = typePortalRef.current?.value || "";
+    if (inputType === 'plain') {
+      workerName = `_${minerNameRef.current?.value}` || '';
+    } else if (inputType === 'fediverse') {
+      const minerNameValue = minerNameRef.current?.value || '';
+      const typePortalValue = typePortalRef.current?.value || '';
 
       const processedPortal = typePortalValue
-        .split(".")
+        .split('.')
         .map((part, index) =>
-          index === 1 ? part.charAt(0).toUpperCase() + part.slice(1) : part,
+          index === 1 ? part.charAt(0).toUpperCase() + part.slice(1) : part
         ) // Capitalize the TLD
-        .join("");
+        .join('');
 
       workerName = `_${minerNameValue}${processedPortal}`;
     }
 
-    const workerIdValue = workerIdRef.current?.value.trim() || "";
-    if (workerIdValue !== "") {
+    const workerIdValue = workerIdRef.current?.value.trim() || '';
+    if (workerIdValue !== '') {
       workerName = `${workerName}-${workerIdValue}`;
     }
 
     const regionKey1 = Object.keys(startMiningPoolConfigurations).find(
       (key) =>
-        startMiningPoolConfigurations[key]["DESCRIPTION"] === dropdownValue1,
+        startMiningPoolConfigurations[key]['DESCRIPTION'] === dropdownValue1
     );
     const regionKey2 = Object.keys(startMiningPoolConfigurations).find(
       (key) =>
-        startMiningPoolConfigurations[key]["DESCRIPTION"] === dropdownValue2,
+        startMiningPoolConfigurations[key]['DESCRIPTION'] === dropdownValue2
     );
 
     const server1 =
-      regionKey1 && startMiningPoolConfigurations[regionKey1]["SERVER"];
+      regionKey1 && startMiningPoolConfigurations[regionKey1]['SERVER'];
     const port1 =
-      regionKey1 && startMiningPoolConfigurations[regionKey1]["PORT"];
+      regionKey1 && startMiningPoolConfigurations[regionKey1]['PORT'];
     const server2 =
-      regionKey2 && startMiningPoolConfigurations[regionKey2]["SERVER"];
+      regionKey2 && startMiningPoolConfigurations[regionKey2]['SERVER'];
     const port2 =
-      regionKey2 && startMiningPoolConfigurations[regionKey2]["PORT"];
+      regionKey2 && startMiningPoolConfigurations[regionKey2]['PORT'];
 
     const configData: Record<string, string | undefined> = {
       wallet: walletAddressFormat,
@@ -299,17 +299,17 @@ const CreateConfig = ({
 
     const configContent = Object.entries(configData)
       .map(([key, value]) => `${key}=${value}`)
-      .join("\n");
+      .join('\n');
 
-    const blob = new Blob([configContent], { type: "text/plain" });
+    const blob = new Blob([configContent], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
+    const a = document.createElement('a');
     a.href = url;
-    a.download = "pool.cfg";
+    a.download = 'pool.cfg';
     a.click();
     URL.revokeObjectURL(url);
 
-    console.log("Config file generated with the following data:");
+    console.log('Config file generated with the following data:');
     console.log(configContent);
   };
   return (
@@ -323,7 +323,7 @@ const CreateConfig = ({
         </>
       )}
       <Spacer variant="xxxl" />
-      <Spacer variant={desktop ? "xxl" : "xxs"} />
+      <Spacer variant={desktop ? 'xxl' : 'xxs'} />
 
       <CreateConfigTitle />
       {desktop ? <Spacer variant="xxl" /> : <Spacer variant="sm" />}
@@ -334,9 +334,9 @@ const CreateConfig = ({
           </Text>
           {desktop ? <Spacer variant="xs" /> : <Spacer variant="sm" />}
           <Text
-            variant={mobile ? "body" : "smallBody"}
+            variant={mobile ? 'body' : 'smallBody'}
             color="subheadingColor"
-            style={{ marginBottom: "8px" }}
+            style={{ marginBottom: '8px' }}
             disableMobileStyles
           >
             Core ID (Wallet address)
@@ -351,7 +351,7 @@ const CreateConfig = ({
           {!isWalletValid && (
             <Text
               variant="smallBody"
-              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+              style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
             >
               Core ID is not valid!
             </Text>
@@ -388,12 +388,12 @@ const CreateConfig = ({
           )}
           <Link to="/start-mining#pools" className={styles.viewPoolsLink}>
             <Text
-              variant={mobile ? "smallBody" : "subheading"}
+              variant={mobile ? 'smallBody' : 'subheading'}
               color="primary"
               type="value"
               style={{
-                textDecoration: mobile ? "underline" : "none",
-                textUnderlineOffset: mobile ? "3px" : "0",
+                textDecoration: mobile ? 'underline' : 'none',
+                textUnderlineOffset: mobile ? '3px' : '0',
               }}
             >
               Mining Pools Overview
@@ -409,9 +409,9 @@ const CreateConfig = ({
               variant="smallBody"
               color="primary"
               type="value"
-              onClick={() => setInputType("plain")}
+              onClick={() => setInputType('plain')}
               className={clsx(styles.linkText, {
-                [styles.activeLink]: inputType === "plain",
+                [styles.activeLink]: inputType === 'plain',
               })}
             >
               Plain name
@@ -426,9 +426,9 @@ const CreateConfig = ({
               variant="smallBody"
               color="primary"
               type="value"
-              onClick={() => setInputType("fediverse")}
+              onClick={() => setInputType('fediverse')}
               className={clsx(styles.linkText, {
-                [styles.activeLink]: inputType === "fediverse",
+                [styles.activeLink]: inputType === 'fediverse',
               })}
             >
               Fediverse
@@ -452,7 +452,7 @@ const CreateConfig = ({
           {showError && (
             <Text
               variant="smallBody"
-              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+              style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
             >
               All required fields need to be filled out correctly to proceed.
             </Text>

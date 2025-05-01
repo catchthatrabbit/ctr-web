@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
-import { Info } from "@site/src/components/Templates/Info";
-import { List } from "@site/src/components/Templates/List";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { Header } from "@site/src/components/Templates/Header";
-import { Search } from "../../Molecules/Search";
+import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
+import { Info } from '@site/src/components/Templates/Info';
+import { List } from '@site/src/components/Templates/List';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { Header } from '@site/src/components/Templates/Header';
+import { Search } from '../../Molecules/Search';
 import {
   convertPaymentsResponse2PaymentInfo,
   convertWorkersResponse2Info,
-} from "./utils";
-import { Text } from "@site/src/components/Atoms/Text";
-import { IAnyPageAndWallet } from "../types";
-import useControls from "./controls";
-import { LoadingPlaceholder } from "../../Atoms/LoadingPlaceholder";
-import { CustomToastError } from "../../Molecules/CopyButton";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+} from './utils';
+import { Text } from '@site/src/components/Atoms/Text';
+import { IAnyPageAndWallet } from '../types';
+import useControls from './controls';
+import { LoadingPlaceholder } from '../../Atoms/LoadingPlaceholder';
+import { CustomToastError } from '../../Molecules/CopyButton';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
-import "react-toastify/dist/ReactToastify.css";
-import styles from "./styles.module.css";
+import 'react-toastify/dist/ReactToastify.css';
+import styles from './styles.module.css';
 
-interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
+interface IWallet extends Omit<IAnyPageAndWallet, 'onSetWalletAddress'> {
   walletAddress: string;
   onClearWalletAddress?: () => void;
   onSetWalletAddress: (walletAddress: string) => void;
@@ -30,7 +30,6 @@ const Wallet = ({
   walletAddress,
   defaultRegion,
   onChangeRegion,
-  onClearWalletAddress,
   onSetWalletAddress,
 }: IWallet) => {
   const {
@@ -53,7 +52,7 @@ const Wallet = ({
     isLoadingMapChart,
   } = useControls({ walletAddress, defaultRegion, onChangeRegion });
 
-  const [filterStatus, setFilterStatus] = useState("All");
+  const [filterStatus, setFilterStatus] = useState('All');
   const [toastShown, setToastShown] = useState(false);
   const { mobile, tablet, desktop } = useMediaQueries();
 
@@ -62,7 +61,7 @@ const Wallet = ({
   // Handle toast notifications
   useEffect(() => {
     if (walletNotFound && !toastShown && !isLoadingFetchWallet) {
-      CustomToastError({ message: "Wallet not found", mobile });
+      CustomToastError({ message: 'Wallet not found', mobile });
       setToastShown(true);
     } else if (!walletNotFound && toastShown) {
       setToastShown(false);
@@ -76,7 +75,7 @@ const Wallet = ({
       data={convertWorkersResponse2Info(
         fetchWorkersByWalletAddress,
         okEmoji,
-        brbEmoji,
+        brbEmoji
       )}
       hidePagination
       dataTableColumns={workersTableColumn}
@@ -110,7 +109,7 @@ const Wallet = ({
         Wallet not found. No data to display.
       </Text>
       <Spacer variant="xl" />
-      <Spacer variant={desktop ? "xxxl" : "xs"} />
+      <Spacer variant={desktop ? 'xxxl' : 'xs'} />
 
       <Search context="wallet" onSearch={onSetWalletAddress} />
       <Spacer variant="lg" />
@@ -126,7 +125,7 @@ const Wallet = ({
         />
       )}
       <Spacer variant="xxl" />
-      <Spacer variant={desktop ? "xxl" : "md"} />
+      <Spacer variant={desktop ? 'xxl' : 'md'} />
 
       <div className={`flex items-center xl-center-items ${styles.fullWidth}`}>
         <Text
@@ -135,7 +134,7 @@ const Wallet = ({
           lineHeight="mediumLineHeight"
           color="white"
           weight="extraBold"
-          variant={mobile ? "headingMobile" : undefined}
+          variant={mobile ? 'headingMobile' : undefined}
         >
           Wallet Overview
         </Text>
@@ -152,7 +151,7 @@ const Wallet = ({
             onChangeRegion={handleChangeRegion}
             iban={walletAddress}
             layout={{ boards: true, search: false, dropdown: true }}
-            context={mobile ? "mobileWallet" : "wallet"}
+            context={mobile ? 'mobileWallet' : 'wallet'}
           />
 
           <Info

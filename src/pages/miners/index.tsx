@@ -1,8 +1,8 @@
-import React from "react";
-import { ConfiguredLayout } from "@site/src/components/Templates/ConfiguredLayout";
-import { Miners } from "@site/src/components/Pages/Miners";
-import { useWalletPage } from "@site/src/hooks/useWallet";
-import { Wallet } from "@site/src/components/Pages/Wallet";
+import React from 'react';
+import { ConfiguredLayout } from '@site/src/components/Templates/ConfiguredLayout';
+import { Miners } from '@site/src/components/Pages/Miners';
+import { useWalletPage } from '@site/src/hooks/useWallet';
+import { Wallet } from '@site/src/components/Pages/Wallet';
 
 const MinersPage = () => {
   const {

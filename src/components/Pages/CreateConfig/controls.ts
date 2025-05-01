@@ -1,8 +1,8 @@
-import { useHeaders } from "@site/src/hooks/useHeaders";
-import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
-import useMapChartData from "../Dashboard/hooks/useMapChartData";
+import { useHeaders } from '@site/src/hooks/useHeaders';
+import { IAnyPageAndWallet } from '@site/src/components/Pages/types';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { START_MINING_POOL_CONFIGURATIONS } from '@site/src/configs/types';
+import useMapChartData from '../Dashboard/hooks/useMapChartData';
 
 const useControls = ({
   onSetWalletAddress,
@@ -15,7 +15,7 @@ const useControls = ({
   const { siteConfig } = useDocusaurusContext();
 
   const convertWorkerName = (
-    str: string,
+    str: string
   ): { href: string | null; caption: string } => {
     if (!str) return {} as { href: string; caption: string };
 
@@ -38,7 +38,7 @@ const useControls = ({
         caption,
       };
     } else {
-      console.log("not match");
+      console.log('not match');
       return {
         href: null,
         caption: str,

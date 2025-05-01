@@ -1,12 +1,12 @@
 .tabs {
   justify-content: center;
-  font-family: var(--regular-font-family)!important;
+  font-family: var(--regular-font-family) !important;
   font-size: var(--body-font-size);
 }
 
 .tabs button {
   padding: var(--space-xs) var(--space-xxl);
-  background-color: #1B1C1C;
+  background-color: #1b1c1c;
   border: 1px solid #292929;
 }
 

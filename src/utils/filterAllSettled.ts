@@ -7,8 +7,8 @@ export const filterAllSettled = async <T>(promiseList: Array<Promise<T>>) => {
   const response = await Promise.allSettled(promiseList);
 
   const results = response
-    .filter((resp) => resp.status === "fulfilled")
-    .map((resp) => "value" in resp && resp.value);
+    .filter((resp) => resp.status === 'fulfilled')
+    .map((resp) => 'value' in resp && resp.value);
 
   return results;
 };

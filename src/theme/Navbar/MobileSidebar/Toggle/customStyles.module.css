@@ -1,23 +1,22 @@
-.buttonColor{
+.buttonColor {
   color: var(--white);
 }
-.buttonAlignment{
+.buttonAlignment {
   margin-left: auto;
 }
 
 .iconMenuCustom {
   width: 24px;
   height: 24px;
-  color: #16C784;
+  color: #16c784;
 }
 
 .iconMenuCustomClose {
   width: 10px;
   height: 10px;
-  color: #16C784;
+  color: #16c784;
 }
 
 .iconMenuCustom svg {
   stroke-width: 5px;
 }
-

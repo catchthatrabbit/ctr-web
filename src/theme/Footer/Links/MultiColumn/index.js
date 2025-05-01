@@ -1,9 +1,9 @@
-import React from "react";
-import LinkItem from "@theme/Footer/LinkItem";
-import clsx from "clsx";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import React from 'react';
+import LinkItem from '@theme/Footer/LinkItem';
+import clsx from 'clsx';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
-import customStyles from "./customStyles.module.css";
+import customStyles from './customStyles.module.css';
 
 function ColumnLinkItem({ item }) {
   return item.html ? (
@@ -23,16 +23,16 @@ function Column({ column }) {
   const { mobile, desktop } = useMediaQueries();
   return (
     <div
-      className={clsx("col", customStyles.removePaddingInline, {
+      className={clsx('col', customStyles.removePaddingInline, {
         footer__col: desktop,
         [customStyles.alignCenter]: mobile,
       })}
     >
-      <div className={clsx("footer__title", customStyles.title)}>
+      <div className={clsx('footer__title', customStyles.title)}>
         {column.title}
       </div>
       <ul
-        className={clsx("footer__items clean-list", customStyles.footerItem, {
+        className={clsx('footer__items clean-list', customStyles.footerItem, {
           [customStyles.footerItemMobile]: mobile,
         })}
       >

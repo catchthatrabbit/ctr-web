@@ -19,19 +19,17 @@
   direction: ltr;
 }
 
-.horizontalLine{
+.horizontalLine {
   height: 1px;
-  background:  #1F1F1F;
+  background: #1f1f1f;
   width: 100vw;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
 }
 
-@media screen and (max-width: 768px){
-  .horizontalLine{
-      background: linear-gradient(to right, #1F1F1F 25%, #FFFFFF0D 75%);
-
+@media screen and (max-width: 768px) {
+  .horizontalLine {
+    background: linear-gradient(to right, #1f1f1f 25%, #ffffff0d 75%);
   }
-  
 }

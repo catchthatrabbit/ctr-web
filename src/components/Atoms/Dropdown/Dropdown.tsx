@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import Select, { ActionMeta } from "react-select";
-import { colourStyles } from "./styles";
-import CustomDropdownIndicator from "./DropdownIndicator";
-import MobileDropdownIndicator from "./MobileDropdownIndicator";
-import { Text } from "@site/src/components/Atoms/Text";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
-import Modal from "@site/src/components/Atoms/Modal/Modal";
-import PaginationRight from "@site/src/icons/PaginationRight";
+import React, { useState } from 'react';
+import Select, { ActionMeta } from 'react-select';
+import { colourStyles } from './styles';
+import CustomDropdownIndicator from './DropdownIndicator';
+import MobileDropdownIndicator from './MobileDropdownIndicator';
+import { Text } from '@site/src/components/Atoms/Text';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
+import Modal from '@site/src/components/Atoms/Modal/Modal';
+import PaginationRight from '@site/src/icons/PaginationRight';
 
-import styles from "./styles.module.css";
-import clsx from "clsx";
+import styles from './styles.module.css';
+import clsx from 'clsx';
 
 interface IDropdown {
   id?: string;
   items: Array<{ value: string; label: string }>;
   onChange?: (
     newValue: { value: string; label: string },
-    actionMeta: ActionMeta<unknown>,
+    actionMeta: ActionMeta<unknown>
   ) => void;
   defaultValue?: string;
   className?: string;
@@ -37,7 +37,7 @@ const Dropdown: React.FC<IDropdown> = ({
   const { mobile } = useMediaQueries();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(
-    items.find((item) => item.label === defaultValue) || items[0],
+    items.find((item) => item.label === defaultValue) || items[0]
   );
 
   const handleOpenModal = () => {
@@ -53,9 +53,9 @@ const Dropdown: React.FC<IDropdown> = ({
   const handleSelectItem = (item: { value: string; label: string }) => {
     setSelectedItem(item);
     onChange?.(item, {
-      action: "select-option",
+      action: 'select-option',
       option: item,
-      name: "select",
+      name: 'select',
     } as ActionMeta<unknown>);
     handleCloseModal();
   };
@@ -69,13 +69,13 @@ const Dropdown: React.FC<IDropdown> = ({
         isDisabled: false,
         isFocused: false,
         menuIsOpen: false,
-        selectProps: { classNamePrefix: "" },
+        selectProps: { classNamePrefix: '' },
       } as any,
       {
         isDisabled: false,
         isFocused: false,
         menuIsOpen: false,
-      } as any,
+      } as any
     ),
     accentColor: undefined,
   };
@@ -87,11 +87,11 @@ const Dropdown: React.FC<IDropdown> = ({
         className={clsx(styles.dropdownTrigger, className)}
         style={{
           ...(controlStyles as React.CSSProperties),
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "0.6rem 1.2rem 0.6rem 1rem",
-          boxSizing: "border-box",
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '0.6rem 1.2rem 0.6rem 1rem',
+          boxSizing: 'border-box',
         }}
       >
         {selectedItem.label}
@@ -107,11 +107,11 @@ const Dropdown: React.FC<IDropdown> = ({
               onClick={() => handleSelectItem(item)}
               style={{
                 ...(controlStyles as React.CSSProperties),
-                cursor: "pointer",
-                boxShadow: "none",
-                border: "none",
-                marginBottom: "0.25rem",
-                padding: "1rem",
+                cursor: 'pointer',
+                boxShadow: 'none',
+                border: 'none',
+                marginBottom: '0.25rem',
+                padding: '1rem',
               }}
             >
               <span>{item.label}</span>
@@ -125,7 +125,7 @@ const Dropdown: React.FC<IDropdown> = ({
                     variant="smallBody"
                     color="primary"
                     weight="bold"
-                    style={{ marginRight: "0.6rem" }}
+                    style={{ marginRight: '0.6rem' }}
                   >
                     Select
                   </Text>
@@ -159,21 +159,21 @@ const Dropdown: React.FC<IDropdown> = ({
       {text && (
         <div
           className={clsx(styles.dropdownTextContainer, {
-            [styles.walletContext]: context === "wallet",
+            [styles.walletContext]: context === 'wallet',
           })}
         >
           <Text
-            variant={mobile ? "body" : "subheading"}
+            variant={mobile ? 'body' : 'subheading'}
             color="subheadingColor"
             style={{
               width:
-                context === "mobileWallet"
-                  ? "95%"
-                  : context === "blocks" || context === "payments"
-                    ? "100%"
-                    : "50%",
-              position: "relative",
-              bottom: "0.5rem",
+                context === 'mobileWallet'
+                  ? '95%'
+                  : context === 'blocks' || context === 'payments'
+                    ? '100%'
+                    : '50%',
+              position: 'relative',
+              bottom: '0.5rem',
             }}
           >
             {text}

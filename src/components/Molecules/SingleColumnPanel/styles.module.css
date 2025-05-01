@@ -15,7 +15,7 @@
 }
 
 .singlePanel {
-  cursor:auto;
+  cursor: auto;
 }
 
 .singleColumnValuePaddingStartMining {
@@ -42,12 +42,12 @@
 
 .label {
   flex: 1;
-  padding: 0.88rem; 
+  padding: 0.88rem;
   position: relative;
 }
 
 .label::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   bottom: 0;
@@ -73,7 +73,7 @@
     padding: 0.6rem 3.6rem 0.9rem 0;
   }
 
-  .label{
+  .label {
     flex: 2;
   }
 }

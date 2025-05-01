@@ -1,5 +1,5 @@
 .copyButtonSmall {
-  background-color: transparent!important;
+  background-color: transparent !important;
   border: none;
   cursor: pointer;
 }
@@ -10,8 +10,7 @@
   border: none;
   cursor: pointer;
   color: #fff;
-  font-size: var( --body-font-size);
-  padding: 0 1.25rem ;
+  font-size: var(--body-font-size);
+  padding: 0 1.25rem;
   margin-left: auto;
 }
-

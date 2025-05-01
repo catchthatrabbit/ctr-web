@@ -1,5 +1,5 @@
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { START_MINING_POOL_CONFIGURATIONS } from '@site/src/configs/types';
 
 const useControls = () => {
   const { siteConfig } = useDocusaurusContext();

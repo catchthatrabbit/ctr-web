@@ -1,15 +1,15 @@
-import React, { useMemo } from "react";
-import { TwoColumnsPanel } from "../../Molecules/TwoColumnsPanel";
-import { WALLET_INFO_RESPONSE } from "@site/src/Api/wallet/types";
+import React, { useMemo } from 'react';
+import { TwoColumnsPanel } from '../../Molecules/TwoColumnsPanel';
+import { WALLET_INFO_RESPONSE } from '@site/src/Api/wallet/types';
 import {
   convertWalletInfoResponse2ComputingInformation,
   convertWalletInfoResponse2GeneralState,
-} from "./utils";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { WalletInfoTabs } from "@site/src/components/Organisms/WalletInfoTabs";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+} from './utils';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { WalletInfoTabs } from '@site/src/components/Organisms/WalletInfoTabs';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
-import clsx from "clsx";
+import clsx from 'clsx';
 
 interface IInfo {
   data: WALLET_INFO_RESPONSE;
@@ -33,19 +33,19 @@ const Info = ({
 
   const generalStats = useMemo(
     () => convertWalletInfoResponse2GeneralState(data),
-    [data],
+    [data]
   );
 
   const computingInformation = useMemo(
     () => convertWalletInfoResponse2ComputingInformation(data),
-    [data],
+    [data]
   );
 
   return (
     <>
       <div
         className={clsx([
-          "grid grid-col-gap grid-row-gap xl-grid-col--2 lg-grid-col--2 md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
+          'grid grid-col-gap grid-row-gap xl-grid-col--2 lg-grid-col--2 md-grid-row--2 sm-grid-row--2 xs-grid-row--2',
         ])}
       >
         <TwoColumnsPanel

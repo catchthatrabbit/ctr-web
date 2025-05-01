@@ -1,19 +1,19 @@
-import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
-import { tablesConfig } from "@site/src/configs";
-import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
+import { IAnyPageAndWallet } from '@site/src/components/Pages/types';
+import { tablesConfig } from '@site/src/configs';
+import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 import {
   useFetchWallet,
   useFetchWorkersByWalletAddress,
-} from "@site/src/hooks/useWallet";
-import { useFetchPaymentByWalletAddress } from "@site/src/hooks/usePayments";
-import { useMemo, useState } from "react";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
-import { useLocation } from "@docusaurus/router";
-import { useHistory } from "react-router-dom";
-import usePageControls from "@site/src/hooks/usePageControls";
+} from '@site/src/hooks/useWallet';
+import { useFetchPaymentByWalletAddress } from '@site/src/hooks/usePayments';
+import { useMemo, useState } from 'react';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { URLS_CONFIG_TYPE } from '@site/src/configs/types';
+import { useLocation } from '@docusaurus/router';
+import { useHistory } from 'react-router-dom';
+import usePageControls from '@site/src/hooks/usePageControls';
 
-interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
+interface IWallet extends Omit<IAnyPageAndWallet, 'onSetWalletAddress'> {
   walletAddress: string;
 }
 
@@ -48,49 +48,49 @@ const useControls = ({
   const paymentPayoutTableColumns = useMemo(
     () => [
       {
-        label: "Tx id",
-        value: "tx",
+        label: 'Tx id',
+        value: 'tx',
         canBeCopied: true,
         isPrimary: true,
         href: urlConfig.TRANSACTION_DETAILS_URL,
       },
       {
-        label: "Amount",
-        value: "amount",
+        label: 'Amount',
+        value: 'amount',
       },
       {
-        label: "Time",
-        value: "timestamp",
+        label: 'Time',
+        value: 'timestamp',
       },
     ],
-    [urlConfig.TRANSACTION_DETAILS_URL],
+    [urlConfig.TRANSACTION_DETAILS_URL]
   );
 
   const workersTableColumn = useMemo(
     () => [
       {
-        value: "rabbit",
-        label: "Miner",
+        value: 'rabbit',
+        label: 'Miner',
         isPrimary: true,
       },
       {
-        value: "hr",
-        label: "Hashrate ~30m",
+        value: 'hr',
+        label: 'Hashrate ~30m',
       },
       {
-        value: "hr2",
-        label: "Hashrate ~3h",
+        value: 'hr2',
+        label: 'Hashrate ~3h',
       },
       {
-        value: "lastBeat",
-        label: "Last share",
+        value: 'lastBeat',
+        label: 'Last share',
       },
       {
-        value: "offline",
-        label: "Status",
+        value: 'offline',
+        label: 'Status',
       },
     ],
-    [],
+    []
   );
 
   const { data: fetchedWalletInfo, isLoading: isLoadingFetchWallet } =
@@ -103,7 +103,7 @@ const useControls = ({
     region,
     walletAddress,
     10,
-    currentPageWorkers,
+    currentPageWorkers
   );
 
   const {
@@ -113,16 +113,16 @@ const useControls = ({
     region,
     walletAddress,
     10,
-    currentPagePayouts,
+    currentPagePayouts
   );
 
   const handleChangeRegion = (id: {
     label: string;
     value: STANDARD_REGIONS_API_KEYS;
   }) => {
-    const splitted = location.pathname.split("/");
+    const splitted = location.pathname.split('/');
     splitted[3] = id.value.toLowerCase();
-    const newUrl = splitted.join("/");
+    const newUrl = splitted.join('/');
     history.push(newUrl);
     sharedHandleChangeRegion(id);
   };

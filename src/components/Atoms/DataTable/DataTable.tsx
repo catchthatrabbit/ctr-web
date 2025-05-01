@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { Text } from "@site/src/components/Atoms/Text";
-import clsx from "clsx";
-import Link from "@docusaurus/Link";
-import { checkArrayObjectIsEmpty } from "@site/src/utils/checkIsEmpty";
-import LoadingSkeleton from "./LoadingSkeleton";
-import { IDataTable } from "./types";
-import { Pagination } from "@site/src/components/Molecules/Pagination";
+import React, { useState } from 'react';
+import { Text } from '@site/src/components/Atoms/Text';
+import clsx from 'clsx';
+import Link from '@docusaurus/Link';
+import { checkArrayObjectIsEmpty } from '@site/src/utils/checkIsEmpty';
+import LoadingSkeleton from './LoadingSkeleton';
+import { IDataTable } from './types';
+import { Pagination } from '@site/src/components/Molecules/Pagination';
 
-import { CopyButtonSmall } from "../../Molecules/CopyButton";
+import { CopyButtonSmall } from '../../Molecules/CopyButton';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 const DataTable = ({
   data,
@@ -36,9 +36,9 @@ const DataTable = ({
   if (checkArrayObjectIsEmpty(data)) return emptyComponent;
 
   const renderCellContent = (rowItem: any, colItem: IColumn) => {
-    const cellValue = rowItem[colItem.value]?.toString() || "";
+    const cellValue = rowItem[colItem.value]?.toString() || '';
     const summarizedValue =
-      rowItem[`${colItem.value}_summarized`]?.toString() || "";
+      rowItem[`${colItem.value}_summarized`]?.toString() || '';
 
     if (colItem.isPrimary) {
       if (colItem.href) {
@@ -58,7 +58,7 @@ const DataTable = ({
           color="primary"
           type="zephirum"
           onClick={() =>
-            typeof colItem.fn === "function" && colItem.fn(cellValue)
+            typeof colItem.fn === 'function' && colItem.fn(cellValue)
           }
         >
           {summarizedValue}
@@ -73,8 +73,8 @@ const DataTable = ({
         weight="medium"
         color="white"
         className={clsx({
-          [styles.runningText]: cellValue === "Running",
-          [styles.inactiveText]: cellValue === "Inactive",
+          [styles.runningText]: cellValue === 'Running',
+          [styles.inactiveText]: cellValue === 'Inactive',
         })}
       >
         {cellValue}
@@ -86,14 +86,14 @@ const DataTable = ({
     <>
       <div
         className={clsx(styles.tableWrapper, {
-          [styles.tableWrapperWallet]: context === "wallet",
+          [styles.tableWrapperWallet]: context === 'wallet',
         })}
       >
         <table
           className={clsx(
             styles.table,
-            context === "wallet" && styles.walletTable,
-            context === "blocks" && styles.blocksTable,
+            context === 'wallet' && styles.walletTable,
+            context === 'blocks' && styles.blocksTable
           )}
           border={0}
         >
@@ -105,16 +105,16 @@ const DataTable = ({
                   className={clsx(
                     colItem.alignToCenter && styles.tableCenteredText,
                     colIndex === 0 && styles.tablePaddingLeft,
-                    context === "wallet" && styles.walletTableHeader,
+                    context === 'wallet' && styles.walletTableHeader
                   )}
                 >
                   <Text
                     variant="tinyBody"
                     color="white"
                     weight="bold"
-                    style={{ textTransform: "uppercase" }}
+                    style={{ textTransform: 'uppercase' }}
                   >
-                    {colItem.label || ""}
+                    {colItem.label || ''}
                   </Text>
                 </th>
               ))}
@@ -128,7 +128,7 @@ const DataTable = ({
                     key={colIndex}
                     className={clsx(
                       colItem.alignToCenter && styles.tableCenteredText,
-                      colIndex === 0 && styles.tablePaddingLeft,
+                      colIndex === 0 && styles.tablePaddingLeft
                     )}
                   >
                     <span className={styles.copyButton}>

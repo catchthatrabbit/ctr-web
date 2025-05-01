@@ -1,5 +1,5 @@
-import useIsBrowser from "@docusaurus/useIsBrowser";
-import { useEffect, useState } from "react";
+import useIsBrowser from '@docusaurus/useIsBrowser';
+import { useEffect, useState } from 'react';
 
 interface NavItem {
   href: string;
@@ -14,7 +14,7 @@ const useNav = (items: NavItem[]) => {
     if (isBrowser) {
       const currentPathname = window.location.pathname;
       const foundActivePageName = items?.find(
-        (item: NavItem) => item.href === currentPathname,
+        (item: NavItem) => item.href === currentPathname
       )?.href;
 
       if (foundActivePageName) setActivatePageName(foundActivePageName);

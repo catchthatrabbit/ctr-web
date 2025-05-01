@@ -16,9 +16,7 @@
 
 .boardTotal {
   flex-direction: column;
-
 }
-
 
 .boardClassNameColumn {
   flex-direction: column !important;

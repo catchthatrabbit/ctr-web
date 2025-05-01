@@ -1,4 +1,4 @@
-import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
+import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
 
 type NODE = {
   blocktime: string;

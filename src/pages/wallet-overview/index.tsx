@@ -1,11 +1,11 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { Wallet } from "@site/src/components/Pages/Wallet";
-import { ConfiguredLayout } from "@site/src/components/Templates/ConfiguredLayout";
-import { useWalletPage } from "@site/src/hooks/useWallet";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
-import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { Wallet } from '@site/src/components/Pages/Wallet';
+import { ConfiguredLayout } from '@site/src/components/Templates/ConfiguredLayout';
+import { useWalletPage } from '@site/src/hooks/useWallet';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { START_MINING_POOL_CONFIGURATIONS } from '@site/src/configs/types';
+import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 
 const WalletOverviewPage = () => {
   const { siteConfig } = useDocusaurusContext();

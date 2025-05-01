@@ -2,11 +2,11 @@
   font-family: var(--label-font-family);
 }
 
-.value{
+.value {
   font-family: var(--value-font-family);
 }
 
-.regular{
+.regular {
   font-family: var(--regular-font-family);
 }
 
@@ -18,7 +18,7 @@
   font-weight: var(--bold-font-weight);
 }
 
-.medium{
+.medium {
   font-weight: var(--medium-font-weight);
 }
 
@@ -42,7 +42,7 @@
   font-weight: var(--extra-bold-font-weight);
 }
 
-.semiBold{
+.semiBold {
   font-weight: var(--semi-bold-font-weight);
 }
 
@@ -58,11 +58,11 @@
   font-size: var(--medium-font-size);
 }
 
-.large{
+.large {
   font-size: var(--large-font-size);
 }
 
-.pictureTitle{
+.pictureTitle {
   font-size: var(--picture-title-font-size);
 }
 
@@ -74,23 +74,23 @@
   color: var(--ifm-InsideChart-color-text);
 }
 
-.valueChartColor{
-  color: var(--ifm-value-chart-color)
+.valueChartColor {
+  color: var(--ifm-value-chart-color);
 }
 
 .dashboardColor {
-  color: var( --ifm-primary-color);
+  color: var(--ifm-primary-color);
 }
 
-.summary{
-  color: var( --if-secondary-color)
+.summary {
+  color: var(--if-secondary-color);
 }
 
 .subheadingColor {
   color: var(--ifm-subheading-color);
 }
 
-.secondary{
+.secondary {
   color: var(--ifm-secondary-text);
 }
 
@@ -113,7 +113,7 @@
 }
 
 .titleIndicator:before {
-  content: "";
+  content: '';
   position: absolute;
   top: 6px;
   left: 0;
@@ -126,7 +126,7 @@
   font-family: var(--exo-font-family);
 }
 
-.zephirum{
+.zephirum {
   font-family: var(--zephirum-font-family);
 }
 
@@ -149,8 +149,8 @@
   line-height: var(--h3-lineHeight-desktop);
 }
 
-.headingMobile{
-  font-size: var( --large-font-size);
+.headingMobile {
+  font-size: var(--large-font-size);
 }
 .heading1-tablet {
   font-size: var(--h1-font-size-tablet);
@@ -187,7 +187,7 @@
   line-height: var(--subheading-lineHeight-desktop);
 }
 
-.subheading1{
+.subheading1 {
   font-size: var(--subheading1-font-size-desktop);
   line-height: var(--subheading1-lineHeight-desktop);
 }
@@ -206,7 +206,6 @@
   font-size: var(--subheading-font-size-tablet);
   line-height: var(--subheading-lineHeight-tablet);
 }
-
 
 .body {
   font-size: var(--body-font-size);

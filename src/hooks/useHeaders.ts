@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { STANDARD_REGIONS_API_KEYS } from "../Api/types";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { START_MINING_POOL_CONFIGURATIONS } from "../configs/types";
-import { REGIONS } from "../constants/regions";
-import { POOL_NAME_ENUM } from "../enums/poolName.enum";
+import { useEffect, useState } from 'react';
+import { STANDARD_REGIONS_API_KEYS } from '../Api/types';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { START_MINING_POOL_CONFIGURATIONS } from '../configs/types';
+import { REGIONS } from '../constants/regions';
+import { POOL_NAME_ENUM } from '../enums/poolName.enum';
 
 type HEADERS_PROPS = {
   defaultRegion: STANDARD_REGIONS_API_KEYS;
@@ -53,7 +53,7 @@ export const useHeaders = ({
   ];
 
   useEffect(() => {
-    if (typeof onSetWalletAddress === "function")
+    if (typeof onSetWalletAddress === 'function')
       onSetWalletAddress(walletAddress);
     setRegion(defaultRegion);
   }, [onSetWalletAddress, walletAddress, defaultRegion]);
@@ -67,24 +67,24 @@ export const useHeaders = ({
     value: STANDARD_REGIONS_API_KEYS;
   }) => {
     setRegion(id.value);
-    if (typeof onChangeRegion === "function") onChangeRegion(id.value);
+    if (typeof onChangeRegion === 'function') onChangeRegion(id.value);
   };
 
   const covertRegionValue2Label = (
-    apiKeys: STANDARD_REGIONS_API_KEYS,
+    apiKeys: STANDARD_REGIONS_API_KEYS
   ): string => {
     switch (apiKeys) {
-      case "DE":
+      case 'DE':
         return startMiningPoolConfigurations[REGIONS.DE][`DESCRIPTION`];
-      case "FI":
+      case 'FI':
         return startMiningPoolConfigurations[REGIONS.FI][`DESCRIPTION`];
-      case "SG":
+      case 'SG':
         return startMiningPoolConfigurations[REGIONS.SG][`DESCRIPTION`];
-      case "HK":
+      case 'HK':
         return startMiningPoolConfigurations[REGIONS.HK][`DESCRIPTION`];
-      case "BR":
+      case 'BR':
         return startMiningPoolConfigurations[REGIONS.BR][`DESCRIPTION`];
-      case "JP":
+      case 'JP':
         return startMiningPoolConfigurations[REGIONS.JP][`DESCRIPTION`];
       default:
         return startMiningPoolConfigurations[REGIONS.DE][`DESCRIPTION`];

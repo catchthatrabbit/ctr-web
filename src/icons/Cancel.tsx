@@ -11,7 +11,7 @@ const Cancel = () => {
     >
       <mask
         id="mask0_1452_11071"
-        style={{ maskType: "alpha" }}
+        style={{ maskType: 'alpha' }}
         maskUnits="userSpaceOnUse"
         x="0"
         y="0"

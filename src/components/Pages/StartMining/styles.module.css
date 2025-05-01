@@ -30,7 +30,7 @@
 }
 
 .input {
-  color:var(--ifm-color-primary)!important;
+  color: var(--ifm-color-primary) !important;
 }
 
 .buttonConfigLessPadding {
@@ -50,11 +50,11 @@
 }
 
 .marginAuto {
-  margin:auto;
+  margin: auto;
 }
 
 .dropdownHeader {
-  font-size: var( --h3-font-size-desktop);
+  font-size: var(--h3-font-size-desktop);
   color: var(--white);
   justify-content: space-between;
   cursor: pointer;
@@ -63,11 +63,10 @@
 
 .poolTable {
   position: relative;
-
 }
 
 .poolTable::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 10px;
   width: 100%;
@@ -81,7 +80,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .poolContainer{
+  .poolContainer {
     width: 100%;
   }
 }

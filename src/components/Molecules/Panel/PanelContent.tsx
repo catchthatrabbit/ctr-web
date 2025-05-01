@@ -1,8 +1,8 @@
-import React from "react";
-import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
-import clsx from "clsx";
+import React from 'react';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
+import clsx from 'clsx';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IPanelContent {
   children: React.ReactNode;

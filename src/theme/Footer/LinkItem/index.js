@@ -1,13 +1,13 @@
 /* eslint-disable import/no-unresolved */
-import React from "react";
-import Link from "@docusaurus/Link";
-import useBaseUrl from "@docusaurus/useBaseUrl";
-import isInternalUrl from "@docusaurus/isInternalUrl";
-import IconExternalLink from "@theme/Icon/ExternalLink";
+import React from 'react';
+import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import isInternalUrl from '@docusaurus/isInternalUrl';
+import IconExternalLink from '@theme/Icon/ExternalLink';
 
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import customStyles from "./customStyles.module.css";
+import customStyles from './customStyles.module.css';
 
 export default function FooterLinkItem({ item }) {
   const { to, href, label, prependBaseUrlToHref, ...props } = item;
@@ -16,7 +16,7 @@ export default function FooterLinkItem({ item }) {
   return (
     <>
       <Link
-        className={clsx("footer__link-item", customStyles.footerLink)}
+        className={clsx('footer__link-item', customStyles.footerLink)}
         {...(href
           ? {
               href: prependBaseUrlToHref ? normalizedHref : href,

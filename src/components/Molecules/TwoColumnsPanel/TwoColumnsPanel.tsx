@@ -1,12 +1,12 @@
-import { Text } from "@site/src/components/Atoms/Text";
-import clsx from "clsx";
-import React from "react";
-import { Panel } from "@site/src/components/Molecules/Panel";
-import LoadingSkeleton from "./LoadingSkeleton";
-import { Empty } from "../../Atoms/Empty";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import { Text } from '@site/src/components/Atoms/Text';
+import clsx from 'clsx';
+import React from 'react';
+import { Panel } from '@site/src/components/Molecules/Panel';
+import LoadingSkeleton from './LoadingSkeleton';
+import { Empty } from '../../Atoms/Empty';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IDetailsTable {
   isLoading?: boolean;
@@ -39,7 +39,7 @@ const TwoColumnsPanel = ({
           <Text
             weight="bold"
             componentType="div"
-            variant={mobile ? "smallBody" : "subheading"}
+            variant={mobile ? 'smallBody' : 'subheading'}
             color="white"
             className={clsx(styles.detailsTableCaption)}
           >
@@ -48,12 +48,12 @@ const TwoColumnsPanel = ({
           <Text
             weight="bold"
             componentType="div"
-            variant={mobile ? "smallBody" : "subheading"}
+            variant={mobile ? 'smallBody' : 'subheading'}
             type="value"
             color="white"
             className={clsx(styles.detailsTableValue)}
           >
-            {item.value?.toString() || ""}
+            {item.value?.toString() || ''}
           </Text>
         </div>
       ))}

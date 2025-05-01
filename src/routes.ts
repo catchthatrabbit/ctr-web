@@ -1,6 +1,6 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import WalletOverviewPage from "@site/src/pages/wallet-overview";
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import WalletOverviewPage from '@site/src/pages/wallet-overview';
 
 const Routes = () =>
   React.createElement(
@@ -8,13 +8,13 @@ const Routes = () =>
     null,
     React.createElement(Route, {
       exact: true,
-      path: "/wallet-overview/:walletAddress",
-      component: WalletOverviewPage
+      path: '/wallet-overview/:walletAddress',
+      component: WalletOverviewPage,
     }),
     React.createElement(Route, {
       exact: true,
-      path: "/coreid/:walletAddress/:pool",
-      component: WalletOverviewPage
+      path: '/coreid/:walletAddress/:pool',
+      component: WalletOverviewPage,
     })
   );
 

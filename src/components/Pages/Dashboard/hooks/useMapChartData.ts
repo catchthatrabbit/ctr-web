@@ -1,15 +1,15 @@
-import { POOL_NAME_ENUM } from "@site/src/enums/poolName.enum";
-import { useFetchSettings } from "@site/src/hooks/useSettings";
-import { useFetchStats } from "@site/src/hooks/useStats";
+import { POOL_NAME_ENUM } from '@site/src/enums/poolName.enum';
+import { useFetchSettings } from '@site/src/hooks/useSettings';
+import { useFetchStats } from '@site/src/hooks/useStats';
 import {
   aggregateNumbers,
   convertPoolChartDataToMapChartInfoBox,
   reduceList,
-} from "../utils";
-import { WHITELIST_AGGREGATE_KEYS } from "@site/src/configs/aggregate-keys.config";
-import { STATS_RESPONSE } from "@site/src/Api/stats/types";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
+} from '../utils';
+import { WHITELIST_AGGREGATE_KEYS } from '@site/src/configs/aggregate-keys.config';
+import { STATS_RESPONSE } from '@site/src/Api/stats/types';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
 
 const useMapChartData = () => {
   const { siteConfig } = useDocusaurusContext();

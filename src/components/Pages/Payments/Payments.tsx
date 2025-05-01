@@ -1,22 +1,22 @@
-import React from "react";
-import { TextFormat } from "@site/src/utils/textFormat";
-import { Header } from "../../Templates/Header";
-import { List } from "@site/src/components/Templates/List";
-import { convertPaymentsResponse2PaymentInfo } from "./utils";
-import { PaymentsTitle } from "@site/src/components/Molecules/PictureTitles";
-import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
-import useControls from "./controls";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { Search } from "@site/src/components/Molecules/Search";
-import { Board } from "@site/src/components/Atoms/Board";
-import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
+import React from 'react';
+import { TextFormat } from '@site/src/utils/textFormat';
+import { Header } from '../../Templates/Header';
+import { List } from '@site/src/components/Templates/List';
+import { convertPaymentsResponse2PaymentInfo } from './utils';
+import { PaymentsTitle } from '@site/src/components/Molecules/PictureTitles';
+import { IAnyPageAndWallet } from '@site/src/components/Pages/types';
+import useControls from './controls';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { Search } from '@site/src/components/Molecules/Search';
+import { Board } from '@site/src/components/Atoms/Board';
+import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
 
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import styles from "./styles.module.css";
-import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
+import styles from './styles.module.css';
+import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 
 interface IPayments extends IAnyPageAndWallet {
   setSelectedPool?: (pool: string) => void;
@@ -70,13 +70,13 @@ const Payments = ({
       pageTitleComponent={<PaymentsTitle />}
       addComponent={
         <Search
-          context={mobile ? "wallet" : "payments"}
+          context={mobile ? 'wallet' : 'payments'}
           onSearch={onSetWalletAddress}
           overrideLabel={true}
           selectedPool={selectedPool}
         />
       }
-      context={mobile ? "mobileWallet" : "payments"}
+      context={mobile ? 'mobileWallet' : 'payments'}
       onSearch={handleSearch}
     />
   );
@@ -113,14 +113,14 @@ const Payments = ({
     setSelectedPool(poolShortcut);
 
     handleChangeRegion(
-      selectedOption as { label: string; value: STANDARD_REGIONS_API_KEYS },
+      selectedOption as { label: string; value: STANDARD_REGIONS_API_KEYS }
     );
   };
 
   return (
     <>
       {renderInfoBox()}
-      <Spacer variant={desktop ? "xxxxl" : "xxxl"} />
+      <Spacer variant={desktop ? 'xxxxl' : 'xxxl'} />
       {mobile && <Spacer variant="xs" />}
       {renderHeader()}
       {desktop ? null : <Spacer variant="xxs" />}
