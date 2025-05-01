@@ -9,7 +9,6 @@
   flex-direction: column;
 }
 
-
 .flexStart {
   display: flex;
   justify-content: flex-start;

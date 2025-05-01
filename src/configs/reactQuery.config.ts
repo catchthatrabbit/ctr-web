@@ -1,4 +1,4 @@
-import { QueryOptions } from "@tanstack/react-query";
+import { QueryOptions } from '@tanstack/react-query';
 
 export const DEFAULT_REACT_QUERY_OPTIONS = {
   retry: 3,

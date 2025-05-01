@@ -48,11 +48,11 @@ const useControls = ({
 
   const dataTableColumns = useMemo(
     () => [
-      { value: "timestamp", label: "Time" },
-      { value: "amount", label: "Amount" },
+      { value: 'timestamp', label: 'Time' },
+      { value: 'amount', label: 'Amount' },
       {
-        value: "address",
-        label: "Address",
+        value: 'address',
+        label: 'Address',
         canBeCopied: true,
         isPrimary: true,
         fn: (walletAddress) => {
@@ -61,14 +61,14 @@ const useControls = ({
         },
       },
       {
-        value: "tx",
-        label: "Tx id",
+        value: 'tx',
+        label: 'Tx id',
         canBeCopied: true,
         isPrimary: true,
         href: urlsConfigs.TRANSACTION_DETAILS_URL,
       },
     ],
-    [setWalletAddress, push, selectedPool, urlsConfigs.TRANSACTION_DETAILS_URL],
+    [setWalletAddress, push, selectedPool, urlsConfigs.TRANSACTION_DETAILS_URL]
   );
 
   return {

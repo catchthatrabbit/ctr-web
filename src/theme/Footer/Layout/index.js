@@ -1,12 +1,12 @@
-import React from "react";
-import clsx from "clsx";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { Text } from "@site/src/components/Atoms/Text";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { DownloadAppStore } from "@site/src/icons";
-import googlePlayImage from "@site/static/img/GooglePlay.png";
+import React from 'react';
+import clsx from 'clsx';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { Text } from '@site/src/components/Atoms/Text';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { DownloadAppStore } from '@site/src/icons';
+import googlePlayImage from '@site/static/img/GooglePlay.png';
 
-import customStyles from "./customStyles.module.css";
+import customStyles from './customStyles.module.css';
 
 export default function FooterLayout({ style, links, logo, copyright }) {
   const { siteConfig } = useDocusaurusContext();
@@ -14,15 +14,15 @@ export default function FooterLayout({ style, links, logo, copyright }) {
     siteConfig.customFields;
   return (
     <footer
-      className={clsx("footer", customStyles.footer, {
-        "footer--dark": style === "dark",
+      className={clsx('footer', customStyles.footer, {
+        'footer--dark': style === 'dark',
       })}
     >
       <div className="container content">
         <div className={customStyles.footerLayout}>
           <Spacer variant="sm" />
-          <div className={clsx("col", customStyles.logoContainer)}>{logo}</div>
-          <div className={clsx("col col--12", customStyles.footerLinks)}>
+          <div className={clsx('col', customStyles.logoContainer)}>{logo}</div>
+          <div className={clsx('col col--12', customStyles.footerLinks)}>
             {links}
             <div className={customStyles.btns}>
               <Text
@@ -60,7 +60,7 @@ export default function FooterLayout({ style, links, logo, copyright }) {
       {copyright && (
         <div
           className={clsx([
-            "footer__bottom text--center ",
+            'footer__bottom text--center ',
             customStyles.footerCopyWrite,
           ])}
         >

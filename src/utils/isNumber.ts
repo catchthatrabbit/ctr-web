@@ -4,13 +4,13 @@
  * @returns A boolean value.
  */
 export const isNumberString = (value: string): boolean => {
-  if (typeof value !== "string") return false;
+  if (typeof value !== 'string') return false;
 
   let result = true;
   let isMayBeFloat = false;
 
   for (const ch of value) {
-    if (ch === "." && !isMayBeFloat) {
+    if (ch === '.' && !isMayBeFloat) {
       isMayBeFloat = true;
       continue;
     }

@@ -6,16 +6,14 @@
   font-weight: var(--bold-font-weight);
 }
 
-
-
 .navbarItem:hover {
   color: var(--ifm-color-primary);
 }
 
-.startMiningLink{
+.startMiningLink {
   color: var(--ifm-color-primary);
   font-size: var(--subheading-font-size-desktop);
-  background-color: #062A1C;
+  background-color: #062a1c;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,30 +21,26 @@
   padding: var(--space-xxs);
 }
 
-.activeNavStartMiningItemLink:before{
+.activeNavStartMiningItemLink:before {
   border-bottom: 1px solid var(--ifm-color-primary);
 }
 
-.activeNavItemLink{
+.activeNavItemLink {
   position: relative;
 }
 
-
-
 .menuList {
-  display: flex
-  ;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-evenly;
-      height: 100%;
-      margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  margin-top: 50px;
 }
 
-.menuList li, .menuList li a{
+.menuList li,
+.menuList li a {
   width: 97%;
-  display: flex;    
+  display: flex;
   justify-content: center;
-} 
-
-
+}

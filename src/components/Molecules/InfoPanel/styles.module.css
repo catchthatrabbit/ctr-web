@@ -1,10 +1,14 @@
 .block {
-  background: linear-gradient(83.31deg, #1B1C1C 42.05%, rgba(22, 199, 132, 0.33) 358.63%);
+  background: linear-gradient(
+    83.31deg,
+    #1b1c1c 42.05%,
+    rgba(22, 199, 132, 0.33) 358.63%
+  );
   width: 49%;
   padding: var(--space-sm);
   border-radius: var(--ifm-global-radius);
 }
 
-.mobileBlock{
+.mobileBlock {
   width: 97%;
 }

@@ -1,9 +1,9 @@
-import React from "react";
-import { TextFormatOutputType } from "@site/src/utils/textFormat";
-import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
-import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
+import React from 'react';
+import { TextFormatOutputType } from '@site/src/utils/textFormat';
+import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IMapChart {
   infoItems: Array<{ title: string; value: TextFormatOutputType }>;

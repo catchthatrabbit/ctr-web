@@ -7,12 +7,12 @@
   border-radius: var(--ifm-global-radius);
 }
 
-@keyframes placeHolderShimmer{
+@keyframes placeHolderShimmer {
   0% {
-    background-position: -468px 0
+    background-position: -468px 0;
   }
   100% {
-    background-position: 468px 0
+    background-position: 468px 0;
   }
 }
 
@@ -23,7 +23,12 @@
   animation-name: placeHolderShimmer;
   animation-timing-function: linear;
   background: darkgray;
-  background: linear-gradient(to right, var(--gray-700) 10%, var(--ocean-blue)  18%, var(--gray-700) 33%);
+  background: linear-gradient(
+    to right,
+    var(--gray-700) 10%,
+    var(--ocean-blue) 18%,
+    var(--gray-700) 33%
+  );
   background-size: 2000px 104px;
   height: 100%;
   position: absolute;

@@ -1,9 +1,9 @@
-import React from "react";
-import { Text } from "@site/src/components/Atoms/Text";
-import clsx from "clsx";
-import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
+import React from 'react';
+import { Text } from '@site/src/components/Atoms/Text';
+import clsx from 'clsx';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IBoard {
   value: string;
@@ -26,14 +26,14 @@ const Board: React.FC<IBoard> = ({
   className = "",
   loaderComp = <Text variant="subheading">———</Text>,
   isLoading = false,
-  dir = "vert",
+  dir = 'vert',
   context,
 }) => {
   const { mobile } = useMediaQueries();
 
   const getTextProps = (type: "value" | "suffix" | "description") => {
     switch (type) {
-      case "value":
+      case 'value':
         return {
           children: value,
           variant: "heading" as const,
@@ -41,14 +41,14 @@ const Board: React.FC<IBoard> = ({
           color: "white" as const,
           type: "zephirum" as const,
         };
-      case "suffix":
+      case 'suffix':
         return {
           children: suffix,
           variant: "subheading" as const,
           weight: "normal" as const,
           color: "white" as const,
         };
-      case "description":
+      case 'description':
         return {
           children: description,
           variant: "subheading" as const,
@@ -62,15 +62,15 @@ const Board: React.FC<IBoard> = ({
   return (
     <div
       className={clsx(styles.boardContainer, className, {
-        [styles.boardContainerPayments]: context === "payments",
+        [styles.boardContainerPayments]: context === 'payments',
       })}
     >
       <div
         className={clsx(styles.content, {
-          [styles.boardClassNameHor]: dir === "hor",
-          [styles.boardClassNameColumn]: dir === "column",
-          [styles.boardClassNameColumnMobile]: dir === "column" && mobile,
-          [styles.boardTotal]: context === "payments",
+          [styles.boardClassNameHor]: dir === 'hor',
+          [styles.boardClassNameColumn]: dir === 'column',
+          [styles.boardClassNameColumnMobile]: dir === 'column' && mobile,
+          [styles.boardTotal]: context === 'payments',
         })}
       >
         <div className={clsx(styles.boardItem, styles.number)}>
@@ -79,7 +79,7 @@ const Board: React.FC<IBoard> = ({
             loaderComp
           ) : (
             <Text
-              {...getTextProps("value")}
+              {...getTextProps('value')}
               lineHeight="normalLineHeight"
               letterSpacing="letterSpacing"
               disableMobileStyles={true}
@@ -92,7 +92,7 @@ const Board: React.FC<IBoard> = ({
             </Text>
           )}
           <Text
-            {...getTextProps("suffix")}
+            {...getTextProps('suffix')}
             lineHeight="normalLineHeight"
             letterSpacing="letterSpacing"
             color="valueChartColor"
@@ -103,7 +103,7 @@ const Board: React.FC<IBoard> = ({
         </div>
         <div className={styles.boardTitle}>
           <Text
-            {...getTextProps("description")}
+            {...getTextProps('description')}
             lineHeight="normalLineHeight"
             letterSpacing="letterSpacing"
             disableMobileStyles

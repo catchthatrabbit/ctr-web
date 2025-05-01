@@ -1,10 +1,10 @@
-import React from "react";
-import clsx from "clsx";
-import Link from "@docusaurus/Link";
-import { useBaseUrlUtils } from "@docusaurus/useBaseUrl";
-import ThemedImage from "@theme/ThemedImage";
+import React from 'react';
+import clsx from 'clsx';
+import Link from '@docusaurus/Link';
+import { useBaseUrlUtils } from '@docusaurus/useBaseUrl';
+import ThemedImage from '@theme/ThemedImage';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 function LogoImage({ logo }) {
   const { withBaseUrl } = useBaseUrlUtils();
   const sources = {
@@ -13,7 +13,7 @@ function LogoImage({ logo }) {
   };
   return (
     <ThemedImage
-      className={clsx("footer__logo", logo.className)}
+      className={clsx('footer__logo', logo.className)}
       alt={logo.alt}
       sources={sources}
       width={logo.width}

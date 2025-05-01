@@ -1,17 +1,17 @@
 import React from 'react';
-import { Text } from "@site/src/components/Atoms/Text";
+import { Text } from '@site/src/components/Atoms/Text';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IMessage {
   text?: string;
-  type?: "warning" | "danger" | "info" | "success" | "secondary" | "primary";
+  type?: 'warning' | 'danger' | 'info' | 'success' | 'secondary' | 'primary';
   onClickCloseBtn?: () => void;
 }
 
 const Message = ({
-  text = "",
-  type = "primary",
+  text = '',
+  type = 'primary',
   onClickCloseBtn,
 }: IMessage) => {
   return (

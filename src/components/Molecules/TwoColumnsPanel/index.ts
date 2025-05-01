@@ -1,1 +1,1 @@
-export { default as TwoColumnsPanel } from "./TwoColumnsPanel";
+export { default as TwoColumnsPanel } from './TwoColumnsPanel';

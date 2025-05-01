@@ -6,12 +6,12 @@
 }
 
 .detailsRowLoadingSkeleton {
-  height: 3.2rem; 
+  height: 3.2rem;
   width: 100%;
 }
 
 .detailsRowContentLoadingSkeleton {
-  padding: calc(var(--space-md)/4) 20px calc(var(--space-xs)/2) 20px;
+  padding: calc(var(--space-md) / 4) 20px calc(var(--space-xs) / 2) 20px;
 }
 
 .detailsRow:nth-child(odd) {
@@ -19,7 +19,7 @@
 }
 
 .detailsTableCaption {
-  padding:var(--space-xs);
+  padding: var(--space-xs);
   border-right: 1px solid var(--dark-rgb-border);
   width: 50%;
 }

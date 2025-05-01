@@ -1,10 +1,10 @@
-import React from "react";
-import useControls from "../../Pages/Dashboard/controls";
-import { Text } from "../../Atoms/Text";
-import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
+import React from 'react';
+import useControls from '../../Pages/Dashboard/controls';
+import { Text } from '../../Atoms/Text';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 
-import clsx from "clsx";
-import styles from "./styles.module.css";
+import clsx from 'clsx';
+import styles from './styles.module.css';
 
 const StartPanel = () => {
   const { poolFee } = useControls();

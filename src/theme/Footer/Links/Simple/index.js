@@ -1,5 +1,5 @@
-import React from "react";
-import LinkItem from "@theme/Footer/LinkItem";
+import React from 'react';
+import LinkItem from '@theme/Footer/LinkItem';
 
 function SimpleLinkItem({ item }) {
   return item.html ? (

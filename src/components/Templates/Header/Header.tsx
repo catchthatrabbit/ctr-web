@@ -1,13 +1,13 @@
-import React from "react";
-import { Dropdown } from "@site/src/components/Atoms/Dropdown";
-import { Board } from "@site/src/components/Atoms/Board";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { IBan } from "@site/src/components/Molecules/IBan";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import React from 'react';
+import { Dropdown } from '@site/src/components/Atoms/Dropdown';
+import { Board } from '@site/src/components/Atoms/Board';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { IBan } from '@site/src/components/Molecules/IBan';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IHeader {
   items?: Array<{ label: string; value: string }>;
@@ -49,21 +49,21 @@ const Header = ({
   const { desktop } = useMediaQueries();
 
   const columnClass = clsx({
-    "flex-col--4": context === "blocks" || context === "payments",
-    "flex-col--6": context === "wallet",
-    "flex-col--12": context === "mobileWallet",
+    'flex-col--4': context === 'blocks' || context === 'payments',
+    'flex-col--6': context === 'wallet',
+    'flex-col--12': context === 'mobileWallet',
   });
   const renderDropdown = () => (
     <div
-      className={clsx("flex flex-column flex-column-center", columnClass, {
-        [styles.blocksDropdown]: context === "blocks",
+      className={clsx('flex flex-column flex-column-center', columnClass, {
+        [styles.blocksDropdown]: context === 'blocks',
       })}
     >
       <Dropdown
         isLoading={isLoading}
         defaultValue={defaultRegion}
         className={clsx(styles.boardDropdown, {
-          [styles.smallWidth]: context === "blocks" || context === "payments",
+          [styles.smallWidth]: context === 'blocks' || context === 'payments',
         })}
         items={items}
         onChange={onChangeRegion}
@@ -93,7 +93,7 @@ const Header = ({
       {pageTitleComponent}
       {layout.search && (
         <>
-          {context === "mobileWallet" ? null : <Spacer variant="xl" />}
+          {context === 'mobileWallet' ? null : <Spacer variant="xl" />}
           <div className="col col--12"></div>
         </>
       )}
@@ -102,15 +102,16 @@ const Header = ({
           {iban && <IBan iBan={iban} />}
           {desktop ? null : <Spacer variant="xxs" />}
 
-          {context === "blocks" && <Spacer variant="xl" />}
-          {context === "mobileWallet" && <Spacer variant="xs" />}
-          {context === "wallet" && <Spacer variant="sm" />}
+          {context === 'blocks' && <Spacer variant="xxl" />}
+          {context === 'payments' && <Spacer variant="xs" />}
+          {context === 'mobileWallet' && <Spacer variant="xs" />}
+          {context === 'wallet' && <Spacer variant="sm" />}
           <div
-            className={clsx("flex", {
-              [styles.blocksContainer]: context === "blocks",
-              [styles.paymentsContainer]: context === "payments",
-              [styles.mobileBlocksContainer]: context === "mobileWallet",
-              "xl-center-items": context === "wallet",
+            className={clsx('flex', {
+              [styles.blocksContainer]: context === 'blocks',
+              [styles.paymentsContainer]: context === 'payments',
+              [styles.mobileBlocksContainer]: context === 'mobileWallet',
+              'xl-center-items': context === 'wallet',
             })}
           >
             {renderDropdown()}
@@ -118,7 +119,7 @@ const Header = ({
           </div>
         </>
       )}
-      {context !== "payments" && desktop && <Spacer variant="xl" />}
+      {context !== 'payments' && desktop && <Spacer variant="xl" />}
 
       {layout.boards && (
         <>
@@ -127,7 +128,7 @@ const Header = ({
         </>
       )}
       {children}
-      {context !== "blocks" && context !== "payments" && desktop ? (
+      {context !== 'blocks' && context !== 'payments' && desktop ? (
         <Spacer variant="md" />
       ) : null}
     </>

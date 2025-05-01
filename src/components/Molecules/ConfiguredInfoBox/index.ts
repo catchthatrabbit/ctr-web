@@ -1,1 +1,1 @@
-export { default as ConfiguredInfoBox } from "./ConfiguredInfoBox";
+export { default as ConfiguredInfoBox } from './ConfiguredInfoBox';

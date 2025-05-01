@@ -14,13 +14,13 @@ import { IAnyPageAndWallet } from "../types";
 import { Header } from "@site/src/components/Templates/Header";
 import { StartMining } from "@site/src/components/Organisms/StartMining";
 
-import { Empty } from "@site/src/components/Atoms/Empty";
-import { Search } from "../../Molecules/Search";
-import styles from "./styles.module.css";
+import { Empty } from '@site/src/components/Atoms/Empty';
+import { Search } from '../../Molecules/Search';
+import styles from './styles.module.css';
 
-import MainPageSearch from "@site/src/components/Molecules/PictureTitles/MainPageSearch";
-import { StartPanel } from "../../Molecules/StartPanel";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import MainPageSearch from '@site/src/components/Molecules/PictureTitles/MainPageSearch';
+import { StartPanel } from '../../Molecules/StartPanel';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
 interface IDashboard extends IAnyPageAndWallet {}
 
@@ -49,9 +49,9 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
     <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
       <div
         className={clsx([
-          "grid",
+          'grid',
           styles.directionRtl,
-          mobile || tablet ? "xs-grid-col--12" : "xl-grid-template-columns",
+          mobile || tablet ? 'xs-grid-col--12' : 'xl-grid-template-columns',
         ])}
       >
         {mobile ? (
@@ -81,7 +81,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           <>
             <div
               className={clsx([
-                "xl-grid-col--6",
+                'xl-grid-col--6',
                 styles.mapChartLocationPlace,
                 styles.directionLtr,
               ])}
@@ -90,9 +90,9 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
             </div>
             <div
               className={clsx([
-                "xl-grid-col--6",
+                'xl-grid-col--6',
                 styles.directionLtr,
-                "text-left",
+                'text-left',
               ])}
             >
               <MainPageSearch flexStart={true} />
@@ -133,7 +133,8 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
   return (
     <>
       {renderMapChartSection()}
-      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xxxl" />}
+      <Spacer variant="xxxl" />
+      {desktop && <Spacer variant="xxl" />}
       <StartPanel />
       {desktop ? <Spacer variant="md" /> : null}
       <Header
@@ -155,7 +156,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
         hidePagination={false}
         isLoading={isLoadingAllRegionMaturedBlocks}
         data={convertMaturedResponseToRecentBlocksInfo(
-          AllRegionsMaturedBlocks || [],
+          AllRegionsMaturedBlocks || []
         )}
       />
       <Spacer variant="xxxl" />

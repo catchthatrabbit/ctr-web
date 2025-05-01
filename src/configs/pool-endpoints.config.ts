@@ -1,5 +1,5 @@
-import { DEFAULT_API_URL } from "@site/src/constants/links";
-import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
+import { DEFAULT_API_URL } from '@site/src/constants/links';
+import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 
 export const DE_API = DEFAULT_API_URL.DE;
 export const FI_API = DEFAULT_API_URL.FI;

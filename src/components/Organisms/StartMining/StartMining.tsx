@@ -1,9 +1,9 @@
-import React from "react";
-import StartMiningTitle from "@site/src/components/Molecules/PictureTitles/StartMiningTitle";
-import { Spacer } from "../../Atoms/Spacer";
-import Link from "@docusaurus/Link";
+import React from 'react';
+import StartMiningTitle from '@site/src/components/Molecules/PictureTitles/StartMiningTitle';
+import { Spacer } from '../../Atoms/Spacer';
+import Link from '@docusaurus/Link';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 const StartMining = () => {
   return (

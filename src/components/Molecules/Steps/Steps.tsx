@@ -1,15 +1,15 @@
-import React from "react";
-import styles from "./styles.module.css";
-import { Text } from "@site/src/components/Atoms/Text";
-import { Search } from "@site/src/components/Molecules/Search";
-import { Warning } from "@site/src/components/Atoms/Warning";
-import { DownloadPanel } from "@site/src/components/Molecules/DownloadPanel";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { OpenInNew } from "@site/src/icons";
-import Button from "@site/src/components/Atoms/Button/Button";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
-import { Link } from "react-router-dom";
-import clsx from "clsx";
+import React from 'react';
+import styles from './styles.module.css';
+import { Text } from '@site/src/components/Atoms/Text';
+import { Search } from '@site/src/components/Molecules/Search';
+import { Warning } from '@site/src/components/Atoms/Warning';
+import { DownloadPanel } from '@site/src/components/Molecules/DownloadPanel';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { OpenInNew } from '@site/src/icons';
+import Button from '@site/src/components/Atoms/Button/Button';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
+import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 
 interface Step {
   number: number;
@@ -33,25 +33,25 @@ interface StepsProps {
 const stepsData: Step[] = [
   {
     number: 1,
-    title: "Download CorePass",
-    text: "Download CorePass mobile app, wallet where you can securely store your rewards.",
-    link: "https://corepass.net/",
-    linkText: "Open Corepass site",
+    title: 'Download CorePass',
+    text: 'Download CorePass mobile app, wallet where you can securely store your rewards.',
+    link: 'https://corepass.net/',
+    linkText: 'Open Corepass site',
     image: true,
   },
   {
     number: 2,
-    title: "Download mining software",
-    text: "CoreMiner is a RandomY CPU mining worker - with CoreMiner you can mine every coin which relies on a RandomY Proof of Work.",
+    title: 'Download mining software',
+    text: 'CoreMiner is a RandomY CPU mining worker - with CoreMiner you can mine every coin which relies on a RandomY Proof of Work.',
     warning: true,
-    button: "Download CoreMiner",
-    buttonTitle: "CoreMiner for Linux",
-    link: "#",
-    linkText: "Auto-install script (docusaurus)",
+    button: 'Download CoreMiner',
+    buttonTitle: 'CoreMiner for Linux',
+    link: '#',
+    linkText: 'Auto-install script (docusaurus)',
   },
   {
     number: 3,
-    title: "Create configuration file",
+    title: 'Create configuration file',
     text: "It's time to configure the miner so that everything works as it should.",
     button: "Create config file",
     buttonLink: "/go-live",
@@ -60,8 +60,8 @@ const stepsData: Step[] = [
   },
   {
     number: 4,
-    title: "View your dashboard",
-    text: "When it’s all ready, all you need to do is view your rewards and stats at the dashboard. Type your address below.",
+    title: 'View your dashboard',
+    text: 'When it’s all ready, all you need to do is view your rewards and stats at the dashboard. Type your address below.',
     showSearch: true,
   },
 ];
@@ -80,7 +80,7 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
     <div className={`flex ${styles.buttonLinkContainer}`}>
       {step.button && (
         <>
-          {step.buttonTitle && <Spacer variant={desktop ? "lg" : "sm"} />}
+          {step.buttonTitle && <Spacer variant={desktop ? 'lg' : 'sm'} />}
           <div className={styles.button}>
             {step.buttonTitle && (
               <Text
@@ -123,7 +123,7 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
         {step.button && (
           <Spacer
             variant={
-              step.buttonTitle ? (mobile ? "sm" : "xl") : mobile ? "sm" : "lg"
+              step.buttonTitle ? (mobile ? 'sm' : 'xl') : mobile ? 'sm' : 'lg'
             }
           />
         )}
@@ -139,7 +139,7 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
             size="regular"
             color="primary"
             weight="bold"
-            style={{ marginLeft: "8px" }}
+            style={{ marginLeft: '8px' }}
             disableMobileStyles
           >
             {step.linkText}
@@ -156,27 +156,27 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
         <div
           key={step.number}
           className={`flex flex-column ${styles.step} ${
-            mobile ? styles.mobileStep : ""
-          } ${index === stepsData.length - 1 ? styles.lastStep : ""}`}
+            mobile ? styles.mobileStep : ''
+          } ${index === stepsData.length - 1 ? styles.lastStep : ''}`}
         >
           <h2 className={clsx(styles.title, { [styles.mobileTitle]: mobile })}>
             {step.number}.&nbsp;&nbsp;{step.title}
           </h2>
           <div className={styles.stepsMargin}>
             <Text
-              variant={desktop ? "heading3" : "body"}
+              variant={desktop ? 'heading3' : 'body'}
               weight="normal"
               color="white"
               style={{
-                lineHeight: "var(--large-line-height)",
-                paddingRight: "15px",
+                lineHeight: 'var(--large-line-height)',
+                paddingRight: '15px',
               }}
             >
               {step.text}
             </Text>
             {step.warning &&
               renderWarning(
-                "In case you do not own a Linux device, we recommend using the Linux virtual operating system.",
+                'In case you do not own a Linux device, we recommend using the Linux virtual operating system.'
               )}
             {step.link && step.linkText && renderButtonAndLink(step)}
           </div>

@@ -1,7 +1,7 @@
-import React from "react";
-import PictureTitle from "@site/src/components/Atoms/PictureTitle/PictureTitle";
-import { HeadDown } from "@site/src/icons";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import React from 'react';
+import PictureTitle from '@site/src/components/Atoms/PictureTitle/PictureTitle';
+import { HeadDown } from '@site/src/icons';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
 const CreateConfigTitle = () => {
   const { mobile } = useMediaQueries();
@@ -10,7 +10,7 @@ const CreateConfigTitle = () => {
     fontFamily: "Exo",
     textAlign: "center" as const,
 
-    ...(mobile && { fontSize: "var(--large-font-size)" }),
+    ...(mobile && { fontSize: 'var(--large-font-size)' }),
   };
   return (
     <PictureTitle

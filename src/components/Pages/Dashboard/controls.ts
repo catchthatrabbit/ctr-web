@@ -1,14 +1,14 @@
-import { useMemo } from "react";
-import usePageControls from "@site/src/hooks/usePageControls";
-import useRadialBarChartData from "./hooks/useRadialBarChartData";
-import { useFetchAllRegionsMaturedBlocks } from "@site/src/hooks/useBlocks";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { useMemo } from 'react';
+import usePageControls from '@site/src/hooks/usePageControls';
+import useRadialBarChartData from './hooks/useRadialBarChartData';
+import { useFetchAllRegionsMaturedBlocks } from '@site/src/hooks/useBlocks';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {
   AS_START_MINING_POOL_LOCATION,
   EU_START_MINING_POOL_LOCATION,
   BR_START_MINING_POOL_LOCATION,
-} from "@site/src/configs/start-minings.config";
-import { IDataTable } from "@site/src/components/Atoms/DataTable/types";
+} from '@site/src/configs/start-minings.config';
+import { IDataTable } from '@site/src/components/Atoms/DataTable/types';
 import {
   POOLS_API_CONFIG_TYPE,
   URLS_CONFIG_TYPE,
@@ -19,7 +19,7 @@ const useControls = () => {
   const { siteConfig } = useDocusaurusContext();
 
   const { infoBoxMapData, isLoadingMapChart, poolFee } = usePageControls({
-    defaultRegion: "DE",
+    defaultRegion: 'DE',
     includeInfoBox: true,
   });
   const {
@@ -43,34 +43,34 @@ const useControls = () => {
   const dataTableColumns = useMemo(
     () => [
       {
-        value: "height",
-        label: "Height",
+        value: 'height',
+        label: 'Height',
         isPrimary: true,
         href: urlsConfigs.BLOCK_DETAILS_URL,
       },
-      { value: "type", label: "Type" },
-      { value: "minedOn", label: "Found at" },
+      { value: 'type', label: 'Type' },
+      { value: 'minedOn', label: 'Found at' },
       {
         canBeCopied: true,
-        value: "blockHash",
-        label: "Block hash",
+        value: 'blockHash',
+        label: 'Block hash',
         isPrimary: true,
         href: urlsConfigs.BLOCK_DETAILS_URL,
       },
-      { value: "reward", label: "Reward" },
-      { value: "variance", label: "Variance" },
+      { value: 'reward', label: 'Reward' },
+      { value: 'variance', label: 'Variance' },
     ],
-    [urlsConfigs.BLOCK_DETAILS_URL],
-  ) as IDataTable["columns"];
+    [urlsConfigs.BLOCK_DETAILS_URL]
+  ) as IDataTable['columns'];
 
   const SloganPrimary: string = String(siteConfig.customFields.SLOGAN_PRIMARY);
   const SloganSecondary: string = String(
     siteConfig.customFields.SLOGAN_SECONDARY,
   );
   const effectsShowLocation: boolean =
-    siteConfig.customFields.EFFECTS_SHOW_LOCATIONS === "true";
+    siteConfig.customFields.EFFECTS_SHOW_LOCATIONS === 'true';
   const effectsShowActionIcons: boolean =
-    siteConfig.customFields.EFFECTS_SHOW_ACTION_ICONS === "true";
+    siteConfig.customFields.EFFECTS_SHOW_ACTION_ICONS === 'true';
 
   return {
     radialChartData,

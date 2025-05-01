@@ -4,14 +4,13 @@
 }
 
 .step {
-  padding: 0.4rem 0; 
+  padding: 0.4rem 0;
   width: 65%;
   border-bottom: 1px solid #292929;
   margin-bottom: var(--space-sm);
-
 }
 
-.stepsMargin{
+.stepsMargin {
   margin-left: 2rem;
 }
 
@@ -29,7 +28,7 @@
 .title {
   margin: 0 0 0.6rem 0;
   font-size: var(--medium-font-size);
-  font-weight: var( --semi-bold-font-weight);
+  font-weight: var(--semi-bold-font-weight);
 }
 
 .mobileTitle {
@@ -39,8 +38,6 @@
 .text {
   margin: 0 0 0.6rem 0;
 }
-
-
 
 .linkSteps {
   align-items: center;
@@ -64,7 +61,7 @@
 }
 
 .lastStep::after {
-  content: "";
+  content: '';
   display: block;
   width: 100vw;
   height: 1px;
@@ -86,11 +83,11 @@
     bottom: 0px;
     top: 20rem;
   }
-  .title{
+  .title {
     margin-bottom: 0.5rem;
   }
 
-  .stepsMargin{
+  .stepsMargin {
     margin-left: 1.7rem;
   }
 }

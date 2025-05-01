@@ -16,13 +16,13 @@ export type POOLS_API_CONFIG_TYPE = Record<
 export type POOLS_LIST = Record<
   "DE" | "FI" | "SG" | "HK" | "BR" | "JP",
   Record<
-    | "DESCRIPTION"
-    | "NAME"
-    | "SERVER"
-    | "PORT"
-    | "USERNAME"
-    | "WORKER_NAME"
-    | "PASSWORD",
+    | 'DESCRIPTION'
+    | 'NAME'
+    | 'SERVER'
+    | 'PORT'
+    | 'USERNAME'
+    | 'WORKER_NAME'
+    | 'PASSWORD',
     string
   >
 >;

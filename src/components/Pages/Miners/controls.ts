@@ -45,14 +45,14 @@ const useControls = ({
 
   const minerList = useMemo(
     () => convertMinerResponse2MinerList(fetchedMinerList as MINERS_RESPONSE),
-    [fetchedMinerList],
+    [fetchedMinerList]
   );
 
   const dataTableColumns = useMemo(
     () => [
       {
-        value: "id",
-        label: "Miner",
+        value: 'id',
+        label: 'Miner',
         canBeCopied: true,
         isPrimary: true,
         fn: (walletAddress: string) => {
@@ -60,10 +60,10 @@ const useControls = ({
           push(`/coreid/${walletAddress}/${selectedPool}`);
         },
       },
-      { value: "hr", label: "Hashrate" },
-      { value: "lastBeat", label: "Last beat" },
+      { value: 'hr', label: 'Hashrate' },
+      { value: 'lastBeat', label: 'Last beat' },
     ],
-    [push, setWalletAddress, selectedPool],
+    [push, setWalletAddress, selectedPool]
   );
 
   return {

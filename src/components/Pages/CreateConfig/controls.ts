@@ -15,7 +15,7 @@ const useControls = ({
   const mapChartData = useMapChartData();
 
   const convertWorkerName = (
-    str: string,
+    str: string
   ): { href: string | null; caption: string } => {
     if (!str) return {} as { href: string; caption: string };
 

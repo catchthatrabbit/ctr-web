@@ -19,9 +19,9 @@
   direction: ltr;
 }
 
-.horizontalLine{
+.horizontalLine {
   height: 1px;
-  background:  #1F1F1F;
+  background: #1f1f1f;
   width: 100vw;
   position: relative;
   left: 50%;

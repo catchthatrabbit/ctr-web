@@ -1,22 +1,22 @@
-import React from "react";
-import { Text } from "@site/src/components/Atoms/Text";
-import clsx from "clsx";
-import { HTMLAttributes } from "react";
+import React from 'react';
+import { Text } from '@site/src/components/Atoms/Text';
+import clsx from 'clsx';
+import { HTMLAttributes } from 'react';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
   href?: string;
-  size?: "small" | "medium" | "large";
+  size?: 'small' | 'medium' | 'large';
   full?: boolean;
   icon?: React.ReactNode;
   value: string;
   backgroundColor?: string;
   textColor?: string;
   customWidth?: string;
-  weight?: "medium";
-  context?: "config" | "wallet";
+  weight?: 'medium';
+  context?: 'config' | 'wallet';
 }
 
 const Button = ({
@@ -24,12 +24,12 @@ const Button = ({
   icon,
   value,
   full = false,
-  size = "large",
+  size = 'large',
   className,
   backgroundColor,
-  textColor = "black",
+  textColor = 'black',
   customWidth,
-  weight = "normal",
+  weight = 'normal',
   context,
   ...restProps
 }: IButtonProps) => {
@@ -47,15 +47,15 @@ const Button = ({
         styles[size],
         styles.full && full,
         className,
-        { [styles.configButton]: context === "config" },
-        { [styles.mobileWalletButton]: context === "wallet" },
+        { [styles.configButton]: context === 'config' },
+        { [styles.mobileWalletButton]: context === 'wallet' }
       )}
       style={buttonStyle}
       {...restProps}
     >
       {icon && <div className={styles.buttonIcon}>{icon}</div>}
       <Text
-        variant={size === "large" ? "body" : "smallBody"}
+        variant={size === 'large' ? 'body' : 'smallBody'}
         color={textColor}
         weight={weight}
         lineHeight="normalLineHeight"

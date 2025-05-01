@@ -1,8 +1,8 @@
-import React from "react";
-import { Panel } from "../Panel";
-import clsx from "clsx";
+import React from 'react';
+import { Panel } from '../Panel';
+import clsx from 'clsx';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface ILoadingSkeleton {
   loadingPlaceholder?: React.ReactNode;

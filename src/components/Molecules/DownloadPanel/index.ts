@@ -1,1 +1,1 @@
-export { default as DownloadPanel } from "./DownloadPanel";
+export { default as DownloadPanel } from './DownloadPanel';

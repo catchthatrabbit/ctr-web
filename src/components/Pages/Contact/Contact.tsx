@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { ContactTitle } from "@site/src/components/Molecules/PictureTitles";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { EmailPanel } from "@site/src/components/Molecules/EmailPanel";
-import useControls from "./controls";
-import { Text } from "@site/src/components/Atoms/Text";
-import { Dropdown } from "@site/src/components/Atoms/Dropdown";
-import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
-import usePageControls from "@site/src/hooks/usePageControls";
+import React, { useState, useEffect } from 'react';
+import { ContactTitle } from '@site/src/components/Molecules/PictureTitles';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { EmailPanel } from '@site/src/components/Molecules/EmailPanel';
+import useControls from './controls';
+import { Text } from '@site/src/components/Atoms/Text';
+import { Dropdown } from '@site/src/components/Atoms/Dropdown';
+import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
+import usePageControls from '@site/src/hooks/usePageControls';
 
-import clsx from "clsx";
-import styles from "./styles.module.css";
+import clsx from 'clsx';
+import styles from './styles.module.css';
 
 const Contact = () => {
   const {
@@ -25,38 +25,38 @@ const Contact = () => {
   } = useControls();
 
   const { mobile, tablet, desktop } = useMediaQueries();
-  const [selectedTitle, setSelectedTitle] = useState("Support");
-  const [message, setMessage] = useState("");
-  const [mailtoLink, setMailtoLink] = useState("");
+  const [selectedTitle, setSelectedTitle] = useState('Support');
+  const [message, setMessage] = useState('');
+  const [mailtoLink, setMailtoLink] = useState('');
 
   const emailPanels = [
     {
-      title: "Support",
+      title: 'Support',
       emailAddress: maintainersSupportEmail,
       text: maintainersSupportDescription,
     },
     {
-      title: "Security",
+      title: 'Security',
       emailAddress: maintainersSecurityEmail,
       text: maintainersSecurityDescription,
     },
     {
-      title: "Commercial",
+      title: 'Commercial',
       emailAddress: maintainersCommercialEmail,
       text: maintainersCommercialDescription,
     },
   ];
   useEffect(() => {
     const selectedEmailPanel = emailPanels.find(
-      (panel) => panel.title === selectedTitle,
+      (panel) => panel.title === selectedTitle
     );
     if (selectedEmailPanel) {
       const emailAddress = selectedEmailPanel.emailAddress;
 
       setMailtoLink(
         `mailto:${emailAddress}?subject=Web%20contact&body=${encodeURIComponent(
-          message,
-        )}`,
+          message
+        )}`
       );
     }
   }, [selectedTitle, message]);
@@ -66,7 +66,7 @@ const Contact = () => {
   };
 
   const handleTextareaChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>,
+    event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     setMessage(event.target.value);
   };
@@ -81,14 +81,15 @@ const Contact = () => {
           />
         </>
       )}
-      {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="xs" />}
+      <Spacer variant={desktop ? 'xxxxl' : 'xxxl'} />
+      {mobile && <Spacer variant="xs" />}
       <ContactTitle />
-      {desktop ? <Spacer variant="xs" /> : null}
-      <Spacer variant="md" />
-      <div className={clsx("row", styles.contactContainer)}>
-        <div className={clsx("col col--6", styles.leftContainer)}>
+      {desktop ? <Spacer variant="sm" /> : null}
+      {desktop ? <Spacer variant="md" /> : <Spacer variant="xs" />}
+      <div className={clsx('row', styles.contactContainer)}>
+        <div className={clsx('col col--6', styles.leftContainer)}>
           <Text
-            variant={desktop ? "smallBody" : "body"}
+            variant={desktop ? 'smallBody' : 'body'}
             weight="normal"
             color="subheadingColor"
           >
@@ -105,7 +106,7 @@ const Contact = () => {
           />
           <Spacer variant="md" />
           <Text
-            variant={desktop ? "smallBody" : "body"}
+            variant={desktop ? 'smallBody' : 'body'}
             weight="normal"
             color="subheadingColor"
           >
@@ -133,7 +134,7 @@ const Contact = () => {
 
         <div className={styles.rightContainer}>
           <Text
-            variant={desktop ? "smallBody" : "body"}
+            variant={desktop ? 'smallBody' : 'body'}
             weight="normal"
             color="subheadingColor"
           >

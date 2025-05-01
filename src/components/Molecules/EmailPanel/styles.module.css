@@ -32,7 +32,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .block{
+  .block {
     padding: var(--space-sm);
   }
 }

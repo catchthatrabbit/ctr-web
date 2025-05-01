@@ -1,8 +1,8 @@
-import { POOL_NAME_ENUM } from "@site/src/enums/poolName.enum";
-import { AxiosInstance } from "../api";
-import { GET_ALL_PROPS, STATS_CHARTS_RESPONSE, STATS_RESPONSE } from "./types";
-import { MATURED_RESPONSE } from "../blocks/types";
-import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
+import { POOL_NAME_ENUM } from '@site/src/enums/poolName.enum';
+import { AxiosInstance } from '../api';
+import { GET_ALL_PROPS, STATS_CHARTS_RESPONSE, STATS_RESPONSE } from './types';
+import { MATURED_RESPONSE } from '../blocks/types';
+import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
 
 const generateAllApiInstances = ({
   urls,
@@ -49,14 +49,14 @@ const concatApiPath = (url: string, apiPath: string) => {
 export const getAllStats = ({ urls, apiPath }: GET_ALL_PROPS) => {
   const allApi = generateAllApiInstances({ urls, apiPath });
   return Object.keys(allApi.instances).map((key) =>
-    allApi.instances[key].getInstance().get("/stats"),
+    allApi.instances[key].getInstance().get('/stats')
   ) as Array<Promise<{ data: STATS_RESPONSE }>>;
 };
 
 export const getAllStatsCharts = ({ urls, apiPath }: GET_ALL_PROPS) => {
   const allApi = generateAllApiInstances({ urls, apiPath });
   return Object.keys(allApi.instances).map((key) =>
-    allApi.instances[key].getInstance().get("/stats/chart"),
+    allApi.instances[key].getInstance().get('/stats/chart')
   ) as Array<Promise<{ data: STATS_CHARTS_RESPONSE }>>;
 };
 
@@ -67,6 +67,6 @@ export const getAllRegionsMaturedBlocks = ({ urls, apiPath }: GET_ALL_PROPS) => 
   return Object.keys(allApi.instances).map((key) =>
     allApi.instances[key]
       .getInstance()
-      .get(`/matured_blocks?limit=${limit}&offset=${offset}`),
+      .get(`/matured_blocks?limit=${limit}&offset=${offset}`)
   ) as Array<Promise<{ data: MATURED_RESPONSE }>>;
 };

@@ -1,5 +1,5 @@
-import useIsBrowser from "@docusaurus/useIsBrowser";
-import { useEffect, useMemo, useState } from "react";
+import useIsBrowser from '@docusaurus/useIsBrowser';
+import { useEffect, useMemo, useState } from 'react';
 
 function useMediaQuery(query: string) {
   const isBrowser = useIsBrowser();
@@ -22,10 +22,10 @@ function useMediaQuery(query: string) {
     // Set the initial state
     setMatch(mediaQuery.matches);
 
-    mediaQuery.addEventListener("change", onChange);
+    mediaQuery.addEventListener('change', onChange);
 
     return () => {
-      mediaQuery.removeEventListener("change", onChange);
+      mediaQuery.removeEventListener('change', onChange);
     };
   }, [mediaQuery, query]);
 

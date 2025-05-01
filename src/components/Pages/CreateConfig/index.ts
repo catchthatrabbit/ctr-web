@@ -1,1 +1,1 @@
-export { default as CreateConfig } from "./CreateConfig";
+export { default as CreateConfig } from './CreateConfig';

@@ -1,10 +1,10 @@
-import { useContext, useEffect } from "react";
-import { MessageContext } from "@site/src/components/Providers/Message/MessageProvider";
+import { useContext, useEffect } from 'react';
+import { MessageContext } from '@site/src/components/Providers/Message/MessageProvider';
 import {
   toast,
   ToastOptions as ReactToastifyOptions,
   CloseButtonProps,
-} from "react-toastify";
+} from 'react-toastify';
 
 interface ToastOptions extends ReactToastifyOptions {
   className?: string;
@@ -14,7 +14,7 @@ interface ToastOptions extends ReactToastifyOptions {
     | boolean
     | ((props: CloseButtonProps) => React.ReactNode)
     | React.ReactElement<CloseButtonProps>;
-  theme?: "light" | "dark" | "colored";
+  theme?: 'light' | 'dark' | 'colored';
 }
 
 const useMessage = (customToastOptions?: ToastOptions) => {
@@ -23,24 +23,24 @@ const useMessage = (customToastOptions?: ToastOptions) => {
   useEffect(() => {
     if (message?.type && message?.text) {
       const defaultToastOptions: ToastOptions = {
-        theme: "dark",
+        theme: 'dark',
       };
       const toastOptions = { ...defaultToastOptions, ...customToastOptions };
 
       switch (message.type) {
-        case "error":
+        case 'error':
           toast.error(message.text, toastOptions);
           break;
-        case "info":
+        case 'info':
           toast.info(message.text, toastOptions);
           break;
-        case "success":
+        case 'success':
           toast.success(message.text, toastOptions);
           break;
-        case "warn":
+        case 'warn':
           toast.warn(message.text, toastOptions);
           break;
-        case "warning":
+        case 'warning':
           toast.warning(message.text, toastOptions);
           break;
         default:

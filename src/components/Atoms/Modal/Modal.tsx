@@ -1,7 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Text } from "../Text";
-import styles from "./styles.module.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Text } from '../Text';
+import styles from './styles.module.css';
 
 interface IModalProps {
   isOpen: boolean;
@@ -33,7 +33,7 @@ const Modal: React.FC<IModalProps> = ({ isOpen, onClose, children }) => {
         {children}
       </div>
     </div>,
-    document.body,
+    document.body
   );
 };
 

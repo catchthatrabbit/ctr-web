@@ -1,6 +1,6 @@
-import { POOL_NAME_ENUM } from "@site/src/enums/poolName.enum";
-import { useFetchSettings } from "@site/src/hooks/useSettings";
-import { useFetchStats } from "@site/src/hooks/useStats";
+import { POOL_NAME_ENUM } from '@site/src/enums/poolName.enum';
+import { useFetchSettings } from '@site/src/hooks/useSettings';
+import { useFetchStats } from '@site/src/hooks/useStats';
 import {
   aggregateNumbers,
   convertPoolChartDataToMapChartInfoBox,

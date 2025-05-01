@@ -1,4 +1,4 @@
-import { TIME_UNITS } from "@site/src/constants/time";
+import { TIME_UNITS } from '@site/src/constants/time';
 
 /**
  * Given a date string, return a string that says how long ago that date was
@@ -9,7 +9,7 @@ import { TIME_UNITS } from "@site/src/constants/time";
 export const ageCalculation = (date: string, short = false) => {
   const seconds = (Date.now() - Date.parse(date)) / TIME_UNITS.MILLISECOND;
 
-  let result = "";
+  let result = '';
   for (const interval of TIME_UNITS.INTERVALS) {
     if (seconds / interval.unitInSeconds > 1) {
       result = `${Math.floor(seconds / interval.unitInSeconds)} ${interval.getUnit(short)} ago`;

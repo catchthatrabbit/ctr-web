@@ -1,5 +1,4 @@
 .searchButton {
-  
   cursor: pointer;
   user-select: none;
   border: none;
@@ -23,7 +22,7 @@
 
 .searchButtonMobile {
   font-size: var(--small-font-size);
-  padding:0.8rem;
+  padding: 0.8rem;
   transform: translateY(0%);
 }
 
@@ -34,11 +33,9 @@
   height: 100%;
 }
 
-
 .searchInputMobile {
   width: 100%;
 }
-
 
 .search {
   flex-direction: column;
@@ -106,14 +103,14 @@
   width: 100%;
   align-content: center;
   flex-direction: column;
-  margin-left: 2rem;
+  margin-left: 1rem;
 }
 
 .searchStartMining .searchContainer {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: stretch;
-  width: 100%;
+  width: 96%;
   gap: 0;
 }
 
@@ -138,16 +135,16 @@
   background-color: var(--ifm-guide-btn-color);
   color: var(--ifm-color-primary);
   border-radius: var(--ifm-global-radius);
-  flex-shrink: 0; 
+  flex-shrink: 0;
   position: relative;
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   justify-content: center;
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  height: auto; 
-  box-sizing: border-box; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  box-sizing: border-box;
 }
 
 .searchStartMining .searchButton:hover {
@@ -221,17 +218,19 @@
 }
 
 @media screen and (max-width: 768px) {
-  .searchInput, .searchWallet .searchInput {
+  .searchInput,
+  .searchWallet .searchInput {
     padding: 1rem 5rem 1rem 2.6rem;
   }
-  .searchStartMining .searchContainer, .searchWallet .searchContainer{
+  .searchStartMining .searchContainer,
+  .searchWallet .searchContainer {
     width: 100%;
-    flex-direction: column ;
+    flex-direction: column;
   }
 
-  .searchStartMining .searchIconWrapper, .searchWallet .searchIconWrapper{
+  .searchStartMining .searchIconWrapper,
+  .searchWallet .searchIconWrapper {
     top: 24%;
-
   }
   .searchStartMining .searchWallet {
     margin-top: 0.3rem;
@@ -243,12 +242,12 @@
     transform: none;
   }
 
-  .searchContainer, .searchStartMining {
- 
+  .searchContainer,
+  .searchStartMining {
     margin-left: 0;
   }
 
-  .searchStartMining{
+  .searchStartMining {
     width: 100%;
   }
 
@@ -259,7 +258,6 @@
 
   .searchWallet .searchButton {
     position: relative;
-  
   }
 }
 
@@ -271,11 +269,10 @@
 }
 
 @media screen and (min-width: 769px) {
-  
   .searchButton {
     top: 50%;
   }
-  
+
   .searchWallet .searchButton,
   .searchStartMining .searchButton,
   .searchPayments .searchButton {
@@ -285,6 +282,4 @@
     left: 0.5rem;
     padding: 1rem 1.5rem;
   }
-
-  
 }

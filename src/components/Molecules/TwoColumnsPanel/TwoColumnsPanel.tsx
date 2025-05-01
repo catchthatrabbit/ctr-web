@@ -6,7 +6,7 @@ import LoadingSkeleton from "./LoadingSkeleton";
 import { Empty } from "../../Atoms/Empty";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IDetailsTable {
   isLoading?: boolean;
@@ -56,7 +56,7 @@ const TwoColumnsPanel = ({
           <Text
             weight="bold"
             componentType="div"
-            variant={mobile ? "smallBody" : "subheading"}
+            variant={mobile ? 'smallBody' : 'subheading'}
             color="white"
             className={clsx(styles.detailsTableCaption)}
           >
@@ -65,7 +65,7 @@ const TwoColumnsPanel = ({
           <Text
             weight="bold"
             componentType="div"
-            variant={mobile ? "smallBody" : "subheading"}
+            variant={mobile ? 'smallBody' : 'subheading'}
             type="value"
             color="white"
             className={clsx(styles.detailsTableValue)}

@@ -9,8 +9,8 @@ const Routes = () =>
     null,
     React.createElement(Route, {
       exact: true,
-      path: "/wallet-overview/:walletAddress",
-      component: WalletOverviewPage
+      path: '/wallet-overview/:walletAddress',
+      component: WalletOverviewPage,
     }),
     React.createElement(Route, {
       exact: true,

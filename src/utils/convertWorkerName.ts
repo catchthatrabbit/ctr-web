@@ -4,7 +4,7 @@
  * @returns {Object} An object containing href (URL) and caption (display text)
  */
 export const convertWorkerName = (
-  str: string,
+  str: string
 ): { href: string | null; caption: string } => {
   if (!str) return {} as { href: string; caption: string };
 
@@ -69,10 +69,14 @@ export const constructWorkerName = (
   }
 
   // Convert username to lowercase and ensure it only contains valid characters
-  const sanitizedUsername = username ? username.toLowerCase().replace(/[^a-z0-9_]/g, '') : '';
+  const sanitizedUsername = username
+    ? username.toLowerCase().replace(/[^a-z0-9_]/g, '')
+    : '';
 
   // Convert domain parts to lowercase and replace dots with underscores
-  const sanitizedDomain = domain.map(part => part.toLowerCase().replace(/\./g, '_'));
+  const sanitizedDomain = domain.map((part) =>
+    part.toLowerCase().replace(/\./g, '_')
+  );
 
   // Construct the base name with underscore prefix and domain parts
   // If sanitizedUsername is empty, use double underscore to maintain format

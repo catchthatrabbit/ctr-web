@@ -1,5 +1,5 @@
-import { STANDARD_REGIONS_API_KEYS } from "../Api/types";
-import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
+import { STANDARD_REGIONS_API_KEYS } from '../Api/types';
+import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
 
 /**
  * Constructs an API URL based on region and pool configuration
@@ -11,7 +11,7 @@ import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
 export const customPoolAndApiUrlSwitch = (
   region: STANDARD_REGIONS_API_KEYS,
   poolUrl: POOLS_API_CONFIG_TYPE,
-  apiPath?: string,
+  apiPath?: string
 ): string => {
   let resultUrl;
   switch (region) {

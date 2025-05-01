@@ -1,13 +1,13 @@
 /* eslint-disable import/no-unresolved */
-import React from "react";
-import { useNavbarMobileSidebar } from "@docusaurus/theme-common/internal";
-import { translate } from "@docusaurus/Translate";
-import IconClose from "@theme/Icon/Close";
-import clsx from "clsx";
+import React from 'react';
+import { useNavbarMobileSidebar } from '@docusaurus/theme-common/internal';
+import { translate } from '@docusaurus/Translate';
+import IconClose from '@theme/Icon/Close';
+import clsx from 'clsx';
 
-import CustomNavButtonsPlaceholder from "./CustomNavButtonsPlaceholder";
+import CustomNavButtonsPlaceholder from './CustomNavButtonsPlaceholder';
 
-import customStyles from "./customStyles.module.css";
+import customStyles from './customStyles.module.css';
 
 function CloseButton() {
   const mobileSidebar = useNavbarMobileSidebar();
@@ -15,9 +15,9 @@ function CloseButton() {
     <button
       type="button"
       aria-label={translate({
-        id: "theme.docs.sidebar.closeSidebarButtonAriaLabel",
-        message: "Close navigation bar",
-        description: "The ARIA label for close button of mobile sidebar",
+        id: 'theme.docs.sidebar.closeSidebarButtonAriaLabel',
+        message: 'Close navigation bar',
+        description: 'The ARIA label for close button of mobile sidebar',
       })}
       className="clean-btn navbar-sidebar__close"
       onClick={() => mobileSidebar.toggle()}
@@ -30,8 +30,8 @@ export default function NavbarMobileSidebarHeader() {
   return (
     <div
       className={clsx([
-        "content",
-        "navbar-sidebar__brand",
+        'content',
+        'navbar-sidebar__brand',
         customStyles.mobileSeparatorLine,
       ])}
     >

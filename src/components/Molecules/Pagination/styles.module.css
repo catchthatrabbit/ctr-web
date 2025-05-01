@@ -13,7 +13,6 @@
   background-color: transparent;
 }
 
-
 .pagination {
   display: flex;
   justify-content: flex-end;
@@ -27,20 +26,15 @@
   flex-wrap: wrap;
 }
 
-
-
 @media (max-width: 1268px) {
   .paginationContainer ul {
     justify-content: center;
-        flex-wrap: nowrap;
+    flex-wrap: nowrap;
   }
 }
 
-
-
 .paginationWidthDesktop {
   width: 50%;
-
 }
 
 .paginationWidthLaptop {
@@ -74,7 +68,7 @@
   justify-content: center;
   width: auto; /* Allow the width to be determined by content or parent */
   height: auto; /* Allow the height to be determined by content or parent */
-  box-sizing: border-box; 
+  box-sizing: border-box;
   background-color: var(--blue-rgb-650);
   font-size: var(--small-font-size);
   position: relative;
@@ -86,13 +80,11 @@
   display: inline-block;
   padding-inline: calc(var(--space-sm) / 2);
   padding-block: calc(var(--space-xs) / 4);
-  
 }
-
 
 .selectedPage {
   background-color: transparent;
- 
+
   color: var(--ifm-color-emphasis-0);
 }
 
@@ -105,7 +97,8 @@
   padding-block: calc(var(--space-xs) / 4);
 }
 
-.paginationNext, .paginationPrevious {
+.paginationNext,
+.paginationPrevious {
   color: var(--ifm-color-primary);
   padding-inline: calc(var(--space-md) / 2);
   padding-block: calc(var(--space-xs) / 4);
@@ -125,28 +118,25 @@
   cursor: pointer;
 }
 
- .paginationNext {
+.paginationNext {
   border-top-right-radius: calc(var(--ifm-global-radius) / 2);
   border-bottom-right-radius: calc(var(--ifm-global-radius) / 2);
 }
 
 .paginationPrevious {
   border-top-left-radius: calc(var(--ifm-global-radius) / 2);
-  border-bottom-left-radius:  calc(var(--ifm-global-radius) / 2);
-
+  border-bottom-left-radius: calc(var(--ifm-global-radius) / 2);
 }
-
-
 
 @media screen and (max-width: 768px) {
-  .paginationNext, .paginationPrevious, .paginationItem:not(.selectedPage) a, .selectedPage{
-    padding: var(--space-xxs) var(--space-xs)
+  .paginationNext,
+  .paginationPrevious,
+  .paginationItem:not(.selectedPage) a,
+  .selectedPage {
+    padding: var(--space-xxs) var(--space-xs);
   }
-   
+
   .containerMobile .selectedPage a {
-    padding:0;
+    padding: 0;
   }
-  
 }
-
-

@@ -14,18 +14,16 @@
   align-items: center;
 }
 
-
 .buttonIcon {
   vertical-align: baseline;
   padding-right: calc(var(--space-xs) / 2);
-  svg path{
+  svg path {
     fill: var(--ifm-color-primary);
   }
-
 }
 
 .buttonIcon:hover {
-  svg path{
+  svg path {
     fill: var(--ifm-search-btn-hover);
   }
 }
@@ -40,7 +38,7 @@
 }
 
 .full {
-  width: 100%
+  width: 100%;
 }
 
 .button:focus {
@@ -81,16 +79,16 @@
 }
 
 .configButton {
-  width: auto
+  width: calc((3 / 12) * 100%);
+  padding: var(--space-xs) var(--space-sm);
 }
 
 .mobileWalletButton {
   padding: calc(var(--space-xs) / 2) var(--space-sm);
-
 }
 
 @media screen and (max-width: 768px) {
-  .configButton{
+  .configButton {
     width: 100%;
   }
 }

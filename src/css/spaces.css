@@ -14,11 +14,11 @@
   --content-offset-tablet: 32px;
   --content-offset-mobile: 20px;
 
-  --margin-xs: .05rem;
-  --margin-sm: .1rem;
-  --margin-md: .3rem;
-  --margin-lg: .6rem;
-  --margin-xl: .8rem;
+  --margin-xs: 0.05rem;
+  --margin-sm: 0.1rem;
+  --margin-md: 0.3rem;
+  --margin-lg: 0.6rem;
+  --margin-xl: 0.8rem;
   --margin-xxl: 1rem;
   --margin-xxxl: 1.2rem;
 }

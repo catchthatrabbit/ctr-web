@@ -16,15 +16,11 @@ import { DropdownIconDown } from "@site/src/icons";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 import ICAN from "@blockchainhub/ican";
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IStartMining extends IAnyPageAndWallet {}
 
-const StartMining = ({
-  defaultRegion,
-  onSetWalletAddress,
-  onChangeRegion,
-}: IStartMining) => {
+const StartMining = ({ onSetWalletAddress }: IStartMining) => {
   const { startMiningPoolConfigurations, infoBoxMapData, isLoadingMapChart } =
     useControls();
 
@@ -44,8 +40,8 @@ const StartMining = ({
           />
         </>
       )}
-      <Spacer variant="sm" />
-      {desktop ? <Spacer variant="md" /> : null}
+      <Spacer variant={desktop ? 'xxxl' : 'xxxl'} />
+      <Spacer variant={desktop ? 'xl' : 'sm'} />
 
       <span id="start"></span>
       <GetStartedTitle />
@@ -53,7 +49,7 @@ const StartMining = ({
       {desktop ? <Spacer variant="xs" /> : null}
 
       <div
-        className={`flex ${styles.infoPanel} ${mobile ? `flex-column ${styles.mobileInfoPanel}` : ""}`}
+        className={`flex ${styles.infoPanel} ${mobile ? `flex-column ${styles.mobileInfoPanel}` : ''}`}
       >
         <InfoPanel
           title="How to Start Mining"
@@ -79,28 +75,28 @@ const StartMining = ({
         onSetWalletAddress={onSetWalletAddress}
         steps={[
           {
-            title: "Step 1",
-            text: "Download mining software compatible with your hardware.",
+            title: 'Step 1',
+            text: 'Download mining software compatible with your hardware.',
             number: 1,
           },
           {
-            title: "Step 2",
-            text: "Configure your wallet address in the mining software.",
+            title: 'Step 2',
+            text: 'Configure your wallet address in the mining software.',
             number: 2,
           },
           {
-            title: "Step 3",
-            text: "Join a mining pool for consistent rewards.",
+            title: 'Step 3',
+            text: 'Join a mining pool for consistent rewards.',
             number: 3,
           },
           {
-            title: "Step 4",
-            text: "Start the mining process and monitor performance.",
+            title: 'Step 4',
+            text: 'Start the mining process and monitor performance.',
             number: 4,
           },
           {
-            title: "Step 5",
-            text: "Optimize your settings for maximum efficiency.",
+            title: 'Step 5',
+            text: 'Optimize your settings for maximum efficiency.',
             number: 5,
           },
         ]}
@@ -115,6 +111,7 @@ const StartMining = ({
       <div className={`flex flex-column ${styles.poolContainer}`}>
         {Object.keys(REGIONS).map((REGION_KEY, index) => (
           <div key={index} className={styles.poolTable}>
+            <Spacer variant="xs" />
             <div
               className={`flex ${styles.dropdownHeader}`}
               onClick={() => toggleRegion(REGION_KEY)}
@@ -122,14 +119,14 @@ const StartMining = ({
               {startMiningPoolConfigurations[REGION_KEY][`NAME`]}
               <DropdownIconDown
                 style={{
-                  width: "24px",
-                  height: "24px",
-                  color: "pink",
+                  width: '24px',
+                  height: '24px',
+                  color: 'pink',
                   transform:
                     openRegion === REGION_KEY
-                      ? "rotate(180deg)"
-                      : "rotate(0deg)",
-                  transition: "transform 0.2s ease",
+                      ? 'rotate(180deg)'
+                      : 'rotate(0deg)',
+                  transition: 'transform 0.2s ease',
                 }}
               />
             </div>
@@ -142,40 +139,40 @@ const StartMining = ({
                 context="startMining"
                 data={[
                   {
-                    label: "Server",
+                    label: 'Server',
                     value: startMiningPoolConfigurations[REGION_KEY][`SERVER`],
                   },
                   {
-                    label: "Port",
+                    label: 'Port',
                     value: startMiningPoolConfigurations[REGION_KEY][`PORT`],
                   },
                   {
-                    label: "Username",
+                    label: 'Username',
                     value:
                       startMiningPoolConfigurations[REGION_KEY][`USERNAME`],
                   },
                   {
-                    label: "Worker name",
+                    label: 'Worker name',
                     value:
                       startMiningPoolConfigurations[REGION_KEY][`WORKER_NAME`],
                   },
                   {
-                    label: "Password",
+                    label: 'Password',
                     value:
                       startMiningPoolConfigurations[REGION_KEY][`PASSWORD`],
                   },
                   {
-                    label: "Payouts Address",
+                    label: 'Payouts Address',
                     value: startMiningPoolConfigurations[REGION_KEY][`PAYOUT`]
                       ? ICAN.printFormat(
-                          startMiningPoolConfigurations[REGION_KEY][`PAYOUT`],
+                          startMiningPoolConfigurations[REGION_KEY][`PAYOUT`]
                         )
-                      : "",
+                      : '',
                   },
                 ]}
               />
             )}
-            <Spacer variant="lg" />
+            <Spacer variant="md" />
           </div>
         ))}
       </div>

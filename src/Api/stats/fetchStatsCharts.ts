@@ -1,7 +1,7 @@
-import { GET_ALL_PROPS, STATS_CHARTS_RESPONSE } from "./types";
-import { filterAllSettled } from "@site/src/utils/filterAllSettled";
-import { getAllStatsCharts } from "./utils";
-import { AxiosError } from "axios";
+import { GET_ALL_PROPS, STATS_CHARTS_RESPONSE } from './types';
+import { filterAllSettled } from '@site/src/utils/filterAllSettled';
+import { getAllStatsCharts } from './utils';
+import { AxiosError } from 'axios';
 
 export const fetchStatsCharts = async ({ urls, apiPath }: GET_ALL_PROPS) => {
   try {

@@ -1,6 +1,6 @@
-import { useMemo } from "react";
-import usePageControls from "@site/src/hooks/usePageControls";
-import { tablesConfig } from "@site/src/configs";
+import { useMemo } from 'react';
+import usePageControls from '@site/src/hooks/usePageControls';
+import { tablesConfig } from '@site/src/configs';
 
 const useControls = () => {
   // Use shared logic from usePageControls
@@ -17,7 +17,7 @@ const useControls = () => {
     infoBoxMapData,
     isLoadingMapChart,
   } = usePageControls({
-    defaultRegion: "DE",
+    defaultRegion: 'DE',
     fetchMultipleData: true,
     includeInfoBox: true,
   });
@@ -26,24 +26,24 @@ const useControls = () => {
   const tableColumns = useMemo(
     () => [
       {
-        value: "height",
-        label: "Height",
+        value: 'height',
+        label: 'Height',
         isPrimary: true,
-        href: "/block-details",
+        href: '/block-details',
       },
-      { value: "type", label: "Type" },
-      { value: "minedOn", label: "Found at" },
+      { value: 'type', label: 'Type' },
+      { value: 'minedOn', label: 'Found at' },
       {
-        value: "blockHash",
-        label: "Block hash",
+        value: 'blockHash',
+        label: 'Block hash',
         canBeCopied: true,
         isPrimary: true,
-        href: "/block-details",
+        href: '/block-details',
       },
-      { value: "reward", label: "Reward" },
-      { value: "variance", label: "Variance" },
+      { value: 'reward', label: 'Reward' },
+      { value: 'variance', label: 'Variance' },
     ],
-    [],
+    []
   );
 
   return {

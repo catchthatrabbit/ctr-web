@@ -1,6 +1,6 @@
 .kbd {
   color: var(--ifm-color-primary);
-  border: 1px solid  var(--gray-700);
+  border: 1px solid var(--gray-700);
   border-radius: var(--ifm--ifm-global-radius);
   padding: var(--space-xs);
   white-space: break-spaces;

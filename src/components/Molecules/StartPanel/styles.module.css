@@ -15,7 +15,11 @@
   bottom: 0;
   border-radius: var(--ifm-global-radius);
   padding: 1px;
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.05) 50%);
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.05) 50%
+  );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
@@ -57,6 +61,8 @@
   border-radius: var(--ifm-global-radius);
   cursor: pointer;
   font-size: var(--body-small-font-size);
+  z-index: 1000;
+  position: relative;
 }
 
 .startButton:hover {
@@ -65,7 +71,7 @@
 }
 
 .startButton:hover {
-  background-color: var(--ifm-guide-btn-hover)
+  background-color: var(--ifm-guide-btn-hover);
 }
 
 .startButtonMobile {

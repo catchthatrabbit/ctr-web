@@ -8,12 +8,14 @@
 export const summarizedText = (
   text: string,
   fromChar: number,
-  toChar: number,
+  toChar: number
 ): string => {
-  if (!text) return "";
+  if (!text) return '';
 
-  const fromText = text.startsWith('0x') ? '0×'+text.slice(2, fromChar).toUpperCase() : text.slice(0, fromChar).toUpperCase();
-  const toText = text.slice(toChar, text.split("").length).toUpperCase();
+  const fromText = text.startsWith('0x')
+    ? '0×' + text.slice(2, fromChar).toUpperCase()
+    : text.slice(0, fromChar).toUpperCase();
+  const toText = text.slice(toChar, text.split('').length).toUpperCase();
 
   return `${fromText}…${toText}`;
 };

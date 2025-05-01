@@ -1,5 +1,5 @@
-import BREAK_POINTS from "./queries";
-import useMediaQuery from "./useMediaQuery";
+import BREAK_POINTS from './queries';
+import useMediaQuery from './useMediaQuery';
 
 function useMediaQueries() {
   const desktopQuery = useMediaQuery(`(min-width: ${BREAK_POINTS.DESKTOP}px)`);
