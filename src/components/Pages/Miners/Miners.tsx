@@ -73,6 +73,7 @@ const Miners = ({
           onSearch={onSetWalletAddress}
           overrideLabel={true}
           selectedPool={selectedPool}
+          showPool={true}
         />
       }
       context={mobile ? 'mobileWallet' : 'payments'}

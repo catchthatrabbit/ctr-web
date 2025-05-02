@@ -11,12 +11,14 @@ import { Text } from '../../Atoms/Text';
 import SearchIcon from '@site/src/icons/SearchIcon';
 import { useHistory } from 'react-router-dom';
 import styles from './styles.module.css';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 interface ISearch extends InputHTMLAttributes<HTMLInputElement> {
   onSearch?: (searchQuery: string) => void;
   context?: 'wallet' | 'main' | 'startMining' | 'payments';
   selectedPool?: string;
   overrideLabel?: boolean;
+  showPool?: boolean;
 }
 
 const Search = forwardRef<HTMLInputElement, ISearch>(
@@ -26,6 +28,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
       context = 'main',
       selectedPool = 'de',
       overrideLabel = false,
+      showPool = false,
       ...restProps
     },
     ref
@@ -34,6 +37,12 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
     const { mobile } = useMediaQueries();
     const [walletAddress, setWalletAddress] = useState('');
     const history = useHistory();
+    const { siteConfig } = useDocusaurusContext();
+    const poolsList = siteConfig.customFields.POOLS_LIST;
+    const poolsArray = Object.entries(poolsList).map(([id, pool]) => ({
+      id,
+      ...pool,
+    }));
 
     const handleSearch = () => {
       const address = inputRef.current?.value || '';
@@ -48,11 +57,18 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
       handleSearch();
     };
 
+    const findPoolInfo = () => {
+      return poolsArray.find(pool => pool.id === selectedPool.toUpperCase());
+    };
+
+    const poolInfo = findPoolInfo();
+    const poolName = poolInfo ? poolInfo.NAME : '';
+
     const placeholderTextMap: Record<string, string> = {
-      wallet: 'Wallet Address',
-      startMining: 'Wallet Address',
-      payments: 'Wallet Address',
-      main: 'Search Miners',
+      wallet: showPool ? 'Wallet Address' + ' on ' + poolName : 'Wallet Address',
+      startMining: showPool ? 'Wallet Address' + ' on ' + poolName : 'Wallet Address',
+      payments: showPool ? 'Wallet Address' + ' on ' + poolName : 'Wallet Address',
+      main: showPool ? 'Search Miners' + ' on ' + poolName : 'Search Miners',
     };
 
     const labelTextMap: Record<string, string> = {
