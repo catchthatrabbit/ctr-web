@@ -392,7 +392,7 @@ const Calculator: React.FC = () => {
             </Text>
           </div>
           <div className={styles.resultItem}>
-            <span style={{ marginRight: '0.5em' }}>Reward in XCB:</span>
+            <span style={{ marginRight: '0.5em' }}>Reward in XCB (brutto):</span>
             <Text variant="body" weight="semiBold" style={{ color: getValueColor(result.rewardXCB) }}>
               {`${new ExchNumberFormat(undefined, {
                 style: 'currency',
@@ -400,6 +400,11 @@ const Calculator: React.FC = () => {
               }).format(result.rewardXCB)}`}
             </Text>
           </div>
+          {result.profit < 0 && (
+            <div className={styles.resultItem}>
+                Not profitable? <a href="https://app.ping.exchange/trade?market=xcb_usdc" target="_blank" rel="noopener" style={{ color: 'var(--ifm-color-primary)' }}>Buy XCB instead</a>
+            </div>
+          )}
           <div className={styles.resultItem}>
             <Text variant="smallBody" color="subheadingColor">
               {`XCB Price: ${new ExchNumberFormat(undefined, {
