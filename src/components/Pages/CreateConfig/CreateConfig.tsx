@@ -41,7 +41,7 @@ const CreateConfig = ({
   const { siteConfig } = useDocusaurusContext();
 
   const hashratePriceOptions = [
-    { value: "max13", label: "MAX series: ~13 kh/s — 100€ per month" },
+    { value: "max13", label: "CTR MAX Series: ~13 kh/s — 100€ per month" },
   ];
 
   const [profitability, setProfitability] = useState<number>(0);

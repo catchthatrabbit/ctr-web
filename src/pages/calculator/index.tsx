@@ -1,11 +1,11 @@
 import React from 'react';
 import { ConfiguredLayout } from '@site/src/components/Templates/ConfiguredLayout';
-import { CreateConfig } from '@site/src/components/Pages/CreateConfig';
+import { Calculator } from '@site/src/components/Pages/Calculator';
 
 const CalculatorPage = () => {
   return (
     <ConfiguredLayout>
-      <CreateConfig />
+      <Calculator />
     </ConfiguredLayout>
   );
 };

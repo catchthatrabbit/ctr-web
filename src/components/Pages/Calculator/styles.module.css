@@ -1,0 +1,50 @@
+.calculatorRoot {
+  background-color: var(--ifm-background-color);
+  border-radius: var(--ifm-global-radius);
+  padding: 2.5em 2em;
+  max-width: var(--ifm-container-width);
+  margin: 2em auto;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+}
+
+.calculatorForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+.input {
+  width: 100%;
+  padding: 0.6em 1em;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-200, #444);
+  background-color: rgba(32, 33, 33, 1);
+  font-size: 1em;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 0.6em 1em;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-200, #444);
+  background-color: rgba(32, 33, 33, 1);
+  color: var(--ifm-font-color-base, #fff);
+  font-size: 1em;
+  margin-top: 0.2em;
+  cursor: context-menu;
+}
+
+.resultBox {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1.2em 1em;
+  margin-top: 1.2em;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
