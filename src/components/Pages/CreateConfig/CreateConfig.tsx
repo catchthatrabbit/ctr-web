@@ -206,7 +206,6 @@ const CreateConfig = ({
             value={minerName.value}
             onChange={handleMinerNameChange}
             placeholder="Name of your worker"
-            ref={minerNameRef}
           />
           {!minerName.isValid && (
             <Text
@@ -235,7 +234,6 @@ const CreateConfig = ({
             value={minerName.value}
             onChange={handleMinerNameChange}
             placeholder="username"
-            ref={minerNameRef}
           />
           {!minerName.isValid && (
             <Text
@@ -258,7 +256,6 @@ const CreateConfig = ({
             value={typePortal.value}
             onChange={handleTypePortalChange}
             placeholder="coretalk.space"
-            ref={typePortalRef}
           />
           {!typePortal.isValid && (
             <Text
@@ -279,7 +276,6 @@ const CreateConfig = ({
           <InputText
             context="dark"
             value={uniqueId}
-            ref={workerIdRef}
             onChange={handleUniqueIdChange}
             placeholder="worker1"
           />
@@ -290,25 +286,18 @@ const CreateConfig = ({
   };
 
   const areFieldsValid = () => {
-    if (inputType === 'plain') {
-      const walletAddressValue = walletAddressRef.current?.value.trim() || '';
-      const minerNameValue = minerNameRef.current?.value.trim() || '';
-
-      return walletAddressValue !== '' && minerNameValue !== '';
-    } else if (inputType === 'fediverse') {
-      const walletAddressValue = walletAddressRef.current?.value.trim() || '';
-      const minerNameValue = minerNameRef.current?.value.trim() || '';
-      const typePortalValue = typePortalRef.current?.value.trim() || '';
-
-      const regex =
-        /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$/;
-      const isPortalValid = regex.test(typePortalValue);
-
+    if (inputType === "plain") {
       return (
-        walletAddressValue !== '' &&
-        minerNameValue !== '' &&
-        typePortalValue !== '' &&
-        isPortalValid
+        isWalletValid && minerName.isValid && walletAddress && minerName.value
+      );
+    } else if (inputType === "fediverse") {
+      return (
+        isWalletValid &&
+        minerName.isValid &&
+        typePortal.isValid &&
+        walletAddress &&
+        minerName.value &&
+        typePortal.value
       );
     }
     return false;
@@ -320,33 +309,17 @@ const CreateConfig = ({
       return;
     }
     setShowError(false);
-
-    const walletAddressFormat = walletAddressRef.current?.value
-      .replace(/\s+/g, '')
-      .toLowerCase();
-    let workerName = '';
-
-    if (inputType === 'plain') {
-      workerName = `_${minerNameRef.current?.value}` || '';
-    } else if (inputType === 'fediverse') {
-      const minerNameValue = minerNameRef.current?.value || '';
-      const typePortalValue = typePortalRef.current?.value || '';
-
-      const processedPortal = typePortalValue
-        .split('.')
-        .map((part, index) =>
-          index === 1 ? part.charAt(0).toUpperCase() + part.slice(1) : part
-        ) // Capitalize the TLD
-        .join('');
-
-      workerName = `_${minerNameValue}${processedPortal}`;
+    let walletAddressFormat = walletAddress.replace(/\s+/g, "").toLowerCase();
+    let workerName = "";
+    if (inputType === "plain") {
+      workerName = minerName.value;
+    } else if (inputType === "fediverse") {
+      workerName = constructWorkerName(
+        minerName.value,
+        [typePortal.value],
+        uniqueId ? uniqueId : undefined,
+      );
     }
-
-    const workerIdValue = workerIdRef.current?.value.trim() || '';
-    if (workerIdValue !== '') {
-      workerName = `${workerName}-${workerIdValue}`;
-    }
-
     const regionKey1 = Object.keys(startMiningPoolConfigurations).find(
       (key) =>
         startMiningPoolConfigurations[key]["DESCRIPTION"] === dropdownValue1?.label,
@@ -357,15 +330,15 @@ const CreateConfig = ({
     );
 
     const server1 =
-      regionKey1 && startMiningPoolConfigurations[regionKey1]['SERVER'];
+      regionKey1 && startMiningPoolConfigurations[regionKey1]["SERVER"];
     const port1 =
-      regionKey1 && startMiningPoolConfigurations[regionKey1]['PORT'];
+      regionKey1 && startMiningPoolConfigurations[regionKey1]["PORT"];
     const server2 =
-      regionKey2 && startMiningPoolConfigurations[regionKey2]['SERVER'];
+      regionKey2 && startMiningPoolConfigurations[regionKey2]["SERVER"];
     const port2 =
-      regionKey2 && startMiningPoolConfigurations[regionKey2]['PORT'];
+      regionKey2 && startMiningPoolConfigurations[regionKey2]["PORT"];
 
-    const configData: Record<string, string | undefined> = {
+    const configData = {
       wallet: walletAddressFormat,
       worker: workerName,
       [`server[1]`]: server1,
@@ -376,16 +349,17 @@ const CreateConfig = ({
 
     const configContent = Object.entries(configData)
       .map(([key, value]) => `${key}=${value}`)
-      .join('\n');
+      .join("\n");
 
-    const blob = new Blob([configContent], { type: 'text/plain' });
+    const blob = new Blob([configContent], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = 'pool.cfg';
+    a.download = "pool.cfg";
     a.click();
     URL.revokeObjectURL(url);
   };
+
   return (
     <>
       {(mobile || tablet) && (
@@ -418,7 +392,6 @@ const CreateConfig = ({
           <InputText
             context="dark"
             value={walletAddress}
-            ref={walletAddressRef}
             onChange={handleWalletAddressChange}
             className={styles.familyZephirum}
           />

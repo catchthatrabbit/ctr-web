@@ -56,7 +56,7 @@ const config: Config = {
         SERVER: "de.catchthatrabbit.com",
         PORT: "8008",
         WORKER_NAME:
-          'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)',
+          'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
         USERNAME: '<your wallet address>.<worker name>',
         PASSWORD: '<empty>',
         PAYOUT: 'cb11ca5aa7cf5ffa5ed333e962310b3922b48af68698',
@@ -67,7 +67,7 @@ const config: Config = {
         SERVER: "fi.catchthatrabbit.com",
         PORT: "8008",
         WORKER_NAME:
-          'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)',
+          'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
         USERNAME: '<your wallet address>.<worker name>',
         PASSWORD: '<empty>',
         PAYOUT: 'cb806ca47e07b803e598ea9bf7413355486723270f71',
@@ -78,7 +78,7 @@ const config: Config = {
         SERVER: "sg.catchthatrabbit.com",
         PORT: "8008",
         WORKER_NAME:
-          'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)',
+          'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
         USERNAME: '<your wallet address>.<worker name>',
         PASSWORD: '<empty>',
         PAYOUT: 'cb060ea54cce80fcb689f8824b238118cb5005572a36',
@@ -89,7 +89,7 @@ const config: Config = {
         SERVER: "hk.catchthatrabbit.com",
         PORT: "8008",
         WORKER_NAME:
-          'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)',
+          'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
         USERNAME: '<your wallet address>.<worker name>',
         PASSWORD: '<empty>',
         PAYOUT: 'cb6242d8b1903db52f99813f79fe4dff2b85fd7c1fdd',
@@ -100,7 +100,7 @@ const config: Config = {
         SERVER: "br.catchthatrabbit.com",
         PORT: "8008",
         WORKER_NAME:
-          'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)',
+          'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
         USERNAME: '<your wallet address>.<worker name>',
         PASSWORD: '<empty>',
         PAYOUT: 'cb532b4658c0077fe257c44fbd3ee89f8c85ce5c68e3',
@@ -111,7 +111,7 @@ const config: Config = {
         SERVER: "jp.catchthatrabbit.com",
         PORT: "8008",
         WORKER_NAME:
-          'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _usernameInstanceTld-id)',
+          'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
         USERNAME: '<your wallet address>.<worker name>',
         PASSWORD: '<empty>',
         PAYOUT: 'cb51bee89e80d6586642f29748054c1566df056472ec',
