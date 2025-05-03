@@ -496,9 +496,6 @@ const CreateConfig = ({
               {!desktop && <Spacer variant="sm" />}
               {!desktop && (
                 <Button
-                  backgroundColor="var(--ifm-color-primary)"
-                  textColor="var(--ifm-button-color)"
-                  weight="medium"
                   value="Download Config"
                   context="config"
                   onClick={handleDownloadConfig}
@@ -524,9 +521,6 @@ const CreateConfig = ({
               </div>
               {!desktop && (
                 <Button
-                  backgroundColor="var(--ifm-color-secondary)"
-                  textColor="var(--ifm-button-color)"
-                  weight="medium"
                   value="Order Machine and Pay Monthly"
                   context="config"
                   className={styles.fullButton}
@@ -537,18 +531,12 @@ const CreateConfig = ({
           {desktop && (
             <div className={styles.buttonContainer}>
               <Button
-                backgroundColor="var(--ifm-color-primary)"
-                textColor="var(--ifm-button-color)"
-                weight="medium"
                 value="Download Config"
                 context="config"
                 onClick={handleDownloadConfig}
                 className={styles.halfButton}
               />
               <Button
-                backgroundColor="var(--ifm-color-secondary)"
-                textColor="var(--ifm-button-color)"
-                weight="medium"
                 value="Order Machine and Pay Monthly"
                 context="config"
                 className={styles.halfButton}

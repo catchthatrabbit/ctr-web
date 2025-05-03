@@ -1,6 +1,7 @@
 .buttonColor {
   color: var(--white);
 }
+
 .buttonAlignment {
   margin-left: auto;
 }
@@ -12,11 +13,7 @@
 }
 
 .iconMenuCustomClose {
-  width: 10px;
-  height: 10px;
+  width: 24px;
+  height: 24px;
   color: #16c784;
-}
-
-.iconMenuCustom svg {
-  stroke-width: 5px;
 }

@@ -7,7 +7,6 @@ import { Text } from '@site/src/components/Atoms/Text';
 import { Dropdown } from '@site/src/components/Atoms/Dropdown';
 import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
 import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
-import usePageControls from '@site/src/hooks/usePageControls';
 
 import clsx from 'clsx';
 import styles from './styles.module.css';
@@ -54,9 +53,9 @@ const Contact = () => {
       const emailAddress = selectedEmailPanel.emailAddress;
 
       setMailtoLink(
-        `mailto:${emailAddress}?subject=Web%20contact&body=${encodeURIComponent(
-          message
-        )}`
+        `mailto:${emailAddress}?subject=${encodeURIComponent(
+          selectedTitle
+        )}&body=${encodeURIComponent(message)}`
       );
     }
   }, [selectedTitle, message]);
@@ -89,7 +88,7 @@ const Contact = () => {
       <div className={clsx('row', styles.contactContainer)}>
         <div className={clsx('col col--6', styles.leftContainer)}>
           <Text
-            variant={desktop ? 'smallBody' : 'body'}
+            variant="body"
             weight="normal"
             color="subheadingColor"
           >
@@ -106,23 +105,23 @@ const Contact = () => {
           />
           <Spacer variant="md" />
           <Text
-            variant={desktop ? 'smallBody' : 'body'}
+            variant="body"
             weight="normal"
             color="subheadingColor"
           >
-            Your message
+            Message
           </Text>
           <Spacer variant="xxs" />
           <textarea
             className={styles.textarea}
             value={message}
             onChange={handleTextareaChange}
-            placeholder="Write text here ..."
+            placeholder="Compose your message here…"
           />
           {desktop ? <Spacer variant="md" /> : <Spacer variant="sm" />}
-          <a href={mailtoLink} target="_blank" className={styles.linkButton}>
+          <a href={mailtoLink} target="_blank" className="button">
             <Text variant="body" color="black" weight="medium">
-              Send via email client
+              Send via Email Client
             </Text>
           </a>
         </div>
@@ -134,11 +133,11 @@ const Contact = () => {
 
         <div className={styles.rightContainer}>
           <Text
-            variant={desktop ? 'smallBody' : 'body'}
+            variant="body"
             weight="normal"
             color="subheadingColor"
           >
-            Contact informations
+            Contact Details
           </Text>
           <Spacer variant="xxs" />
           {emailPanels.map((panel, index) => (

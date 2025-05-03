@@ -13,9 +13,9 @@ interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode;
   value: string;
   backgroundColor?: string;
-  textColor?: string;
+  textColor?: "black" | "white" | "primary" | "secondary" | "summary" | "InsideChartColor" | "dashboardColor" | "valueChartColor" | "subheadingColor";
   customWidth?: string;
-  weight?: 'medium';
+  weight?: 'medium' | 'normal';
   context?: 'config' | 'wallet';
 }
 
@@ -43,7 +43,6 @@ const Button = ({
       onClick={onClick}
       className={clsx(
         styles.button,
-        styles.outline,
         styles[size],
         styles.full && full,
         className,

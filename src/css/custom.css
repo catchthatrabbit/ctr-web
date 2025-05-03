@@ -4,6 +4,7 @@
 @import url('grid.css');
 @import url('breakpoints.css');
 @import url('flex.css');
+@import url('buttons.css');
 
 body {
   overflow-x: hidden !important;
@@ -50,10 +51,6 @@ h3 {
   margin: 0px;
 }
 
-button {
-  cursor: pointer;
-}
-
 .content {
   margin: 0 auto;
 }
@@ -68,26 +65,6 @@ button {
 
 .remove-padding-inline {
   padding-inline: 0px;
-}
-
-.link-button {
-  cursor: pointer;
-
-  border-radius: 10px;
-  color: var(--black-800);
-  font-weight: var(--medium-font-weight);
-  padding: var(--space-xxs) var(--space-sm);
-  text-align: center;
-  white-space: nowrap;
-  border: 1px solid var(--blue-rgb-700);
-  background-color: var(--ifm-color-primary);
-}
-
-.link-button:hover {
-  border: 1px solid var(--gray-700);
-  background-color: var(--ifm-search-btn-hover);
-  color: var(--black-800);
-  text-decoration: none;
 }
 
 .mr-0 {

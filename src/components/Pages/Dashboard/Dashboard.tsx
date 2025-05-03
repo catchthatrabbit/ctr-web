@@ -106,13 +106,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 {SloganPrimary}
               </Text>
               <Spacer variant="xxs" />
-              <Text
-                color="subheadingColor"
-                variant="subheading1"
-                letterSpacing="letterSpacing"
-              >
-                {SloganSecondary}
-              </Text>
+              <cite className={styles.poolCite}>{SloganSecondary}</cite>
               <div className={styles.poolDescriptions}>
                 <span className={styles.poolDescriptionTitle}>XCB Pools:</span>
                 <Text variant="subheading" color="subheadingColor">

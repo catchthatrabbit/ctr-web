@@ -27,13 +27,8 @@ export default function NavbarMobilePrimaryMenu() {
           key={i}
           className={clsx(
             customStyles.navbarItem,
-            { [customStyles.startMiningLink]: item.href === '/start-mining' },
             {
               [customStyles.activeNavItemLink]: item.href === activatePageName,
-            },
-            {
-              [customStyles.activeNavStartMiningItemLink]:
-                '/start-mining' === activatePageName,
             },
             {
               [customStyles.navbarItemMobile]: mobile,

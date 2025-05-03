@@ -16,9 +16,11 @@ import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 
 import customStyles from './customStyles.module.css';
 import './custom.css';
+
 function useNavbarItems() {
   return useThemeConfig().navbar.items;
 }
+
 function NavbarItems({ items }) {
   const { activatePageName } = useNav(items);
 
@@ -37,18 +39,12 @@ ${JSON.stringify(item, null, 2)}`,
           }
         >
           <NavbarItem
-            className={clsx([
+            className={clsx(
+              'menuLink',
               {
-                [customStyles.activeNavStartMiningItemLink]:
-                  item.href === '/start-mining',
-                [customStyles.activeNavItemLink]:
-                  item.href === activatePageName,
-              },
-              {
-                [customStyles.navBarContainerMiningItem]:
-                  item.href === '/start-mining',
-              },
-            ])}
+                'active': item.href === activatePageName,
+              }
+            )}
             {...item}
           />
         </ErrorCauseBoundary>
@@ -56,17 +52,18 @@ ${JSON.stringify(item, null, 2)}`,
     </>
   );
 }
+
 function NavbarContentLayout({ left, right }) {
   const { desktop } = useMediaQueries();
   return (
     <div className={clsx('navbar__inner', {})}>
-      {' '}
       <div className={customStyles.grow} />
       {!desktop && <div className="navbar__items">{left}</div>}
       <div className="navbar__items navbar__items--right">{right}</div>
     </div>
   );
 }
+
 export default function NavbarContent() {
   const mobileSidebar = useNavbarMobileSidebar();
   const items = useNavbarItems();

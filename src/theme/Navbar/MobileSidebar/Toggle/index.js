@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavbarMobileSidebar } from '@docusaurus/theme-common/internal';
 import { translate } from '@docusaurus/Translate';
 import IconMenu from '@theme/Icon/Menu';
-import IconClose from '/img/closeIcon.svg';
+import IconClose from '/img/close-icon.svg';
 import clsx from 'clsx';
 
 import customStyles from './customStyles.module.css';

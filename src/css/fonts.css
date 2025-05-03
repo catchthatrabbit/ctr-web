@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('https://cdn.jsdelivr.net/gh/rastislavcore/zephirum/zephirum.css');
-
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Noto+Color+Emoji&display=swap'); /* it's for emodji in dropdown menu, "Noto Color Emoji" - font */
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Noto+Color+Emoji&display=swap');
 
 :root {
   --regular-font-family:

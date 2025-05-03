@@ -46,19 +46,19 @@ const StartPanel = () => {
         <div className={styles.buttonContainer}>
           <a
             href="/go-live"
-            className={styles.startButton}
+            className="button"
           >
             Launch Miner
           </a>
           <a
             href="/calculator"
-            className={styles.startButton}
+            className="button"
           >
             Profit Calculator
           </a>
           <a
             href="/start-mining"
-            className={styles.startButton}
+            className="button"
           >
             View Guide
           </a>

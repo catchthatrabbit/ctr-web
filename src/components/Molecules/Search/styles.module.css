@@ -6,12 +6,11 @@
   color: var(--black-800);
   background: var(--ifm-search-btn-color);
   transition: all 0.1s ease-in-out 0s;
-  position: absolute;
+  position: relative;
   font-family: var(--regular-font-family);
   font-size: var(--regular-font-size);
   font-weight: var(--medium-font-weight);
-  right: 0.5rem;
-  transform: translateY(-50%);
+  right: 7rem;
   padding: 1rem 1.5rem;
   z-index: 2;
 }

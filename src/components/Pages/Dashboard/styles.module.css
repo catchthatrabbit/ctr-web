@@ -32,6 +32,10 @@
   margin-right: 0.5em;
 }
 
+.poolCite {
+  font-size: var(--medium-font-size);
+}
+
 @media screen and (max-width: 768px){
   .horizontalLine{
       background: linear-gradient(to right, #1F1F1F 25%, #FFFFFF0D 75%);

@@ -28,7 +28,7 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
         return (
           <React.Fragment key={index}>
             <a
-              href={`mailto:${emailItem}?subject=Web%20contact`}
+              href={`mailto:${emailItem}`}
               target="_blank"
               className={styles.link}
               style={{ marginRight: index < emails.length - 1 ? '8px' : '0' }}
@@ -48,7 +48,7 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
               <>
                 <Spacer variant="xxs" />
                 <a
-                  href={`mailto:${email}?subject=Web%20contact`}
+                  href={`mailto:${email}`}
                   target="_blank"
                   className={styles.link}
                   style={{ marginRight: '8px' }}
@@ -70,7 +70,10 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
                       textToCopy={keyLink}
                       value="Copy GPG key"
                       toastText="GPG Key copied to clipboard"
-                      customStyles={{ padding: '0' }}
+                      customStyles={{
+                        padding: '0',
+                        backgroundColor: 'transparent',
+                      }}
                       icon={<CopyBent />}
                     />
                   </a>

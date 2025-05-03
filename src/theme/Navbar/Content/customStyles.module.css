@@ -30,11 +30,6 @@
   border-bottom: 1px solid var(--ifm-color-primary);
 }
 
-.navBarContainerLogo img {
-  width: 100%;
-  height: 35px;
-}
-
 .activeNavStartMiningItemLink:before {
   border-bottom: 1px solid var(--ifm-color-primary) !important;
 }

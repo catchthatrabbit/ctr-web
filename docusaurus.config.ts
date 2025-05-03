@@ -250,8 +250,8 @@ const config: Config = {
     navbar: {
       hideOnScroll: true,
       logo: {
-        alt: 'CTR LOGO',
-        src: 'img/newLogo.svg',
+        alt: 'Catch That Rabbit',
+        src: 'img/ctr-logo.svg',
       },
       items: [
         {
@@ -283,6 +283,7 @@ const config: Config = {
           href: '/start-mining',
           label: 'Start mining',
           position: 'right',
+          className: 'button',
         },
       ],
     },

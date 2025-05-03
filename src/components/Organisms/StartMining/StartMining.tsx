@@ -13,10 +13,10 @@ const StartMining = () => {
 
         <Spacer variant="md" />
         <div className={styles.buttonContainer}>
-          <Link to={"/start-mining"} className="link-button">
+          <Link to={"/start-mining"} className="button">
             Start mining
           </Link>
-          <Link to={"/go-live"} className="link-button">
+          <Link to={"/go-live"} className="button">
             Launch Miner
           </Link>
         </div>
