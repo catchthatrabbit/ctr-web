@@ -40,8 +40,7 @@ const StartMining = ({ onSetWalletAddress }: IStartMining) => {
           />
         </>
       )}
-      <Spacer variant={desktop ? 'xxxl' : 'xxxl'} />
-      <Spacer variant={desktop ? 'xl' : 'sm'} />
+      <Spacer variant={desktop ? 'xxl' : 'xl'} />
 
       <span id="start"></span>
       <GetStartedTitle />
@@ -53,16 +52,15 @@ const StartMining = ({ onSetWalletAddress }: IStartMining) => {
       >
         <InfoPanel
           title="How to Start Mining"
-          text="A step-by-step guide to help you get started."
+          text="Follow our comprehensive guide to begin your mining journey with CTR."
           link="#steps"
-          linkText="View Section"
+          linkText="Read Mining Guide"
         />
-        {mobile && <Spacer variant="xxs" />}
         <InfoPanel
-          title="Pools"
-          text="Explore all available geo-locations you can connect to."
+          title="Mining Pools"
+          text="Connect to our global network of mining pools for optimal performance."
           link="#pools"
-          linkText="View Section"
+          linkText="Explore Pools"
         />
       </div>
       {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="sm" />}

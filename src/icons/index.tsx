@@ -18,3 +18,4 @@ export { default as Cancel } from './Cancel';
 export { default as OpenInNew } from './OpenInNew';
 export { default as QR } from './QR';
 export { default as CopyBent } from './CopyBent';
+export { default as DownloadFile } from './DownloadFile';

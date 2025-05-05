@@ -35,19 +35,17 @@ const InfoPanel: React.FC<BlockProps> = ({ title, text, link, linkText }) => {
         variant="heading3"
         weight="semiBold"
         color="white"
-        style={{ marginBottom: '4px' }}
+        style={{ marginBottom: '0.5em' }}
       >
         {title}
       </Text>
-      <Text variant="body" color="subheadingColor">
+      <Text variant="body" color="subheadingColor" style={{ lineHeight: '1.3em' }}>
         {text}
       </Text>
-      {mobile && <Spacer variant="sm" />}
+      <Spacer variant="xs" />
 
       <a href={link} className={styles.link} onClick={handleLinkClick}>
-        <Text variant="smallBody" color="primary" weight="bold">
-          {linkText}
-        </Text>
+        {linkText}
       </a>
     </div>
   );

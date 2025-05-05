@@ -41,13 +41,23 @@ const IBan = ({ iBan = '', pool = 'de' }: IIBan) => {
           textToCopy={iBan}
           value="Copy Core ID"
           toastText="Core ID copied to clipboard"
-          context={mobile ? "wallet" : "config"}
+          context={mobile ? 'wallet' : 'config'}
+          customStyles={{
+            backgroundColor: 'transparent',
+            border: 'none',
+            width: 'auto',
+          }}
         />
         <CopyButton
           textToCopy={permalink}
           value="Copy Permalink"
           toastText="Permalink copied to clipboard"
           context={mobile ? 'wallet' : 'config'}
+          customStyles={{
+            backgroundColor: 'transparent',
+            border: 'none',
+            width: 'auto',
+          }}
         />
       </div>
     </>

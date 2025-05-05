@@ -30,6 +30,15 @@ interface IPayments {
   secondPool?: string;
 }
 
+interface CustomFields {
+  URLS: {
+    BUY_LINK: string;
+  };
+  API_ENDPOINTS: POOLS_API_CONFIG_TYPE;
+  API_PATH: string;
+  POOLS_LIST: Record<string, any>;
+}
+
 const CreateConfig = ({
   defaultRegion,
   onSetWalletAddress,
@@ -39,6 +48,9 @@ const CreateConfig = ({
   secondPool,
 }: IPayments) => {
   const { siteConfig } = useDocusaurusContext();
+  const customFields = siteConfig.customFields as unknown as CustomFields;
+  const buyLink = customFields.URLS.BUY_LINK;
+  console.log(buyLink);
 
   const hashratePriceOptions = [
     { value: "max13", label: "CTR MAX Series: ~13 kh/s — 100€ per month" },
@@ -370,8 +382,7 @@ const CreateConfig = ({
           />
         </>
       )}
-      <Spacer variant="xxxl" />
-      <Spacer variant={desktop ? 'xxl' : 'xxs'} />
+      <Spacer variant={desktop ? 'xxl' : 'xl'} />
 
       <CreateConfigTitle />
       {desktop ? <Spacer variant="xxl" /> : <Spacer variant="sm" />}
@@ -453,14 +464,8 @@ const CreateConfig = ({
             </div>
           </div>
           <div className={styles.viewPoolsLinkContainer}>
-            <Link to="/start-mining#pools">
-              <Text
-                variant="subheading"
-                color="primary"
-                type="value"
-              >
-                Mining Pools Overview
-              </Text>
+            <Link to="/start-mining#pools" style={{ color: 'var(--ifm-color-primary)' }}>
+              Mining Pools Overview
             </Link>
           </div>
           {mobile ? <Spacer variant="xs" /> : <Spacer variant="sm" />}
@@ -516,7 +521,7 @@ const CreateConfig = ({
                 </div>
                 <div>
                   <span><strong>Estimation:</strong> {profitability ? `$${profitability.toFixed(2)}` : "Calculating…"} @XCB {xcbPrice ? `$${xcbPrice.toFixed(4)}` : "Loading…"}</span>
-                  <span style={{ marginLeft: '0.8em', fontSize: '0.9em' }}>Tip: <a href="https://app.ping.exchange/trade?market=xcb_usdc" target="_blank" rel="noopener" className={styles.minerLink}>Buy more XCB</a> to raise the price globally.</span>
+                  <span style={{ marginLeft: '1em', fontSize: 'var(--small-font-size)' }}>Tip: <a href={buyLink} target="_blank" rel="noopener" className={styles.minerLink}>Buy more XCB</a> to raise the price globally.</span>
                 </div>
               </div>
               {!desktop && (

@@ -42,11 +42,17 @@
 .linkSteps {
   align-items: center;
   cursor: pointer;
+  padding-top: 0.6rem;
 }
 
 .link {
-  color: #007bff;
+  color: var(--ifm-color-primary);
+  font-size: var(--h3-font-size-desktop);
   text-decoration: none;
+}
+
+.linkText {
+  margin-left: 0.5rem;
 }
 
 .image {

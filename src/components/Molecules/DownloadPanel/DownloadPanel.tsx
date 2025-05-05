@@ -3,32 +3,40 @@ import { Text } from '@site/src/components/Atoms/Text';
 import { Spacer } from '@site/src/components/Atoms/Spacer';
 import { DownloadAppStore, QR } from '@site/src/icons';
 import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import clsx from 'clsx';
 
 import styles from './styles.module.css';
+
+interface CustomFields {
+  APP_STORE_URL: string;
+  GOOGLE_PLAY_URL: string;
+}
 
 const googlePlayImage = '/img/GooglePlay.png';
 
 const DownloadPanel: React.FC = () => {
   const { mobile, desktop } = useMediaQueries();
+  const { siteConfig } = useDocusaurusContext();
+  const { APP_STORE_URL, GOOGLE_PLAY_URL } = (siteConfig.customFields as unknown as CustomFields);
 
   const renderDownloadButtons = () => (
     <div className={styles.btns}>
       <a
-        href="https://apps.apple.com"
+        href={APP_STORE_URL}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener"
       >
         <DownloadAppStore />
       </a>
       <a
-        href="https://play.google.com/store"
+        href={GOOGLE_PLAY_URL}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener"
       >
         <img
           src={googlePlayImage}
-          alt="Download on Google Play"
+          alt="Google Play"
           className={clsx(styles.googlePlayImage, {
             [styles.googlePlayImageMobile]: mobile,
           })}
@@ -54,18 +62,20 @@ const DownloadPanel: React.FC = () => {
     >
       <div className={styles.content}>
         <Spacer variant="xxs" />
-        <Text
-          size={desktop ? 'large' : 'mediumSize'}
-          weight="semiBold"
-          color="white"
-          disableMobileStyles
-        >
-          Download now for free!
-        </Text>
-        {desktop ? <Spacer variant="xs" /> : <Spacer variant="xxs" />}
-        <Text variant="heading3" color="white" weight="bold">
-          Available worldwide.
-        </Text>
+        <div className={styles.textContainer}>
+          <Text
+            size={desktop ? 'large' : 'mediumSize'}
+            weight="semiBold"
+            color="white"
+            disableMobileStyles
+          >
+            Free download
+          </Text>
+          {desktop ? <Spacer variant="xs" /> : <Spacer variant="xxs" />}
+          <Text variant="heading3" color="white" weight="bold">
+            Available globally
+          </Text>
+        </div>
         <Spacer variant="md" />
         {renderDownloadButtons()}
         <Spacer variant="md" />

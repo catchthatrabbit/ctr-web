@@ -3,7 +3,11 @@
 }
 
 .infoPanel {
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.infoPanel > div {
+  max-width: var(--ifm-container-width-sm);
 }
 
 .mobileInfoPanel {

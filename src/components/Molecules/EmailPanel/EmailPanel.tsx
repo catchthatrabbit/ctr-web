@@ -4,8 +4,7 @@ import { Spacer } from '@site/src/components/Atoms/Spacer';
 import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 import clsx from 'clsx';
 import styles from './styles.module.css';
-import { CopyBent } from '@site/src/icons';
-import { CopyButton } from '@site/src/components/Molecules/CopyButton';
+import { DownloadFile } from '@site/src/icons';
 
 interface IEmailPanel {
   title?: string;
@@ -31,11 +30,8 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
               href={`mailto:${emailItem}`}
               target="_blank"
               className={styles.link}
-              style={{ marginRight: index < emails.length - 1 ? '8px' : '0' }}
             >
-              <Text variant="smallBody" color="primary" weight="bold">
-                {emailItem}
-              </Text>
+              {emailItem}
             </a>
           </React.Fragment>
         );
@@ -51,33 +47,21 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
                   href={`mailto:${email}`}
                   target="_blank"
                   className={styles.link}
-                  style={{ marginRight: '8px' }}
                 >
-                  <Text variant="smallBody" color="primary" weight="bold">
-                    {email}
-                  </Text>
+                  {email}
                 </a>
               </>
               {keyLink && (
-                <>
-                  <Spacer variant="sm" />
-                  <a
-                    href={keyLink}
-                    className={`${styles.link} ${styles.linkKey}`}
-                    download
-                  >
-                    <CopyButton
-                      textToCopy={keyLink}
-                      value="Copy GPG key"
-                      toastText="GPG Key copied to clipboard"
-                      customStyles={{
-                        padding: '0',
-                        backgroundColor: 'transparent',
-                      }}
-                      icon={<CopyBent />}
-                    />
-                  </a>
-                </>
+                <a
+                  href={keyLink}
+                  className={styles.downloadLink}
+                  rel="noopener noreferrer"
+                  download
+                  style={{ marginTop: '0.2em' }}
+                >
+                  <DownloadFile />
+                  Download GPG Key
+                </a>
               )}
             </div>
           </React.Fragment>
@@ -92,14 +76,14 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
         variant="heading3"
         weight="semiBold"
         color="white"
-        style={{ marginBottom: '4px' }}
+        style={{ marginBottom: '0.5em' }}
       >
         {title}
       </Text>
       <Text
         variant={desktop ? 'subheading' : 'body'}
         color="subheadingColor"
-        style={{ lineHeight: '24px' }}
+        style={{ lineHeight: '1.2em' }}
       >
         {text}
       </Text>

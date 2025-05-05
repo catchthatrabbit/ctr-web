@@ -48,6 +48,7 @@ const config: Config = {
     URLS: {
       TRANSACTION_DETAILS_URL: "https://blockindex.net/tx",
       BLOCK_DETAILS_URL: "https://blockindex.net/block",
+      BUY_LINK: "https://app.ping.exchange/trade?market=xcb_usdc",
     },
     POOLS_LIST: {
       DE: {
@@ -120,7 +121,7 @@ const config: Config = {
 
     MAINTAINERS_SUPPORT_EMAIL: 'support@catchthatrabbit.com',
     MAINTAINERS_SUPPORT_DESCRIPTION:
-      'If you have any questions about our pool, you can contact us freely through this email.',
+      'For general inquiries, technical support, and assistance with mining operations. Our support team is available to help you with pool configuration, troubleshooting, and any questions about our services.',
     MAINTAINERS_SECURITY_EMAIL: [
       'security@catchthatrabbit.com',
       {
@@ -128,10 +129,13 @@ const config: Config = {
       },
     ], // TODO: Replace
     MAINTAINERS_SECURITY_DESCRIPTION:
-      'Any bug or any other security issue reports are highly and greatly appreciated.',
+      'For reporting security vulnerabilities, incidents, or any security-related concerns. We take security seriously and appreciate responsible disclosure of any potential issues.',
     MAINTAINERS_COMMERCIAL_EMAIL: 'contact@catchthatrabbit.com',
     MAINTAINERS_COMMERCIAL_DESCRIPTION:
-      'Please, feel free to email us with any legal and commercial questions.',
+      'For business inquiries, partnership opportunities, and commercial discussions. The team is available to discuss mining devices, mining farm setup, hardware procurement, and other commercial arrangements.',
+    MAINTAINERS_RENTAL_EMAIL: 'rentals@catchthatrabbit.com',
+    MAINTAINERS_RENTAL_DESCRIPTION:
+      'For rental inquiries, partnership opportunities, and rental discussions. The team is available to discuss rented devices, mining farm setup, hardware procurement, and other rental arrangements.',
 
     ESTD: '2022',
 

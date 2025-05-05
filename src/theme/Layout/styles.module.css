@@ -10,11 +10,6 @@ body {
   background-color: var(--ifm-color-primary-background);
 }
 
-/* Docusaurus-specific utility class */
-:global(.docusaurus-mt-lg) {
-  margin-top: 3rem;
-}
-
 :global(#__docusaurus) {
   min-height: 100%;
   display: flex;

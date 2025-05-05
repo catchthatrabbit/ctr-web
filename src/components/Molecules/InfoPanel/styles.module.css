@@ -4,11 +4,12 @@
     #1b1c1c 42.05%,
     rgba(22, 199, 132, 0.33) 358.63%
   );
-  width: 49%;
   padding: var(--space-sm);
+  margin: var(--space-xs);
   border-radius: var(--ifm-global-radius);
 }
 
-.mobileBlock {
-  width: 97%;
+.link {
+  text-decoration: none;
+  color: var(--ifm-color-primary);
 }

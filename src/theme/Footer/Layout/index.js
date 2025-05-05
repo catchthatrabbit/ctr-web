@@ -10,7 +10,7 @@ import customStyles from './customStyles.module.css';
 
 export default function FooterLayout({ style, links, logo, copyright }) {
   const { siteConfig } = useDocusaurusContext();
-  const { APP_STORE_URL, GOOGLE_PLAY_URL, GOOGLE_PLAY_IMAGE } =
+  const { APP_STORE_URL, GOOGLE_PLAY_URL } =
     siteConfig.customFields;
   return (
     <footer

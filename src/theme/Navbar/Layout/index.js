@@ -56,7 +56,7 @@ export default function NavbarLayout({ children }) {
   const { navbarRef, isNavbarVisible } = useHideableNavbar(hideOnScroll);
 
   return (
-    <>
+    <div className={styles.navbarContainer}>
       <nav
         ref={navbarRef}
         aria-label={translate({
@@ -94,6 +94,6 @@ export default function NavbarLayout({ children }) {
           />
         </>
       )}
-    </>
+    </div>
   );
 }

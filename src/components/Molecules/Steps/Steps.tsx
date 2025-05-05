@@ -2,13 +2,10 @@ import React from 'react';
 import styles from './styles.module.css';
 import { Text } from '@site/src/components/Atoms/Text';
 import { Search } from '@site/src/components/Molecules/Search';
-import { Warning } from '@site/src/components/Atoms/Warning';
 import { DownloadPanel } from '@site/src/components/Molecules/DownloadPanel';
 import { Spacer } from '@site/src/components/Atoms/Spacer';
 import { OpenInNew } from '@site/src/icons';
-import Button from '@site/src/components/Atoms/Button/Button';
 import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
-import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
 interface Step {
@@ -34,34 +31,34 @@ const stepsData: Step[] = [
   {
     number: 1,
     title: 'Download CorePass',
-    text: 'Download CorePass mobile app, wallet where you can securely store your rewards.',
-    link: 'https://corepass.net/',
-    linkText: 'Open Corepass site',
+    text: 'Download CorePass mobile app, a wallet where you can securely store your rewards.',
+    link: 'https://corepass.net',
+    linkText: 'Open CorePass website',
     image: true,
   },
   {
     number: 2,
-    title: 'Download mining software',
-    text: 'CoreMiner is a RandomY CPU mining worker - with CoreMiner you can mine every coin which relies on a RandomY Proof of Work.',
-    warning: true,
+    title: 'Choose a mining software',
+    text: 'CoreMiner is a RandomY CPU mining worker - with CoreMiner you can mine any coin that relies on a RandomY Proof of Work. You can choose any other mining software if you prefer.',
     button: 'Download CoreMiner',
     buttonTitle: 'CoreMiner for Linux',
-    link: '#',
-    linkText: 'Auto-install script (docusaurus)',
+    buttonLink: 'https://github.com/catchthatrabbit/coreminer/releases',
+    link: 'https://github.com/catchthatrabbit/coreminer?tab=readme-ov-file#automatic-installation',
+    linkText: 'Automatic installation script',
   },
   {
     number: 3,
     title: 'Create configuration file',
-    text: "It's time to configure the miner so that everything works as it should.",
-    button: "Create config file",
-    buttonLink: "/go-live",
-    link: "#",
-    linkText: "Open configuration manual (github)",
+    text: 'Configure the miner for your wallet address (Core ID) and preferred pools.',
+    button: 'Create config file',
+    buttonLink: '/go-live',
+    link: 'https://github.com/catchthatrabbit/coreminer?tab=readme-ov-file#config-file',
+    linkText: 'Open configuration manual',
   },
   {
     number: 4,
     title: 'View your dashboard',
-    text: 'When it’s all ready, all you need to do is view your rewards and stats at the dashboard. Type your address below.',
+    text: 'When everything is ready, you can view your rewards and stats on the dashboard. Enter your address below.',
     showSearch: true,
   },
 ];
@@ -69,65 +66,40 @@ const stepsData: Step[] = [
 const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
   const { mobile, desktop } = useMediaQueries();
 
-  const renderWarning = (text: string) => (
-    <>
-      <Spacer variant="md" />
-      <Warning text={text} />
-    </>
-  );
-
   const renderButtonAndLink = (step: Step) => (
     <div className={`flex ${styles.buttonLinkContainer}`}>
       {step.button && (
         <>
-          {step.buttonTitle && <Spacer variant={desktop ? 'lg' : 'sm'} />}
-          <div className={styles.button}>
-            {step.buttonTitle && (
-              <Text
-                variant="heading3"
-                weight="semiBold"
-                color="white"
-                disableMobileStyles
-              >
-                {step.buttonTitle}
-              </Text>
-            )}
-            {step.warning ? (
-              <Spacer variant="xs" />
-            ) : mobile ? (
-              <Spacer variant="sm" />
-            ) : (
-              <Spacer variant="md" />
-            )}
-
+          <div className={styles.button} style={{ textAlign: 'center' }}>
             {step.buttonLink ? (
-              <Link to={step.buttonLink}>
-                <Button
-                  backgroundColor="#062A1C"
-                  textColor="#16C784"
-                  value={step.button}
-                />
-              </Link>
+              <a
+                href={step.buttonLink}
+                target="_blank"
+                className="button"
+                rel="noopener"
+              >
+                {step.button}
+              </a>
             ) : (
-              <Button
-                backgroundColor="#062A1C"
-                textColor="#16C784"
-                value={step.button}
-              />
+              <span>{step.button}</span>
+            )}
+            {step.buttonTitle && (
+              <>
+                <Spacer variant="xxs" />
+                <Text
+                  variant="heading3"
+                  color="white"
+                  disableMobileStyles
+                >
+                  {step.buttonTitle}
+                </Text>
+              </>
             )}
           </div>
           <Spacer direction="hor" variant="xs" />
         </>
       )}
       <div className={styles.linkContainer}>
-        {step.button && (
-          <Spacer
-            variant={
-              step.buttonTitle ? (mobile ? 'sm' : 'xl') : mobile ? 'sm' : 'lg'
-            }
-          />
-        )}
-        {!step.button && <Spacer variant="xs" />}
         <a
           href={step.link}
           target="_blank"
@@ -135,15 +107,7 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
           className={`flex items-center ${styles.linkSteps} ${styles.link}`}
         >
           <OpenInNew />
-          <Text
-            size="regular"
-            color="primary"
-            weight="bold"
-            style={{ marginLeft: '8px' }}
-            disableMobileStyles
-          >
-            {step.linkText}
-          </Text>
+          <span className={styles.linkText}>{step.linkText}</span>
         </a>
       </div>
       {desktop ? <Spacer variant="xxs" /> : <Spacer variant="xs" />}
@@ -160,7 +124,7 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
           } ${index === stepsData.length - 1 ? styles.lastStep : ''}`}
         >
           <h2 className={clsx(styles.title, { [styles.mobileTitle]: mobile })}>
-            {step.number}.&nbsp;&nbsp;{step.title}
+            {step.number}. {step.title}
           </h2>
           <div className={styles.stepsMargin}>
             <Text
@@ -168,16 +132,12 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
               weight="normal"
               color="white"
               style={{
-                lineHeight: 'var(--large-line-height)',
-                paddingRight: '15px',
+                lineHeight: 'var(--large-line-height)'
               }}
             >
               {step.text}
             </Text>
-            {step.warning &&
-              renderWarning(
-                'In case you do not own a Linux device, we recommend using the Linux virtual operating system.'
-              )}
+            <Spacer variant="lg" />
             {step.link && step.linkText && renderButtonAndLink(step)}
           </div>
           {step.image && (

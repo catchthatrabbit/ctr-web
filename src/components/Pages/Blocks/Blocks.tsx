@@ -49,9 +49,7 @@ const Blocks = () => {
           isLoading={isLoadingMapChart}
         />
       )}
-      <Spacer variant={desktop ? 'xxxxl' : 'xxxl'} />
-      {mobile && <Spacer variant="xs" />}
-      {/* Header with dropdown and tabs */}
+      <Spacer variant={desktop ? 'xxl' : 'xl'} />
       <Header
         items={dropdownItems}
         defaultRegion={regionLabel}

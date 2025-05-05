@@ -36,16 +36,14 @@
   border-radius: var(--ifm-global-radius);
 }
 
-@media screen and (max-width: 1270px) and (min-width: 769px) {
+@media screen and (max-width: 1270px) {
   .rightContainer {
     width: 100%;
     margin: 0 auto;
   }
-}
 
-@media screen and (max-width: 768px) {
-  .linkButton {
+  .leftContainer {
     width: 100%;
-    text-align: center;
+    margin: 0 auto;
   }
 }

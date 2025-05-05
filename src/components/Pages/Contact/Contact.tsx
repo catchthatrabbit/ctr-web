@@ -19,6 +19,8 @@ const Contact = () => {
     maintainersSecurityEmail,
     maintainersSupportDescription,
     maintainersSupportEmail,
+    maintainersRentalDescription,
+    maintainersRentalEmail,
     infoBoxMapData,
     isLoadingMapChart,
   } = useControls();
@@ -43,6 +45,11 @@ const Contact = () => {
       title: 'Commercial',
       emailAddress: maintainersCommercialEmail,
       text: maintainersCommercialDescription,
+    },
+    {
+      title: 'Rentals',
+      emailAddress: maintainersRentalEmail,
+      text: maintainersRentalDescription,
     },
   ];
   useEffect(() => {
@@ -80,8 +87,7 @@ const Contact = () => {
           />
         </>
       )}
-      <Spacer variant={desktop ? 'xxxxl' : 'xxxl'} />
-      {mobile && <Spacer variant="xs" />}
+      <Spacer variant={desktop ? 'xxl' : 'xl'} />
       <ContactTitle />
       {desktop ? <Spacer variant="sm" /> : null}
       {desktop ? <Spacer variant="md" /> : <Spacer variant="xs" />}
@@ -152,7 +158,7 @@ const Contact = () => {
           ))}
         </div>
       </div>
-      <Spacer variant="xxxl" />
+      <Spacer variant="xl" />
     </>
   );
 };

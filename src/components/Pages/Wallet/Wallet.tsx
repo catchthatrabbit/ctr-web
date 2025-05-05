@@ -124,8 +124,7 @@ const Wallet = ({
           isLoading={isLoadingMapChart}
         />
       )}
-      <Spacer variant="xxl" />
-      <Spacer variant={desktop ? 'xxl' : 'md'} />
+      <Spacer variant={desktop ? 'xxl' : 'xl'} />
 
       <div className={`flex items-center xl-center-items ${styles.fullWidth}`}>
         <Text

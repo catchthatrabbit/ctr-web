@@ -1,6 +1,5 @@
 .block {
   padding: var(--space-sm);
-  padding-right: 0;
   background-color: var(--ifm-background-color);
   border-radius: var(--ifm-global-radius);
 }
@@ -24,15 +23,16 @@
   text-decoration: none;
   color: var(--ifm-link-color);
   transition: color 0.3s ease;
-  position: relative;
 }
 
 .link:hover {
   color: var(--ifm-link-hover-color);
 }
 
-@media screen and (max-width: 768px) {
-  .block {
-    padding: var(--space-sm);
-  }
+.downloadLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
 }

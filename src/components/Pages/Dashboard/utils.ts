@@ -11,7 +11,6 @@ import { BLOCK_TIME } from "./constants";
 import { SETTINGS_RESPONSE } from "@site/src/Api/settings/types";
 import { MATURED_RESPONSE } from "@site/src/Api/blocks/types";
 import { summarizedText } from "@site/src/utils/summarizedText";
-import { profitabilityCalculation } from "@site/src/utils/profitabilityCalculation";
 
 /**
  * Given a list of items, and a function that takes two items and returns a single item, return the

@@ -145,8 +145,15 @@ function isProfitabilityResult(obj: any): obj is { revenue: number; xcbPrice: nu
   return obj && typeof obj === 'object' && 'revenue' in obj && 'xcbPrice' in obj;
 }
 
+interface CustomFields {
+  URLS: {
+    BUY_LINK: string;
+  };
+}
+
 const Calculator: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
+  const customFields = siteConfig.customFields as unknown as CustomFields;
   const [currency, setCurrency] = useState('EUR');
   const [selectedMachine, setSelectedMachine] = useState('');
   const [hashrate, setHashrate] = useState('');
@@ -251,9 +258,7 @@ const Calculator: React.FC = () => {
       <form className={styles.calculatorForm} onSubmit={e => e.preventDefault()}>
         <div className={styles.inputGroup}>
           <label htmlFor="currency">
-            <Text variant="body" color="subheadingColor">
-              Currency
-            </Text>
+            Currency
           </label>
           <select
             id="currency"
@@ -268,7 +273,7 @@ const Calculator: React.FC = () => {
                 </option>
               ))}
             </optgroup>
-            <optgroup label="All Currencies (Alphabetically)">
+            <optgroup label="All Supported Currencies (Alphabetically)">
               {otherCurrencies.map((curr) => (
                 <option key={curr.value} value={curr.value}>
                   {`${curr.value} — ${curr.name}`}
@@ -278,29 +283,37 @@ const Calculator: React.FC = () => {
           </select>
         </div>
         <div className={styles.inputGroup}>
-          <label>
-            <Text variant="body" color="subheadingColor">
-              Machine template
-            </Text>
-            <select
-              className={styles.dropdown}
-              value={selectedMachine}
-              onChange={e => setSelectedMachine(e.target.value)}
+          <label htmlFor="machine">Machine Template</label>
+          <select
+            id="machine"
+            value={selectedMachine}
+            onChange={(e) => setSelectedMachine(e.target.value)}
+            className={styles.dropdown}
+          >
+            <option value="">None</option>
+            {sortedMachines.map((machine) => (
+              <option key={machine.name} value={machine.name}>
+                {machine.name}
+              </option>
+            ))}
+          </select>
+          <div style={{ textAlign: 'right', marginTop: '4px' }}>
+            <a
+              href="https://github.com/catchthatrabbit/ctr-web/issues/new?template=template_proposal.yml"
+              target="_blank"
+              rel="noopener"
+              style={{
+                fontSize: 'var(--small-font-size)',
+                color: 'var(--ifm-color-primary)'
+              }}
             >
-              <option value="">None</option>
-              {sortedMachines.map(machine => (
-                <option key={machine.name} value={machine.name}>
-                  {machine.name}
-                </option>
-              ))}
-            </select>
-          </label>
+              Propose new template
+            </a>
+          </div>
         </div>
         <div className={styles.inputGroup}>
           <label>
-            <Text variant="body" color="subheadingColor">
               Hashrate (h/s)
-            </Text>
             <InputText
               type="number"
               min="1"
@@ -315,9 +328,7 @@ const Calculator: React.FC = () => {
         </div>
         <div className={styles.inputGroup}>
           <label>
-            <Text variant="body" color="subheadingColor">
-              {`Electricity Cost (${currency} per kWh)`}
-            </Text>
+            Electricity Cost ({currency} per kWh)
             <InputText
               type="number"
               step="0.01"
@@ -331,9 +342,7 @@ const Calculator: React.FC = () => {
         </div>
         <div className={styles.inputGroup}>
           <label>
-            <Text variant="body" color="subheadingColor">
-              Electricity Consumption (W)
-            </Text>
+            Electricity Consumption (W)
             <InputText
               type="number"
               min="0"
@@ -348,9 +357,7 @@ const Calculator: React.FC = () => {
         </div>
         <div className={styles.inputGroup}>
           <label>
-            <Text variant="body" color="subheadingColor">
-              {`Extra expenses per month (${currency})`}
-            </Text>
+            Extra expenses per month ({currency})
             <InputText
               type="number"
               min="0"
@@ -402,7 +409,7 @@ const Calculator: React.FC = () => {
           </div>
           {result.profit < 0 && (
             <div className={styles.resultItem}>
-                Not profitable? <a href="https://app.ping.exchange/trade?market=xcb_usdc" target="_blank" rel="noopener" style={{ color: 'var(--ifm-color-primary)' }}>Buy XCB instead</a>
+              Not profitable? <a href={customFields.URLS.BUY_LINK} target="_blank" rel="noopener" style={{ color: 'var(--ifm-color-primary)' }}>Buy XCB instead</a>
             </div>
           )}
           <div className={styles.resultItem}>

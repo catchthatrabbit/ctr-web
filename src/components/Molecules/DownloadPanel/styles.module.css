@@ -39,14 +39,13 @@
   margin-bottom: 1.3rem;
 }
 
-.buttons {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 1.3rem;
+.textContainer {
+  z-index: 10;
 }
 
-.button {
-  width: 150px; /* Adjust the size as needed */
+.buttons {
+  display: flex;
+  margin-bottom: 1.3rem;
 }
 
 .qrCode {
@@ -79,9 +78,10 @@
 }
 
 .btns {
-  width: 38%;
+  justify-content: flex-start;
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
+  z-index: 10;
 }
 
 .downloadPanelMobile {

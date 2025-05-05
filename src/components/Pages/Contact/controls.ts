@@ -25,6 +25,10 @@ const useControls = () => {
         | string
         | (string | { [email: string]: string })[];
       MAINTAINERS_COMMERCIAL_DESCRIPTION: string;
+      MAINTAINERS_RENTAL_EMAIL:
+        | string
+        | (string | { [email: string]: string })[];
+      MAINTAINERS_RENTAL_DESCRIPTION: string;
     }>;
 
     return {
@@ -38,6 +42,9 @@ const useControls = () => {
         customFields.MAINTAINERS_COMMERCIAL_EMAIL ?? [],
       maintainersCommercialDescription:
         customFields.MAINTAINERS_COMMERCIAL_DESCRIPTION ?? '',
+      maintainersRentalEmail: customFields.MAINTAINERS_RENTAL_EMAIL ?? [],
+      maintainersRentalDescription:
+        customFields.MAINTAINERS_RENTAL_DESCRIPTION ?? '',
     };
   }, []);
 

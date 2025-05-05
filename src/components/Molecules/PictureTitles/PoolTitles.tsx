@@ -10,7 +10,7 @@ const PoolTitle = () => {
     <PictureTitle
       title="Pools"
       titleStyles={{ fontWeight: '800', fontFamily: 'Exo' }}
-      secondaryText="We have several geo-locations to choose from:"
+      secondaryText="CTR has a global network of mining pools to choose from"
       secondaryTextStyle={{
         fontSize: 'var(--regular-font-size)',
         textWrap: 'nowrap',

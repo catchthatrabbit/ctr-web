@@ -121,8 +121,7 @@ const Payments = ({
   return (
     <>
       {renderInfoBox()}
-      <Spacer variant={desktop ? 'xxxxl' : 'xxxl'} />
-      {mobile && <Spacer variant="xs" />}
+      <Spacer variant={desktop ? 'xxl' : 'xl'} />
       {renderHeader()}
       {desktop ? null : <Spacer variant="xxs" />}
       <List
