@@ -8,9 +8,9 @@ import remarkFediverseUser from 'remark-fediverse-user';
 import path from 'path';
 
 const config: Config = {
-  title: "Catch That Rabbit",
-  tagline: "Catch That Rabbit — ₡ORE mining pool",
-  favicon: "img/favicon.ico",
+  title: 'Catch That Rabbit',
+  tagline: 'Catch That Rabbit — ₡ORE mining pool',
+  favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
   url: 'http://catchthatrabbit.com',
@@ -37,25 +37,24 @@ const config: Config = {
 
   customFields: {
     API_ENDPOINTS: {
-      DE_API_ENDPOINT: "https://eu-api.catchthatrabbit.com",
-      FI_API_ENDPOINT: "https://eu-api.catchthatrabbit.com",
-      SG_API_ENDPOINT: "https://as1-api.catchthatrabbit.com",
-      HK_API_ENDPOINT: "https://as-api.catchthatrabbit.com",
-      BR_API_ENDPOINT: "https://us-api.catchthatrabbit.com",
-      JP_API_ENDPOINT: "https://us1-api.catchthatrabbit.com",
+      DE_API_ENDPOINT: 'https://eu-api.catchthatrabbit.com',
+      FI_API_ENDPOINT: 'https://eu1-api.catchthatrabbit.com',
+      SG_API_ENDPOINT: 'https://as1-api.catchthatrabbit.com',
+      HK_API_ENDPOINT: 'https://as-api.catchthatrabbit.com',
+      BR_API_ENDPOINT: 'https://us-api.catchthatrabbit.com',
+      JP_API_ENDPOINT: 'https://us1-api.catchthatrabbit.com',
     },
     API_PATH: 'v2/api/',
     URLS: {
-      TRANSACTION_DETAILS_URL: "https://blockindex.net/tx",
-      BLOCK_DETAILS_URL: "https://blockindex.net/block",
-      BUY_LINK: "https://app.ping.exchange/trade?market=xcb_usdc",
+      TRANSACTION_DETAILS_URL: 'https://blockindex.net/tx',
+      BLOCK_DETAILS_URL: 'https://blockindex.net/block',
     },
     POOLS_LIST: {
       DE: {
-        NAME: "DACH",
-        DESCRIPTION: "DACH Pool 🇩🇪🇦🇹🇨🇭",
-        SERVER: "de.catchthatrabbit.com",
-        PORT: "8008",
+        NAME: 'DACH',
+        DESCRIPTION: 'DACH Pool 🇩🇪🇦🇹🇨🇭',
+        SERVER: 'de.catchthatrabbit.com',
+        PORT: '8008',
         WORKER_NAME:
           'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
         USERNAME: '<your wallet address>.<worker name>',
@@ -63,10 +62,10 @@ const config: Config = {
         PAYOUT: 'cb11ca5aa7cf5ffa5ed333e962310b3922b48af68698',
       },
       FI: {
-        NAME: "Nordic",
-        DESCRIPTION: "Nordic Pool 🇫🇮🇳🇴🇸🇪",
-        SERVER: "fi.catchthatrabbit.com",
-        PORT: "8008",
+        NAME: 'Nordic',
+        DESCRIPTION: 'Nordic Pool 🇫🇮🇳🇴🇸🇪',
+        SERVER: 'fi.catchthatrabbit.com',
+        PORT: '8008',
         WORKER_NAME:
           'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
         USERNAME: '<your wallet address>.<worker name>',
@@ -74,10 +73,10 @@ const config: Config = {
         PAYOUT: 'cb806ca47e07b803e598ea9bf7413355486723270f71',
       },
       SG: {
-        NAME: "ASEAN",
-        DESCRIPTION: "ASEAN Pool 🇸🇬🇹🇭🇵🇭",
-        SERVER: "sg.catchthatrabbit.com",
-        PORT: "8008",
+        NAME: 'ASEAN',
+        DESCRIPTION: 'ASEAN Pool 🇸🇬🇹🇭🇵🇭',
+        SERVER: 'sg.catchthatrabbit.com',
+        PORT: '8008',
         WORKER_NAME:
           'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
         USERNAME: '<your wallet address>.<worker name>',
@@ -85,10 +84,10 @@ const config: Config = {
         PAYOUT: 'cb060ea54cce80fcb689f8824b238118cb5005572a36',
       },
       HK: {
-        NAME: "Far-East",
-        DESCRIPTION: "Far-East Pool 🇭🇰🇨🇳🇰🇷",
-        SERVER: "hk.catchthatrabbit.com",
-        PORT: "8008",
+        NAME: 'Far-East',
+        DESCRIPTION: 'Far-East Pool 🇭🇰🇨🇳🇰🇷',
+        SERVER: 'hk.catchthatrabbit.com',
+        PORT: '8008',
         WORKER_NAME:
           'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
         USERNAME: '<your wallet address>.<worker name>',
@@ -96,10 +95,10 @@ const config: Config = {
         PAYOUT: 'cb6242d8b1903db52f99813f79fe4dff2b85fd7c1fdd',
       },
       BR: {
-        NAME: "America",
-        DESCRIPTION: "American Pool 🇧🇷🇲🇽🇺🇸",
-        SERVER: "br.catchthatrabbit.com",
-        PORT: "8008",
+        NAME: 'America',
+        DESCRIPTION: 'American Pool 🇧🇷🇲🇽🇺🇸',
+        SERVER: 'br.catchthatrabbit.com',
+        PORT: '8008',
         WORKER_NAME:
           'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
         USERNAME: '<your wallet address>.<worker name>',
@@ -107,10 +106,10 @@ const config: Config = {
         PAYOUT: 'cb532b4658c0077fe257c44fbd3ee89f8c85ce5c68e3',
       },
       JP: {
-        NAME: "Japan",
-        DESCRIPTION: "Japanese Pool 🇯🇵",
-        SERVER: "jp.catchthatrabbit.com",
-        PORT: "8008",
+        NAME: 'Japan',
+        DESCRIPTION: 'Japanese Pool 🇯🇵',
+        SERVER: 'jp.catchthatrabbit.com',
+        PORT: '8008',
         WORKER_NAME:
           'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
         USERNAME: '<your wallet address>.<worker name>',
@@ -274,14 +273,14 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: "/go-live",
-          label: "Launch Miner",
-          position: "right",
+          href: '/go-live',
+          label: 'Launch Miner',
+          position: 'right',
         },
         {
-          href: "/contact",
-          label: "Contact",
-          position: "right",
+          href: '/contact',
+          label: 'Contact',
+          position: 'right',
         },
         {
           href: '/start-mining',
@@ -306,16 +305,16 @@ const config: Config = {
               to: '/start-mining',
             },
             {
-              label: "Launch Miner",
-              to: "/go-live",
+              label: 'Launch Miner',
+              to: '/go-live',
             },
             {
-              label: "Profit Calculator",
-              to: "/calculator",
+              label: 'Profit Calculator',
+              to: '/calculator',
             },
             {
-              label: "Miners",
-              href: "/miners",
+              label: 'Miners',
+              href: '/miners',
             },
             {
               label: 'Payments',
@@ -340,20 +339,20 @@ const config: Config = {
               href: '/',
             },
             {
-              label: "Core Talk",
-              href: "https://coretalk.space/@catchthatrabbit",
+              label: 'Core Talk',
+              href: 'https://coretalk.space/@catchthatrabbit',
             },
             {
-              label: "Core Blockchain",
-              href: "https://coreblockchain.net",
+              label: 'Core Blockchain',
+              href: 'https://coreblockchain.net',
             },
             {
-              label: "Mining Software",
-              href: "https://github.com/catchthatrabbit/coreminer",
+              label: 'Mining Software',
+              href: 'https://github.com/catchthatrabbit/coreminer',
             },
             {
-              label: "GitHub",
-              href: "https://github.com/catchthatrabbit",
+              label: 'GitHub',
+              href: 'https://github.com/catchthatrabbit',
             },
           ],
         },

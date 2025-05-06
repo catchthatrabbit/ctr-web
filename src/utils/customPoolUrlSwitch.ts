@@ -14,28 +14,29 @@ export const customPoolAndApiUrlSwitch = (
   apiPath?: string
 ): string => {
   let resultUrl;
+
   switch (region) {
-    case "DE":
-      resultUrl = poolUrl["DE_API_ENDPOINT"];
+    case 'DE':
+      resultUrl = poolUrl['DE_API_ENDPOINT'];
       break;
-    case "FI":
-      resultUrl = poolUrl["FI_API_ENDPOINT"];
+    case 'FI':
+      resultUrl = poolUrl['FI_API_ENDPOINT'];
       break;
-    case "SG":
-      resultUrl = poolUrl["SG_API_ENDPOINT"];
+    case 'SG':
+      resultUrl = poolUrl['SG_API_ENDPOINT'];
       break;
-    case "HK":
-      resultUrl = poolUrl["HK_API_ENDPOINT"];
+    case 'HK':
+      resultUrl = poolUrl['HK_API_ENDPOINT'];
       break;
-    case "BR":
-      resultUrl = poolUrl["BR_API_ENDPOINT"];
+    case 'BR':
+      resultUrl = poolUrl['BR_API_ENDPOINT'];
       break;
-    case "JP":
-      resultUrl = poolUrl["JP_API_ENDPOINT"];
+    case 'JP':
+      resultUrl = poolUrl['JP_API_ENDPOINT'];
       break;
   }
   if (apiPath) {
-    if (resultUrl.endsWith("/")) return `${resultUrl}${apiPath}`;
+    if (resultUrl.endsWith('/')) return `${resultUrl}${apiPath}`;
     return `${resultUrl}/${apiPath}`;
   }
   return resultUrl;
