@@ -2,15 +2,16 @@ import { isNumberString } from '@site/src/utils/isNumber';
 import {
   STATS_CHARTS_RESPONSE,
   STATS_RESPONSE,
-} from "@site/src/Api/stats/types";
-import { TextFormat } from "@site/src/utils/textFormat";
-import { convertTime2Date } from "@site/src/utils/convertTime2Date";
-import { UNITS } from "@site/src/constants/units";
-import { ChartItem } from "./types";
-import { BLOCK_TIME } from "./constants";
-import { SETTINGS_RESPONSE } from "@site/src/Api/settings/types";
-import { MATURED_RESPONSE } from "@site/src/Api/blocks/types";
-import { summarizedText } from "@site/src/utils/summarizedText";
+} from '@site/src/Api/stats/types';
+import { TextFormat } from '@site/src/utils/textFormat';
+import { convertTime2Date } from '@site/src/utils/convertTime2Date';
+import { UNITS } from '@site/src/constants/units';
+import { ChartItem } from './types';
+import { BLOCK_TIME } from './constants';
+import { SETTINGS_RESPONSE } from '@site/src/Api/settings/types';
+import { MATURED_RESPONSE } from '@site/src/Api/blocks/types';
+import { summarizedText } from '@site/src/utils/summarizedText';
+import { profitabilityCalculation } from '@site/src/utils/profitabilityCalculation';
 
 /**
  * Given a list of items, and a function that takes two items and returns a single item, return the
@@ -119,26 +120,39 @@ export const convertPoolChartDataToMapChartInfoBox = async (
     poolFee: settings.PoolFee,
     infoBoxItems: [
       {
-        title: "CTR hashrate:",
-        value: data.hashrate ? TextFormat.getHashText(data.hashrate) : TextFormat.getDefaultText("×"),
+        title: 'CTR hashrate:',
+        value: data.hashrate
+          ? TextFormat.getHashText(data.hashrate)
+          : TextFormat.getDefaultText('×'),
       },
       {
-        title: "XCB hashrate:",
-        value: node.difficulty ? TextFormat.getHashText(Number(node.difficulty) / BLOCK_TIME) : TextFormat.getDefaultText("×"),
+        title: 'XCB hashrate:',
+        value: node.difficulty
+          ? TextFormat.getHashText(Number(node.difficulty) / BLOCK_TIME)
+          : TextFormat.getDefaultText('×'),
       },
       {
-        title: "Difficulty:",
-        value: node.difficulty ? TextFormat.getHashText(Number(node.difficulty), "") : TextFormat.getDefaultText("×"),
+        title: 'Difficulty:',
+        value: node.difficulty
+          ? TextFormat.getHashText(Number(node.difficulty), '')
+          : TextFormat.getDefaultText('×'),
       },
       {
-        title: "Miners:",
-        value: data.minersTotal ? TextFormat.getNumberText(data.minersTotal) : TextFormat.getDefaultText("×"),
+        title: 'Miners:',
+        value: data.minersTotal
+          ? TextFormat.getNumberText(data.minersTotal)
+          : TextFormat.getDefaultText('×'),
       },
       {
-        title: "Variance:",
-        value: roundShares && node.difficulty ? TextFormat.getPercentText(
-          ((100 * Number(roundShares)) / Number(node.difficulty)).toFixed(2),
-        ) : TextFormat.getDefaultText("×"),
+        title: 'Variance:',
+        value:
+          roundShares && node.difficulty
+            ? TextFormat.getPercentText(
+                ((100 * Number(roundShares)) / Number(node.difficulty)).toFixed(
+                  2
+                )
+              )
+            : TextFormat.getDefaultText('×'),
       },
       {
         title: "Profit:",

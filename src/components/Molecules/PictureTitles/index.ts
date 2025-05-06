@@ -9,3 +9,4 @@ export { default as RecentBlocksTitle } from './RecentBlocksTitle';
 export { default as MainPageSearch } from './MainPageSearch';
 export { default as GuideTitle } from './GuideTitle';
 export { default as CreateConfigTitle } from './CreateConfigTitle';
+export { default as SelectPoolTitle } from './SelectPoolTitle';

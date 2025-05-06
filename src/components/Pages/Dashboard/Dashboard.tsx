@@ -1,18 +1,18 @@
-import React from "react";
-import useControls from "./controls";
-import { MapChart } from "@site/src/components/Organisms/MapChart";
-import { DashboardImage } from "@site/src/components/Molecules/InsideChart/DashboardImage";
-import { Text } from "@site/src/components/Atoms/Text";
-import clsx from "clsx";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { StatsChart } from "@site/src/components/Organisms/StatsChart";
-import { RadialBarChart } from "@site/src/components/Organisms/RadialBarChart";
-import { RecentBlocksTitle } from "@site/src/components/Molecules/PictureTitles";
-import { List } from "@site/src/components/Templates/List";
-import { convertMaturedResponseToRecentBlocksInfo } from "./utils";
-import { IAnyPageAndWallet } from "../types";
-import { Header } from "@site/src/components/Templates/Header";
-import { StartMining } from "@site/src/components/Organisms/StartMining";
+import React from 'react';
+import useControls from './controls';
+import { MapChart } from '@site/src/components/Organisms/MapChart';
+import { DashboardImage } from '@site/src/components/Molecules/InsideChart/DashboardImage';
+import { Text } from '@site/src/components/Atoms/Text';
+import clsx from 'clsx';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { StatsChart } from '@site/src/components/Organisms/StatsChart';
+import { RadialBarChart } from '@site/src/components/Organisms/RadialBarChart';
+import { RecentBlocksTitle } from '@site/src/components/Molecules/PictureTitles';
+import { List } from '@site/src/components/Templates/List';
+import { convertMaturedResponseToRecentBlocksInfo } from './utils';
+import { IAnyPageAndWallet } from '../types';
+import { Header } from '@site/src/components/Templates/Header';
+import { StartMining } from '@site/src/components/Organisms/StartMining';
 
 import { Empty } from '@site/src/components/Atoms/Empty';
 import { Search } from '../../Molecules/Search';
@@ -42,7 +42,9 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
   const { mobile, tablet, desktop } = useMediaQueries();
 
   // Helper function to render the search component
-  const renderSearch = () => <Search onSearch={onSetWalletAddress} />;
+  const renderSearch = () => (
+    <Search onSearch={onSetWalletAddress} selectedPool="undefined" />
+  );
 
   // Helper function to render the map chart section
   const renderMapChartSection = () => (
@@ -56,7 +58,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
       >
         {mobile ? (
           <>
-            <div className={clsx(styles.textContainer, "text-center")}>
+            <div className={clsx(styles.textContainer, 'text-center')}>
               <MainPageSearch flexStart={false} />
 
               <Spacer variant="xxs" />
@@ -112,7 +114,7 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
                 <Text variant="subheading" color="subheadingColor">
                   {Object.values(startMiningPoolConfigurations)
                     .map((pool) => pool.NAME)
-                    .join(", ")}
+                    .join(', ')}
                 </Text>
               </div>
               <Spacer variant="xxl" />

@@ -5,14 +5,14 @@ import {
   aggregateNumbers,
   convertPoolChartDataToMapChartInfoBox,
   reduceList,
-} from "../utils";
-import { WHITELIST_AGGREGATE_KEYS } from "@site/src/configs/aggregate-keys.config";
-import { STATS_RESPONSE } from "@site/src/Api/stats/types";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { useEffect, useState } from "react";
-import { TextFormatOutputType } from "@site/src/utils/textFormat";
-import { profitabilityCalculation } from "@site/src/utils/profitabilityCalculation";
-import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
+} from '../utils';
+import { WHITELIST_AGGREGATE_KEYS } from '@site/src/configs/aggregate-keys.config';
+import { STATS_RESPONSE } from '@site/src/Api/stats/types';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { useEffect, useState } from 'react';
+import { TextFormatOutputType } from '@site/src/utils/textFormat';
+import { profitabilityCalculation } from '@site/src/utils/profitabilityCalculation';
+import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
 
 interface MapChartData {
   poolFee: string | number;
@@ -22,7 +22,7 @@ interface MapChartData {
 const useMapChartData = () => {
   const { siteConfig } = useDocusaurusContext();
   const [chartData, setChartData] = useState<MapChartData>({
-    poolFee: "",
+    poolFee: '',
     infoBoxItems: [],
   });
 
@@ -35,30 +35,54 @@ const useMapChartData = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const aggregator = aggregateNumbers(WHITELIST_AGGREGATE_KEYS.home.jumbotron);
-      let stats: STATS_RESPONSE = null;
-
-      if (statsResponse?.length > 0) {
-        stats = reduceList(statsResponse, aggregator);
+      if (!statsResponse || statsResponse.length === 0) {
+        console.warn(
+          'statsResponse is not ready yet or is empty:',
+          statsResponse
+        );
+        return; // Exit early if statsResponse is not ready
       }
 
-      const profitability = await profitabilityCalculation(
-        1000,
-        siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
-        siteConfig.customFields.API_PATH as string,
-        "usd",
-        "monthly"
-      );
-      const data = await convertPoolChartDataToMapChartInfoBox(
-        stats,
-        settingsResponse,
-        profitability === false ? undefined : { revenue: profitability.revenue }
-      );
-      setChartData(data);
+      try {
+        const aggregator = aggregateNumbers(
+          WHITELIST_AGGREGATE_KEYS.home.jumbotron
+        );
+        let stats: STATS_RESPONSE = null;
+
+        // Process statsResponse
+        stats = reduceList(statsResponse, aggregator);
+
+        console.log('stats after processing:', stats);
+
+        const profitability = await profitabilityCalculation(
+          1000,
+          siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
+          siteConfig.customFields.API_PATH as string,
+          'usd',
+          'monthly'
+        );
+
+        const data = await convertPoolChartDataToMapChartInfoBox(
+          stats,
+          settingsResponse,
+          profitability === false
+            ? undefined
+            : { revenue: profitability.revenue }
+        );
+
+        setChartData(data);
+      } catch (error) {
+        console.error('Error fetching chart data:', error);
+      }
     };
 
     fetchData();
-  }, [statsResponse, settingsResponse, siteConfig.customFields.API_ENDPOINTS, siteConfig.customFields.API_PATH]);
+  }, [
+    statsResponse,
+    settingsResponse,
+    siteConfig.customFields.API_ENDPOINTS,
+    siteConfig.customFields.API_PATH,
+  ]);
 
   return {
     ...chartData,

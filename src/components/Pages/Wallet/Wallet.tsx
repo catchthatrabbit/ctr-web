@@ -111,7 +111,11 @@ const Wallet = ({
       <Spacer variant="xl" />
       <Spacer variant={desktop ? 'xxxl' : 'xs'} />
 
-      <Search context="wallet" onSearch={onSetWalletAddress} />
+      <Search
+        context="wallet"
+        onSearch={onSetWalletAddress}
+        selectedPool="undefined"
+      />
       <Spacer variant="lg" />
     </div>
   );

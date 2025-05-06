@@ -12,6 +12,7 @@ import SearchIcon from '@site/src/icons/SearchIcon';
 import { useHistory } from 'react-router-dom';
 import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { STANDARD_REGIONS_API } from '@site/src/Api/constants';
 
 interface ISearch extends InputHTMLAttributes<HTMLInputElement> {
   onSearch?: (searchQuery: string) => void;
@@ -26,7 +27,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
     {
       onSearch,
       context = 'main',
-      selectedPool = 'de',
+      selectedPool,
       overrideLabel = false,
       showPool = false,
       ...restProps
@@ -38,19 +39,107 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
     const [walletAddress, setWalletAddress] = useState('');
     const history = useHistory();
     const { siteConfig } = useDocusaurusContext();
+    const apiEndpoints = siteConfig.customFields.API_ENDPOINTS;
+    const apiPath = siteConfig.customFields.API_PATH;
+
     const poolsList = siteConfig.customFields.POOLS_LIST;
     const poolsArray = Object.entries(poolsList).map(([id, pool]) => ({
       id,
       ...pool,
     }));
 
-    const handleSearch = () => {
+    const detectPoolsForWallet = async (walletAddress: string) => {
+      try {
+        const responses = await Promise.allSettled(
+          Object.entries(apiEndpoints).map(async ([poolKey, apiUrl]) => {
+            try {
+              const apiUrlWithPath = `https://cors-anywhere.herokuapp.com/${apiUrl}/v2/api/accounts/${walletAddress}`; //link to avoid CORS issues in development
+              console.log(`Requesting data from: ${apiUrlWithPath}`);
+              const response = await fetch(apiUrlWithPath, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
+
+              if (!response.ok) {
+                if (response.status === 404) {
+                  console.warn(
+                    `Endpoint ${poolKey} returned 404: Resource not found.`
+                  );
+                } else {
+                  console.error(
+                    `Failed to fetch data from ${poolKey}: ${response.statusText}`
+                  );
+                }
+                return null;
+              }
+
+              const data = await response.json();
+              const regionKey = Object.keys(STANDARD_REGIONS_API).find((key) =>
+                poolKey.startsWith(key)
+              );
+
+              const region = regionKey ? STANDARD_REGIONS_API[regionKey] : null;
+
+              return { region, apiUrlWithPath };
+            } catch (error) {
+              console.error(`Error fetching data from ${poolKey}:`, error);
+              return null;
+            }
+          })
+        );
+
+        const successfulPools = responses
+          .filter(
+            (result) => result.status === 'fulfilled' && result.value !== null
+          )
+          .map((result) => (result as PromiseFulfilledResult<any>).value);
+
+        console.log('responses:', responses);
+        console.log('All successful pools:', successfulPools);
+
+        return successfulPools;
+      } catch (error) {
+        console.error('Error fetching data from APIs:', error);
+        return [];
+      }
+    };
+    const handleSearch = async () => {
       const address = inputRef.current?.value || '';
       setWalletAddress(address);
+
       if (typeof onSearch === 'function') {
         onSearch(address);
       }
-      history.push(`/coreid/${address}/${selectedPool}`);
+
+      if (selectedPool !== 'undefined') {
+        history.push(`/coreid/${address}/${selectedPool}`);
+      } else {
+        const pools = await detectPoolsForWallet(address);
+
+        if (pools.length > 0) {
+          console.log('Matching pools:', pools);
+
+          if (pools.length === 1) {
+            // Navigate to the first pool's route
+            const firstPool = pools[0];
+            console.log('region', firstPool?.region);
+
+            if (firstPool?.region) {
+              history.push(`/coreid/${address}/${firstPool.region}`);
+            }
+          } else if (pools.length > 1) {
+            history.push({
+              pathname: '/pool-selection',
+              state: { pools, walletAddress: address },
+            });
+          }
+        } else {
+          console.warn('No matching pools found for wallet address:', address);
+          history.push(`/coreid/${address}/de`); // Fallback to default pool to open wallet not found page
+        }
+      }
     };
 
     const handleClickSearchButton = () => {
@@ -58,24 +147,35 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
     };
 
     const findPoolInfo = () => {
-      return poolsArray.find(pool => pool.id === selectedPool.toUpperCase());
+      if (!selectedPool) {
+        console.warn('selectedPool is undefined');
+        return null;
+      }
+
+      return poolsArray.find((pool) => pool.id === selectedPool.toUpperCase());
     };
 
     const poolInfo = findPoolInfo();
     const poolName = poolInfo ? poolInfo.NAME : '';
 
     const placeholderTextMap: Record<string, string> = {
-      wallet: showPool ? 'Wallet Address' + ' on ' + poolName : 'Wallet Address',
-      startMining: showPool ? 'Wallet Address' + ' on ' + poolName : 'Wallet Address',
-      payments: showPool ? 'Wallet Address' + ' on ' + poolName : 'Wallet Address',
+      wallet: showPool
+        ? 'Wallet Address' + ' on ' + poolName
+        : 'Wallet Address',
+      startMining: showPool
+        ? 'Wallet Address' + ' on ' + poolName
+        : 'Wallet Address',
+      payments: showPool
+        ? 'Wallet Address' + ' on ' + poolName
+        : 'Wallet Address',
       main: showPool ? 'Search Miners' + ' on ' + poolName : 'Search Miners',
     };
 
     const labelTextMap: Record<string, string> = {
-      wallet: "Core ID",
-      startMining: "Wallet Address",
-      payments: "Core ID",
-      main: "Core ID",
+      wallet: 'Core ID',
+      startMining: 'Wallet Address',
+      payments: 'Core ID',
+      main: 'Core ID',
     };
 
     return (

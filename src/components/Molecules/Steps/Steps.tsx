@@ -88,11 +88,7 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
             {step.buttonTitle && (
               <>
                 <Spacer variant="xxs" />
-                <Text
-                  variant="heading3"
-                  color="white"
-                  disableMobileStyles
-                >
+                <Text variant="heading3" color="white" disableMobileStyles>
                   {step.buttonTitle}
                 </Text>
               </>
@@ -134,7 +130,7 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
               weight="normal"
               color="white"
               style={{
-                lineHeight: 'var(--large-line-height)'
+                lineHeight: 'var(--large-line-height)',
               }}
             >
               {step.text}
@@ -152,7 +148,11 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
           {step.showSearch && (
             <>
               <Spacer variant="lg" />
-              <Search context="startMining" onSearch={onSetWalletAddress} />
+              <Search
+                context="startMining"
+                onSearch={onSetWalletAddress}
+                selectedPool="undefined"
+              />
             </>
           )}
           {desktop ? <Spacer variant="md" /> : <Spacer variant="xxs" />}
