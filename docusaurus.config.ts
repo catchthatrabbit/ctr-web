@@ -5,7 +5,6 @@ import remarkCorepass from 'remark-corepass';
 import remarkCorebc from 'remark-corebc';
 import remarkCurrencyFormatter from 'remark-currency-formatter';
 import remarkFediverseUser from 'remark-fediverse-user';
-import path from 'path';
 
 const config: Config = {
   title: "Catch That Rabbit",
@@ -21,7 +20,7 @@ const config: Config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'catchthatrabbit', // Usually your GitHub org/user name.
-  projectName: 'frontend', // Usually your repo name.
+  projectName: 'ctr-web', // Repo name.
 
   onBrokenLinks: 'throw',
   onBrokenAnchors: 'throw',
@@ -48,7 +47,8 @@ const config: Config = {
     URLS: {
       TRANSACTION_DETAILS_URL: "https://blockindex.net/tx",
       BLOCK_DETAILS_URL: "https://blockindex.net/block",
-      BUY_LINK: "https://app.ping.exchange/trade?market=xcb_usdc",
+      BUY_LINK: "https://app.ping.exchange?ref-code=kz3Xyxnn",
+      CTR_API: "https://api.catchthatrabbit.com/v1",
     },
     POOLS_LIST: {
       DE: {
@@ -179,7 +179,7 @@ const config: Config = {
           postsPerPage: 10,
           feedOptions: {
             type: 'all',
-            copyright: `⊛ CORE 2022 - ${new Date().getFullYear()} Catch that Rabbit.`,
+            copyright: `⊛ CORE 2022 - ${new Date().getFullYear()} Catch That Rabbit.`,
             createFeedItems: async (params) => {
               const { blogPosts, defaultCreateFeedItems, ...rest } = params;
               return defaultCreateFeedItems({
@@ -372,15 +372,8 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
 
   plugins: [
-    // [
-    //   "@docusaurus/plugin-google-gtag",
-    //   {
-    //     trackingID: "G-K79ZXPBSHD",
-    //     anonymizeIP: true,
-    //   },
-    // ]
-    path.resolve(__dirname, './src/plugins/dynamic-router-plugin.ts'),
-    path.resolve(__dirname, './src/plugins/custom-post-css-plugin.ts'),
+    './src/plugins/dynamic-router-plugin.ts',
+    './src/plugins/custom-post-css-plugin.ts',
   ],
 };
 

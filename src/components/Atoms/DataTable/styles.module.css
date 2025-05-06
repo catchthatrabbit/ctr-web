@@ -108,6 +108,18 @@
   margin-inline: calc(var(--space-xs) / 2);
 }
 
+.link {
+  color: var(--ifm-color-primary);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link.zephirum {
+  font-family: zephirum;
+}
+
 .paginationWrapper {
   width: 100%;
 }

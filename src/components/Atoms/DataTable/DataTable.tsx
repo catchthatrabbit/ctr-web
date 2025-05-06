@@ -3,13 +3,22 @@ import { Text } from '@site/src/components/Atoms/Text';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import { checkArrayObjectIsEmpty } from '@site/src/utils/checkIsEmpty';
-import LoadingSkeleton from './LoadingSkeleton';
 import { IDataTable } from './types';
 import { Pagination } from '@site/src/components/Molecules/Pagination';
-
 import { CopyButtonSmall } from '../../Molecules/CopyButton';
-
+import { FEDIVERSE_REGEX } from '@site/src/constants/fediverse';
+import { convertWorkerName } from '@site/src/utils/convertWorkerName';
 import styles from './styles.module.css';
+
+interface IColumn {
+  value: string;
+  label: string;
+  alignToCenter?: boolean;
+  isPrimary?: boolean;
+  fn?: (value: string) => void;
+  href?: string;
+  canBeCopied?: boolean;
+}
 
 const DataTable = ({
   data,
@@ -43,27 +52,39 @@ const DataTable = ({
     if (colItem.isPrimary) {
       if (colItem.href) {
         return (
-          <Link to={`${colItem.href}/${rowItem[colItem.value]}`}>
-            <Text variant="body" color="primary" type="zephirum">
-              {summarizedValue}
-            </Text>
+          <Link to={`${colItem.href}/${rowItem[colItem.value]}`} className={clsx(styles.link, styles.zephirum)}>
+            {summarizedValue}
           </Link>
         );
       }
+      if (colItem.fn) {
+        return (
+          <a
+            onClick={() => typeof colItem.fn === 'function' && colItem.fn(cellValue)}
+            className={clsx(styles.link, styles.zephirum)}
+            style={{ cursor: 'pointer' }}
+          >
+            {summarizedValue}
+          </a>
+        );
+      }
+      if (FEDIVERSE_REGEX.test(summarizedValue)) {
+        const { href, caption } = convertWorkerName(summarizedValue);
+        if (href) {
+          return (
+            <a
+              href={href}
+            className={clsx(styles.link, styles.zephirum)}
+            target="_blank"
+            rel="noopener"
+            >
+              {caption}
+            </a>
+          );
+        }
+      }
 
-      return (
-        <Text
-          variant="body"
-          className={styles.cursorPointer}
-          color="primary"
-          type="zephirum"
-          onClick={() =>
-            typeof colItem.fn === 'function' && colItem.fn(cellValue)
-          }
-        >
-          {summarizedValue}
-        </Text>
-      );
+      return <Text type="zephirum" variant="subheading" weight="semiBold" color="white">{summarizedValue}</Text>;
     }
 
     return (
@@ -134,7 +155,7 @@ const DataTable = ({
                     <span className={styles.copyButton}>
                       {renderCellContent(rowItem, colItem)}
                       {colItem.canBeCopied && (
-                        <CopyButtonSmall textToCopy={rowItem[colItem.value]} />
+                        <CopyButtonSmall textToCopy={String(rowItem[colItem.value])} />
                       )}
                     </span>
                   </td>

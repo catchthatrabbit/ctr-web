@@ -7,138 +7,10 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
 import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
 import ExchNumberFormat from 'exchange-rounding';
-
-// Currency options
-const topCurrencies = [
-  { value: 'EUR', name: 'Euro' },
-  { value: 'USD', name: 'US Dollar' },
-  { value: 'CHF', name: 'Swiss Franc' }
-];
-
-const otherCurrencies = [
-  { value: 'AED', name: 'UAE Dirham' },
-  { value: 'ARS', name: 'Argentine Peso' },
-  { value: 'AUD', name: 'Australian Dollar' },
-  { value: 'AZN', name: 'Azerbaijani Manat' },
-  { value: 'BBD', name: 'Barbadian Dollar' },
-  { value: 'BDT', name: 'Bangladeshi Taka' },
-  { value: 'BGN', name: 'Bulgarian Lev' },
-  { value: 'BHD', name: 'Bahraini Dinar' },
-  { value: 'BIF', name: 'Burundian Franc' },
-  { value: 'BOB', name: 'Bolivian Boliviano' },
-  { value: 'BRL', name: 'Brazilian Real' },
-  { value: 'BSD', name: 'Bahamian Dollar' },
-  { value: 'BWP', name: 'Botswana Pula' },
-  { value: 'CAD', name: 'Canadian Dollar' },
-  { value: 'CHF', name: 'Swiss Franc' },
-  { value: 'CLP', name: 'Chilean Peso' },
-  { value: 'CNY', name: 'Chinese Yuan' },
-  { value: 'COP', name: 'Colombian Peso' },
-  { value: 'CRC', name: 'Costa Rican Colón' },
-  { value: 'CUP', name: 'Cuban Peso' },
-  { value: 'CZK', name: 'Czech Koruna' },
-  { value: 'DKK', name: 'Danish Krone' },
-  { value: 'DOP', name: 'Dominican Peso' },
-  { value: 'EGP', name: 'Egyptian Pound' },
-  { value: 'ETB', name: 'Ethiopian Birr' },
-  { value: 'EUR', name: 'Euro' },
-  { value: 'GBP', name: 'British Pound' },
-  { value: 'GHS', name: 'Ghanaian Cedi' },
-  { value: 'GNF', name: 'Guinean Franc' },
-  { value: 'GTQ', name: 'Guatemalan Quetzal' },
-  { value: 'HKD', name: 'Hong Kong Dollar' },
-  { value: 'HNL', name: 'Honduran Lempira' },
-  { value: 'HTG', name: 'Haitian Gourde' },
-  { value: 'HUF', name: 'Hungarian Forint' },
-  { value: 'IDR', name: 'Indonesian Rupiah' },
-  { value: 'ILS', name: 'Israeli Shekel' },
-  { value: 'INR', name: 'Indian Rupee' },
-  { value: 'IQD', name: 'Iraqi Dinar' },
-  { value: 'ISK', name: 'Icelandic Króna' },
-  { value: 'JMD', name: 'Jamaican Dollar' },
-  { value: 'JOD', name: 'Jordanian Dinar' },
-  { value: 'JPY', name: 'Japanese Yen' },
-  { value: 'KES', name: 'Kenyan Shilling' },
-  { value: 'KGS', name: 'Kyrgyzstani Som' },
-  { value: 'KHR', name: 'Cambodian Riel' },
-  { value: 'KRW', name: 'South Korean Won' },
-  { value: 'KWD', name: 'Kuwaiti Dinar' },
-  { value: 'KZT', name: 'Kazakhstani Tenge' },
-  { value: 'LAK', name: 'Lao Kip' },
-  { value: 'LBP', name: 'Lebanese Pound' },
-  { value: 'LYD', name: 'Libyan Dinar' },
-  { value: 'MAD', name: 'Moroccan Dirham' },
-  { value: 'MDL', name: 'Moldovan Leu' },
-  { value: 'MGA', name: 'Malagasy Ariary' },
-  { value: 'MKD', name: 'Macedonian Denar' },
-  { value: 'MMK', name: 'Myanmar Kyat' },
-  { value: 'MOP', name: 'Macanese Pataca' },
-  { value: 'MUR', name: 'Mauritian Rupee' },
-  { value: 'MVR', name: 'Maldivian Rufiyaa' },
-  { value: 'MWK', name: 'Malawian Kwacha' },
-  { value: 'MXN', name: 'Mexican Peso' },
-  { value: 'MYR', name: 'Malaysian Ringgit' },
-  { value: 'MZN', name: 'Mozambican Metical' },
-  { value: 'NAD', name: 'Namibian Dollar' },
-  { value: 'NGN', name: 'Nigerian Naira' },
-  { value: 'NIO', name: 'Nicaraguan Córdoba' },
-  { value: 'NOK', name: 'Norwegian Krone' },
-  { value: 'NPR', name: 'Nepalese Rupee' },
-  { value: 'NZD', name: 'New Zealand Dollar' },
-  { value: 'OMR', name: 'Omani Rial' },
-  { value: 'PEN', name: 'Peruvian Sol' },
-  { value: 'PHP', name: 'Philippine Peso' },
-  { value: 'PKR', name: 'Pakistani Rupee' },
-  { value: 'PLN', name: 'Polish Złoty' },
-  { value: 'PYG', name: 'Paraguayan Guaraní' },
-  { value: 'QAR', name: 'Qatari Riyal' },
-  { value: 'RON', name: 'Romanian Leu' },
-  { value: 'RSD', name: 'Serbian Dinar' },
-  { value: 'RUB', name: 'Russian Ruble' },
-  { value: 'RWF', name: 'Rwandan Franc' },
-  { value: 'SAR', name: 'Saudi Riyal' },
-  { value: 'SCR', name: 'Seychellois Rupee' },
-  { value: 'SDG', name: 'Sudanese Pound' },
-  { value: 'SEK', name: 'Swedish Krona' },
-  { value: 'SGD', name: 'Singapore Dollar' },
-  { value: 'SOS', name: 'Somali Shilling' },
-  { value: 'THB', name: 'Thai Baht' },
-  { value: 'TJS', name: 'Tajikistani Somoni' },
-  { value: 'TND', name: 'Tunisian Dinar' },
-  { value: 'TRY', name: 'Turkish Lira' },
-  { value: 'TWD', name: 'New Taiwan Dollar' },
-  { value: 'TZS', name: 'Tanzanian Shilling' },
-  { value: 'UAH', name: 'Ukrainian Hryvnia' },
-  { value: 'UGX', name: 'Ugandan Shilling' },
-  { value: 'USD', name: 'United States Dollar' },
-  { value: 'UYU', name: 'Uruguayan Peso' },
-  { value: 'UZS', name: 'Uzbekistani Som' },
-  { value: 'VND', name: 'Vietnamese Đồng' },
-  { value: 'XAF', name: 'Central African CFA Franc' },
-  { value: 'XOF', name: 'West African CFA Franc' },
-  { value: 'XPF', name: 'CFP Franc' },
-  { value: 'YER', name: 'Yemeni Rial' },
-  { value: 'ZAR', name: 'South African Rand' },
-  { value: 'ZMW', name: 'Zambian Kwacha' }
-];
-
-const machineList = [
-  {
-    name: 'CTR MAX Series - 13 kh/s',
-    hashrate: 13000,
-    power: 0
-  },
-  {
-    name: 'AMD Ryzen™ 9 7950X3D',
-    hashrate: 25000,
-    power: 600
-  }
-];
-
-const allCurrencies = [
-  ...topCurrencies.map(c => ({ ...c, code: c.value })),
-  ...otherCurrencies.map(c => ({ ...c, code: c.value })),
-];
+import { currencies, topCurrencies } from '@site/src/constants/currencies';
+import { machines } from '@site/src/constants/machies';
+import config from '@site/docusaurus.config';
+import { getRepoUrl } from '@site/src/utils/getRepoUrl';
 
 // Type guard for profitabilityCalculation result
 function isProfitabilityResult(obj: any): obj is { revenue: number; xcbPrice: number; rewardXCB: number } {
@@ -173,17 +45,17 @@ const Calculator: React.FC = () => {
   };
 
   // Alphabetically sorted machine list
-  const sortedMachines = [...machineList].sort((a, b) => a.name.localeCompare(b.name));
+  const sortedMachines = [...machines].sort((a, b) => a.name.localeCompare(b.name));
 
   // Handle machine template selection
   useEffect(() => {
     if (selectedMachine) {
-      const machine = machineList.find(m => m.name === selectedMachine);
+      const machine = machines.find(m => m.name === selectedMachine);
       if (machine) {
         setHashrate(machine.hashrate.toString());
         // Always set power if it's defined, even if it's 0
-        if (typeof machine.power === 'number') {
-          setElectricityConsumption(machine.power.toString());
+        if (typeof machine.powerConsumption === 'number') {
+          setElectricityConsumption(machine.powerConsumption.toString());
         }
       }
     } else {
@@ -192,7 +64,7 @@ const Calculator: React.FC = () => {
       setElectricityConsumption('');
       setExtraExpenses('');
     }
-  }, [selectedMachine, machineList]);
+  }, [selectedMachine, machines]);
 
   useEffect(() => {
     let cancelled = false;
@@ -274,7 +146,7 @@ const Calculator: React.FC = () => {
               ))}
             </optgroup>
             <optgroup label="All Supported Currencies (Alphabetically)">
-              {otherCurrencies.map((curr) => (
+              {currencies.map((curr) => (
                 <option key={curr.value} value={curr.value}>
                   {`${curr.value} — ${curr.name}`}
                 </option>
@@ -297,9 +169,9 @@ const Calculator: React.FC = () => {
               </option>
             ))}
           </select>
-          <div style={{ textAlign: 'right', marginTop: '4px' }}>
+          <div style={{ textAlign: 'right', marginTop: '0.5em' }}>
             <a
-              href="https://github.com/catchthatrabbit/ctr-web/issues/new?template=template_proposal.yml"
+              href={`${getRepoUrl(config)}/edit/master/src/constants/machines.ts`}
               target="_blank"
               rel="noopener"
               style={{
@@ -307,20 +179,20 @@ const Calculator: React.FC = () => {
                 color: 'var(--ifm-color-primary)'
               }}
             >
-              Propose new template
+              Propose a New Machine Template
             </a>
           </div>
         </div>
         <div className={styles.inputGroup}>
           <label>
-              Hashrate (h/s)
+              RandomY Hashrate (H/s)
             <InputText
               type="number"
               min="1"
               step="any"
               value={hashrate}
               onChange={e => setHashrate(e.target.value)}
-              placeholder="Enter hashrate in h/s"
+              placeholder="Enter hashrate in H/s"
               context="dark"
               className={styles.input}
             />

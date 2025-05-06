@@ -1,4 +1,4 @@
-import React, { forwardRef, InputHTMLAttributes, FormEvent } from 'react';
+import React, { forwardRef, InputHTMLAttributes, FormEvent, ChangeEvent } from 'react';
 import { Text } from '../../Atoms/Text';
 import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 
@@ -71,7 +71,15 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
         placeholder={placeholder}
         rows={1}
         style={{ direction: 'ltr' }}
-        onChange={onChange}
+        onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+          if (onChange) {
+            const value = e.target.value;
+            const inputEvent = {
+              target: { value }
+            } as ChangeEvent<HTMLInputElement>;
+            onChange(inputEvent);
+          }
+        }}
         onInput={(e: FormEvent<HTMLTextAreaElement>) => {
           const target = e.target as HTMLTextAreaElement;
           target.style.height = 'auto';

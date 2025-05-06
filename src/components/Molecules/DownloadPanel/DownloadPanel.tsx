@@ -22,17 +22,20 @@ const DownloadPanel: React.FC = () => {
 
   const renderDownloadButtons = () => (
     <div className={styles.btns}>
-      <a
-        href={APP_STORE_URL}
-        target="_blank"
-        rel="noopener"
+      {APP_STORE_URL && (
+        <a
+          href={APP_STORE_URL}
+          target="_blank"
+          rel="noopener"
       >
-        <DownloadAppStore />
-      </a>
-      <a
-        href={GOOGLE_PLAY_URL}
-        target="_blank"
-        rel="noopener"
+          <DownloadAppStore />
+        </a>
+      )}
+      {GOOGLE_PLAY_URL && (
+        <a
+          href={GOOGLE_PLAY_URL}
+          target="_blank"
+          rel="noopener"
       >
         <img
           src={googlePlayImage}
@@ -42,6 +45,7 @@ const DownloadPanel: React.FC = () => {
           })}
         />
       </a>
+      )}
     </div>
   );
 
@@ -76,18 +80,22 @@ const DownloadPanel: React.FC = () => {
             Available globally
           </Text>
         </div>
-        <Spacer variant="md" />
-        {renderDownloadButtons()}
-        <Spacer variant="md" />
-        {renderQRCodeOrSpacer()}
-        {desktop ? <Spacer variant="md" /> : <Spacer variant="xl" />}
+        {(APP_STORE_URL || GOOGLE_PLAY_URL) && (
+          <>
+            <Spacer variant="md" />
+            {renderDownloadButtons()}
+            <Spacer variant="md" />
+            {renderQRCodeOrSpacer()}
+            {desktop ? <Spacer variant="md" /> : <Spacer variant="xl" />}
+          </>
+        )}
       </div>
       <div
         className={clsx(styles.image, {
           [styles.imageMobile]: mobile,
         })}
       >
-        <img src="/img/downloadDoubleCell.svg" alt="App Preview" />
+        <img src="/img/app-preview.svg" alt="App Preview" />
       </div>
     </div>
   );

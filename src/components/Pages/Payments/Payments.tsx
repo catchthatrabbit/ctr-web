@@ -85,20 +85,14 @@ const Payments = ({
   // Helper function to render the Board components
   const renderBoards = () => (
     <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
-      <Spacer variant="sm" />
-      <Spacer variant="md" />
       <Board
         isLoading={isLoadingPaymentState}
-        description="Sent payments"
+        description="Released payments"
         value={
           TextFormat.getNumberText(fetchedPaymentsState?.paymentsTotal).text
         }
         context="payments"
-        prefix=""
-        suffix=""
       />
-      {desktop ? <Spacer variant="sm" /> : <Spacer variant="lg" />}
-      <Spacer variant="md" />
     </div>
   );
 

@@ -24,36 +24,42 @@ export default function FooterLayout({ style, links, logo, copyright }) {
           <div className={clsx('col', customStyles.logoContainer)}>{logo}</div>
           <div className={clsx('col col--12', customStyles.footerLinks)}>
             {links}
-            <div className={customStyles.btns}>
-              <Text
-                variant="smallBody"
-                type="regular"
-                color="white"
-                className={customStyles.downloadText}
-              >
-                Wallet with XCB, CTN, Money𐆖 support
-              </Text>
-              <div className={customStyles.downloadBtns}>
-                <a
-                  href={APP_STORE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+            {(APP_STORE_URL || GOOGLE_PLAY_URL) && (
+              <div className={customStyles.btns}>
+                <Text
+                  variant="smallBody"
+                  type="regular"
+                  color="white"
+                  className={customStyles.downloadText}
                 >
-                  <DownloadAppStore />
-                </a>
-                <a
-                  href={GOOGLE_PLAY_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={googlePlayImage}
-                    alt="Download on Google Play"
-                    className={customStyles.googlePlayImage}
-                  />
-                </a>
+                  Wallet with XCB, CTN, Money𐆖 support
+                </Text>
+                <div className={customStyles.downloadBtns}>
+                  {APP_STORE_URL && (
+                    <a
+                      href={APP_STORE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                  >
+                      <DownloadAppStore />
+                    </a>
+                  )}
+                  {GOOGLE_PLAY_URL && (
+                    <a
+                      href={GOOGLE_PLAY_URL}
+                      target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={googlePlayImage}
+                      alt="Download on Google Play"
+                      className={customStyles.googlePlayImage}
+                      />
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

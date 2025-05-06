@@ -71,33 +71,6 @@ const StartMining = ({ onSetWalletAddress }: IStartMining) => {
 
       <Steps
         onSetWalletAddress={onSetWalletAddress}
-        steps={[
-          {
-            title: 'Step 1',
-            text: 'Download mining software compatible with your hardware.',
-            number: 1,
-          },
-          {
-            title: 'Step 2',
-            text: 'Configure your wallet address in the mining software.',
-            number: 2,
-          },
-          {
-            title: 'Step 3',
-            text: 'Join a mining pool for consistent rewards.',
-            number: 3,
-          },
-          {
-            title: 'Step 4',
-            text: 'Start the mining process and monitor performance.',
-            number: 4,
-          },
-          {
-            title: 'Step 5',
-            text: 'Optimize your settings for maximum efficiency.',
-            number: 5,
-          },
-        ]}
       />
 
       <Spacer variant="xl" />

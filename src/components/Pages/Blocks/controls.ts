@@ -1,6 +1,13 @@
 import { useMemo } from 'react';
 import usePageControls from '@site/src/hooks/usePageControls';
 import { tablesConfig } from '@site/src/configs';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+
+interface CustomFields {
+  URLS: {
+    BLOCK_DETAILS_URL: string;
+  };
+}
 
 const useControls = () => {
   // Use shared logic from usePageControls
@@ -22,6 +29,9 @@ const useControls = () => {
     includeInfoBox: true,
   });
 
+  const { siteConfig } = useDocusaurusContext();
+  const { URLS } = (siteConfig.customFields as unknown as CustomFields);
+
   // Page-specific logic for table columns
   const tableColumns = useMemo(
     () => [
@@ -29,7 +39,7 @@ const useControls = () => {
         value: 'height',
         label: 'Height',
         isPrimary: true,
-        href: '/block-details',
+        href: URLS.BLOCK_DETAILS_URL,
       },
       { value: 'type', label: 'Type' },
       { value: 'minedOn', label: 'Found at' },
@@ -38,7 +48,7 @@ const useControls = () => {
         label: 'Block hash',
         canBeCopied: true,
         isPrimary: true,
-        href: '/block-details',
+        href: URLS.BLOCK_DETAILS_URL,
       },
       { value: 'reward', label: 'Reward' },
       { value: 'variance', label: 'Variance' },

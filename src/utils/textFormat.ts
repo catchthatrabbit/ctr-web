@@ -25,7 +25,7 @@ export class TextFormat {
    */
   static getHashText = (
     value: number,
-    suffix: string = 'h/s'
+    suffix: string = 'H/s'
   ): TextFormatOutputType => {
     return {
       text: convertNumber2String(siFormat(value, 2)),
@@ -119,6 +119,6 @@ export class TextFormat {
   static getProfitabilityText = (value: string | number, prefix: string | null = null, period: string = "daily", fullName: boolean = true): TextFormatOutputType => ({
     text: convertNumber2String(value),
     prefix: prefix !== null ? prefix + " " : "",
-    suffix: period === "daily" ? (fullName ? " $/day" : " $/d") : period === "weekly" ? (fullName ? " $/week" : " $/w") : period === "monthly" ? (fullName ? " $/month" : " $/m") : (fullName ? " $/year" : " $/y"),
+    suffix: period === "daily" ? (fullName ? " $/day" : " $/d") : period === "weekly" ? (fullName ? " $/week" : " $/w") : period === "monthly" ? (fullName ? " $/month" : " $/mth") : (fullName ? " $/year" : " $/y"),
   });
 }

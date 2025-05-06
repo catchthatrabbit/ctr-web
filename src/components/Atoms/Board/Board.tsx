@@ -86,7 +86,7 @@ const Board: React.FC<IBoard> = ({
               variant="body"
               weight="medium"
               color="valueChartColor"
-              type="regular"
+              type="zephirum"
             >
               {value || "×"}
             </Text>
@@ -96,7 +96,7 @@ const Board: React.FC<IBoard> = ({
             lineHeight="normalLineHeight"
             letterSpacing="letterSpacing"
             color="valueChartColor"
-            type="regular"
+            type="zephirum"
           >
             {suffix}
           </Text>

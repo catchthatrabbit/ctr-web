@@ -7,6 +7,8 @@ import { Spacer } from '@site/src/components/Atoms/Spacer';
 import { OpenInNew } from '@site/src/icons';
 import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 import clsx from 'clsx';
+import config from '@site/docusaurus.config';
+import { getRepoUrl } from '@site/src/utils/getRepoUrl';
 
 interface Step {
   number: number;
@@ -23,7 +25,7 @@ interface Step {
 }
 
 interface StepsProps {
-  steps: Step[];
+  steps?: Step[];
   onSetWalletAddress: (address: string) => void;
 }
 
@@ -42,8 +44,8 @@ const stepsData: Step[] = [
     text: 'CoreMiner is a RandomY CPU mining worker - with CoreMiner you can mine any coin that relies on a RandomY Proof of Work. You can choose any other mining software if you prefer.',
     button: 'Download CoreMiner',
     buttonTitle: 'CoreMiner for Linux',
-    buttonLink: 'https://github.com/catchthatrabbit/coreminer/releases',
-    link: 'https://github.com/catchthatrabbit/coreminer?tab=readme-ov-file#automatic-installation',
+    buttonLink: `${getRepoUrl(config, 'coreminer')}/releases`,
+    link: `${getRepoUrl(config, 'coreminer')}?tab=readme-ov-file#automatic-installation`,
     linkText: 'Automatic installation script',
   },
   {
@@ -52,7 +54,7 @@ const stepsData: Step[] = [
     text: 'Configure the miner for your wallet address (Core ID) and preferred pools.',
     button: 'Create config file',
     buttonLink: '/go-live',
-    link: 'https://github.com/catchthatrabbit/coreminer?tab=readme-ov-file#config-file',
+    link: `${getRepoUrl(config, 'coreminer')}?tab=readme-ov-file#config-file`,
     linkText: 'Open configuration manual',
   },
   {

@@ -16,6 +16,11 @@ import { profitabilityCalculation } from "@site/src/utils/profitabilityCalculati
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
 import { ActionMeta } from "react-select";
+import config from '@site/docusaurus.config';
+import { getRepoUrl } from '@site/src/utils/getRepoUrl';
+import { products } from "@site/src/constants/products";
+import ExchNumberFormat from "exchange-rounding";
+import { siFormat } from "@site/src/utils/siFormat";
 
 import clsx from 'clsx';
 
@@ -52,13 +57,19 @@ const CreateConfig = ({
   const buyLink = customFields.URLS.BUY_LINK;
   console.log(buyLink);
 
-  const hashratePriceOptions = [
-    { value: "max13", label: "CTR MAX Series: ~13 kh/s — 100€ per month" },
-  ];
+  const hashratePriceOptions = products
+    .filter(product => product.available)
+    .map(product => ({
+      value: product.id,
+      label: `${product.name}: ~${siFormat(product.hashrate, 0)}H/s — ${product.price}€ per unit per month`
+    }));
 
+  const isOutOfStock = hashratePriceOptions.length === 0;
   const [profitability, setProfitability] = useState<number>(0);
   const [xcbPrice, setXcbPrice] = useState<number>(0);
-  const [selectedOption, setSelectedOption] = useState<string>(hashratePriceOptions[0].value);
+  const [xcbReward, setXcbReward] = useState<number>(0);
+  const [selectedOption, setSelectedOption] = useState<string>(isOutOfStock ? '' : hashratePriceOptions[0].value);
+  const [quantity, setQuantity] = useState<number>(1);
   const [dropdownValue1, setDropdownValue1] = useState<{ value: string; label: string } | null>(null);
   const [dropdownValue2, setDropdownValue2] = useState<{ value: string; label: string } | null>(null);
 
@@ -124,32 +135,20 @@ const CreateConfig = ({
     [],
   );
 
-  const handleDropdownChange1 = useCallback(
-    (selectedOption: { value: string; label: string }) => {
-      setDropdownValue1(selectedOption);
-    },
-    [],
-  );
-
-  const handleDropdownChange2 = useCallback(
-    (selectedOption: { value: string; label: string }) => {
-      setDropdownValue2(selectedOption);
-    },
-    [],
-  );
-
   const calculateProfitability = useCallback(async (hashrate: number) => {
     try {
       const result = await profitabilityCalculation(
         hashrate,
         siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
         String(siteConfig.customFields.API_PATH),
-        "usd",
+        "eur",
         "monthly"
       );
+      console.log(result);
       if (result) {
         setProfitability(result.revenue);
         setXcbPrice(result.xcbPrice);
+        setXcbReward(result.rewardXCB);
       }
     } catch (error) {
       console.error("Error calculating profitability:", error);
@@ -158,24 +157,39 @@ const CreateConfig = ({
 
   const handleHashratePriceChange = useCallback((newValue: { value: string; label: string }, actionMeta: ActionMeta<unknown>) => {
     setSelectedOption(newValue.value);
+    setQuantity(1); // Reset quantity when product changes
   }, []);
 
-  useEffect(() => {
-    if (selectedOption) {
-      const numericValue = selectedOption.replace(/[^0-9]/g, '');
-      const hashrate = Number(numericValue) * 1000; // Convert from kh/s to h/s
-      calculateProfitability(hashrate);
+  const handleQuantityChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    if (!isNaN(value) && value >= 1 && value <= 10) {
+      setQuantity(value);
     }
-  }, [selectedOption, calculateProfitability]);
+  }, []);
+
+  const getTotalPrice = useCallback(() => {
+    if (isOutOfStock || !selectedOption) return 0;
+    const selectedProduct = products.find(p => p.id === selectedOption);
+    if (!selectedProduct) return 0;
+    return selectedProduct.price * quantity;
+  }, [selectedOption, quantity, isOutOfStock]);
 
   useEffect(() => {
-    if (hashratePriceOptions.length > 0 && !selectedOption) {
+    if (selectedOption && !isOutOfStock) {
+      const numericValue = selectedOption.replace(/[^0-9]/g, '');
+      const hashrate = Number(numericValue) * 1000; // Convert from kH/s to h/s
+      calculateProfitability(hashrate);
+    }
+  }, [selectedOption, calculateProfitability, isOutOfStock]);
+
+  useEffect(() => {
+    if (hashratePriceOptions.length > 0 && !selectedOption && !isOutOfStock) {
       const initialValue = hashratePriceOptions[0].value;
       const numericValue = initialValue.replace(/[^0-9]/g, '');
       const hashrate = Number(numericValue) * 1000;
       calculateProfitability(hashrate);
     }
-  }, [hashratePriceOptions, calculateProfitability]);
+  }, [hashratePriceOptions, calculateProfitability, selectedOption, isOutOfStock]);
 
   useEffect(() => {
     if (
@@ -269,7 +283,7 @@ const CreateConfig = ({
             onChange={handleTypePortalChange}
             placeholder="coretalk.space"
           />
-          {!typePortal.isValid && (
+          {!typePortal.isValid && typePortal.value && (
             <Text
               variant="smallBody"
               style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
@@ -406,7 +420,7 @@ const CreateConfig = ({
             onChange={handleWalletAddressChange}
             className={styles.familyZephirum}
           />
-          {!isWalletValid && (
+          {!isWalletValid && walletAddress && (
             <Text
               variant="smallBody"
               style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
@@ -496,7 +510,8 @@ const CreateConfig = ({
             <div className={styles.halfContainer}>
               <div>
                 <h3 className={styles.ownHardware}>Own Hardware</h3>
-                <p>Click the download button to get the <span className={styles.boldText}>pool.cfg</span> file. Place it in the same folder as your <a href="https://github.com/catchthatrabbit/coreminer/releases" target="_blank" rel="noopener" className={styles.minerLink}>miner software</a>.</p>
+                <p>Click the download button to get the <span className={styles.boldText}>pool.cfg</span> file.
+                Place it in the same folder as your <a href={`${getRepoUrl(config, 'coreminer')}/releases`} target="_blank" rel="noopener" className={styles.minerLink}>miner software</a>.</p>
               </div>
               {!desktop && <Spacer variant="sm" />}
               {!desktop && (
@@ -512,24 +527,64 @@ const CreateConfig = ({
               <div>
                 <h3 className={styles.hosting}>Hosting</h3>
                 <div className={styles.dropdownPriceContainer}>
-                  <Dropdown
-                    defaultValue={hashratePriceOptions.find(opt => opt.value === selectedOption)?.label || ""}
-                    items={hashratePriceOptions}
-                    onChange={handleHashratePriceChange}
-                    text="Hashrate & Price"
-                  />
+                  <div className={styles.dropdownAndQuantity}>
+                    <Dropdown
+                      defaultValue={isOutOfStock ? "Out of Stock" : hashratePriceOptions.find(opt => opt.value === selectedOption)?.label || ""}
+                      items={isOutOfStock ? [{ value: "out_of_stock", label: "Out of Stock" }] : hashratePriceOptions}
+                      onChange={handleHashratePriceChange}
+                      isLoading={false}
+                    />
+                    {!isOutOfStock && (
+                      <div className={styles.quantityInput}>
+                        <InputText
+                          type="number"
+                          min="1"
+                          max="10"
+                          step="1"
+                          value={quantity}
+                          onChange={handleQuantityChange}
+                          context="dark"
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div>
-                  <span><strong>Estimation:</strong> {profitability ? `$${profitability.toFixed(2)}` : "Calculating…"} @XCB {xcbPrice ? `$${xcbPrice.toFixed(4)}` : "Loading…"}</span>
-                  <span style={{ marginLeft: '1em', fontSize: 'var(--small-font-size)' }}>Tip: <a href={buyLink} target="_blank" rel="noopener" className={styles.minerLink}>Buy more XCB</a> to raise the price globally.</span>
-                </div>
+                {!isOutOfStock && (
+                  <div>
+                    <div>
+                      <strong>Estimation:</strong> {profitability ? new ExchNumberFormat(undefined, {
+                        style: 'currency',
+                        currency: 'EUR'
+                      }).format(profitability * quantity) : "Calculating…"}<span style={{ fontSize: 'var(--small-font-size)', marginLeft: '0.5em', marginRight: '0.5em' }}>@XCB {xcbPrice ? new ExchNumberFormat(undefined, {
+                        style: 'currency',
+                        currency: 'EUR'
+                      }).format(xcbPrice) : "Loading…"}</span>({xcbReward ? new ExchNumberFormat(undefined, {
+                        style: 'currency',
+                        currency: 'XCB'
+                      }).format(xcbReward * quantity) : "Loading…"})
+                    </div>
+                    <div>
+                      With ordering you agree to the <a href="/machines-terms" target="_blank" rel="noopener" className={styles.minerLink}>Terms & Conditions</a>.
+                    </div>
+                    <div style={{ fontSize: 'var(--small-font-size)' }}>
+                      Tip: <a href={buyLink} target="_blank" rel="noopener" className={styles.minerLink}>Buy more XCB</a> to raise the price globally.
+                    </div>
+                  </div>
+                )}
               </div>
               {!desktop && (
-                <Button
-                  value="Order Machine and Pay Monthly"
-                  context="config"
-                  className={styles.fullButton}
-                />
+                <>
+                  <Spacer variant="sm" />
+                  <Button
+                    value={isOutOfStock ? "Out of Stock" : `Order Machine ×${quantity} and Pay Monthly ${`${new ExchNumberFormat(undefined, {
+                    style: 'currency',
+                    currency: 'EUR'
+                    }).format(getTotalPrice())}`}`}
+                    context="config"
+                    className={styles.fullButton}
+                    disabled={isOutOfStock}
+                  />
+                </>
               )}
             </div>
           </div>
@@ -540,11 +595,16 @@ const CreateConfig = ({
                 context="config"
                 onClick={handleDownloadConfig}
                 className={styles.halfButton}
+                disabled={!areFieldsValid()}
               />
               <Button
-                value="Order Machine and Pay Monthly"
+                value={isOutOfStock ? "Out of Stock" : `Order Machine ×${quantity} and Pay Monthly ${`${new ExchNumberFormat(undefined, {
+                  style: 'currency',
+                  currency: 'EUR'
+                }).format(getTotalPrice())}`}`}
                 context="config"
                 className={styles.halfButton}
+                disabled={isOutOfStock}
               />
             </div>
           )}

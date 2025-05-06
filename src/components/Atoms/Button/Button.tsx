@@ -17,6 +17,7 @@ interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   customWidth?: string;
   weight?: 'medium' | 'normal';
   context?: 'config' | 'wallet';
+  disabled?: boolean;
 }
 
 const Button = ({
@@ -31,11 +32,14 @@ const Button = ({
   customWidth,
   weight = 'normal',
   context,
+  disabled = false,
   ...restProps
 }: IButtonProps) => {
   const buttonStyle = {
     backgroundColor,
     color: textColor,
+    opacity: disabled ? 0.5 : 1,
+    cursor: disabled ? 'not-allowed' : 'pointer',
   };
 
   const renderedButton = (
@@ -50,6 +54,7 @@ const Button = ({
         { [styles.mobileWalletButton]: context === 'wallet' }
       )}
       style={buttonStyle}
+      disabled={disabled}
       {...restProps}
     >
       {icon && <div className={styles.buttonIcon}>{icon}</div>}

@@ -176,6 +176,44 @@
   outline: 2px solid var(--white);
 }
 
+.dropdownAndQuantity {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+}
+
+.dropdownAndQuantity > div:first-child {
+  flex: 1;
+}
+
+.quantityInput {
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.quantityInput input {
+  width: 100%;
+  padding: 0.9rem 0.3rem;
+  border-radius: 8px;
+  border: 1px solid #363636;
+  background: var(--dark-rgb-600);
+  color: var(--white);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.quantityInput input:focus {
+  outline: 2px solid var(--white);
+}
+
+.quantityInput input::-webkit-inner-spin-button,
+.quantityInput input::-webkit-outer-spin-button {
+  opacity: 1;
+  height: 2em;
+  margin-right: 4px;
+}
+
 @media screen and (max-width: 768px) {
   .mainContent {
     width: 100%;

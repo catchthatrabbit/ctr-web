@@ -142,7 +142,7 @@ export const convertPoolChartDataToMapChartInfoBox = async (
       },
       {
         title: "Profit:",
-        value: profitabilityData?.revenue !== undefined ? TextFormat.getProfitabilityText(profitabilityData.revenue.toFixed(2), "1kh/s", "monthly", false) : TextFormat.getDefaultText("×"),
+        value: profitabilityData?.revenue !== undefined ? TextFormat.getProfitabilityText(profitabilityData.revenue.toFixed(2), "1kH/s", "monthly", false) : TextFormat.getDefaultText("×"),
       },
     ],
   };

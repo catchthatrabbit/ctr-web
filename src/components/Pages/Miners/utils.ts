@@ -18,7 +18,7 @@ export const convertMinerResponse2MinerList = (
   return constMinersId?.map((minerId) => ({
     id: minerId,
     id_summarized: summarizedText(minerId, 10, 39),
-    hr: `${convert2kilo(minerResponse?.miners[minerId]?.hr)} kh/s`,
+    hr: `${convert2kilo(minerResponse?.miners[minerId]?.hr)} kH/s`,
     lastBeat: convertTime2Date(minerResponse?.miners[minerId]?.lastBeat),
     offline: minerResponse?.miners[minerId]?.offline,
   }));
