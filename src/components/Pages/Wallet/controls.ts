@@ -102,7 +102,7 @@ const useControls = ({
   } = useFetchWorkersByWalletAddress(
     region,
     walletAddress,
-    10,
+    100000, //need to make inactive/running pagination
     currentPageWorkers
   );
 

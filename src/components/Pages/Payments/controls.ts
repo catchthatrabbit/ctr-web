@@ -1,15 +1,15 @@
-import { useMemo } from "react";
-import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
-import { tablesConfig } from "@site/src/configs";
+import { useMemo } from 'react';
+import { IAnyPageAndWallet } from '@site/src/components/Pages/types';
+import { tablesConfig } from '@site/src/configs';
 import {
   useFetchPayments,
   useFetchPaymentsState,
-} from "@site/src/hooks/usePayments";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
-import { POOLS_LIST } from "@site/src/configs/types";
-import { useHistory } from "@docusaurus/router";
-import usePageControls from "@site/src/hooks/usePageControls";
+} from '@site/src/hooks/usePayments';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { URLS_CONFIG_TYPE } from '@site/src/configs/types';
+import { POOLS_LIST } from '@site/src/configs/types';
+import { useHistory } from '@docusaurus/router';
+import usePageControls from '@site/src/hooks/usePageControls';
 
 const useControls = ({
   onSetWalletAddress,
@@ -41,7 +41,7 @@ const useControls = ({
   const { data: fetchedPaymentsState, isLoading: isLoadingPaymentState } =
     useFetchPaymentsState(region);
   const { data: fetchedPaymentsList, isLoading: isLoadingPaymentList } =
-    useFetchPayments(region, 10, currentPageNumber);
+    useFetchPayments(region, 100000, currentPageNumber);
 
   const startMiningPoolConfigurations = siteConfig.customFields
     .POOLS_LIST as POOLS_LIST;

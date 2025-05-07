@@ -27,6 +27,7 @@ const List = ({
   data,
   onPageChange,
   total,
+
   hidePagination,
   isLoading,
   context,
@@ -78,13 +79,15 @@ const List = ({
               context === 'blocks' && styles.blocksPaginationWrapper
             )}
           >
-            <Pagination
-              offset={currentPage}
-              total={calcTotal()}
-              onPageChange={handlePageChange}
-              isLoading={isLoading}
-              loadingComp={<LoadingPlaceholder />}
-            />
+            {hidePagination && (
+              <Pagination
+                offset={currentPage}
+                total={filteredData.length}
+                onPageChange={handlePageChange}
+                isLoading={isLoading}
+                loadingComp={<LoadingPlaceholder />}
+              />
+            )}
           </div>
         </div>
       </div>

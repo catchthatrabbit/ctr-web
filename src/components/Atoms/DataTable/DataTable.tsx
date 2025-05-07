@@ -52,7 +52,10 @@ const DataTable = ({
     if (colItem.isPrimary) {
       if (colItem.href) {
         return (
-          <Link to={`${colItem.href}/${rowItem[colItem.value]}`} className={clsx(styles.link, styles.zephirum)}>
+          <Link
+            to={`${colItem.href}/${rowItem[colItem.value]}`}
+            className={clsx(styles.link, styles.zephirum)}
+          >
             {summarizedValue}
           </Link>
         );
@@ -60,7 +63,9 @@ const DataTable = ({
       if (colItem.fn) {
         return (
           <a
-            onClick={() => typeof colItem.fn === 'function' && colItem.fn(cellValue)}
+            onClick={() =>
+              typeof colItem.fn === 'function' && colItem.fn(cellValue)
+            }
             className={clsx(styles.link, styles.zephirum)}
             style={{ cursor: 'pointer' }}
           >
@@ -74,9 +79,9 @@ const DataTable = ({
           return (
             <a
               href={href}
-            className={clsx(styles.link, styles.zephirum)}
-            target="_blank"
-            rel="noopener"
+              className={clsx(styles.link, styles.zephirum)}
+              target="_blank"
+              rel="noopener"
             >
               {caption}
             </a>
@@ -84,7 +89,16 @@ const DataTable = ({
         }
       }
 
-      return <Text type="zephirum" variant="subheading" weight="semiBold" color="white">{summarizedValue}</Text>;
+      return (
+        <Text
+          type="zephirum"
+          variant="subheading"
+          weight="semiBold"
+          color="white"
+        >
+          {summarizedValue}
+        </Text>
+      );
     }
 
     return (
@@ -155,7 +169,9 @@ const DataTable = ({
                     <span className={styles.copyButton}>
                       {renderCellContent(rowItem, colItem)}
                       {colItem.canBeCopied && (
-                        <CopyButtonSmall textToCopy={String(rowItem[colItem.value])} />
+                        <CopyButtonSmall
+                          textToCopy={String(rowItem[colItem.value])}
+                        />
                       )}
                     </span>
                   </td>

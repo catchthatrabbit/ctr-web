@@ -1,13 +1,13 @@
-import { useFetchMiners, useFetchMinersState } from "@site/src/hooks/useMiners";
-import { convertMinerResponse2MinerList } from "./utils";
-import { MINERS_RESPONSE } from "@site/src/Api/miners/types";
-import { useHistory } from "@docusaurus/router";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { POOLS_LIST } from "@site/src/configs/types";
-import { useMemo } from "react";
-import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
-import { tablesConfig } from "@site/src/configs";
-import usePageControls from "@site/src/hooks/usePageControls";
+import { useFetchMiners, useFetchMinersState } from '@site/src/hooks/useMiners';
+import { convertMinerResponse2MinerList } from './utils';
+import { MINERS_RESPONSE } from '@site/src/Api/miners/types';
+import { useHistory } from '@docusaurus/router';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { POOLS_LIST } from '@site/src/configs/types';
+import { useMemo } from 'react';
+import { IAnyPageAndWallet } from '@site/src/components/Pages/types';
+import { tablesConfig } from '@site/src/configs';
+import usePageControls from '@site/src/hooks/usePageControls';
 
 const useControls = ({
   onSetWalletAddress,
@@ -38,7 +38,7 @@ const useControls = ({
   const { data: fetchedMinerState, isLoading: isLoadingMinerState } =
     useFetchMinersState(region);
   const { data: fetchedMinerList, isLoading: isLoadingMinerList } =
-    useFetchMiners(region, 10, currentPageNumber);
+    useFetchMiners(region, 100000, currentPageNumber);
 
   const startMiningPoolConfigurations = siteConfig.customFields
     .POOLS_LIST as POOLS_LIST;

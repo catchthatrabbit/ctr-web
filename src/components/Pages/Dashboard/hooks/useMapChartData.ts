@@ -26,6 +26,7 @@ const useMapChartData = () => {
     infoBoxItems: [],
   });
 
+  // Call hooks at the top level
   const { data: statsResponse, isLoading } = useFetchStats({
     urls: siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
     apiPath: String(siteConfig.customFields.API_PATH),
@@ -47,10 +48,9 @@ const useMapChartData = () => {
         const aggregator = aggregateNumbers(
           WHITELIST_AGGREGATE_KEYS.home.jumbotron
         );
-        let stats: STATS_RESPONSE = null;
 
         // Process statsResponse
-        stats = reduceList(statsResponse, aggregator);
+        const stats = reduceList(statsResponse, aggregator);
 
         console.log('stats after processing:', stats);
 
