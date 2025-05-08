@@ -53,7 +53,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
         const responses = await Promise.allSettled(
           Object.entries(apiEndpoints).map(async ([poolKey, apiUrl]) => {
             try {
-              const apiUrlWithPath = `https://cors-anywhere.herokuapp.com/${apiUrl}/v2/api/accounts/${walletAddress}`; //link to avoid CORS issues in development
+              const apiUrlWithPath = `${apiUrl}/v2/api/accounts/${walletAddress}`; //link to avoid CORS issues in development
               console.log(`Requesting data from: ${apiUrlWithPath}`);
               const response = await fetch(apiUrlWithPath, {
                 method: 'GET',
