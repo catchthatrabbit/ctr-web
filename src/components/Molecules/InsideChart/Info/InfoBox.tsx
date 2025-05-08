@@ -27,7 +27,6 @@ const InfoBox = ({
   loadingComponent,
   dir,
   className,
-  boardClassNameHor,
   boardClassNameVert,
   boardClassNameColumn,
   applyFullWidthBorder = false,

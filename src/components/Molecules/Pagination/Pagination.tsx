@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import ReactPaginate from 'react-paginate';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 import PaginationLeft from '@site/src/icons/PaginationLeft';
 import PaginationRight from '@site/src/icons/PaginationRight';
@@ -30,10 +30,17 @@ const Pagination = ({
   loadingComp,
 }: IPagination) => {
   const { desktop, laptop, mobile, tablet } = useMediaQueries();
+  const [fixedTotal, setFixedTotal] = useState(total);
 
   const handleChangePage = (selectedItem: { selected: number }) => {
     if (typeof onPageChange === 'function') onPageChange(selectedItem.selected);
   };
+
+  useEffect(() => {
+    if (total > fixedTotal) {
+      setFixedTotal(total); // Update only if total is valid
+    }
+  }, [total]);
 
   const startItem = offset * limit + 1;
   const endItem = Math.min((offset + 1) * limit, total);
@@ -92,7 +99,7 @@ const Pagination = ({
         onPageChange={handleChangePage}
         pageRangeDisplayed={2}
         marginPagesDisplayed={1}
-        pageCount={Math.ceil(total / limit)}
+        pageCount={Math.ceil(fixedTotal / limit)}
         previousClassName={styles.paginationPrevious}
         previousLabel={<PaginationLeft />}
         renderOnZeroPageCount={null}

@@ -112,7 +112,7 @@ const useControls = ({
   } = useFetchPaymentByWalletAddress(
     region,
     walletAddress,
-    10,
+    100000,
     currentPagePayouts
   );
 
