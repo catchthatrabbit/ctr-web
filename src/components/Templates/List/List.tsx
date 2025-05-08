@@ -86,6 +86,7 @@ const List = ({
                 onPageChange={handlePageChange}
                 isLoading={isLoading}
                 loadingComp={<LoadingPlaceholder />}
+                isFiltered={filterStatus !== 'All'}
               />
             )}
           </div>

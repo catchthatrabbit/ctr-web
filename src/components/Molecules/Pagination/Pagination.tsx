@@ -28,7 +28,8 @@ const Pagination = ({
   emptyComponent = <></>,
   isLoading,
   loadingComp,
-}: IPagination) => {
+  isFiltered = false, // New prop to indicate if the table is filtered
+}: IPagination & { isFiltered?: boolean }) => {
   const { desktop, laptop, mobile, tablet } = useMediaQueries();
   const [fixedTotal, setFixedTotal] = useState(total);
 
@@ -37,13 +38,17 @@ const Pagination = ({
   };
 
   useEffect(() => {
-    if (total > 0) {
-      setFixedTotal(total); // Update only if total is valid
+    if (isFiltered) {
+      // For filtered tables, always use the dynamic total
+      setFixedTotal(total);
+    } else if (total > 0 && total > fixedTotal) {
+      // For unfiltered tables, update only if the total increases
+      setFixedTotal(total);
     }
-  }, [total]);
+  }, [total, isFiltered, fixedTotal]);
 
   const startItem = offset * limit + 1;
-  const endItem = Math.min((offset + 1) * limit, total);
+  const endItem = Math.min((offset + 1) * limit, fixedTotal);
 
   if (isLoading)
     return (
@@ -99,7 +104,7 @@ const Pagination = ({
         onPageChange={handleChangePage}
         pageRangeDisplayed={2}
         marginPagesDisplayed={1}
-        pageCount={Math.ceil(total / limit)}
+        pageCount={Math.ceil(fixedTotal / limit)}
         previousClassName={styles.paginationPrevious}
         previousLabel={<PaginationLeft />}
         renderOnZeroPageCount={null}
