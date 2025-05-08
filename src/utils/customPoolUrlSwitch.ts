@@ -34,7 +34,12 @@ export const customPoolAndApiUrlSwitch = (
     case 'JP':
       resultUrl = poolUrl['JP_API_ENDPOINT'];
       break;
+    default:
+      resultUrl = '';
   }
+
+  if (!resultUrl) return '';
+
   if (apiPath) {
     if (resultUrl.endsWith('/')) return `${resultUrl}${apiPath}`;
     return `${resultUrl}/${apiPath}`;

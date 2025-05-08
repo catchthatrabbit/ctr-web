@@ -8,7 +8,7 @@ import {
 import { Spacer } from '@site/src/components/Atoms/Spacer';
 import { WalletInfoTabs } from '@site/src/components/Organisms/WalletInfoTabs';
 import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
-
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import clsx from 'clsx';
 
 interface IInfo {
@@ -30,15 +30,15 @@ const Info = ({
   handleFilterChange,
 }: IInfo) => {
   const { desktop, mobile } = useMediaQueries();
-
+  const { siteConfig } = useDocusaurusContext();
   const generalStats = useMemo(
     () => convertWalletInfoResponse2GeneralState(data),
     [data]
   );
 
   const computingInformation = useMemo(
-    () => convertWalletInfoResponse2ComputingInformation(data),
-    [data]
+    () => convertWalletInfoResponse2ComputingInformation(data, siteConfig),
+    [data, siteConfig]
   );
 
   return (

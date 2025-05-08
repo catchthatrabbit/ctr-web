@@ -14,7 +14,7 @@ export const fetchWalletInfo = async ({
 }) => {
   try {
     const instance = new AxiosInstance({ region, url }).getInstance();
-    console.log('walletinfo', region, url);
+
     const response = instance.get(`/accounts/${walletAddress}`) as Promise<
       AxiosResponse<WALLET_INFO_RESPONSE>
     >;
