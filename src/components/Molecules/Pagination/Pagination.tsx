@@ -37,7 +37,7 @@ const Pagination = ({
   };
 
   useEffect(() => {
-    if (total > fixedTotal) {
+    if (total > 0) {
       setFixedTotal(total); // Update only if total is valid
     }
   }, [total]);
@@ -99,7 +99,7 @@ const Pagination = ({
         onPageChange={handleChangePage}
         pageRangeDisplayed={2}
         marginPagesDisplayed={1}
-        pageCount={Math.ceil(fixedTotal / limit)}
+        pageCount={Math.ceil(total / limit)}
         previousClassName={styles.paginationPrevious}
         previousLabel={<PaginationLeft />}
         renderOnZeroPageCount={null}
