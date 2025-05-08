@@ -6,11 +6,12 @@
   color: var(--black-800);
   background: var(--ifm-search-btn-color);
   transition: all 0.1s ease-in-out 0s;
-  position: relative;
+  position: absolute;
   font-family: var(--regular-font-family);
   font-size: var(--regular-font-size);
   font-weight: var(--medium-font-weight);
-  right: 7rem;
+  right: 0.5rem;
+  transform: translateY(-50%);
   padding: 1rem 1.5rem;
   z-index: 2;
 }
@@ -217,6 +218,7 @@
 }
 
 @media screen and (max-width: 768px) {
+
   .searchInput,
   .searchWallet .searchInput {
     padding: 1rem 5rem 1rem 2.6rem;
@@ -258,6 +260,12 @@
   .searchWallet .searchButton {
     position: relative;
   }
+
+  .searchButtonMobile_o26a {
+    font-size: var(--small-font-size);
+    padding: 0.8rem;
+    transform: translateY(0%);
+}
 }
 
 @media screen and (min-width: 1600px) {
@@ -282,3 +290,4 @@
     padding: 1rem 1.5rem;
   }
 }
+
