@@ -26,7 +26,9 @@ export default function NavbarMobileSidebarLayout({
           }
         )}
       >
-        <div className={`navbar-sidebar__item menu ${customStyles.navbarItem}`}>
+        <div
+          className={`navbar-sidebar__item menu ${customStyles.navbarItem} ${customStyles.centered}`}
+        >
           {primaryMenu}
         </div>
       </div>
