@@ -33,6 +33,7 @@ const Routes = () =>
       path: '/go-live/:walletAddress/:pool/:secondPool',
       component: CreateConfig,
     }),
+
     React.createElement(Route, {
       exact: true,
       path: '/pool-selection',

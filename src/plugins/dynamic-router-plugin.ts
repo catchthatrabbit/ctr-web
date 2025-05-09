@@ -12,6 +12,11 @@ export default function dynamicRouterPlugin(
         component: '@site/src/pages/wallet-overview',
         exact: true,
       });
+      actions.addRoute({
+        path: '/go-live/:walletAddress/:pool/:secondPool',
+        component: '@site/src/pages/go-live',
+        exact: true,
+      });
     },
   };
 }

@@ -1,26 +1,26 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { CreateConfigTitle } from "@site/src/components/Molecules/PictureTitles";
-import { InputText } from "@site/src/components/Atoms/InputText";
-import { Dropdown } from "../../Atoms/Dropdown";
-import { Text } from "@site/src/components/Atoms/Text";
-import Button from "@site/src/components/Atoms/Button/Button";
-import Ican from "@blockchainhub/ican";
-import useControls from "./controls";
-import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
-import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
-import { constructWorkerName } from "@site/src/utils/convertWorkerName";
-import { profitabilityCalculation } from "@site/src/utils/profitabilityCalculation";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
-import { ActionMeta } from "react-select";
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { CreateConfigTitle } from '@site/src/components/Molecules/PictureTitles';
+import { InputText } from '@site/src/components/Atoms/InputText';
+import { Dropdown } from '../../Atoms/Dropdown';
+import { Text } from '@site/src/components/Atoms/Text';
+import Button from '@site/src/components/Atoms/Button/Button';
+import Ican from '@blockchainhub/ican';
+import useControls from './controls';
+import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
+import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
+import { constructWorkerName } from '@site/src/utils/convertWorkerName';
+import { profitabilityCalculation } from '@site/src/utils/profitabilityCalculation';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
+import { ActionMeta } from 'react-select';
 import config from '@site/docusaurus.config';
 import { getRepoUrl } from '@site/src/utils/getRepoUrl';
-import { products } from "@site/src/constants/products";
-import ExchNumberFormat from "exchange-rounding";
-import { siFormat } from "@site/src/utils/siFormat";
+import { products } from '@site/src/constants/products';
+import ExchNumberFormat from 'exchange-rounding';
+import { siFormat } from '@site/src/utils/siFormat';
 
 import clsx from 'clsx';
 
@@ -55,31 +55,41 @@ const CreateConfig = ({
   const { siteConfig } = useDocusaurusContext();
   const customFields = siteConfig.customFields as unknown as CustomFields;
   const buyLink = customFields.URLS.BUY_LINK;
+  const prefillDone = useRef(false);
+  const isTryingToPrefill = useRef(false);
   console.log(buyLink);
 
   const hashratePriceOptions = products
-    .filter(product => product.available)
-    .map(product => ({
+    .filter((product) => product.available)
+    .map((product) => ({
       value: product.id,
-      label: `${product.name}: ~${siFormat(product.hashrate, 0)}H/s — ${product.price}€ per unit per month`
+      label: `${product.name}: ~${siFormat(product.hashrate, 0)}H/s — ${product.price}€ per unit per month`,
     }));
 
   const isOutOfStock = hashratePriceOptions.length === 0;
   const [profitability, setProfitability] = useState<number>(0);
   const [xcbPrice, setXcbPrice] = useState<number>(0);
   const [xcbReward, setXcbReward] = useState<number>(0);
-  const [selectedOption, setSelectedOption] = useState<string>(isOutOfStock ? '' : hashratePriceOptions[0].value);
+  const [selectedOption, setSelectedOption] = useState<string>(
+    isOutOfStock ? '' : hashratePriceOptions[0].value
+  );
   const [quantity, setQuantity] = useState<number>(1);
-  const [dropdownValue1, setDropdownValue1] = useState<{ value: string; label: string } | null>(null);
-  const [dropdownValue2, setDropdownValue2] = useState<{ value: string; label: string } | null>(null);
+  const [dropdownValue1, setDropdownValue1] = useState<{
+    value: string;
+    label: string;
+  } | null>(null);
+  const [dropdownValue2, setDropdownValue2] = useState<{
+    value: string;
+    label: string;
+  } | null>(null);
 
   // Group all useState hooks together
-  const [walletAddress, setWalletAddress] = useState(address || "");
+  const [walletAddress, setWalletAddress] = useState(address || '');
   const [isWalletValid, setIsWalletValid] = useState(true);
-  const [inputType, setInputType] = useState("plain");
-  const [minerName, setMinerName] = useState({ value: "", isValid: true });
-  const [typePortal, setTypePortal] = useState({ value: "", isValid: true });
-  const [uniqueId, setUniqueId] = useState("");
+  const [inputType, setInputType] = useState('plain');
+  const [minerName, setMinerName] = useState({ value: '', isValid: true });
+  const [typePortal, setTypePortal] = useState({ value: '', isValid: true });
+  const [uniqueId, setUniqueId] = useState('');
   const [showError, setShowError] = useState(false);
   const { mobile, tablet, desktop } = useMediaQueries();
   const {
@@ -92,29 +102,90 @@ const CreateConfig = ({
 
   // Group all useCallback hooks together
   const formatWalletAddress = useCallback((value: string) => {
-    return value.replace(/(.{4})/g, "$1 ").trim();
+    return value.replace(/(.{4})/g, '$1 ').trim();
   }, []);
 
   const handleWalletAddressChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const formattedValue = formatWalletAddress(
-        event.target.value.replace(/\s+/g, ""),
+        event.target.value.replace(/\s+/g, '')
       );
       const isValid = Ican.isValid(formattedValue, true);
       setIsWalletValid(isValid);
       setWalletAddress(formattedValue);
     },
-    [formatWalletAddress],
+    [formatWalletAddress]
   );
+
+  useEffect(() => {
+    if (prefillDone.current || dropdownItems.length === 0) return;
+    if (dropdownItems.length > 0) {
+      const pathParts = window.location.pathname.split('/').filter(Boolean);
+
+      const isGoLiveWithParams =
+        pathParts[0] === 'go-live' && pathParts.length === 4;
+
+      if (isGoLiveWithParams) {
+        const [, walletParam, pool1Param, pool2Param] = pathParts;
+
+        setWalletAddress((prev) => {
+          const newAddress = walletParam.replace(/\s+/g, '');
+          const formattedAddress = formatWalletAddress(newAddress);
+          const isValid = Ican.isValid(formattedAddress, true);
+          setIsWalletValid(isValid);
+          if (prev !== newAddress) {
+            onSetWalletAddress?.(formattedAddress);
+            return formattedAddress;
+          }
+          return prev;
+        });
+
+        const dropdown1 =
+          dropdownItems.find(
+            (item) => item.value === pool1Param.toUpperCase()
+          ) || null;
+        const dropdown2 =
+          dropdownItems.find(
+            (item) => item.value === pool2Param.toUpperCase()
+          ) || null;
+
+        console.log('dropdown1', dropdown1);
+        if (!dropdown1 || !dropdown2) return;
+        if (dropdown1 && dropdown2) {
+          setDropdownValue1((prev) =>
+            prev?.value !== dropdown1?.value ? dropdown1 : prev
+          );
+
+          setDropdownValue2((prev) =>
+            prev?.value !== dropdown2?.value ? dropdown2 : prev
+          );
+          isTryingToPrefill.current = true;
+        }
+      }
+    }
+  }, [dropdownItems, onSetWalletAddress]);
+
+  useEffect(() => {
+    if (
+      isTryingToPrefill.current &&
+      dropdownValue1 &&
+      dropdownValue2 &&
+      !prefillDone.current
+    ) {
+      prefillDone.current = true;
+      isTryingToPrefill.current = false;
+    }
+  }, [dropdownValue1, dropdownValue2]);
 
   const handleMinerNameChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value;
-      const regex = inputType === "plain" ? /^[A-Za-z0-9_-]+$/ : /^[A-Za-z0-9]+$/;
+      const regex =
+        inputType === 'plain' ? /^[A-Za-z0-9_-]+$/ : /^[A-Za-z0-9]+$/;
       const isValid = regex.test(value);
       setMinerName({ value, isValid });
     },
-    [inputType],
+    [inputType]
   );
 
   const handleTypePortalChange = useCallback(
@@ -125,51 +196,63 @@ const CreateConfig = ({
       const isValid = regex.test(value);
       setTypePortal({ value, isValid });
     },
-    [],
+    []
   );
 
   const handleUniqueIdChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setUniqueId(event.target.value);
     },
-    [],
+    []
   );
 
-  const calculateProfitability = useCallback(async (hashrate: number) => {
-    try {
-      const result = await profitabilityCalculation(
-        hashrate,
-        siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
-        String(siteConfig.customFields.API_PATH),
-        "eur",
-        "monthly"
-      );
-      console.log(result);
-      if (result) {
-        setProfitability(result.revenue);
-        setXcbPrice(result.xcbPrice);
-        setXcbReward(result.rewardXCB);
+  const calculateProfitability = useCallback(
+    async (hashrate: number) => {
+      try {
+        const result = await profitabilityCalculation(
+          hashrate,
+          siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
+          String(siteConfig.customFields.API_PATH),
+          'eur',
+          'monthly'
+        );
+        console.log(result);
+        if (result) {
+          setProfitability(result.revenue);
+          setXcbPrice(result.xcbPrice);
+          setXcbReward(result.rewardXCB);
+        }
+      } catch (error) {
+        console.error('Error calculating profitability:', error);
       }
-    } catch (error) {
-      console.error("Error calculating profitability:", error);
-    }
-  }, [siteConfig]);
+    },
+    [siteConfig]
+  );
 
-  const handleHashratePriceChange = useCallback((newValue: { value: string; label: string }, actionMeta: ActionMeta<unknown>) => {
-    setSelectedOption(newValue.value);
-    setQuantity(1); // Reset quantity when product changes
-  }, []);
+  const handleHashratePriceChange = useCallback(
+    (
+      newValue: { value: string; label: string },
+      actionMeta: ActionMeta<unknown>
+    ) => {
+      setSelectedOption(newValue.value);
+      setQuantity(1); // Reset quantity when product changes
+    },
+    []
+  );
 
-  const handleQuantityChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    if (!isNaN(value) && value >= 1 && value <= 10) {
-      setQuantity(value);
-    }
-  }, []);
+  const handleQuantityChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = parseFloat(e.target.value);
+      if (!isNaN(value) && value >= 1 && value <= 10) {
+        setQuantity(value);
+      }
+    },
+    []
+  );
 
   const getTotalPrice = useCallback(() => {
     if (isOutOfStock || !selectedOption) return 0;
-    const selectedProduct = products.find(p => p.id === selectedOption);
+    const selectedProduct = products.find((p) => p.id === selectedOption);
     if (!selectedProduct) return 0;
     return selectedProduct.price * quantity;
   }, [selectedOption, quantity, isOutOfStock]);
@@ -189,23 +272,30 @@ const CreateConfig = ({
       const hashrate = Number(numericValue) * 1000;
       calculateProfitability(hashrate);
     }
-  }, [hashratePriceOptions, calculateProfitability, selectedOption, isOutOfStock]);
+  }, [
+    hashratePriceOptions,
+    calculateProfitability,
+    selectedOption,
+    isOutOfStock,
+  ]);
 
   useEffect(() => {
-    if (
-      dropdownItems.length > 0 &&
-      (!dropdownValue1 || !dropdownValue2)
-    ) {
+    if (dropdownItems.length > 0 && (!dropdownValue1 || !dropdownValue2)) {
       if (pool || secondPool) {
-        const pool1 = dropdownItems.find(item => item.value === pool) || dropdownItems[0];
-        const pool2 = dropdownItems.find(item => item.value === secondPool) || dropdownItems[1];
+        const pool1 =
+          dropdownItems.find((item) => item.value === pool) || dropdownItems[0];
+        const pool2 =
+          dropdownItems.find((item) => item.value === secondPool) ||
+          dropdownItems[1];
         setDropdownValue1(pool1);
         setDropdownValue2(pool2);
       } else {
         const pool1Index = Math.floor(Math.random() * dropdownItems.length);
         const pool1 = dropdownItems[pool1Index];
         setDropdownValue1(pool1);
-        const pool2Candidates = dropdownItems.filter((_, idx) => idx !== pool1Index);
+        const pool2Candidates = dropdownItems.filter(
+          (_, idx) => idx !== pool1Index
+        );
         if (pool2Candidates.length > 0) {
           const pool2Index = Math.floor(Math.random() * pool2Candidates.length);
           setDropdownValue2(pool2Candidates[pool2Index]);
@@ -223,7 +313,7 @@ const CreateConfig = ({
           <Text
             variant="body"
             color="subheadingColor"
-            style={{ marginBottom: "0.5em" }}
+            style={{ marginBottom: '0.5em' }}
           >
             Plain name
           </Text>
@@ -236,7 +326,7 @@ const CreateConfig = ({
           {!minerName.isValid && (
             <Text
               variant="body"
-              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+              style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
             >
               Plain name is invalid. Use only letters, numbers, underscores (_),
               or hyphens (-).
@@ -251,7 +341,7 @@ const CreateConfig = ({
           <Text
             variant="body"
             color="subheadingColor"
-            style={{ marginBottom: "0.5em" }}
+            style={{ marginBottom: '0.5em' }}
           >
             Fediverse Username
           </Text>
@@ -264,7 +354,7 @@ const CreateConfig = ({
           {!minerName.isValid && (
             <Text
               variant="body"
-              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+              style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
             >
               Fediverse username is invalid. Use only letters and numbers.
             </Text>
@@ -273,7 +363,7 @@ const CreateConfig = ({
           <Text
             variant="body"
             color="subheadingColor"
-            style={{ marginBottom: "0.5em" }}
+            style={{ marginBottom: '0.5em' }}
           >
             Fediverse portal
           </Text>
@@ -295,7 +385,7 @@ const CreateConfig = ({
           <Text
             variant="body"
             color="subheadingColor"
-            style={{ marginBottom: "0.5em" }}
+            style={{ marginBottom: '0.5em' }}
           >
             Worker ID (optional)
           </Text>
@@ -312,11 +402,11 @@ const CreateConfig = ({
   };
 
   const areFieldsValid = () => {
-    if (inputType === "plain") {
+    if (inputType === 'plain') {
       return (
         isWalletValid && minerName.isValid && walletAddress && minerName.value
       );
-    } else if (inputType === "fediverse") {
+    } else if (inputType === 'fediverse') {
       return (
         isWalletValid &&
         minerName.isValid &&
@@ -335,34 +425,36 @@ const CreateConfig = ({
       return;
     }
     setShowError(false);
-    let walletAddressFormat = walletAddress.replace(/\s+/g, "").toLowerCase();
-    let workerName = "";
-    if (inputType === "plain") {
+    let walletAddressFormat = walletAddress.replace(/\s+/g, '').toLowerCase();
+    let workerName = '';
+    if (inputType === 'plain') {
       workerName = minerName.value;
-    } else if (inputType === "fediverse") {
+    } else if (inputType === 'fediverse') {
       workerName = constructWorkerName(
         minerName.value,
         [typePortal.value],
-        uniqueId ? uniqueId : undefined,
+        uniqueId ? uniqueId : undefined
       );
     }
     const regionKey1 = Object.keys(startMiningPoolConfigurations).find(
       (key) =>
-        startMiningPoolConfigurations[key]["DESCRIPTION"] === dropdownValue1?.label,
+        startMiningPoolConfigurations[key]['DESCRIPTION'] ===
+        dropdownValue1?.label
     );
     const regionKey2 = Object.keys(startMiningPoolConfigurations).find(
       (key) =>
-        startMiningPoolConfigurations[key]["DESCRIPTION"] === dropdownValue2?.label,
+        startMiningPoolConfigurations[key]['DESCRIPTION'] ===
+        dropdownValue2?.label
     );
 
     const server1 =
-      regionKey1 && startMiningPoolConfigurations[regionKey1]["SERVER"];
+      regionKey1 && startMiningPoolConfigurations[regionKey1]['SERVER'];
     const port1 =
-      regionKey1 && startMiningPoolConfigurations[regionKey1]["PORT"];
+      regionKey1 && startMiningPoolConfigurations[regionKey1]['PORT'];
     const server2 =
-      regionKey2 && startMiningPoolConfigurations[regionKey2]["SERVER"];
+      regionKey2 && startMiningPoolConfigurations[regionKey2]['SERVER'];
     const port2 =
-      regionKey2 && startMiningPoolConfigurations[regionKey2]["PORT"];
+      regionKey2 && startMiningPoolConfigurations[regionKey2]['PORT'];
 
     const configData = {
       wallet: walletAddressFormat,
@@ -375,13 +467,13 @@ const CreateConfig = ({
 
     const configContent = Object.entries(configData)
       .map(([key, value]) => `${key}=${value}`)
-      .join("\n");
+      .join('\n');
 
-    const blob = new Blob([configContent], { type: "text/plain" });
+    const blob = new Blob([configContent], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
+    const a = document.createElement('a');
     a.href = url;
-    a.download = "pool.cfg";
+    a.download = 'pool.cfg';
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -409,7 +501,7 @@ const CreateConfig = ({
           <Text
             variant="body"
             color="subheadingColor"
-            style={{ marginBottom: "0.5em" }}
+            style={{ marginBottom: '0.5em' }}
             disableMobileStyles
           >
             Core ID (Wallet address)
@@ -434,19 +526,21 @@ const CreateConfig = ({
               <Text
                 variant="body"
                 color="subheadingColor"
-                style={{ marginBottom: "0.5em" }}
+                style={{ marginBottom: '0.5em' }}
               >
                 Primary pool (Main)
               </Text>
               <select
                 className={styles.boardDropdown}
-                value={dropdownValue1?.value || ""}
-                onChange={e => {
-                  const selected = dropdownItems.find(item => item.value === e.target.value);
+                value={dropdownValue1?.value || ''}
+                onChange={(e) => {
+                  const selected = dropdownItems.find(
+                    (item) => item.value === e.target.value
+                  );
                   setDropdownValue1(selected || null);
                 }}
               >
-                {dropdownItems.map(item => (
+                {dropdownItems.map((item) => (
                   <option key={item.value} value={item.value}>
                     {item.label}
                   </option>
@@ -457,19 +551,21 @@ const CreateConfig = ({
               <Text
                 variant="body"
                 color="subheadingColor"
-                style={{ marginBottom: "0.5em" }}
+                style={{ marginBottom: '0.5em' }}
               >
                 Secondary pool (Fail-Safe)
               </Text>
               <select
                 className={styles.boardDropdown}
-                value={dropdownValue2?.value || ""}
-                onChange={e => {
-                  const selected = dropdownItems.find(item => item.value === e.target.value);
+                value={dropdownValue2?.value || ''}
+                onChange={(e) => {
+                  const selected = dropdownItems.find(
+                    (item) => item.value === e.target.value
+                  );
                   setDropdownValue2(selected || null);
                 }}
               >
-                {dropdownItems.map(item => (
+                {dropdownItems.map((item) => (
                   <option key={item.value} value={item.value}>
                     {item.label}
                   </option>
@@ -478,7 +574,10 @@ const CreateConfig = ({
             </div>
           </div>
           <div className={styles.viewPoolsLinkContainer}>
-            <Link to="/start-mining#pools" style={{ color: 'var(--ifm-color-primary)' }}>
+            <Link
+              to="/start-mining#pools"
+              style={{ color: 'var(--ifm-color-primary)' }}
+            >
               Mining Pools Overview
             </Link>
           </div>
@@ -490,15 +589,21 @@ const CreateConfig = ({
           <div className={styles.tabs}>
             <button
               type="button"
-              className={clsx(styles.tabButton, inputType === "plain" && styles.activeTab)}
-              onClick={() => setInputType("plain")}
+              className={clsx(
+                styles.tabButton,
+                inputType === 'plain' && styles.activeTab
+              )}
+              onClick={() => setInputType('plain')}
             >
               Plain name
             </button>
             <button
               type="button"
-              className={clsx(styles.tabButton, inputType === "fediverse" && styles.activeTab)}
-              onClick={() => setInputType("fediverse")}
+              className={clsx(
+                styles.tabButton,
+                inputType === 'fediverse' && styles.activeTab
+              )}
+              onClick={() => setInputType('fediverse')}
             >
               Fediverse
             </button>
@@ -510,8 +615,20 @@ const CreateConfig = ({
             <div className={styles.halfContainer}>
               <div>
                 <h3 className={styles.ownHardware}>Own Hardware</h3>
-                <p>Click the download button to get the <span className={styles.boldText}>pool.cfg</span> file.
-                Place it in the same folder as your <a href={`${getRepoUrl(config, 'coreminer')}/releases`} target="_blank" rel="noopener" className={styles.minerLink}>miner software</a>.</p>
+                <p>
+                  Click the download button to get the{' '}
+                  <span className={styles.boldText}>pool.cfg</span> file. Place
+                  it in the same folder as your{' '}
+                  <a
+                    href={`${getRepoUrl(config, 'coreminer')}/releases`}
+                    target="_blank"
+                    rel="noopener"
+                    className={styles.minerLink}
+                  >
+                    miner software
+                  </a>
+                  .
+                </p>
               </div>
               {!desktop && <Spacer variant="sm" />}
               {!desktop && (
@@ -529,8 +646,18 @@ const CreateConfig = ({
                 <div className={styles.dropdownPriceContainer}>
                   <div className={styles.dropdownAndQuantity}>
                     <Dropdown
-                      defaultValue={isOutOfStock ? "Out of Stock" : hashratePriceOptions.find(opt => opt.value === selectedOption)?.label || ""}
-                      items={isOutOfStock ? [{ value: "out_of_stock", label: "Out of Stock" }] : hashratePriceOptions}
+                      defaultValue={
+                        isOutOfStock
+                          ? 'Out of Stock'
+                          : hashratePriceOptions.find(
+                              (opt) => opt.value === selectedOption
+                            )?.label || ''
+                      }
+                      items={
+                        isOutOfStock
+                          ? [{ value: 'out_of_stock', label: 'Out of Stock' }]
+                          : hashratePriceOptions
+                      }
                       onChange={handleHashratePriceChange}
                       isLoading={false}
                     />
@@ -552,22 +679,60 @@ const CreateConfig = ({
                 {!isOutOfStock && (
                   <div>
                     <div>
-                      <strong>Estimation:</strong> {profitability ? new ExchNumberFormat(undefined, {
-                        style: 'currency',
-                        currency: 'EUR'
-                      }).format(profitability * quantity) : "Calculating…"}<span style={{ fontSize: 'var(--small-font-size)', marginLeft: '0.5em', marginRight: '0.5em' }}>@XCB {xcbPrice ? new ExchNumberFormat(undefined, {
-                        style: 'currency',
-                        currency: 'EUR'
-                      }).format(xcbPrice) : "Loading…"}</span>({xcbReward ? new ExchNumberFormat(undefined, {
-                        style: 'currency',
-                        currency: 'XCB'
-                      }).format(xcbReward * quantity) : "Loading…"})
+                      <strong>Estimation:</strong>{' '}
+                      {profitability
+                        ? new ExchNumberFormat(undefined, {
+                            style: 'currency',
+                            currency: 'EUR',
+                          }).format(profitability * quantity)
+                        : 'Calculating…'}
+                      <span
+                        style={{
+                          fontSize: 'var(--small-font-size)',
+                          marginLeft: '0.5em',
+                          marginRight: '0.5em',
+                        }}
+                      >
+                        @XCB{' '}
+                        {xcbPrice
+                          ? new ExchNumberFormat(undefined, {
+                              style: 'currency',
+                              currency: 'EUR',
+                            }).format(xcbPrice)
+                          : 'Loading…'}
+                      </span>
+                      (
+                      {xcbReward
+                        ? new ExchNumberFormat(undefined, {
+                            style: 'currency',
+                            currency: 'XCB',
+                          }).format(xcbReward * quantity)
+                        : 'Loading…'}
+                      )
                     </div>
                     <div>
-                      With ordering you agree to the <a href="/machines-terms" target="_blank" rel="noopener" className={styles.minerLink}>Terms & Conditions</a>.
+                      With ordering you agree to the{' '}
+                      <a
+                        href="/machines-terms"
+                        target="_blank"
+                        rel="noopener"
+                        className={styles.minerLink}
+                      >
+                        Terms & Conditions
+                      </a>
+                      .
                     </div>
                     <div style={{ fontSize: 'var(--small-font-size)' }}>
-                      Tip: <a href={buyLink} target="_blank" rel="noopener" className={styles.minerLink}>Buy more XCB</a> to raise the price globally.
+                      Tip:{' '}
+                      <a
+                        href={buyLink}
+                        target="_blank"
+                        rel="noopener"
+                        className={styles.minerLink}
+                      >
+                        Buy more XCB
+                      </a>{' '}
+                      to raise the price globally.
                     </div>
                   </div>
                 )}
@@ -576,10 +741,17 @@ const CreateConfig = ({
                 <>
                   <Spacer variant="sm" />
                   <Button
-                    value={isOutOfStock ? "Out of Stock" : `Order Machine ×${quantity} and Pay Monthly ${`${new ExchNumberFormat(undefined, {
-                    style: 'currency',
-                    currency: 'EUR'
-                    }).format(getTotalPrice())}`}`}
+                    value={
+                      isOutOfStock
+                        ? 'Out of Stock'
+                        : `Order Machine ×${quantity} and Pay Monthly ${`${new ExchNumberFormat(
+                            undefined,
+                            {
+                              style: 'currency',
+                              currency: 'EUR',
+                            }
+                          ).format(getTotalPrice())}`}`
+                    }
                     context="config"
                     className={styles.fullButton}
                     disabled={isOutOfStock}
@@ -598,10 +770,17 @@ const CreateConfig = ({
                 disabled={!areFieldsValid()}
               />
               <Button
-                value={isOutOfStock ? "Out of Stock" : `Order Machine ×${quantity} and Pay Monthly ${`${new ExchNumberFormat(undefined, {
-                  style: 'currency',
-                  currency: 'EUR'
-                }).format(getTotalPrice())}`}`}
+                value={
+                  isOutOfStock
+                    ? 'Out of Stock'
+                    : `Order Machine ×${quantity} and Pay Monthly ${`${new ExchNumberFormat(
+                        undefined,
+                        {
+                          style: 'currency',
+                          currency: 'EUR',
+                        }
+                      ).format(getTotalPrice())}`}`
+                }
                 context="config"
                 className={styles.halfButton}
                 disabled={isOutOfStock}
