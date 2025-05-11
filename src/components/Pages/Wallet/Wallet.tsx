@@ -32,9 +32,17 @@ const Wallet = ({
   onChangeRegion,
   onSetWalletAddress,
 }: IWallet) => {
+  const [filterStatus, setFilterStatus] = useState<
+    'All' | 'Running' | 'Inactive'
+  >('All');
+  const [toastShown, setToastShown] = useState(false);
+  const { mobile, tablet, desktop } = useMediaQueries();
+
   const {
     fetchPaymentsByWalletAddress,
     fetchWorkersByWalletAddress,
+    fetchWorkerCounts,
+    isLoadingFetchWorkerCounts,
     fetchedWalletInfo,
     handleChangePagePayouts,
     handleChangePageWorkers,
@@ -50,13 +58,33 @@ const Wallet = ({
     regionLabel,
     infoBoxMapData,
     isLoadingMapChart,
-  } = useControls({ walletAddress, defaultRegion, onChangeRegion });
-
-  const [filterStatus, setFilterStatus] = useState('All');
-  const [toastShown, setToastShown] = useState(false);
-  const { mobile, tablet, desktop } = useMediaQueries();
+  } = useControls({
+    walletAddress,
+    defaultRegion,
+    onChangeRegion,
+    filterStatus,
+  });
 
   const walletNotFound = !walletAddress || !fetchedWalletInfo;
+
+  const getWorkersTotal = () => {
+    if (!fetchWorkerCounts) return 0;
+    if (filterStatus === 'All') {
+      return (
+        (fetchWorkerCounts.workersOnline || 0) +
+        (fetchWorkerCounts.workersOffline || 0)
+      );
+    }
+    if (filterStatus === 'Running') {
+      return fetchWorkerCounts.workersOnline || 0;
+    }
+    if (filterStatus === 'Inactive') {
+      return fetchWorkerCounts.workersOffline || 0;
+    }
+    return 0;
+  };
+
+  console.log('get workers total', getWorkersTotal());
 
   // Handle toast notifications
   useEffect(() => {
@@ -79,7 +107,7 @@ const Wallet = ({
       )}
       hidePagination
       dataTableColumns={workersTableColumn}
-      total={fetchWorkersByWalletAddress?.workersTotal}
+      total={getWorkersTotal()}
       onPageChange={handleChangePageWorkers}
       context="wallet"
       filterStatus={filterStatus}
@@ -161,7 +189,16 @@ const Wallet = ({
             data={fetchedWalletInfo}
             isLoading={isLoadingFetchWallet}
             loadingPlaceholder={<LoadingPlaceholder />}
-            handleFilterChange={setFilterStatus}
+            handleFilterChange={(status: string) => {
+              // Only allow valid statuses
+              if (
+                status === 'All' ||
+                status === 'Running' ||
+                status === 'Inactive'
+              ) {
+                setFilterStatus(status);
+              }
+            }}
             workers={renderWorkers()}
             payouts={renderPayouts()}
           />

@@ -41,7 +41,7 @@ const useControls = ({
   const { data: fetchedPaymentsState, isLoading: isLoadingPaymentState } =
     useFetchPaymentsState(region);
   const { data: fetchedPaymentsList, isLoading: isLoadingPaymentList } =
-    useFetchPayments(region, 100000, currentPageNumber);
+    useFetchPayments(region, 10, currentPageNumber);
 
   const startMiningPoolConfigurations = siteConfig.customFields
     .POOLS_LIST as POOLS_LIST;

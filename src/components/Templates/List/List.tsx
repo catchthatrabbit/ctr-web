@@ -34,22 +34,11 @@ const List = ({
   filterStatus = 'All',
 }: IList) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const { mobile } = useMediaQueries();
-
-  const calcTotal = useCallback(() => {
-    if (total > MAX_PAGES) return MAX_PAGES;
-    return total;
-  }, [total]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     if (typeof onPageChange === 'function') onPageChange(page);
   };
-
-  const filteredData = data?.filter((item) => {
-    if (filterStatus === 'All') return true;
-    return item.status === filterStatus;
-  });
 
   return (
     <div
@@ -65,7 +54,7 @@ const List = ({
             <DataTable
               emptyComponent={<Empty />}
               columns={dataTableColumns}
-              data={filteredData}
+              data={data}
               isLoading={isLoading}
               loadingComp={<LoadingPlaceholder />}
               context={context}
@@ -82,7 +71,7 @@ const List = ({
             {hidePagination && (
               <Pagination
                 offset={currentPage}
-                total={filteredData.length}
+                total={total}
                 onPageChange={handlePageChange}
                 isLoading={isLoading}
                 loadingComp={<LoadingPlaceholder />}

@@ -39,7 +39,7 @@ const usePageControls = ({
 
   // Fetch multiple datasets (e.g., blocks)
   const multipleData = fetchMultipleData
-    ? useFetchAllBlocks(region, 100000, currentPageNumber)
+    ? useFetchAllBlocks(region, 10, currentPageNumber)
     : null;
 
   return {

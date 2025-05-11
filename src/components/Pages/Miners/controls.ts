@@ -38,7 +38,7 @@ const useControls = ({
   const { data: fetchedMinerState, isLoading: isLoadingMinerState } =
     useFetchMinersState(region);
   const { data: fetchedMinerList, isLoading: isLoadingMinerList } =
-    useFetchMiners(region, 100000, currentPageNumber);
+    useFetchMiners(region, 10, currentPageNumber);
 
   const startMiningPoolConfigurations = siteConfig.customFields
     .POOLS_LIST as POOLS_LIST;

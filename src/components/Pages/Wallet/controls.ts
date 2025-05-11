@@ -4,6 +4,7 @@ import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 import {
   useFetchWallet,
   useFetchWorkersByWalletAddress,
+  useFetchWorkerCounts,
 } from '@site/src/hooks/useWallet';
 import { useFetchPaymentByWalletAddress } from '@site/src/hooks/usePayments';
 import { useMemo, useState } from 'react';
@@ -15,12 +16,13 @@ import usePageControls from '@site/src/hooks/usePageControls';
 
 interface IWallet extends Omit<IAnyPageAndWallet, 'onSetWalletAddress'> {
   walletAddress: string;
+  filterStatus?: 'All' | 'Running' | 'Inactive';
 }
 
 const useControls = ({
   defaultRegion,
-  onChangeRegion,
   walletAddress,
+  filterStatus = 'All',
 }: IWallet) => {
   const {
     region,
@@ -44,6 +46,11 @@ const useControls = ({
   const urlConfig = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
   const okEmoji = String(siteConfig.customFields.EFFECTS_EMOJI_OK);
   const brbEmoji = String(siteConfig.customFields.EFFECTS_EMOJI_BRB);
+
+  let status: 'active' | 'inactive' | undefined;
+  if (filterStatus === 'Running') status = 'active';
+  else if (filterStatus === 'Inactive') status = 'inactive';
+  else status = undefined;
 
   const paymentPayoutTableColumns = useMemo(
     () => [
@@ -102,8 +109,9 @@ const useControls = ({
   } = useFetchWorkersByWalletAddress(
     region,
     walletAddress,
-    100000, //need to make inactive/running pagination
-    currentPageWorkers
+    10, //need to make inactive/running pagination
+    currentPageWorkers,
+    status
   );
 
   const {
@@ -112,9 +120,12 @@ const useControls = ({
   } = useFetchPaymentByWalletAddress(
     region,
     walletAddress,
-    100000,
+    10,
     currentPagePayouts
   );
+
+  const { data: fetchWorkerCounts, isLoading: isLoadingFetchWorkerCounts } =
+    useFetchWorkerCounts(region, walletAddress);
 
   const handleChangeRegion = (id: {
     label: string;
@@ -140,6 +151,8 @@ const useControls = ({
     paymentPayoutTableColumns,
     fetchedWalletInfo,
     fetchWorkersByWalletAddress,
+    fetchWorkerCounts,
+    isLoadingFetchWorkerCounts,
     fetchPaymentsByWalletAddress,
     handleChangePagePayouts,
     handleChangePageWorkers,
