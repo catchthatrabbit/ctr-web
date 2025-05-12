@@ -39,7 +39,7 @@ const PoolSelectionPage = ({
         />
       )}
       <div className="pool-selection-page">
-        <Spacer variant="xxxxl" />
+        {mobile ? <Spacer variant="xl" /> : <Spacer variant="xxxxl" />}
         <SelectPoolTitle />
         <Spacer variant="xxl" />
         <div

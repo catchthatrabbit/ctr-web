@@ -72,7 +72,7 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
     <div className={`flex ${styles.buttonLinkContainer}`}>
       {step.button && (
         <>
-          <div className={styles.button} style={{ textAlign: 'center' }}>
+          <div className={styles.button}>
             {step.buttonLink ? (
               <a
                 href={step.buttonLink}

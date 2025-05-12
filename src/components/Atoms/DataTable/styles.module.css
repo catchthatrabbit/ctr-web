@@ -4,6 +4,7 @@
   border-top-left-radius: var(--ifm-global-radius);
   border-top-right-radius: var(--ifm-global-radius);
   margin-bottom: 0;
+  display: inline-table;
 }
 
 .walletTable {

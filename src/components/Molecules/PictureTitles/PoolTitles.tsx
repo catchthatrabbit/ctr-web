@@ -13,7 +13,6 @@ const PoolTitle = () => {
       secondaryText="CTR has a global network of mining pools to choose from"
       secondaryTextStyle={{
         fontSize: 'var(--regular-font-size)',
-        textWrap: 'nowrap',
       }}
       image={<Dive />}
     />

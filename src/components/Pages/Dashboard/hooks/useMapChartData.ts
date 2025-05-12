@@ -26,7 +26,6 @@ const useMapChartData = () => {
     infoBoxItems: [],
   });
 
-  // Call hooks at the top level
   const { data: statsResponse, isLoading } = useFetchStats({
     urls: siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
     apiPath: String(siteConfig.customFields.API_PATH),
@@ -36,12 +35,16 @@ const useMapChartData = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!statsResponse || statsResponse.length === 0) {
-        console.warn(
-          'statsResponse is not ready yet or is empty:',
-          statsResponse
-        );
-        return; // Exit early if statsResponse is not ready
+      if (!statsResponse || !Array.isArray(statsResponse)) {
+        console.warn('statsResponse is not an array:', statsResponse);
+        return;
+      }
+
+      const validStats = statsResponse.filter(Boolean);
+
+      if (validStats.length === 0) {
+        console.warn('No valid stats responses');
+        return;
       }
 
       try {
@@ -49,10 +52,8 @@ const useMapChartData = () => {
           WHITELIST_AGGREGATE_KEYS.home.jumbotron
         );
 
-        // Process statsResponse
-        const stats = reduceList(statsResponse, aggregator);
-
-        console.log('stats after processing:', stats);
+        const stats = reduceList(validStats, aggregator);
+        console.log('Reduced stats:', stats);
 
         const profitability = await profitabilityCalculation(
           1000,
