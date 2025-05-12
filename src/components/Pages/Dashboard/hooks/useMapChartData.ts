@@ -21,6 +21,7 @@ interface MapChartData {
 
 const useMapChartData = () => {
   const { siteConfig } = useDocusaurusContext();
+
   const [chartData, setChartData] = useState<MapChartData>({
     poolFee: '',
     infoBoxItems: [],
@@ -35,15 +36,16 @@ const useMapChartData = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!statsResponse || !Array.isArray(statsResponse)) {
-        console.warn('statsResponse is not an array:', statsResponse);
+      if (isLoading) return;
+
+      if (!Array.isArray(statsResponse)) {
         return;
       }
 
       const validStats = statsResponse.filter(Boolean);
 
       if (validStats.length === 0) {
-        console.warn('No valid stats responses');
+        console.warn('No valid stats data received from any pools.');
         return;
       }
 
@@ -53,7 +55,6 @@ const useMapChartData = () => {
         );
 
         const stats = reduceList(validStats, aggregator);
-        console.log('Reduced stats:', stats);
 
         const profitability = await profitabilityCalculation(
           1000,
@@ -73,13 +74,14 @@ const useMapChartData = () => {
 
         setChartData(data);
       } catch (error) {
-        console.error('Error fetching chart data:', error);
+        console.error('Error building chart data:', error);
       }
     };
 
     fetchData();
   }, [
     statsResponse,
+    isLoading,
     settingsResponse,
     siteConfig.customFields.API_ENDPOINTS,
     siteConfig.customFields.API_PATH,
