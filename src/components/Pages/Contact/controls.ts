@@ -3,14 +3,12 @@ import usePageControls from '@site/src/hooks/usePageControls';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 const useControls = () => {
-  // Use shared logic from usePageControls
   const { infoBoxMapData, isLoadingMapChart } = usePageControls({
     defaultRegion: 'DE',
     includeInfoBox: true,
   });
   const { siteConfig } = useDocusaurusContext();
 
-  // Page-specific logic for maintainers data
   const maintainersData = useMemo(() => {
     const customFields = siteConfig.customFields as Partial<{
       MAINTAINERS_SUPPORT_EMAIL:

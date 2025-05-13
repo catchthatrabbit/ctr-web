@@ -84,8 +84,6 @@ const Wallet = ({
     return 0;
   };
 
-  console.log('get workers total', getWorkersTotal());
-
   // Handle toast notifications
   useEffect(() => {
     if (walletNotFound && !toastShown && !isLoadingFetchWallet) {

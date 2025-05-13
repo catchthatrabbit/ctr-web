@@ -1,7 +1,6 @@
 import { toast } from 'react-toastify';
 import CustomCloseButton from '../components/Molecules/CopyButton/CustomCloseButton';
 
-// Function to generate toast styles dynamically
 const getToastStyles = (mobile: boolean) => ({
   background: '#363636',
   top: mobile ? '6rem' : undefined,
@@ -11,7 +10,6 @@ const getToastStyles = (mobile: boolean) => ({
   borderRadius: mobile ? '8px' : undefined,
 });
 
-// Success Toast
 export const showSuccessToast = (
   message: string,
   mobile: boolean,
@@ -25,7 +23,6 @@ export const showSuccessToast = (
   });
 };
 
-// Error Toast
 export const showErrorToast = (
   message: string,
   mobile: boolean,

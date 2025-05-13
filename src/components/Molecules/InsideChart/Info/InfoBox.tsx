@@ -36,7 +36,6 @@ const InfoBox = ({
 }: IInfoBox) => {
   const { desktop, laptop, mobile, tablet } = useMediaQueries();
 
-  // Convert 'around' to a valid Board dir value
   const boardDir = dir === 'around' ? 'column' : dir;
 
   return isLoading ? (

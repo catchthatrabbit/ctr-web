@@ -6,8 +6,8 @@ import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 
 interface IPageControls {
   defaultRegion: STANDARD_REGIONS_API_KEYS;
-  includeInfoBox?: boolean; // Include infoBoxMapData
-  fetchMultipleData?: boolean; // Fetch multiple datasets (e.g., blocks)
+  includeInfoBox?: boolean;
+  fetchMultipleData?: boolean;
 }
 
 const usePageControls = ({
@@ -15,7 +15,6 @@ const usePageControls = ({
   includeInfoBox = false,
   fetchMultipleData = false,
 }: IPageControls) => {
-  // Region handling
   const {
     region,
     regionLabel,
@@ -27,17 +26,14 @@ const usePageControls = ({
     defaultRegion,
   });
 
-  // Pagination
   const { currentPageNumber, handlePageChange } = usePaginate();
 
-  // Map chart data
   const {
     infoBoxItems: infoBoxMapData,
     poolFee,
     isLoading: isLoadingMapChart,
   } = useMapChartData();
 
-  // Fetch multiple datasets (e.g., blocks)
   const multipleData = fetchMultipleData
     ? useFetchAllBlocks(region, 10, currentPageNumber)
     : null;

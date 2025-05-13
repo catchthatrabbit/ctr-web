@@ -21,7 +21,6 @@ const PoolSelectionPage = ({
   const { mobile, tablet } = useMediaQueries();
 
   const handleSelectPool = (pool: any) => {
-    console.log('Selected pool:', pool);
     history.push(`/coreid/${walletAddress}/${pool.region}`);
   };
 

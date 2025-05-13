@@ -8,9 +8,9 @@ import styles from './styles.module.css';
 interface BlockProps {
   title: string;
   text: string;
-  link?: string; // Make link optional
+  link?: string;
   linkText: string;
-  onClick?: () => void; // Optional onClick handler
+  onClick?: () => void;
 }
 
 const InfoPanel: React.FC<BlockProps> = ({
@@ -37,8 +37,8 @@ const InfoPanel: React.FC<BlockProps> = ({
   return (
     <div
       className={`flex flex-column ${styles.block} ${mobile ? styles.mobileBlock : ''}`}
-      onClick={onClick} // Add onClick to the container
-      style={onClick ? { cursor: 'pointer' } : undefined} // Add pointer cursor if onClick is provided
+      onClick={onClick}
+      style={onClick ? { cursor: 'pointer' } : undefined}
     >
       <Text
         variant="heading3"
@@ -57,7 +57,7 @@ const InfoPanel: React.FC<BlockProps> = ({
       </Text>
       <Spacer variant="xs" />
 
-      {link ? ( // Conditionally render the link
+      {link ? (
         <a href={link} className={styles.link} onClick={handleLinkClick}>
           <Text variant="smallBody" color="primary" weight="bold">
             {linkText}

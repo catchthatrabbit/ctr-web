@@ -12,7 +12,6 @@ export const convertNumber2Currency = (
   type = 'XCB',
   location: string | null = 'auto'
 ): string => {
-  // Initialize ExchNumberFormat
   const numberFormat = new ExchNumberFormat(location, {
     style: 'currency',
     currency: type,

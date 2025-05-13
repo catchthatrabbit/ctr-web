@@ -53,8 +53,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
         const responses = await Promise.allSettled(
           Object.entries(apiEndpoints).map(async ([poolKey, apiUrl]) => {
             try {
-              const apiUrlWithPath = `https://cors-anywhere.herokuapp.com/${apiUrl}/v2/api/accounts/${walletAddress}`; //link to avoid CORS issues in development
-              console.log(`Requesting data from: ${apiUrlWithPath}`);
+              const apiUrlWithPath = `${apiUrl}/v2/api/accounts/${walletAddress}`;
               const response = await fetch(apiUrlWithPath, {
                 method: 'GET',
                 headers: {
@@ -96,9 +95,6 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
           )
           .map((result) => (result as PromiseFulfilledResult<any>).value);
 
-        console.log('responses:', responses);
-        console.log('All successful pools:', successfulPools);
-
         return successfulPools;
       } catch (error) {
         console.error('Error fetching data from APIs:', error);
@@ -119,12 +115,9 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
         const pools = await detectPoolsForWallet(address);
 
         if (pools.length > 0) {
-          console.log('Matching pools:', pools);
-
           if (pools.length === 1) {
             // Navigate to the first pool's route
             const firstPool = pools[0];
-            console.log('region', firstPool?.region);
 
             if (firstPool?.region) {
               history.push(`/coreid/${address}/${firstPool.region}`);

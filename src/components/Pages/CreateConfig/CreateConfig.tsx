@@ -57,7 +57,6 @@ const CreateConfig = ({
   const buyLink = customFields.URLS.BUY_LINK;
   const prefillDone = useRef(false);
   const isTryingToPrefill = useRef(false);
-  console.log(buyLink);
 
   const hashratePriceOptions = products
     .filter((product) => product.available)
@@ -83,7 +82,6 @@ const CreateConfig = ({
     label: string;
   } | null>(null);
 
-  // Group all useState hooks together
   const [walletAddress, setWalletAddress] = useState(address || '');
   const [isWalletValid, setIsWalletValid] = useState(true);
   const [inputType, setInputType] = useState('plain');
@@ -100,7 +98,6 @@ const CreateConfig = ({
     isLoadingMapChart,
   } = useControls({ defaultRegion, onSetWalletAddress, onChangeRegion });
 
-  // Group all useCallback hooks together
   const formatWalletAddress = useCallback((value: string) => {
     return value.replace(/(.{4})/g, '$1 ').trim();
   }, []);
@@ -149,7 +146,6 @@ const CreateConfig = ({
             (item) => item.value === pool2Param.toUpperCase()
           ) || null;
 
-        console.log('dropdown1', dropdown1);
         if (!dropdown1 || !dropdown2) return;
         if (dropdown1 && dropdown2) {
           setDropdownValue1((prev) =>
@@ -216,7 +212,7 @@ const CreateConfig = ({
           'eur',
           'monthly'
         );
-        console.log(result);
+
         if (result) {
           setProfitability(result.revenue);
           setXcbPrice(result.xcbPrice);

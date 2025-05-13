@@ -14,10 +14,6 @@ function useMediaQueries() {
     mobile: mobileQuery && !tabletQuery && !laptopQuery && !desktopQuery,
   };
 
-  // if (result.tablet) result.mobile = false;
-  // if (result.laptop) result.tablet = false;
-  // if (result.desktop) result.laptop = false;
-
   return result;
 }
 

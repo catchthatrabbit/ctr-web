@@ -21,7 +21,6 @@ export const fetchWorkersByWalletAddress = async ({
   try {
     const instance = new AxiosInstance({ region, url }).getInstance();
 
-    // Build query string
     let query = `/workers/${walletAddress}?limit=${limit}&offset=${offset}`;
     if (status === 'active') {
       query += `&online=true`;

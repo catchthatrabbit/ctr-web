@@ -10,7 +10,6 @@ interface CustomFields {
 }
 
 const useControls = () => {
-  // Use shared logic from usePageControls
   const {
     regionLabel,
     dropdownItems,
@@ -30,9 +29,8 @@ const useControls = () => {
   });
 
   const { siteConfig } = useDocusaurusContext();
-  const { URLS } = (siteConfig.customFields as unknown as CustomFields);
+  const { URLS } = siteConfig.customFields as unknown as CustomFields;
 
-  // Page-specific logic for table columns
   const tableColumns = useMemo(
     () => [
       {

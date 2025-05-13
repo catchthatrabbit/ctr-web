@@ -12,9 +12,12 @@ import { machines } from '@site/src/constants/machies';
 import config from '@site/docusaurus.config';
 import { getRepoUrl } from '@site/src/utils/getRepoUrl';
 
-// Type guard for profitabilityCalculation result
-function isProfitabilityResult(obj: any): obj is { revenue: number; xcbPrice: number; rewardXCB: number } {
-  return obj && typeof obj === 'object' && 'revenue' in obj && 'xcbPrice' in obj;
+function isProfitabilityResult(
+  obj: any
+): obj is { revenue: number; xcbPrice: number; rewardXCB: number } {
+  return (
+    obj && typeof obj === 'object' && 'revenue' in obj && 'xcbPrice' in obj
+  );
 }
 
 interface CustomFields {
@@ -32,25 +35,28 @@ const Calculator: React.FC = () => {
   const [electricityCost, setElectricityCost] = useState('');
   const [electricityConsumption, setElectricityConsumption] = useState('');
   const [extraExpenses, setExtraExpenses] = useState('');
-  const [result, setResult] = useState<null | { profit: number; xcbPrice: number; rewardXCB: number }>(null);
+  const [result, setResult] = useState<null | {
+    profit: number;
+    xcbPrice: number;
+    rewardXCB: number;
+  }>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [inputWarning, setInputWarning] = useState<string | null>(null);
 
-  // Helper function to determine color based on value
   const getValueColor = (value: number): string => {
     if (value > 0) return 'var(--ifm-color-success)';
     if (value < 0) return 'var(--ifm-color-danger)';
     return 'white';
   };
 
-  // Alphabetically sorted machine list
-  const sortedMachines = [...machines].sort((a, b) => a.name.localeCompare(b.name));
+  const sortedMachines = [...machines].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 
-  // Handle machine template selection
   useEffect(() => {
     if (selectedMachine) {
-      const machine = machines.find(m => m.name === selectedMachine);
+      const machine = machines.find((m) => m.name === selectedMachine);
       if (machine) {
         setHashrate(machine.hashrate.toString());
         // Always set power if it's defined, even if it's 0
@@ -79,7 +85,6 @@ const Calculator: React.FC = () => {
         setLoading(false);
         return;
       }
-      // Allow negative values for electricity cost
       const electricityCostNum = Number(electricityCost) || 0;
       const electricityConsumptionNum = Number(electricityConsumption) || 0;
       const extraExpensesNum = Number(extraExpenses) || 0;
@@ -94,12 +99,13 @@ const Calculator: React.FC = () => {
           electricityCostNum
         );
         if (isProfitabilityResult(res)) {
-          const profitAfterExpenses = res.revenue - (res.electricityCost || 0) - extraExpensesNum;
+          const profitAfterExpenses =
+            res.revenue - (res.electricityCost || 0) - extraExpensesNum;
           const rewardXCB = Number.isFinite(res.rewardXCB) ? res.rewardXCB : 0;
           setResult({
             profit: profitAfterExpenses,
             xcbPrice: res.xcbPrice,
-            rewardXCB
+            rewardXCB,
           });
         } else {
           setError('Calculation failed.');
@@ -118,8 +124,17 @@ const Calculator: React.FC = () => {
       setError(null);
       setInputWarning(null);
     }
-    return () => { cancelled = true; };
-  }, [hashrate, electricityCost, electricityConsumption, extraExpenses, currency, siteConfig]);
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    hashrate,
+    electricityCost,
+    electricityConsumption,
+    extraExpenses,
+    currency,
+    siteConfig,
+  ]);
 
   return (
     <div className={styles.calculatorRoot}>
@@ -127,11 +142,12 @@ const Calculator: React.FC = () => {
         Profit Calculator
       </Text>
       <Spacer variant="sm" />
-      <form className={styles.calculatorForm} onSubmit={e => e.preventDefault()}>
+      <form
+        className={styles.calculatorForm}
+        onSubmit={(e) => e.preventDefault()}
+      >
         <div className={styles.inputGroup}>
-          <label htmlFor="currency">
-            Currency
-          </label>
+          <label htmlFor="currency">Currency</label>
           <select
             id="currency"
             value={currency}
@@ -176,7 +192,7 @@ const Calculator: React.FC = () => {
               rel="noopener"
               style={{
                 fontSize: 'var(--small-font-size)',
-                color: 'var(--ifm-color-primary)'
+                color: 'var(--ifm-color-primary)',
               }}
             >
               Propose a New Machine Template
@@ -185,13 +201,13 @@ const Calculator: React.FC = () => {
         </div>
         <div className={styles.inputGroup}>
           <label>
-              RandomY Hashrate (H/s)
+            RandomY Hashrate (H/s)
             <InputText
               type="number"
               min="1"
               step="any"
               value={hashrate}
-              onChange={e => setHashrate(e.target.value)}
+              onChange={(e) => setHashrate(e.target.value)}
               placeholder="Enter hashrate in H/s"
               context="dark"
               className={styles.input}
@@ -205,7 +221,7 @@ const Calculator: React.FC = () => {
               type="number"
               step="0.01"
               value={electricityCost}
-              onChange={e => setElectricityCost(e.target.value)}
+              onChange={(e) => setElectricityCost(e.target.value)}
               placeholder="e.g. 0.20"
               context="dark"
               className={styles.input}
@@ -220,7 +236,7 @@ const Calculator: React.FC = () => {
               min="0"
               step="any"
               value={electricityConsumption}
-              onChange={e => setElectricityConsumption(e.target.value)}
+              onChange={(e) => setElectricityConsumption(e.target.value)}
               placeholder="e.g. 120"
               context="dark"
               className={styles.input}
@@ -235,7 +251,7 @@ const Calculator: React.FC = () => {
               min="0"
               step="any"
               value={extraExpenses}
-              onChange={e => setExtraExpenses(e.target.value)}
+              onChange={(e) => setExtraExpenses(e.target.value)}
               placeholder="e.g. 10 (internet, rent, etc.)"
               context="dark"
               className={styles.input}
@@ -262,33 +278,53 @@ const Calculator: React.FC = () => {
       {result && !error && !loading && (
         <div className={styles.resultBox}>
           <div className={styles.resultItem}>
-            <span style={{ marginRight: '0.5em' }}>Estimated Monthly Profit:</span>
-            <Text variant="body" weight="semiBold" style={{ color: getValueColor(result.profit) }}>
+            <span style={{ marginRight: '0.5em' }}>
+              Estimated Monthly Profit:
+            </span>
+            <Text
+              variant="body"
+              weight="semiBold"
+              style={{ color: getValueColor(result.profit) }}
+            >
               {`${new ExchNumberFormat(undefined, {
                 style: 'currency',
-                currency: currency
+                currency: currency,
               }).format(result.profit)}`}
             </Text>
           </div>
           <div className={styles.resultItem}>
-            <span style={{ marginRight: '0.5em' }}>Reward in XCB (brutto):</span>
-            <Text variant="body" weight="semiBold" style={{ color: getValueColor(result.rewardXCB) }}>
+            <span style={{ marginRight: '0.5em' }}>
+              Reward in XCB (brutto):
+            </span>
+            <Text
+              variant="body"
+              weight="semiBold"
+              style={{ color: getValueColor(result.rewardXCB) }}
+            >
               {`${new ExchNumberFormat(undefined, {
                 style: 'currency',
-                currency: 'XCB'
+                currency: 'XCB',
               }).format(result.rewardXCB)}`}
             </Text>
           </div>
           {result.profit < 0 && (
             <div className={styles.resultItem}>
-              Not profitable? <a href={customFields.URLS.BUY_LINK} target="_blank" rel="noopener" style={{ color: 'var(--ifm-color-primary)' }}>Buy XCB instead</a>
+              Not profitable?{' '}
+              <a
+                href={customFields.URLS.BUY_LINK}
+                target="_blank"
+                rel="noopener"
+                style={{ color: 'var(--ifm-color-primary)' }}
+              >
+                Buy XCB instead
+              </a>
             </div>
           )}
           <div className={styles.resultItem}>
             <Text variant="smallBody" color="subheadingColor">
               {`XCB Price: ${new ExchNumberFormat(undefined, {
                 style: 'currency',
-                currency: currency
+                currency: currency,
               }).format(result.xcbPrice)}`}
             </Text>
           </div>

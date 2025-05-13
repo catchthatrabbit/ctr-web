@@ -14,18 +14,15 @@ import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
 const useRadialBarChartData = () => {
   const { siteConfig } = useDocusaurusContext();
 
-  // Fetch data from the API
   const { data: statsChartsData = [], isLoading } = useFetchStatsCharts({
     urls: siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
     apiPath: String(siteConfig.customFields.API_PATH),
   });
 
-  // Default values for infoBox and chart
   let infoBox: Array<{ title: string; value: TextFormatOutputType }> = [];
   let chart: ChartItem[] = [];
 
   try {
-    // Safely reduce statsChartsData to extract required data
     const allPoolChartsData = statsChartsData.reduce<{
       allPoolChartsData: Array<{ poolCharts: Array<{ x: number; y: number }> }>;
       allLastBlockFound: number[];
@@ -44,17 +41,14 @@ const useRadialBarChartData = () => {
       { allPoolChartsData: [], allLastBlockFound: [] }
     );
 
-    // Calculate the last block found
     const lastBlockFound =
       allPoolChartsData.allLastBlockFound.length > 0
         ? Math.max(...allPoolChartsData.allLastBlockFound)
         : null;
 
-    // Aggregate stats data
     const aggregator = aggregateNumbers(WHITELIST_AGGREGATE_KEYS.home.stats);
     const stats = reduceList(statsChartsData || [], aggregator);
 
-    // Generate infoBox and chart data
     if (statsChartsData.length > 0) {
       infoBox = convertPoolChartDataToRadialInfoBox({
         ...statsChartsData[0],
