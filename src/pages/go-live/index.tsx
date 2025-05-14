@@ -1,7 +1,7 @@
-import React from "react";
-import { ConfiguredLayout } from "@site/src/components/Templates/ConfiguredLayout";
-import { CreateConfig } from "@site/src/components/Pages/CreateConfig";
-import { useParams } from "react-router-dom";
+import React from 'react';
+import { ConfiguredLayout } from '@site/src/components/Templates/ConfiguredLayout';
+import { CreateConfig } from '@site/src/components/Pages/CreateConfig';
+import { useParams } from 'react-router-dom';
 
 const CreateConfigPage = () => {
   const { walletAddress, pool, secondPool } = useParams<{
@@ -12,7 +12,11 @@ const CreateConfigPage = () => {
 
   return (
     <ConfiguredLayout>
-      <CreateConfig address={walletAddress} pool={pool} secondPool={secondPool} />
+      <CreateConfig
+        address={walletAddress}
+        pool={pool}
+        secondPool={secondPool}
+      />
     </ConfiguredLayout>
   );
 };

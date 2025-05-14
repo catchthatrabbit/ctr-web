@@ -120,7 +120,7 @@ const CreateConfig = ({
       const pathParts = window.location.pathname.split('/').filter(Boolean);
 
       const isGoLiveWithParams =
-        pathParts[0] === 'go-live' && pathParts.length === 4;
+        pathParts[0] === 'go-live' && pathParts.length >= 2;
 
       if (isGoLiveWithParams) {
         const [, walletParam, pool1Param, pool2Param] = pathParts;
@@ -138,25 +138,32 @@ const CreateConfig = ({
         });
 
         const dropdown1 =
-          dropdownItems.find(
-            (item) => item.value === pool1Param.toUpperCase()
-          ) || null;
-        const dropdown2 =
-          dropdownItems.find(
-            (item) => item.value === pool2Param.toUpperCase()
-          ) || null;
+          (pool1Param &&
+            dropdownItems.find(
+              (item) => item.value === pool1Param.toUpperCase()
+            )) ||
+          null;
 
-        if (!dropdown1 || !dropdown2) return;
-        if (dropdown1 && dropdown2) {
+        const dropdown2 =
+          (pool2Param &&
+            dropdownItems.find(
+              (item) => item.value === pool2Param.toUpperCase()
+            )) ||
+          null;
+
+        if (dropdown1) {
           setDropdownValue1((prev) =>
             prev?.value !== dropdown1?.value ? dropdown1 : prev
           );
+        }
 
+        if (dropdown2) {
           setDropdownValue2((prev) =>
             prev?.value !== dropdown2?.value ? dropdown2 : prev
           );
-          isTryingToPrefill.current = true;
         }
+
+        isTryingToPrefill.current = true;
       }
     }
   }, [dropdownItems, onSetWalletAddress]);

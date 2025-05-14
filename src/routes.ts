@@ -30,6 +30,16 @@ const Routes = () =>
     }),
     React.createElement(Route, {
       exact: true,
+      path: '/go-live/:walletAddress',
+      component: CreateConfig,
+    }),
+    React.createElement(Route, {
+      exact: true,
+      path: '/go-live/:walletAddress/:pool',
+      component: CreateConfig,
+    }),
+    React.createElement(Route, {
+      exact: true,
       path: '/go-live/:walletAddress/:pool/:secondPool',
       component: CreateConfig,
     }),

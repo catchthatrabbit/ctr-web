@@ -13,6 +13,16 @@ export default function dynamicRouterPlugin(
         exact: true,
       });
       actions.addRoute({
+        path: '/go-live/:walletAddress',
+        component: '@site/src/pages/go-live',
+        exact: true,
+      });
+      actions.addRoute({
+        path: '/go-live/:walletAddress/:pool',
+        component: '@site/src/pages/go-live',
+        exact: true,
+      });
+      actions.addRoute({
         path: '/go-live/:walletAddress/:pool/:secondPool',
         component: '@site/src/pages/go-live',
         exact: true,
