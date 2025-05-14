@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
 import ExchNumberFormat from 'exchange-rounding';
 import { currencies, topCurrencies } from '@site/src/constants/currencies';
-import { machines } from '@site/src/constants/machies';
+import { machines } from '@site/src/constants/machines';
 import config from '@site/docusaurus.config';
 import { getRepoUrl } from '@site/src/utils/getRepoUrl';
 

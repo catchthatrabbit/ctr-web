@@ -22,7 +22,7 @@ A modern web application built on top of Docusaurus for managing CTR mining oper
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/ctr-web.git
+git clone https://github.com/catchthatrabbit/ctr-web.git
 cd ctr-web
 ```
 
