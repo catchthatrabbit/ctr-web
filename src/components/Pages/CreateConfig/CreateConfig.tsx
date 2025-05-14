@@ -125,12 +125,13 @@ const CreateConfig = ({
       if (isGoLiveWithParams) {
         const [, walletParam, pool1Param, pool2Param] = pathParts;
 
+        const newAddressRaw = walletParam.replace(/\s+/g, '');
+        const formattedAddress = formatWalletAddress(newAddressRaw);
+        const isValid = Ican.isValid(formattedAddress, true);
+
         setWalletAddress((prev) => {
-          const newAddress = walletParam.replace(/\s+/g, '');
-          const formattedAddress = formatWalletAddress(newAddress);
-          const isValid = Ican.isValid(formattedAddress, true);
-          setIsWalletValid(isValid);
-          if (prev !== newAddress) {
+          if (prev !== formattedAddress) {
+            setIsWalletValid(isValid);
             onSetWalletAddress?.(formattedAddress);
             return formattedAddress;
           }
@@ -166,7 +167,7 @@ const CreateConfig = ({
         isTryingToPrefill.current = true;
       }
     }
-  }, [dropdownItems, onSetWalletAddress]);
+  }, [dropdownItems, onSetWalletAddress, formatWalletAddress]);
 
   useEffect(() => {
     if (
@@ -238,7 +239,7 @@ const CreateConfig = ({
       actionMeta: ActionMeta<unknown>
     ) => {
       setSelectedOption(newValue.value);
-      setQuantity(1); // Reset quantity when product changes
+      setQuantity(1);
     },
     []
   );
