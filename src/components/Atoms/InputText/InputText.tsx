@@ -18,7 +18,10 @@ interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   text?: string;
 }
 
-const InputText = forwardRef<HTMLInputElement, InputTextProps>(
+const InputText = forwardRef<
+  HTMLInputElement | HTMLTextAreaElement,
+  InputTextProps
+>(
   (
     {
       context = 'main',
