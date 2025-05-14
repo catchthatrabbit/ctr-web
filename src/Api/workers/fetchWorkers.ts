@@ -20,7 +20,8 @@ export const fetchWorkersByWalletAddress = async ({
   try {
     const instance = new AxiosInstance({ region, url }).getInstance();
 
-    let query = `/workers/${walletAddress}?limit=${limit}&offset=${offset}`;
+    const realOffset = offset * limit;
+    let query = `/workers/${walletAddress}?limit=${limit}&offset=${realOffset}`;
     if (status === 'active') {
       query += `&online=true`;
     } else if (status === 'inactive') {
@@ -30,7 +31,22 @@ export const fetchWorkersByWalletAddress = async ({
       AxiosResponse<WORKER_BY_WALLET_ADDRESS_RESPONSE>
     >;
 
-    return (await response).data;
+    const data = (await response).data;
+
+    const sortedWorkers = Object.entries(data.workers)
+      .sort(([, a], [, b]) => b.lastBeat - a.lastBeat) // descending by lastBeat
+      .reduce(
+        (acc, [key, value]) => {
+          acc[key] = value;
+          return acc;
+        },
+        {} as typeof data.workers
+      );
+
+    return {
+      ...data,
+      workers: sortedWorkers,
+    };
   } catch (e) {
     console.error(e);
     return Promise.reject(e as AxiosError);

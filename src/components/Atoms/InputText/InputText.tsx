@@ -69,7 +69,7 @@ const InputText = forwardRef<
     };
     const renderTextarea = () => (
       <textarea
-        ref={ref as unknown as React.Ref<HTMLTextAreaElement>}
+        ref={ref as React.Ref<HTMLTextAreaElement>}
         onKeyDown={handleSearchOnPressEnter}
         className={clsx(styles.inputText, className, {
           [styles.searchWallet]: context === 'wallet',
@@ -104,7 +104,7 @@ const InputText = forwardRef<
     );
     const renderInput = () => (
       <input
-        ref={ref}
+        ref={ref as React.Ref<HTMLInputElement>}
         {...restProps}
         onChange={onChange}
         onKeyDown={handleSearchOnPressEnter}
