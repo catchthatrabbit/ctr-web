@@ -78,6 +78,10 @@
   transform: translateX(-50%);
 }
 
+.buttonTitle {
+  text-align: center;
+}
+
 @media screen and (max-width: 768px) {
   .stepsContainer {
     display: flex;

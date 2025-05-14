@@ -11,8 +11,7 @@ const RecentBlocksTitle = () => {
     <PictureTitle
       title="Recent blocks"
       image={<HeadAndNeckAbove />}
-      secondaryText="Explore the flow and placement of blocks in the blockchain"
-      secondaryTextStyle={secondaryTextStyle}
+      secondaryText="See how blocks are placed in the blockchain"
     />
   );
 };

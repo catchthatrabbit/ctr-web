@@ -86,12 +86,12 @@ const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
               <span>{step.button}</span>
             )}
             {step.buttonTitle && (
-              <>
+              <div className={styles.buttonTitle}>
                 <Spacer variant="xxs" />
                 <Text variant="heading3" color="white" disableMobileStyles>
                   {step.buttonTitle}
                 </Text>
-              </>
+              </div>
             )}
           </div>
           <Spacer direction="hor" variant="xs" />
