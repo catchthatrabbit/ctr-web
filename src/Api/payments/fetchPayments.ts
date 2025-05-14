@@ -20,10 +20,12 @@ export const fetchPaymentsByWalletAddress = async ({
   url?: string;
 }) => {
   try {
+    const realOffset = offset * limit;
+
     const instance = new AxiosInstance({ region, url }).getInstance();
 
     const response = instance.get(
-      `/payments/${walletAddress}?limit=${limit}&offset=${offset}`
+      `/payments/${walletAddress}?limit=${limit}&offset=${realOffset}`
     ) as Promise<AxiosResponse<PAYMENTS_BY_WALLET_ADDRESS_RESPONSE>>;
 
     return (await response).data;

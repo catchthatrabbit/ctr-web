@@ -14,9 +14,10 @@ export const fetchMiners = async ({
   url?: string;
 }) => {
   try {
+    const realOffset = offset * limit;
     const instance = new AxiosInstance({ region, url }).getInstance();
     const response = instance.get(
-      `/miners?limit=${limit}&offset=${offset}`
+      `/miners?limit=${limit}&offset=${realOffset}`
     ) as Promise<AxiosResponse<MINERS_RESPONSE, unknown>>;
     return (await response).data;
   } catch (e) {

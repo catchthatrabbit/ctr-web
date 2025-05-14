@@ -15,9 +15,10 @@ export const fetchMatured = async (
   url?: string
 ) => {
   try {
+    const realOffset = offset * limit;
     const instance = new AxiosInstance({ region, url }).getInstance();
     const response = instance.get(
-      `/matured_blocks?limit=${limit}&offset=${offset}`
+      `/matured_blocks?limit=${limit}&offset=${realOffset}`
     ) as Promise<AxiosResponse<MATURED_RESPONSE, unknown>>;
     return (await response).data;
   } catch (e) {
