@@ -4,6 +4,6 @@ export const products = [
     name: "CTR MAX Series",
     hashrate: 13000,
     price: 100,
-    available: false
+    available: true
   }
 ];

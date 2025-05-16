@@ -44,8 +44,12 @@ const useControls = ({
   const history = useHistory();
 
   const urlConfig = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
-  const okEmoji = String(siteConfig.customFields.EFFECTS_EMOJI_OK);
-  const brbEmoji = String(siteConfig.customFields.EFFECTS_EMOJI_BRB);
+  const okEmoji = siteConfig.customFields.EFFECTS_EMOJI_ENABLED
+    ? String(siteConfig.customFields.EFFECTS_EMOJI_OK)
+    : 'Running';
+  const brbEmoji = siteConfig.customFields.EFFECTS_EMOJI_ENABLED
+    ? String(siteConfig.customFields.EFFECTS_EMOJI_BRB)
+    : 'Inactive';
 
   let status: 'active' | 'inactive' | undefined;
   if (filterStatus === 'Running') status = 'active';

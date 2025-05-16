@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { ContactTitle } from '@site/src/components/Molecules/PictureTitles';
 import { Spacer } from '@site/src/components/Atoms/Spacer';
 import { EmailPanel } from '@site/src/components/Molecules/EmailPanel';
@@ -7,74 +7,42 @@ import { Text } from '@site/src/components/Atoms/Text';
 import { Dropdown } from '@site/src/components/Atoms/Dropdown';
 import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
 import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
 const Contact = () => {
-  const {
-    maintainersCommercialDescription,
-    maintainersCommercialEmail,
-    maintainersSecurityDescription,
-    maintainersSecurityEmail,
-    maintainersSupportDescription,
-    maintainersSupportEmail,
-    maintainersRentalDescription,
-    maintainersRentalEmail,
-    infoBoxMapData,
-    isLoadingMapChart,
-  } = useControls();
-
+  const { infoBoxMapData, isLoadingMapChart } = useControls();
+  const { siteConfig } = useDocusaurusContext();
   const { mobile, tablet, desktop } = useMediaQueries();
   const [selectedTitle, setSelectedTitle] = useState('Support');
   const [message, setMessage] = useState('');
-  const [mailtoLink, setMailtoLink] = useState('');
 
-  const emailPanels = [
-    {
-      title: 'Support',
-      emailAddress: maintainersSupportEmail,
-      text: maintainersSupportDescription,
-    },
-    {
-      title: 'Security',
-      emailAddress: maintainersSecurityEmail,
-      text: maintainersSecurityDescription,
-    },
-    {
-      title: 'Commercial',
-      emailAddress: maintainersCommercialEmail,
-      text: maintainersCommercialDescription,
-    },
-    {
-      title: 'Rentals',
-      emailAddress: maintainersRentalEmail,
-      text: maintainersRentalDescription,
-    },
-  ];
-  useEffect(() => {
-    const selectedEmailPanel = emailPanels.find(
-      (panel) => panel.title === selectedTitle
-    );
-    if (selectedEmailPanel) {
-      const emailAddress = selectedEmailPanel.emailAddress;
-
-      setMailtoLink(
-        `mailto:${emailAddress}?subject=${encodeURIComponent(
-          selectedTitle
-        )}&body=${encodeURIComponent(message)}`
-      );
-    }
-  }, [selectedTitle, message]);
+  const emailPanels = useMemo(() => {
+    const emails = siteConfig.customFields.EMAILS as Record<string, Array<{ email: string; description: string; key?: string }>>;
+    return Object.entries(emails).map(([category, contacts]) => ({
+      value: category,
+      label: category,
+      email: contacts[0].email,
+      description: contacts[0].description,
+      key: contacts[0].key,
+      allEmails: contacts.map(contact => contact.email)
+    }));
+  }, [siteConfig]);
 
   const handleDropdownChange = (newValue: { value: string; label: string }) => {
     setSelectedTitle(newValue.value);
   };
 
-  const handleTextareaChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const handleTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    const selectedTopic = emailPanels.find(panel => panel.value === selectedTitle);
+    if (!selectedTopic) return '';
+    return `mailto:${selectedTopic.email}?subject=${encodeURIComponent(selectedTopic.label)}&body=${encodeURIComponent(message)}`;
   };
 
   return (
@@ -102,10 +70,7 @@ const Contact = () => {
           </Text>
           <Spacer variant="xxs" />
           <Dropdown
-            items={emailPanels.map((panel) => ({
-              label: panel.title,
-              value: panel.title,
-            }))}
+            items={emailPanels}
             onChange={handleDropdownChange}
             defaultValue={selectedTitle}
           />
@@ -125,7 +90,7 @@ const Contact = () => {
             placeholder="Compose your message here…"
           />
           {desktop ? <Spacer variant="md" /> : <Spacer variant="sm" />}
-          <a href={mailtoLink} target="_blank" className="button">
+          <a href={handleSubmit()} target="_blank" className="button">
             <Text variant="body" color="black" weight="medium">
               Send via Email Client
             </Text>
@@ -149,9 +114,13 @@ const Contact = () => {
           {emailPanels.map((panel, index) => (
             <React.Fragment key={index}>
               <EmailPanel
-                title={panel.title}
-                emailAddress={panel.emailAddress}
-                text={panel.text}
+                title={panel.label}
+                emailAddress={panel.allEmails.map(email => {
+                  const contact = (siteConfig.customFields.EMAILS as Record<string, Array<{ email: string; description: string; key?: string }>>)[panel.value]
+                    .find(c => c.email === email);
+                  return contact?.key ? { [email]: contact.key } : email;
+                })}
+                text={panel.description}
               />
               {index < emailPanels.length - 1 && <Spacer variant="xs" />}
             </React.Fragment>

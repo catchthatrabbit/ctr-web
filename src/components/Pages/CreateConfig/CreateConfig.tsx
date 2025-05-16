@@ -717,7 +717,7 @@ const CreateConfig = ({
                     <div>
                       With ordering you agree to the{' '}
                       <a
-                        href="/machines-terms"
+                        href="/docs/rental-terms"
                         target="_blank"
                         rel="noopener"
                         className={styles.minerLink}
@@ -787,7 +787,7 @@ const CreateConfig = ({
                 }
                 context="config"
                 className={styles.halfButton}
-                disabled={isOutOfStock}
+                disabled={isOutOfStock || !areFieldsValid()}
               />
             </div>
           )}

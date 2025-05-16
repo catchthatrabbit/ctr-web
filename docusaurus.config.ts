@@ -118,33 +118,28 @@ const config: Config = {
         PAYOUT: 'cb51bee89e80d6586642f29748054c1566df056472ec',
       },
     },
-
-    MAINTAINERS_SUPPORT_EMAIL: 'support@catchthatrabbit.com',
-    MAINTAINERS_SUPPORT_DESCRIPTION:
-      'For general inquiries, technical support, and assistance with mining operations. Our support team is available to help you with pool configuration, troubleshooting, and any questions about our services.',
-    MAINTAINERS_SECURITY_EMAIL: [
-      'security@catchthatrabbit.com',
-      {
-        'ctr@onion.email': 'https://keys.openpgp.org/vks/v1/by-fingerprint/ABC',
-      },
-    ], // TODO: Replace
-    MAINTAINERS_SECURITY_DESCRIPTION:
-      'For reporting security vulnerabilities, incidents, or any security-related concerns. We take security seriously and appreciate responsible disclosure of any potential issues.',
-    MAINTAINERS_COMMERCIAL_EMAIL: 'contact@catchthatrabbit.com',
-    MAINTAINERS_COMMERCIAL_DESCRIPTION:
-      'For business inquiries, partnership opportunities, and commercial discussions. The team is available to discuss mining devices, mining farm setup, hardware procurement, and other commercial arrangements.',
-    MAINTAINERS_RENTAL_EMAIL: 'rentals@catchthatrabbit.com',
-    MAINTAINERS_RENTAL_DESCRIPTION:
-      'For rental inquiries, partnership opportunities, and rental discussions. The team is available to discuss rented devices, mining farm setup, hardware procurement, and other rental arrangements.',
+    EMAILS: {
+      'Support': [
+        {email:'support@catchthatrabbit.com', description: 'For general inquiries, technical support, and assistance with mining operations. Our support team is available to help you with pool configuration, troubleshooting, and any questions about our services.'},
+      ],
+      'Security': [
+        {email:'security@catchthatrabbit.com', description: 'For reporting security vulnerabilities, incidents, or any security-related concerns. We take security seriously and appreciate responsible disclosure of any potential issues.'},
+        {email:'ctr@onion.email', description: 'For reporting security vulnerabilities, incidents, or any security-related concerns. We take security seriously and appreciate responsible disclosure of any potential issues.', key: 'https://keys.openpgp.org/vks/v1/by-fingerprint/ABC'},
+      ],
+      'Commercial': [
+        {email:'contact@catchthatrabbit.com', description: 'For business inquiries, partnership opportunities, and commercial discussions. The team is available to discuss mining devices, mining farm setup, hardware procurement, and other commercial arrangements.'},
+      ],
+      'Rental': [
+        {email:'rentals@catchthatrabbit.com', description: 'For rental inquiries, partnership opportunities, and rental discussions. The team is available to discuss rented devices, mining farm setup, hardware procurement, and other rental arrangements.'},
+      ],
+    },
 
     ESTD: '2022',
-
-    EFFECTS_SHOW_LOCATIONS: true,
-    EFFECTS_SHOW_ACTION_ICONS: false,
     SLOGAN_PRIMARY: 'Mining pool for Core Blockchain',
     SLOGAN_SECONDARY: 'A mining pool in the lotusland of Ores',
-    EFFECTS_EMOJI_OK: 'Running',
-    EFFECTS_EMOJI_BRB: 'Inactive',
+    EFFECTS_EMOJI_ENABLED: false,
+    EFFECTS_EMOJI_OK: '▶️',
+    EFFECTS_EMOJI_BRB: '⏸️',
     APP_STORE_URL: 'https://apps.apple.com/app/corepass-id/id1644928641',
     GOOGLE_PLAY_URL:
       'https://play.google.com/store/apps/details?id=net.corepass.app',
