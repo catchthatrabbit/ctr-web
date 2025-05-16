@@ -22,7 +22,7 @@ export const machines = [
     powerConsumption: 600
   },
   {
-    name: 'CTR MAX Series - 13 kH/s',
+    name: 'CTR Gamma Γ',
     hashrate: 13000,
     powerConsumption: 0
   },

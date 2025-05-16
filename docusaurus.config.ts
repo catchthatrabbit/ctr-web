@@ -48,7 +48,6 @@ const config: Config = {
       TRANSACTION_DETAILS_URL: "https://blockindex.net/tx",
       BLOCK_DETAILS_URL: "https://blockindex.net/block",
       BUY_LINK: "https://app.ping.exchange?ref-code=kz3Xyxnn",
-      CTR_API: "https://api.catchthatrabbit.com/v1",
     },
     POOLS_LIST: {
       DE: {
@@ -143,6 +142,13 @@ const config: Config = {
     APP_STORE_URL: 'https://apps.apple.com/app/corepass-id/id1644928641',
     GOOGLE_PLAY_URL:
       'https://play.google.com/store/apps/details?id=net.corepass.app',
+    ENABLE_HOSTING: true,
+    STRIPE: {
+      PUBLISHABLE_KEY: 'pk_live_51N000000000000000000000',
+      PRICE_ID: 'price_1RPOo7JerhadZPETpPhaSm4M',
+      SUCCESS_URL: 'http://localhost:3000/success',
+      CANCEL_URL: 'http://localhost:3000/cancel',
+    },
   },
 
   presets: [
