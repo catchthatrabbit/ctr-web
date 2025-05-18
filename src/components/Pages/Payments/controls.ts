@@ -65,10 +65,10 @@ const useControls = ({
         label: 'Tx id',
         canBeCopied: true,
         isPrimary: true,
-        href: urlsConfigs.TRANSACTION_DETAILS_URL,
+        href: urlsConfigs.TRANSACTION_DETAILS,
       },
     ],
-    [setWalletAddress, push, selectedPool, urlsConfigs.TRANSACTION_DETAILS_URL]
+    [setWalletAddress, push, selectedPool, urlsConfigs.TRANSACTION_DETAILS]
   );
 
   return {

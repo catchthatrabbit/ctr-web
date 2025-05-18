@@ -16,7 +16,6 @@ import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 import clsx from 'clsx';
 
 import styles from './styles.module.css';
-import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 
 interface IPayments extends IAnyPageAndWallet {
   setSelectedPool?: (pool: string) => void;
@@ -108,7 +107,7 @@ const Payments = ({
     setSelectedPool(poolShortcut);
 
     handleChangeRegion(
-      selectedOption as { label: string; value: STANDARD_REGIONS_API_KEYS }
+      selectedOption as { label: string; value: string }
     );
   };
 

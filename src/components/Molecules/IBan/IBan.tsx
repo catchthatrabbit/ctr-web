@@ -4,17 +4,27 @@ import { generateIBan } from '@site/src/utils/generateIBan';
 import clsx from 'clsx';
 import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 import { CopyButton } from '@site/src/components/Molecules/CopyButton';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import styles from './styles.module.css';
+
+interface CustomFields {
+  DEFAULT_REGION: string;
+}
 
 interface IIBan {
   iBan?: string;
   pool?: string;
 }
 
-const IBan = ({ iBan = '', pool = 'de' }: IIBan) => {
+const IBan = ({ iBan = '', pool }: IIBan) => {
   const { mobile, tablet } = useMediaQueries();
-  const permalink = `${pool}.ctr.watch/@${iBan}`;
+  const { siteConfig } = useDocusaurusContext();
+  const { DEFAULT_REGION } = siteConfig.customFields as unknown as CustomFields;
+  const defaultPool = DEFAULT_REGION?.toString().toLowerCase() || 'de';
+  const poolRegion = pool || defaultPool;
+  const permalink = `${poolRegion}.ctr.watch/@${iBan}`;
+
   return (
     <>
       <div className={clsx([[styles.iBanRoot, styles.justifyCenter, 'flex']])}>

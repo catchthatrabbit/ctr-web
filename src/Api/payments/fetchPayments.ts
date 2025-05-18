@@ -1,6 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { AxiosInstance } from '../api';
-import { STANDARD_REGIONS_API_KEYS } from '../types';
 import {
   PAYMENTS_BY_WALLET_ADDRESS_RESPONSE,
   PAYMENTS_RESPONSE,
@@ -14,7 +13,7 @@ export const fetchPaymentsByWalletAddress = async ({
   offset = 0,
   url,
 }: {
-  region: STANDARD_REGIONS_API_KEYS;
+  region: string;
   walletAddress: string;
   limit: number;
   offset: number;
@@ -41,7 +40,7 @@ export const fetchPayments = async ({
   offset = 0,
   url,
 }: {
-  region: STANDARD_REGIONS_API_KEYS;
+  region: string;
   limit: number;
   offset: number;
   url?: string;
@@ -65,7 +64,7 @@ export const fetchPaymentsState = async ({
   region,
   url,
 }: {
-  region: STANDARD_REGIONS_API_KEYS;
+  region: string;
   url?: string;
 }) => {
   try {

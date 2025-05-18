@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-import { STANDARD_REGIONS_API_KEYS } from "../Api/types";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { POOLS_LIST } from "../configs/types";
-import { REGIONS } from "../constants/regions";
-import { POOL_NAME_ENUM } from "../enums/poolName.enum";
 
 type HEADERS_PROPS = {
-  defaultRegion: STANDARD_REGIONS_API_KEYS;
+  defaultRegion: string;
   onSetWalletAddress?: (walletAddress: string) => void;
-  onChangeRegion?: (region: STANDARD_REGIONS_API_KEYS) => void;
+  onChangeRegion?: (region: string) => void;
 };
 
 export const useHeaders = ({
@@ -17,24 +14,20 @@ export const useHeaders = ({
   onChangeRegion,
 }: HEADERS_PROPS) => {
   const [walletAddress, setWalletAddress] = useState<string>();
-
-  const [region, setRegion] =
-    useState<STANDARD_REGIONS_API_KEYS>(defaultRegion);
+  const [region, setRegion] = useState<string>(defaultRegion);
 
   const { siteConfig } = useDocusaurusContext();
-  const startMiningPoolConfigurations = siteConfig.customFields
-    .POOLS_LIST as POOLS_LIST;
+  const poolsList = siteConfig.customFields.POOLS_LIST as POOLS_LIST;
 
-  const dropdownItems = Object.entries(startMiningPoolConfigurations)
-    .filter(([key, config]) =>
-      key in REGIONS &&
+  const dropdownItems = Object.entries(poolsList)
+    .filter(([_, config]) =>
       config &&
       typeof config === 'object' &&
       'DESCRIPTION' in config
     )
     .map(([key, config]) => ({
       label: config.DESCRIPTION,
-      value: key as POOL_NAME_ENUM
+      value: key
     }));
 
   useEffect(() => {
@@ -49,31 +42,14 @@ export const useHeaders = ({
 
   const handleChangeRegion = (id: {
     label: string;
-    value: STANDARD_REGIONS_API_KEYS;
+    value: string;
   }) => {
     setRegion(id.value);
     if (typeof onChangeRegion === 'function') onChangeRegion(id.value);
   };
 
-  const covertRegionValue2Label = (
-    apiKeys: STANDARD_REGIONS_API_KEYS
-  ): string => {
-    switch (apiKeys) {
-      case 'DE':
-        return startMiningPoolConfigurations[REGIONS.DE][`DESCRIPTION`];
-      case 'FI':
-        return startMiningPoolConfigurations[REGIONS.FI][`DESCRIPTION`];
-      case 'SG':
-        return startMiningPoolConfigurations[REGIONS.SG][`DESCRIPTION`];
-      case 'HK':
-        return startMiningPoolConfigurations[REGIONS.HK][`DESCRIPTION`];
-      case 'BR':
-        return startMiningPoolConfigurations[REGIONS.BR][`DESCRIPTION`];
-      case 'JP':
-        return startMiningPoolConfigurations[REGIONS.JP][`DESCRIPTION`];
-      default:
-        return startMiningPoolConfigurations[REGIONS.DE][`DESCRIPTION`];
-    }
+  const covertRegionValue2Label = (regionKey: string): string => {
+    return poolsList[regionKey]?.DESCRIPTION || '';
   };
 
   return {

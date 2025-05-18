@@ -1,8 +1,6 @@
 import { fetchWalletInfo } from '../Api/wallet/fetchWalletInfo';
 import { QUERY_KEYS } from '@site/src/constants/queryKeys';
-import { STANDARD_REGIONS_API_KEYS } from '../Api/types';
 import { useState } from 'react';
-import { POOL_NAME_ENUM } from '@site/src/enums/poolName.enum';
 import {
   fetchWorkerCounts,
   fetchWorkersByWalletAddress,
@@ -11,9 +9,14 @@ import { useQueryConfigured } from './useQueryConfigured';
 import { WORKER_BY_WALLET_ADDRESS_RESPONSE } from '../Api/workers/types';
 import { WALLET_INFO_RESPONSE } from '../Api/wallet/types';
 import { useConfigUrlBasedRegion } from './useConfigUrlBasedRegion';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+
+interface CustomFields {
+  DEFAULT_REGION: string;
+}
 
 export const useFetchWallet = (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   walletAddress: string
 ) => {
   return useQueryConfigured<WALLET_INFO_RESPONSE>(
@@ -25,11 +28,13 @@ export const useFetchWallet = (
 };
 
 export const useWalletPage = () => {
+  const { siteConfig } = useDocusaurusContext();
+  const { DEFAULT_REGION } = siteConfig.customFields as unknown as CustomFields;
+  const defaultRegion = DEFAULT_REGION?.toString() || 'DE';
+
   const [walletAddress, setWalletAddress] = useState<string>();
-  const [region, setRegion] = useState<STANDARD_REGIONS_API_KEYS>(
-    POOL_NAME_ENUM.DE
-  );
-  const [selectedPool, setSelectedPool] = useState<string>('de');
+  const [region, setRegion] = useState<string>(defaultRegion.toUpperCase());
+  const [selectedPool, setSelectedPool] = useState<string>(defaultRegion.toLowerCase());
 
   const handleWalletAddress = (walletAddress: string) => {
     setWalletAddress(walletAddress);
@@ -39,7 +44,7 @@ export const useWalletPage = () => {
     setSelectedPool(selectedPool);
   };
 
-  const handleChangeRegion = (selectedRegion: STANDARD_REGIONS_API_KEYS) => {
+  const handleChangeRegion = (selectedRegion: string) => {
     setRegion(selectedRegion);
   };
 
@@ -59,7 +64,7 @@ export const useWalletPage = () => {
 };
 
 export const useFetchWorkersByWalletAddress = (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   walletAddress: string,
   limit?: number,
   offset?: number,
@@ -75,7 +80,7 @@ export const useFetchWorkersByWalletAddress = (
 };
 
 export const useFetchWorkerCounts = (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   walletAddress: string
 ) => {
   const { url } = useConfigUrlBasedRegion(region);

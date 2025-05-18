@@ -7,8 +7,7 @@ import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
  * Calculate estimated mining profitability for Core Blockchain.
  *
  * @param {number} userHashrate - User's hashrate in H/s.
- * @param {POOLS_API_CONFIG_TYPE} urls - Pool API endpoints configuration.
- * @param {string} apiPath - API path for the endpoints.
+ * @param {object} customFields - Pool API endpoints configuration.
  * @param {string} [currency="usd"] - Currency symbol or code (e.g., "usd", "eur").
  * @param {string} [period] - Period to calculate profitability for (e.g., "daily", "weekly", "monthly", "yearly").
  * @param {number} [powerConsumption] - Optional power usage in Watts.
@@ -17,8 +16,12 @@ import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
  */
 export const profitabilityCalculation = async (
   userHashrate: number,
-  urls: POOLS_API_CONFIG_TYPE,
-  apiPath: string,
+  customFields: {
+    [key: string]: unknown;
+    URLS?: { EXCHANGE_RATES: string };
+    API_ENDPOINTS?: POOLS_API_CONFIG_TYPE;
+    API_PATH?: string;
+  },
   currency: string = "usd",
   period: string,
   powerConsumption?: number,
@@ -32,7 +35,7 @@ export const profitabilityCalculation = async (
   // Fetch XCB price in the specified currency
   let xcbPrice: number;
   try {
-    xcbPrice = await fetchXcbPrice(currency.toString());
+    xcbPrice = await fetchXcbPrice(currency.toString(), customFields.URLS?.EXCHANGE_RATES);
   } catch (error) {
     console.error('Error fetching XCB price');
     return false;
@@ -41,7 +44,7 @@ export const profitabilityCalculation = async (
   // Fetch network difficulty
   let networkDifficulty: number;
   try {
-    const difficulty = await fetchNetworkDifficulty(urls, apiPath);
+    const difficulty = await fetchNetworkDifficulty(customFields.API_ENDPOINTS, customFields.API_PATH);
     networkDifficulty = difficulty || 0;
   } catch (error) {
     console.error('Error fetching network difficulty');

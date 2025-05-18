@@ -5,11 +5,16 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 interface CustomFields {
   URLS: {
-    BLOCK_DETAILS_URL: string;
+    BLOCK_DETAILS: string;
   };
+  DEFAULT_REGION: string;
 }
 
 const useControls = () => {
+  const { siteConfig } = useDocusaurusContext();
+  const { URLS, DEFAULT_REGION } = siteConfig.customFields as unknown as CustomFields;
+  const defaultRegion = DEFAULT_REGION?.toString().toUpperCase() || 'DE';
+
   const {
     regionLabel,
     dropdownItems,
@@ -23,13 +28,10 @@ const useControls = () => {
     infoBoxMapData,
     isLoadingMapChart,
   } = usePageControls({
-    defaultRegion: 'DE',
+    defaultRegion,
     fetchMultipleData: true,
     includeInfoBox: true,
   });
-
-  const { siteConfig } = useDocusaurusContext();
-  const { URLS } = siteConfig.customFields as unknown as CustomFields;
 
   const tableColumns = useMemo(
     () => [
@@ -37,7 +39,7 @@ const useControls = () => {
         value: 'height',
         label: 'Height',
         isPrimary: true,
-        href: URLS.BLOCK_DETAILS_URL,
+        href: URLS.BLOCK_DETAILS,
       },
       { value: 'type', label: 'Type' },
       { value: 'minedOn', label: 'Found at' },
@@ -46,7 +48,7 @@ const useControls = () => {
         label: 'Block hash',
         canBeCopied: true,
         isPrimary: true,
-        href: URLS.BLOCK_DETAILS_URL,
+        href: URLS.BLOCK_DETAILS,
       },
       { value: 'reward', label: 'Reward' },
       { value: 'variance', label: 'Variance' },

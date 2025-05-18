@@ -1,4 +1,3 @@
-import { POOL_NAME_ENUM } from '@site/src/enums/poolName.enum';
 import { useFetchSettings } from '@site/src/hooks/useSettings';
 import { useFetchStats } from '@site/src/hooks/useStats';
 import {
@@ -7,12 +6,17 @@ import {
   reduceList,
 } from '../utils';
 import { WHITELIST_AGGREGATE_KEYS } from '@site/src/configs/aggregate-keys.config';
-import { STATS_RESPONSE } from '@site/src/Api/stats/types';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useEffect, useState } from 'react';
 import { TextFormatOutputType } from '@site/src/utils/textFormat';
 import { profitabilityCalculation } from '@site/src/utils/profitabilityCalculation';
 import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
+
+interface CustomFields {
+  DEFAULT_REGION: string;
+  API_ENDPOINTS: POOLS_API_CONFIG_TYPE;
+  API_PATH: string;
+}
 
 interface MapChartData {
   poolFee: string | number;
@@ -21,6 +25,13 @@ interface MapChartData {
 
 const useMapChartData = () => {
   const { siteConfig } = useDocusaurusContext();
+  const { 
+    DEFAULT_REGION,
+    API_ENDPOINTS,
+    API_PATH
+  } = siteConfig.customFields as unknown as CustomFields;
+
+  const defaultRegion = DEFAULT_REGION?.toString().toUpperCase() || 'DE';
 
   const [chartData, setChartData] = useState<MapChartData>({
     poolFee: '',
@@ -28,11 +39,11 @@ const useMapChartData = () => {
   });
 
   const { data: statsResponse, isLoading } = useFetchStats({
-    urls: siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
-    apiPath: String(siteConfig.customFields.API_PATH),
+    urls: API_ENDPOINTS,
+    apiPath: String(API_PATH),
   });
 
-  const { data: settingsResponse } = useFetchSettings(POOL_NAME_ENUM.DE);
+  const { data: settingsResponse } = useFetchSettings(defaultRegion);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,8 +69,7 @@ const useMapChartData = () => {
 
         const profitability = await profitabilityCalculation(
           1000,
-          siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
-          siteConfig.customFields.API_PATH as string,
+          siteConfig.customFields,
           'usd',
           'monthly'
         );
@@ -83,8 +93,8 @@ const useMapChartData = () => {
     statsResponse,
     isLoading,
     settingsResponse,
-    siteConfig.customFields.API_ENDPOINTS,
-    siteConfig.customFields.API_PATH,
+    API_ENDPOINTS,
+    API_PATH,
   ]);
 
   return {

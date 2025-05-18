@@ -1,6 +1,5 @@
 import { useQueries, UseQueryResult } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@site/src/constants/queryKeys';
-import { STANDARD_REGIONS_API_KEYS } from '../Api/types';
 import {
   fetchMatured,
   fetchImMatured,
@@ -19,7 +18,7 @@ import { useEffect } from 'react';
 import { useConfigUrlBasedRegion } from './useConfigUrlBasedRegion';
 
 export const useFetchAllBlocks = (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   limit?: number,
   offset?: number
 ) => {

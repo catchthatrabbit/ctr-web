@@ -1,6 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { AxiosInstance } from '../api';
-import { STANDARD_REGIONS_API_KEYS } from '../types';
 import { WORKER_BY_WALLET_ADDRESS_RESPONSE } from './types';
 
 export const fetchWorkersByWalletAddress = async ({
@@ -11,7 +10,7 @@ export const fetchWorkersByWalletAddress = async ({
   url,
   status, // 'active' | 'inactive' | undefined
 }: {
-  region: STANDARD_REGIONS_API_KEYS;
+  region: string;
   walletAddress: string;
   limit?: number;
   offset?: number;
@@ -43,7 +42,7 @@ export const fetchWorkerCounts = async ({
   walletAddress,
   url,
 }: {
-  region: STANDARD_REGIONS_API_KEYS;
+  region: string;
   walletAddress: string;
   url?: string;
 }) => {

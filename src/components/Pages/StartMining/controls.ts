@@ -5,21 +5,28 @@ import {
   URLS_CONFIG_TYPE,
 } from '@site/src/configs/types';
 
+interface CustomFields {
+  DEFAULT_REGION: string;
+  URLS: URLS_CONFIG_TYPE;
+  POOLS_LIST: POOLS_LIST;
+}
+
 const useControls = () => {
+  const { siteConfig } = useDocusaurusContext();
+  const {
+    DEFAULT_REGION,
+    URLS: urlsConfig,
+    POOLS_LIST: startMiningPoolConfigurations
+  } = siteConfig.customFields as unknown as CustomFields;
+
+  const defaultRegion = DEFAULT_REGION?.toString().toUpperCase() || 'DE';
+
   const { infoBoxMapData, isLoadingMapChart } = usePageControls({
-    defaultRegion: 'DE',
+    defaultRegion,
     includeInfoBox: true,
   });
 
-  const { siteConfig } = useDocusaurusContext();
-  const urlsConfig = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
-
-  const startMiningPoolConfigurations = siteConfig.customFields
-    .POOLS_LIST as POOLS_LIST;
-
   return {
-    githubReleaseDownloadUrl: String(urlsConfig.GITHUB_RELEASE_DOWNLOAD_URL),
-    githubRawMineSh: String(urlsConfig.GITHUB_RAW_MINE_SH),
     startMiningPoolConfigurations,
     infoBoxMapData,
     isLoadingMapChart,

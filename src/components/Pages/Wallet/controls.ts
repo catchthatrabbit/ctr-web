@@ -1,6 +1,5 @@
 import { IAnyPageAndWallet } from '@site/src/components/Pages/types';
 import { tablesConfig } from '@site/src/configs';
-import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 import {
   useFetchWallet,
   useFetchWorkersByWalletAddress,
@@ -63,7 +62,7 @@ const useControls = ({
         value: 'tx',
         canBeCopied: true,
         isPrimary: true,
-        href: urlConfig.TRANSACTION_DETAILS_URL,
+        href: urlConfig.TRANSACTION_DETAILS,
       },
       {
         label: 'Amount',
@@ -74,7 +73,7 @@ const useControls = ({
         value: 'timestamp',
       },
     ],
-    [urlConfig.TRANSACTION_DETAILS_URL]
+    [urlConfig.TRANSACTION_DETAILS]
   );
 
   const workersTableColumn = useMemo(
@@ -133,7 +132,7 @@ const useControls = ({
 
   const handleChangeRegion = (id: {
     label: string;
-    value: STANDARD_REGIONS_API_KEYS;
+    value: string;
   }) => {
     const splitted = location.pathname.split('/');
     splitted[3] = id.value.toLowerCase();

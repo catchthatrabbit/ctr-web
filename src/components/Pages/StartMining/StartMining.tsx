@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { SingleColumnPanel } from "@site/src/components/Molecules/SingleColumnPanel";
-import { REGIONS } from "@site/src/constants/regions";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import {
   GetStartedTitle,
@@ -15,6 +14,8 @@ import { Steps } from "../../Molecules/Steps";
 import { DropdownIconDown } from "@site/src/icons";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
 import ICAN from "@blockchainhub/ican";
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { POOLS_LIST } from '@site/src/configs/types';
 
 import styles from './styles.module.css';
 
@@ -23,6 +24,8 @@ interface IStartMining extends IAnyPageAndWallet {}
 const StartMining = ({ onSetWalletAddress }: IStartMining) => {
   const { startMiningPoolConfigurations, infoBoxMapData, isLoadingMapChart } =
     useControls();
+  const { siteConfig } = useDocusaurusContext();
+  const poolsList = siteConfig.customFields.POOLS_LIST as POOLS_LIST;
 
   const [openRegion, setOpenRegion] = useState<string | null>(null);
   const { mobile, tablet, desktop } = useMediaQueries();
@@ -80,64 +83,57 @@ const StartMining = ({ onSetWalletAddress }: IStartMining) => {
       <PoolTitle />
       {desktop ? <Spacer variant="lg" /> : <Spacer variant="md" />}
       <div className={`flex flex-column ${styles.poolContainer}`}>
-        {Object.keys(REGIONS).map((REGION_KEY, index) => (
+        {Object.keys(poolsList).map((poolKey, index) => (
           <div key={index} className={styles.poolTable}>
             <Spacer variant="xs" />
             <div
               className={`flex ${styles.dropdownHeader}`}
-              onClick={() => toggleRegion(REGION_KEY)}
+              onClick={() => toggleRegion(poolKey)}
             >
-              {startMiningPoolConfigurations[REGION_KEY][`NAME`]}
+              {poolsList[poolKey].NAME}
               <DropdownIconDown
                 style={{
                   width: '24px',
                   height: '24px',
                   color: 'pink',
                   transform:
-                    openRegion === REGION_KEY
+                    openRegion === poolKey
                       ? 'rotate(180deg)'
                       : 'rotate(0deg)',
                   transition: 'transform 0.2s ease',
                 }}
               />
             </div>
-            {openRegion === REGION_KEY && (
+            {openRegion === poolKey && (
               <SingleColumnPanel
-                id={REGION_KEY.toLowerCase()}
-                description={
-                  startMiningPoolConfigurations[REGION_KEY][`DESCRIPTION`]
-                }
+                id={poolKey.toLowerCase()}
+                description={poolsList[poolKey].DESCRIPTION}
                 context="startMining"
                 data={[
                   {
                     label: 'Server',
-                    value: startMiningPoolConfigurations[REGION_KEY][`SERVER`],
+                    value: poolsList[poolKey].SERVER,
                   },
                   {
                     label: 'Port',
-                    value: startMiningPoolConfigurations[REGION_KEY][`PORT`],
+                    value: poolsList[poolKey].PORT,
                   },
                   {
                     label: 'Username',
-                    value:
-                      startMiningPoolConfigurations[REGION_KEY][`USERNAME`],
+                    value: poolsList[poolKey].USERNAME,
                   },
                   {
                     label: 'Worker name',
-                    value:
-                      startMiningPoolConfigurations[REGION_KEY][`WORKER_NAME`],
+                    value: poolsList[poolKey].WORKER_NAME,
                   },
                   {
                     label: 'Password',
-                    value:
-                      startMiningPoolConfigurations[REGION_KEY][`PASSWORD`],
+                    value: poolsList[poolKey].PASSWORD,
                   },
                   {
                     label: 'Payouts Address',
-                    value: startMiningPoolConfigurations[REGION_KEY][`PAYOUT`]
-                      ? ICAN.printFormat(
-                          startMiningPoolConfigurations[REGION_KEY][`PAYOUT`]
-                        )
+                    value: poolsList[poolKey].PAYOUT
+                      ? ICAN.printFormat(poolsList[poolKey].PAYOUT)
                       : '',
                   },
                 ]}

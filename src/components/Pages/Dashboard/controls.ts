@@ -3,11 +3,6 @@ import usePageControls from '@site/src/hooks/usePageControls';
 import useRadialBarChartData from './hooks/useRadialBarChartData';
 import { useFetchAllRegionsMaturedBlocks } from '@site/src/hooks/useBlocks';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import {
-  AS_START_MINING_POOL_LOCATION,
-  EU_START_MINING_POOL_LOCATION,
-  BR_START_MINING_POOL_LOCATION,
-} from '@site/src/configs/start-minings.config';
 import { IDataTable } from '@site/src/components/Atoms/DataTable/types';
 import {
   POOLS_API_CONFIG_TYPE,
@@ -15,13 +10,39 @@ import {
   POOLS_LIST,
 } from "@site/src/configs/types";
 
+interface CustomFields {
+  DEFAULT_REGION: string;
+  API_ENDPOINTS: POOLS_API_CONFIG_TYPE;
+  API_PATH: string;
+  URLS: URLS_CONFIG_TYPE;
+  POOLS_LIST: POOLS_LIST;
+  SLOGAN_PRIMARY: string;
+  SLOGAN_SECONDARY: string;
+  EFFECTS_SHOW_LOCATIONS: string;
+  EFFECTS_SHOW_ACTION_ICONS: string;
+}
+
 const useControls = () => {
   const { siteConfig } = useDocusaurusContext();
+  const {
+    DEFAULT_REGION,
+    API_ENDPOINTS,
+    API_PATH,
+    URLS: urlsConfigs,
+    POOLS_LIST: startMiningPoolConfigurations,
+    SLOGAN_PRIMARY,
+    SLOGAN_SECONDARY,
+    EFFECTS_SHOW_LOCATIONS,
+    EFFECTS_SHOW_ACTION_ICONS
+  } = siteConfig.customFields as unknown as CustomFields;
+
+  const defaultRegion = DEFAULT_REGION?.toString().toUpperCase() || 'DE';
 
   const { infoBoxMapData, isLoadingMapChart, poolFee } = usePageControls({
-    defaultRegion: 'DE',
+    defaultRegion,
     includeInfoBox: true,
   });
+
   const {
     chart: radialChartData,
     infoBox: infoBoxRadialData,
@@ -32,13 +53,9 @@ const useControls = () => {
     data: AllRegionsMaturedBlocks,
     isLoading: isLoadingAllRegionMaturedBlocks,
   } = useFetchAllRegionsMaturedBlocks({
-    urls: siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
-    apiPath: String(siteConfig.customFields.API_PATH),
+    urls: API_ENDPOINTS,
+    apiPath: String(API_PATH),
   });
-
-  const urlsConfigs = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
-  const startMiningPoolConfigurations = siteConfig.customFields
-    .POOLS_LIST as POOLS_LIST;
 
   const dataTableColumns = useMemo(
     () => [
@@ -46,7 +63,7 @@ const useControls = () => {
         value: 'height',
         label: 'Height',
         isPrimary: true,
-        href: urlsConfigs.BLOCK_DETAILS_URL,
+        href: urlsConfigs.BLOCK_DETAILS,
       },
       { value: 'type', label: 'Type' },
       { value: 'minedOn', label: 'Found at' },
@@ -55,37 +72,22 @@ const useControls = () => {
         value: 'blockHash',
         label: 'Block hash',
         isPrimary: true,
-        href: urlsConfigs.BLOCK_DETAILS_URL,
+        href: urlsConfigs.BLOCK_DETAILS,
       },
       { value: 'reward', label: 'Reward' },
       { value: 'variance', label: 'Variance' },
     ],
-    [urlsConfigs.BLOCK_DETAILS_URL]
+    [urlsConfigs.BLOCK_DETAILS]
   ) as IDataTable['columns'];
 
-  const SloganPrimary: string = String(siteConfig.customFields.SLOGAN_PRIMARY);
-  const SloganSecondary: string = String(
-    siteConfig.customFields.SLOGAN_SECONDARY,
-  );
-  const effectsShowLocation: boolean =
-    siteConfig.customFields.EFFECTS_SHOW_LOCATIONS === 'true';
-  const effectsShowActionIcons: boolean =
-    siteConfig.customFields.EFFECTS_SHOW_ACTION_ICONS === 'true';
+  const effectsShowLocation: boolean = EFFECTS_SHOW_LOCATIONS === 'true';
+  const effectsShowActionIcons: boolean = EFFECTS_SHOW_ACTION_ICONS === 'true';
 
   return {
     radialChartData,
     infoBoxRadialData,
     infoBoxMapData,
     poolFee,
-    usStarMiningPoolLocation: (siteConfig.customFields
-      .BR_START_MINING_POOL_LOCATION ||
-      BR_START_MINING_POOL_LOCATION) as string,
-    euStarMiningPoolLocation: (siteConfig.customFields
-      .EU_START_MINING_POOL_LOCATION ||
-      EU_START_MINING_POOL_LOCATION) as string,
-    asStarMiningPoolLocation: (siteConfig.customFields
-      .AS_START_MINING_POOL_LOCATION ||
-      AS_START_MINING_POOL_LOCATION) as string,
     AllRegionsMaturedBlocks,
     recentMatureBlockListColumns: dataTableColumns,
     isLoadingRadialBarChart,
@@ -93,8 +95,8 @@ const useControls = () => {
     isLoadingAllRegionMaturedBlocks,
     effectsShowLocation,
     effectsShowActionIcons,
-    SloganPrimary,
-    SloganSecondary,
+    SloganPrimary: String(SLOGAN_PRIMARY),
+    SloganSecondary: String(SLOGAN_SECONDARY),
     startMiningPoolConfigurations,
   };
 };

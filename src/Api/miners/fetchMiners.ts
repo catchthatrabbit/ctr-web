@@ -1,7 +1,6 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { AxiosInstance } from '../api';
 import { MINERS_RESPONSE, MINERS_STATES } from './types';
-import { STANDARD_REGIONS_API_KEYS } from '../types';
 
 export const fetchMiners = async ({
   region,
@@ -9,7 +8,7 @@ export const fetchMiners = async ({
   offset = 0,
   url,
 }: {
-  region: STANDARD_REGIONS_API_KEYS;
+  region: string;
   limit: number;
   offset: number;
   url?: string;
@@ -30,7 +29,7 @@ export const fetchMinersState = async ({
   region,
   url,
 }: {
-  region: STANDARD_REGIONS_API_KEYS;
+  region: string;
   url?: string;
 }) => {
   try {

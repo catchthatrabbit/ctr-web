@@ -91,8 +91,7 @@ const Calculator: React.FC = () => {
       try {
         const res = await profitabilityCalculation(
           hashrateNum,
-          siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
-          String(siteConfig.customFields.API_PATH),
+          siteConfig.customFields,
           currency,
           'monthly',
           electricityConsumptionNum,

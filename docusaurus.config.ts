@@ -45,9 +45,10 @@ const config: Config = {
     },
     API_PATH: 'v2/api/',
     URLS: {
-      TRANSACTION_DETAILS_URL: "https://blockindex.net/tx",
-      BLOCK_DETAILS_URL: "https://blockindex.net/block",
+      TRANSACTION_DETAILS: "https://blockindex.net/tx",
+      BLOCK_DETAILS: "https://blockindex.net/block",
       BUY_LINK: "https://app.ping.exchange?ref-code=kz3Xyxnn",
+      EXCHANGE_RATES: "https://coreport.pages.dev/api/v1",
     },
     POOLS_LIST: {
       DE: {
@@ -117,6 +118,7 @@ const config: Config = {
         PAYOUT: 'cb51bee89e80d6586642f29748054c1566df056472ec',
       },
     },
+    DEFAULT_REGION: 'DE',
     EMAILS: {
       'Support': [
         {email:'support@catchthatrabbit.com', description: 'For general inquiries, technical support, and assistance with mining operations. Our support team is available to help you with pool configuration, troubleshooting, and any questions about our services.'},
@@ -143,12 +145,10 @@ const config: Config = {
     GOOGLE_PLAY_URL:
       'https://play.google.com/store/apps/details?id=net.corepass.app',
     ENABLE_HOSTING: true,
-    STRIPE: {
-      PUBLISHABLE_KEY: 'pk_live_51N000000000000000000000',
-      PRICE_ID: 'price_1RPOo7JerhadZPETpPhaSm4M',
-      SUCCESS_URL: 'http://localhost:3000/success',
-      CANCEL_URL: 'http://localhost:3000/cancel',
-    },
+    HOSTING: {
+      URL: 'https://shop.catchthatrabbit.com',
+      PROVIDER: 'shopify',
+    }
   },
 
   presets: [

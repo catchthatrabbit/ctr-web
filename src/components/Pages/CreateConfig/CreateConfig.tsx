@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import { Spacer } from '@site/src/components/Atoms/Spacer';
 import { CreateConfigTitle } from '@site/src/components/Molecules/PictureTitles';
 import { InputText } from '@site/src/components/Atoms/InputText';
-import { Dropdown } from '../../Atoms/Dropdown';
+import { Dropdown } from '@site/src/components/Atoms/Dropdown';
 import { Text } from '@site/src/components/Atoms/Text';
 import Button from '@site/src/components/Atoms/Button/Button';
 import Ican from '@blockchainhub/ican';
 import useControls from './controls';
-import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
+import { ConfiguredInfoBox } from '@site/src/components/Molecules/ConfiguredInfoBox';
 import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
-import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 import { constructWorkerName } from '@site/src/utils/convertWorkerName';
 import { profitabilityCalculation } from '@site/src/utils/profitabilityCalculation';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -21,16 +20,16 @@ import { getRepoUrl } from '@site/src/utils/getRepoUrl';
 import { products } from '@site/src/constants/products';
 import ExchNumberFormat from 'exchange-rounding';
 import { siFormat } from '@site/src/utils/siFormat';
-import getStripe from '@site/src/utils/getStripe';
+import { getVariantId, getFormAction, isSupportedProvider } from '@site/src/utils/shop';
 
 import clsx from 'clsx';
 
 import styles from './styles.module.css';
 
 interface IPayments {
-  defaultRegion?: STANDARD_REGIONS_API_KEYS;
+  defaultRegion?: string;
   onSetWalletAddress?: (address: string) => void;
-  onChangeRegion?: (region: any) => void;
+  onChangeRegion?: (region: string) => void;
   address?: string;
   pool?: string;
   secondPool?: string;
@@ -40,16 +39,11 @@ interface CustomFields {
   URLS: {
     BUY_LINK: string;
   };
-  API_ENDPOINTS: POOLS_API_CONFIG_TYPE;
-  API_PATH: string;
-  POOLS_LIST: Record<string, any>;
-  STRIPE: {
-    PUBLISHABLE_KEY: string;
-    PRICE_ID: string;
-    SUCCESS_URL: string;
-    CANCEL_URL: string;
-  };
   ENABLE_HOSTING: boolean;
+  HOSTING: {
+    PROVIDER: string;
+    URL?: string;
+  };
 }
 
 const CreateConfig = ({
@@ -62,7 +56,11 @@ const CreateConfig = ({
 }: IPayments) => {
   const { siteConfig } = useDocusaurusContext();
   const customFields = siteConfig.customFields as unknown as CustomFields;
-  const buyLink = customFields.URLS.BUY_LINK;
+  const {
+    URLS: { BUY_LINK: buyLink },
+    ENABLE_HOSTING: enableHosting,
+    HOSTING: { PROVIDER: hostingProvider, URL: hostingUrl },
+  } = customFields;
   const prefillDone = useRef(false);
   const isTryingToPrefill = useRef(false);
 
@@ -70,7 +68,10 @@ const CreateConfig = ({
     .filter((product) => product.available)
     .map((product) => ({
       value: product.id,
-      label: `${product.name}: ~${siFormat(product.hashrate, 0)}H/s — ${product.price}€ per unit per month`,
+      label: `${product.name}: ~${siFormat(product.hashrate, 0)}H/s — ${new ExchNumberFormat(undefined, {
+        style: 'currency',
+        currency: (product as any).currency || 'EUR',
+      }).format(product.price)} per unit per month`,
     }));
 
   const isOutOfStock = hashratePriceOptions.length === 0;
@@ -106,9 +107,6 @@ const CreateConfig = ({
     infoBoxMapData,
     isLoadingMapChart,
   } = useControls({ defaultRegion, onSetWalletAddress, onChangeRegion });
-
-  const [customerEmail, setCustomerEmail] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(true);
 
   const formatWalletAddress = useCallback((value: string) => {
     return value.replace(/(.{4})/g, '$1 ').trim();
@@ -227,8 +225,7 @@ const CreateConfig = ({
       try {
         const result = await profitabilityCalculation(
           hashrate,
-          siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
-          String(siteConfig.customFields.API_PATH),
+          siteConfig.customFields,
           'eur',
           'monthly'
         );
@@ -321,15 +318,6 @@ const CreateConfig = ({
       }
     }
   }, [dropdownItems, pool, secondPool, dropdownValue1, dropdownValue2]);
-
-  const validateEmail = (email: string) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomerEmail(event.target.value);
-    setIsEmailValid(validateEmail(event.target.value));
-  };
 
   const renderInputs = () => {
     if (inputType === 'plain') {
@@ -447,11 +435,15 @@ const CreateConfig = ({
   const handleDownloadConfig = () => {
     if (!areFieldsValid()) {
       setShowError(true);
+      setErrorMessage('Please fill in all fields correctly.');
       return;
     }
     setShowError(false);
+    setErrorMessage('');
+
     let walletAddressFormat = walletAddress.replace(/\s+/g, '').toLowerCase();
     let workerName = '';
+
     if (inputType === 'plain') {
       workerName = minerName.value;
     } else if (inputType === 'fediverse') {
@@ -461,6 +453,7 @@ const CreateConfig = ({
         uniqueId ? uniqueId : undefined
       );
     }
+
     const regionKey1 = Object.keys(startMiningPoolConfigurations).find(
       (key) =>
         startMiningPoolConfigurations[key]['DESCRIPTION'] ===
@@ -503,66 +496,16 @@ const CreateConfig = ({
     URL.revokeObjectURL(url);
   };
 
-  const handleOrder = async () => {
-    if (!areFieldsValid() || isOutOfStock || !validateEmail(customerEmail)) {
-      setShowError(true);
-      setErrorMessage('All required fields need to be filled out correctly to proceed, including a valid email address.');
-      if (!validateEmail(customerEmail)) setIsEmailValid(false);
-      return;
-    }
+  const showHosting = enableHosting && isSupportedProvider(hostingProvider);
 
-    try {
-      const publishableKey = (siteConfig.customFields as unknown as CustomFields).STRIPE.PUBLISHABLE_KEY;
-      const stripe = await getStripe(publishableKey);
-      if (!stripe) {
-        throw new Error('Failed to initialize payment');
-      }
-
-      const orderData = {
-        coreId: walletAddress.replace(/\s+/g, '').toLowerCase(),
-        workerName: inputType === 'plain' ? minerName.value : constructWorkerName(minerName.value, [typePortal.value], uniqueId ? uniqueId : undefined),
-        pools: {
-          primary: {
-            pool: dropdownValue1?.value,
-            port: startMiningPoolConfigurations[dropdownValue1?.value]?.PORT
-          },
-          secondary: {
-            pool: dropdownValue2?.value,
-            port: startMiningPoolConfigurations[dropdownValue2?.value]?.PORT
-          }
-        },
-        order: {
-          productId: selectedOption,
-          quantity: quantity
-        }
-      };
-
-      const { error } = await stripe.redirectToCheckout({
-        lineItems: [
-          {
-            price: (siteConfig.customFields as unknown as CustomFields).STRIPE.PRICE_ID,
-            quantity: quantity,
-          },
-        ],
-        mode: 'subscription',
-        successUrl: (siteConfig.customFields as unknown as CustomFields).STRIPE.SUCCESS_URL,
-        cancelUrl: (siteConfig.customFields as unknown as CustomFields).STRIPE.CANCEL_URL,
-        clientReferenceId: `${orderData.coreId}|${orderData.workerName}|${orderData.pools.primary.pool}-${orderData.pools.secondary.pool}`,
-        customerEmail: customerEmail,
-      });
-
-      if (error) {
-        setShowError(true);
-        setErrorMessage(error.message || 'Payment failed. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error processing payment:', error);
-      setShowError(true);
-      setErrorMessage('An unexpected error occurred. Please try again.');
-    }
-  };
-
-  const enableHosting = customFields.ENABLE_HOSTING;
+  const variantId = getVariantId(selectedOption, hostingProvider) || '';
+  const quantityValue = quantity;
+  const coreIdValue = walletAddress.replace(/\s+/g, '').toLowerCase();
+  const workerNameValue = inputType === 'plain'
+    ? minerName.value
+    : constructWorkerName(minerName.value, [typePortal.value], uniqueId || undefined);
+  const primaryPoolValue = dropdownValue1?.value || '';
+  const secondaryPoolValue = dropdownValue2?.value || '';
 
   return (
     <>
@@ -727,7 +670,7 @@ const CreateConfig = ({
                 />
               )}
             </div>
-            {enableHosting && (
+            {showHosting && (
               <div className={styles.halfContainer}>
                 <div>
                   <h3 className={styles.hosting}>Hosting</h3>
@@ -798,18 +741,6 @@ const CreateConfig = ({
                           : 'Loading…'}
                         )
                       </div>
-                      <div>
-                        With ordering you agree to the{' '}
-                        <a
-                          href="/docs/rental-terms"
-                          target="_blank"
-                          rel="noopener"
-                          className={styles.minerLink}
-                        >
-                          Rental Terms
-                        </a>
-                        .
-                      </div>
                       <div style={{ fontSize: 'var(--small-font-size)' }}>
                         Tip:{' '}
                         <a
@@ -823,48 +754,50 @@ const CreateConfig = ({
                         to raise the price globally.
                       </div>
                       <Spacer variant="sm" />
-                      <div>
-                        <InputText
-                          type="email"
-                          value={customerEmail}
-                          onChange={handleEmailChange}
-                          context="dark"
-                          placeholder="Customer Email (required for hosting)"
-                          className={styles.emailInput}
-                        />
-                      </div>
-                      {!isEmailValid && customerEmail && (
-                        <div>
-                          <Text
-                            variant="smallBody"
-                            style={{ marginTop: '0.5rem', color: 'var(--ifm-color-danger)' }}
-                          >
-                            Please enter a valid email address.
-                          </Text>
-                        </div>
-                      )}
                     </>
                   )}
                   {!desktop && (
                     <>
                       <Spacer variant="sm" />
-                      <Button
-                        value={
-                          isOutOfStock
-                            ? 'Out of Stock'
-                            : `Order Machine ×${quantity} and Pay Monthly ${`${new ExchNumberFormat(
-                                undefined,
-                                {
-                                  style: 'currency',
-                                  currency: 'EUR',
-                                }
-                              ).format(getTotalPrice())}`}`
-                        }
-                        context="config"
-                        className={styles.fullButton}
-                        disabled={isOutOfStock || !areFieldsValid()}
-                        onClick={handleOrder}
-                      />
+                      {hostingProvider === 'shopify' && (
+                        <form
+                          id="subscriptionForm"
+                          method="POST"
+                          action={getFormAction(hostingUrl, hostingProvider)}
+                          target="_blank"
+                          style={{ width: '100%' }}
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            setTimeout(() => {
+                              window.location.href = `${hostingUrl}/cart`;
+                            }, 500);
+                          }}
+                        >
+                          <input type="hidden" name="id" value={variantId} />
+                          <input type="hidden" name="quantity" value={quantityValue} />
+                          <input type="hidden" name="properties[coreId]" value={coreIdValue} />
+                          <input type="hidden" name="properties[workerName]" value={workerNameValue} />
+                          <input type="hidden" name="properties[primaryPool]" value={primaryPoolValue} />
+                          <input type="hidden" name="properties[secondaryPool]" value={secondaryPoolValue} />
+                          <Button
+                            type="submit"
+                            value={
+                              isOutOfStock
+                                ? 'Out of Stock'
+                                : `Add to cart ×${quantityValue} and subscribe monthly ${`${new ExchNumberFormat(
+                                    undefined,
+                                    {
+                                      style: 'currency',
+                                      currency: 'EUR',
+                                    }
+                                  ).format(getTotalPrice())}`}`
+                            }
+                            context="config"
+                            className={styles.fullButton}
+                            disabled={isOutOfStock || !areFieldsValid()}
+                          />
+                        </form>
+                      )}
                     </>
                   )}
                 </div>
@@ -880,24 +813,44 @@ const CreateConfig = ({
                 className={styles.halfButton}
                 disabled={!areFieldsValid()}
               />
-              {enableHosting && (
-                <Button
-                  value={
-                    isOutOfStock
-                      ? 'Out of Stock'
-                      : `Order Machine ×${quantity} and Pay Monthly ${`${new ExchNumberFormat(
-                          undefined,
-                          {
-                            style: 'currency',
-                            currency: 'EUR',
-                          }
-                        ).format(getTotalPrice())}`}`
-                  }
-                  context="config"
-                  className={styles.halfButton}
-                  disabled={isOutOfStock || !areFieldsValid()}
-                  onClick={handleOrder}
-                />
+              {showHosting && hostingProvider === 'shopify' && (
+                <form
+                  id="subscriptionForm"
+                  method="POST"
+                  action={getFormAction(hostingUrl, hostingProvider)}
+                  target="_blank"
+                  style={{ width: '50%' }}
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    setTimeout(() => {
+                      window.location.href = `${hostingUrl}/cart`;
+                    }, 500);
+                  }}
+                >
+                  <input type="hidden" name="id" value={variantId} />
+                  <input type="hidden" name="quantity" value={quantityValue} />
+                  <input type="hidden" name="properties[coreId]" value={coreIdValue} />
+                  <input type="hidden" name="properties[workerName]" value={workerNameValue} />
+                  <input type="hidden" name="properties[primaryPool]" value={primaryPoolValue} />
+                  <input type="hidden" name="properties[secondaryPool]" value={secondaryPoolValue} />
+                  <Button
+                    type="submit"
+                    value={
+                      isOutOfStock
+                        ? 'Out of Stock'
+                        : `Add to cart ×${quantityValue} and subscribe monthly ${`${new ExchNumberFormat(
+                            undefined,
+                            {
+                              style: 'currency',
+                              currency: 'EUR',
+                            }
+                          ).format(getTotalPrice())}`}`
+                    }
+                    context="config"
+                    className={styles.fullButton}
+                    disabled={isOutOfStock || !areFieldsValid()}
+                  />
+                </form>
               )}
             </div>
           )}

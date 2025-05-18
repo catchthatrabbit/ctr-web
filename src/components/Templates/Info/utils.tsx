@@ -6,8 +6,7 @@ import { convertNumber2Currency } from '@site/src/utils/convertNumber2Currency';
 import { convertTime2Date } from '@site/src/utils/convertTime2Date';
 import { profitabilityCalculation } from '@site/src/utils/profitabilityCalculation';
 import { TextFormat } from '@site/src/utils/textFormat';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
+import { DocusaurusContext } from '@docusaurus/types';
 
 export const convertWalletInfoResponse2GeneralState = (
   data: WALLET_INFO_RESPONSE
@@ -63,8 +62,7 @@ const calculateProfitability = async (
   try {
     const result = await profitabilityCalculation(
       Number(hashrate),
-      siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
-      String(siteConfig.customFields.API_PATH),
+      siteConfig.customFields,
       'usd',
       'monthly'
     );

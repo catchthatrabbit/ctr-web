@@ -8,6 +8,16 @@ import { Spacer } from '../../Atoms/Spacer';
 import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 import usePageControls from '@site/src/hooks/usePageControls';
 
+interface CustomFields {
+  DEFAULT_REGION: string;
+  POOLS_LIST: {
+    [key: string]: {
+      NAME: string;
+      DESCRIPTION: string;
+    };
+  };
+}
+
 const PoolSelectionPage = ({
   pools,
   walletAddress,
@@ -17,7 +27,12 @@ const PoolSelectionPage = ({
 }) => {
   const history = useHistory();
   const { siteConfig } = useDocusaurusContext();
-  const { POOLS_LIST } = siteConfig.customFields;
+  const {
+    DEFAULT_REGION,
+    POOLS_LIST
+  } = siteConfig.customFields as unknown as CustomFields;
+
+  const defaultRegion = DEFAULT_REGION?.toString().toUpperCase() || 'DE';
   const { mobile, tablet } = useMediaQueries();
 
   const handleSelectPool = (pool: any) => {
@@ -25,7 +40,7 @@ const PoolSelectionPage = ({
   };
 
   const { infoBoxMapData, isLoadingMapChart } = usePageControls({
-    defaultRegion: 'DE',
+    defaultRegion,
     includeInfoBox: true,
   });
 

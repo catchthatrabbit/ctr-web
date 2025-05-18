@@ -1,6 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
 import axios from "axios";
-import { EXCHANGE_RATES_API } from "../constants";
 import { XCB_PRICE_RESPONSE } from "./types";
 
 /**
@@ -9,11 +8,11 @@ import { XCB_PRICE_RESPONSE } from "./types";
  * @param {string} currency - The currency to get the XCB price in (e.g., "usd", "eur")
  * @returns {Promise<number>} - The XCB price in the specified currency
  */
-export const fetchXcbPrice = async (currency: string = "usd"): Promise<number> => {
+export const fetchXcbPrice = async (currency: string = "usd", providerUrl: string): Promise<number> => {
   try {
     const normalizedCurrency = currency.toLowerCase();
     const response = await axios.get(
-      `${EXCHANGE_RATES_API}/rates/xcb/${normalizedCurrency}`
+      `${providerUrl}/rates/xcb/${normalizedCurrency}`
     ) as AxiosResponse<XCB_PRICE_RESPONSE>;
 
     if (response.data && typeof response.data.rate === 'number') {

@@ -5,12 +5,11 @@ import {
   IM_MATURED_RESPONSE,
   MATURED_RESPONSE,
 } from './types';
-import { STANDARD_REGIONS_API_KEYS } from '../types';
 import { getAllRegionsMaturedBlocks } from '../stats/utils';
 import { filterAllSettled } from '@site/src/utils/filterAllSettled';
 
 export const fetchMatured = async (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   limit = 10,
   offset = 0,
   url?: string
@@ -44,7 +43,7 @@ export const fetchAllRegionsMatured = async ({
 };
 
 export const fetchImMatured = async (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   limit = 10,
   offset = 0,
   url?: string
@@ -62,7 +61,7 @@ export const fetchImMatured = async (
 };
 
 export const fetchCandidates = async (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   limit = 10,
   offset = 0,
   url?: string

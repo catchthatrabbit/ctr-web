@@ -1,12 +1,11 @@
 import { QUERY_KEYS } from '@site/src/constants/queryKeys';
 import { useQuery } from '@tanstack/react-query';
 import { fetchMinersState, fetchMiners } from '../Api/miners/fetchMiners';
-import { STANDARD_REGIONS_API_KEYS } from '../Api/types';
 import { useQueryConfigured } from './useQueryConfigured';
 import { MINERS_RESPONSE, MINERS_STATES } from '../Api/miners/types';
 import { useConfigUrlBasedRegion } from './useConfigUrlBasedRegion';
 
-export const useFetchMinersState = (region: STANDARD_REGIONS_API_KEYS) => {
+export const useFetchMinersState = (region: string) => {
   const { url } = useConfigUrlBasedRegion(region);
 
   return useQuery<MINERS_STATES>({
@@ -16,7 +15,7 @@ export const useFetchMinersState = (region: STANDARD_REGIONS_API_KEYS) => {
 };
 
 export const useFetchMiners = (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   limit?: number,
   offset?: number
 ) => {

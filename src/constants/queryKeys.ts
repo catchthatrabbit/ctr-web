@@ -10,4 +10,5 @@ export const QUERY_KEYS = {
   ALL_REGIONS_MATURED: 'allRegionsMatured',
   IM_MATURED: 'imMatured',
   CANDIDATES: 'candidates',
+  WORKER_COUNTS: 'worker_counts',
 };

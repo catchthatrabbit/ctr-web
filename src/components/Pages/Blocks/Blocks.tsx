@@ -10,8 +10,12 @@ import useControls from './controls';
 import { Spacer } from '@site/src/components/Atoms/Spacer';
 import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
 import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 const Blocks = () => {
+  const { siteConfig } = useDocusaurusContext();
+  const defaultRegion = siteConfig.customFields.DEFAULT_REGION.toString().toUpperCase() || 'DE';
+
   const {
     regionLabel,
     dropdownItems,
@@ -25,7 +29,7 @@ const Blocks = () => {
     infoBoxMapData,
     isLoadingMapChart,
   } = usePageControls({
-    defaultRegion: 'DE',
+    defaultRegion,
     fetchMultipleData: true,
     includeInfoBox: true,
   });

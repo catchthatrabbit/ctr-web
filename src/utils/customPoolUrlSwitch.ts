@@ -1,4 +1,3 @@
-import { STANDARD_REGIONS_API_KEYS } from '../Api/types';
 import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
 
 /**
@@ -9,40 +8,10 @@ import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
  * @returns {string} The constructed API URL for the specified region
  */
 export const customPoolAndApiUrlSwitch = (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   poolUrl: POOLS_API_CONFIG_TYPE,
   apiPath?: string
 ): string => {
-  let resultUrl;
-
-  switch (region) {
-    case 'DE':
-      resultUrl = poolUrl['DE_API_ENDPOINT'];
-      break;
-    case 'FI':
-      resultUrl = poolUrl['FI_API_ENDPOINT'];
-      break;
-    case 'SG':
-      resultUrl = poolUrl['SG_API_ENDPOINT'];
-      break;
-    case 'HK':
-      resultUrl = poolUrl['HK_API_ENDPOINT'];
-      break;
-    case 'BR':
-      resultUrl = poolUrl['BR_API_ENDPOINT'];
-      break;
-    case 'JP':
-      resultUrl = poolUrl['JP_API_ENDPOINT'];
-      break;
-    default:
-      resultUrl = '';
-  }
-
-  if (!resultUrl) return '';
-
-  if (apiPath) {
-    if (resultUrl.endsWith('/')) return `${resultUrl}${apiPath}`;
-    return `${resultUrl}/${apiPath}`;
-  }
-  return resultUrl;
+  const resultUrl: string = poolUrl[`${region}_API_ENDPOINT`] || '';
+  return resultUrl ? `${resultUrl}${apiPath || ''}` : '';
 };

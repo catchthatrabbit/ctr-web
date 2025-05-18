@@ -12,7 +12,6 @@ import SearchIcon from '@site/src/icons/SearchIcon';
 import { useHistory } from 'react-router-dom';
 import styles from './styles.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { STANDARD_REGIONS_API } from '@site/src/Api/constants';
 
 interface ISearch extends InputHTMLAttributes<HTMLInputElement> {
   onSearch?: (searchQuery: string) => void;
@@ -75,11 +74,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
               }
 
               const data = await response.json();
-              const regionKey = Object.keys(STANDARD_REGIONS_API).find((key) =>
-                poolKey.startsWith(key)
-              );
-
-              const region = regionKey ? STANDARD_REGIONS_API[regionKey] : null;
+              const region = poolKey.toLowerCase();
 
               return { region, apiUrlWithPath };
             } catch (error) {

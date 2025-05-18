@@ -22,11 +22,6 @@ export const machines = [
     powerConsumption: 600
   },
   {
-    name: 'CTR Gamma Γ',
-    hashrate: 13000,
-    powerConsumption: 0
-  },
-  {
     name: 'Intel® Xeon® E5-2670 v3',
     hashrate: 12000,
     powerConsumption: 250

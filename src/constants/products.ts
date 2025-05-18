@@ -1,8 +1,9 @@
 export const products = [
   {
-    id: "ctrgamma13",
+    id: "ctrgamma",
+    variantId: "1234567890",
     name: "CTR Gamma Γ",
-    hashrate: 13000,
+    hashrate: 1000,
     price: 100,
     available: true
   }

@@ -1,5 +1,4 @@
 import { QUERY_KEYS } from '@site/src/constants/queryKeys';
-import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 import {
   fetchPayments,
   fetchPaymentsByWalletAddress,
@@ -14,7 +13,7 @@ import {
 import { useConfigUrlBasedRegion } from './useConfigUrlBasedRegion';
 
 export const useFetchPaymentByWalletAddress = (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   walletAddress: string,
   limit?: number,
   offset?: number
@@ -29,7 +28,7 @@ export const useFetchPaymentByWalletAddress = (
 };
 
 export const useFetchPayments = (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   limit?: number,
   offset?: number
 ) => {
@@ -42,7 +41,7 @@ export const useFetchPayments = (
   );
 };
 
-export const useFetchPaymentsState = (region: STANDARD_REGIONS_API_KEYS) => {
+export const useFetchPaymentsState = (region: string) => {
   const { url } = useConfigUrlBasedRegion(region);
 
   return useQueryConfigured<PAYMENTS_STATE>(

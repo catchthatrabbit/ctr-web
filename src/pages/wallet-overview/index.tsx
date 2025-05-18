@@ -5,7 +5,6 @@ import { ConfiguredLayout } from '@site/src/components/Templates/ConfiguredLayou
 import { useWalletPage } from '@site/src/hooks/useWallet';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { POOLS_LIST } from '@site/src/configs/types';
-import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 import ICAN from '@blockchainhub/ican';
 
 const WalletOverviewPage = () => {
@@ -25,7 +24,7 @@ const WalletOverviewPage = () => {
   } = useWalletPage();
 
   const defaultRegion = pool
-    ? (pool.toUpperCase() as STANDARD_REGIONS_API_KEYS)
+    ? pool.toUpperCase()
     : region;
 
   return (

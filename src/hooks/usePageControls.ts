@@ -2,10 +2,9 @@ import { useHeaders } from '@site/src/hooks/useHeaders';
 import { usePaginate } from '@site/src/hooks/usePaginate';
 import useMapChartData from '@site/src/components/Pages/Dashboard/hooks/useMapChartData';
 import { useFetchAllBlocks } from '@site/src/hooks/useBlocks';
-import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
 
 interface IPageControls {
-  defaultRegion: STANDARD_REGIONS_API_KEYS;
+  defaultRegion: string;
   includeInfoBox?: boolean;
   fetchMultipleData?: boolean;
 }

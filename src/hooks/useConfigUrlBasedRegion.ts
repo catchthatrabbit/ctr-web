@@ -2,9 +2,8 @@ import siteContext from '@docusaurus/useDocusaurusContext';
 import { useCallback } from 'react';
 import { customPoolAndApiUrlSwitch } from '../utils/customPoolUrlSwitch';
 import { POOLS_API_CONFIG_TYPE } from '../configs/types';
-import { STANDARD_REGIONS_API_KEYS } from '../Api/types';
 
-export const useConfigUrlBasedRegion = (region: STANDARD_REGIONS_API_KEYS) => {
+export const useConfigUrlBasedRegion = (region: string) => {
   const { siteConfig } = siteContext();
 
   const url = useCallback(

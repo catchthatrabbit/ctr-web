@@ -18,6 +18,7 @@ interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   weight?: 'medium' | 'normal';
   context?: 'config' | 'wallet';
   disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const Button = ({
@@ -33,6 +34,7 @@ const Button = ({
   weight = 'normal',
   context,
   disabled = false,
+  type = 'button',
   ...restProps
 }: IButtonProps) => {
   const buttonStyle = {
@@ -55,6 +57,7 @@ const Button = ({
       )}
       style={buttonStyle}
       disabled={disabled}
+      type={type}
       {...restProps}
     >
       {icon && <div className={styles.buttonIcon}>{icon}</div>}
