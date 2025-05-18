@@ -40,7 +40,8 @@
     "remark-corebc": "^0.2.2",
     "remark-corepass": "^0.2.1",
     "remark-currency-formatter": "^0.2.1",
-    "remark-fediverse-user": "^0.2.1"
+    "remark-fediverse-user": "^0.2.1",
+    "stripe": "^18.1.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.7.0",
