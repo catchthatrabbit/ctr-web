@@ -23,7 +23,7 @@ const IBan = ({ iBan = '', pool }: IIBan) => {
   const { DEFAULT_REGION } = siteConfig.customFields as unknown as CustomFields;
   const defaultPool = DEFAULT_REGION?.toString().toLowerCase() || 'de';
   const poolRegion = pool || defaultPool;
-  const permalink = `https://${poolRegion}.ctr.watch/${iBan}`;
+  const permalink = `https://${poolRegion}.ctr.watch/@${iBan}`;
 
   return (
     <>
