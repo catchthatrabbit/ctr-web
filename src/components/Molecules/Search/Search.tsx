@@ -74,7 +74,7 @@ const Search = forwardRef<HTMLInputElement, ISearch>(
               }
 
               const data = await response.json();
-              const region = poolKey.toLowerCase();
+              const region = poolKey.toLowerCase().split('_')[0];
 
               return { region, apiUrlWithPath };
             } catch (error) {

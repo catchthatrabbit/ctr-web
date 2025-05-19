@@ -6,13 +6,19 @@ export const fetchWalletInfo = async ({
   region,
   walletAddress,
   url,
+  apiConfig,
 }: {
   region: string;
   walletAddress: string;
+  apiConfig?: ApiConfig;
   url?: string;
 }) => {
   try {
-    const instance = new AxiosInstance({ region, url }).getInstance();
+    const instance = new AxiosInstance({
+      region,
+      url,
+      apiConfig,
+    }).getInstance();
 
     const response = instance.get(`/accounts/${walletAddress}`) as Promise<
       AxiosResponse<WALLET_INFO_RESPONSE>

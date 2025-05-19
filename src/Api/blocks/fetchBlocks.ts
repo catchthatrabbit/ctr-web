@@ -18,7 +18,7 @@ export const fetchMatured = async (
     const realOffset = offset * limit;
     const instance = new AxiosInstance({ region, url }).getInstance();
     const response = instance.get(
-      `/matured_blocks?limit=${limit}&offset=${realOffset}`
+      `matured_blocks?limit=${limit}&offset=${realOffset}`
     ) as Promise<AxiosResponse<MATURED_RESPONSE, unknown>>;
     return (await response).data;
   } catch (e) {
@@ -30,9 +30,14 @@ export const fetchMatured = async (
 export const fetchAllRegionsMatured = async ({
   urls,
   apiPath,
+  apiConfig,
 }: Parameters<typeof getAllRegionsMaturedBlocks>[0]) => {
   try {
-    const instanceArray = getAllRegionsMaturedBlocks({ urls, apiPath });
+    const instanceArray = getAllRegionsMaturedBlocks({
+      urls,
+      apiPath,
+      apiConfig,
+    });
     const statsResponses = await filterAllSettled<{ data: MATURED_RESPONSE }>(
       instanceArray
     );

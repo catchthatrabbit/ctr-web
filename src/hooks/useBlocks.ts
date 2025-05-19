@@ -16,6 +16,8 @@ import {
 import { useQueryConfigured } from './useQueryConfigured';
 import { useEffect } from 'react';
 import { useConfigUrlBasedRegion } from './useConfigUrlBasedRegion';
+import { getApiConfig } from '../utils/getApiConfig';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 export const useFetchAllBlocks = (
   region: string,
@@ -81,8 +83,10 @@ export const useFetchAllRegionsMaturedBlocks = ({
   urls,
   apiPath,
 }: Parameters<typeof fetchAllRegionsMatured>[0]) => {
+  const { siteConfig } = useDocusaurusContext();
+  const apiConfig = getApiConfig(siteConfig.customFields);
   return useQueryConfigured<MATURED_RESPONSE[]>(
-    { urls, apiPath },
+    { urls, apiPath, apiConfig },
     QUERY_KEYS.ALL_REGIONS_MATURED,
     fetchAllRegionsMatured
   );

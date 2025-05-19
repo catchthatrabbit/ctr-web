@@ -27,16 +27,16 @@ const PoolSelectionPage = ({
 }) => {
   const history = useHistory();
   const { siteConfig } = useDocusaurusContext();
-  const {
-    DEFAULT_REGION,
-    POOLS_LIST
-  } = siteConfig.customFields as unknown as CustomFields;
+  const { DEFAULT_REGION, POOLS_LIST } =
+    siteConfig.customFields as unknown as CustomFields;
 
   const defaultRegion = DEFAULT_REGION?.toString().toUpperCase() || 'DE';
   const { mobile, tablet } = useMediaQueries();
 
   const handleSelectPool = (pool: any) => {
-    history.push(`/coreid/${walletAddress}/${pool.region}`);
+    const region = pool.region.split('_')[0];
+    console.log('Selected pool:', region);
+    history.push(`/coreid/${walletAddress}/${region}`);
   };
 
   const { infoBoxMapData, isLoadingMapChart } = usePageControls({

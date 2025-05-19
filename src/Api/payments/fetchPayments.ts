@@ -48,10 +48,11 @@ export const fetchPayments = async ({
   url?: string;
 }) => {
   try {
+    const realOffset = offset * limit;
     const instance = new AxiosInstance({ region, url }).getInstance();
 
     const response = instance.get(
-      `/payments?limit=${limit}&offset=${offset}`
+      `/payments?limit=${limit}&offset=${realOffset}`
     ) as Promise<AxiosResponse<PAYMENTS_RESPONSE>>;
 
     return (await response).data;

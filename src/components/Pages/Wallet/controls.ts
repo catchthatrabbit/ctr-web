@@ -12,6 +12,7 @@ import { URLS_CONFIG_TYPE } from '@site/src/configs/types';
 import { useLocation } from '@docusaurus/router';
 import { useHistory } from 'react-router-dom';
 import usePageControls from '@site/src/hooks/usePageControls';
+import { getApiConfig } from '@site/src/utils/getApiConfig';
 
 interface IWallet extends Omit<IAnyPageAndWallet, 'onSetWalletAddress'> {
   walletAddress: string;
@@ -39,6 +40,7 @@ const useControls = ({
   const [currentPageWorkers, setCurrentPageWorkers] = useState<number>(1);
 
   const { siteConfig } = useDocusaurusContext();
+  const apiConfig = getApiConfig(siteConfig.customFields);
   const location = useLocation();
   const history = useHistory();
 
@@ -104,7 +106,7 @@ const useControls = ({
   );
 
   const { data: fetchedWalletInfo, isLoading: isLoadingFetchWallet } =
-    useFetchWallet(region, walletAddress);
+    useFetchWallet(region, walletAddress, apiConfig);
 
   const {
     data: fetchWorkersByWalletAddress,
@@ -130,10 +132,7 @@ const useControls = ({
   const { data: fetchWorkerCounts, isLoading: isLoadingFetchWorkerCounts } =
     useFetchWorkerCounts(region, walletAddress);
 
-  const handleChangeRegion = (id: {
-    label: string;
-    value: string;
-  }) => {
+  const handleChangeRegion = (id: { label: string; value: string }) => {
     const splitted = location.pathname.split('/');
     splitted[3] = id.value.toLowerCase();
     const newUrl = splitted.join('/');

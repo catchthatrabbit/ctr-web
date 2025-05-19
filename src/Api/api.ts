@@ -22,7 +22,10 @@ class AxiosInstance {
         baseURL: url,
       });
     } else if (apiConfig?.apiEndpoints && apiConfig?.apiPath && region) {
-      const baseUrl = apiConfig.apiEndpoints[region];
+      const normalizedRegionKey = `${region}_API_ENDPOINT`;
+
+      const baseUrl = apiConfig.apiEndpoints[normalizedRegionKey];
+
       if (!baseUrl) {
         throw new Error(`No API endpoint found for region: ${region}`);
       }

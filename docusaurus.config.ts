@@ -43,12 +43,12 @@ const config: Config = {
       BR_API_ENDPOINT: 'https://us-api.catchthatrabbit.com',
       JP_API_ENDPOINT: 'https://us1-api.catchthatrabbit.com',
     },
-    API_PATH: 'v2/api/',
+    API_PATH: '/v2/api/',
     URLS: {
-      TRANSACTION_DETAILS: "https://blockindex.net/tx",
-      BLOCK_DETAILS: "https://blockindex.net/block",
-      BUY_LINK: "https://app.ping.exchange?ref-code=kz3Xyxnn",
-      EXCHANGE_RATES: "https://coreport.pages.dev/api/v1",
+      TRANSACTION_DETAILS: 'https://blockindex.net/tx',
+      BLOCK_DETAILS: 'https://blockindex.net/block',
+      BUY_LINK: 'https://app.ping.exchange?ref-code=kz3Xyxnn',
+      EXCHANGE_RATES: 'https://coreport.pages.dev/api/v1',
     },
     POOLS_LIST: {
       DE: {
@@ -120,18 +120,39 @@ const config: Config = {
     },
     DEFAULT_REGION: 'DE',
     EMAILS: {
-      'Support': [
-        {email:'support@catchthatrabbit.com', description: 'For general inquiries, technical support, and assistance with mining operations. Our support team is available to help you with pool configuration, troubleshooting, and any questions about our services.'},
+      Support: [
+        {
+          email: 'support@catchthatrabbit.com',
+          description:
+            'For general inquiries, technical support, and assistance with mining operations. Our support team is available to help you with pool configuration, troubleshooting, and any questions about our services.',
+        },
       ],
-      'Security': [
-        {email:'security@catchthatrabbit.com', description: 'For reporting security vulnerabilities, incidents, or any security-related concerns. We take security seriously and appreciate responsible disclosure of any potential issues.'},
-        {email:'ctr@onion.email', description: 'For reporting security vulnerabilities, incidents, or any security-related concerns. We take security seriously and appreciate responsible disclosure of any potential issues.', key: 'https://keys.openpgp.org/vks/v1/by-fingerprint/ABC'},
+      Security: [
+        {
+          email: 'security@catchthatrabbit.com',
+          description:
+            'For reporting security vulnerabilities, incidents, or any security-related concerns. We take security seriously and appreciate responsible disclosure of any potential issues.',
+        },
+        {
+          email: 'ctr@onion.email',
+          description:
+            'For reporting security vulnerabilities, incidents, or any security-related concerns. We take security seriously and appreciate responsible disclosure of any potential issues.',
+          key: 'https://keys.openpgp.org/vks/v1/by-fingerprint/ABC',
+        },
       ],
-      'Commercial': [
-        {email:'contact@catchthatrabbit.com', description: 'For business inquiries, partnership opportunities, and commercial discussions. The team is available to discuss mining devices, mining farm setup, hardware procurement, and other commercial arrangements.'},
+      Commercial: [
+        {
+          email: 'contact@catchthatrabbit.com',
+          description:
+            'For business inquiries, partnership opportunities, and commercial discussions. The team is available to discuss mining devices, mining farm setup, hardware procurement, and other commercial arrangements.',
+        },
       ],
-      'Rental': [
-        {email:'rentals@catchthatrabbit.com', description: 'For rental inquiries, partnership opportunities, and rental discussions. The team is available to discuss rented devices, mining farm setup, hardware procurement, and other rental arrangements.'},
+      Rental: [
+        {
+          email: 'rentals@catchthatrabbit.com',
+          description:
+            'For rental inquiries, partnership opportunities, and rental discussions. The team is available to discuss rented devices, mining farm setup, hardware procurement, and other rental arrangements.',
+        },
       ],
     },
 
@@ -148,7 +169,7 @@ const config: Config = {
     HOSTING: {
       URL: 'https://shop.catchthatrabbit.com',
       PROVIDER: 'shopify',
-    }
+    },
   },
 
   presets: [

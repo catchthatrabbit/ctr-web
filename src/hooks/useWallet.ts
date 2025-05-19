@@ -17,10 +17,11 @@ interface CustomFields {
 
 export const useFetchWallet = (
   region: string,
-  walletAddress: string
+  walletAddress: string,
+  apiConfig: ApiConfig
 ) => {
   return useQueryConfigured<WALLET_INFO_RESPONSE>(
-    { region, walletAddress },
+    { region, walletAddress, apiConfig },
     QUERY_KEYS.WALLET_INFO,
     fetchWalletInfo,
     walletAddress !== undefined
@@ -34,7 +35,9 @@ export const useWalletPage = () => {
 
   const [walletAddress, setWalletAddress] = useState<string>();
   const [region, setRegion] = useState<string>(defaultRegion.toUpperCase());
-  const [selectedPool, setSelectedPool] = useState<string>(defaultRegion.toLowerCase());
+  const [selectedPool, setSelectedPool] = useState<string>(
+    defaultRegion.toLowerCase()
+  );
 
   const handleWalletAddress = (walletAddress: string) => {
     setWalletAddress(walletAddress);
@@ -79,10 +82,7 @@ export const useFetchWorkersByWalletAddress = (
   );
 };
 
-export const useFetchWorkerCounts = (
-  region: string,
-  walletAddress: string
-) => {
+export const useFetchWorkerCounts = (region: string, walletAddress: string) => {
   const { url } = useConfigUrlBasedRegion(region);
   return useQueryConfigured<any>(
     { region, walletAddress, url },

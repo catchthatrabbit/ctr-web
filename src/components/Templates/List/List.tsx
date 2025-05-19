@@ -68,7 +68,7 @@ const List = ({
               context === 'blocks' && styles.blocksPaginationWrapper
             )}
           >
-            {hidePagination && (
+            {hidePagination && Array.isArray(data) && data.length > 0 && (
               <Pagination
                 offset={currentPage}
                 total={total}
