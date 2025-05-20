@@ -31,6 +31,7 @@ const Wallet = ({
   defaultRegion,
   onChangeRegion,
   onSetWalletAddress,
+  selectedPool,
 }: IWallet) => {
   const [filterStatus, setFilterStatus] = useState<
     'All' | 'Running' | 'Inactive'
@@ -179,6 +180,7 @@ const Wallet = ({
             defaultRegion={regionLabel}
             onChangeRegion={handleChangeRegion}
             iban={walletAddress}
+            selectedPool={selectedPool}
             layout={{ boards: true, search: false, dropdown: true }}
             context={mobile ? 'mobileWallet' : 'wallet'}
           />

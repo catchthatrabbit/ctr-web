@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import { Text } from '../../Atoms/Text';
 import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
+import TextareaAutosize from 'react-textarea-autosize';
 
 import clsx from 'clsx';
 
@@ -68,7 +69,7 @@ const InputText = forwardRef<
       );
     };
     const renderTextarea = () => (
-      <textarea
+      <TextareaAutosize
         ref={ref as React.Ref<HTMLTextAreaElement>}
         onKeyDown={handleSearchOnPressEnter}
         className={clsx(styles.inputText, className, {
@@ -81,8 +82,7 @@ const InputText = forwardRef<
         rows={1}
         style={{
           height: 'auto',
-          minHeight: '4rem',
-          overflow: 'hidden',
+          boxSizing: 'border-box',
           resize: 'none',
           direction: 'ltr',
         }}

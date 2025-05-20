@@ -14,6 +14,7 @@ interface IHeader {
   defaultRegion?: string;
   children?: React.ReactNode;
   iban?: string;
+  selectedPool?: string;
   isLoading?: boolean;
   boardItems?: Array<{
     desc: string;
@@ -39,6 +40,7 @@ const Header = ({
   onChangeRegion,
   defaultRegion,
   iban,
+  selectedPool,
   children,
   isLoading = false,
   pageTitleComponent,
@@ -99,7 +101,7 @@ const Header = ({
       )}
       {layout.dropdown && (
         <>
-          {iban && <IBan iBan={iban} />}
+          {iban && <IBan iBan={iban} pool={selectedPool} />}
           {desktop ? null : <Spacer variant="xxs" />}
 
           {context === 'blocks' && <Spacer variant="xxl" />}
