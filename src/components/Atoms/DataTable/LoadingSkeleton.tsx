@@ -1,9 +1,9 @@
 import React from 'react';
-import { Dispatch, SetStateAction } from "react";
-import { Text } from "../Text";
-import clsx from "clsx";
+import { Dispatch, SetStateAction } from 'react';
+import { Text } from '../Text';
+import clsx from 'clsx';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface ILoadingSkeleton {
   columns: Array<{
@@ -27,12 +27,10 @@ const LoadingSkeleton = ({ columns, loadingComp }: ILoadingSkeleton) => {
               key={colIndex}
               className={clsx(
                 colItem.alignToCenter && styles.tableCenteredText,
-                colIndex === 0 && styles.tablePaddingLeft,
+                colIndex === 0 && styles.tablePaddingLeft
               )}
             >
-              <Text variant="heading2">
-                {colItem.label || ""}
-              </Text>
+              <Text variant="heading2">{colItem.label || ''}</Text>
             </th>
           ))}
         </tr>
@@ -42,7 +40,7 @@ const LoadingSkeleton = ({ columns, loadingComp }: ILoadingSkeleton) => {
           <tr key={indexRow}>
             {columns?.map((_, indexCol) => (
               <td key={indexCol}>
-                <div className={styles.loadingComp}>{loadingComp}</div>{" "}
+                <div className={styles.loadingComp}>{loadingComp}</div>{' '}
               </td>
             ))}
           </tr>

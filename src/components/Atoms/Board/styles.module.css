@@ -1,34 +1,26 @@
-.boardContainer {
-  width: auto;
-}
-
 .boardContainer.boardContainerPayments {
-  padding: 10px 0;
+  padding: 1em 0;
 }
 
 .content {
-  box-sizing: border-box;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  gap: var(--space-xxs);
-  width: 100%;
+}
+
+.boardContainer.boardContainerPayments .content {
+  flex-direction: column;
+  gap: 0;
 }
 
 .boardTotal {
   flex-direction: column;
-  justify-content: center;
 }
 
-.boardItem {
-  display: flex;
-  align-items: center;
+.boardTitle {
+  margin-right: 0.2em;
 }
 
 .boardClassNameColumn {
   flex-direction: column !important;
-}
-
-.boardClassNameColumnMobile {
-  height: 81px;
 }

@@ -1,9 +1,9 @@
-import React from "react";
-import clsx from "clsx";
-import { useNavbarSecondaryMenu } from "@docusaurus/theme-common/internal";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
+import React from 'react';
+import clsx from 'clsx';
+import { useNavbarSecondaryMenu } from '@docusaurus/theme-common/internal';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
 
-import customStyles from "./customStyles.module.css";
+import customStyles from './customStyles.module.css';
 
 export default function NavbarMobileSidebarLayout({
   header,
@@ -17,11 +17,18 @@ export default function NavbarMobileSidebarLayout({
       <Spacer variant="xxl" />
 
       <div
-        className={clsx("navbar-sidebar__items", customStyles.centered, {
-          "navbar-sidebar__items--show-secondary": secondaryMenuShown,
-        })}
+        className={clsx(
+          'navbar-sidebar__items',
+          customStyles.centered,
+          customStyles.navbarItems,
+          {
+            'navbar-sidebar__items--show-secondary': secondaryMenuShown,
+          }
+        )}
       >
-        <div className={`navbar-sidebar__item menu ${customStyles.navbarItem}`}>
+        <div
+          className={`navbar-sidebar__item menu ${customStyles.navbarItem} ${customStyles.centered}`}
+        >
           {primaryMenu}
         </div>
       </div>

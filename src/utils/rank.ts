@@ -3,20 +3,18 @@
  * @param num - The numeric value to convert to a rank
  * @returns {string} The rank title with emoji based on the input value
  */
-export const convert2Rank = (
-  num: number,
-): string => {
+export const convert2Rank = (num: number): string => {
   if (num >= 5) {
-    return "🦖 Godzilla";
+    return '🦖 Godzilla';
   } else if (num >= 3) {
-    return "🐋 Whale";
+    return '🐋 Whale';
   } else if (num >= 1) {
-    return "🦈 Shark";
+    return '🦈 Shark';
   } else if (num >= 0.7) {
-    return "🦑 Squid";
+    return '🦑 Squid';
   } else if (num >= 0.3) {
-    return "🐗 Bull";
+    return '🐗 Bull';
   } else {
-    return "🐰 Rabbit";
+    return '🐰 Rabbit';
   }
 };

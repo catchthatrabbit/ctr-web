@@ -1,11 +1,11 @@
-import React from "react";
-import { Panel } from "@site/src/components/Molecules/Panel";
-import { Text } from "@site/src/components/Atoms/Text";
-import clsx from "clsx";
-import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
+import React from 'react';
+import { Panel } from '@site/src/components/Molecules/Panel';
+import { Text } from '@site/src/components/Atoms/Text';
+import clsx from 'clsx';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface ISingleColumnPanel {
   id?: string;
@@ -13,7 +13,7 @@ interface ISingleColumnPanel {
   children?: React.ReactNode;
   data: Array<{ label: string; value: string }>;
   description?: string;
-  context?: "default" | "startMining";
+  context?: 'default' | 'startMining';
 }
 
 const SingleColumnPanel = ({
@@ -21,13 +21,13 @@ const SingleColumnPanel = ({
   data,
   id,
   description,
-  context = "default",
+  context = 'default',
 }: ISingleColumnPanel) => {
-  const { desktop, laptop, mobile, tablet } = useMediaQueries();
+  const { desktop, mobile, tablet } = useMediaQueries();
   return (
     <Panel
-      id={id || ""}
-      title={title || ""}
+      id={id || ''}
+      title={title || ''}
       variant="heading2"
       color="primary"
       titleClassName={styles.singlePanel}
@@ -38,39 +38,35 @@ const SingleColumnPanel = ({
           <Spacer variant="xxs" />
           <div
             className={clsx(styles.singleColumnValue, {
-              // [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
               [styles.singleColumnValuePaddingTablet]: tablet,
-              [styles.singleColumnValuePaddingMobile]: mobile,
               [styles.singleColumnValuePaddingStartMining]:
-                context === "startMining",
+                context === 'startMining',
             })}
           >
-            <Text type="value" variant={desktop ? "subheading" : "body"}>
+            <Text type="value" variant={desktop ? 'subheading' : 'body'}>
               {description}
             </Text>
           </div>
-          <Spacer variant="sm" />
         </>
       )}
+      <Spacer variant="sm" />
       {data?.map((item, index) => (
         <div
           key={index}
           className={clsx(styles.singleColumnValue, {
-            // [styles.singleColumnValuePaddingDesktop]: desktop || laptop,
             [styles.singleColumnValuePaddingTablet]: tablet,
-            [styles.singleColumnValuePaddingMobile]: mobile,
             [styles.singleColumnValuePaddingStartMining]:
-              context === "startMining",
+              context === 'startMining',
           })}
         >
-          {context === "startMining" ? (
+          {context === 'startMining' ? (
             <div className={styles.labelValueContainer}>
               <div className={styles.label}>
                 <Text
                   type="value"
                   variant="smallBody"
                   color="white"
-                  weight={desktop ? "normal" : "bold"}
+                  weight={desktop ? 'normal' : 'bold'}
                 >
                   {item.label}
                 </Text>
@@ -80,9 +76,9 @@ const SingleColumnPanel = ({
                   type="value"
                   variant="smallBody"
                   color="white"
-                  weight={desktop ? "normal" : "bold"}
+                  weight={desktop ? 'normal' : 'bold'}
                 >
-                  {item.value || ""}
+                  {item.value || ''}
                 </Text>
               </div>
             </div>
@@ -91,9 +87,8 @@ const SingleColumnPanel = ({
               <Text type="value" variant="subheading">
                 {`${item.label}:`}
               </Text>
-              &nbsp;&nbsp;
               <Text type="value" variant="subheading">
-                {item.value || ""}
+                {item.value || ''}
               </Text>
             </>
           )}

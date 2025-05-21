@@ -5,7 +5,6 @@
 }
 
 .dropdownListItem {
-  padding: 10px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -16,23 +15,12 @@
   background-color: #f0f0f0;
 }
 
-
 .dropdownTextContainer {
   width: 100%;
 }
 
-.walletContext{
-  width: 52%;
-}
-
-@media screen and (min-width: 1650px) {
-  .dropdownTextContainer {
-    width: 41%;
-  }
-}
-
 @media screen and (max-width: 768px) {
   .dropdownTextContainer {
-    width: 97%;
+    width: 100%;
   }
 }

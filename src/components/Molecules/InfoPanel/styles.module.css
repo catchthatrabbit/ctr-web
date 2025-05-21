@@ -1,10 +1,19 @@
 .block {
-  background: linear-gradient(83.31deg, #1B1C1C 42.05%, rgba(22, 199, 132, 0.33) 358.63%);
-  width: 49%;
-  padding: var(--space-sm);
-  border-radius: var(--ifm-global-radius);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1.2em 1em;
+  transition: background-color 0.2s ease;
 }
 
-.mobileBlock{
-  width: 97%;
+.clickable:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.mobileBlock {
+  padding: 1em 0.8em;
+}
+
+.link {
+  text-decoration: none;
+  display: inline-block;
 }

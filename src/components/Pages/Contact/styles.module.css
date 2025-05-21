@@ -11,46 +11,39 @@
 .rightContainer {
   display: flex;
   flex-direction: column;
-  width: calc((5.1/12) * 100%);
+  width: calc((5.1 / 12) * 100%);
 }
 
 .textarea {
-  width: 100%;
-  height: 182px;
-  padding: 14px 16px;
   border: 1px solid var(--ifm-border-color);
   border-radius: var(--ifm-global-radius);
   resize: vertical;
   background-color: rgba(32, 33, 33, 1);
   border: 1px solid rgba(54, 54, 54, 1);
+  height: 12rem;
+  padding: var(--space-xs);
+  font-size: var(--regular-font-size);
 }
 
 .textarea::placeholder {
   color: var(--ifm-subheading-color);
   font-family: var(--regular-font-family);
-  font-size: var(  --regular-font-size);
 }
 
 .linkButton {
   padding: var(--space-xxs) var(--space-sm);
   background-color: var(--ifm-color-primary);
-  width: 37%;
   border-radius: var(--ifm-global-radius);
 }
 
-@media screen and (max-width: 768px) {
-  .leftContainer {
-    --ifm-col-width: 97%;
-    margin-left: 7px;
-  }
-
+@media screen and (max-width: 1270px) {
   .rightContainer {
-    width: 97%;
+    width: 100%;
     margin: 0 auto;
   }
 
-  .linkButton {
+  .leftContainer {
     width: 100%;
-    text-align: center;
+    margin: 0 auto;
   }
 }

@@ -1,60 +1,16 @@
-:root {
-  --toastify-icon-color-success: var(--ifm-color-primary); /* Set the variable here */
-}
-
 .copyButtonSmall {
-  background-color: transparent!important;
+  background-color: transparent !important;
   border: none;
   cursor: pointer;
 }
 
-.customToastBody {
-  font-size: 16px;
-  font-family: var(--regular-font-family);
-}
-
-.customToast {
-  background-color: rgba(54, 54, 54, 1);
-  color: #fff;
-  border-radius: 8px;
-  width: 397px;
-  position: relative;
-  right: var(--space-xxl);
-  top: calc(var(--space-xxxl) + var(--space-xs));
-}
-
-.customToastBody {
-  font-size: 16px;
-  display: flex; /* Use Flexbox */
-  align-items: center; /* Center items vertically */
-}
-
-.customToastProgress {
-  background-color: var(--ifm-color-primary);
-}
-
-.customToast > svg {
-  width: 13px;
-  height: 13px;
-}
-
-.Toastify__closeButton {
+.closeButton {
   align-self: center;
-}
-
-@media (max-width: 767px) {
-  .customToast {
-    width: 92%;
-    left: 4%;
-    top: 115px;
-  }
-
-  .customToastBody {
-    font-size: 15px;
-  }
-
-  .Toastify__toast-icon {
-    width: 13px;
-    height: 13px;
-  }
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: var(--body-font-size);
+  padding: 0 1.25rem;
+  margin-left: auto;
 }

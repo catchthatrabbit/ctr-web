@@ -17,8 +17,7 @@
 }
 
 .boardDropdown {
-  width: 588px;
-  margin: auto;
+  width: 100%;
 }
 
 .blocksDropdown {
@@ -31,7 +30,7 @@
 }
 
 .smallWidth {
-  width: 384px;
+  width: 100%;
 }
 
 .mobileBlocksContainer {
@@ -40,7 +39,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .boardDropdown{
-    width: 97%;
+  .boardDropdown {
+    width: 100%;
   }
 }

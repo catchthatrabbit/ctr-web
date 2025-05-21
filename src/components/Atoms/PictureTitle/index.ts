@@ -1,1 +1,1 @@
-export { default as PictureContentTitle } from "./PictureTitle";
+export { default as PictureContentTitle } from './PictureTitle';

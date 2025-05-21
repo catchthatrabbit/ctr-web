@@ -1,6 +1,6 @@
 import React from 'react';
-import { ConfiguredLayout } from "@site/src/components/Templates/ConfiguredLayout";
-import { Contact } from "@site/src/components/Pages/Contact";
+import { ConfiguredLayout } from '@site/src/components/Templates/ConfiguredLayout';
+import { Contact } from '@site/src/components/Pages/Contact';
 
 const ContactPage = () => {
   return (

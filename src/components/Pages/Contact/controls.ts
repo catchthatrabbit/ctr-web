@@ -1,52 +1,24 @@
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import useMapChartData from "../Dashboard/hooks/useMapChartData";
+import usePageControls from '@site/src/hooks/usePageControls';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 interface CustomFields {
-  MAINTAINERS_SUPPORT_EMAIL?: string | (string | { [email: string]: string })[];
-  MAINTAINERS_SUPPORT_DESCRIPTION?: string;
-  MAINTAINERS_SECURITY_EMAIL?:
-    | string
-    | (string | { [email: string]: string })[];
-  MAINTAINERS_SECURITY_DESCRIPTION?: string;
-  MAINTAINERS_COMMERCIAL_EMAIL?:
-    | string
-    | (string | { [email: string]: string })[];
-  MAINTAINERS_COMMERCIAL_DESCRIPTION?: string;
+  DEFAULT_REGION: string;
 }
 
 const useControls = () => {
   const { siteConfig } = useDocusaurusContext();
+  const { DEFAULT_REGION } = siteConfig.customFields as unknown as CustomFields;
+  const defaultRegion = DEFAULT_REGION?.toString().toUpperCase() || 'DE';
 
-  const customFields = siteConfig.customFields as Partial<CustomFields>;
-
-  const maintainersSupportEmail = customFields.MAINTAINERS_SUPPORT_EMAIL ?? [];
-  const maintainersSupportDescription =
-    customFields.MAINTAINERS_SUPPORT_DESCRIPTION ?? "";
-  const maintainersSecurityEmail =
-    customFields.MAINTAINERS_SECURITY_EMAIL ?? [];
-  const maintainersSecurityDescription =
-    customFields.MAINTAINERS_SECURITY_DESCRIPTION ?? "";
-  const maintainersCommercialEmail =
-    customFields.MAINTAINERS_COMMERCIAL_EMAIL ?? [];
-  const maintainersCommercialDescription =
-    customFields.MAINTAINERS_COMMERCIAL_DESCRIPTION ?? "";
-
-  const {
-    infoBoxItems: infoBoxMapData,
-    poolFee,
-    isLoading: isLoadingMapChart,
-  } = useMapChartData();
+  const { infoBoxMapData, isLoadingMapChart } = usePageControls({
+    defaultRegion,
+    includeInfoBox: true,
+  });
 
   return {
-    maintainersCommercialDescription,
-    maintainersCommercialEmail,
-    maintainersSecurityDescription,
-    maintainersSecurityEmail,
-    maintainersSupportDescription,
-    maintainersSupportEmail,
     infoBoxMapData,
     isLoadingMapChart,
   };
 };
 
-export { useControls };
+export default useControls;

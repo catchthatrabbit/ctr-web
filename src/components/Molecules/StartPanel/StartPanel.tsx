@@ -1,10 +1,10 @@
-import React from "react";
-import useControls from "../../Pages/Dashboard/controls";
-import { Text } from "../../Atoms/Text";
-import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
+import React from 'react';
+import useControls from '../../Pages/Dashboard/controls';
+import { Text } from '../../Atoms/Text';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 
-import clsx from "clsx";
-import styles from "./styles.module.css";
+import clsx from 'clsx';
+import styles from './styles.module.css';
 
 const StartPanel = () => {
   const { poolFee } = useControls();
@@ -16,7 +16,9 @@ const StartPanel = () => {
       })}
     >
       <div
-        className={clsx(styles.startDiv, { [styles.startDivMobile]: mobile })}
+        className={clsx(styles.startDiv, {
+          [styles.startDivMobile]: mobile,
+        })}
       >
         <div className={styles.startDivTitle}>
           <Text
@@ -41,14 +43,26 @@ const StartPanel = () => {
             </>
           )}
         </div>
-        <a
-          href="/start-mining"
-          className={clsx(styles.startButton, {
-            [styles.startButtonMobile]: mobile,
-          })}
-        >
-          View guide
-        </a>
+        <div className={styles.buttonContainer}>
+          <a
+            href="/go-live"
+            className="button"
+          >
+            Launch Miner
+          </a>
+          <a
+            href="/calculator"
+            className="button"
+          >
+            Profit Calculator
+          </a>
+          <a
+            href="/start-mining"
+            className="button"
+          >
+            View Guide
+          </a>
+        </div>
       </div>
     </div>
   );

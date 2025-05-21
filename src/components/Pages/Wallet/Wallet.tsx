@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
-import { Info } from "@site/src/components/Templates/Info";
-import { List } from "@site/src/components/Templates/List";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { Header } from "@site/src/components/Templates/Header";
-import { Search } from "../../Molecules/Search";
+import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
+import { Info } from '@site/src/components/Templates/Info';
+import { List } from '@site/src/components/Templates/List';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { Header } from '@site/src/components/Templates/Header';
+import { Search } from '../../Molecules/Search';
 import {
   convertPaymentsResponse2PaymentInfo,
   convertWorkersResponse2Info,
-} from "./utils";
-import { Text } from "@site/src/components/Atoms/Text";
-import { IAnyPageAndWallet } from "../types";
-import useControls from "./controls";
-import { LoadingPlaceholder } from "../../Atoms/LoadingPlaceholder";
-import { CustomToastError } from "../../Molecules/CopyButton";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+} from './utils';
+import { Text } from '@site/src/components/Atoms/Text';
+import { IAnyPageAndWallet } from '../types';
+import useControls from './controls';
+import { LoadingPlaceholder } from '../../Atoms/LoadingPlaceholder';
+import { CustomToastError } from '../../Molecules/CopyButton';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
-import "react-toastify/dist/ReactToastify.css";
-import styles from "./styles.module.css";
+import 'react-toastify/dist/ReactToastify.css';
+import styles from './styles.module.css';
 
-interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
+interface IWallet extends Omit<IAnyPageAndWallet, 'onSetWalletAddress'> {
   walletAddress: string;
   onClearWalletAddress?: () => void;
   onSetWalletAddress: (walletAddress: string) => void;
@@ -30,12 +30,20 @@ const Wallet = ({
   walletAddress,
   defaultRegion,
   onChangeRegion,
-  onClearWalletAddress,
   onSetWalletAddress,
+  selectedPool,
 }: IWallet) => {
+  const [filterStatus, setFilterStatus] = useState<
+    'All' | 'Running' | 'Inactive'
+  >('All');
+  const [toastShown, setToastShown] = useState(false);
+  const { mobile, tablet, desktop } = useMediaQueries();
+
   const {
     fetchPaymentsByWalletAddress,
     fetchWorkersByWalletAddress,
+    fetchWorkerCounts,
+    isLoadingFetchWorkerCounts,
     fetchedWalletInfo,
     handleChangePagePayouts,
     handleChangePageWorkers,
@@ -51,41 +59,103 @@ const Wallet = ({
     regionLabel,
     infoBoxMapData,
     isLoadingMapChart,
-  } = useControls({ walletAddress, defaultRegion, onChangeRegion });
-  const [filterStatus, setFilterStatus] = useState("All");
-  const [toastShown, setToastShown] = useState(false);
-  const { mobile, tablet, desktop } = useMediaQueries();
-
-  const handleFilterChange = (status: string) => {
-    setFilterStatus(status);
-  };
+  } = useControls({
+    walletAddress,
+    defaultRegion,
+    onChangeRegion,
+    filterStatus,
+  });
 
   const walletNotFound = !walletAddress || !fetchedWalletInfo;
 
+  const getWorkersTotal = () => {
+    if (!fetchWorkerCounts) return 0;
+    if (filterStatus === 'All') {
+      return (
+        (fetchWorkerCounts.workersOnline || 0) +
+        (fetchWorkerCounts.workersOffline || 0)
+      );
+    }
+    if (filterStatus === 'Running') {
+      return fetchWorkerCounts.workersOnline || 0;
+    }
+    if (filterStatus === 'Inactive') {
+      return fetchWorkerCounts.workersOffline || 0;
+    }
+    return 0;
+  };
+
+  // Handle toast notifications
   useEffect(() => {
     if (walletNotFound && !toastShown && !isLoadingFetchWallet) {
-      CustomToastError({ message: "Wallet not found" });
+      CustomToastError({ message: 'Wallet not found', mobile });
       setToastShown(true);
-    }
-  }, [walletNotFound, toastShown, isLoadingFetchWallet]);
-
-  useEffect(() => {
-    if (!walletNotFound && toastShown) {
+    } else if (!walletNotFound && toastShown) {
       setToastShown(false);
     }
   }, [walletNotFound, toastShown, isLoadingFetchWallet]);
 
+  // Helper function to render workers
+  const renderWorkers = () => (
+    <List
+      isLoading={isLoadingFetchWorkerByWalletAddress}
+      data={convertWorkersResponse2Info(
+        fetchWorkersByWalletAddress,
+        okEmoji,
+        brbEmoji
+      )}
+      hidePagination
+      dataTableColumns={workersTableColumn}
+      total={getWorkersTotal()}
+      onPageChange={handleChangePageWorkers}
+      context="wallet"
+      filterStatus={filterStatus}
+    />
+  );
+
+  // Helper function to render payouts
+  const renderPayouts = () => (
+    <List
+      dataTableColumns={paymentPayoutTableColumns}
+      hidePagination
+      isLoading={isLoadingFetchPaymentByWalletAddress}
+      data={convertPaymentsResponse2PaymentInfo(fetchPaymentsByWalletAddress)}
+      total={fetchedWalletInfo?.paymentsTotal}
+      onPageChange={handleChangePagePayouts}
+      context="wallet"
+    />
+  );
+
+  // Helper function to render wallet not found message
+  const renderWalletNotFound = () => (
+    <div
+      className={`flex flex-column items-center xl-center-items ${styles.fullWidth}`}
+    >
+      <Spacer variant="xxs" />
+      <Text type="regular" variant="heading3" color="white" weight="normal">
+        Wallet not found. No data to display.
+      </Text>
+      <Spacer variant="xl" />
+      <Spacer variant={desktop ? 'xxxl' : 'xs'} />
+
+      <Search
+        context="wallet"
+        onSearch={onSetWalletAddress}
+        selectedPool="undefined"
+      />
+      <Spacer variant="lg" />
+    </div>
+  );
+
   return (
     <>
       {(mobile || tablet) && (
-        <>
-          <ConfiguredInfoBox
-            infoItems={infoBoxMapData}
-            isLoading={isLoadingMapChart}
-          />
-        </>
+        <ConfiguredInfoBox
+          infoItems={infoBoxMapData}
+          isLoading={isLoadingMapChart}
+        />
       )}
-      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="sm" />}
+      <Spacer variant={desktop ? 'xxl' : 'xl'} />
 
       <div className={`flex items-center xl-center-items ${styles.fullWidth}`}>
         <Text
@@ -94,38 +164,14 @@ const Wallet = ({
           lineHeight="mediumLineHeight"
           color="white"
           weight="extraBold"
-          variant={mobile ? "headingMobile" : undefined}
+          variant={mobile ? 'headingMobile' : undefined}
         >
           Wallet Overview
         </Text>
       </div>
+
       {walletNotFound ? (
-        <>
-          <div
-            className={`flex flex-column items-center xl-center-items ${styles.fullWidth}`}
-          >
-            <Spacer variant="xxs" />
-            <Text
-              type="regular"
-              variant="heading3"
-              color="white"
-              weight="normal"
-            >
-              Wallet not found. No data to display.
-            </Text>
-            {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="md" />}
-            <Spacer variant="sm" />
-            <Spacer variant="xxs" />
-          </div>
-          <Search context="wallet" onSearch={onSetWalletAddress} />
-          <Spacer variant="xxxl" />
-          {desktop ? (
-            <>
-              <Spacer variant="sm" />
-              <Spacer variant="xxs" />{" "}
-            </>
-          ) : null}
-        </>
+        renderWalletNotFound()
       ) : (
         <>
           <Header
@@ -134,49 +180,32 @@ const Wallet = ({
             defaultRegion={regionLabel}
             onChangeRegion={handleChangeRegion}
             iban={walletAddress}
+            selectedPool={selectedPool}
             layout={{ boards: true, search: false, dropdown: true }}
-            context={mobile ? "mobileWallet" : "wallet"}
+            context={mobile ? 'mobileWallet' : 'wallet'}
           />
+
           <Info
             data={fetchedWalletInfo}
             isLoading={isLoadingFetchWallet}
             loadingPlaceholder={<LoadingPlaceholder />}
-            handleFilterChange={handleFilterChange}
-            workers={
-              <>
-                <List
-                  isLoading={isLoadingFetchWorkerByWalletAddress}
-                  data={convertWorkersResponse2Info(
-                    fetchWorkersByWalletAddress,
-                    okEmoji,
-                    brbEmoji,
-                  )}
-                  hidePagination
-                  dataTableColumns={workersTableColumn}
-                  total={fetchWorkersByWalletAddress?.workersTotal}
-                  onPageChange={handleChangePageWorkers}
-                  context="wallet"
-                  filterStatus={filterStatus}
-                />
-              </>
-            }
-            payouts={
-              <List
-                dataTableColumns={paymentPayoutTableColumns}
-                hidePagination
-                isLoading={isLoadingFetchPaymentByWalletAddress}
-                data={convertPaymentsResponse2PaymentInfo(
-                  fetchPaymentsByWalletAddress,
-                )}
-                total={fetchedWalletInfo?.paymentsTotal}
-                onPageChange={handleChangePagePayouts}
-                context="wallet"
-              />
-            }
+            handleFilterChange={(status: string) => {
+              // Only allow valid statuses
+              if (
+                status === 'All' ||
+                status === 'Running' ||
+                status === 'Inactive'
+              ) {
+                setFilterStatus(status);
+              }
+            }}
+            workers={renderWorkers()}
+            payouts={renderPayouts()}
           />
         </>
       )}
-      {desktop ? <Spacer variant="xl" /> : <Spacer variant="xxxl" />}
+
+      <Spacer variant="xxxl" />
     </>
   );
 };

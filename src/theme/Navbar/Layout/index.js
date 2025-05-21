@@ -1,26 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import clsx from "clsx";
 import { useThemeConfig } from "@docusaurus/theme-common";
 import {
   useHideableNavbar,
   useNavbarMobileSidebar,
-} from "@docusaurus/theme-common/internal";
-import { translate } from "@docusaurus/Translate";
-import { InfoBoxLoadingSkeleton } from "@site/src/components/Atoms/InfoBoxLoadingSkeleton";
-import { InfoBox } from "@site/src/components/Molecules/InsideChart/Info";
-import { LoadingPlaceholder } from "@site/src/components/Atoms/LoadingPlaceholder";
-import NavbarMobileSidebar from "@theme/Navbar/MobileSidebar";
-import useControls from "@site/src/components/Pages/Dashboard/controls";
-import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
+} from '@docusaurus/theme-common/internal';
+import { translate } from '@docusaurus/Translate';
+import { InfoBoxLoadingSkeleton } from '@site/src/components/Atoms/InfoBoxLoadingSkeleton';
+import { InfoBox } from '@site/src/components/Molecules/InsideChart/Info';
+import { LoadingPlaceholder } from '@site/src/components/Atoms/LoadingPlaceholder';
+import NavbarMobileSidebar from '@theme/Navbar/MobileSidebar';
+import useControls from '@site/src/components/Pages/Dashboard/controls';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 function NavbarBackdrop(props) {
   return (
     <div
       role="presentation"
       {...props}
-      className={clsx("navbar-sidebar__backdrop", props.className)}
+      className={clsx('navbar-sidebar__backdrop', props.className)}
     />
   );
 }
@@ -44,30 +44,11 @@ const ConfiguredInfoBox = ({ horClassName, isLoading, infoItems }) => (
 );
 
 const horClassName =
-  "xl-flex-col--2 lg-flex-col--2 md-flex-col--6 sm-flex-col--12 xs-flex-col--12";
+  'xl-flex-col--2 lg-flex-col--2 md-flex-col--6 sm-flex-col--12 xs-flex-col--12';
 
 export default function NavbarLayout({ children }) {
-  const { mobile, tablet, desktop } = useMediaQueries();
-
-  const {
-    infoBoxMapData,
-    asStarMiningPoolLocation,
-    euStarMiningPoolLocation,
-    usStarMiningPoolLocation,
-    poolFee,
-    infoBoxRadialData,
-    radialChartData,
-    recentMatureBlockListColumns,
-    AllRegionsMaturedBlocks,
-    isLoadingMapChart,
-    isLoadingRadialBarChart,
-    isLoadingAllRegionMaturedBlocks,
-    SLoganSecondary,
-    sLoganPrimary,
-    effectsShowActionIcons,
-    effectsShowLocation,
-  } = useControls();
-
+  const { mobile, tablet } = useMediaQueries();
+  const { infoBoxMapData, isLoadingMapChart } = useControls();
   const {
     navbar: { hideOnScroll, style },
   } = useThemeConfig();
@@ -75,27 +56,29 @@ export default function NavbarLayout({ children }) {
   const { navbarRef, isNavbarVisible } = useHideableNavbar(hideOnScroll);
 
   return (
-    <>
+    <div className={styles.navbarContainer}>
       <nav
         ref={navbarRef}
         aria-label={translate({
-          id: "theme.NavBar.navAriaLabel",
-          message: "Main",
-          description: "The ARIA label for the main navigation",
+          id: 'theme.NavBar.navAriaLabel',
+          message: 'Main',
+          description: 'The ARIA label for the main navigation',
         })}
         className={clsx(
-          "navbar",
-          "navbar--fixed-top",
-          "flex-column",
-          hideOnScroll && [
-            styles.navbarHideable,
-            !isNavbarVisible && styles.navbarHidden,
-          ],
+          'navbar',
+          hideOnScroll
+            ? [
+                'navbar--fixed-top',
+                styles.navbarHideable,
+                !isNavbarVisible && styles.navbarHidden,
+              ]
+            : styles.navbarRelative,
+          'flex-column',
           {
-            "navbar--dark": style === "dark",
-            "navbar--primary": style === "primary",
-            "navbar-sidebar--show": mobileSidebar.shown,
-          },
+            'navbar--dark': style === 'dark',
+            'navbar--primary': style === 'primary',
+            'navbar-sidebar--show': mobileSidebar.shown,
+          }
         )}
       >
         {children}
@@ -104,7 +87,6 @@ export default function NavbarLayout({ children }) {
       </nav>
       {!mobile && !tablet && (
         <>
-          {/* <Spacer variant="lg" /> */}
           <ConfiguredInfoBox
             horClassName={horClassName}
             isLoading={isLoadingMapChart}
@@ -112,6 +94,6 @@ export default function NavbarLayout({ children }) {
           />
         </>
       )}
-    </>
+    </div>
   );
 }

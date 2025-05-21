@@ -2,11 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-xxs) var(--space-xxs);
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
-  list-style: none;
+  padding: calc(var(--space-sm) / 2) var(--space-xxs);
   border-bottom-left-radius: var(--ifm-global-radius);
   border-bottom-right-radius: var(--ifm-global-radius);
   background-color: var(--dark-rgb-400);
@@ -33,16 +29,16 @@
 @media (max-width: 1268px) {
   .paginationContainer ul {
     justify-content: center;
+    flex-wrap: nowrap;
   }
 }
 
-.pagination a {
-  display: inline-block;
-  padding: var(--space-xxs) var(--space-xs);
+.paginationWidthDesktop {
+  width: 50%;
 }
 
-.paginationWidthDesktop, .paginationWidthLaptop {
-  width: 50%;
+.paginationWidthLaptop {
+  width: 55%;
 }
 
 .paginationWidthTablet {
@@ -51,6 +47,7 @@
 
 .paginationWidthMobile {
   width: 100%;
+  justify-content: center;
 }
 
 .disabled svg path {
@@ -66,24 +63,42 @@
 .paginationItem {
   border: 1px solid var(--gray-700);
   cursor: pointer;
-  padding-inline: calc(var(--space-sm) / 2);
-  padding-block: calc(var(--space-xs) / 4);
+  display: flex; /* Ensure the content inside aligns properly */
+  align-items: center;
+  justify-content: center;
+  width: auto; /* Allow the width to be determined by content or parent */
+  height: auto; /* Allow the height to be determined by content or parent */
+  box-sizing: border-box;
   background-color: var(--blue-rgb-650);
   font-size: var(--small-font-size);
+  position: relative;
+}
+
+.paginationItem a {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  padding-inline: calc(var(--space-sm) / 2);
+  padding-block: calc(var(--space-xs) / 4);
 }
 
 .selectedPage {
   background-color: transparent;
-  padding-inline: calc(var(--space-sm) / 2);
-  padding-block: calc(var(--space-xs) / 4);
+
   color: var(--ifm-color-emphasis-0);
 }
 
 .paginationItem:not(.selectedPage) a {
   color: var(--ifm-color-primary);
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  padding-inline: calc(var(--space-sm) / 2);
+  padding-block: calc(var(--space-xs) / 4);
 }
 
-.paginationNext, .paginationPrevious {
+.paginationNext,
+.paginationPrevious {
   color: var(--ifm-color-primary);
   padding-inline: calc(var(--space-md) / 2);
   padding-block: calc(var(--space-xs) / 4);
@@ -103,13 +118,25 @@
   cursor: pointer;
 }
 
- .paginationNext {
+.paginationNext {
   border-top-right-radius: calc(var(--ifm-global-radius) / 2);
   border-bottom-right-radius: calc(var(--ifm-global-radius) / 2);
 }
 
 .paginationPrevious {
   border-top-left-radius: calc(var(--ifm-global-radius) / 2);
-  border-bottom-left-radius:  calc(var(--ifm-global-radius) / 2);
+  border-bottom-left-radius: calc(var(--ifm-global-radius) / 2);
+}
 
+@media screen and (max-width: 768px) {
+  .paginationNext,
+  .paginationPrevious,
+  .paginationItem:not(.selectedPage) a,
+  .selectedPage {
+    padding: var(--space-xxs) var(--space-xs);
+  }
+
+  .containerMobile .selectedPage a {
+    padding: 0;
+  }
 }

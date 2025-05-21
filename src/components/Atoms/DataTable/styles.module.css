@@ -1,15 +1,16 @@
 .table {
-  width:100%;
+  width: 100%;
   border: 1px solid var(--blue-rgb-700);
   border-top-left-radius: var(--ifm-global-radius);
   border-top-right-radius: var(--ifm-global-radius);
   margin-bottom: 0;
+  display: inline-table;
 }
 
 .walletTable {
   border-bottom-right-radius: 0;
-  border-top-right-radius:0;
-  border-top-left-radius:0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
   .runningText {
     background-color: rgba(0, 191, 255, 0.2);
     padding: calc(var(--space-xs) / 2) var(--space-xxs);
@@ -31,32 +32,31 @@
 }
 
 .table tbody tr:nth-child(odd) {
-  background-color:var(--dark-rgb-400);
+  background-color: var(--dark-rgb-400);
   border-top: 1px solid var(--dark-rgb-border);
   border-bottom: 1px solid var(--dark-rgb-border);
 }
 
 .table tbody tr:nth-child(even) {
-  background-color:var(--dark-rgb-600);
+  background-color: var(--dark-rgb-600);
 }
 
 .table thead {
   text-align: left;
-  background-color: var(--ifm-table-stripe-background);
 }
 
-.table th, .table td {
+.table th,
+.table td {
   white-space: nowrap;
 }
 
 .table th {
-  width: 1%;
+  width: 10%;
 }
 
 .table .walletTableHeader {
   background-color: rgba(22, 43, 35, 1);
 }
-
 
 .table tbody tr:hover {
   background-color: var(--blue-rgb-700);
@@ -78,7 +78,7 @@
 .table > thead > tr > th,
 .table > thead > tr,
 .table > tbody > tr {
-  border:none;
+  border: none;
 }
 
 .loadingComp {
@@ -101,18 +101,24 @@
   visibility: visible;
 }
 
-
 .listRoot {
   position: relative;
 }
 
-.tableWrapper {
-  width: 100%;
-  overflow-x: auto;
-}
-
 .listMarginInlineMobile {
   margin-inline: calc(var(--space-xs) / 2);
+}
+
+.link {
+  color: var(--ifm-color-primary);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link.zephirum {
+  font-family: zephirum;
 }
 
 .paginationWrapper {
@@ -121,11 +127,8 @@
 
 @media (max-width: 767px) {
   .tableWrapper {
-    width: 100%;
     overflow-x: auto;
-    position: relative;
-    border-radius: 8px;
-    margin-left: 6px;
+    border-radius: var(--ifm-global-radius);
   }
 
   .tableWrapperWallet {
@@ -143,16 +146,15 @@
   }
 
   .walletTable {
-      border-bottom-right-radius: 0;
-      border-top-right-radius:0;
-      border-top-left-radius:0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
   }
 
   .table th,
   .table td {
-    vertical-align: top;
-    padding: 10px 92px 10px 10px;
-    width: 100px;
+    padding: 0.6rem 5.7rem 0.6rem 0.6rem;
+    width: 6.25rem;
     white-space: nowrap;
   }
 
@@ -160,7 +162,7 @@
   .walletTable td,
   .blocksTable th,
   .blocksTable td {
-    padding: 11px 26px 13px 22px;
+    padding: 0.7rem 1.6rem 0.8rem 1.4rem;
   }
 
   .table th:first-child,

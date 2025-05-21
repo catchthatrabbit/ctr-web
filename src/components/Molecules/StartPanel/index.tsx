@@ -1,1 +1,1 @@
-export { default as StartPanel } from "./StartPanel";
+export { default as StartPanel } from './StartPanel';

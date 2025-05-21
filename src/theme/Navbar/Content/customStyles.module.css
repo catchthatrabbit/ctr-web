@@ -7,7 +7,7 @@
 }
 
 .navBarContainerMiningItem {
-  color: var( --ifm-color-primary);
+  color: var(--ifm-color-primary);
   cursor: pointer;
   background-color: rgba(6, 42, 28, 1);
   font-weight: 500;
@@ -17,7 +17,7 @@
 }
 
 .navBarContainerMiningItem:hover {
-  color: var( --ifm-color-primary);
+  color: var(--ifm-color-primary);
 }
 
 .navBarContainerMiningItem:after {
@@ -30,24 +30,8 @@
   border-bottom: 1px solid var(--ifm-color-primary);
 }
 
-.navBarContainerLogo img {
-  width: 170px;
-  height: 35px;
-}
-
 .activeNavStartMiningItemLink:before {
-  border-bottom: 1px solid var(--ifm-color-primary)!important;
-}
-
-.activeNavItemLink:before {
-  content: '';
-  border-bottom: 1px solid var(--white);
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
-  top:-1px;
+  border-bottom: 1px solid var(--ifm-color-primary) !important;
 }
 
 .grow {
@@ -63,6 +47,10 @@
   height: 5rem;
 }
 
-.flexEnd{
+.flexEnd {
   align-items: flex-end;
+}
+
+.flexCenter {
+  align-items: center;
 }

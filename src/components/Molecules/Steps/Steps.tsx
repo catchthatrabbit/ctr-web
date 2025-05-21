@@ -1,16 +1,14 @@
-import React from "react";
-import styles from "./styles.module.css";
-import { Text } from "@site/src/components/Atoms/Text";
-import { Search } from "@site/src/components/Molecules/Search";
-import { Warning } from "@site/src/components/Atoms/Warning";
-import { DownloadPanel } from "@site/src/components/Molecules/DownloadPanel";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { OpenInNew } from "@site/src/icons";
-import Button from "@site/src/components/Atoms/Button/Button";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
-import { Link } from "react-router-dom";
-
-import clsx from "clsx";
+import React from 'react';
+import styles from './styles.module.css';
+import { Text } from '@site/src/components/Atoms/Text';
+import { Search } from '@site/src/components/Molecules/Search';
+import { DownloadPanel } from '@site/src/components/Molecules/DownloadPanel';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { OpenInNew } from '@site/src/icons';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
+import clsx from 'clsx';
+import config from '@site/docusaurus.config';
+import { getRepoUrl } from '@site/src/utils/getRepoUrl';
 
 interface Step {
   number: number;
@@ -21,166 +19,140 @@ interface Step {
   image?: boolean;
   button?: string;
   buttonTitle?: string;
-  buttonLink?: string; // Add buttonLink property
+  buttonLink?: string;
   warning?: boolean;
   showSearch?: boolean;
 }
 
 interface StepsProps {
-  steps: Step[];
+  steps?: Step[];
   onSetWalletAddress: (address: string) => void;
 }
 
 const stepsData: Step[] = [
   {
     number: 1,
-    title: "Download CorePass",
-    text: "Download CorePass mobile app, wallet where you can securely store your rewards.",
-    link: "https://corepass.net/",
-    linkText: "Open Corepass site",
+    title: 'Download CorePass',
+    text: 'Download CorePass mobile app, a wallet where you can securely store your rewards.',
+    link: 'https://corepass.net',
+    linkText: 'Open CorePass website',
     image: true,
   },
   {
     number: 2,
-    title: "Download mining software",
-    text: "CoreMiner is a RandomY CPU mining worker - with CoreMiner you can mine every coin which relies on a RandomY Proof of Work.",
-    warning: true,
-    button: "Download CoreMiner",
-    buttonTitle: "CoreMiner for Linux",
-    link: "#",
-    linkText: "Auto-instal script (docusaurus)",
+    title: 'Choose a mining software',
+    text: 'CoreMiner is a RandomY CPU mining worker - with CoreMiner you can mine any coin that relies on a RandomY Proof of Work. You can choose any other mining software if you prefer.',
+    button: 'Download CoreMiner',
+    buttonTitle: 'CoreMiner for Linux',
+    buttonLink: `${getRepoUrl(config, 'coreminer')}/releases`,
+    link: `${getRepoUrl(config, 'coreminer')}?tab=readme-ov-file#automatic-installation`,
+    linkText: 'Automatic installation script',
   },
   {
     number: 3,
-    title: "Create configuration file",
-    text: "It's time to configure the miner so that everything works as it should.",
-    button: "Create config file",
-    buttonLink: "/create-config",
-    link: "#",
-    linkText: "Open configuration manual (github)",
+    title: 'Create configuration file',
+    text: 'Configure the miner for your wallet address (Core ID) and preferred pools.',
+    button: 'Create config file',
+    buttonLink: '/go-live',
+    link: `${getRepoUrl(config, 'coreminer')}?tab=readme-ov-file#config-file`,
+    linkText: 'Open configuration manual',
   },
   {
     number: 4,
-    title: "View your dashboard",
-    text: "When it’s all ready, all you need to do is view your rewards and stats at the dashboard. Type your address below.",
+    title: 'View your dashboard',
+    text: 'When everything is ready, you can view your rewards and stats on the dashboard. Enter your address below.',
     showSearch: true,
   },
 ];
 
 const Steps: React.FC<StepsProps> = ({ onSetWalletAddress }) => {
-  const { mobile, tablet, desktop } = useMediaQueries();
+  const { mobile, desktop } = useMediaQueries();
+
+  const renderButtonAndLink = (step: Step) => (
+    <div className={`flex ${styles.buttonLinkContainer}`}>
+      {step.button && (
+        <>
+          <div className={styles.button}>
+            {step.buttonLink ? (
+              <a
+                href={step.buttonLink}
+                target="_blank"
+                className="button"
+                rel="noopener"
+              >
+                {step.button}
+              </a>
+            ) : (
+              <span>{step.button}</span>
+            )}
+            {step.buttonTitle && (
+              <div className={styles.buttonTitle}>
+                <Spacer variant="xxs" />
+                <Text variant="heading3" color="white" disableMobileStyles>
+                  {step.buttonTitle}
+                </Text>
+              </div>
+            )}
+          </div>
+          <Spacer direction="hor" variant="xs" />
+        </>
+      )}
+      <div className={styles.linkContainer}>
+        <a
+          href={step.link}
+          target="_blank"
+          rel="noreferrer"
+          className={`flex items-center ${styles.linkSteps} ${styles.link}`}
+        >
+          <OpenInNew />
+          <span className={styles.linkText}>{step.linkText}</span>
+        </a>
+      </div>
+      {desktop ? <Spacer variant="xxs" /> : <Spacer variant="xs" />}
+    </div>
+  );
+
   return (
     <div className={`flex flex-column ${styles.stepsContainer}`}>
       {stepsData.map((step, index) => (
         <div
           key={step.number}
-          className={`flex flex-column ${styles.step} ${mobile ? styles.mobileStep : ""}
-         ${index === stepsData.length - 1 ? styles.lastStep : ""}
-        `}
+          className={`flex flex-column ${styles.step} ${
+            mobile ? styles.mobileStep : ''
+          } ${index === stepsData.length - 1 ? styles.lastStep : ''}`}
         >
           <h2 className={clsx(styles.title, { [styles.mobileTitle]: mobile })}>
-            {step.number}.&nbsp;&nbsp;{step.title}
+            {step.number}. {step.title}
           </h2>
-          <Text
-            variant={desktop ? "heading3" : "body"}
-            weight="normal"
-            color="white"
-            style={{
-              marginLeft: "33px",
-              lineHeight: "var(--small-line-height)",
-            }}
-          >
-            {step.text}
-          </Text>
-          {step.warning && (
-            <>
-              <Spacer variant="md" />
-              <Warning
-                text="In case you do not own a Linux device, we recommend using the
-                  Linux virtual operating system."
-              />
-            </>
-          )}
-
-          {step.link && step.linkText && (
-            <>
-              {!step.buttonTitle && <Spacer variant="xxs" />}
-              <div className={`flex ${styles.buttonLinkContainer}`}>
-                {step.button && (
-                  <>
-                    {step.buttonTitle && (
-                      <Spacer variant={desktop ? "lg" : "sm"} />
-                    )}
-                    <div className={styles.button}>
-                      {step.buttonTitle ? (
-                        <Text
-                          variant="heading3"
-                          weight="semiBold"
-                          color="white"
-                          disableMobileStyles
-                        >
-                          {step.buttonTitle}
-                        </Text>
-                      ) : (
-                        <>{desktop ? <Spacer variant="sm" /> : null}</>
-                      )}
-                      <Spacer variant="xs" />
-                      {step.buttonLink ? (
-                        <Link to={step.buttonLink}>
-                          <Button
-                            backgroundColor="#062A1C"
-                            textColor="#16C784"
-                            value={step.button}
-                          />
-                        </Link>
-                      ) : (
-                        <Button
-                          backgroundColor="#062A1C"
-                          textColor="#16C784"
-                          value={step.button}
-                        />
-                      )}
-                    </div>
-                    <Spacer direction="hor" variant="xs" />
-                  </>
-                )}
-
-                <div className={styles.linkContainer}>
-                  {step.button && <Spacer variant={desktop ? "xl" : "sm"} />}
-                  <a
-                    href={step.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`flex items-center ${styles.linkSteps} ${styles.link}`}
-                  >
-                    <OpenInNew />
-                    <Text
-                      size="regular"
-                      color="primary"
-                      weight="bold"
-                      style={{ marginLeft: "8px" }}
-                      disableMobileStyles
-                    >
-                      {step.linkText}
-                    </Text>
-                  </a>
-                </div>
-                {desktop ? <Spacer variant="xxs" /> : <Spacer variant="xs" />}
-              </div>
-            </>
-          )}
-
+          <div className={styles.stepsMargin}>
+            <Text
+              variant={desktop ? 'heading3' : 'body'}
+              weight="normal"
+              color="white"
+              style={{
+                lineHeight: 'var(--large-line-height)',
+              }}
+            >
+              {step.text}
+            </Text>
+            <Spacer variant="lg" />
+            {step.link && step.linkText && renderButtonAndLink(step)}
+          </div>
           {step.image && (
             <>
-              {desktop ? <Spacer variant="md" /> : <Spacer variant="xs" />}
+              {desktop ? <Spacer variant="sm" /> : null}
               <DownloadPanel />
               {desktop ? null : <Spacer variant="md" />}
             </>
           )}
           {step.showSearch && (
             <>
-              {desktop ? <Spacer variant="lg" /> : <Spacer variant="md" />}
-              <Search context="startMining" onSearch={onSetWalletAddress} />
+              <Spacer variant="lg" />
+              <Search
+                context="startMining"
+                onSearch={onSetWalletAddress}
+                selectedPool="undefined"
+              />
             </>
           )}
           {desktop ? <Spacer variant="md" /> : <Spacer variant="xxs" />}

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface IBlockListTabs {
   blocks?: React.ReactNode;
@@ -16,11 +16,11 @@ const BlockListTabs = ({
 }: IBlockListTabs) => {
   const renderContent = () => {
     switch (activeTab) {
-      case "blocks":
+      case 'blocks':
         return blocks;
-      case "immature":
+      case 'immature':
         return immature;
-      case "newBlocks":
+      case 'newBlocks':
         return candidates;
       default:
         return null;

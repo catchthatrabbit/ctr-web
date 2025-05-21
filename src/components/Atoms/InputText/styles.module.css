@@ -4,12 +4,21 @@
   font-family: var(--regular-font-family);
   font-size: var(--subheading-font-size-mobile);
   border-radius: var(--ifm-global-radius);
-  border: 1px solid #363636;
+  border: 1px solid var(--dark-300);
   color: var(--gray-700);
   background-color: var(--white);
   transition: all 0.1s ease-in-out 0s;
+  box-sizing: border-box;
+}
+.inputText {
+  resize: none; /* Prevent manual resizing */
+  overflow: hidden; /* Hide scrollbars */
 }
 
+.mobileInputText {
+  width: 100%; /* Ensure it takes full width */
+  font-size: 1rem; /* Adjust font size for mobile */
+}
 .inputText:focus-visible {
   border: 1px solid var(--gray-100);
 }
@@ -19,18 +28,19 @@
 }
 
 .inputContainer {
-  position: relative;
-  display: flex;
-  align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+.searchStartMining {
+  width: 85%;
 }
 
 .searchDark {
   background-color: var(--dark-rgb-600);
   color: var(--white);
-  padding: 14px 16px;
-  height: 52px;
+  padding: 0.9rem 1rem;
+  height: 3.2rem;
 }
 
 .icon {
@@ -46,8 +56,8 @@
   left: 6%;
   height: 25%;
   svg {
-    width: 18px;
-    height: 18px;
+    width: 1.2rem;
+    height: 1.2rem;
   }
 }
 
@@ -57,23 +67,19 @@
 }
 
 .inputWithIcon {
-  padding-left: 30px;
+  padding-left: 2rem;
 }
 
 @media screen and (max-width: 768px) {
-  .inputText{
-    font-size: var( --regular-font-size);
+  .inputText {
+    font-size: var(--regular-font-size);
   }
   .inputText::placeholder {
-    font-size: 16px;
+    font-size: var(--body-font-size);
   }
 
   .mobileIconWallet {
     left: 7%;
     top: 56%;
-  }
-
-  .inputContainer {
-    width: 100%;
   }
 }

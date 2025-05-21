@@ -1,5 +1,5 @@
 .infoBoxContainer {
-  gap: var(--space-xs);
+  gap: var(--space-sm);
 }
 
 .justifyCenter {
@@ -26,10 +26,22 @@
 .fullWidthBorder {
   background-color: var(--black-800);
   position: relative;
-  width: calc(100vw );
+  width: calc(100vw);
   left: 50%;
-  top: 1px;
+  z-index: 900;
   transform: translateX(-50%);
   border-top: 1px solid rgba(54, 54, 54, 1);
   border-bottom: 1px solid rgba(54, 54, 54, 1);
+}
+
+@media screen and (max-width: 1039px) {
+  .fullWidthBorder {
+    top: -28px;
+  }
+}
+
+@media screen and (min-width: 1040px) {
+  .fullWidthBorder {
+    top: var(--ifm-navbar-height);
+  }
 }

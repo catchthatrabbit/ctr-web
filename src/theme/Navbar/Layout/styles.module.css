@@ -1,7 +1,21 @@
+.navbarContainer {
+  height: calc(var(--ifm-navbar-height) + 28px);
+}
+
+.navbarRelative {
+  position: relative !important;
+  top: auto !important;
+  transform: none !important;
+}
+
 .navbarHideable {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: var(--ifm-navbar-z-index);
   transition: transform var(--ifm-transition-fast) ease;
 }
 
-.navbarHidden {
+.navbarHideable.navbarHidden {
   transform: translate3d(0, calc(-100% - 2px), 0);
 }

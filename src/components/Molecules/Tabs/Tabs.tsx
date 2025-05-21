@@ -1,8 +1,8 @@
-import React from "react";
-import clsx from "clsx";
-import { Text } from "../../Atoms/Text";
+import React from 'react';
+import clsx from 'clsx';
+import { Text } from '../../Atoms/Text';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 export interface ITabs {
   items: Array<{ label: string; value: string }>;
@@ -23,7 +23,7 @@ export const Tabs = ({ items, activeTab, onTabChange }: ITabs) => {
         >
           <Text
             variant="smallBody"
-            color={activeTab === item.value ? "white" : "primary"}
+            color={activeTab === item.value ? 'white' : 'primary'}
             weight="bold"
           >
             {item.label}

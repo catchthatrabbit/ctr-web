@@ -1,17 +1,15 @@
-import { useHeaders } from "@site/src/hooks/useHeaders";
-import { usePaginate } from "@site/src/hooks/usePaginate";
-import { useMemo } from "react";
-import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
-import { tablesConfig } from "@site/src/configs";
+import { useMemo } from 'react';
+import { IAnyPageAndWallet } from '@site/src/components/Pages/types';
+import { tablesConfig } from '@site/src/configs';
 import {
   useFetchPayments,
   useFetchPaymentsState,
-} from "@site/src/hooks/usePayments";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
-import { START_MINING_POOL_CONFIGURATIONS } from "@site/src/configs/types";
-import { useHistory } from "@docusaurus/router";
-import useMapChartData from "../Dashboard/hooks/useMapChartData";
+} from '@site/src/hooks/usePayments';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { URLS_CONFIG_TYPE } from '@site/src/configs/types';
+import { POOLS_LIST } from '@site/src/configs/types';
+import { useHistory } from '@docusaurus/router';
+import usePageControls from '@site/src/hooks/usePageControls';
 
 const useControls = ({
   onSetWalletAddress,
@@ -22,12 +20,18 @@ const useControls = ({
   const {
     handleChangeRegion,
     handleSearch,
-    region,
-    setWalletAddress,
-    dropdownItems,
+    handlePageChange,
     regionLabel,
-  } = useHeaders({ defaultRegion, onSetWalletAddress, onChangeRegion });
-  const { currentPageNumber, handlePageChange } = usePaginate();
+    dropdownItems,
+    currentPageNumber,
+    infoBoxMapData,
+    isLoadingMapChart,
+    setWalletAddress,
+    region,
+  } = usePageControls({
+    defaultRegion,
+    includeInfoBox: true,
+  });
 
   const { siteConfig } = useDocusaurusContext();
   const { push } = useHistory();
@@ -40,15 +44,15 @@ const useControls = ({
     useFetchPayments(region, 10, currentPageNumber);
 
   const startMiningPoolConfigurations = siteConfig.customFields
-    .START_MINING_POOL_CONFIGURATIONS as START_MINING_POOL_CONFIGURATIONS;
+    .POOLS_LIST as POOLS_LIST;
 
   const dataTableColumns = useMemo(
     () => [
-      { value: "timestamp", label: "Time" },
-      { value: "amount", label: "Amount" },
+      { value: 'timestamp', label: 'Time' },
+      { value: 'amount', label: 'Amount' },
       {
-        value: "address",
-        label: "Address",
+        value: 'address',
+        label: 'Address',
         canBeCopied: true,
         isPrimary: true,
         fn: (walletAddress) => {
@@ -57,20 +61,15 @@ const useControls = ({
         },
       },
       {
-        value: "tx",
-        label: "Tx id",
+        value: 'tx',
+        label: 'Tx id',
         canBeCopied: true,
         isPrimary: true,
-        href: urlsConfigs.TRANSACTION_DETAILS_URL,
+        href: urlsConfigs.TRANSACTION_DETAILS,
       },
     ],
-    [setWalletAddress, push, selectedPool, urlsConfigs.TRANSACTION_DETAILS_URL],
+    [setWalletAddress, push, selectedPool, urlsConfigs.TRANSACTION_DETAILS]
   );
-  const {
-    infoBoxItems: infoBoxMapData,
-    poolFee,
-    isLoading: isLoadingMapChart,
-  } = useMapChartData();
 
   return {
     dataTableColumns,

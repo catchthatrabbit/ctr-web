@@ -1,1 +1,1 @@
-export { default as SingleColumnPanel } from "./SingleColumnPanel";
+export { default as SingleColumnPanel } from './SingleColumnPanel';

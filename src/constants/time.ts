@@ -10,27 +10,27 @@ export class TIME_UNITS {
   static INTERVALS = [
     {
       unitInSeconds: TIME_UNITS.YEAR_IN_SECONDS,
-      getUnit: (short: boolean) => (short ? "y" : "years"),
+      getUnit: (short: boolean) => (short ? 'y' : 'years'),
     },
     {
       unitInSeconds: TIME_UNITS.MONTH_IN_SECONDS,
-      getUnit: (short: boolean) => (short ? "mth" : "months"),
+      getUnit: (short: boolean) => (short ? 'mth' : 'months'),
     },
     {
       unitInSeconds: TIME_UNITS.DAY_IN_SECONDS,
-      getUnit: (short: boolean) => (short ? "d" : "days"),
+      getUnit: (short: boolean) => (short ? 'd' : 'days'),
     },
     {
       unitInSeconds: TIME_UNITS.HOUR_IN_SECONDS,
-      getUnit: (short: boolean) => (short ? "h" : "hours"),
+      getUnit: (short: boolean) => (short ? 'h' : 'hours'),
     },
     {
       unitInSeconds: TIME_UNITS.MINUTE_IN_SECONDS,
-      getUnit: (short: boolean) => (short ? "min" : "minutes"),
+      getUnit: (short: boolean) => (short ? 'min' : 'minutes'),
     },
     {
       unitInSeconds: TIME_UNITS.SECOND,
-      getUnit: (short: boolean) => (short ? "s" : "seconds"),
+      getUnit: (short: boolean) => (short ? 's' : 'seconds'),
     },
   ] as const;
 }

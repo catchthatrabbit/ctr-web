@@ -9,10 +9,6 @@
   flex-direction: column;
 }
 
-.pictureImg {
-  margin-bottom: 5px;
-}
-
 .flexStart {
   display: flex;
   justify-content: flex-start;

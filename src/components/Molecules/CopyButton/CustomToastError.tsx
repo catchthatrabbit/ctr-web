@@ -1,35 +1,29 @@
-import React from "react";
-import { toast } from "react-toastify";
-import { Cancel } from "@site/src/icons";
+import React from 'react';
+import { showErrorToast } from '@site/src/utils/toastUtils';
+import Cansel from '@site/src/icons/Cancel';
+import 'react-toastify/dist/ReactToastify.css';
 
-import "react-toastify/dist/ReactToastify.css";
+const getToastStyles = (mobile: boolean) => ({
+  top: mobile ? '6.6rem' : undefined,
+  maxWidth: mobile ? '95%' : '100%',
+  margin: mobile ? '0 auto' : undefined,
+  marginTop: mobile ? '0.6rem' : undefined,
+  borderRadius: mobile ? '8px' : undefined,
+  backgroundColor: 'rgb(54, 54, 54)',
+});
 
-import styles from "./styles.module.css";
+interface CustomToastErrorProps {
+  message: string;
+  mobile: boolean;
+}
 
-const CustomCloseButton = ({ closeToast }) => (
-  <button
-    onClick={closeToast}
-    style={{
-      alignSelf: "center",
-      background: "none",
-      border: "none",
-      cursor: "pointer",
-      color: "#fff",
-      fontSize: "15px",
-      padding: "0 20px",
-    }}
-  >
-    ✖
-  </button>
-);
-
-const CustomToastError = ({ message }: { message: string }) => {
-  toast.error(message, {
-    className: styles.customToast,
-    closeButton: CustomCloseButton,
-    theme: "dark",
-    icon: <Cancel />,
-    style: { background: 'var(--ifm-color-error)' },
+const CustomToastError: React.FC<CustomToastErrorProps> = ({
+  message,
+  mobile,
+}) => {
+  showErrorToast(message, mobile, {
+    icon: <Cansel />,
+    style: getToastStyles(mobile),
   });
 
   return null;

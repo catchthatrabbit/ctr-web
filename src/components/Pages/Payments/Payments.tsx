@@ -1,22 +1,21 @@
 import React from 'react';
-import { TextFormat } from "@site/src/utils/textFormat";
-import { Header } from "../../Templates/Header";
-import { List } from "@site/src/components/Templates/List";
-import { convertPaymentsResponse2PaymentInfo } from "./utils";
-import { PaymentsTitle } from "@site/src/components/Molecules/PictureTitles";
-import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
-import useControls from "./controls";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { Search } from "@site/src/components/Molecules/Search";
-import { Board } from "@site/src/components/Atoms/Board";
-import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
+import { TextFormat } from '@site/src/utils/textFormat';
+import { Header } from '../../Templates/Header';
+import { List } from '@site/src/components/Templates/List';
+import { convertPaymentsResponse2PaymentInfo } from './utils';
+import { PaymentsTitle } from '@site/src/components/Molecules/PictureTitles';
+import { IAnyPageAndWallet } from '@site/src/components/Pages/types';
+import useControls from './controls';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { Search } from '@site/src/components/Molecules/Search';
+import { Board } from '@site/src/components/Atoms/Board';
+import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
 
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import styles from "./styles.module.css";
-import { STANDARD_REGIONS_API_KEYS } from '@site/src/Api/types';
+import styles from './styles.module.css';
 
 interface IPayments extends IAnyPageAndWallet {
   setSelectedPool?: (pool: string) => void;
@@ -51,6 +50,51 @@ const Payments = ({
   });
   const { mobile, tablet, desktop } = useMediaQueries();
 
+  // Helper function to render the ConfiguredInfoBox
+  const renderInfoBox = () =>
+    (mobile || tablet) && (
+      <ConfiguredInfoBox
+        infoItems={infoBoxMapData}
+        isLoading={isLoadingMapChart}
+      />
+    );
+
+  // Helper function to render the Header
+  const renderHeader = () => (
+    <Header
+      items={dropdownItems}
+      defaultRegion={regionLabel}
+      onChangeRegion={handleDropdownChange}
+      isLoading={isLoadingPaymentState}
+      pageTitleComponent={<PaymentsTitle />}
+      addComponent={
+        <Search
+          context={mobile ? 'wallet' : 'payments'}
+          onSearch={onSetWalletAddress}
+          overrideLabel={true}
+          selectedPool={selectedPool}
+          showPool={true}
+        />
+      }
+      context={mobile ? 'mobileWallet' : 'payments'}
+      onSearch={handleSearch}
+    />
+  );
+
+  // Helper function to render the Board components
+  const renderBoards = () => (
+    <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
+      <Board
+        isLoading={isLoadingPaymentState}
+        description="Released payments"
+        value={
+          TextFormat.getNumberText(fetchedPaymentsState?.paymentsTotal).text
+        }
+        context="payments"
+      />
+    </div>
+  );
+
   const handleDropdownChange = (selectedOption: {
     label: string;
     value: string;
@@ -62,45 +106,17 @@ const Payments = ({
 
     setSelectedPool(poolShortcut);
 
-    handleChangeRegion(selectedOption as { label: string; value: STANDARD_REGIONS_API_KEYS });
+    handleChangeRegion(
+      selectedOption as { label: string; value: string }
+    );
   };
 
   return (
     <>
-      {(mobile || tablet) && (
-        <>
-          <ConfiguredInfoBox
-            infoItems={infoBoxMapData}
-            isLoading={isLoadingMapChart}
-          />
-        </>
-      )}
-      {desktop ? (
-        <>
-          <Spacer variant="lg" /> <Spacer variant="md" />
-        </>
-      ) : (
-        <Spacer variant="xs" />
-      )}
-
-      <Header
-        items={dropdownItems}
-        defaultRegion={regionLabel}
-        onChangeRegion={handleDropdownChange}
-        isLoading={isLoadingPaymentState}
-        pageTitleComponent={<PaymentsTitle />}
-        addComponent={
-          <Search
-            context={mobile ? "wallet" : "payments"}
-            onSearch={onSetWalletAddress}
-            overrideLabel={true}
-            selectedPool={selectedPool}
-          />
-        }
-        context={mobile ? "mobileWallet" : "payments"}
-        onSearch={handleSearch}
-      />
-      {desktop ? null : <Spacer variant="xxxl" />}
+      {renderInfoBox()}
+      <Spacer variant={desktop ? 'xxl' : 'xl'} />
+      {renderHeader()}
+      {desktop ? null : <Spacer variant="xxs" />}
       <List
         isLoading={isLoadingPaymentList}
         data={convertPaymentsResponse2PaymentInfo(fetchedPaymentsList)}
@@ -110,22 +126,8 @@ const Payments = ({
         hidePagination
         context="blocks"
       />
-      <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
-        <Spacer variant="sm" />
-        <Spacer variant="md" />
-        <Board
-          isLoading={isLoadingPaymentState}
-          description="Sent payments"
-          value={
-            TextFormat.getNumberText(fetchedPaymentsState?.paymentsTotal).text
-          }
-          context="payments"
-          prefix=""
-          suffix=""
-        />
-        {desktop ? <Spacer variant="sm" /> : <Spacer variant="lg" />}
-        <Spacer variant="md" />
-      </div>
+      {renderBoards()}
+      {mobile && <Spacer variant="sm" />}
     </>
   );
 };

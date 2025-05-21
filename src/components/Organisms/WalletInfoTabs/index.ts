@@ -1,1 +1,1 @@
-export { default as WalletInfoTabs } from "./WalletInfoTabs";
+export { default as WalletInfoTabs } from './WalletInfoTabs';

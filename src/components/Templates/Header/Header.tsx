@@ -1,20 +1,20 @@
-import React from "react";
-import { Dropdown } from "@site/src/components/Atoms/Dropdown";
-import { Board } from "@site/src/components/Atoms/Board";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { IBan } from "@site/src/components/Molecules/IBan";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
+import React from 'react';
+import { Dropdown } from '@site/src/components/Atoms/Dropdown';
+import { Board } from '@site/src/components/Atoms/Board';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { IBan } from '@site/src/components/Molecules/IBan';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IHeader {
   items?: Array<{ label: string; value: string }>;
   defaultRegion?: string;
-  onSearch?: (searchQuery: string) => void;
   children?: React.ReactNode;
   iban?: string;
+  selectedPool?: string;
   isLoading?: boolean;
   boardItems?: Array<{
     desc: string;
@@ -31,15 +31,16 @@ interface IHeader {
     boards: boolean;
   };
   context?: string;
+  onSearch?: (searchQuery: string) => void;
 }
 
 const Header = ({
   items,
-  onSearch,
   boardItems,
   onChangeRegion,
   defaultRegion,
   iban,
+  selectedPool,
   children,
   isLoading = false,
   pageTitleComponent,
@@ -47,88 +48,89 @@ const Header = ({
   layout = { boards: true, dropdown: true, search: true },
   context,
 }: IHeader) => {
-  const { mobile, desktop } = useMediaQueries();
+  const { desktop } = useMediaQueries();
 
-  const columnClass =
-    context === "blocks" || context === "payments"
-      ? "flex-col--4"
-      : "flex-col--12";
+  const columnClass = clsx({
+    'flex-col--4': context === 'blocks' || context === 'payments',
+    'flex-col--6': context === 'wallet',
+    'flex-col--12': context === 'mobileWallet',
+  });
+  const renderDropdown = () => (
+    <div
+      className={clsx('flex flex-column flex-column-center', columnClass, {
+        [styles.blocksDropdown]: context === 'blocks',
+      })}
+    >
+      <Dropdown
+        isLoading={isLoading}
+        defaultValue={defaultRegion}
+        className={clsx(styles.boardDropdown, {
+          [styles.smallWidth]: context === 'blocks' || context === 'payments',
+        })}
+        items={items}
+        onChange={onChangeRegion}
+        text="Mining pool"
+        context={context}
+      />
+    </div>
+  );
+
+  const renderBoards = () => (
+    <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
+      {boardItems?.map((boardItem, index) => (
+        <Board
+          isLoading={isLoading}
+          key={index}
+          description={boardItem.desc}
+          value={boardItem.value}
+          suffix={boardItem.suffix}
+          prefix={boardItem.prefix}
+        />
+      ))}
+    </div>
+  );
 
   return (
     <>
       {pageTitleComponent}
       {layout.search && (
         <>
-          {context === "mobileWallet" ? null : <Spacer variant="xl" />}
-          <div className="col col--12">
-          </div>
+          {context === 'mobileWallet' ? null : <Spacer variant="xl" />}
+          <div className="col col--12"></div>
         </>
       )}
       {layout.dropdown && (
         <>
-          {iban && <IBan iBan={iban} />}
-          <Spacer variant="xxs" />
+          {iban && <IBan iBan={iban} pool={selectedPool} />}
+          {desktop ? null : <Spacer variant="xxs" />}
 
-          {context === "blocks" && <Spacer variant="xl" />}
-          {context === "mobileWallet" && <Spacer variant="lg" />}
+          {context === 'blocks' && <Spacer variant="xxl" />}
+          {context === 'payments' && <Spacer variant="xs" />}
+          {context === 'mobileWallet' && <Spacer variant="xs" />}
+          {context === 'wallet' && <Spacer variant="sm" />}
           <div
-            className={clsx("flex", {
-              [styles.blocksContainer]: context === "blocks",
-              [styles.paymentsContainer]: context === "payments",
-              [styles.mobileBlocksContainer]: context === "mobileWallet",
+            className={clsx('flex', {
+              [styles.blocksContainer]: context === 'blocks',
+              [styles.paymentsContainer]: context === 'payments',
+              [styles.mobileBlocksContainer]: context === 'mobileWallet',
+              'xl-center-items': context === 'wallet',
             })}
           >
-            <div
-              className={clsx(
-                "flex flex-column flex-column-center",
-                columnClass,
-                { [styles.blocksDropdown]: context === "blocks" },
-              )}
-            >
-              <Dropdown
-                isLoading={isLoading}
-                defaultValue={defaultRegion}
-                className={clsx(styles.boardDropdown, {
-                  [styles.smallWidth]:
-                    context === "blocks" || context === "payments",
-                })}
-                items={items}
-                onChange={onChangeRegion}
-                text="Mining pool"
-                context={context}
-              />
-            </div>
+            {renderDropdown()}
             {addComponent}
           </div>
         </>
       )}
-      {context !== "payments" &&
-        desktop &&
-        (context === "blocks" ? (
-          <Spacer variant="md" />
-        ) : (
-          <Spacer variant="xl" />
-        ))}
+      {context !== 'payments' && desktop && <Spacer variant="xl" />}
 
       {layout.boards && (
         <>
-          <Spacer variant="lg" />
-          <div className={clsx(styles.boardRoot, styles.boardJustifyCenter)}>
-            {boardItems?.map((boardItem, index) => (
-              <Board
-                isLoading={isLoading}
-                key={index}
-                description={boardItem.desc}
-                value={boardItem.value}
-                suffix={boardItem.suffix}
-                prefix={boardItem.prefix}
-              />
-            ))}
-          </div>
+          {desktop ? <Spacer variant="lg" /> : <Spacer variant="sm" />}
+          {renderBoards()}
         </>
       )}
       {children}
-      {context !== "blocks" && context !== "payments" && desktop ? (
+      {context !== 'blocks' && context !== 'payments' && desktop ? (
         <Spacer variant="md" />
       ) : null}
     </>

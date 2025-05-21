@@ -1,17 +1,17 @@
 .detailsRow {
   width: 100%;
-  height: 53px;
+  height: 3.3rem;
   margin: auto;
   display: flex;
 }
 
 .detailsRowLoadingSkeleton {
-  height: 51px;
+  height: 3.2rem;
   width: 100%;
 }
 
 .detailsRowContentLoadingSkeleton {
-  padding: calc(var(--space-md)/4) 20px calc(var(--space-xs)/2) 20px;
+  padding: calc(var(--space-md) / 4) 20px calc(var(--space-xs) / 2) 20px;
 }
 
 .detailsRow:nth-child(odd) {
@@ -19,7 +19,7 @@
 }
 
 .detailsTableCaption {
-  padding:calc(var(--space-sm)-9px) var(--space-xs);
+  padding: var(--space-xs);
   border-right: 1px solid var(--dark-rgb-border);
   width: 50%;
 }

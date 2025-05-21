@@ -1,16 +1,16 @@
-import { isNumberString } from "@site/src/utils/isNumber";
+import { isNumberString } from '@site/src/utils/isNumber';
 import {
   STATS_CHARTS_RESPONSE,
   STATS_RESPONSE,
-} from "@site/src/Api/stats/types";
-import { TextFormat } from "@site/src/utils/textFormat";
-import { convertTime2Date } from "@site/src/utils/convertTime2Date";
-import { UNITS } from "@site/src/constants/units";
-import { ChartItem } from "./types";
-import { BLOCK_TIME } from "./constants";
-import { SETTINGS_RESPONSE } from "@site/src/Api/settings/types";
-import { MATURED_RESPONSE } from "@site/src/Api/blocks/types";
-import { summarizedText } from "@site/src/utils/summarizedText";
+} from '@site/src/Api/stats/types';
+import { TextFormat } from '@site/src/utils/textFormat';
+import { convertTime2Date } from '@site/src/utils/convertTime2Date';
+import { UNITS } from '@site/src/constants/units';
+import { ChartItem } from './types';
+import { BLOCK_TIME } from './constants';
+import { SETTINGS_RESPONSE } from '@site/src/Api/settings/types';
+import { MATURED_RESPONSE } from '@site/src/Api/blocks/types';
+import { summarizedText } from '@site/src/utils/summarizedText';
 
 /**
  * Given a list of items, and a function that takes two items and returns a single item, return the
@@ -20,7 +20,7 @@ import { summarizedText } from "@site/src/utils/summarizedText";
  * @returns The result of the reduce function.
  */
 export const reduceList = <T>(list: T[], by: (x: T, y: T) => T): T => {
-  if (!Array.isArray(list)) throw new Error("list must be an array");
+  if (!Array.isArray(list)) throw new Error('list must be an array');
 
   const [first, ...rest] = list;
   return rest.reduce(by, first);
@@ -32,22 +32,22 @@ const AGGREGATE_MAPPER: Record<
     x: unknown,
     y: unknown,
     whitelist?: string[],
-    blacklist?: string[],
+    blacklist?: string[]
   ) => unknown
 > = {
-  "number:true|object:false|array:false": (x: number, y: number) => +x + +y,
-  "number:false|object:true|array:false": (
+  'number:true|object:false|array:false': (x: number, y: number) => +x + +y,
+  'number:false|object:true|array:false': (
     x: object,
     y: object,
     whitelist,
-    blacklist,
+    blacklist
   ) => aggregateNumbers(whitelist, blacklist)(x, y),
-  "number:false|object:true|array:true": (x: [], y: [], whitelist, blacklist) =>
+  'number:false|object:true|array:true': (x: [], y: [], whitelist, blacklist) =>
     x.map((item, index) =>
-      aggregateNumbers(whitelist, blacklist)(item, y[index]),
+      aggregateNumbers(whitelist, blacklist)(item, y[index])
     ),
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  "number:false|object:false|array:false": (x: unknown, _) => x,
+  'number:false|object:false|array:false': (x: unknown, _) => x,
 };
 
 /**
@@ -83,8 +83,8 @@ export const aggregateNumbers =
         whitelist?.includes(key) ||
         (!!blacklist?.length && !blacklist?.includes(key))
       ) {
-        const isNumber = typeof value === "number" || isNumberString(value);
-        const isObject = typeof value === "object";
+        const isNumber = typeof value === 'number' || isNumberString(value);
+        const isObject = typeof value === 'object';
         const isArray = Array.isArray(value);
         const type = `number:${isNumber}|object:${isObject}|array:${isArray}`;
 
@@ -92,7 +92,7 @@ export const aggregateNumbers =
           value,
           target[key],
           whitelist,
-          blacklist,
+          blacklist
         );
       }
     });
@@ -100,13 +100,14 @@ export const aggregateNumbers =
     return result;
   };
 
-export const convertPoolChartDataToMapChartInfoBox = (
+export const convertPoolChartDataToMapChartInfoBox = async (
   data: STATS_RESPONSE,
   settings: SETTINGS_RESPONSE,
+  profitabilityData?: { revenue: number }
 ) => {
   if (!data || !settings) {
     return {
-      poolFee: "",
+      poolFee: '',
       infoBoxItems: [],
     };
   }
@@ -118,33 +119,50 @@ export const convertPoolChartDataToMapChartInfoBox = (
     poolFee: settings.PoolFee,
     infoBoxItems: [
       {
-        title: "Pools hashrate: ",
-        value: TextFormat.getHashText(data.hashrate),
+        title: 'CTR hashrate:',
+        value: data.hashrate
+          ? TextFormat.getHashText(data.hashrate)
+          : TextFormat.getDefaultText('×'),
       },
       {
-        title: "Network hashrate: ",
-        value: TextFormat.getHashText(Number(node.difficulty) / BLOCK_TIME),
+        title: 'XCB hashrate:',
+        value: node.difficulty
+          ? TextFormat.getHashText(Number(node.difficulty) / BLOCK_TIME)
+          : TextFormat.getDefaultText('×'),
       },
       {
-        title: "Network difficulty: ",
-        value: TextFormat.getHashText(Number(node.difficulty), ""),
+        title: 'Difficulty:',
+        value: node.difficulty
+          ? TextFormat.getHashText(Number(node.difficulty), '')
+          : TextFormat.getDefaultText('×'),
       },
       {
-        title: "Active miners: ",
-        value: TextFormat.getNumberText(data.minersTotal),
+        title: 'Miners:',
+        value: data.minersTotal
+          ? TextFormat.getNumberText(data.minersTotal)
+          : TextFormat.getDefaultText('×'),
       },
       {
-        title: "Round variance: ",
-        value: TextFormat.getPercentText(
-          ((100 * Number(roundShares)) / Number(node.difficulty)).toFixed(2),
-        ),
+        title: 'Variance:',
+        value:
+          roundShares && node.difficulty
+            ? TextFormat.getPercentText(
+                ((100 * Number(roundShares)) / Number(node.difficulty)).toFixed(
+                  2
+                )
+              )
+            : TextFormat.getDefaultText('×'),
+      },
+      {
+        title: "Profit:",
+        value: profitabilityData?.revenue !== undefined ? TextFormat.getProfitabilityText(profitabilityData.revenue.toFixed(2), "1kH/s", "monthly", false) : TextFormat.getDefaultText("×"),
       },
     ],
   };
 };
 
 export const convertPoolChartDataToRadialInfoBox = (
-  data: STATS_CHARTS_RESPONSE & { lastBlockFound: number },
+  data: STATS_CHARTS_RESPONSE & { lastBlockFound: number }
 ) => {
   if (!data?.nodes) return [];
 
@@ -152,30 +170,30 @@ export const convertPoolChartDataToRadialInfoBox = (
 
   return [
     {
-      title: "Network difficulty",
+      title: 'Network difficulty',
       value: TextFormat.getHashText(Number(node.difficulty || 0)),
     },
     {
-      title: "Blockchain Height",
+      title: 'Blockchain Height',
       value: TextFormat.getNumberText(node.height),
     },
     {
-      title: "Round Shares",
+      title: 'Round Shares',
       value: TextFormat.getNumberText(data.stats.roundShares),
     },
     {
-      title: "Last block found",
+      title: 'Last block found',
       value: TextFormat.getAgoText(convertTime2Date(data.stats.lastBlockFound)),
     },
     {
-      title: "Block reward",
+      title: 'Block reward',
       value: TextFormat.getXCBText(Number(data.blockReward || 0) / UNITS.CORE),
     },
   ];
 };
 
 export const convertPoolChartDataToChartData = (
-  poolCharts: Array<{ x: unknown; y: unknown }>,
+  poolCharts: Array<{ x: unknown; y: unknown }>
 ): ChartItem[] => {
   if (!poolCharts) return [];
   //
@@ -183,7 +201,7 @@ export const convertPoolChartDataToChartData = (
   const chartItemMapper = (item) => ({
     value: item.y,
     time: convertTime2Date(item.x),
-    hour: convertTime2Date(item.x, { hour: "2-digit", hour12: false }),
+    hour: convertTime2Date(item.x, { hour: '2-digit', hour12: false }),
   });
 
   //
@@ -191,7 +209,7 @@ export const convertPoolChartDataToChartData = (
   // it preserves latest chart item date of an average group as "time" field to show on chart by hovering
   const chartItemAverageReducer = (
     averages: Map<string, ChartItem>,
-    chartItem: ChartItem,
+    chartItem: ChartItem
   ) => {
     if (!averages.has(chartItem.hour)) {
       averages.set(chartItem.hour, chartItem);
@@ -214,7 +232,7 @@ export const convertPoolChartDataToChartData = (
 };
 
 export const convertMaturedResponseToRecentBlocksInfo = (
-  data: MATURED_RESPONSE[],
+  data: MATURED_RESPONSE[] = []
 ): Array<{
   height: string;
   type: string;
@@ -223,23 +241,53 @@ export const convertMaturedResponseToRecentBlocksInfo = (
   reward: string;
   variance: string;
 }> => {
-  if (!data) return null;
+  // Ensure data is an array
+  if (!Array.isArray(data)) {
+    console.warn('Matured blocks data is not an array. Returning empty array.');
+    return [];
+  }
 
-  const result = data?.map((items) =>
-    items.matured.map((item) => ({
-      height_summarized: String(item.height),
-      height: String(item.height),
-      type: item.uncle ? "Uncle" : item.orphan ? "Orphan" : "Block",
-      minedOn: convertTime2Date(item.timestamp),
-      blockHash: item.hash,
-      blockHash_summarized: item.hash === "0x0" ? "❌" : summarizedText(item.hash, 10, item.hash.length - 6),
-      reward: TextFormat.getXCBText(Number(item.reward || 0) / UNITS.CORE).text,
-      variance: `${((100 * Number(item.shares)) / Number(item.difficulty)).toFixed(2)}%`,
-    })),
-  );
+  try {
+    const result = data.map((items) =>
+      Array.isArray(items.matured)
+        ? items.matured.map((item) => ({
+            height_summarized: String(item.height || 'N/A'),
+            height: String(item.height || 'N/A'),
+            type: item.uncle ? 'Uncle' : item.orphan ? 'Orphan' : 'Block',
+            minedOn: item.timestamp
+              ? convertTime2Date(item.timestamp)
+              : 'Unknown',
+            blockHash: item.hash || 'N/A',
+            blockHash_summarized:
+              item.hash === '0x0'
+                ? '❌'
+                : summarizedText(
+                    item.hash || 'N/A',
+                    10,
+                    (item.hash || '').length - 6
+                  ),
+            reward: TextFormat.getXCBText(Number(item.reward || 0) / UNITS.CORE)
+              .text,
+            variance:
+              item.shares && item.difficulty
+                ? `${(
+                    (100 * Number(item.shares)) /
+                    Number(item.difficulty)
+                  ).toFixed(2)}%`
+                : 'N/A',
+          }))
+        : []
+    );
 
-  // eslint-disable-next-line prefer-spread
-  return [].concat
-    .apply([], result)
-    .sort((a, b) => (a["minedOn"] < b["minedOn"] ? 1 : -1));
+    // Flatten the result and sort by minedOn
+    return []
+      .concat(...result)
+      .sort((a, b) => (a['minedOn'] < b['minedOn'] ? 1 : -1));
+  } catch (error) {
+    console.error(
+      'Error processing matured blocks data. Returning empty array:',
+      error
+    );
+    return [];
+  }
 };

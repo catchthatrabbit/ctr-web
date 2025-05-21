@@ -1,17 +1,16 @@
-
-.skeletonBorderItem{
-  height: 88px;
+.skeletonBorderItem {
+  height: 5.5rem;
   padding: var(--space-xs);
 }
 
-.borderRadius{
+.borderRadius {
   border-radius: var(--ifm-global-radius);
 }
 
-.justifyCenter{
+.justifyCenter {
   justify-content: center;
 }
 
-.justifySpaceBetween{
+.justifySpaceBetween {
   justify-content: space-evenly;
 }

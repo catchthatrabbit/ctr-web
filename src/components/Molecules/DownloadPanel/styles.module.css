@@ -2,20 +2,19 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  background-color: #1B1C1C; /* Set your desired background color */
-  padding: 38px 0px 0 47px;
-  border-radius: 8px;
-  margin-left: 30px;
-  height: 100%;
+  width: 97%;
+  background-color: #1b1c1c;
+  padding: 2.8rem 0 0 3.1rem;
+  border-radius: var(--ifm-global-radius);
   position: relative;
   flex: 1;
-
+  margin-left: 2rem;
 }
 
 .downloadPanelMobile {
   width: 100%;
   margin-left: 0;
-  padding: 23px 0px 138px 0px;
+  padding: 1.4rem 0 8.6rem 0;
   overflow: hidden;
 }
 
@@ -27,74 +26,73 @@
 
 .downloadPanelMobile .content {
   align-items: center;
-
 }
 
 .title {
-  font-size: 24px;
+  font-size: var(--medium-font-size);
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 0.6rem;
 }
 
 .text {
-  font-size: 16px;
-  margin-bottom: 20px;
+  font-size: var(--body-font-size);
+  margin-bottom: 1.3rem;
+}
+
+.textContainer {
+  z-index: 10;
 }
 
 .buttons {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.button {
-  width: 150px; /* Adjust the size as needed */
+  margin-bottom: 1.3rem;
 }
 
 .qrCode {
   border: 1px solid #808080;
   border-radius: 6px;
   width: fit-content;
-  padding: 12px 12px 6px 12px;
+  padding: 0.75rem 0.75rem 0.4rem 0.75rem;
 }
 
 .image {
   flex: 1;
   display: flex;
   position: absolute;
-  right: 30px;
+  right: 2rem;
 }
 
 .imageMobile {
-  bottom: -20px;
-  left: 20px;
+  bottom: -1.2rem;
+  left: 1.2rem;
   right: 0px;
 }
 
-.imageMobile img{
+.imageMobile img {
   width: 92%;
 }
 
 .image img {
   max-width: 100%;
-  border-radius: 8px;
+  border-radius: var(--ifm-global-radius);
 }
 
 .btns {
-  width: 37%;
+  justify-content: flex-start;
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.downloadPanelMobile {
+  margin-left: 0;
 }
 
 .downloadPanelMobile .btns {
-  width: 74%;
+  width: 75%;
 }
 
 .googlePlayImage {
-  width: 119px;
+  width: 135px;
   height: 40px;
-}
-
-.googlePlayImageMobile{
-  width: 133px;
 }

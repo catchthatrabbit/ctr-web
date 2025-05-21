@@ -1,6 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { SingleColumnPanel } from "@site/src/components/Molecules/SingleColumnPanel";
-import { REGIONS } from "@site/src/constants/regions";
 import { Spacer } from "@site/src/components/Atoms/Spacer";
 import {
   GetStartedTitle,
@@ -8,41 +7,25 @@ import {
   GuideTitle,
 } from "@site/src/components/Molecules/PictureTitles";
 import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
-import { useFetchSettings } from "@site/src/hooks/useSettings";
-import { useHeaders } from "@site/src/hooks/useHeaders";
 import { IAnyPageAndWallet } from "../types";
 import { useControls } from "./controls";
 import { InfoPanel } from "@site/src/components/Molecules/InfoPanel";
 import { Steps } from "../../Molecules/Steps";
 import { DropdownIconDown } from "@site/src/icons";
 import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
-import ICAN from '@blockchainhub/ican';
+import ICAN from "@blockchainhub/ican";
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { POOLS_LIST } from '@site/src/configs/types';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IStartMining extends IAnyPageAndWallet {}
 
-const StartMining = ({
-  defaultRegion,
-  onSetWalletAddress,
-  onChangeRegion,
-}: IStartMining) => {
-  const {
-    startMiningPoolConfigurations,
-    githubReleaseDownloadUrl,
-    infoBoxMapData,
-    isLoadingMapChart,
-  } = useControls();
-
-  const inputStartMiningRef = useRef<HTMLInputElement>(null);
-
-  const { region, handleSearch } = useHeaders({
-    defaultRegion,
-    onSetWalletAddress,
-    onChangeRegion,
-  });
-
-  const { data: fetchSettings } = useFetchSettings(region);
+const StartMining = ({ onSetWalletAddress }: IStartMining) => {
+  const { startMiningPoolConfigurations, infoBoxMapData, isLoadingMapChart } =
+    useControls();
+  const { siteConfig } = useDocusaurusContext();
+  const poolsList = siteConfig.customFields.POOLS_LIST as POOLS_LIST;
 
   const [openRegion, setOpenRegion] = useState<string | null>(null);
   const { mobile, tablet, desktop } = useMediaQueries();
@@ -50,7 +33,6 @@ const StartMining = ({
   const toggleRegion = (regionKey: string) => {
     setOpenRegion(openRegion === regionKey ? null : regionKey);
   };
-
   return (
     <>
       {(mobile || tablet) && (
@@ -61,29 +43,26 @@ const StartMining = ({
           />
         </>
       )}
-      <Spacer variant="sm" />
-      {desktop ? <Spacer variant="md" /> : null}
+      <Spacer variant={desktop ? 'xxl' : 'xl'} />
 
       <span id="start"></span>
       <GetStartedTitle />
       <Spacer variant="sm" />
-      {desktop ? <Spacer variant="md" /> : null}
 
       <div
-        className={`flex ${styles.infoPanel} ${mobile ? `flex-column ${styles.mobileInfoPanel}` : ""}`}
+        className={`flex ${styles.infoPanel} ${mobile ? `flex-column ${styles.mobileInfoPanel}` : ''}`}
       >
         <InfoPanel
           title="How to Start Mining"
-          text="A step-by-step guide to help you get started."
+          text="Follow our comprehensive guide to begin your mining journey with CTR."
           link="#steps"
-          linkText="View Section"
+          linkText="Read Mining Guide"
         />
-        {mobile && <Spacer variant="xxs" />}
         <InfoPanel
-          title="Pools"
-          text="Explore all available geo-locations you can connect to."
+          title="Mining Pools"
+          text="Connect to our global network of mining pools for optimal performance."
           link="#pools"
-          linkText="View Section"
+          linkText="Explore Pools"
         />
       </div>
       {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="sm" />}
@@ -94,105 +73,72 @@ const StartMining = ({
 
       <Steps
         onSetWalletAddress={onSetWalletAddress}
-        steps={[
-          {
-            title: "Step 1",
-            text: "Download mining software compatible with your hardware.",
-            number: 1
-          },
-          {
-            title: "Step 2",
-            text: "Configure your wallet address in the mining software.",
-            number: 2
-          },
-          {
-            title: "Step 3",
-            text: "Join a mining pool for consistent rewards.",
-            number: 3
-          },
-          {
-            title: "Step 4",
-            text: "Start the mining process and monitor performance.",
-            number: 4
-          },
-          {
-            title: "Step 5",
-            text: "Optimize your settings for maximum efficiency.",
-            number: 5
-          }
-        ]}
       />
 
       <Spacer variant="xl" />
       <span id="pools"></span>
-      {desktop ? <Spacer variant="md" /> : <Spacer variant="xxxl" />}
+      {desktop ? <Spacer variant="md" /> : <Spacer variant="lg" />}
 
       <PoolTitle />
-      <Spacer variant="xl" />
+      {desktop ? <Spacer variant="lg" /> : <Spacer variant="md" />}
       <div className={`flex flex-column ${styles.poolContainer}`}>
-        {Object.keys(REGIONS).map((REGION_KEY, index) => (
+        {Object.keys(poolsList).map((poolKey, index) => (
           <div key={index} className={styles.poolTable}>
+            <Spacer variant="xs" />
             <div
               className={`flex ${styles.dropdownHeader}`}
-              onClick={() => toggleRegion(REGION_KEY)}
+              onClick={() => toggleRegion(poolKey)}
             >
-              {startMiningPoolConfigurations[REGION_KEY][`NAME`]}
+              {poolsList[poolKey].NAME}
               <DropdownIconDown
                 style={{
-                  width: "24px",
-                  height: "24px",
-                  color: "pink",
+                  width: '24px',
+                  height: '24px',
+                  color: 'pink',
                   transform:
-                    openRegion === REGION_KEY
-                      ? "rotate(180deg)"
-                      : "rotate(0deg)",
-                  transition: "transform 0.2s ease",
+                    openRegion === poolKey
+                      ? 'rotate(180deg)'
+                      : 'rotate(0deg)',
+                  transition: 'transform 0.2s ease',
                 }}
               />
             </div>
-            {openRegion === REGION_KEY && (
+            {openRegion === poolKey && (
               <SingleColumnPanel
-                id={REGION_KEY.toLowerCase()}
-                description={
-                  startMiningPoolConfigurations[REGION_KEY][`DESCRIPTION`]
-                }
+                id={poolKey.toLowerCase()}
+                description={poolsList[poolKey].DESCRIPTION}
                 context="startMining"
                 data={[
                   {
-                    label: "Server",
-                    value: startMiningPoolConfigurations[REGION_KEY][`SERVER`],
+                    label: 'Server',
+                    value: poolsList[poolKey].SERVER,
                   },
                   {
-                    label: "Port",
-                    value: startMiningPoolConfigurations[REGION_KEY][`PORT`],
+                    label: 'Port',
+                    value: poolsList[poolKey].PORT,
                   },
                   {
-                    label: "Username",
-                    value:
-                      startMiningPoolConfigurations[REGION_KEY][`USERNAME`],
+                    label: 'Username',
+                    value: poolsList[poolKey].USERNAME,
                   },
                   {
-                    label: "Worker name",
-                    value:
-                      startMiningPoolConfigurations[REGION_KEY][`WORKER_NAME`],
+                    label: 'Worker name',
+                    value: poolsList[poolKey].WORKER_NAME,
                   },
                   {
-                    label: "Password",
-                    value:
-                      startMiningPoolConfigurations[REGION_KEY][`PASSWORD`],
+                    label: 'Password',
+                    value: poolsList[poolKey].PASSWORD,
                   },
                   {
-                    label: "Payouts Address",
-                    value: startMiningPoolConfigurations[REGION_KEY][`PAYOUT`]
-                      ? ICAN.printFormat(startMiningPoolConfigurations[REGION_KEY][
-                          `PAYOUT`
-                        ])
-                      : "",
+                    label: 'Payouts Address',
+                    value: poolsList[poolKey].PAYOUT
+                      ? ICAN.printFormat(poolsList[poolKey].PAYOUT)
+                      : '',
                   },
                 ]}
               />
             )}
-            <Spacer variant="lg" />
+            <Spacer variant="md" />
           </div>
         ))}
       </div>

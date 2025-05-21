@@ -2,16 +2,32 @@
   background-color: transparent;
 }
 
+.footerLayout {
+  position: relative;
+}
+
+.footerLayout::after {
+  content: '';
+  position: absolute;
+  bottom: -48px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #1f1f1f;
+}
+
 .logoContainer {
   display: flex;
   align-items: center;
-  width: auto;
   flex: 0 0 auto;
 }
 
+/* Download Buttons */
 .downloadBtns {
   display: flex;
   justify-content: flex-end;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
 }
 
 .downloadContainer {
@@ -21,32 +37,25 @@
   gap: var(--space-xs);
 }
 
-.btns {
-  display: flex;
-  gap: var(--space-xxs);
-}
-
 .googlePlayImage {
   height: 40px;
 }
 
 .footerLinks {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: var(--space-md);
-  gap: var(--space-sm);
+  position: relative;
+  display: block;
+  margin-top: var(--space-xl);
 }
 
 .footerLinks > div {
   margin-right: var(--space-md);
-  margin-bottom: var(--space-sm);
-  white-space: nowrap;
 }
 
 .footerLinks .footer__title {
   font-family: var(--font-family-heading);
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--space-xs);
+  text-align: center;
 }
 
 .footerCopyWrite {
@@ -54,7 +63,15 @@
   position: relative;
 }
 
-/* Mobile styles */
+.btns {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxs);
+}
+
 @media (max-width: 767px) {
   .footerLayout {
     display: flex;
@@ -62,45 +79,36 @@
     align-items: center;
   }
 
+  .footerLayout::after {
+    bottom: -5px;
+  }
+
   .logoContainer {
     justify-content: center;
     width: 100%;
-    margin-bottom: var(--space-sm);
-  }
-
-  .downloadBtns {
-    width: 100%;
-    justify-content: center;
-    margin-bottom: var(--space-sm);
   }
 
   .downloadContainer {
     align-items: center;
   }
 
-  .downloadText {
-    text-align: center;
-  }
-
-  .btns {
-    justify-content: center;
-  }
-
   .footerLinks {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: var(--space-xs);
+    margin: var(--space-md) 0;
   }
 
   .footerLinks > div {
-    margin-right: 0;
-    margin-bottom: var(--space-sm);
     white-space: normal;
+    margin-right: 0;
   }
 
-  .footerLinks .footer__title {
-    text-align: center;
+  .btns {
+    position: static;
+    align-items: center;
+    margin-top: var(--space-xl);
+    gap: var(--space-sm);
   }
 
   .footerCopyWrite {

@@ -1,12 +1,12 @@
-import clsx from "clsx";
-import ReactPaginate from "react-paginate";
-import React from "react";
-import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
-import PaginationLeft from "@site/src/icons/PaginationLeft";
-import PaginationRight from "@site/src/icons/PaginationRight";
-import { Spacer } from "../../Atoms/Spacer";
-import styles from "./styles.module.css";
-import { Text } from "@site/src/components/Atoms/Text";
+import clsx from 'clsx';
+import ReactPaginate from 'react-paginate';
+import React, { useState, useEffect } from 'react';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
+import PaginationLeft from '@site/src/icons/PaginationLeft';
+import PaginationRight from '@site/src/icons/PaginationRight';
+import { Spacer } from '../../Atoms/Spacer';
+import styles from './styles.module.css';
+import { Text } from '@site/src/components/Atoms/Text';
 
 interface IPagination {
   offset?: number;
@@ -28,15 +28,21 @@ const Pagination = ({
   emptyComponent = <></>,
   isLoading,
   loadingComp,
-}: IPagination) => {
+  isFiltered = false, // New prop to indicate if the table is filtered
+}: IPagination & { isFiltered?: boolean }) => {
   const { desktop, laptop, mobile, tablet } = useMediaQueries();
+  const [fixedTotal, setFixedTotal] = useState(total);
 
   const handleChangePage = (selectedItem: { selected: number }) => {
-    if (typeof onPageChange === "function") onPageChange(selectedItem.selected);
+    if (typeof onPageChange === 'function') onPageChange(selectedItem.selected);
   };
 
+  useEffect(() => {
+    setFixedTotal(total);
+  }, [total]);
+
   const startItem = offset * limit + 1;
-  const endItem = Math.min((offset + 1) * limit, total);
+  const endItem = Math.min((offset + 1) * limit, fixedTotal);
 
   if (isLoading)
     return (
@@ -53,10 +59,10 @@ const Pagination = ({
             key={index}
             className={clsx(
               styles.paginationItem,
-              styles.paginationLoadingSkeleton,
+              styles.paginationLoadingSkeleton
             )}
           >
-            {loadingComp}{" "}
+            {loadingComp}{' '}
           </div>
         ))}
       </div>
@@ -66,7 +72,7 @@ const Pagination = ({
     emptyComponent
   ) : (
     <div
-      className={`${styles.paginationContainer} ${!desktop ? styles.containerMobile : ""}`}
+      className={`${styles.paginationContainer} ${!desktop ? styles.containerMobile : ''}`}
     >
       <Text
         variant="smallBody"
@@ -92,7 +98,7 @@ const Pagination = ({
         onPageChange={handleChangePage}
         pageRangeDisplayed={2}
         marginPagesDisplayed={1}
-        pageCount={Math.ceil(total / limit)}
+        pageCount={Math.ceil(fixedTotal / limit)}
         previousClassName={styles.paginationPrevious}
         previousLabel={<PaginationLeft />}
         renderOnZeroPageCount={null}

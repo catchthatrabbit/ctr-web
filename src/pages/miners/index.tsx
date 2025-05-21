@@ -1,7 +1,8 @@
-import React from "react";
-import { ConfiguredLayout } from "@site/src/components/Templates/ConfiguredLayout";
-import { Miners } from "@site/src/components/Pages/Miners";
-import { useWalletPage } from "@site/src/hooks/useWallet";
+import React from 'react';
+import { ConfiguredLayout } from '@site/src/components/Templates/ConfiguredLayout';
+import { Miners } from '@site/src/components/Pages/Miners';
+import { useWalletPage } from '@site/src/hooks/useWallet';
+import { Wallet } from '@site/src/components/Pages/Wallet';
 
 const MinersPage = () => {
   const {
@@ -16,13 +17,23 @@ const MinersPage = () => {
 
   return (
     <ConfiguredLayout>
-      <Miners
-        defaultRegion={region}
-        onSetWalletAddress={handleWalletAddress}
-        onChangeRegion={handleChangeRegion}
-        selectedPool={selectedPool}
-        setSelectedPool={handleSelectedPool}
-      />
+      {walletAddress ? (
+        <Wallet
+          onClearWalletAddress={handleClearWalletAddress}
+          defaultRegion={region}
+          walletAddress={walletAddress}
+          onChangeRegion={handleChangeRegion}
+          onSetWalletAddress={handleWalletAddress}
+        />
+      ) : (
+        <Miners
+          defaultRegion={region}
+          onSetWalletAddress={handleWalletAddress}
+          onChangeRegion={handleChangeRegion}
+          selectedPool={selectedPool}
+          setSelectedPool={handleSelectedPool}
+        />
+      )}
     </ConfiguredLayout>
   );
 };

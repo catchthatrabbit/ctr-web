@@ -1,7 +1,7 @@
-import React from "react";
-import { Text } from "@site/src/components/Atoms/Text";
+import React from 'react';
+import { Text } from '@site/src/components/Atoms/Text';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IPictureTitle {
   title?: string;
@@ -11,12 +11,14 @@ interface IPictureTitle {
   secondaryText?: string;
   secondaryTextStyle?: React.CSSProperties;
   disableMobileStyles?: boolean;
+  lineHeight?: 'largeLineHeight' | 'normalLineHeight' | 'smallLineHeight' | 'mediumLineHeight';
 }
 
 const PictureTitle = ({
   image,
-  title = "",
+  title = '',
   titleStyles,
+  lineHeight = 'largeLineHeight',
   flexStart,
   secondaryText,
   secondaryTextStyle,
@@ -32,9 +34,9 @@ const PictureTitle = ({
         type="exo"
         size="pictureTitle"
         weight="extraBold"
-        lineHeight="mediumLineHeight"
         color="white"
         letterSpacing="letterSpacing"
+        lineHeight={lineHeight}
         style={{ ...titleStyles }}
         disableMobileStyles={disableMobileStyles}
       >
@@ -44,9 +46,12 @@ const PictureTitle = ({
         <Text
           variant="subheading1"
           color="subheadingColor"
-          lineHeight="normalLineHeight"
           letterSpacing="letterSpacing"
-          style={{ marginTop: "0.5rem", ...secondaryTextStyle }}
+          lineHeight={lineHeight}
+          style={{
+            textAlign: 'center',
+            ...secondaryTextStyle,
+          }}
           disableMobileStyles={disableMobileStyles}
         >
           {secondaryText}

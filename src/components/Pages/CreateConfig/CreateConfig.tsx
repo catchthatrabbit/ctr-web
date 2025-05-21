@@ -1,111 +1,332 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { CreateConfigTitle } from "@site/src/components/Molecules/PictureTitles";
-import { InputText } from "@site/src/components/Atoms/InputText";
-import { Dropdown } from "../../Atoms/Dropdown";
-import { Text } from "@site/src/components/Atoms/Text";
-import { Warning } from "@site/src/components/Atoms/Warning";
-import Button from "@site/src/components/Atoms/Button/Button";
-import Ican from "@blockchainhub/ican";
-import useControls from "./controls";
-import { ConfiguredInfoBox } from "../../Molecules/ConfiguredInfoBox";
-import useMediaQueries from "@site/src/hooks/useMediaQueries/useMediaQueries";
-import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
-import { constructWorkerName } from "@site/src/utils/convertWorkerName";
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { CreateConfigTitle } from '@site/src/components/Molecules/PictureTitles';
+import { InputText } from '@site/src/components/Atoms/InputText';
+import { Dropdown } from '@site/src/components/Atoms/Dropdown';
+import { Text } from '@site/src/components/Atoms/Text';
+import Button from '@site/src/components/Atoms/Button/Button';
+import Ican from '@blockchainhub/ican';
+import useControls from './controls';
+import { ConfiguredInfoBox } from '@site/src/components/Molecules/ConfiguredInfoBox';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
+import { constructWorkerName } from '@site/src/utils/convertWorkerName';
+import { profitabilityCalculation } from '@site/src/utils/profitabilityCalculation';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
+import { ActionMeta } from 'react-select';
+import config from '@site/docusaurus.config';
+import { getRepoUrl } from '@site/src/utils/getRepoUrl';
+import { products } from '@site/src/constants/products';
+import ExchNumberFormat from 'exchange-rounding';
+import { siFormat } from '@site/src/utils/siFormat';
+import { getVariantId, getFormAction, isSupportedProvider } from '@site/src/utils/shop';
 
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IPayments {
-  defaultRegion?: STANDARD_REGIONS_API_KEYS;
+  defaultRegion?: string;
   onSetWalletAddress?: (address: string) => void;
-  onChangeRegion?: (region: any) => void;
+  onChangeRegion?: (region: string) => void;
+  address?: string;
+  pool?: string;
+  secondPool?: string;
+}
+
+interface CustomFields {
+  URLS: {
+    BUY_LINK: string;
+  };
+  ENABLE_HOSTING: boolean;
+  HOSTING: {
+    PROVIDER: string;
+    URL?: string;
+  };
 }
 
 const CreateConfig = ({
   defaultRegion,
   onSetWalletAddress,
   onChangeRegion,
+  address,
+  pool,
+  secondPool,
 }: IPayments) => {
+  const { siteConfig } = useDocusaurusContext();
+  const customFields = siteConfig.customFields as unknown as CustomFields;
   const {
-    handleChangeRegion,
-    handleSearch,
+    URLS: { BUY_LINK: buyLink },
+    ENABLE_HOSTING: enableHosting,
+    HOSTING: { PROVIDER: hostingProvider, URL: hostingUrl },
+  } = customFields;
+  const prefillDone = useRef(false);
+  const isTryingToPrefill = useRef(false);
+
+  const hashratePriceOptions = products
+    .filter((product) => product.available)
+    .map((product) => ({
+      value: product.id,
+      label: `${product.name}: ~${siFormat(product.hashrate, 0)}H/s — ${new ExchNumberFormat(undefined, {
+        style: 'currency',
+        currency: (product as any).currency || 'EUR',
+      }).format(product.price)} per unit per month`,
+    }));
+
+  const isOutOfStock = hashratePriceOptions.length === 0;
+  const [profitability, setProfitability] = useState<number>(0);
+  const [xcbPrice, setXcbPrice] = useState<number>(0);
+  const [xcbReward, setXcbReward] = useState<number>(0);
+  const [selectedOption, setSelectedOption] = useState<string>(
+    isOutOfStock ? '' : hashratePriceOptions[0].value
+  );
+  const [quantity, setQuantity] = useState<number>(1);
+  const [dropdownValue1, setDropdownValue1] = useState<{
+    value: string;
+    label: string;
+  } | null>(null);
+  const [dropdownValue2, setDropdownValue2] = useState<{
+    value: string;
+    label: string;
+  } | null>(null);
+
+  const [walletAddress, setWalletAddress] = useState(address || '');
+  const [isWalletValid, setIsWalletValid] = useState(true);
+  const [inputType, setInputType] = useState('plain');
+  const [minerName, setMinerName] = useState({ value: '', isValid: true });
+  const [typePortal, setTypePortal] = useState({ value: '', isValid: true });
+  const [uniqueId, setUniqueId] = useState('');
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const { mobile, tablet, desktop } = useMediaQueries();
+  const {
     dropdownItems,
     regionLabel,
-    convertWorkerName,
     startMiningPoolConfigurations,
     infoBoxMapData,
     isLoadingMapChart,
   } = useControls({ defaultRegion, onSetWalletAddress, onChangeRegion });
 
-  const [walletAddress, setWalletAddress] = useState("");
-  const [isWalletValid, setIsWalletValid] = useState(true);
-  const [inputType, setInputType] = useState("plain");
-  const [minerName, setMinerName] = useState({ value: "", isValid: true });
-  const [typePortal, setTypePortal] = useState({ value: "", isValid: true });
-  const [uniqueId, setUniqueId] = useState("");
-  const [dropdownValue1, setDropdownValue1] = useState(regionLabel);
-  const [dropdownValue2, setDropdownValue2] = useState(dropdownItems[1].label);
-  const [showError, setShowError] = useState(false);
+  const formatWalletAddress = useCallback((value: string) => {
+    return value.replace(/(.{4})/g, '$1 ').trim();
+  }, []);
 
-  const { mobile, tablet, desktop } = useMediaQueries();
+  const handleWalletAddressChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const formattedValue = formatWalletAddress(
+        event.target.value.replace(/\s+/g, '')
+      );
+      const isValid = Ican.isValid(formattedValue, true);
+      setIsWalletValid(isValid);
+      setWalletAddress(formattedValue);
+    },
+    [formatWalletAddress]
+  );
 
-  const formatWalletAddress = (value: string) => {
-    return value.replace(/(.{4})/g, "$1 ").trim();
-  };
+  useEffect(() => {
+    if (prefillDone.current || dropdownItems.length === 0) return;
+    if (dropdownItems.length > 0) {
+      const pathParts = window.location.pathname.split('/').filter(Boolean);
 
-  const handleWalletAddressChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const formattedValue = formatWalletAddress(
-      event.target.value.replace(/\s+/g, ""),
-    );
-    const isValid = Ican.isValid(formattedValue, true);
-    setIsWalletValid(isValid);
-    setWalletAddress(formattedValue);
-  };
+      const isGoLiveWithParams =
+        pathParts[0] === 'go-live' && pathParts.length >= 2;
 
-  const handleMinerNameChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const value = event.target.value;
-    const regex = inputType === "plain" ? /^[A-Za-z0-9_-]+$/ : /^[A-Za-z0-9]+$/;
-    const isValid = regex.test(value);
-    setMinerName({ value, isValid });
-  };
+      if (isGoLiveWithParams) {
+        const [, walletParam, pool1Param, pool2Param] = pathParts;
 
-  const handleTypePortalChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const value = event.target.value;
-    const regex =
-      /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$/;
-    const isValid = regex.test(value);
-    setTypePortal({ value, isValid });
-  };
+        const newAddressRaw = walletParam.replace(/\s+/g, '');
+        const formattedAddress = formatWalletAddress(newAddressRaw);
+        const isValid = Ican.isValid(formattedAddress, true);
 
-  const handleUniqueIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUniqueId(event.target.value);
-  };
+        setWalletAddress((prev) => {
+          if (prev !== formattedAddress) {
+            setIsWalletValid(isValid);
+            onSetWalletAddress?.(formattedAddress);
+            return formattedAddress;
+          }
+          return prev;
+        });
 
-  const handleDropdownChange1 = (selectedOption: { label: string }) => {
-    setDropdownValue1(selectedOption.label);
-  };
+        const dropdown1 =
+          (pool1Param &&
+            dropdownItems.find(
+              (item) => item.value === pool1Param.toUpperCase()
+            )) ||
+          null;
 
-  const handleDropdownChange2 = (selectedOption: { label: string }) => {
-    setDropdownValue2(selectedOption.label);
-  };
+        const dropdown2 =
+          (pool2Param &&
+            dropdownItems.find(
+              (item) => item.value === pool2Param.toUpperCase()
+            )) ||
+          null;
+
+        if (dropdown1) {
+          setDropdownValue1((prev) =>
+            prev?.value !== dropdown1?.value ? dropdown1 : prev
+          );
+        }
+
+        if (dropdown2) {
+          setDropdownValue2((prev) =>
+            prev?.value !== dropdown2?.value ? dropdown2 : prev
+          );
+        }
+
+        isTryingToPrefill.current = true;
+      }
+    }
+  }, [dropdownItems, onSetWalletAddress, formatWalletAddress]);
+
+  useEffect(() => {
+    if (
+      isTryingToPrefill.current &&
+      dropdownValue1 &&
+      dropdownValue2 &&
+      !prefillDone.current
+    ) {
+      prefillDone.current = true;
+      isTryingToPrefill.current = false;
+    }
+  }, [dropdownValue1, dropdownValue2]);
+
+  const handleMinerNameChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      const regex =
+        inputType === 'plain' ? /^[A-Za-z0-9_-]+$/ : /^[A-Za-z0-9]+$/;
+      const isValid = regex.test(value);
+      setMinerName({ value, isValid });
+    },
+    [inputType]
+  );
+
+  const handleTypePortalChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      const regex =
+        /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$/;
+      const isValid = regex.test(value);
+      setTypePortal({ value, isValid });
+    },
+    []
+  );
+
+  const handleUniqueIdChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setUniqueId(event.target.value);
+    },
+    []
+  );
+
+  const calculateProfitability = useCallback(
+    async (hashrate: number) => {
+      try {
+        const result = await profitabilityCalculation(
+          hashrate,
+          siteConfig.customFields,
+          'eur',
+          'monthly'
+        );
+
+        if (result) {
+          setProfitability(result.revenue);
+          setXcbPrice(result.xcbPrice);
+          setXcbReward(result.rewardXCB);
+        }
+      } catch (error) {
+        console.error('Error calculating profitability:', error);
+      }
+    },
+    [siteConfig]
+  );
+
+  const handleHashratePriceChange = useCallback(
+    (
+      newValue: { value: string; label: string },
+      actionMeta: ActionMeta<unknown>
+    ) => {
+      setSelectedOption(newValue.value);
+      setQuantity(1);
+    },
+    []
+  );
+
+  const handleQuantityChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = parseFloat(e.target.value);
+      if (!isNaN(value) && value >= 1 && value <= 10) {
+        setQuantity(value);
+      }
+    },
+    []
+  );
+
+  const getTotalPrice = useCallback(() => {
+    if (isOutOfStock || !selectedOption) return 0;
+    const selectedProduct = products.find((p) => p.id === selectedOption);
+    if (!selectedProduct) return 0;
+    return selectedProduct.price * quantity;
+  }, [selectedOption, quantity, isOutOfStock]);
+
+  useEffect(() => {
+    if (selectedOption && !isOutOfStock) {
+      const selectedProduct = products.find((p) => p.id === selectedOption);
+      const hashrate = selectedProduct ? selectedProduct.hashrate : 0;
+      calculateProfitability(hashrate);
+    }
+  }, [selectedOption, calculateProfitability, isOutOfStock]);
+
+  useEffect(() => {
+    if (hashratePriceOptions.length > 0 && !selectedOption && !isOutOfStock) {
+      const initialValue = hashratePriceOptions[0].value;
+      const selectedProduct = products.find((p) => p.id === initialValue);
+      const hashrate = selectedProduct ? selectedProduct.hashrate : 0;
+      calculateProfitability(hashrate);
+    }
+  }, [
+    hashratePriceOptions,
+    calculateProfitability,
+    selectedOption,
+    isOutOfStock,
+  ]);
+
+  useEffect(() => {
+    if (dropdownItems.length > 0 && (!dropdownValue1 || !dropdownValue2)) {
+      if (pool || secondPool) {
+        const pool1 =
+          dropdownItems.find((item) => item.value === pool) || dropdownItems[0];
+        const pool2 =
+          dropdownItems.find((item) => item.value === secondPool) ||
+          dropdownItems[1];
+        setDropdownValue1(pool1);
+        setDropdownValue2(pool2);
+      } else {
+        const pool1Index = Math.floor(Math.random() * dropdownItems.length);
+        const pool1 = dropdownItems[pool1Index];
+        setDropdownValue1(pool1);
+        const pool2Candidates = dropdownItems.filter(
+          (_, idx) => idx !== pool1Index
+        );
+        if (pool2Candidates.length > 0) {
+          const pool2Index = Math.floor(Math.random() * pool2Candidates.length);
+          setDropdownValue2(pool2Candidates[pool2Index]);
+        } else {
+          setDropdownValue2(null);
+        }
+      }
+    }
+  }, [dropdownItems, pool, secondPool, dropdownValue1, dropdownValue2]);
 
   const renderInputs = () => {
-    if (inputType === "plain") {
+    if (inputType === 'plain') {
       return (
         <>
           <Text
-            variant="smallBody"
+            variant="body"
             color="subheadingColor"
-            style={{ marginBottom: "8px" }}
+            style={{ marginBottom: '0.5em' }}
           >
             Plain name
           </Text>
@@ -117,22 +338,23 @@ const CreateConfig = ({
           />
           {!minerName.isValid && (
             <Text
-              variant="smallBody"
-              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+              variant="body"
+              style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
             >
-              Plain name is invalid. Use only letters, numbers, underscores (_), or hyphens (-).
+              Plain name is invalid. Use only letters, numbers, underscores (_),
+              or hyphens (-).
             </Text>
           )}
           <Spacer variant="xs" />
         </>
       );
-    } else if (inputType === "fediverse") {
+    } else if (inputType === 'fediverse') {
       return (
         <>
           <Text
-            variant="smallBody"
+            variant="body"
             color="subheadingColor"
-            style={{ marginBottom: "8px" }}
+            style={{ marginBottom: '0.5em' }}
           >
             Fediverse Username
           </Text>
@@ -144,17 +366,17 @@ const CreateConfig = ({
           />
           {!minerName.isValid && (
             <Text
-              variant="smallBody"
-              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+              variant="body"
+              style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
             >
               Fediverse username is invalid. Use only letters and numbers.
             </Text>
           )}
           <Spacer variant="sm" />
           <Text
-            variant="smallBody"
+            variant="body"
             color="subheadingColor"
-            style={{ marginBottom: "8px" }}
+            style={{ marginBottom: '0.5em' }}
           >
             Fediverse portal
           </Text>
@@ -164,19 +386,19 @@ const CreateConfig = ({
             onChange={handleTypePortalChange}
             placeholder="coretalk.space"
           />
-          {!typePortal.isValid && (
+          {!typePortal.isValid && typePortal.value && (
             <Text
               variant="smallBody"
-              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+              style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
             >
               Portal is invalid. Enter a valid domain.
             </Text>
           )}
           <Spacer variant="sm" />
           <Text
-            variant="smallBody"
+            variant="body"
             color="subheadingColor"
-            style={{ marginBottom: "8px" }}
+            style={{ marginBottom: '0.5em' }}
           >
             Worker ID (optional)
           </Text>
@@ -193,11 +415,11 @@ const CreateConfig = ({
   };
 
   const areFieldsValid = () => {
-    if (inputType === "plain") {
+    if (inputType === 'plain') {
       return (
         isWalletValid && minerName.isValid && walletAddress && minerName.value
       );
-    } else if (inputType === "fediverse") {
+    } else if (inputType === 'fediverse') {
       return (
         isWalletValid &&
         minerName.isValid &&
@@ -213,37 +435,44 @@ const CreateConfig = ({
   const handleDownloadConfig = () => {
     if (!areFieldsValid()) {
       setShowError(true);
+      setErrorMessage('Please fill in all fields correctly.');
       return;
     }
     setShowError(false);
-    let walletAddressFormat = walletAddress.replace(/\s+/g, "").toLowerCase();
-    let workerName = "";
-    if (inputType === "plain") {
+    setErrorMessage('');
+
+    let walletAddressFormat = walletAddress.replace(/\s+/g, '').toLowerCase();
+    let workerName = '';
+
+    if (inputType === 'plain') {
       workerName = minerName.value;
-    } else if (inputType === "fediverse") {
+    } else if (inputType === 'fediverse') {
       workerName = constructWorkerName(
         minerName.value,
         [typePortal.value],
-        uniqueId ? uniqueId : undefined,
+        uniqueId ? uniqueId : undefined
       );
     }
+
     const regionKey1 = Object.keys(startMiningPoolConfigurations).find(
       (key) =>
-        startMiningPoolConfigurations[key]["DESCRIPTION"] === dropdownValue1,
+        startMiningPoolConfigurations[key]['DESCRIPTION'] ===
+        dropdownValue1?.label
     );
     const regionKey2 = Object.keys(startMiningPoolConfigurations).find(
       (key) =>
-        startMiningPoolConfigurations[key]["DESCRIPTION"] === dropdownValue2,
+        startMiningPoolConfigurations[key]['DESCRIPTION'] ===
+        dropdownValue2?.label
     );
 
     const server1 =
-      regionKey1 && startMiningPoolConfigurations[regionKey1]["SERVER"];
+      regionKey1 && startMiningPoolConfigurations[regionKey1]['SERVER'];
     const port1 =
-      regionKey1 && startMiningPoolConfigurations[regionKey1]["PORT"];
+      regionKey1 && startMiningPoolConfigurations[regionKey1]['PORT'];
     const server2 =
-      regionKey2 && startMiningPoolConfigurations[regionKey2]["SERVER"];
+      regionKey2 && startMiningPoolConfigurations[regionKey2]['SERVER'];
     const port2 =
-      regionKey2 && startMiningPoolConfigurations[regionKey2]["PORT"];
+      regionKey2 && startMiningPoolConfigurations[regionKey2]['PORT'];
 
     const configData = {
       wallet: walletAddressFormat,
@@ -256,16 +485,27 @@ const CreateConfig = ({
 
     const configContent = Object.entries(configData)
       .map(([key, value]) => `${key}=${value}`)
-      .join("\n");
+      .join('\n');
 
-    const blob = new Blob([configContent], { type: "text/plain" });
+    const blob = new Blob([configContent], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
+    const a = document.createElement('a');
     a.href = url;
-    a.download = "pool.cfg";
+    a.download = 'pool.cfg';
     a.click();
     URL.revokeObjectURL(url);
   };
+
+  const showHosting = enableHosting && isSupportedProvider(hostingProvider);
+
+  const variantId = getVariantId(selectedOption, hostingProvider) || '';
+  const quantityValue = quantity;
+  const coreIdValue = walletAddress.replace(/\s+/g, '').toLowerCase();
+  const workerNameValue = inputType === 'plain'
+    ? minerName.value
+    : constructWorkerName(minerName.value, [typePortal.value], uniqueId || undefined);
+  const primaryPoolValue = dropdownValue1?.value || '';
+  const secondaryPoolValue = dropdownValue2?.value || '';
 
   return (
     <>
@@ -277,21 +517,20 @@ const CreateConfig = ({
           />
         </>
       )}
-      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xs" />}
+      <Spacer variant={desktop ? 'xxl' : 'xl'} />
+
       <CreateConfigTitle />
-
-      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="lg" />}
-
-      <div className="flex xl-center-items">
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="sm" />}
+      <div className="flex">
         <div className={`flex flex-column ${styles.mainContent}`}>
           <Text variant="heading3" color="white" weight="semiBold">
             Basic details
           </Text>
           {desktop ? <Spacer variant="xs" /> : <Spacer variant="sm" />}
           <Text
-            variant={mobile ? "body" : "smallBody"}
+            variant="body"
             color="subheadingColor"
-            style={{ marginBottom: "8px" }}
+            style={{ marginBottom: '0.5em' }}
             disableMobileStyles
           >
             Core ID (Wallet address)
@@ -302,113 +541,325 @@ const CreateConfig = ({
             onChange={handleWalletAddressChange}
             className={styles.familyZephirum}
           />
-          {!isWalletValid && (
+          {!isWalletValid && walletAddress && (
             <Text
               variant="smallBody"
-              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+              style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
             >
               Core ID is not valid!
             </Text>
           )}
-          {desktop ? <Spacer variant="xs" /> : <Spacer variant="md" />}
+          {desktop ? <Spacer variant="sm" /> : <Spacer variant="md" />}
           <div className={styles.dropdowns}>
             <div className={styles.dropdownContainer}>
-              <Dropdown
-                isLoading={isLoadingMapChart}
-                defaultValue={dropdownValue1}
-                className={clsx(styles.boardDropdown)}
-                items={dropdownItems}
-                onChange={handleDropdownChange1}
-                text="Primary pool"
-              />
+              <Text
+                variant="body"
+                color="subheadingColor"
+                style={{ marginBottom: '0.5em' }}
+              >
+                Primary pool (Main)
+              </Text>
+              <select
+                className={styles.boardDropdown}
+                value={dropdownValue1?.value || ''}
+                onChange={(e) => {
+                  const selected = dropdownItems.find(
+                    (item) => item.value === e.target.value
+                  );
+                  setDropdownValue1(selected || null);
+                }}
+              >
+                {dropdownItems.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className={styles.dropdownContainer}>
-              <Dropdown
-                isLoading={isLoadingMapChart}
-                defaultValue={dropdownValue2}
-                className={clsx(styles.boardDropdown)}
-                items={dropdownItems}
-                onChange={handleDropdownChange2}
-                text="Secondary pool"
-              />
+              <Text
+                variant="body"
+                color="subheadingColor"
+                style={{ marginBottom: '0.5em' }}
+              >
+                Secondary pool (Fail-Safe)
+              </Text>
+              <select
+                className={styles.boardDropdown}
+                value={dropdownValue2?.value || ''}
+                onChange={(e) => {
+                  const selected = dropdownItems.find(
+                    (item) => item.value === e.target.value
+                  );
+                  setDropdownValue2(selected || null);
+                }}
+              >
+                {dropdownItems.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
-          {desktop ? (
-            <Spacer variant="xs" />
-          ) : (
-            <>
-              <Spacer variant="lg" /> <Spacer variant="xxs" />
-            </>
-          )}
-          <Link to="/start-mining#pools" className={styles.viewPoolsLink}>
-            <Text
-              variant={mobile ? "smallBody" : "subheading"}
-              color="primary"
-              type="value"
-              style={{
-                textDecoration: mobile ? "underline" : "none",
-                textUnderlineOffset: mobile ? "3px" : "0",
-              }}
+          <div className={styles.viewPoolsLinkContainer}>
+            <Link
+              to="/start-mining#pools"
+              style={{ color: 'var(--ifm-color-primary)' }}
             >
               Mining Pools Overview
-            </Text>
-          </Link>
-          <Spacer variant="sm" />
+            </Link>
+          </div>
+          {mobile ? <Spacer variant="xs" /> : <Spacer variant="sm" />}
           <Text variant="heading3" color="white" weight="semiBold">
             Identification details
           </Text>
-          {desktop ? <Spacer variant="sm" /> : <Spacer variant="xs" />}
-          <div className={`row  ${styles.inputs}`}>
-            <Text
-              variant="smallBody"
-              color="primary"
-              type="value"
-              onClick={() => setInputType("plain")}
-              className={clsx(styles.linkText, {
-                [styles.activeLink]: inputType === "plain",
-              })}
+          <Spacer variant="xxs" />
+          <div className={styles.tabs}>
+            <button
+              type="button"
+              className={clsx(
+                styles.tabButton,
+                inputType === 'plain' && styles.activeTab
+              )}
+              onClick={() => setInputType('plain')}
             >
               Plain name
-            </Text>
-
-            {desktop ? (
-              <Spacer direction="hor" variant="sm" />
-            ) : (
-              <Spacer direction="hor" variant="xxs" />
-            )}
-            <Text
-              variant="smallBody"
-              color="primary"
-              type="value"
-              onClick={() => setInputType("fediverse")}
-              className={clsx(styles.linkText, {
-                [styles.activeLink]: inputType === "fediverse",
-              })}
+            </button>
+            <button
+              type="button"
+              className={clsx(
+                styles.tabButton,
+                inputType === 'fediverse' && styles.activeTab
+              )}
+              onClick={() => setInputType('fediverse')}
             >
               Fediverse
-            </Text>
+            </button>
           </div>
           {desktop ? <Spacer variant="md" /> : <Spacer variant="sm" />}
           {renderInputs()}
-          <Warning
-            context="config"
-            text={`Click the download button to get the <span class="${styles.boldText}">pool.cfg</span> file. Place it in the same folder as your miner software.`}
-          />
-          <Spacer variant="md" />
-          <Button
-            backgroundColor="var(--ifm-color-primary)"
-            textColor="var(--ifm-button-color)"
-            weight="medium"
-            value="Download"
-            context="config"
-            onClick={handleDownloadConfig}
-          />
+          <Spacer variant="sm" />
+          <div className={styles.responsiveContainer}>
+            <div className={styles.halfContainer}>
+              <div>
+                <h3 className={styles.ownHardware}>Own Hardware</h3>
+                <p>
+                  Click the download button to get the{' '}
+                  <span className={styles.boldText}>pool.cfg</span> file. Place
+                  it in the same folder as your{' '}
+                  <a
+                    href={`${getRepoUrl(config, 'coreminer')}/releases`}
+                    target="_blank"
+                    rel="noopener"
+                    className={styles.minerLink}
+                  >
+                    miner software
+                  </a>
+                  .
+                </p>
+              </div>
+              {!desktop && <Spacer variant="sm" />}
+              {!desktop && (
+                <Button
+                  value="Download Config"
+                  context="config"
+                  onClick={handleDownloadConfig}
+                  className={styles.fullButton}
+                  disabled={!areFieldsValid()}
+                />
+              )}
+            </div>
+            {showHosting && (
+              <div className={styles.halfContainer}>
+                <div>
+                  <h3 className={styles.hosting}>Hosting</h3>
+                  <div className={styles.dropdownPriceContainer}>
+                    <div className={styles.dropdownAndQuantity}>
+                      <Dropdown
+                        defaultValue={
+                          isOutOfStock
+                            ? 'Out of Stock'
+                            : hashratePriceOptions.find(
+                                (opt) => opt.value === selectedOption
+                              )?.label || ''
+                        }
+                        items={
+                          isOutOfStock
+                            ? [{ value: 'out_of_stock', label: 'Out of Stock' }]
+                            : hashratePriceOptions
+                        }
+                        onChange={handleHashratePriceChange}
+                        isLoading={false}
+                      />
+                      {!isOutOfStock && (
+                        <div className={styles.quantityInput}>
+                          <InputText
+                            type="number"
+                            min="1"
+                            max="10"
+                            step="1"
+                            value={quantity}
+                            onChange={handleQuantityChange}
+                            context="dark"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  {!isOutOfStock && (
+                    <>
+                      <div>
+                        <strong>Estimation:</strong>{' '}
+                        {profitability
+                          ? new ExchNumberFormat(undefined, {
+                              style: 'currency',
+                              currency: 'EUR',
+                            }).format(profitability * quantity)
+                          : 'Calculating…'}
+                        <span
+                          style={{
+                            fontSize: 'var(--small-font-size)',
+                            marginLeft: '0.5em',
+                            marginRight: '0.5em',
+                          }}
+                        >
+                          @XCB{' '}
+                          {xcbPrice
+                            ? new ExchNumberFormat(undefined, {
+                                style: 'currency',
+                                currency: 'EUR',
+                              }).format(xcbPrice)
+                            : 'Loading…'}
+                        </span>
+                        (
+                        {xcbReward
+                          ? new ExchNumberFormat(undefined, {
+                              style: 'currency',
+                              currency: 'XCB',
+                            }).format(xcbReward * quantity)
+                          : 'Loading…'}
+                        )
+                      </div>
+                      <div style={{ fontSize: 'var(--small-font-size)' }}>
+                        Tip:{' '}
+                        <a
+                          href={buyLink}
+                          target="_blank"
+                          rel="noopener"
+                          className={styles.minerLink}
+                        >
+                          Buy more XCB
+                        </a>{' '}
+                        to raise the price globally.
+                      </div>
+                      <Spacer variant="sm" />
+                    </>
+                  )}
+                  {!desktop && (
+                    <>
+                      <Spacer variant="sm" />
+                      {hostingProvider === 'shopify' && (
+                        <form
+                          id="subscriptionForm"
+                          method="POST"
+                          action={getFormAction(hostingUrl, hostingProvider)}
+                          target="_blank"
+                          style={{ width: '100%' }}
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            setTimeout(() => {
+                              window.location.href = `${hostingUrl}/cart`;
+                            }, 500);
+                          }}
+                        >
+                          <input type="hidden" name="id" value={variantId} />
+                          <input type="hidden" name="quantity" value={quantityValue} />
+                          <input type="hidden" name="properties[coreId]" value={coreIdValue} />
+                          <input type="hidden" name="properties[workerName]" value={workerNameValue} />
+                          <input type="hidden" name="properties[primaryPool]" value={primaryPoolValue} />
+                          <input type="hidden" name="properties[secondaryPool]" value={secondaryPoolValue} />
+                          <Button
+                            type="submit"
+                            value={
+                              isOutOfStock
+                                ? 'Out of Stock'
+                                : `Add to cart ×${quantityValue} and subscribe monthly ${`${new ExchNumberFormat(
+                                    undefined,
+                                    {
+                                      style: 'currency',
+                                      currency: 'EUR',
+                                    }
+                                  ).format(getTotalPrice())}`}`
+                            }
+                            context="config"
+                            className={styles.fullButton}
+                            disabled={isOutOfStock || !areFieldsValid()}
+                          />
+                        </form>
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+          {desktop && (
+            <div className={styles.buttonContainer}>
+              <Button
+                value="Download Config"
+                context="config"
+                onClick={handleDownloadConfig}
+                className={styles.halfButton}
+                disabled={!areFieldsValid()}
+              />
+              {showHosting && hostingProvider === 'shopify' && (
+                <form
+                  id="subscriptionForm"
+                  method="POST"
+                  action={getFormAction(hostingUrl, hostingProvider)}
+                  target="_blank"
+                  style={{ width: '50%' }}
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    setTimeout(() => {
+                      window.location.href = `${hostingUrl}/cart`;
+                    }, 500);
+                  }}
+                >
+                  <input type="hidden" name="id" value={variantId} />
+                  <input type="hidden" name="quantity" value={quantityValue} />
+                  <input type="hidden" name="properties[coreId]" value={coreIdValue} />
+                  <input type="hidden" name="properties[workerName]" value={workerNameValue} />
+                  <input type="hidden" name="properties[primaryPool]" value={primaryPoolValue} />
+                  <input type="hidden" name="properties[secondaryPool]" value={secondaryPoolValue} />
+                  <Button
+                    type="submit"
+                    value={
+                      isOutOfStock
+                        ? 'Out of Stock'
+                        : `Add to cart ×${quantityValue} and subscribe monthly ${`${new ExchNumberFormat(
+                            undefined,
+                            {
+                              style: 'currency',
+                              currency: 'EUR',
+                            }
+                          ).format(getTotalPrice())}`}`
+                    }
+                    context="config"
+                    className={styles.fullButton}
+                    disabled={isOutOfStock || !areFieldsValid()}
+                  />
+                </form>
+              )}
+            </div>
+          )}
           {showError && (
             <Text
               variant="smallBody"
-              style={{ marginTop: "1rem", color: "var(--ifm-color-danger)" }}
+              style={{ marginTop: '1rem', color: 'var(--ifm-color-danger)' }}
             >
-              All required fields need to be filled out correctly to proceed.
+              {errorMessage}
             </Text>
           )}
           <Spacer variant="xxxl" />
