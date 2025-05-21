@@ -36,19 +36,18 @@ const config: Config = {
 
   customFields: {
     API_ENDPOINTS: {
-      DE_API_ENDPOINT: 'https://eu-api.catchthatrabbit.com',
-      FI_API_ENDPOINT: 'https://eu1-api.catchthatrabbit.com',
-      SG_API_ENDPOINT: 'https://as1-api.catchthatrabbit.com',
-      HK_API_ENDPOINT: 'https://as-api.catchthatrabbit.com',
-      BR_API_ENDPOINT: 'https://us-api.catchthatrabbit.com',
-      JP_API_ENDPOINT: 'https://us1-api.catchthatrabbit.com',
+      DE_API_ENDPOINT: 'https://de-api.catchthatrabbit.com',
+      FI_API_ENDPOINT: 'https://fi-api.catchthatrabbit.com',
+      SG_API_ENDPOINT: 'https://sg-api.catchthatrabbit.com',
+      HK_API_ENDPOINT: 'https://hk-api.catchthatrabbit.com',
+      US_API_ENDPOINT: 'https://us-api.catchthatrabbit.com',
     },
     API_PATH: '/v2/api/',
     URLS: {
       TRANSACTION_DETAILS: 'https://blockindex.net/tx',
       BLOCK_DETAILS: 'https://blockindex.net/block',
       BUY_LINK: 'https://app.ping.exchange?ref-code=kz3Xyxnn',
-      EXCHANGE_RATES: 'https://coreport.pages.dev/api/v1',
+      EXCHANGE_RATES: 'https://temp-endpoint.coreport.net/api/v1',
     },
     POOLS_LIST: {
       DE: {
@@ -86,7 +85,7 @@ const config: Config = {
       },
       HK: {
         NAME: 'Far-East',
-        DESCRIPTION: 'Far-East Pool 🇭🇰🇨🇳🇰🇷',
+        DESCRIPTION: 'Far-East Pool 🇭🇰🇨🇳🇯🇵',
         SERVER: 'hk.catchthatrabbit.com',
         PORT: '8008',
         WORKER_NAME:
@@ -95,27 +94,16 @@ const config: Config = {
         PASSWORD: '<empty>',
         PAYOUT: 'cb6242d8b1903db52f99813f79fe4dff2b85fd7c1fdd',
       },
-      BR: {
+      US: {
         NAME: 'America',
-        DESCRIPTION: 'American Pool 🇧🇷🇲🇽🇺🇸',
-        SERVER: 'br.catchthatrabbit.com',
+        DESCRIPTION: 'American Pool 🇺🇸🇲🇽🇧🇷',
+        SERVER: 'us.catchthatrabbit.com',
         PORT: '8008',
         WORKER_NAME:
           'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
         USERNAME: '<your wallet address>.<worker name>',
         PASSWORD: '<empty>',
-        PAYOUT: 'cb532b4658c0077fe257c44fbd3ee89f8c85ce5c68e3',
-      },
-      JP: {
-        NAME: 'Japan',
-        DESCRIPTION: 'Japanese Pool 🇯🇵',
-        SERVER: 'jp.catchthatrabbit.com',
-        PORT: '8008',
-        WORKER_NAME:
-          'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
-        USERNAME: '<your wallet address>.<worker name>',
-        PASSWORD: '<empty>',
-        PAYOUT: 'cb51bee89e80d6586642f29748054c1566df056472ec',
+        PAYOUT: 'cb71da3021af067f51a447f68aa59894cff7ca9cb109',
       },
     },
     DEFAULT_REGION: 'DE',
@@ -137,7 +125,8 @@ const config: Config = {
           email: 'ctr@onion.email',
           description:
             'For reporting security vulnerabilities, incidents, or any security-related concerns. We take security seriously and appreciate responsible disclosure of any potential issues.',
-          key: 'https://keys.openpgp.org/vks/v1/by-fingerprint/ABC',
+          keyLink: 'https://keys.openpgp.org/vks/v1/by-fingerprint/AF5A75BDC5748490B63A4FE2F0E61C2B76529B62',
+          keyId: 'F0E61C2B76529B62',
         },
       ],
       Commercial: [
@@ -147,7 +136,7 @@ const config: Config = {
             'For business inquiries, partnership opportunities, and commercial discussions. The team is available to discuss mining devices, mining farm setup, hardware procurement, and other commercial arrangements.',
         },
       ],
-      Rental: [
+      Rentals: [
         {
           email: 'rentals@catchthatrabbit.com',
           description:
@@ -165,7 +154,7 @@ const config: Config = {
     APP_STORE_URL: 'https://apps.apple.com/app/corepass-id/id1644928641',
     GOOGLE_PLAY_URL:
       'https://play.google.com/store/apps/details?id=net.corepass.app',
-    ENABLE_HOSTING: true,
+    ENABLE_HOSTING: false,
     HOSTING: {
       URL: 'https://shop.catchthatrabbit.com',
       PROVIDER: 'shopify',
@@ -359,7 +348,7 @@ const config: Config = {
             },
             {
               label: 'GPG key',
-              href: '/',
+              href: 'https://keys.openpgp.org/vks/v1/by-fingerprint/AF5A75BDC5748490B63A4FE2F0E61C2B76529B62',
             },
             {
               label: 'Core Talk',

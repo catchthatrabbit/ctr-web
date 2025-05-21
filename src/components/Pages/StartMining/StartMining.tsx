@@ -48,7 +48,6 @@ const StartMining = ({ onSetWalletAddress }: IStartMining) => {
       <span id="start"></span>
       <GetStartedTitle />
       <Spacer variant="sm" />
-      {desktop ? <Spacer variant="xs" /> : null}
 
       <div
         className={`flex ${styles.infoPanel} ${mobile ? `flex-column ${styles.mobileInfoPanel}` : ''}`}

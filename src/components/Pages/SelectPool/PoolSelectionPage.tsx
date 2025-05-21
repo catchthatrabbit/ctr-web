@@ -31,7 +31,7 @@ const PoolSelectionPage = ({
     siteConfig.customFields as unknown as CustomFields;
 
   const defaultRegion = DEFAULT_REGION?.toString().toUpperCase() || 'DE';
-  const { mobile, tablet } = useMediaQueries();
+  const { mobile, tablet, desktop } = useMediaQueries();
 
   const handleSelectPool = (pool: any) => {
     const region = pool.region.split('_')[0];
@@ -53,15 +53,15 @@ const PoolSelectionPage = ({
         />
       )}
       <div className="pool-selection-page">
-        {mobile ? <Spacer variant="xl" /> : <Spacer variant="xxxxl" />}
+        <Spacer variant={desktop ? 'xxl' : 'xl'} />
         <SelectPoolTitle />
-        <Spacer variant="xxl" />
+        <Spacer variant="sm" />
         <div
           className="pool-list"
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: '16px',
+            gap: '1em',
             justifyContent: 'center',
           }}
         >
@@ -74,14 +74,11 @@ const PoolSelectionPage = ({
                 text={
                   poolInfo?.DESCRIPTION || `API URL: ${pool.apiUrlWithPath}`
                 }
-                link="#"
-                linkText="Select Pool"
                 onClick={() => handleSelectPool(pool)}
               />
             );
           })}
         </div>
-        <Spacer variant="xxxl" />
       </div>
     </>
   );

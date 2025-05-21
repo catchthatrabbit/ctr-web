@@ -9,7 +9,7 @@ interface BlockProps {
   title: string;
   text: string;
   link?: string;
-  linkText: string;
+  linkText?: string;
   onClick?: () => void;
 }
 
@@ -36,7 +36,7 @@ const InfoPanel: React.FC<BlockProps> = ({
 
   return (
     <div
-      className={`flex flex-column ${styles.block} ${mobile ? styles.mobileBlock : ''}`}
+      className={`flex flex-column ${styles.block} ${mobile ? styles.mobileBlock : ''} ${onClick ? styles.clickable : ''}`}
       onClick={onClick}
       style={onClick ? { cursor: 'pointer' } : undefined}
     >
@@ -55,20 +55,15 @@ const InfoPanel: React.FC<BlockProps> = ({
       >
         {text}
       </Text>
-      <Spacer variant="xs" />
-
-      {link ? (
-        <a href={link} className={styles.link} onClick={handleLinkClick}>
-          <Text variant="smallBody" color="primary" weight="bold">
-            {linkText}
-          </Text>
-        </a>
-      ) : (
-        <div className={styles.link}>
-          <Text variant="smallBody" color="primary" weight="bold">
-            {linkText}
-          </Text>
-        </div>
+      {link && linkText && (
+        <>
+          <Spacer variant="xs" />
+          <a href={link} className={styles.link} onClick={handleLinkClick}>
+            <Text variant="smallBody" color="primary" weight="bold">
+              {linkText}
+            </Text>
+          </a>
+        </>
       )}
     </div>
   );

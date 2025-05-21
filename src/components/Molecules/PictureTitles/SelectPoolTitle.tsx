@@ -10,7 +10,7 @@ const SelectPoolTitle = () => {
     <PictureTitle
       title="Select Pool"
       titleStyles={{ fontWeight: '800', fontFamily: 'Exo' }}
-      secondaryText="We have several geo-locations to choose from:"
+      secondaryText="Core ID has been found in multiple locations"
       secondaryTextStyle={{
         fontSize: 'var(--regular-font-size)',
         textWrap: 'nowrap',

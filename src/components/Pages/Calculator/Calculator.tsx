@@ -5,12 +5,12 @@ import { InputText } from '@site/src/components/Atoms/InputText';
 import { profitabilityCalculation } from '@site/src/utils/profitabilityCalculation';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './styles.module.css';
-import { POOLS_API_CONFIG_TYPE } from '@site/src/configs/types';
 import ExchNumberFormat from 'exchange-rounding';
 import { currencies, topCurrencies } from '@site/src/constants/currencies';
 import { machines } from '@site/src/constants/machines';
 import config from '@site/docusaurus.config';
 import { getRepoUrl } from '@site/src/utils/getRepoUrl';
+import Select from 'react-select';
 
 function isProfitabilityResult(
   obj: any
@@ -50,22 +50,58 @@ const Calculator: React.FC = () => {
     return 'white';
   };
 
-  const sortedMachines = [...machines].sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+  const groupedMachines = machines.reduce((acc, machine) => {
+    if (!machine.type) {
+      acc.ungrouped = acc.ungrouped || [];
+      acc.ungrouped.push({
+        value: machine.name,
+        label: machine.name
+      });
+    } else {
+      const type = machine.type.charAt(0).toUpperCase() + machine.type.slice(1);
+      if (!acc[type]) {
+        acc[type] = [];
+      }
+      acc[type].push({
+        value: machine.name,
+        label: machine.name
+      });
+    }
+    return acc;
+  }, {} as Record<string, { value: string; label: string }[]>);
+
+  const machineOptions = Object.entries(groupedMachines).map(([type, machines]) => ({
+    label: type === 'ungrouped' ? 'CPU' : type,
+    options: machines
+  }));
+
+  const currencyOptions = [
+    {
+      label: 'Currencies',
+      options: topCurrencies.map(curr => ({
+        value: curr.value,
+        label: `${curr.value} — ${curr.name}`
+      }))
+    },
+    {
+      label: 'All Supported Currencies',
+      options: currencies.map(curr => ({
+        value: curr.value,
+        label: `${curr.value} — ${curr.name}`
+      }))
+    }
+  ];
 
   useEffect(() => {
     if (selectedMachine) {
       const machine = machines.find((m) => m.name === selectedMachine);
       if (machine) {
         setHashrate(machine.hashrate.toString());
-        // Always set power if it's defined, even if it's 0
         if (typeof machine.powerConsumption === 'number') {
           setElectricityConsumption(machine.powerConsumption.toString());
         }
       }
     } else {
-      // Clear all fields when "None" is selected
       setHashrate('');
       setElectricityConsumption('');
       setExtraExpenses('');
@@ -115,7 +151,6 @@ const Calculator: React.FC = () => {
         setLoading(false);
       }
     };
-    // Only recalc if hashrate is filled
     if (hashrate) {
       recalc();
     } else {
@@ -147,43 +182,178 @@ const Calculator: React.FC = () => {
       >
         <div className={styles.inputGroup}>
           <label htmlFor="currency">Currency</label>
-          <select
+          <Select
             id="currency"
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
-            className={styles.dropdown}
-          >
-            <optgroup label="Currencies">
-              {topCurrencies.map((curr) => (
-                <option key={curr.value} value={curr.value}>
-                  {`${curr.value} — ${curr.name}`}
-                </option>
-              ))}
-            </optgroup>
-            <optgroup label="All Supported Currencies (Alphabetically)">
-              {currencies.map((curr) => (
-                <option key={curr.value} value={curr.value}>
-                  {`${curr.value} — ${curr.name}`}
-                </option>
-              ))}
-            </optgroup>
-          </select>
+            value={currencyOptions
+              .flatMap(group => group.options)
+              .find(option => option.value === currency)}
+            onChange={(option) => setCurrency(option?.value || 'EUR')}
+            options={currencyOptions}
+            className={styles.reactSelect}
+            classNamePrefix="react-select"
+            isSearchable={true}
+            placeholder="Select currency..."
+            styles={{
+              control: (base) => ({
+                ...base,
+                backgroundColor: 'rgba(32, 33, 33, 1)',
+                border: '1px solid var(--ifm-color-emphasis-200, #444)',
+                borderRadius: '8px',
+                minHeight: '38px',
+                cursor: 'context-menu',
+                '&:hover': {
+                  borderColor: 'var(--ifm-color-emphasis-200, #444)'
+                }
+              }),
+              menu: (base) => ({
+                ...base,
+                backgroundColor: 'rgba(32, 33, 33, 1)',
+                border: '1px solid var(--ifm-color-emphasis-200, #444)',
+                borderRadius: '8px',
+                marginTop: '4px'
+              }),
+              option: (base, state) => ({
+                ...base,
+                backgroundColor: state.isFocused ? 'var(--ifm-color-primary)' : 'transparent',
+                color: state.isFocused ? 'white' : 'var(--ifm-font-color-base, #fff)',
+                cursor: 'context-menu',
+                padding: '8px 12px',
+                '&:hover': {
+                  backgroundColor: 'var(--ifm-color-primary)',
+                  color: 'white'
+                }
+              }),
+              group: (base) => ({
+                ...base,
+                paddingTop: 0
+              }),
+              groupHeading: (base) => ({
+                ...base,
+                color: 'var(--ifm-color-primary)',
+                fontWeight: 'bold',
+                fontSize: '0.9em',
+                padding: '8px 12px',
+                backgroundColor: 'rgba(32, 33, 33, 0.8)'
+              }),
+              input: (base) => ({
+                ...base,
+                color: 'var(--ifm-font-color-base, #fff)',
+                margin: 0,
+                cursor: 'context-menu'
+              }),
+              singleValue: (base) => ({
+                ...base,
+                color: 'var(--ifm-font-color-base, #fff)'
+              }),
+              placeholder: (base) => ({
+                ...base,
+                color: 'var(--ifm-color-emphasis-600)'
+              }),
+              clearIndicator: (base) => ({
+                ...base,
+                color: 'var(--ifm-color-emphasis-600)',
+                cursor: 'context-menu',
+                '&:hover': {
+                  color: 'var(--ifm-color-emphasis-800)'
+                }
+              }),
+              dropdownIndicator: (base) => ({
+                ...base,
+                color: 'var(--ifm-color-emphasis-600)',
+                cursor: 'context-menu',
+                '&:hover': {
+                  color: 'var(--ifm-color-emphasis-800)'
+                }
+              })
+            }}
+          />
         </div>
         <div className={styles.inputGroup}>
           <label htmlFor="machine">Machine Template</label>
-          <select
+          <Select
             id="machine"
-            value={selectedMachine}
-            onChange={(e) => setSelectedMachine(e.target.value)}
-            className={styles.dropdown}
-          >
-            <option value="">None</option>
-            {sortedMachines.map((machine) => (
-              <option key={machine.name} value={machine.name}>
-                {machine.name}
-              </option>
-            ))}
-          </select>
+            value={selectedMachine ? { value: selectedMachine, label: selectedMachine } : null}
+            onChange={(option) => setSelectedMachine(option?.value || '')}
+            options={machineOptions}
+            isClearable
+            placeholder="Select a machine..."
+            className={styles.reactSelect}
+            classNamePrefix="react-select"
+            isSearchable={true}
+            styles={{
+              control: (base) => ({
+                ...base,
+                backgroundColor: 'rgba(32, 33, 33, 1)',
+                border: '1px solid var(--ifm-color-emphasis-200, #444)',
+                borderRadius: '8px',
+                minHeight: '38px',
+                cursor: 'context-menu',
+                '&:hover': {
+                  borderColor: 'var(--ifm-color-emphasis-200, #444)'
+                }
+              }),
+              menu: (base) => ({
+                ...base,
+                backgroundColor: 'rgba(32, 33, 33, 1)',
+                border: '1px solid var(--ifm-color-emphasis-200, #444)',
+                borderRadius: '8px',
+                marginTop: '4px'
+              }),
+              option: (base, state) => ({
+                ...base,
+                backgroundColor: state.isFocused ? 'var(--ifm-color-primary)' : 'transparent',
+                color: state.isFocused ? 'white' : 'var(--ifm-font-color-base, #fff)',
+                cursor: 'context-menu',
+                padding: '8px 12px',
+                '&:hover': {
+                  backgroundColor: 'var(--ifm-color-primary)',
+                  color: 'white'
+                }
+              }),
+              group: (base) => ({
+                ...base,
+                paddingTop: 0
+              }),
+              groupHeading: (base) => ({
+                ...base,
+                color: 'var(--ifm-color-primary)',
+                fontWeight: 'bold',
+                fontSize: '0.9em',
+                padding: '8px 12px',
+                backgroundColor: 'rgba(32, 33, 33, 0.8)'
+              }),
+              input: (base) => ({
+                ...base,
+                color: 'var(--ifm-font-color-base, #fff)',
+                margin: 0,
+                cursor: 'context-menu'
+              }),
+              singleValue: (base) => ({
+                ...base,
+                color: 'var(--ifm-font-color-base, #fff)'
+              }),
+              placeholder: (base) => ({
+                ...base,
+                color: 'var(--ifm-color-emphasis-600)'
+              }),
+              clearIndicator: (base) => ({
+                ...base,
+                color: 'var(--ifm-color-emphasis-600)',
+                cursor: 'context-menu',
+                '&:hover': {
+                  color: 'var(--ifm-color-emphasis-800)'
+                }
+              }),
+              dropdownIndicator: (base) => ({
+                ...base,
+                color: 'var(--ifm-color-emphasis-600)',
+                cursor: 'context-menu',
+                '&:hover': {
+                  color: 'var(--ifm-color-emphasis-800)'
+                }
+              })
+            }}
+          />
           <div style={{ textAlign: 'right', marginTop: '0.5em' }}>
             <a
               href={`${getRepoUrl(config)}/edit/master/src/constants/machines.ts`}

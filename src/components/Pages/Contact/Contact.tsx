@@ -115,11 +115,7 @@ const Contact = () => {
             <React.Fragment key={index}>
               <EmailPanel
                 title={panel.label}
-                emailAddress={panel.allEmails.map(email => {
-                  const contact = (siteConfig.customFields.EMAILS as Record<string, Array<{ email: string; description: string; key?: string }>>)[panel.value]
-                    .find(c => c.email === email);
-                  return contact?.key ? { [email]: contact.key } : email;
-                })}
+                emailAddress={(siteConfig.customFields.EMAILS as Record<string, Array<{ email: string; description: string; keyLink?: string; keyId?: string }>>)[panel.value]}
                 text={panel.description}
               />
               {index < emailPanels.length - 1 && <Spacer variant="xs" />}

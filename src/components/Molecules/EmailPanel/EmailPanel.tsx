@@ -6,68 +6,54 @@ import clsx from 'clsx';
 import styles from './styles.module.css';
 import { DownloadFile } from '@site/src/icons';
 
+interface EmailData {
+  email: string;
+  description: string;
+  keyLink?: string;
+  keyId?: string;
+}
+
 interface IEmailPanel {
   title?: string;
   text?: string;
-  emailAddress?: string | (string | { [email: string]: string })[];
+  emailAddress?: EmailData[];
 }
 
 const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
   const { desktop, laptop, tablet, mobile } = useMediaQueries();
 
-  const renderEmailButtons = (
-    emails: string | (string | { [email: string]: string })[]
-  ) => {
-    if (typeof emails === 'string') {
-      emails = [emails];
-    }
-
-    return emails.map((emailItem, index) => {
-      if (typeof emailItem === 'string') {
-        return (
-          <React.Fragment key={index}>
+  const renderEmailButtons = (emails: EmailData[]) => {
+    return emails.map((emailData, index) => (
+      <React.Fragment key={index}>
+        <div className={`flex flex-column ${styles.emailRow}`}>
+          <>
+            <Spacer variant="xxs" />
             <a
-              href={`mailto:${emailItem}`}
+              href={`mailto:${emailData.email}`}
               target="_blank"
               className={styles.link}
             >
-              {emailItem}
+              {emailData.email}
             </a>
-          </React.Fragment>
-        );
-      } else {
-        const email = Object.keys(emailItem)[0];
-        const keyLink = emailItem[email];
-        return (
-          <React.Fragment key={index}>
-            <div className={`flex flex-column ${styles.emailRow}`}>
-              <>
-                <Spacer variant="xxs" />
-                <a
-                  href={`mailto:${email}`}
-                  target="_blank"
-                  className={styles.link}
-                >
-                  {email}
-                </a>
-              </>
-              {keyLink && (
-                <a
-                  href={keyLink}
-                  className={styles.downloadLink}
-                  rel="noopener noreferrer"
-                  download
-                  style={{ marginTop: '0.2em' }}
-                >
-                  <DownloadFile />
-                  Download GPG Key
-                </a>
-              )}
-            </div>
-          </React.Fragment>
-        );
-      }
-    });
+          </>
+          {emailData.keyLink && (
+            <a
+              href={emailData.keyLink}
+              className={styles.downloadLink}
+              rel="noopener noreferrer"
+              download
+              style={{ marginTop: '0.2em' }}
+            >
+              <DownloadFile />
+              <span className={styles.downloadText}>Download GPG Key</span>
+              <span className={styles.downloadKeyId}>
+                [{emailData.keyId}]
+              </span>
+            </a>
+          )}
+        </div>
+      </React.Fragment>
+    ));
   };
 
   return (
@@ -97,7 +83,7 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
       >
         <Spacer variant="xs" />
         <div className={`flex flex-column ${styles.emailButtonsContainer}`}>
-          {renderEmailButtons(emailAddress)}
+          {emailAddress && renderEmailButtons(emailAddress)}
         </div>
       </div>
     </div>

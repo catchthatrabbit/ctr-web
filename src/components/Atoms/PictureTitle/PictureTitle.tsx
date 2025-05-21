@@ -11,6 +11,7 @@ interface IPictureTitle {
   secondaryText?: string;
   secondaryTextStyle?: React.CSSProperties;
   disableMobileStyles?: boolean;
+  lineHeight?: 'largeLineHeight' | 'normalLineHeight' | 'smallLineHeight' | 'mediumLineHeight';
 }
 
 const PictureTitle = ({
