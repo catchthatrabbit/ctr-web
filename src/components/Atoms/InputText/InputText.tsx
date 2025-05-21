@@ -36,11 +36,19 @@ const InputText = forwardRef<
     },
     ref
   ) => {
-    const handleSearchOnPressEnter = (e: { key: string }) => {
+    const handleSearchOnPressEnter: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
       if (e.key === 'Enter' && typeof onPressEnter === 'function') {
         onPressEnter();
       }
     };
+
+    const handleTextareaKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === 'Enter' && typeof onPressEnter === 'function') {
+        e.preventDefault();
+        onPressEnter();
+      }
+    };
+
     const { mobile } = useMediaQueries();
     const renderIcon = () => {
       if (!icon) return null;
@@ -71,7 +79,8 @@ const InputText = forwardRef<
     const renderTextarea = () => (
       <TextareaAutosize
         ref={ref as React.Ref<HTMLTextAreaElement>}
-        onKeyDown={handleSearchOnPressEnter}
+        // @ts-ignore - TypeScript has trouble with the union type of event handlers
+        onKeyDown={handleTextareaKeyDown}
         className={clsx(styles.inputText, className, {
           [styles.searchWallet]: context === 'wallet',
           [styles.searchDark]: context === 'dark',
@@ -81,10 +90,9 @@ const InputText = forwardRef<
         {...restProps}
         rows={1}
         style={{
-          height: 'auto',
-          boxSizing: 'border-box',
-          resize: 'none',
-          direction: 'ltr',
+          boxSizing: 'border-box' as const,
+          resize: 'none' as const,
+          direction: 'ltr' as const,
         }}
         onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
           if (onChange) {
