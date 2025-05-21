@@ -13,7 +13,16 @@ interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode;
   value: string;
   backgroundColor?: string;
-  textColor?: "black" | "white" | "primary" | "secondary" | "summary" | "InsideChartColor" | "dashboardColor" | "valueChartColor" | "subheadingColor";
+  textColor?:
+    | 'black'
+    | 'white'
+    | 'primary'
+    | 'secondary'
+    | 'summary'
+    | 'InsideChartColor'
+    | 'dashboardColor'
+    | 'valueChartColor'
+    | 'subheadingColor';
   customWidth?: string;
   weight?: 'medium' | 'normal';
   context?: 'config' | 'wallet';
@@ -42,6 +51,7 @@ const Button = ({
     color: textColor,
     opacity: disabled ? 0.5 : 1,
     cursor: disabled ? 'not-allowed' : 'pointer',
+    textWrap: 'auto',
   };
 
   const renderedButton = (

@@ -38,14 +38,8 @@ const Pagination = ({
   };
 
   useEffect(() => {
-    if (isFiltered) {
-      // For filtered tables, always use the dynamic total
-      setFixedTotal(total);
-    } else if (total > 0 && total > fixedTotal) {
-      // For unfiltered tables, update only if the total increases
-      setFixedTotal(total);
-    }
-  }, [total, isFiltered, fixedTotal]);
+    setFixedTotal(total);
+  }, [total]);
 
   const startItem = offset * limit + 1;
   const endItem = Math.min((offset + 1) * limit, fixedTotal);
