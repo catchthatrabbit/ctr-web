@@ -1,1 +1,1 @@
-export { default as StatsChart } from "./StatsChart";
+export { default as StatsChart } from './StatsChart';

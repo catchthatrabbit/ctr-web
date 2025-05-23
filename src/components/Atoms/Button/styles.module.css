@@ -1,38 +1,45 @@
-.button{
+.button {
   box-sizing: border-box;
   display: flex;
-  background: none;
+  background: var(--ifm-color-primary);
   cursor: pointer;
   user-select: none;
-  border-radius: 10px;
-  color: var(--white);
-  padding: var(--space-xs);
+  border-radius: var(--ifm-button-border-radius);
+  color: var(--ifm-color-primary);
+  padding: var(--space-xxs) var(--space-sm);
   text-align: center;
   white-space: nowrap;
-  border: 1px solid var(--blue-rgb-700);
+  border: none;
   justify-content: center;
+  align-items: center;
+  transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
 }
 
-.buttonIcon{
+.buttonIcon {
   vertical-align: baseline;
-  padding-right: var(--space-sm);
+  padding-right: calc(var(--space-xs) / 2);
+  svg path {
+    fill: var(--ifm-color-primary);
+  }
 }
 
-.small{
+.buttonIcon:hover {
+  svg path {
+    fill: var(--ifm-search-btn-hover);
+  }
+}
+
+.small {
   padding: calc(var(--space-xs) / 2);
 }
 
-.medium{
+.medium {
   padding: var(--space-md);
   min-width: 215px;
 }
 
-.large{
-  padding: var(--space-lg) var(--space-xs)
-}
-
-.full{
-  width: 100%
+.full {
+  width: 100%;
 }
 
 .button:focus {
@@ -40,34 +47,49 @@
 }
 
 .button:hover {
-  border: 1px solid var(--gray-700);
-  background-color: var(--blue-rgb-700);
+  border: none;
+  background: var(--ifm-color-white);
 }
 
-.outline{
-  background-color: var(--blue-rgb-500);
+.outline {
+  background-color: transparent;
 }
 
-.outline:hover{
-  background-color: var(--blue-rgb-700);
+.outline:hover {
+  background-color: transparent;
 }
 
-.transparent{
+.transparent {
   min-width: 0;
   background-color: var(--blue-rgb-900);
   backdrop-filter: blur(6px);
   transition: transform 0.3s;
 }
 
-.transparent:hover{
+.transparent:hover {
   transform: scale(1.05);
   backdrop-filter: blur(18px);
 }
 
-.email{
+.email {
   background-color: var(--blue-rgb-600);
 }
 
-.email:hover{
+.email:hover {
   background-color: var(--blue-rgb-700);
+}
+
+.configButton {
+
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.mobileWalletButton {
+  padding: calc(var(--space-xs) / 2) var(--space-sm);
+}
+
+@media screen and (max-width: 768px) {
+  .configButton {
+    width: 100%;
+  }
 }

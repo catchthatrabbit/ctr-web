@@ -1,21 +1,43 @@
-.emailButtonsContainer {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.emailRow {
-  display: flex;
-  align-items: center;
+.block {
+  padding: var(--space-sm);
+  background-color: var(--ifm-background-color);
+  border-radius: var(--ifm-global-radius);
 }
 
 .emailValueDesktop {
-  padding: var(--space-md) 0px var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
 }
 
 .emailValueTablet {
-  padding: var(--space-md) 0px var(--space-md) var(--space-sm);
+  display: flex;
+  flex-direction: column;
 }
 
 .emailValueMobile {
-  padding: var(--space-md) 0px var(--space-md) var(--space-xs);
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--ifm-link-color);
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: var(--ifm-link-hover-color);
+}
+
+.downloadLink {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.8rem;
+}
+
+.downloadKeyId {
+  font-family: var(--zephirum-font-family);
 }

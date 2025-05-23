@@ -1,19 +1,85 @@
 .inputText {
-    width: 100%;
-    padding: 18px 20px;
-    font-family: var(--value-font-family);
-    font-size: var(--body-font-size);
-    border-radius: var(--ifm-global-radius);
-    border: 1px solid var(--gray-700);
-    color: var(--white);
-    background-color: var(--blue-rgb-600);
-    transition: all 0.1s ease-in-out 0s;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-family: var(--regular-font-family);
+  font-size: var(--subheading-font-size-mobile);
+  border-radius: var(--ifm-global-radius);
+  border: 1px solid var(--dark-300);
+  color: var(--gray-700);
+  background-color: var(--white);
+  transition: all 0.1s ease-in-out 0s;
+  box-sizing: border-box;
+}
+.inputText {
+  resize: none; /* Prevent manual resizing */
+  overflow: hidden; /* Hide scrollbars */
 }
 
-.inputText:focus-visible{
-    border: 1px solid var(--gray-100);
+.mobileInputText {
+  width: 100%; /* Ensure it takes full width */
+  font-size: 1rem; /* Adjust font size for mobile */
+}
+.inputText:focus-visible {
+  border: 1px solid var(--gray-100);
 }
 
 .inputText::placeholder {
-    color: var(--gray-700); 
+  color: var(--ifm-subheading-color);
+}
+
+.inputContainer {
+  justify-content: center;
+  width: 100%;
+}
+
+.searchStartMining {
+  width: 85%;
+}
+
+.searchDark {
+  background-color: var(--dark-rgb-600);
+  color: var(--white);
+  padding: 0.9rem 1rem;
+  height: 3.2rem;
+}
+
+.icon {
+  position: absolute;
+  left: 4%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  height: 30%;
+}
+
+.smallIcon {
+  left: 6%;
+  height: 25%;
+  svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
+
+.mobileIcon {
+  left: 9%;
+  top: 54%;
+}
+
+.inputWithIcon {
+  padding-left: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .inputText {
+    font-size: var(--regular-font-size);
+  }
+  .inputText::placeholder {
+    font-size: var(--body-font-size);
+  }
+
+  .mobileIconWallet {
+    left: 7%;
+    top: 56%;
+  }
 }

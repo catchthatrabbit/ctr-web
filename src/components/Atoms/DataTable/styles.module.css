@@ -1,36 +1,73 @@
-.table{
-    width:100%;
-    border: 1px solid var(--blue-rgb-700);
-    border-radius: var(--ifm-global-radius);
+.table {
+  width: 100%;
+  border: 1px solid var(--blue-rgb-700);
+  border-top-left-radius: var(--ifm-global-radius);
+  border-top-right-radius: var(--ifm-global-radius);
+  margin-bottom: 0;
+  display: inline-table;
 }
 
-
-.tableRow::nth-child(even){
-    background-color: var(--blue-rgb-600);
+.walletTable {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  .runningText {
+    background-color: rgba(0, 191, 255, 0.2);
+    padding: calc(var(--space-xs) / 2) var(--space-xxs);
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0, 191, 255, 1);
+  }
+  .inactiveText {
+    background-color: rgba(240, 82, 82, 0.2);
+    color: rgba(229, 78, 78, 1);
+    padding: calc(var(--space-xs) / 2) var(--space-xxs);
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
-.table tbody tr:nth-child(odd){
-    background-color:var(--blue-rgb-600);
+.table tbody tr:nth-child(odd) {
+  background-color: var(--dark-rgb-400);
+  border-top: 1px solid var(--dark-rgb-border);
+  border-bottom: 1px solid var(--dark-rgb-border);
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: var(--dark-rgb-600);
 }
 
 .table thead {
-    text-align: left;
+  text-align: left;
+}
+
+.table th,
+.table td {
+  white-space: nowrap;
 }
 
 .table th {
-    width: 1%;
+  width: 10%;
 }
 
-.table tbody tr:hover{
-    background-color: var(--blue-rgb-700);
+.table .walletTableHeader {
+  background-color: rgba(22, 43, 35, 1);
 }
 
-.tableCenteredText{
-    text-align: center;
+.table tbody tr:hover {
+  background-color: var(--blue-rgb-700);
 }
 
-.cursorPointer{
-    cursor: pointer;
+.tableCenteredText {
+  text-align: center;
+}
+
+.cursorPointer {
+  cursor: pointer;
 }
 
 .table > tbody > tr > td,
@@ -40,26 +77,122 @@
 .table > thead > tr > td,
 .table > thead > tr > th,
 .table > thead > tr,
-.table > tbody > tr{
-    border:none;
+.table > tbody > tr {
+  border: none;
 }
 
 .loadingComp {
-    width: 100%;
-    height: 28.8px;
-    display: block;
+  width: 100%;
+  height: 28.8px;
+  display: block;
 }
 
 .copyButton {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .copyButton > button {
-    visibility: hidden;
-    left: 2rem;
+  visibility: hidden;
+  left: 2rem;
 }
 
-.copyButton:hover > button{
-    visibility: visible;
+.copyButton:hover > button {
+  visibility: visible;
+}
+
+.listRoot {
+  position: relative;
+}
+
+.listMarginInlineMobile {
+  margin-inline: calc(var(--space-xs) / 2);
+}
+
+.link {
+  color: var(--ifm-color-primary);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link.zephirum {
+  font-family: zephirum;
+}
+
+.paginationWrapper {
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .tableWrapper {
+    overflow-x: auto;
+    border-radius: var(--ifm-global-radius);
+  }
+
+  .tableWrapperWallet {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .table {
+    width: 110%;
+    height: auto;
+    border-bottom-right-radius: var(--ifm-global-radius);
+    border-top-right-radius: var(--ifm-global-radius);
+    border-top-left-radius: 0;
+    overflow: visible;
+  }
+
+  .walletTable {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.6rem 5.7rem 0.6rem 0.6rem;
+    width: 6.25rem;
+    white-space: nowrap;
+  }
+
+  .walletTable th,
+  .walletTable td,
+  .blocksTable th,
+  .blocksTable td {
+    padding: 0.7rem 1.6rem 0.8rem 1.4rem;
+  }
+
+  .table th:first-child,
+  .table td:first-child {
+    position: sticky;
+    width: auto;
+    left: 0;
+    z-index: 3;
+    background-color: inherit;
+    border-right: 1px solid var(--blue-rgb-700);
+    border-bottom: 1px solid var(--blue-rgb-700);
+    height: -webkit-fill-available;
+  }
+
+  .table > tbody:last-child > tr:first-child {
+    border-bottom-left-radius: var(--ifm-global-radius);
+  }
+
+  .table th:first-child {
+    border-top-left-radius: var(--ifm-global-radius);
+    background-color: var(--ifm-table-head-background);
+  }
+
+  .walletTable th:first-child {
+    border-top-left-radius: 0;
+  }
+
+  .table th:not(:first-child),
+  .table td:not(:first-child) {
+    z-index: 1;
+    position: relative;
+  }
 }

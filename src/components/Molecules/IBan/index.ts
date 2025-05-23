@@ -1,1 +1,1 @@
-export { default as IBan } from "./IBan";
+export { default as IBan } from './IBan';

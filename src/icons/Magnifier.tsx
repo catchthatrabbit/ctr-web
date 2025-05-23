@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Magnifier = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="20.18" height="20.18">

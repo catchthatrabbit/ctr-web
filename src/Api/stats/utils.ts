@@ -1,87 +1,59 @@
-import { POOL_NAME_ENUM } from "@site/src/enums/poolName.enum";
-import { AxiosInstance } from "../api";
-import { GET_ALL_PROPS, STATS_CHARTS_RESPONSE, STATS_RESPONSE } from "./types";
-import { MATURED_RESPONSE } from "../blocks/types";
-import { POOLS_API_CONFIG_TYPE } from "@site/src/configs/types";
+import { AxiosInstance } from '../api';
+import { getApiConfig } from '../../utils/getApiConfig';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { POOLS_API_CONFIG_TYPE } from '../../configs/types';
+import { GET_ALL_PROPS, STATS_CHARTS_RESPONSE, STATS_RESPONSE } from './types';
+import { MATURED_RESPONSE } from '../blocks/types';
 
-const generateAllApiInstances = ({
+export const generateAllApiInstances = (
+  urls: POOLS_API_CONFIG_TYPE,
+  apiPath: string,
+  apiConfig?: ApiConfig
+) => {
+  return Object.entries(urls).map(([region, url]) => {
+    if (url === '') {
+      if (!apiConfig) {
+        throw new Error('Missing apiConfig for empty region URL');
+      }
+      return new AxiosInstance({ region, apiConfig });
+    }
+    return new AxiosInstance({ url });
+  });
+};
+
+export const getAllStats = ({
   urls,
   apiPath,
-}: {
-  urls?: POOLS_API_CONFIG_TYPE;
-  apiPath?: string;
-}): Record<"instances", Record<string, AxiosInstance>> => {
-  return {
-    instances: {
-      [POOL_NAME_ENUM.DE]: new AxiosInstance({
-        region: POOL_NAME_ENUM.DE,
-        url: urls.DE_API_ENDPOINT
-          ? concatApiPath(urls.DE_API_ENDPOINT, apiPath)
-          : concatApiPath(urls.NEXT_PUBLIC_DE_API_ENDPOINT, apiPath),
-      }),
-      [POOL_NAME_ENUM.FI]: new AxiosInstance({
-        region: POOL_NAME_ENUM.FI,
-        url: urls.FI_API_ENDPOINT
-          ? concatApiPath(urls.FI_API_ENDPOINT, apiPath)
-          : concatApiPath(urls.NEXT_PUBLIC_FI_API_ENDPOINT, apiPath),
-      }),
-      [POOL_NAME_ENUM.SG]: new AxiosInstance({
-        region: POOL_NAME_ENUM.SG,
-        url: urls.SG_API_ENDPOINT
-          ? concatApiPath(urls.SG_API_ENDPOINT, apiPath)
-          : concatApiPath(urls.NEXT_PUBLIC_SG_API_ENDPOINT, apiPath),
-      }),
-      [POOL_NAME_ENUM.HK]: new AxiosInstance({
-        region: POOL_NAME_ENUM.HK,
-        url: urls.HK_API_ENDPOINT
-          ? concatApiPath(urls.HK_API_ENDPOINT, apiPath)
-          : concatApiPath(urls.NEXT_PUBLIC_HK_API_ENDPOINT, apiPath),
-      }),
-      [POOL_NAME_ENUM.AM]: new AxiosInstance({
-        region: POOL_NAME_ENUM.AM,
-        url: urls.AM_API_ENDPOINT
-          ? concatApiPath(urls.AM_API_ENDPOINT, apiPath)
-          : concatApiPath(urls.NEXT_PUBLIC_AM_API_ENDPOINT, apiPath),
-      }),
-      [POOL_NAME_ENUM.JP]: new AxiosInstance({
-        region: POOL_NAME_ENUM.JP,
-        url: urls.JP_API_ENDPOINT
-          ? concatApiPath(urls.JP_API_ENDPOINT, apiPath)
-          : concatApiPath(urls.NEXT_PUBLIC_JP_API_ENDPOINT, apiPath),
-      }),
-    },
-  };
+  apiConfig,
+}: GET_ALL_PROPS & { apiConfig?: ApiConfig }) => {
+  const allApi = generateAllApiInstances(urls, apiPath, apiConfig);
+  return allApi.map((api) => api.getInstance().get('/v2/api/stats')) as Array<
+    Promise<{ data: STATS_RESPONSE }>
+  >;
 };
 
-const concatApiPath = (url: string, apiPath: string) => {
-  if (apiPath) return `${url}${apiPath}`;
-  return url;
-};
-
-export const getAllStats = ({ apiPath, urls }: GET_ALL_PROPS) => {
-  const allApi = generateAllApiInstances({ urls, apiPath });
-  return Object.keys(allApi.instances).map((key) =>
-    allApi.instances[key].getInstance().get("/stats"),
-  ) as Array<Promise<{ data: STATS_RESPONSE }>>;
-};
-
-export const getAllStatsCharts = ({ apiPath, urls }: GET_ALL_PROPS) => {
-  const allApi = generateAllApiInstances({ urls, apiPath });
-  return Object.keys(allApi.instances).map((key) =>
-    allApi.instances[key].getInstance().get("/stats/chart"),
+export const getAllStatsCharts = ({
+  urls,
+  apiPath,
+  apiConfig,
+}: GET_ALL_PROPS & { apiConfig?: ApiConfig }) => {
+  const allApi = generateAllApiInstances(urls, apiPath, apiConfig);
+  return allApi.map((api) =>
+    api.getInstance().get('/v2/api/stats/chart')
   ) as Array<Promise<{ data: STATS_CHARTS_RESPONSE }>>;
 };
 
 export const getAllRegionsMaturedBlocks = ({
-  apiPath,
   urls,
-}: GET_ALL_PROPS) => {
-  const allApi = generateAllApiInstances({ urls, apiPath });
+  apiPath,
+  apiConfig,
+}: GET_ALL_PROPS & { apiConfig?: ApiConfig }) => {
+  const allApi = generateAllApiInstances(urls, apiPath, apiConfig);
   const limit = 5;
   const offset = 0;
-  return Object.keys(allApi.instances).map((key) =>
-    allApi.instances[key]
+  return allApi.map((api) =>
+    api
       .getInstance()
-      .get(`/matured_blocks?limit=${limit}&offset=${offset}`),
+      .get(`/v2/api/matured_blocks?limit=${limit}&offset=${offset}`)
   ) as Array<Promise<{ data: MATURED_RESPONSE }>>;
 };

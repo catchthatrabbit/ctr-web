@@ -1,0 +1,73 @@
+button {
+  cursor: pointer;
+}
+
+.button {
+  cursor: pointer;
+  font-size: var(--ifm-button-size);
+}
+
+.menuButton {
+  background-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary-background);
+  border-radius: 8px;
+  padding: 10px 20px;
+}
+
+.menuButton:hover {
+  background-color: var(--ifm-color-primary-dark);
+}
+
+.menuButton:active {
+  background-color: var(--ifm-color-primary-darker);
+}
+
+.menuLink {
+  color: var(--ifm-color-primary);
+}
+
+.menuLink:hover {
+  text-decoration: underline;
+}
+
+.menuLink:focus {
+  background-color: var(--ifm-color-primary-darker);
+}
+
+.menuLink.active {
+  color: var(--ifm-navbar-link-hover-color);
+}
+
+.navbar .button {
+  cursor: pointer;
+  background-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary-background);
+  color: var(--black-800);
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
+.navbar .button:hover {
+  background-color: var(--ifm-color-white);
+}
+
+.navbar .button.active {
+  background-color: var(--ifm-color-primary-dark);
+}
+
+a.button {
+  cursor: pointer;
+  color: var(--black-800);
+  font-weight: var(--medium-font-weight);
+  padding: var(--space-xxs) var(--space-sm);
+  text-align: center;
+  white-space: nowrap;
+  border: 1px solid var(--blue-rgb-700);
+  background-color: var(--ifm-color-primary);
+  border-radius: var(--ifm-button-border-radius);
+}
+
+a.button:hover {
+  background-color: var(--ifm-color-white);
+  color: var(--black-800);
+  text-decoration: none;
+}

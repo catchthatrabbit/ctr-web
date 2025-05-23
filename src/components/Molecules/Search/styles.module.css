@@ -1,43 +1,293 @@
 .searchButton {
-    height: 55px;
-    width: 68px;
-    cursor: pointer;
-    user-select: none;
-    border: none;
-    border-radius: 0px var(--ifm-global-radius) var(--ifm-global-radius) 0px;
-    color: var(--white);
-    background: var(--gray-700);
-    transition: all 0.1s ease-in-out 0s;
-    position: absolute;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  border-radius: var(--ifm-global-radius);
+  color: var(--black-800);
+  background: var(--ifm-search-btn-color);
+  transition: all 0.1s ease-in-out 0s;
+  position: absolute;
+  font-family: var(--regular-font-family);
+  font-size: var(--regular-font-size);
+  font-weight: var(--medium-font-weight);
+  right: 0.5rem;
+  transform: translateY(-50%);
+  padding: 1rem 1.5rem;
+  z-index: 2;
 }
 
-.searchButton:hover{
-    background-color: var(--white);
-    color: var(--gray-700);
+.searchButton:hover {
+  background-color: var(--ifm-search-btn-hover);
 }
 
-.searchButtonDesktop{
-    right: 69px;
+.searchButtonMobile {
+  font-size: var(--small-font-size);
+  padding: 0.8rem;
+  transform: translateY(0%);
 }
 
-.searchInputDesktop{
-    margin-inline: 69px;
+.searchInput {
+  border-radius: var(--ifm-global-radius);
+  padding: 1.45rem 5.6rem 1.45rem 3.2rem;
+  width: 100%;
+  height: 100%;
 }
 
-
-.searchButtonMobile{
-    right: 0px;
-}
-
-.searchInputMobile{
-    margin-inline: 0px;
-}
-
-.searchInput{
-    border-radius: var(--ifm-global-radius);
-    padding-right: 90px;
+.searchInputMobile {
+  width: 100%;
 }
 
 .search {
-    position: relative;
+  flex-direction: column;
+  gap: calc(var(--space-xs) / 2);
 }
+
+.searchContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIconWrapper {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.searchWallet {
+  display: flex;
+  width: 100%;
+  align-content: center;
+  flex-direction: column;
+}
+
+.searchWallet .searchContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 65%;
+}
+
+.searchWallet .searchInput {
+  flex: 1;
+  background-color: var(--dark-rgb-600);
+  color: var(--white);
+  padding: 0.9rem 5.6rem 0.8rem 3.2rem;
+}
+
+.searchWallet .searchInput::placeholder {
+  color: var(--ifm-subheading-color);
+}
+
+.searchWallet .searchButton {
+  background-color: var(--ifm-guide-btn-color);
+  color: var(--ifm-color-primary);
+  border-radius: var(--ifm-global-radius);
+  height: auto;
+  padding: 0.75rem 1rem;
+}
+
+.searchWallet .searchButton:hover {
+  background-color: var(--white);
+  color: var(--gray-700);
+}
+
+.searchStartMining {
+  display: flex;
+  width: 100%;
+  align-content: center;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.searchStartMining .searchContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 96%;
+  gap: 0;
+}
+
+.searchStartMining .searchButtonDesktop {
+  margin-left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.searchStartMining .searchInput {
+  flex: 1;
+  background-color: var(--dark-rgb-600);
+  color: var(--white);
+  padding: 0.45rem 5.6rem 0.45rem 3.2rem;
+}
+
+.searchStartMining .searchInput::placeholder {
+  color: var(--ifm-subheading-color);
+}
+
+.searchStartMining .searchButton {
+  background-color: var(--ifm-guide-btn-color);
+  color: var(--ifm-color-primary);
+  border-radius: var(--ifm-global-radius);
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.searchStartMining .searchButton:hover {
+  background-color: var(--white);
+  color: var(--gray-700);
+}
+
+.searchPayments {
+  display: flex;
+  align-content: center;
+  width: 48%;
+}
+
+.searchPayments .searchContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.searchPayments .searchInput {
+  flex: 1;
+  background-color: var(--dark-rgb-600);
+  color: var(--white);
+  padding: 0.75rem 5.5rem 0.75rem 3rem;
+}
+
+.searchPayments .searchInput::placeholder {
+  color: var(--ifm-subheading-color);
+}
+
+.searchPayments .searchButton {
+  background-color: var(--ifm-guide-btn-color);
+  color: var(--ifm-color-primary);
+  border-radius: var(--ifm-global-radius);
+}
+
+.searchPayments .searchButton:hover {
+  background-color: var(--white);
+  color: var(--gray-700);
+}
+
+.searchPayments .searchButtonDesktop {
+  margin-left: 0.5rem;
+  top: 50%;
+  /* transform: translateY(-50%); */
+}
+
+.searchWalletMobile {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchContainerWalletMobile {
+  width: 100%;
+}
+
+.searchInputWalletMobile {
+  width: 100%;
+}
+
+.searchButtonWalletMobile {
+  width: 100%;
+  margin-top: var(--space-xs);
+  position: relative;
+  right: auto;
+  top: auto;
+  transform: none;
+  font-size: var(--regular-font-size);
+}
+
+@media screen and (max-width: 768px) {
+
+  .searchInput,
+  .searchWallet .searchInput {
+    padding: 1rem 5rem 1rem 2.6rem;
+  }
+  .searchStartMining .searchContainer,
+  .searchWallet .searchContainer {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .searchStartMining .searchIconWrapper,
+  .searchWallet .searchIconWrapper {
+    top: 24%;
+  }
+  .searchStartMining .searchWallet {
+    margin-top: 0.3rem;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+  }
+
+  .searchContainer,
+  .searchStartMining {
+    margin-left: 0;
+  }
+
+  .searchStartMining {
+    width: 100%;
+  }
+
+  .searchStartMining .searchInput {
+    width: 100%;
+    padding: 1rem 5rem 1rem 3.2rem;
+  }
+
+  .searchWallet .searchButton {
+    position: relative;
+  }
+
+  .searchButtonMobile_o26a {
+    font-size: var(--small-font-size);
+    padding: 0.8rem;
+    transform: translateY(0%);
+}
+}
+
+@media screen and (min-width: 1600px) {
+  .searchWallet .searchButtonDesktop,
+  .searchStartMining .searchButtonDesktop {
+    margin-left: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .searchButton {
+    top: 50%;
+  }
+
+  .searchWallet .searchButton,
+  .searchStartMining .searchButton,
+  .searchPayments .searchButton {
+    position: relative;
+    margin-left: 0rem;
+    transform: translateY(0%);
+    left: 0.5rem;
+    padding: 1rem 1.5rem;
+  }
+}
+

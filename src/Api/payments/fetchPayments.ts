@@ -1,11 +1,10 @@
-import { AxiosError, AxiosResponse } from "axios";
-import { AxiosInstance } from "../api";
-import { STANDARD_REGIONS_API_KEYS } from "../types";
+import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosInstance } from '../api';
 import {
   PAYMENTS_BY_WALLET_ADDRESS_RESPONSE,
   PAYMENTS_RESPONSE,
   PAYMENTS_STATE,
-} from "./types";
+} from './types';
 
 export const fetchPaymentsByWalletAddress = async ({
   region,
@@ -14,17 +13,19 @@ export const fetchPaymentsByWalletAddress = async ({
   offset = 0,
   url,
 }: {
-  region: STANDARD_REGIONS_API_KEYS;
+  region: string;
   walletAddress: string;
   limit: number;
   offset: number;
   url?: string;
 }) => {
   try {
+    const realOffset = offset * limit;
+
     const instance = new AxiosInstance({ region, url }).getInstance();
 
     const response = instance.get(
-      `/payments/${walletAddress}?limit=${limit}&offset=${offset}`,
+      `/payments/${walletAddress}?limit=${limit}&offset=${realOffset}`
     ) as Promise<AxiosResponse<PAYMENTS_BY_WALLET_ADDRESS_RESPONSE>>;
 
     return (await response).data;
@@ -41,16 +42,17 @@ export const fetchPayments = async ({
   offset = 0,
   url,
 }: {
-  region: STANDARD_REGIONS_API_KEYS;
+  region: string;
   limit: number;
   offset: number;
   url?: string;
 }) => {
   try {
+    const realOffset = offset * limit;
     const instance = new AxiosInstance({ region, url }).getInstance();
 
     const response = instance.get(
-      `/payments?limit=${limit}&offset=${offset}`,
+      `/payments?limit=${limit}&offset=${realOffset}`
     ) as Promise<AxiosResponse<PAYMENTS_RESPONSE>>;
 
     return (await response).data;
@@ -65,7 +67,7 @@ export const fetchPaymentsState = async ({
   region,
   url,
 }: {
-  region: STANDARD_REGIONS_API_KEYS;
+  region: string;
   url?: string;
 }) => {
   try {

@@ -1,7 +1,8 @@
-import { StartMining } from "@site/src/components/Pages/StartMining";
-import { Wallet } from "@site/src/components/Pages/Wallet";
-import { ConfiguredLayout } from "@site/src/components/Templates/ConfiguredLayout";
-import { useWalletPage } from "@site/src/hooks/useWallet";
+import React from 'react';
+import { StartMining } from '@site/src/components/Pages/StartMining';
+import { Wallet } from '@site/src/components/Pages/Wallet';
+import { ConfiguredLayout } from '@site/src/components/Templates/ConfiguredLayout';
+import { useWalletPage } from '@site/src/hooks/useWallet';
 
 const StartMiningPage = () => {
   const {
@@ -20,6 +21,7 @@ const StartMiningPage = () => {
           defaultRegion={region}
           walletAddress={walletAddress}
           onChangeRegion={handleChangeRegion}
+          onSetWalletAddress={handleWalletAddress}
         />
       ) : (
         <StartMining

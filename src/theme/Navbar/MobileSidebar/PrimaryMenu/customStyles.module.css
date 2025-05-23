@@ -1,42 +1,49 @@
 .navbarItem {
-  padding: 14px 20px 14px 20px;
   justify-content: left;
-  margin-left: 25px;
-  color: var(--ifm-color-emphasis-0);
-  font-size: var(--subheading-font-size-desktop);
+  color: var(--ifm-color-primary);
+  font-size: var(--subheading-font-size-tablet);
   list-style: var(--subheading-lineHeight-desktop);
-  font-weight: var(--bold-font-weight);
+  font-weight: var(--semibold-font-weight);
 }
 
 .navbarItem:hover {
   color: var(--ifm-color-primary);
 }
 
-.startMiningLink{
-  color: var(--ifm-color-primary)!important;
+.startMiningLink {
+  color: var(--ifm-color-primary);
+  font-size: var(--subheading-font-size-desktop);
+  background-color: #062a1c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: var(--space-xxs);
 }
 
-.activeNavStartMiningItemLink:before{
-  border-bottom: 1px solid var(--ifm-color-primary)!important;
+.activeNavStartMiningItemLink:before {
+  border-bottom: 1px solid var(--ifm-color-primary);
 }
 
-.activeNavItemLink{
+.activeNavItemLink {
   position: relative;
-}
-
-.activeNavItemLink:before{
-  content: '';
-  border-bottom: 1px solid var(--white);
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
-  top:-1px;
 }
 
 .menuList {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.menuList li {
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.menuList li a {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
 }

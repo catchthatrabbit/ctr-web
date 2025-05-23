@@ -1,24 +1,44 @@
-.mapChartLocationPlace{
-    position: relative;
+.fullWidth {
+  width: 100%;
 }
 
-.fullWidth{
-    width: 100%;
+.loadingSkeleton {
+  min-height: 615px;
+  width: 100%;
 }
 
-.loadingSkeleton{
-    min-height: 615px;
-    width: 100%;
+.loadingPlaceholder {
+  position: static;
 }
 
-.loadingPlaceholder{
-    position: static;
+.directionRtl {
+  direction: rtl;
 }
 
-.directionRtl{
-    direction: rtl;
+.directionLtr {
+  direction: ltr;
 }
 
-.directionLtr{
-    direction: ltr;
+.horizontalLine {
+  height: 1px;
+  background: #1f1f1f;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.poolDescriptionTitle {
+  margin-right: 0.5em;
+}
+
+.poolCite {
+  font-size: var(--medium-font-size);
+}
+
+@media screen and (max-width: 768px){
+  .horizontalLine{
+      background: linear-gradient(to right, #1F1F1F 25%, #FFFFFF0D 75%);
+
+  }
 }

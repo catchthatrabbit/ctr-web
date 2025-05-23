@@ -1,24 +1,39 @@
-import axios from "axios";
-import { STANDARD_REGIONS_API_KEYS } from "./types";
-import { API_SWITCH } from "../configs/pool-endpoints.config";
+import axios, { AxiosInstance as AxiosInstanceType } from 'axios';
+import { POOLS_API_CONFIG_TYPE } from '../configs/types';
+
+interface ApiConfig {
+  apiEndpoints: POOLS_API_CONFIG_TYPE;
+  apiPath: string;
+}
 
 class AxiosInstance {
-  _axiosInstance;
+  _axiosInstance: AxiosInstanceType;
   constructor({
     region,
     url,
+    apiConfig,
   }: {
-    region?: STANDARD_REGIONS_API_KEYS;
+    region?: string;
     url?: string;
+    apiConfig?: ApiConfig;
   }) {
-    if (url !== "" && url !== undefined) {
+    if (url !== '' && url !== undefined) {
       this._axiosInstance = axios.create({
         baseURL: url,
       });
-    } else {
+    } else if (apiConfig?.apiEndpoints && apiConfig?.apiPath && region) {
+      const normalizedRegionKey = `${region}_API_ENDPOINT`;
+
+      const baseUrl = apiConfig.apiEndpoints[normalizedRegionKey];
+
+      if (!baseUrl) {
+        throw new Error(`No API endpoint found for region: ${region}`);
+      }
       this._axiosInstance = axios.create({
-        baseURL: API_SWITCH[region],
+        baseURL: baseUrl + apiConfig.apiPath,
       });
+    } else {
+      throw new Error('Invalid API configuration');
     }
   }
 
@@ -28,3 +43,4 @@ class AxiosInstance {
 }
 
 export { AxiosInstance };
+export type { ApiConfig };

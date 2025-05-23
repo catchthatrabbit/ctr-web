@@ -1,27 +1,28 @@
-import { useQueries, UseQueryResult } from "@tanstack/react-query";
-import { QUERY_KEYS } from "@site/src/constants/queryKeys";
-import { STANDARD_REGIONS_API_KEYS } from "../Api/types";
+import { useQueries, UseQueryResult } from '@tanstack/react-query';
+import { QUERY_KEYS } from '@site/src/constants/queryKeys';
 import {
   fetchMatured,
   fetchImMatured,
   fetchCandidates,
   fetchAllRegionsMatured,
-} from "@site/src/Api/blocks/fetchBlocks";
-import { useMessage } from "./useMessage";
-import { DEFAULT_REACT_QUERY_OPTIONS } from "../configs/reactQuery.config";
+} from '@site/src/Api/blocks/fetchBlocks';
+import { useMessage } from './useMessage';
+import { DEFAULT_REACT_QUERY_OPTIONS } from '../configs/reactQuery.config';
 import {
   CANDIDATES_RESPONSE,
   IM_MATURED_RESPONSE,
   MATURED_RESPONSE,
-} from "../Api/blocks/types";
-import { useQueryConfigured } from "./useQueryConfigured";
-import { useEffect } from "react";
-import { useConfigUrlBasedRegion } from "./useConfigUrlBasedRegion";
+} from '../Api/blocks/types';
+import { useQueryConfigured } from './useQueryConfigured';
+import { useEffect } from 'react';
+import { useConfigUrlBasedRegion } from './useConfigUrlBasedRegion';
+import { getApiConfig } from '../utils/getApiConfig';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 export const useFetchAllBlocks = (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   limit?: number,
-  offset?: number,
+  offset?: number
 ) => {
   const { setMessage, message } = useMessage();
 
@@ -56,11 +57,11 @@ export const useFetchAllBlocks = (
       (isErrorMatured || isErrorImMatured || isErrorCandidates)
     ) {
       if (isErrorMatured)
-        setMessage({ text: resultArray[0].error.message, type: "error" });
+        setMessage({ text: resultArray[0].error.message, type: 'error' });
       if (isErrorImMatured && !message?.text)
-        setMessage({ text: resultArray[1].error.message, type: "error" });
+        setMessage({ text: resultArray[1].error.message, type: 'error' });
       if (isErrorCandidates && !message?.text)
-        setMessage({ text: resultArray[2].error.message, type: "error" });
+        setMessage({ text: resultArray[2].error.message, type: 'error' });
     } else if (
       message.text &&
       !isErrorMatured &&
@@ -79,12 +80,14 @@ export const useFetchAllBlocks = (
 };
 
 export const useFetchAllRegionsMaturedBlocks = ({
-  apiPath,
   urls,
+  apiPath,
 }: Parameters<typeof fetchAllRegionsMatured>[0]) => {
+  const { siteConfig } = useDocusaurusContext();
+  const apiConfig = getApiConfig(siteConfig.customFields);
   return useQueryConfigured<MATURED_RESPONSE[]>(
-    { urls, apiPath },
+    { urls, apiPath, apiConfig },
     QUERY_KEYS.ALL_REGIONS_MATURED,
-    fetchAllRegionsMatured,
+    fetchAllRegionsMatured
   );
 };

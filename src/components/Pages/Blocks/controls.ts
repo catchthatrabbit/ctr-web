@@ -1,54 +1,65 @@
-import { useHeaders } from "@site/src/hooks/useHeaders";
-import { usePaginate } from "@site/src/hooks/usePaginate";
-import { useMemo } from "react";
-import { tablesConfig } from "@site/src/configs";
-import { POOL_NAME_ENUM } from "@site/src/enums/poolName.enum";
-import { useFetchAllBlocks } from "@site/src/hooks/useBlocks";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
+import { useMemo } from 'react';
+import usePageControls from '@site/src/hooks/usePageControls';
+import { tablesConfig } from '@site/src/configs';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+
+interface CustomFields {
+  URLS: {
+    BLOCK_DETAILS: string;
+  };
+  DEFAULT_REGION: string;
+}
 
 const useControls = () => {
-  const { region, regionLabel, handleChangeRegion, dropdownItems } = useHeaders(
-    {
-      defaultRegion: POOL_NAME_ENUM.DE,
-    },
-  );
   const { siteConfig } = useDocusaurusContext();
+  const { URLS, DEFAULT_REGION } = siteConfig.customFields as unknown as CustomFields;
+  const defaultRegion = DEFAULT_REGION?.toString().toUpperCase() || 'DE';
 
-  const { currentPageNumber, handlePageChange } = usePaginate();
+  const {
+    regionLabel,
+    dropdownItems,
+    handleChangeRegion,
+    handlePageChange,
+    multipleData: [
+      fetchedMaturedBlocks,
+      fetchedImMatureBlocks,
+      fetchCandidatesBlocks,
+    ],
+    infoBoxMapData,
+    isLoadingMapChart,
+  } = usePageControls({
+    defaultRegion,
+    fetchMultipleData: true,
+    includeInfoBox: true,
+  });
 
-  const [fetchedMaturedBlocks, fetchedImMatureBlocks, fetchCandidatesBlocks] =
-    useFetchAllBlocks(region, 10, currentPageNumber);
-
-  const urlsConfigs = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
-
-  const dataTableColumns = useMemo(
+  const tableColumns = useMemo(
     () => [
       {
-        value: "height",
-        label: "Height",
+        value: 'height',
+        label: 'Height',
         isPrimary: true,
-        href: urlsConfigs.BLOCK_DETAILS_URL,
+        href: URLS.BLOCK_DETAILS,
       },
-      { value: "type", label: "Type" },
-      { value: "minedOn", label: "Mined on" },
+      { value: 'type', label: 'Type' },
+      { value: 'minedOn', label: 'Found at' },
       {
-        value: "blockHash",
-        label: "Block hash",
+        value: 'blockHash',
+        label: 'Block hash',
         canBeCopied: true,
         isPrimary: true,
-        href: urlsConfigs.BLOCK_DETAILS_URL,
+        href: URLS.BLOCK_DETAILS,
       },
-      { value: "reward", label: "Reward" },
-      { value: "variance", label: "Variance" },
+      { value: 'reward', label: 'Reward' },
+      { value: 'variance', label: 'Variance' },
     ],
-    [urlsConfigs.BLOCK_DETAILS_URL],
+    []
   );
 
   return {
     regionLabel,
     dropdownItems,
-    dataTableColumns,
+    tableColumns,
     handleChangeRegion,
     handlePageChange,
     isLoadingMaturedBlocks: fetchedMaturedBlocks.isLoading,
@@ -58,6 +69,8 @@ const useControls = () => {
     isLoadingCandidatesBlocks: fetchCandidatesBlocks.isLoading,
     fetchCandidatesBlocks: fetchCandidatesBlocks?.data,
     rowCount: tablesConfig.PAGE_LIMIT,
+    infoBoxMapData,
+    isLoadingMapChart,
   };
 };
 

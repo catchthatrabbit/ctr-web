@@ -1,0 +1,108 @@
+.startDivWrapper {
+  position: relative;
+  border-radius: var(--ifm-global-radius-large);
+  padding: var(--space-sm);
+  background-color: rgba(20, 20, 20, 1);
+  z-index: 1;
+}
+
+.startDivWrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--ifm-global-radius);
+  padding: 1px;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.05) 50%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  z-index: 0;
+}
+
+.startDivWrapperMobile {
+  bottom: var(--space-sm);
+}
+
+.startDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.startDivMobile {
+  padding: var(--space-xs);
+  display: flex;
+  flex-direction: column;
+}
+
+.startDivMobile > div {
+  margin-bottom: var(--space-xs);
+}
+
+.startButton {
+  position: relative;
+  z-index: 4;
+  pointer-events: auto;
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--ifm-guide-btn-color);
+  color: var(--ifm-start-btn-color);
+  border-radius: var(--ifm-global-radius);
+  cursor: pointer;
+  font-size: var(--body-small-font-size);
+  z-index: 1000;
+  position: relative;
+}
+
+.startButton:hover {
+  text-decoration: none;
+  color: var(--ifm-start-btn-color);
+}
+
+.startButton:hover {
+  background-color: var(--ifm-guide-btn-hover);
+}
+
+.startButtonMobile {
+  width: 100%;
+  text-align: center;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-left: auto;
+  position: relative;
+  z-index: 3;
+}
+
+@media screen and (max-width: 767px) {
+  .startDivWrapper {
+    padding: var(--space-xxs);
+  }
+}
+
+@media (max-width: 768px) {
+  .buttonContainer {
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* Ensure the entire panel allows pointer events */
+.startDivWrapper * {
+  pointer-events: auto;
+}

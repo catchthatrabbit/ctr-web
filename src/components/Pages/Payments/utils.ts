@@ -1,11 +1,11 @@
-import { PAYMENTS_RESPONSE } from "@site/src/Api/payments/types";
-import { UNITS } from "@site/src/constants/units";
-import { summarizedText } from "@site/src/utils";
-import { convertNumber2Currency } from "@site/src/utils/convertNumber2Currency";
-import { convertTime2Date } from "@site/src/utils/convertTime2Date";
+import { PAYMENTS_RESPONSE } from '@site/src/Api/payments/types';
+import { UNITS } from '@site/src/constants/units';
+import { summarizedText } from '@site/src/utils/summarizedText';
+import { convertNumber2Currency } from '@site/src/utils/convertNumber2Currency';
+import { convertTime2Date } from '@site/src/utils/convertTime2Date';
 
 export const convertPaymentsResponse2PaymentInfo = (
-  paymentResponse: PAYMENTS_RESPONSE,
+  paymentResponse: PAYMENTS_RESPONSE
 ): Array<{
   address: string;
   address_summarized: string;

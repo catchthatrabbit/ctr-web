@@ -1,24 +1,24 @@
-import { AxiosError, AxiosResponse } from "axios";
-import { AxiosInstance } from "../api";
+import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosInstance } from '../api';
 import {
   CANDIDATES_RESPONSE,
   IM_MATURED_RESPONSE,
   MATURED_RESPONSE,
-} from "./types";
-import { STANDARD_REGIONS_API_KEYS } from "../types";
-import { getAllRegionsMaturedBlocks } from "../stats/utils";
-import { filterAllSettled } from "@site/src/utils/filterAllSettled";
+} from './types';
+import { getAllRegionsMaturedBlocks } from '../stats/utils';
+import { filterAllSettled } from '@site/src/utils/filterAllSettled';
 
 export const fetchMatured = async (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   limit = 10,
   offset = 0,
-  url?: string,
+  url?: string
 ) => {
   try {
+    const realOffset = offset * limit;
     const instance = new AxiosInstance({ region, url }).getInstance();
     const response = instance.get(
-      `/matured_blocks?limit=${limit}&offset=${offset}`,
+      `matured_blocks?limit=${limit}&offset=${realOffset}`
     ) as Promise<AxiosResponse<MATURED_RESPONSE, unknown>>;
     return (await response).data;
   } catch (e) {
@@ -28,13 +28,18 @@ export const fetchMatured = async (
 };
 
 export const fetchAllRegionsMatured = async ({
-  apiPath,
   urls,
+  apiPath,
+  apiConfig,
 }: Parameters<typeof getAllRegionsMaturedBlocks>[0]) => {
   try {
-    const instanceArray = getAllRegionsMaturedBlocks({ urls, apiPath });
+    const instanceArray = getAllRegionsMaturedBlocks({
+      urls,
+      apiPath,
+      apiConfig,
+    });
     const statsResponses = await filterAllSettled<{ data: MATURED_RESPONSE }>(
-      instanceArray,
+      instanceArray
     );
     return statsResponses?.map((statsResp) => statsResp.data);
   } catch (e) {
@@ -44,15 +49,15 @@ export const fetchAllRegionsMatured = async ({
 };
 
 export const fetchImMatured = async (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   limit = 10,
   offset = 0,
-  url?: string,
+  url?: string
 ) => {
   try {
     const instance = new AxiosInstance({ region, url }).getInstance();
     const response = instance.get(
-      `/immature_blocks?limit=${limit}&offset=${offset}`,
+      `/immature_blocks?limit=${limit}&offset=${offset}`
     ) as Promise<AxiosResponse<IM_MATURED_RESPONSE, unknown>>;
     return (await response).data;
   } catch (e) {
@@ -62,15 +67,15 @@ export const fetchImMatured = async (
 };
 
 export const fetchCandidates = async (
-  region: STANDARD_REGIONS_API_KEYS,
+  region: string,
   limit = 10,
   offset = 0,
-  url?: string,
+  url?: string
 ) => {
   try {
     const instance = new AxiosInstance({ region, url }).getInstance();
     const response = instance.get(
-      `/candidates_blocks?limit=${limit}&offset=${offset}`,
+      `/candidates_blocks?limit=${limit}&offset=${offset}`
     ) as Promise<AxiosResponse<CANDIDATES_RESPONSE, unknown>>;
     return (await response).data;
   } catch (e) {

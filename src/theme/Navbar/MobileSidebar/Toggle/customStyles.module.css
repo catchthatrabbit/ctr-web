@@ -1,6 +1,19 @@
-.buttonColor{
-    color: var(--white);
+.buttonColor {
+  color: var(--white);
 }
-.buttonAlignment{
-    margin-left: auto;
+
+.buttonAlignment {
+  margin-left: auto;
+}
+
+.iconMenuCustom {
+  width: 24px;
+  height: 24px;
+  color: #16c784;
+}
+
+.iconMenuCustomClose {
+  width: 24px;
+  height: 24px;
+  color: #16c784;
 }

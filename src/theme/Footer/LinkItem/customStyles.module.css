@@ -1,4 +1,15 @@
-.footerLink{
-    font-family: var(--value-font-family);
-    font-size: var(--body-font-size);
+.footerLink {
+  font-family: var(--value-font-family);
+  font-size: var(--body-small-font-size);
+  color: var(--ifm-color-primary);
+}
+
+.footerLink:hover {
+  color: var(--ifm-footerLink-hover);
+}
+
+@media (max-width: 767px) {
+  .footerLink {
+    font-size: var(--body-regular-font-size);
+  }
 }

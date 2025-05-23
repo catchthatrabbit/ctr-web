@@ -1,72 +1,142 @@
+.paginationContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(var(--space-sm) / 2) var(--space-xxs);
+  border-bottom-left-radius: var(--ifm-global-radius);
+  border-bottom-right-radius: var(--ifm-global-radius);
+  background-color: var(--dark-rgb-400);
+}
+
+.containerMobile {
+  flex-direction: column-reverse;
+  background-color: transparent;
+}
+
 .pagination {
-    display: flex;
-    margin: auto;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--space-md);
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
-    list-style: none;
-    font-size: var(--body-large-font-size);
-    line-height: var(--body-large-lineHeigh);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: calc(var(--space-xxs) / 3);
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  list-style: none;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1268px) {
+  .paginationContainer ul {
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
 }
 
 .paginationWidthDesktop {
-    width: 35%;
+  width: 50%;
 }
 
 .paginationWidthLaptop {
-    width: 55%;
+  width: 55%;
 }
 
 .paginationWidthTablet {
-    width: 75%;
+  width: 75%;
 }
 
 .paginationWidthMobile {
-    width: 100%
+  width: 100%;
+  justify-content: center;
 }
 
-.disabled {
-    display: none;
-}
-
-.selectedPage {
-    border: 1px solid var(--gray-700);
-    background-color: var(--blue-rgb-650);
-    border-radius: var(--ifm-global-radius);
-    padding: calc(var(--space-xs) / 2) var(--space-xs);
-    color: var(--ifm-color-emphasis-0);
+.disabled svg path {
+  fill: var(--ifm-subheading-color);
 }
 
 .paginationLoadingSkeleton {
-    width: 50px;
-    height: 50px;
-    cursor: auto!important;
+  width: 50px;
+  height: 50px;
+  cursor: auto !important;
 }
 
 .paginationItem {
-    cursor: pointer;
-    padding-inline: calc(var(--space-xs) / 2);
-    padding-block: calc(var(--space-xs) / 4);
+  border: 1px solid var(--gray-700);
+  cursor: pointer;
+  display: flex; /* Ensure the content inside aligns properly */
+  align-items: center;
+  justify-content: center;
+  width: auto; /* Allow the width to be determined by content or parent */
+  height: auto; /* Allow the height to be determined by content or parent */
+  box-sizing: border-box;
+  background-color: var(--blue-rgb-650);
+  font-size: var(--small-font-size);
+  position: relative;
+}
+
+.paginationItem a {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  padding-inline: calc(var(--space-sm) / 2);
+  padding-block: calc(var(--space-xs) / 4);
+}
+
+.selectedPage {
+  background-color: transparent;
+
+  color: var(--ifm-color-emphasis-0);
 }
 
 .paginationItem:not(.selectedPage) a {
-    color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  padding-inline: calc(var(--space-sm) / 2);
+  padding-block: calc(var(--space-xs) / 4);
 }
 
-.paginationNext a, .paginationPrevious a {
-    color: var(--ifm-color-primary);
-    padding: var(--space-xs);
+.paginationNext,
+.paginationPrevious {
+  color: var(--ifm-color-primary);
+  padding-inline: calc(var(--space-md) / 2);
+  padding-block: calc(var(--space-xs) / 4);
+  background-color: var(--blue-rgb-650);
+  border: 1px solid var(--gray-700);
+  border-radius: 0.5px;
+  font-size: var(--small-font-size);
+}
+
+.paginationNext a {
+  border-left: none;
+  cursor: pointer;
+}
+
+.paginationPrevious a {
+  border-right: none;
+  cursor: pointer;
 }
 
 .paginationNext {
-   border-left: 1px solid var(--gray-700);
-   cursor: pointer;
+  border-top-right-radius: calc(var(--ifm-global-radius) / 2);
+  border-bottom-right-radius: calc(var(--ifm-global-radius) / 2);
 }
 
 .paginationPrevious {
-    border-right: 1px solid var(--gray-700);
-    cursor: pointer;
- }
+  border-top-left-radius: calc(var(--ifm-global-radius) / 2);
+  border-bottom-left-radius: calc(var(--ifm-global-radius) / 2);
+}
+
+@media screen and (max-width: 768px) {
+  .paginationNext,
+  .paginationPrevious,
+  .paginationItem:not(.selectedPage) a,
+  .selectedPage {
+    padding: var(--space-xxs) var(--space-xs);
+  }
+
+  .containerMobile .selectedPage a {
+    padding: 0;
+  }
+}

@@ -1,16 +1,23 @@
-.listRoot{
-    position: relative;
+.listRoot {
+  position: relative;
 }
 
-.tableWrapper{
-    width: 100%;
-    overflow-x: auto;
+.blocksListRoot {
+  border-radius: var(--ifm-global-radius);
 }
 
-.listMarginInlineMobile{
-    margin-inline: calc(var(--space-xs) / 2);
+.blocksContext {
+  border-radius: var(--ifm-global-radius);
 }
 
-.paginationWrapper{
-    width: 100%;
+.tableWrapper {
+  width: 100%;
+}
+
+.listMarginInlineMobile {
+  margin-inline: calc(var(--space-xs) / 2);
+}
+
+.paginationWrapper {
+  width: 100%;
 }

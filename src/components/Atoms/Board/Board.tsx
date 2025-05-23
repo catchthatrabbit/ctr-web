@@ -1,8 +1,9 @@
-import { Text } from "@site/src/components/Atoms/Text";
-import clsx from "clsx";
-import React from "react";
+import React from 'react';
+import { Text } from '@site/src/components/Atoms/Text';
+import clsx from 'clsx';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IBoard {
   value: string;
@@ -12,35 +13,103 @@ interface IBoard {
   className?: string;
   loaderComp?: React.ReactNode;
   isLoading?: boolean;
+  dir?: "vert" | "hor" | "column";
+  context?: "mapChart" | "statsChart" | "payments";
+  boardClassNameColumn?: string;
 }
 
-const Board = ({
-  description,
+const Board: React.FC<IBoard> = ({
   value,
-  suffix,
-  prefix,
-  className,
-  loaderComp = <Text variant="subheading">&nbsp;--&nbsp;</Text>,
+  description = "",
+  prefix = "",
+  suffix = "",
+  className = "",
+  loaderComp = <Text variant="subheading">———</Text>,
   isLoading = false,
-}: IBoard) => {
+  dir = 'vert',
+  context,
+}) => {
+  const { mobile } = useMediaQueries();
+
+  const getTextProps = (type: "value" | "suffix" | "description") => {
+    switch (type) {
+      case 'value':
+        return {
+          children: value,
+          variant: "heading" as const,
+          weight: "bold" as const,
+          color: "white" as const,
+          type: "zephirum" as const,
+        };
+      case 'suffix':
+        return {
+          children: suffix,
+          variant: "subheading" as const,
+          weight: "normal" as const,
+          color: "white" as const,
+        };
+      case 'description':
+        return {
+          children: description,
+          variant: "subheading" as const,
+          weight: "normal" as const,
+          color: "white" as const,
+          disableMobileStyles: true,
+        };
+    }
+  };
+
   return (
-    <div className={clsx([styles.boardContainer, className])}>
-      <div className={styles.content}>
-        <div className={styles.boardItem}>
-          <Text>{prefix}</Text>
+    <div
+      className={clsx(styles.boardContainer, className, {
+        [styles.boardContainerPayments]: context === 'payments',
+      })}
+    >
+      <div
+        className={clsx(styles.content, {
+          [styles.boardClassNameHor]: dir === 'hor',
+          [styles.boardClassNameColumn]: dir === 'column',
+          [styles.boardClassNameColumnMobile]: dir === 'column' && mobile,
+          [styles.boardTotal]: context === 'payments',
+        })}
+      >
+        <div className={clsx(styles.boardItem, styles.number)}>
+          <Text type="regular">{prefix}</Text>
           {isLoading ? (
             loaderComp
           ) : (
-            <Text variant="subheading" weight="bold">
-              {value || "0"}
+            <Text
+              {...getTextProps('value')}
+              lineHeight="normalLineHeight"
+              letterSpacing="letterSpacing"
+              disableMobileStyles={true}
+              variant="body"
+              weight="medium"
+              color="valueChartColor"
+              type="zephirum"
+            >
+              {value || "×"}
             </Text>
           )}
-          <Text variant="subheading" weight="bold">
+          <Text
+            {...getTextProps('suffix')}
+            lineHeight="normalLineHeight"
+            letterSpacing="letterSpacing"
+            color="valueChartColor"
+            type="zephirum"
+          >
             {suffix}
           </Text>
         </div>
-        <div className={styles.boardItem}>
-          <Text>{description || ""}</Text>
+        <div className={styles.boardTitle}>
+          <Text
+            {...getTextProps('description')}
+            lineHeight="normalLineHeight"
+            letterSpacing="letterSpacing"
+            disableMobileStyles
+          >
+            {description}
+          </Text>
         </div>
       </div>
     </div>

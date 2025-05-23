@@ -1,23 +1,26 @@
-import React from "react";
-import StartMiningTitle from "@site/src/components/Molecules/PictureTitles/StartMiningTitle";
-import { Text } from "@site/src/components/Atoms/Text";
-import { Spacer } from "../../Atoms/Spacer";
-import { Button } from "../../Atoms/Button";
-import Link from "@docusaurus/Link";
+import React from 'react';
+import StartMiningTitle from '@site/src/components/Molecules/PictureTitles/StartMiningTitle';
+import { Spacer } from '../../Atoms/Spacer';
+import Link from '@docusaurus/Link';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 const StartMining = () => {
   return (
     <div className={styles.startMining}>
       <div className={styles.startMiningContent}>
         <StartMiningTitle />
-        <Spacer variant="xl" />
-        <Text variant="heading2">Let's jump into it</Text>
-        <Spacer variant="xl" />
-        <Link to={"/start-mining"} className="link-button">
-          Start mining
-        </Link>
+
+        <Spacer variant="md" />
+        <div className={styles.buttonContainer}>
+          <Link to={"/start-mining"} className="button">
+            Start mining
+          </Link>
+          <Link to={"/go-live"} className="button">
+            Launch Miner
+          </Link>
+        </div>
+        <Spacer variant="xxl" />
       </div>
     </div>
   );

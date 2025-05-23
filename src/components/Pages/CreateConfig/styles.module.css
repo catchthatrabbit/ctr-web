@@ -1,0 +1,249 @@
+.mainContent {
+  margin: 0 auto;
+}
+
+.boardDropdown {
+  width: 100%;
+  margin: auto;
+}
+
+.boardJustifyCenter{
+  justify-content: center;
+}
+
+.smallWidth {
+  width: 47%;
+}
+
+.dropdowns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdownContainer {
+  flex: 0 0 48%;
+}
+
+.dropdownPriceContainer {
+  margin-bottom: 1em;
+}
+
+.viewPoolsLinkContainer {
+  display: flex;
+  justify-content: right;
+}
+
+.inputs {
+  display: flex;
+  justify-content: stretch;
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid #292929;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.minerLink {
+  color: var(--ifm-color-primary);
+}
+
+.linkText {
+  position: relative;
+  cursor: pointer;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.activeLink {
+  border-bottom: 2px solid #16C784;
+}
+
+.boldText {
+  font-weight: 600;
+}
+
+.familyZephirum {
+  font-family: var(--zephirum-font-family);
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.halfButton {
+  flex: 1;
+  min-width: 0;
+}
+
+.minerInfoContainer {
+  margin-top: 16px;
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  font-family: var(--ifm-font-family-base);
+  font-size: var(--ifm-font-size-base);
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.minerInfoContainer div {
+  margin-bottom: 4px;
+}
+
+.minerInfoContainer div:last-child {
+  margin-bottom: 0;
+}
+
+.minerInfoLabel {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.responsiveContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.halfContainer {
+  flex: 1;
+  min-width: 0;
+}
+
+.fullButton {
+  width: 100%;
+}
+
+.minerInfoContainer {
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  height: 100%;
+}
+
+.ownHardware {
+  margin-bottom: 0.5em;
+}
+
+.hosting {
+  margin-bottom: 0.5em;
+}
+
+.tabButton {
+  width: 50%;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--ifm-color-primary);
+  cursor: pointer;
+  padding: 12px 0 8px 0;
+  font: inherit;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.activeTab {
+  border-bottom: 2px solid #16C784;
+  color: #16C784;
+}
+
+.boardDropdown {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #363636;
+  background: var(--dark-rgb-600);;
+  color: var(--white);
+  font-size: 1rem;
+  margin-bottom: 1em;
+  cursor: context-menu;
+}
+
+.boardDropdown:focus {
+  outline: 2px solid var(--white);
+}
+
+.dropdownAndQuantity {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+}
+
+.dropdownAndQuantity > div:first-child {
+  flex: 1;
+}
+
+.quantityInput {
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.quantityInput input {
+  width: 100%;
+  padding: 0.9rem 0.3rem;
+  border-radius: 8px;
+  border: 1px solid #363636;
+  background: var(--dark-rgb-600);
+  color: var(--white);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.quantityInput input:focus {
+  outline: 2px solid var(--white);
+}
+
+.quantityInput input::-webkit-inner-spin-button,
+.quantityInput input::-webkit-outer-spin-button {
+  opacity: 1;
+  height: 2em;
+  margin-right: 4px;
+}
+
+@media screen and (max-width: 768px) {
+  .mainContent {
+    width: 100%;
+  }
+
+  .dropdowns {
+    flex-direction: column;
+  }
+
+  .smallWidth {
+    width: 100%;
+  }
+
+  .inputs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tabs {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .responsiveContainer {
+    flex-direction: column;
+  }
+
+  .halfContainer {
+    width: 100%;
+  }
+}

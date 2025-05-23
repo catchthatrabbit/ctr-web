@@ -1,6 +1,6 @@
-import { FC } from "react";
+import React, { FC } from 'react';
 
-import styles from "./customStyles.module.css";
+import styles from './customStyles.module.css';
 
 const CustomButtonsPlaceholder: FC<{ children: React.ReactNode }> = ({
   children,

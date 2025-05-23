@@ -1,0 +1,32 @@
+.warning {
+  background-color: #1b190c;
+  border: 1px solid #746010;
+  color: #faca15;
+  padding: 0.81rem 0.25rem 0.81rem 0.75rem;
+  border-radius: 0.5rem;
+  margin-top: -0.6rem;
+  width: 100%;
+}
+
+.configWarning {
+  margin: 0 !important;
+}
+
+.warningText {
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .warning.configWarning {
+    width: 100%;
+  }
+
+  .warning {
+    padding: 1rem;
+    width: 91%;
+  }
+
+  .warningText {
+    font-size: var(--body-font-size);
+  }
+}

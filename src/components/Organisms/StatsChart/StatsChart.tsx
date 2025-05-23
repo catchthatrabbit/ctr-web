@@ -1,11 +1,13 @@
-import { TextFormatOutputType } from "@site/src/utils/textFormat";
-import { PoolStatisticsTitle } from "@site/src/components/Molecules/PictureTitles";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { LoadingPlaceholder } from "@site/src/components/Atoms/LoadingPlaceholder";
-import { InfoBox } from "@site/src/components/Molecules/InsideChart/Info";
-import { InfoBoxLoadingSkeleton } from "../../Atoms/InfoBoxLoadingSkeleton";
+import React from 'react';
+import { TextFormatOutputType } from '@site/src/utils/textFormat';
+import { PoolStatisticsTitle } from '@site/src/components/Molecules/PictureTitles';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { LoadingPlaceholder } from '@site/src/components/Atoms/LoadingPlaceholder';
+import { InfoBox } from '@site/src/components/Molecules/InsideChart/Info';
+import { InfoBoxLoadingSkeleton } from '../../Atoms/InfoBoxLoadingSkeleton';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IStatsChart {
   radialBarChart: React.ReactNode;
@@ -15,32 +17,33 @@ interface IStatsChart {
 
 const StatsChart = ({ radialBarChart, infoItems, isLoading }: IStatsChart) => {
   const vertClassName =
-    "xl-flex-col--12 lg-flex-col--12 md-flex-col--6 sm-flex-col--12 xs-flex-col--12";
-  const radialClassName =
-    "xl-flex-col--9 lg-flex-col--9 md-flex-col--12 sm-flex-col--12 xs-flex-col--12";
+    'xl-flex-col--12 lg-flex-col--12 md-flex-col--6 sm-flex-col--12 xs-flex-col--12';
   const infoBoxClassName =
-    "xl-flex-col--3 lg-flex-col--3 md-flex-col--12 sm-flex-col--12 xs-flex-col--12";
+    'xl-flex-col--3 lg-flex-col--3 md-flex-col--12 sm-flex-col--12 xs-flex-col--12';
+  const { mobile, desktop } = useMediaQueries();
 
   return (
     <div className={styles.statsChart}>
       <PoolStatisticsTitle />
-      <Spacer variant="lg" />
-      <div className="flex">
-        <div className={radialClassName}>
-          {isLoading ? (
-            <div className={styles.loadingSkeleton}>
-              <LoadingPlaceholder />
-            </div>
-          ) : (
-            radialBarChart
-          )}
-        </div>
+      <Spacer variant="xs" />
+
+      <div className={styles.flex}>
+        {isLoading ? (
+          <div className={styles.loadingSkeleton}>
+            <LoadingPlaceholder />
+          </div>
+        ) : (
+          radialBarChart
+        )}
+
+        {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="lg" />}
         <InfoBox
-          boardClassNameVert={vertClassName}
-          className={infoBoxClassName}
-          dir="vert"
+          dir="column"
+          spaceAround={true}
           items={infoItems}
           isLoading={isLoading}
+          context="statsChart"
+          applyFullWidth={true}
           loadingComponent={
             <InfoBoxLoadingSkeleton
               className={infoBoxClassName}
@@ -49,6 +52,7 @@ const StatsChart = ({ radialBarChart, infoItems, isLoading }: IStatsChart) => {
             />
           }
         />
+        {desktop ? <Spacer variant="xxxl" /> : <Spacer variant="xs" />}
       </div>
     </div>
   );

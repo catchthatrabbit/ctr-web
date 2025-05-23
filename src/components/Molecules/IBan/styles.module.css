@@ -1,18 +1,18 @@
-.justifyCenter{
-    justify-content: center;
+.justifyCenter {
+  justify-content: center;
 }
 
-.iBan{
-    white-space: normal;
-    line-break: anywhere;
-    font-family: monospace;
-    padding-right: var(--space-xs);
+.iBan {
+  white-space: normal;
+  line-break: anywhere;
+  padding-top: calc(var(--space-xs) / 2);
 }
 
-.iBanPaddingBottom{
-    padding-bottom: var(--space-xs);
+.iBanPaddingBottom {
+  padding-bottom: var(--space-xs);
 }
 
-.iBanRoot{
-    align-items: center;
+.iBanRoot {
+  align-items: center;
+  text-align: center;
 }

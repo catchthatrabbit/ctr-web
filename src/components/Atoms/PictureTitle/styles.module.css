@@ -1,5 +1,15 @@
-.pictureTitleRoot{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.pictureTitleRoot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexStart {
+  display: flex;
+  justify-content: flex-start;
 }

@@ -1,28 +1,28 @@
-import React from "react";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { Text } from "@site/src/components/Atoms/Text";
+import React from 'react';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { Text } from '@site/src/components/Atoms/Text';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IPanel {
   title?: string;
   children?: React.ReactNode;
   variant?:
-    | "body"
-    | "heading1"
-    | "heading2"
-    | "heading3"
-    | "subheading"
-    | "smallBody"
-    | "tinyBody"
-    | "tag"
-    | "CTA";
+    | 'body'
+    | 'heading1'
+    | 'heading2'
+    | 'heading3'
+    | 'subheading'
+    | 'smallBody'
+    | 'tinyBody'
+    | 'tag'
+    | 'CTA';
   className?: string;
 }
 
 const Title = ({
-  title = "",
-  variant = "body",
+  title = '',
+  variant = 'body',
   children,
   className,
 }: IPanel) => {

@@ -1,98 +1,195 @@
-import React from "react";
-import { Text } from "@site/src/components/Atoms/Text";
-import clsx from "clsx";
-import Link from "@docusaurus/Link";
-import { checkArrayObjectIsEmpty } from "@site/src/utils/checkIsEmpty";
-import LoadingSkeleton from "./LoadingSkeleton";
-import { IDataTable } from "./types";
+import React, { useState } from 'react';
+import { Text } from '@site/src/components/Atoms/Text';
+import clsx from 'clsx';
+import Link from '@docusaurus/Link';
+import { checkArrayObjectIsEmpty } from '@site/src/utils/checkIsEmpty';
+import { IDataTable } from './types';
+import { Pagination } from '@site/src/components/Molecules/Pagination';
+import { CopyButtonSmall } from '../../Molecules/CopyButton';
+import { FEDIVERSE_REGEX } from '@site/src/constants/fediverse';
+import { convertWorkerName } from '@site/src/utils/convertWorkerName';
+import styles from './styles.module.css';
 
-import { CopyButtonSmall } from "../../Molecules/CopyButton";
+interface IColumn {
+  value: string;
+  label: string;
+  alignToCenter?: boolean;
+  isPrimary?: boolean;
+  fn?: (value: string) => void;
+  href?: string;
+  canBeCopied?: boolean;
+}
 
-import styles from "./styles.module.css";
-import "./styles.css";
 const DataTable = ({
   data,
   columns,
   emptyComponent = <></>,
   isLoading,
   loadingComp = <></>,
+  itemsPerPage = 10,
+  context,
+  hidePagination = false,
 }: IDataTable) => {
-  if (isLoading)
-    return <LoadingSkeleton columns={columns} loadingComp={loadingComp} />;
+  const [currentPage, setCurrentPage] = useState(0);
 
-  return checkArrayObjectIsEmpty(data) ? (
-    emptyComponent
-  ) : (
-    <table className={styles.table} border={0}>
-      <thead>
-        <tr>
-          {columns?.map((colItem, colIndex) => (
-            <th
-              key={colIndex}
-              className={clsx(
-                colItem.alignToCenter && styles.tableCenteredText,
-                colIndex === 0 && styles.tablePaddingLeft,
-              )}
+  const handlePageChange = (selectedPage: number) => {
+    setCurrentPage(selectedPage);
+  };
+
+  const paginatedData = data
+    ? data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
+    : [];
+
+  if (isLoading) return loadingComp;
+
+  if (checkArrayObjectIsEmpty(data)) return emptyComponent;
+
+  const renderCellContent = (rowItem: any, colItem: IColumn) => {
+    const cellValue = rowItem[colItem.value]?.toString() || '';
+    const summarizedValue =
+      rowItem[`${colItem.value}_summarized`]?.toString() || '';
+
+    if (colItem.isPrimary) {
+      if (colItem.href) {
+        return (
+          <Link
+            to={`${colItem.href}/${rowItem[colItem.value]}`}
+            className={clsx(styles.link, styles.zephirum)}
+          >
+            {summarizedValue}
+          </Link>
+        );
+      }
+      if (colItem.fn) {
+        return (
+          <a
+            onClick={() =>
+              typeof colItem.fn === 'function' && colItem.fn(cellValue)
+            }
+            className={clsx(styles.link, styles.zephirum)}
+            style={{ cursor: 'pointer' }}
+          >
+            {summarizedValue}
+          </a>
+        );
+      }
+      if (FEDIVERSE_REGEX.test(summarizedValue)) {
+        const { href, caption } = convertWorkerName(summarizedValue);
+        if (href) {
+          return (
+            <a
+              href={href}
+              className={clsx(styles.link, styles.zephirum)}
+              target="_blank"
+              rel="noopener"
             >
-              <Text variant="heading2">
-                {colItem.label || ""}
-              </Text>
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data?.map((rowItem, rowIndex) => (
-          <tr key={rowIndex} className={styles.tableRow}>
-            {columns?.map((colItem, colIndex) => (
-              <td
-                key={colIndex}
-                className={clsx(
-                  colItem.alignToCenter && styles.tableCenteredText,
-                  colIndex === 0 && styles.tablePaddingLeft,
-                )}
-              >
-                <span className={styles.copyButton}>
-                  {colItem.isPrimary ? (
-                    colItem.href ? (
-                      <Link to={`${colItem.href}/${rowItem[colItem.value]}`}>
-                        <Text variant="body" color="primary" type="value">
-                          {rowItem[`${colItem.value}_summarized`]?.toString() ||
-                            ""}
-                        </Text>
-                      </Link>
-                    ) : (
-                      <Text
-                        variant="body"
-                        className={styles.cursorPointer}
-                        color="primary"
-                        type="value"
-                        onClick={() =>
-                          typeof colItem?.fn === "function" &&
-                          colItem.fn(rowItem[colItem.value]?.toString())
-                        }
-                      >
-                        {rowItem[`${colItem.value}_summarized`]?.toString() ||
-                          ""}
-                      </Text>
-                    )
-                  ) : (
-                    <Text variant="body" type="value">
-                      {rowItem[colItem.value]?.toString() || ""}
-                    </Text>
+              {caption}
+            </a>
+          );
+        }
+      }
+
+      return (
+        <Text
+          type="zephirum"
+          variant="subheading"
+          weight="semiBold"
+          color="white"
+        >
+          {summarizedValue}
+        </Text>
+      );
+    }
+
+    return (
+      <Text
+        variant="smallBody"
+        type="regular"
+        weight="medium"
+        color="white"
+        className={clsx({
+          [styles.runningText]: cellValue === 'Running',
+          [styles.inactiveText]: cellValue === 'Inactive',
+        })}
+      >
+        {cellValue}
+      </Text>
+    );
+  };
+
+  return (
+    <>
+      <div
+        className={clsx(styles.tableWrapper, {
+          [styles.tableWrapperWallet]: context === 'wallet',
+        })}
+      >
+        <table
+          className={clsx(
+            styles.table,
+            context === 'wallet' && styles.walletTable,
+            context === 'blocks' && styles.blocksTable
+          )}
+          border={0}
+        >
+          <thead>
+            <tr>
+              {columns.map((colItem, colIndex) => (
+                <th
+                  key={colIndex}
+                  className={clsx(
+                    colItem.alignToCenter && styles.tableCenteredText,
+                    colIndex === 0 && styles.tablePaddingLeft,
+                    context === 'wallet' && styles.walletTableHeader
                   )}
-                  {colItem.canBeCopied && (
-                    <CopyButtonSmall
-                      textToCopy={rowItem[colItem.value]?.toString() || ""}
-                    />
-                  )}
-                </span>
-              </td>
+                >
+                  <Text
+                    variant="tinyBody"
+                    color="white"
+                    weight="bold"
+                    style={{ textTransform: 'uppercase' }}
+                  >
+                    {colItem.label || ''}
+                  </Text>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {paginatedData.map((rowItem, rowIndex) => (
+              <tr key={rowIndex} className={styles.tableRow}>
+                {columns.map((colItem, colIndex) => (
+                  <td
+                    key={colIndex}
+                    className={clsx(
+                      colItem.alignToCenter && styles.tableCenteredText,
+                      colIndex === 0 && styles.tablePaddingLeft
+                    )}
+                  >
+                    <span className={styles.copyButton}>
+                      {renderCellContent(rowItem, colItem)}
+                      {colItem.canBeCopied && (
+                        <CopyButtonSmall
+                          textToCopy={String(rowItem[colItem.value])}
+                        />
+                      )}
+                    </span>
+                  </td>
+                ))}
+              </tr>
             ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
+      {!hidePagination && (
+        <Pagination
+          limit={itemsPerPage}
+          offset={currentPage}
+          total={data.length}
+          onPageChange={handlePageChange}
+        />
+      )}
+    </>
   );
 };
 

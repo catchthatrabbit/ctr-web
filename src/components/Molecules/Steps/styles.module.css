@@ -1,0 +1,103 @@
+.stepsContainer {
+  align-items: center;
+  gap: 2rem;
+}
+
+.step {
+  padding: 0.4rem 0;
+  width: 65%;
+  border-bottom: 1px solid #292929;
+  margin-bottom: var(--space-sm);
+}
+
+.stepsMargin {
+  margin-left: 2rem;
+}
+
+.mobileStep {
+  width: 100%;
+  padding: 0.3rem 0.3rem 0 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.stepNumber {
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+}
+
+.title {
+  margin: 0 0 0.6rem 0;
+  font-size: var(--medium-font-size);
+  font-weight: var(--semi-bold-font-weight);
+}
+
+.mobileTitle {
+  font-size: var(--h2-font-size-mobile);
+}
+
+.text {
+  margin: 0 0 0.6rem 0;
+}
+
+.linkSteps {
+  align-items: center;
+  cursor: pointer;
+  padding-top: 0.6rem;
+}
+
+.link {
+  color: var(--ifm-color-primary);
+  font-size: var(--h3-font-size-desktop);
+  text-decoration: none;
+}
+
+.linkText {
+  margin-left: 0.5rem;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  margin: 0.6rem 0;
+}
+
+.lastStep {
+  position: relative;
+  border-bottom: none;
+}
+
+.lastStep::after {
+  content: '';
+  display: block;
+  width: 100vw;
+  height: 1px;
+  background-color: #292929;
+  position: absolute;
+  bottom: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.buttonTitle {
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .stepsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .lastStep::after {
+    bottom: 0px;
+    top: 22rem;
+  }
+  .title {
+    margin-bottom: 0.5rem;
+  }
+
+  .stepsMargin {
+    margin-left: 1.7rem;
+  }
+}

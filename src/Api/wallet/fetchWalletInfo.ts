@@ -1,19 +1,24 @@
-import { AxiosError, AxiosResponse } from "axios";
-import { AxiosInstance } from "../api";
-import { STANDARD_REGIONS_API_KEYS } from "../types";
-import { WALLET_INFO_RESPONSE } from "./types";
+import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosInstance } from '../api';
+import { WALLET_INFO_RESPONSE } from './types';
 
 export const fetchWalletInfo = async ({
   region,
   walletAddress,
   url,
+  apiConfig,
 }: {
-  region: STANDARD_REGIONS_API_KEYS;
+  region: string;
   walletAddress: string;
+  apiConfig?: ApiConfig;
   url?: string;
 }) => {
   try {
-    const instance = new AxiosInstance({ region, url }).getInstance();
+    const instance = new AxiosInstance({
+      region,
+      url,
+      apiConfig,
+    }).getInstance();
 
     const response = instance.get(`/accounts/${walletAddress}`) as Promise<
       AxiosResponse<WALLET_INFO_RESPONSE>

@@ -1,7 +1,7 @@
-import React from "react";
-import { useThemeConfig } from "@docusaurus/theme-common";
-import { useNavbarSecondaryMenu } from "@docusaurus/theme-common/internal";
-import Translate from "@docusaurus/Translate";
+import React from 'react';
+import { useThemeConfig } from '@docusaurus/theme-common';
+import { useNavbarSecondaryMenu } from '@docusaurus/theme-common/internal';
+import Translate from '@docusaurus/Translate';
 function SecondaryMenuBackButton(props) {
   return (
     <button {...props} type="button" className="clean-btn navbar-sidebar__back">
@@ -22,10 +22,10 @@ export default function NavbarMobileSidebarSecondaryMenu() {
   return (
     <>
       {/* edge-case: prevent returning to the primaryMenu when it's empty */}
-      {!isPrimaryMenuEmpty && (
+      {/* {!isPrimaryMenuEmpty && (
         <SecondaryMenuBackButton onClick={() => secondaryMenu.hide()} />
-      )}
-      {secondaryMenu.content}
+      )} */}
+      {/* {secondaryMenu.content} */}
     </>
   );
 }

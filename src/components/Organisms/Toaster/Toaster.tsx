@@ -1,11 +1,12 @@
-import { Message } from "@site/src/components/Molecules/Message";
-import { useEffect, useState } from "react";
+import React from 'react';
+import { Message } from '@site/src/components/Molecules/Message';
+import { useEffect, useState } from 'react';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface IToaster {
   text?: string;
-  type?: "warning" | "danger" | "info" | "success" | "secondary" | "primary";
+  type?: 'warning' | 'danger' | 'info' | 'success' | 'secondary' | 'primary';
   onChange?: () => void;
   show?: boolean;
 }

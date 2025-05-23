@@ -1,28 +1,58 @@
-.panelRoot{
-    border: 1px solid var(--gray-700);
-    border-radius: var(--ifm-global-radius);
-    flex-grow: 1;
-    background-color: var(--blue-rgb-500);
+.panelRoot {
+  border: 1px solid var(--dark-rgb-border);
+  border-radius: var(--ifm-global-radius);
+  flex-grow: 1;
+  height: fit-content;
 }
 
-.panelTitleBase{
-    width: 94%;
-    border-bottom: 1px solid var(--gray-700);
+.panelTitleBase {
+  display: flex;
+  justify-content: space-between;
 }
 
 .panelTitle {
-    margin: auto;
-    padding: var(--space-lg) 0px;
+  margin: auto;
+  padding: calc(var(--space-xs) + 4px) var(--space-xs);
+  background-color: rgba(26, 51, 41, 1);
+  border-top-left-radius: var(--ifm-global-radius);
+  border-top-right-radius: var(--ifm-global-radius);
 }
 
-.panelContentDesktop{
-    padding: var(--space-md) var(--space-lg);
+.panelTitleBtns button {
+  padding: calc(var(--space-xs) / 2) var(--space-xxs);
+  margin-right: calc(var(--space-xs) / 2);
+  border-radius: calc(var(--space-xs) / 2);
+  background-color: transparent;
+  border: 1px solid var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  font-size: var(--body-tiny-font-size);
+  font-weight: var(--medium-font-weight);
+  font-family: var(--regular-font-family);
 }
 
-.panelContentTablet{
-    padding: var(--space-md) var(--space-sm);
+.panelTitleBtns .activeButton {
+  background-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary-background);
 }
 
-.panelContentMobile{
-    padding: var(--space-md) var(--space-xs);
+.panelContentDesktop {
+  padding: var(--space-md) var(--space-lg);
+}
+
+.panelContentTablet {
+  padding: var(--space-md) var(--space-sm);
+}
+
+.panelContentMobile {
+  padding: var(--space-md) var(--space-xs);
+}
+
+.startMiningPanel {
+  border: none !important;
+}
+
+@media (max-width: 767px) {
+  .panelRoot {
+    border: none;
+  }
 }

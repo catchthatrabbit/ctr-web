@@ -1,170 +1,142 @@
-import useControls from "./controls";
-import { MapChart } from "@site/src/components/Organisms/MapChart";
-import {
-  Locations,
-  MapPin,
-} from "@site/src/components/Molecules/InsideChart/Locations";
-import { MapButton } from "@site/src/components/Molecules/InsideChart/MapButton";
-import { Text } from "@site/src/components/Atoms/Text";
-import {
-  Mouse,
-  MouseContent,
-} from "@site/src/components/Molecules/InsideChart/Mouse";
-import clsx from "clsx";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { StatsChart } from "@site/src/components/Organisms/StatsChart";
-import { RadialBarChart } from "@site/src/components/Organisms/RadialBarChart";
-import { RecentBlocksTitle } from "@site/src/components/Molecules/PictureTitles";
-import { List } from "@site/src/components/Templates/List";
-import { convertMaturedResponseToRecentBlocksInfo } from "./utils";
-import { IAnyPageAndWallet } from "../types";
-import { Header } from "@site/src/components/Templates/Header";
-import { LoadingPlaceholder } from "@site/src/components/Atoms/LoadingPlaceholder";
-import { StartMining } from "@site/src/components/Organisms/StartMining";
+import React from 'react';
+import useControls from './controls';
+import { MapChart } from '@site/src/components/Organisms/MapChart';
+import { DashboardImage } from '@site/src/components/Molecules/InsideChart/DashboardImage';
+import { Text } from '@site/src/components/Atoms/Text';
+import clsx from 'clsx';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { StatsChart } from '@site/src/components/Organisms/StatsChart';
+import { RadialBarChart } from '@site/src/components/Organisms/RadialBarChart';
+import { RecentBlocksTitle } from '@site/src/components/Molecules/PictureTitles';
+import { List } from '@site/src/components/Templates/List';
+import { convertMaturedResponseToRecentBlocksInfo } from './utils';
+import { IAnyPageAndWallet } from '../types';
+import { Header } from '@site/src/components/Templates/Header';
+import { StartMining } from '@site/src/components/Organisms/StartMining';
 
-import { Empty } from "@site/src/components/Atoms/Empty";
+import { Empty } from '@site/src/components/Atoms/Empty';
+import { Search } from '../../Molecules/Search';
+import styles from './styles.module.css';
 
-import styles from "./styles.module.css";
+import MainPageSearch from '@site/src/components/Molecules/PictureTitles/MainPageSearch';
+import { StartPanel } from '../../Molecules/StartPanel';
+import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
 
 interface IDashboard extends IAnyPageAndWallet {}
 
 const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
   const {
     infoBoxMapData,
-    asStarMiningPoolLocation,
-    euStarMiningPoolLocation,
-    usStarMiningPoolLocation,
-    poolFee,
+    isLoadingMapChart,
+    SloganPrimary,
+    SloganSecondary,
     infoBoxRadialData,
     radialChartData,
     recentMatureBlockListColumns,
     AllRegionsMaturedBlocks,
-    isLoadingMapChart,
     isLoadingRadialBarChart,
     isLoadingAllRegionMaturedBlocks,
-    SLoganSecondary,
-    sLoganPrimary,
-    effectsShowActionIcons,
-    effectsShowLocation,
+    startMiningPoolConfigurations,
   } = useControls();
+
+  const { mobile, tablet, desktop } = useMediaQueries();
+
+  // Helper function to render the search component
+  const renderSearch = () => (
+    <Search onSearch={onSetWalletAddress} selectedPool="undefined" />
+  );
+
+  // Helper function to render the map chart section
+  const renderMapChartSection = () => (
+    <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
+      <div
+        className={clsx([
+          'grid',
+          styles.directionRtl,
+          mobile || tablet ? 'xs-grid-col--12' : 'xl-grid-template-columns',
+        ])}
+      >
+        {mobile ? (
+          <>
+            <div className={clsx(styles.textContainer, 'text-center')}>
+              <MainPageSearch flexStart={false} />
+
+              <Spacer variant="xxs" />
+              <Text
+                variant="heading1"
+                weight="extraBold"
+                color="dashboardColor"
+                lineHeight="largeLineHeight"
+                disableMobileStyles={true}
+              >
+                {SloganPrimary}
+              </Text>
+              <Spacer variant="xl" />
+            </div>
+            <div>
+              <DashboardImage />
+            </div>
+            <Spacer variant="xxs" />
+            <div>{renderSearch()}</div>
+          </>
+        ) : (
+          <>
+            <div
+              className={clsx([
+                'xl-grid-col--6',
+                styles.mapChartLocationPlace,
+                styles.directionLtr,
+              ])}
+            >
+              {isLoadingMapChart ? null : <DashboardImage />}
+            </div>
+            <div
+              className={clsx([
+                'xl-grid-col--6',
+                styles.directionLtr,
+                'text-left',
+              ])}
+            >
+              <MainPageSearch flexStart={true} />
+              <Spacer variant="xxs" />
+              <Text
+                variant="heading"
+                weight="extraBold"
+                color="dashboardColor"
+                lineHeight="largeLineHeight"
+              >
+                {SloganPrimary}
+              </Text>
+              <Spacer variant="xxs" />
+              <cite className={styles.poolCite}>{SloganSecondary}</cite>
+              <div className={styles.poolDescriptions}>
+                <span className={styles.poolDescriptionTitle}>XCB Pools:</span>
+                <Text variant="subheading" color="subheadingColor">
+                  {Object.values(startMiningPoolConfigurations)
+                    .map((pool) => pool.NAME)
+                    .join(', ')}
+                </Text>
+              </div>
+              <Spacer variant="xxl" />
+              {renderSearch()}
+            </div>
+          </>
+        )}
+      </div>
+    </MapChart>
+  );
 
   return (
     <>
+      {renderMapChartSection()}
       <Spacer variant="xxxl" />
-      <MapChart infoItems={infoBoxMapData} isLoading={isLoadingMapChart}>
-        <div
-          className={clsx([
-            "grid xl-grid-col--5 lg-grid-col--5 md-grid-row--2 sm-grid-row--2 xs-grid-row--2",
-            styles.directionRtl,
-            styles.fullWidth,
-          ])}
-        >
-          <div
-            className={clsx([
-              styles.mapChartLocationPlace,
-              "xl-grid-span-col--4",
-              "lg-grid-span-col--4",
-              styles.directionLtr,
-            ])}
-          >
-            {isLoadingMapChart ? (
-              <div className={styles.loadingSkeleton}>
-                <LoadingPlaceholder className={styles.loadingPlaceholder} />
-              </div>
-            ) : (
-              <>
-                <Locations>
-                  <span className="lg-hide md-hide" />
-                  {effectsShowLocation && (
-                    <>
-                      <MapPin
-                        className="lg-grid-span-col--2 md-grid-span-col--3"
-                        mapButton={
-                          <MapButton
-                            value="US location"
-                            href={
-                              effectsShowActionIcons && usStarMiningPoolLocation
-                            }
-                          />
-                        }
-                      />
-                      <span className="lg-hide" />
-                      <MapPin
-                        className="xl-grid-span-col--2 lg-grid-span-col--2 md-grid-span-col--3 sm-grid-span-col--6"
-                        mapButton={
-                          <MapButton
-                            value="EU location"
-                            href={
-                              effectsShowActionIcons && euStarMiningPoolLocation
-                            }
-                          />
-                        }
-                      />
-                      <span className="lg-hide md-hide" />
-                      <MapPin
-                        className="lg-grid-span-col--2 md-grid-span-col--2"
-                        mapButton={
-                          <MapButton
-                            value="AP location"
-                            href={
-                              effectsShowActionIcons && asStarMiningPoolLocation
-                            }
-                          />
-                        }
-                      />
-                    </>
-                  )}
-                </Locations>
-                <Mouse>
-                  <MouseContent />
-                </Mouse>
-              </>
-            )}
-          </div>
-          <Spacer className="xl-hide lg-hide" variant="lg" />
-          <div
-            className={clsx([
-              styles.directionLtr,
-              "xs-text-center sm-text-center md-text-center",
-            ])}
-          >
-            <Spacer variant="lg" className="xl-hide lg-hide md-hide" />
-            <Text variant="subheading">{sLoganPrimary}</Text>
-            <br />
-            <Text variant="body" color="gray" type="label">
-              {SLoganSecondary}
-            </Text>
-            <br />
-            <Text variant="body" color="primary" type="value">
-              Pay-per-last-N-shares &nbsp;&nbsp;
-            </Text>
-            <Text variant="body" color="gray" type="value">
-              (PPLNS)&nbsp;
-            </Text>
-            <Text variant="body" color="gray" type="value">
-              system with only&nbsp;
-            </Text>
-            <Text variant="body" color="primary" type="value">
-              {poolFee ? `${poolFee}% fee` : "-"}
-            </Text>
-            <br />
-            <Text variant="body" color="gray" type="value">
-              Please, select one of the locations to&nbsp;
-            </Text>
-            <a href="/start-mining">
-              <Text variant="body" color="primary" type="value">
-                start your mining today
-              </Text>
-            </a>
-          </div>
-        </div>
-      </MapChart>
-      <Spacer variant="xl" />
+      {desktop && <Spacer variant="xxl" />}
+      <StartPanel />
+      {desktop ? <Spacer variant="md" /> : null}
       <Header
         layout={{ boards: false, dropdown: false, search: true }}
         onSearch={onSetWalletAddress}
       />
-      <Spacer variant="xl" />
       <StatsChart
         isLoading={isLoadingRadialBarChart}
         infoItems={infoBoxRadialData}
@@ -172,17 +144,25 @@ const Dashboard = ({ onSetWalletAddress }: IDashboard) => {
           <RadialBarChart emptyComponent={<Empty />} data={radialChartData} />
         }
       />
-      <Spacer variant="xl" />
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="xl" />}
       <RecentBlocksTitle />
-      <Spacer variant="xl" />
+      {desktop ? <Spacer variant="xxl" /> : <Spacer variant="lg" />}
       <List
         dataTableColumns={recentMatureBlockListColumns}
-        hidePagination
+        hidePagination={false}
         isLoading={isLoadingAllRegionMaturedBlocks}
-        data={convertMaturedResponseToRecentBlocksInfo(AllRegionsMaturedBlocks)}
+        data={convertMaturedResponseToRecentBlocksInfo(
+          AllRegionsMaturedBlocks || []
+        )}
       />
-      <Spacer variant="xxl" />
+      <Spacer variant="xxxl" />
+      <Spacer variant="xs" />
+
+      <div className={styles.horizontalLine}></div>
+
+      {desktop ? <Spacer variant="xl" /> : <Spacer variant="xxxl" />}
       <StartMining />
+      {desktop ? null : <Spacer variant="sm" />}
     </>
   );
 };

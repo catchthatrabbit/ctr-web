@@ -1,22 +1,35 @@
-/* eslint-disable import/no-unresolved */
-import React from "react";
-import TabsDocusaurus from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import React from 'react';
+import clsx from 'clsx';
+import { Text } from '../../Atoms/Text';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 export interface ITabs {
-  items: Array<{ label: string; value: string; tabContent: React.ReactNode }>;
+  items: Array<{ label: string; value: string }>;
+  activeTab: string;
+  onTabChange: (value: string) => void;
 }
 
-export const Tabs = ({ items }: ITabs) => {
+export const Tabs = ({ items, activeTab, onTabChange }: ITabs) => {
   return (
-    <TabsDocusaurus className={styles.tabs}>
-      {items?.map((item, index) => (
-        <TabItem key={index} value={item.value} label={item.label}>
-          {item.tabContent}
-        </TabItem>
+    <div className={styles.tabs}>
+      {items.map((item, index) => (
+        <button
+          key={index}
+          className={clsx(styles.tab, {
+            [styles.activeTab]: activeTab === item.value,
+          })}
+          onClick={() => onTabChange(item.value)}
+        >
+          <Text
+            variant="smallBody"
+            color={activeTab === item.value ? 'white' : 'primary'}
+            weight="bold"
+          >
+            {item.label}
+          </Text>
+        </button>
       ))}
-    </TabsDocusaurus>
+    </div>
   );
 };

@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 export interface IDataTable {
   columns: Array<{
@@ -14,4 +14,8 @@ export interface IDataTable {
   emptyComponent: React.ReactNode;
   isLoading?: boolean;
   loadingComp?: React.ReactNode;
+  isWalletPage?: boolean;
+  itemsPerPage?: number;
+  context?: string;
+  hidePagination?: boolean;
 }

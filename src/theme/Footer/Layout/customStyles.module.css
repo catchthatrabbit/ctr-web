@@ -1,20 +1,117 @@
-.footerLayout{
+.footer {
+  background-color: transparent;
+}
+
+.footerLayout {
+  position: relative;
+}
+
+.footerLayout::after {
+  content: '';
+  position: absolute;
+  bottom: -48px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #1f1f1f;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+/* Download Buttons */
+.downloadBtns {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.downloadContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-xs);
+}
+
+.googlePlayImage {
+  height: 40px;
+}
+
+.footerLinks {
+  position: relative;
+  display: block;
+  margin-top: var(--space-xl);
+}
+
+.footerLinks > div {
+  margin-right: var(--space-md);
+}
+
+.footerLinks .footer__title {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-xs);
+  text-align: center;
+}
+
+.footerCopyWrite {
+  padding-block: var(--space-sm);
+  position: relative;
+}
+
+.btns {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxs);
+}
+
+@media (max-width: 767px) {
+  .footerLayout {
     display: flex;
-    flex-direction: row;
-    margin-bottom: var(--space-md);
-}
+    flex-direction: column;
+    align-items: center;
+  }
 
-.customLogoText{
-    margin-top:var(--space-lg);
-}
+  .footerLayout::after {
+    bottom: -5px;
+  }
 
-.footer{
-    background-color: transparent;
-    padding-bottom: 0px;
-    padding-inline: 0px;
-}
+  .logoContainer {
+    justify-content: center;
+    width: 100%;
+  }
 
-.footerCopyWrite{
-    background-color: var(--blue-rgb-600);
-    padding-block: var(--space-lg);
+  .downloadContainer {
+    align-items: center;
+  }
+
+  .footerLinks {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: var(--space-md) 0;
+  }
+
+  .footerLinks > div {
+    white-space: normal;
+    margin-right: 0;
+  }
+
+  .btns {
+    position: static;
+    align-items: center;
+    margin-top: var(--space-xl);
+    gap: var(--space-sm);
+  }
+
+  .footerCopyWrite {
+    padding-block: var(--space-md);
+  }
 }

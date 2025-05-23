@@ -1,86 +1,112 @@
-import { IAnyPageAndWallet } from "@site/src/components/Pages/types";
-import { tablesConfig } from "@site/src/configs";
-import { STANDARD_REGIONS_API_KEYS } from "@site/src/Api/types";
+import { IAnyPageAndWallet } from '@site/src/components/Pages/types';
+import { tablesConfig } from '@site/src/configs';
 import {
   useFetchWallet,
   useFetchWorkersByWalletAddress,
-} from "@site/src/hooks/useWallet";
-import { useFetchPaymentByWalletAddress } from "@site/src/hooks/usePayments";
-import { useMemo, useState } from "react";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { URLS_CONFIG_TYPE } from "@site/src/configs/types";
-import { useHeaders } from "@site/src/hooks/useHeaders";
+  useFetchWorkerCounts,
+} from '@site/src/hooks/useWallet';
+import { useFetchPaymentByWalletAddress } from '@site/src/hooks/usePayments';
+import { useMemo, useState } from 'react';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { URLS_CONFIG_TYPE } from '@site/src/configs/types';
+import { useLocation } from '@docusaurus/router';
+import { useHistory } from 'react-router-dom';
+import usePageControls from '@site/src/hooks/usePageControls';
+import { getApiConfig } from '@site/src/utils/getApiConfig';
 
-interface IWallet extends Omit<IAnyPageAndWallet, "onSetWalletAddress"> {
+interface IWallet extends Omit<IAnyPageAndWallet, 'onSetWalletAddress'> {
   walletAddress: string;
+  filterStatus?: 'All' | 'Running' | 'Inactive';
 }
 
 const useControls = ({
   defaultRegion,
-  onChangeRegion,
   walletAddress,
+  filterStatus = 'All',
 }: IWallet) => {
-  const [region, setRegion] =
-    useState<STANDARD_REGIONS_API_KEYS>(defaultRegion);
+  const {
+    region,
+    regionLabel,
+    dropdownItems,
+    handleChangeRegion: sharedHandleChangeRegion,
+    infoBoxMapData,
+    isLoadingMapChart,
+  } = usePageControls({
+    defaultRegion,
+    includeInfoBox: true,
+  });
+
   const [currentPagePayouts, setCurrentPagePayouts] = useState<number>(1);
   const [currentPageWorkers, setCurrentPageWorkers] = useState<number>(1);
-  const { dropdownItems, regionLabel } = useHeaders({ defaultRegion });
+
   const { siteConfig } = useDocusaurusContext();
+  const apiConfig = getApiConfig(siteConfig.customFields);
+  const location = useLocation();
+  const history = useHistory();
 
   const urlConfig = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
-  const okEmoji = String(siteConfig.customFields.EFFECTS_EMOJI_OK);
-  const brbEmoji = String(siteConfig.customFields.EFFECTS_EMOJI_BRB);
+  const okEmoji = siteConfig.customFields.EFFECTS_EMOJI_ENABLED
+    ? String(siteConfig.customFields.EFFECTS_EMOJI_OK)
+    : 'Running';
+  const brbEmoji = siteConfig.customFields.EFFECTS_EMOJI_ENABLED
+    ? String(siteConfig.customFields.EFFECTS_EMOJI_BRB)
+    : 'Inactive';
+
+  let status: 'active' | 'inactive' | undefined;
+  if (filterStatus === 'Running') status = 'active';
+  else if (filterStatus === 'Inactive') status = 'inactive';
+  else status = undefined;
 
   const paymentPayoutTableColumns = useMemo(
     () => [
       {
-        label: "Time",
-        value: "timestamp",
-      },
-      {
-        label: "Tx id",
-        value: "tx",
+        label: 'Tx id',
+        value: 'tx',
         canBeCopied: true,
         isPrimary: true,
-        href: urlConfig.TRANSACTION_DETAILS_URL,
+        href: urlConfig.TRANSACTION_DETAILS,
       },
       {
-        label: "Amount",
-        value: "amount",
+        label: 'Amount',
+        value: 'amount',
+      },
+      {
+        label: 'Time',
+        value: 'timestamp',
       },
     ],
-    [urlConfig.TRANSACTION_DETAILS_URL],
+    [urlConfig.TRANSACTION_DETAILS]
   );
 
   const workersTableColumn = useMemo(
     () => [
       {
-        value: "rabbit",
-        label: "Rabbit",
+        value: 'rabbit',
+        label: 'Miner',
         isPrimary: true,
       },
       {
-        value: "hr",
-        label: "Hashrate ~30m",
+        value: 'hr',
+        label: 'Hashrate ~30m',
       },
       {
-        value: "hr2",
-        label: "Hashrate ~3h",
+        value: 'hr2',
+        label: 'Hashrate ~3h',
       },
       {
-        value: "lastBeat",
-        label: "Last share",
+        value: 'lastBeat',
+        label: 'Last share',
       },
       {
-        value: "offline",
-        label: "Status",
+        value: 'offline',
+        label: 'Status',
       },
     ],
-    [],
+    []
   );
 
   const { data: fetchedWalletInfo, isLoading: isLoadingFetchWallet } =
-    useFetchWallet(region, walletAddress);
+    useFetchWallet(region, walletAddress, apiConfig);
 
   const {
     data: fetchWorkersByWalletAddress,
@@ -90,6 +116,7 @@ const useControls = ({
     walletAddress,
     10,
     currentPageWorkers,
+    status
   );
 
   const {
@@ -99,15 +126,18 @@ const useControls = ({
     region,
     walletAddress,
     10,
-    currentPagePayouts,
+    currentPagePayouts
   );
 
-  const handleChangeRegion = (id: {
-    label: string;
-    value: STANDARD_REGIONS_API_KEYS;
-  }) => {
-    setRegion(id.value);
-    if (typeof onChangeRegion === "function") onChangeRegion(region);
+  const { data: fetchWorkerCounts, isLoading: isLoadingFetchWorkerCounts } =
+    useFetchWorkerCounts(region, walletAddress);
+
+  const handleChangeRegion = (id: { label: string; value: string }) => {
+    const splitted = location.pathname.split('/');
+    splitted[3] = id.value.toLowerCase();
+    const newUrl = splitted.join('/');
+    history.push(newUrl);
+    sharedHandleChangeRegion(id);
   };
 
   const handleChangePagePayouts = (currentPage: number) => {
@@ -123,6 +153,8 @@ const useControls = ({
     paymentPayoutTableColumns,
     fetchedWalletInfo,
     fetchWorkersByWalletAddress,
+    fetchWorkerCounts,
+    isLoadingFetchWorkerCounts,
     fetchPaymentsByWalletAddress,
     handleChangePagePayouts,
     handleChangePageWorkers,
@@ -135,6 +167,8 @@ const useControls = ({
     brbEmoji,
     dropdownItems,
     regionLabel,
+    infoBoxMapData,
+    isLoadingMapChart,
   };
 };
 

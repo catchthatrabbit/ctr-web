@@ -1,5 +1,16 @@
-.copyButtonSmall{
-    background-color: transparent!important;
-    border: none;
-    cursor: pointer;
+.copyButtonSmall {
+  background-color: transparent !important;
+  border: none;
+  cursor: pointer;
+}
+
+.closeButton {
+  align-self: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: var(--body-font-size);
+  padding: 0 1.25rem;
+  margin-left: auto;
 }

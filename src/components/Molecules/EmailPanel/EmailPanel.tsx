@@ -1,58 +1,79 @@
 import React from 'react';
-import { Panel } from "@site/src/components/Molecules/Panel";
-import { Text } from "@site/src/components/Atoms/Text";
-import Link from "@docusaurus/Link";
-import { Spacer } from "@site/src/components/Atoms/Spacer";
-import { useMediaQueries } from "@site/src/hooks/useMediaQueries";
-import clsx from "clsx";
-import styles from "./styles.module.css";
+import { Text } from '@site/src/components/Atoms/Text';
+import { Spacer } from '@site/src/components/Atoms/Spacer';
+import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
+import clsx from 'clsx';
+import styles from './styles.module.css';
+import { DownloadFile } from '@site/src/icons';
+
+interface EmailData {
+  email: string;
+  description: string;
+  keyLink?: string;
+  keyId?: string;
+}
 
 interface IEmailPanel {
   title?: string;
   text?: string;
-  emailAddress?: string | (string | { [email: string]: string })[];
+  emailAddress?: EmailData[];
 }
 
 const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
   const { desktop, laptop, tablet, mobile } = useMediaQueries();
 
-  const renderEmailButtons = (emails: string | (string | { [email: string]: string })[]) => {
-    if (typeof emails === 'string') {
-      emails = [emails];
-    }
-
-    return emails.map((emailItem, index) => {
-      if (typeof emailItem === 'string') {
-        return (
-          <React.Fragment key={index}>
-            <Link to={`mailto:${emailItem}?subject=Web%20contact`} className="link-button" style={{ marginRight: index < emails.length - 1 ? '8px' : '0' }}>
-              {emailItem}
-            </Link>
-          </React.Fragment>
-        );
-      } else {
-        const email = Object.keys(emailItem)[0];
-        const keyLink = emailItem[email];
-        return (
-          <React.Fragment key={index}>
-            <div className={styles.emailRow}>
-              <Link to={`mailto:${email}?subject=Web%20contact`} className="link-button" style={{ marginRight: '8px' }}>
-                {email}
-              </Link>
-              {keyLink && (
-                <Link to={keyLink} className="link-button" download style={{ marginLeft: '8px' }}>
-                  🔑 Key
-                </Link>
-              )}
-            </div>
-          </React.Fragment>
-        );
-      }
-    });
+  const renderEmailButtons = (emails: EmailData[]) => {
+    return emails.map((emailData, index) => (
+      <React.Fragment key={index}>
+        <div className={`flex flex-column ${styles.emailRow}`}>
+          <>
+            <Spacer variant="xxs" />
+            <a
+              href={`mailto:${emailData.email}`}
+              target="_blank"
+              className={styles.link}
+            >
+              {emailData.email}
+            </a>
+          </>
+          {emailData.keyLink && (
+            <a
+              href={emailData.keyLink}
+              className={styles.downloadLink}
+              rel="noopener noreferrer"
+              download
+              style={{ marginTop: '0.2em' }}
+            >
+              <DownloadFile />
+              <span className={styles.downloadText}>Download GPG Key</span>
+              <span className={styles.downloadKeyId}>
+                [{emailData.keyId}]
+              </span>
+            </a>
+          )}
+        </div>
+      </React.Fragment>
+    ));
   };
 
   return (
-    <Panel title={title}>
+    <div className={`flex flex-column ${styles.block}`}>
+      <Text
+        variant="heading3"
+        weight="semiBold"
+        color="white"
+        style={{ marginBottom: '0.5em' }}
+      >
+        {title}
+      </Text>
+      <Text
+        variant={desktop ? 'subheading' : 'body'}
+        color="subheadingColor"
+        style={{ lineHeight: '1.2em' }}
+      >
+        {text}
+      </Text>
+
       <div
         className={clsx({
           [styles.emailValueDesktop]: desktop || laptop,
@@ -60,15 +81,12 @@ const EmailPanel = ({ title, text, emailAddress }: IEmailPanel) => {
           [styles.emailValueMobile]: mobile,
         })}
       >
-        <Text variant="body" type="value">
-          {text}
-        </Text>
-        <Spacer variant="sm" />
-        <div className={styles.emailButtonsContainer}>
-          {renderEmailButtons(emailAddress)}
+        <Spacer variant="xs" />
+        <div className={`flex flex-column ${styles.emailButtonsContainer}`}>
+          {emailAddress && renderEmailButtons(emailAddress)}
         </div>
       </div>
-    </Panel>
+    </div>
   );
 };
 

@@ -1,33 +1,47 @@
-import useRadialBarChartData from "./hooks/useRadialBarChartData";
-import useMapChartData from "./hooks/useMapChartData";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import {
-  AS_START_MINING_POOL_LOCATION,
-  EU_START_MINING_POOL_LOCATION,
-  AM_START_MINING_POOL_LOCATION,
-} from "@site/src/configs/start-minings.config";
-import { useFetchAllRegionsMaturedBlocks } from "@site/src/hooks/useBlocks";
-import { useMemo } from "react";
-import { IDataTable } from "@site/src/components/Atoms/DataTable/types";
+import { useMemo } from 'react';
+import usePageControls from '@site/src/hooks/usePageControls';
+import useRadialBarChartData from './hooks/useRadialBarChartData';
+import { useFetchAllRegionsMaturedBlocks } from '@site/src/hooks/useBlocks';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { IDataTable } from '@site/src/components/Atoms/DataTable/types';
 import {
   POOLS_API_CONFIG_TYPE,
   URLS_CONFIG_TYPE,
+  POOLS_LIST,
 } from "@site/src/configs/types";
+
+interface CustomFields {
+  DEFAULT_REGION: string;
+  API_ENDPOINTS: POOLS_API_CONFIG_TYPE;
+  API_PATH: string;
+  URLS: URLS_CONFIG_TYPE;
+  POOLS_LIST: POOLS_LIST;
+  SLOGAN_PRIMARY: string;
+  SLOGAN_SECONDARY: string;
+  EFFECTS_SHOW_LOCATIONS: string;
+  EFFECTS_SHOW_ACTION_ICONS: string;
+}
 
 const useControls = () => {
   const { siteConfig } = useDocusaurusContext();
+  const {
+    DEFAULT_REGION,
+    API_ENDPOINTS,
+    API_PATH,
+    URLS: urlsConfigs,
+    POOLS_LIST: startMiningPoolConfigurations,
+    SLOGAN_PRIMARY,
+    SLOGAN_SECONDARY,
+    EFFECTS_SHOW_LOCATIONS,
+    EFFECTS_SHOW_ACTION_ICONS
+  } = siteConfig.customFields as unknown as CustomFields;
 
-  const urlsConfigs = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
-  const estd = siteConfig.customFields.ESTD;
-  const effectsShowLocation: boolean =
-    siteConfig.customFields.EFFECTS_SHOW_LOCATIONS === "true" ? true : false;
+  const defaultRegion = DEFAULT_REGION?.toString().toUpperCase() || 'DE';
 
-  const effectsShowActionIcons: boolean =
-    siteConfig.customFields.EFFECTS_SHOW_ACTION_ICONS === "true" ? true : false;
-  const sLoganPrimary: string = String(siteConfig.customFields.SLOGAN_PRIMARY);
-  const SLoganSecondary: string = String(
-    siteConfig.customFields.SLOGAN_SECONDARY,
-  );
+  const { infoBoxMapData, isLoadingMapChart, poolFee } = usePageControls({
+    defaultRegion,
+    includeInfoBox: true,
+  });
 
   const {
     chart: radialChartData,
@@ -36,60 +50,44 @@ const useControls = () => {
   } = useRadialBarChartData();
 
   const {
-    infoBoxItems: infoBoxMapData,
-    poolFee,
-    isLoading: isLoadingMapChart,
-  } = useMapChartData();
-
-  const {
     data: AllRegionsMaturedBlocks,
     isLoading: isLoadingAllRegionMaturedBlocks,
   } = useFetchAllRegionsMaturedBlocks({
-    urls: siteConfig.customFields.API_ENDPOINTS as POOLS_API_CONFIG_TYPE,
-    apiPath: String(siteConfig.customFields.API_PATH),
+    urls: API_ENDPOINTS,
+    apiPath: String(API_PATH),
   });
 
   const dataTableColumns = useMemo(
     () => [
       {
-        value: "height",
-        label: "Height",
+        value: 'height',
+        label: 'Height',
         isPrimary: true,
-        href: urlsConfigs.BLOCK_DETAILS_URL,
+        href: urlsConfigs.BLOCK_DETAILS,
       },
-      { value: "type", label: "Type" },
-      { value: "minedOn", label: "Mined on" },
+      { value: 'type', label: 'Type' },
+      { value: 'minedOn', label: 'Found at' },
       {
         canBeCopied: true,
-        value: "blockHash",
-        label: "Block hash",
+        value: 'blockHash',
+        label: 'Block hash',
         isPrimary: true,
-        href: urlsConfigs.BLOCK_DETAILS_URL,
+        href: urlsConfigs.BLOCK_DETAILS,
       },
-      { value: "reward", label: "Reward" },
-      { value: "variance", label: "Variance" },
+      { value: 'reward', label: 'Reward' },
+      { value: 'variance', label: 'Variance' },
     ],
-    [urlsConfigs.BLOCK_DETAILS_URL],
-  ) as IDataTable["columns"];
+    [urlsConfigs.BLOCK_DETAILS]
+  ) as IDataTable['columns'];
+
+  const effectsShowLocation: boolean = EFFECTS_SHOW_LOCATIONS === 'true';
+  const effectsShowActionIcons: boolean = EFFECTS_SHOW_ACTION_ICONS === 'true';
 
   return {
     radialChartData,
     infoBoxRadialData,
     infoBoxMapData,
     poolFee,
-    usStarMiningPoolLocation: (siteConfig.customFields
-      .AM_START_MINING_POOL_LOCATION ||
-      AM_START_MINING_POOL_LOCATION) as string,
-    euStarMiningPoolLocation: (siteConfig.customFields
-      .EU_START_MINING_POOL_LOCATION ||
-      EU_START_MINING_POOL_LOCATION) as string,
-    asStarMiningPoolLocation: (siteConfig.customFields
-      .AS_START_MINING_POOL_LOCATION ||
-      AS_START_MINING_POOL_LOCATION) as string,
-    estd:
-      estd !== "" && estd !== undefined
-        ? estd
-        : new Date().getFullYear().toString(),
     AllRegionsMaturedBlocks,
     recentMatureBlockListColumns: dataTableColumns,
     isLoadingRadialBarChart,
@@ -97,8 +95,9 @@ const useControls = () => {
     isLoadingAllRegionMaturedBlocks,
     effectsShowLocation,
     effectsShowActionIcons,
-    sLoganPrimary,
-    SLoganSecondary,
+    SloganPrimary: String(SLOGAN_PRIMARY),
+    SloganSecondary: String(SLOGAN_SECONDARY),
+    startMiningPoolConfigurations,
   };
 };
 
