@@ -6,8 +6,6 @@ module.exports = {
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:import/recommended",
-        "plugin:import/typescript",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
@@ -18,21 +16,13 @@ module.exports = {
     parserOptions: { ecmaVersion: "latest", sourceType: "module" },
     plugins: [
         "@typescript-eslint",
-        "import",
         "promise",
         "n",
         "react-refresh"
     ],
     settings: {
-        "import/parsers": {
-          "@typescript-eslint/parser": [".ts", ".tsx"],
-        },
         react: {
           version: "detect",
-        },
-        "import/resolver": {
-          typescript: true,
-          node: true,
         },
       },
     "rules": {
@@ -40,7 +30,6 @@ module.exports = {
         "react/react-in-jsx-scope": "off",
         "react/jsx-uses-react": "off",
         "react/prop-types": "off",
-        "import/no-named-as-default": 'off',
         "no-console": "warn",
         "sort-imports": "off",
         "indent": ["error", 2],
