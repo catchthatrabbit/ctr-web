@@ -6,7 +6,6 @@ import { useFetchWorkersByWalletAddress } from '@site/src/hooks/useWallet';
 import { convertWorkerName } from '@site/src/utils/convertWorkerName';
 import { siFormat } from '@site/src/utils/siFormat';
 import { convertTime2Date } from '@site/src/utils/convertTime2Date';
-import { ageCalculation } from '@site/src/utils/ageCalculation';
 import Blockies from 'react-blockies';
 import styles from './styles.module.css';
 
@@ -118,13 +117,17 @@ const WorkerDetailsContent = () => {
 
   const isOffline = workerStats.offline;
   const statusLabel = isOffline ? 'Inactive' : 'Active';
-  const lastShareStr = ageCalculation(
-    convertTime2Date(workerStats.lastBeat)
-  );
+  const lastShareStr = workerStats.lastBeat
+    ? convertTime2Date(workerStats.lastBeat, {
+        day: 'numeric',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+      }).replace(', ', ' ')
+    : 'Never';
 
   return (
     <div className={styles.root}>
-      {/* Profile: blockies center, name, fediverse, active tag - no title */}
       <div className={styles.card}>
         <div className={styles.profileSection}>
           <div className={styles.blockiesWrapper}>
@@ -166,7 +169,6 @@ const WorkerDetailsContent = () => {
 
       <div className={styles.sectionSpacer} />
 
-      {/* Stats */}
       <div className={styles.card}>
         <h2 className={styles.panelHeading}>Stats</h2>
         <div className={styles.statsGrid}>
@@ -174,7 +176,12 @@ const WorkerDetailsContent = () => {
             <Text variant="smallBody" color="white" weight="medium">
               Hashrate ~30m
             </Text>
-            <Text type="zephirum" variant="body" color="white">
+            <Text
+              type="zephirum"
+              variant="body"
+              color="white"
+              className={styles.statValue}
+            >
               {`${siFormat(workerStats.hr, 2)}h/s`}
             </Text>
           </div>
@@ -182,7 +189,12 @@ const WorkerDetailsContent = () => {
             <Text variant="smallBody" color="white" weight="medium">
               Hashrate ~3h
             </Text>
-            <Text type="zephirum" variant="body" color="white">
+            <Text
+              type="zephirum"
+              variant="body"
+              color="white"
+              className={styles.statValue}
+            >
               {`${siFormat(workerStats.hr2, 2)}h/s`}
             </Text>
           </div>
@@ -190,7 +202,12 @@ const WorkerDetailsContent = () => {
             <Text variant="smallBody" color="white" weight="medium">
               Last share
             </Text>
-            <Text type="zephirum" variant="body" color="white">
+            <Text
+              type="zephirum"
+              variant="body"
+              color="white"
+              className={styles.statValue}
+            >
               {lastShareStr}
             </Text>
           </div>
@@ -199,7 +216,6 @@ const WorkerDetailsContent = () => {
 
       <div className={styles.sectionSpacer} />
 
-      {/* Worker ID (readonly input style) + PDF417 + download */}
       <div className={styles.card}>
         <h2 className={styles.panelHeading}>Worker ID</h2>
         <div className={styles.workerIdInputRow}>
@@ -235,7 +251,6 @@ const WorkerDetailsContent = () => {
 
       <div className={styles.sectionSpacer} />
 
-      {/* Permalink last - readonly input like worker ID */}
       <div className={styles.card}>
         <h2 className={styles.panelHeading}>Permalink</h2>
         <div className={styles.permalinkInputRow}>

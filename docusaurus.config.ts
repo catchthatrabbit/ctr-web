@@ -40,7 +40,7 @@ const config: Config = {
       FI_API_ENDPOINT: 'https://fi-api.catchthatrabbit.com',
       SG_API_ENDPOINT: 'https://sg-api.catchthatrabbit.com',
       HK_API_ENDPOINT: 'https://id-api.catchthatrabbit.com',
-      US_API_ENDPOINT: 'https://us-api.catchthatrabbit.com',
+      AM_API_ENDPOINT: 'https://am-api.catchthatrabbit.com',
     },
     API_PATH: '/v2/api/',
     URLS: {
@@ -94,7 +94,7 @@ const config: Config = {
         PASSWORD: '<empty>',
         PAYOUT: 'cb6242d8b1903db52f99813f79fe4dff2b85fd7c1fdd',
       },
-      US: {
+      AM: {
         NAME: 'America',
         DESCRIPTION: 'American Pool 🇺🇸🇲🇽🇧🇷',
         SERVER: 'us.catchthatrabbit.com',

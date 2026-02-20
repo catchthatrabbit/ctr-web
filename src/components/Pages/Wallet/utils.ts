@@ -57,12 +57,16 @@ export const convertPaymentsResponse2PaymentInfo = (
 ): PAYMENT_INFO_BY_WALLET_ADDRESS => {
   if (!paymentResponse) return [] as PAYMENT_INFO_BY_WALLET_ADDRESS;
 
-  return paymentResponse?.payments?.map((payment) => ({
-    amount: convertNumber2Currency((payment?.amount || 0) / UNITS.NUCLE),
-    timestamp: convertTime2Date(payment.timestamp),
-    tx: payment.tx,
-    tx_summarized: summarizedText(payment.tx, 10, payment?.tx?.length - 6),
-  }));
+  return paymentResponse?.payments?.map((payment) => {
+    const amountRaw = (payment?.amount || 0) / UNITS.NUCLE;
+    return {
+      amount: convertNumber2Currency(amountRaw),
+      amountRaw,
+      timestamp: convertTime2Date(payment.timestamp),
+      tx: payment.tx,
+      tx_summarized: summarizedText(payment.tx, 10, payment?.tx?.length - 6),
+    };
+  });
 };
 
 export const generateWorkerOfflineEmoji = (

@@ -12,6 +12,7 @@ export type WORKER_INFO_BY_WALLET_ADDRESS = Array<{
 
 export type PAYMENT_INFO_BY_WALLET_ADDRESS = Array<{
   amount: string;
+  amountRaw?: number;
   timestamp: string;
   tx: string;
 }>;
