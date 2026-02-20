@@ -39,7 +39,7 @@ const config: Config = {
       DE_API_ENDPOINT: 'https://de-api.catchthatrabbit.com',
       FI_API_ENDPOINT: 'https://fi-api.catchthatrabbit.com',
       SG_API_ENDPOINT: 'https://sg-api.catchthatrabbit.com',
-      HK_API_ENDPOINT: 'https://hk-api.catchthatrabbit.com',
+      HK_API_ENDPOINT: 'https://id-api.catchthatrabbit.com',
       US_API_ENDPOINT: 'https://us-api.catchthatrabbit.com',
     },
     API_PATH: '/v2/api/',
@@ -47,7 +47,7 @@ const config: Config = {
       TRANSACTION_DETAILS: 'https://blockindex.net/tx',
       BLOCK_DETAILS: 'https://blockindex.net/block',
       BUY_LINK: 'https://app.ping.exchange?ref-code=kz3Xyxnn',
-      EXCHANGE_RATES: 'https://temp-endpoint.coreport.net/api/v1',
+      EXCHANGE_RATES: 'https://core.exposed/obp/v6.0.0',
     },
     POOLS_LIST: {
       DE: {

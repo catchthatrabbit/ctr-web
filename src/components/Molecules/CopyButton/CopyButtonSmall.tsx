@@ -6,13 +6,20 @@ import { useMediaQueries } from '@site/src/hooks/useMediaQueries';
 
 import styles from './styles.module.css';
 
-const CopyButtonSmall: React.FC<ICopyButton> = ({ textToCopy, onCopy }) => {
+const CopyButtonSmall: React.FC<ICopyButton> = ({
+  textToCopy,
+  onCopy,
+  toastText,
+}) => {
   const { mobile } = useMediaQueries();
 
   const handleCopy = () => {
     navigator.clipboard.writeText(textToCopy);
     if (typeof onCopy === 'function') onCopy();
-    showSuccessToast('Wallet address copied to clipboard', mobile);
+    showSuccessToast(
+      toastText ?? 'Wallet address copied to clipboard',
+      mobile
+    );
   };
 
   return (

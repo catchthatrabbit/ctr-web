@@ -7,9 +7,15 @@ interface IModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  title?: string;
 }
 
-const Modal: React.FC<IModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<IModalProps> = ({
+  isOpen,
+  onClose,
+  children,
+  title = 'Mining pool',
+}) => {
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
@@ -23,7 +29,7 @@ const Modal: React.FC<IModalProps> = ({ isOpen, onClose, children }) => {
             lineHeight="normalLineHeight"
             letterSpacing="letterSpacing"
           >
-            Mining pool
+            {title}
           </Text>
           <button className={styles.closeButton} onClick={onClose}>
             &times;

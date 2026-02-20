@@ -1,0 +1,185 @@
+/* Consistent spacing between sections */
+.root {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 3rem 1rem 2rem;
+}
+
+.sectionSpacer {
+  height: 1.5rem;
+}
+
+.card {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--dark-rgb-600, #1a1a2e);
+  border-radius: 8px;
+  border: 1px solid var(--blue-rgb-700, #2d3748);
+}
+
+.card:last-child {
+  margin-bottom: 0;
+}
+
+.panelHeading {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.02em;
+}
+
+.permalinkInputRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.permalinkInput {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: white;
+  background-color: var(--dark-rgb-500, #16213e);
+  border: 1px solid var(--blue-rgb-700, #2d3748);
+  border-radius: 6px;
+  cursor: default;
+  outline: none;
+}
+
+.permalinkInput:focus {
+  border-color: var(--blue-rgb-600, #2d3748);
+}
+
+.profileSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.blockiesWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background-color: var(--dark-rgb-500, #16213e);
+  border-radius: 12px;
+  border: 1px solid var(--blue-rgb-700, #2d3748);
+}
+
+.blockies {
+  border-radius: 8px;
+  overflow: hidden;
+  display: block;
+}
+
+.profileName {
+  margin-top: 0.25rem;
+}
+
+.fediverseLink {
+  font-size: 0.875rem;
+  color: var(--ifm-color-primary, #25c2a0);
+  word-break: break-all;
+}
+
+.statusActive {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background-color: rgba(0, 191, 255, 0.2);
+  color: rgba(0, 191, 255, 1);
+  margin-top: 0.25rem;
+}
+
+.statusInactive {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background-color: rgba(240, 82, 82, 0.2);
+  color: rgba(229, 78, 78, 1);
+  margin-top: 0.25rem;
+}
+
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.workerIdInputRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.workerIdInput {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--zephirum-font-family, 'Zephirum', monospace);
+  font-size: 0.875rem;
+  color: white;
+  background-color: var(--dark-rgb-500, #16213e);
+  border: 1px solid var(--blue-rgb-700, #2d3748);
+  border-radius: 6px;
+  cursor: default;
+  outline: none;
+}
+
+.workerIdInput:focus {
+  border-color: var(--ifm-color-primary, #25c2a0);
+}
+
+.barcodeSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.barcodeCanvas {
+  display: block;
+  max-width: 100%;
+  min-width: 200px;
+  min-height: 80px;
+  height: auto;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid var(--blue-rgb-700, #2d3748);
+}
+
+.downloadButton {
+  padding: 0.75rem 1.25rem;
+  background: var(--ifm-color-primary, #25c2a0);
+  color: var(--dark-rgb-600, #1a1a2e);
+  border: 2px solid var(--ifm-color-primary, #25c2a0);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.downloadButton:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.downloadButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

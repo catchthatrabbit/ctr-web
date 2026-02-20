@@ -9,6 +9,7 @@ export interface IDataTable {
     isPrimary?: boolean;
     fn?: Dispatch<SetStateAction<unknown>>;
     href?: string;
+    customRender?: (row: Record<string, unknown>) => React.ReactNode;
   }>;
   data: Array<{ [key in string]: ReactNode }>;
   emptyComponent: React.ReactNode;

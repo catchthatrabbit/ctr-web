@@ -82,7 +82,7 @@ const useControls = ({
     () => [
       {
         value: 'rabbit',
-        label: 'Miner',
+        label: 'Worker',
         isPrimary: true,
       },
       {
