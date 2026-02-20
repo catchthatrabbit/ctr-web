@@ -97,7 +97,7 @@ const config: Config = {
       AM: {
         NAME: 'America',
         DESCRIPTION: 'American Pool 🇺🇸🇲🇽🇧🇷',
-        SERVER: 'us.catchthatrabbit.com',
+        SERVER: 'am.catchthatrabbit.com',
         PORT: '8008',
         WORKER_NAME:
           'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',
