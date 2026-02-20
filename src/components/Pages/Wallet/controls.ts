@@ -6,13 +6,16 @@ import {
   useFetchWorkerCounts,
 } from '@site/src/hooks/useWallet';
 import { useFetchPaymentByWalletAddress } from '@site/src/hooks/usePayments';
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { URLS_CONFIG_TYPE } from '@site/src/configs/types';
 import { useLocation } from '@docusaurus/router';
 import { useHistory } from 'react-router-dom';
 import usePageControls from '@site/src/hooks/usePageControls';
 import { getApiConfig } from '@site/src/utils/getApiConfig';
+import { useQuery } from '@tanstack/react-query';
+import { fetchXcbPrice } from '@site/src/Api/price/fetchPrice';
+import { Text } from '@site/src/components/Atoms/Text';
 
 interface IWallet extends Omit<IAnyPageAndWallet, 'onSetWalletAddress'> {
   walletAddress: string;
@@ -45,6 +48,14 @@ const useControls = ({
   const history = useHistory();
 
   const urlConfig = siteConfig.customFields.URLS as URLS_CONFIG_TYPE;
+  const exchangeRatesUrl = (siteConfig.customFields.URLS as { EXCHANGE_RATES?: string })?.EXCHANGE_RATES;
+
+  const { data: xcbPriceUsd } = useQuery({
+    queryKey: ['xcbPrice', 'usd', exchangeRatesUrl],
+    queryFn: () => fetchXcbPrice('usd', exchangeRatesUrl!),
+    enabled: Boolean(exchangeRatesUrl),
+  });
+
   const okEmoji = siteConfig.customFields.EFFECTS_EMOJI_ENABLED
     ? String(siteConfig.customFields.EFFECTS_EMOJI_OK)
     : 'Running';
@@ -71,18 +82,36 @@ const useControls = ({
         value: 'amount',
       },
       {
+        label: 'Fiat',
+        value: 'fiat',
+        customRender: (row: Record<string, unknown>) => {
+          const raw = row.amountRaw as number | undefined;
+          const textProps = {
+            variant: 'smallBody' as const,
+            type: 'regular' as const,
+            weight: 'medium' as const,
+            color: 'white' as const,
+          };
+          const fallback = React.createElement(Text, { ...textProps, children: '—' });
+          if (raw == null || typeof raw !== 'number') return fallback;
+          if (xcbPriceUsd == null || !Number.isFinite(xcbPriceUsd)) return fallback;
+          const formatted = `$\u00A0${(raw * xcbPriceUsd).toFixed(2)}`;
+          return React.createElement(Text, { ...textProps, children: formatted });
+        },
+      },
+      {
         label: 'Time',
         value: 'timestamp',
       },
     ],
-    [urlConfig.TRANSACTION_DETAILS]
+    [urlConfig.TRANSACTION_DETAILS, xcbPriceUsd]
   );
 
   const workersTableColumn = useMemo(
     () => [
       {
         value: 'rabbit',
-        label: 'Miner',
+        label: 'Worker',
         isPrimary: true,
       },
       {

@@ -29,7 +29,7 @@ const WalletInfoTabs = ({
   const { mobile } = useMediaQueries();
   return (
     <div>
-      <Panel title="Miners" handleFilterChange={handleFilterChange}>
+      <Panel title="Workers" handleFilterChange={handleFilterChange}>
         {workers}
       </Panel>
       <Spacer variant="sm" />

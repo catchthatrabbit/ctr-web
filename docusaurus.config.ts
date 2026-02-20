@@ -39,15 +39,15 @@ const config: Config = {
       DE_API_ENDPOINT: 'https://de-api.catchthatrabbit.com',
       FI_API_ENDPOINT: 'https://fi-api.catchthatrabbit.com',
       SG_API_ENDPOINT: 'https://sg-api.catchthatrabbit.com',
-      HK_API_ENDPOINT: 'https://hk-api.catchthatrabbit.com',
-      US_API_ENDPOINT: 'https://us-api.catchthatrabbit.com',
+      HK_API_ENDPOINT: 'https://id-api.catchthatrabbit.com',
+      AM_API_ENDPOINT: 'https://am-api.catchthatrabbit.com',
     },
     API_PATH: '/v2/api/',
     URLS: {
       TRANSACTION_DETAILS: 'https://blockindex.net/tx',
       BLOCK_DETAILS: 'https://blockindex.net/block',
       BUY_LINK: 'https://app.ping.exchange?ref-code=kz3Xyxnn',
-      EXCHANGE_RATES: 'https://temp-endpoint.coreport.net/api/v1',
+      EXCHANGE_RATES: 'https://core.exposed/obp/v6.0.0',
     },
     POOLS_LIST: {
       DE: {
@@ -94,10 +94,10 @@ const config: Config = {
         PASSWORD: '<empty>',
         PAYOUT: 'cb6242d8b1903db52f99813f79fe4dff2b85fd7c1fdd',
       },
-      US: {
+      AM: {
         NAME: 'America',
         DESCRIPTION: 'American Pool 🇺🇸🇲🇽🇧🇷',
-        SERVER: 'us.catchthatrabbit.com',
+        SERVER: 'am.catchthatrabbit.com',
         PORT: '8008',
         WORKER_NAME:
           'Regular name (alphanumeric and underscores/hyphens) or Fediverse user (e.g., _username_domain_tld-workerPart)',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import WalletOverviewPage from '@site/src/pages/wallet-overview';
+import WorkerDetailsPage from '@site/src/components/Pages/WorkerDetails';
 import CreateConfig from '@site/src/pages/go-live';
 import PoolSelectionPage from '@site/src/components/Pages/SelectPool/PoolSelectionPage';
 
@@ -27,6 +28,11 @@ const Routes = () =>
       exact: true,
       path: '/coreid/:walletAddress/:pool',
       component: WalletOverviewPage,
+    }),
+    React.createElement(Route, {
+      exact: true,
+      path: '/coreid/:walletAddress/:pool/worker/:workerName',
+      component: WorkerDetailsPage,
     }),
     React.createElement(Route, {
       exact: true,

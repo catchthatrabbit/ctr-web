@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import Link from '@docusaurus/Link';
+import clsx from 'clsx';
 
 import { ConfiguredInfoBox } from '../../Molecules/ConfiguredInfoBox';
 import { Info } from '@site/src/components/Templates/Info';
@@ -16,7 +18,6 @@ import useControls from './controls';
 import { LoadingPlaceholder } from '../../Atoms/LoadingPlaceholder';
 import { CustomToastError } from '../../Molecules/CopyButton';
 import useMediaQueries from '@site/src/hooks/useMediaQueries/useMediaQueries';
-
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './styles.module.css';
 
@@ -95,17 +96,49 @@ const Wallet = ({
     }
   }, [walletNotFound, toastShown, isLoadingFetchWallet]);
 
+  const workersData = useMemo(
+    () =>
+      convertWorkersResponse2Info(
+        fetchWorkersByWalletAddress,
+        okEmoji,
+        brbEmoji,
+        walletAddress
+      ),
+    [
+      fetchWorkersByWalletAddress,
+      okEmoji,
+      brbEmoji,
+      walletAddress,
+    ]
+  );
+
+  const workersTableColumnsWithLink = useMemo(
+    () => [
+      {
+        value: 'workerName',
+        label: 'Worker',
+        isPrimary: true,
+        customRender: (row: Record<string, unknown>) => (
+          <Link
+            to={`/coreid/${walletAddress}/${selectedPool}/worker/${encodeURIComponent((row.workerName as string) ?? '')}`}
+            className={clsx(styles.workerLink, styles.workerLinkZephirum)}
+          >
+            {(row.rabbit_summarized ?? row.workerName) as string}
+          </Link>
+        ),
+      },
+      ...workersTableColumn.slice(1),
+    ],
+    [workersTableColumn, walletAddress, selectedPool]
+  );
+
   // Helper function to render workers
   const renderWorkers = () => (
     <List
       isLoading={isLoadingFetchWorkerByWalletAddress}
-      data={convertWorkersResponse2Info(
-        fetchWorkersByWalletAddress,
-        okEmoji,
-        brbEmoji
-      )}
+      data={workersData}
       hidePagination
-      dataTableColumns={workersTableColumn}
+      dataTableColumns={workersTableColumnsWithLink}
       total={getWorkersTotal()}
       onPageChange={handleChangePageWorkers}
       context="wallet"

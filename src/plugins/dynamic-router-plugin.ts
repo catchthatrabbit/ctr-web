@@ -13,6 +13,11 @@ export default function dynamicRouterPlugin(
         exact: true,
       });
       actions.addRoute({
+        path: '/coreid/:walletAddress/:pool/worker/:workerName',
+        component: '@site/src/components/Pages/WorkerDetails',
+        exact: true,
+      });
+      actions.addRoute({
         path: '/go-live/:walletAddress',
         component: '@site/src/pages/go-live',
         exact: true,

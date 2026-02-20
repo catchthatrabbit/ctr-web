@@ -12,16 +12,26 @@ import { UNITS } from '@site/src/constants/units';
 import { summarizedText } from '@site/src/utils/summarizedText';
 import { convertWorkerName } from '@site/src/utils/convertWorkerName';
 
+function buildWorkerId(address: string, workerName: string): string {
+  const first4 = address.slice(0, 4).toUpperCase();
+  const last4 = address.slice(-4).toUpperCase();
+  return first4 + last4 + workerName;
+}
+
 export const convertWorkersResponse2Info = (
   workerResponse: WORKER_BY_WALLET_ADDRESS_RESPONSE,
   falseEmoji: string,
-  trueEmoji: string
+  trueEmoji: string,
+  walletAddress?: string
 ): WORKER_INFO_BY_WALLET_ADDRESS => {
   if (!workerResponse) return [] as WORKER_INFO_BY_WALLET_ADDRESS;
   return Object.keys(workerResponse.workers)?.map((key) => {
     const { caption, href } = convertWorkerName(key);
     const isOffline = workerResponse.workers[key].offline;
-    const status = isOffline ? 'Inactive' : 'Running'; // Determine status based on offline field
+    const status = isOffline ? 'Inactive' : 'Running';
+    const workerId = walletAddress
+      ? buildWorkerId(walletAddress, key)
+      : undefined;
     return {
       rabbit: href,
       rabbit_summarized: caption,
@@ -36,6 +46,8 @@ export const convertWorkersResponse2Info = (
         trueEmoji
       ),
       status,
+      workerId,
+      workerName: key,
     };
   });
 };
@@ -45,12 +57,16 @@ export const convertPaymentsResponse2PaymentInfo = (
 ): PAYMENT_INFO_BY_WALLET_ADDRESS => {
   if (!paymentResponse) return [] as PAYMENT_INFO_BY_WALLET_ADDRESS;
 
-  return paymentResponse?.payments?.map((payment) => ({
-    amount: convertNumber2Currency((payment?.amount || 0) / UNITS.NUCLE),
-    timestamp: convertTime2Date(payment.timestamp),
-    tx: payment.tx,
-    tx_summarized: summarizedText(payment.tx, 10, payment?.tx?.length - 6),
-  }));
+  return paymentResponse?.payments?.map((payment) => {
+    const amountRaw = (payment?.amount || 0) / UNITS.NUCLE;
+    return {
+      amount: convertNumber2Currency(amountRaw),
+      amountRaw,
+      timestamp: convertTime2Date(payment.timestamp),
+      tx: payment.tx,
+      tx_summarized: summarizedText(payment.tx, 10, payment?.tx?.length - 6),
+    };
+  });
 };
 
 export const generateWorkerOfflineEmoji = (

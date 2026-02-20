@@ -12,15 +12,16 @@ export const fetchXcbPrice = async (currency: string = "usd", providerUrl: strin
   try {
     const normalizedCurrency = currency.toLowerCase();
     const response = await axios.get(
-      `${providerUrl}/rates/xcb/${normalizedCurrency}`
+      `${providerUrl}/fx/${normalizedCurrency}/xcb`,
+      { headers: { accept: '*/*' } }
     ) as AxiosResponse<XCB_PRICE_RESPONSE>;
 
-    if (response.data && typeof response.data.rate === 'number') {
-      return response.data.rate;
-    } else {
-      console.error('Invalid response format from XCB price API:', response.data);
-      return 0;
+    if (response.data?.inverse_conversion_value != null) {
+      const price = parseFloat(response.data.inverse_conversion_value);
+      return Number.isFinite(price) ? price : 0;
     }
+    console.error('Invalid response format from XCB price API:', response.data);
+    return 0;
   } catch (e) {
     console.error('Error fetching XCB price:', e);
     return Promise.reject(e as AxiosError);

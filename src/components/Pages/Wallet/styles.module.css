@@ -3,3 +3,17 @@
   align-items: center;
   justify-content: center;
 }
+
+.workerLink {
+  color: var(--ifm-color-primary, #25c2a0);
+  text-decoration: none;
+}
+
+.workerLink:hover {
+  text-decoration: underline;
+  color: var(--ifm-color-primary, #25c2a0);
+}
+
+.workerLinkZephirum {
+  font-family: var(--zephirum-font-family, 'Zephirum', monospace);
+}

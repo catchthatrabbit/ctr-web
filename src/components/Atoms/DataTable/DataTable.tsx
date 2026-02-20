@@ -18,6 +18,7 @@ interface IColumn {
   fn?: (value: string) => void;
   href?: string;
   canBeCopied?: boolean;
+  customRender?: (row: Record<string, unknown>) => React.ReactNode;
 }
 
 const DataTable = ({
@@ -45,6 +46,9 @@ const DataTable = ({
   if (checkArrayObjectIsEmpty(data)) return emptyComponent;
 
   const renderCellContent = (rowItem: any, colItem: IColumn) => {
+    if (colItem.customRender) {
+      return colItem.customRender(rowItem);
+    }
     const cellValue = rowItem[colItem.value]?.toString() || '';
     const summarizedValue =
       rowItem[`${colItem.value}_summarized`]?.toString() || '';
