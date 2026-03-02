@@ -1,11 +1,11 @@
 /**
- * Converts a worker name string into a formatted href and caption
+ * Converts a worker name string into a formatted href, caption (display name), and optional fediverse handle
  * @param str - The worker name string to convert (format: _username_domain_tld-workerPart)
- * @returns {Object} An object containing href (URL) and caption (display text)
+ * @returns {Object} An object containing href (URL), caption (display name only, e.g. "Pontus"), and fediverseHandle (e.g. "@user@domain") when fediverse
  */
 export const convertWorkerName = (
   str: string
-): { href: string | null; caption: string } => {
+): { href: string | null; caption: string; fediverseHandle?: string } => {
   if (!str) return {} as { href: string; caption: string };
 
   // Split the string by hyphen to separate worker part
@@ -41,14 +41,16 @@ export const convertWorkerName = (
   // Construct the href with proper format
   const href = `https://${domain}/@${username}${workerPart ? `#${workerPart}` : ''}`;
 
-  // Construct the caption with fediverse format
-  const caption = workerPart
-    ? `@${username}@${domain} ${workerPart}`
-    : `@${username}@${domain}`;
+  // Caption: show only the worker name (e.g. "Pontus") for list and details; no @user@domain prefix
+  const caption = workerPart ?? `@${username}@${domain}`;
+
+  // Fediverse handle for link text (e.g. "@catchthatrabbit@coretalk.space")
+  const fediverseHandle = `@${username}@${domain}`;
 
   return {
     href,
     caption,
+    fediverseHandle,
   };
 };
 

@@ -87,6 +87,12 @@
   gap: 1.5rem;
 }
 
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .statItem {
   margin: 0;
   display: flex;
