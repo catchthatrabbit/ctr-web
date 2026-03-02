@@ -41,8 +41,8 @@ export const convertWorkerName = (
   // Construct the href with proper format
   const href = `https://${domain}/@${username}${workerPart ? `#${workerPart}` : ''}`;
 
-  // Caption: show only the worker name (e.g. "Pontus") for list and details; no @user@domain prefix
-  const caption = workerPart ?? `@${username}@${domain}`;
+  // Caption: worker name (e.g. "Pontus") when defined; otherwise fediverse username only (e.g. "@catchthatrabbit")
+  const caption = workerPart ?? `@${username}`;
 
   // Fediverse handle for link text (e.g. "@catchthatrabbit@coretalk.space")
   const fediverseHandle = `@${username}@${domain}`;
