@@ -41,7 +41,7 @@ const WorkerDetailsContent = () => {
         : undefined,
     [walletAddress, workerName]
   );
-  const { caption: displayName, href: fediverseHref } = useMemo(
+  const { caption: displayName, href: fediverseHref, fediverseHandle } = useMemo(
     () => convertWorkerName(workerName),
     [workerName]
   );
@@ -147,14 +147,14 @@ const WorkerDetailsContent = () => {
           >
             {displayName || workerName}
           </Text>
-          {fediverseHref && (
+          {fediverseHref && fediverseHandle && (
             <a
               href={fediverseHref}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.fediverseLink}
             >
-              {fediverseHref}
+              {fediverseHandle}
             </a>
           )}
           <span
