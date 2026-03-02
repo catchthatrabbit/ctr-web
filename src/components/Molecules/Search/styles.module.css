@@ -76,6 +76,7 @@
 
 .searchWallet .searchInput {
   flex: 1;
+  min-width: 0;
   background-color: var(--dark-rgb-600);
   color: var(--white);
   padding: 0.9rem 5.6rem 0.8rem 3.2rem;
@@ -223,10 +224,24 @@
   .searchWallet .searchInput {
     padding: 1rem 5rem 1rem 2.6rem;
   }
+
+  /* Keep wallet input on one line; scroll horizontally when text is long */
+  .searchWallet .searchInput {
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
   .searchStartMining .searchContainer,
   .searchWallet .searchContainer {
     width: 100%;
     flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .searchWallet .searchContainer {
+    min-width: 0;
+    overflow: hidden;
   }
 
   .searchStartMining .searchIconWrapper,
