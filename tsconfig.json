@@ -1,9 +1,14 @@
 {
-  // This file is not used in compilation. It is here just for a nice editor experience.
-  "extends": "@docusaurus/tsconfig",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "jsx": "react",
-    "downlevelIteration": true
-  }
+	"extends": "$app/tsconfig",
+	"compilerOptions": {
+		"sourceMap": true,
+		"strict": true,
+		"paths": {
+			"$lib/*": ["./src/lib/*"]
+		}
+	},
+	"include": [
+		"src",
+		"vite.config.ts"
+	]
 }

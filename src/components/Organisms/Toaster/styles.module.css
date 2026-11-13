@@ -1,7 +1,0 @@
-.toaster {
-  position: fixed;
-  width: 300px;
-  right: var(--space-md);
-  top: var(--space-xxl);
-  z-index: 1000;
-}

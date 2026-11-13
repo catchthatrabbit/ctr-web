@@ -1,0 +1,438 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import { page } from '$app/state';
+	import { ArrowUpLeft, ArrowUpRight, ChevronRight } from '@lucide/svelte';
+	import { Icon, Tooltip } from '#components';
+	import { Key } from '@lucide/svelte';
+	import { asDynamicIcon } from '#lib/helpers/icon.js';
+	import { LL, locale as localeStore, t, torNot } from '#lib/helpers/i18n.js';
+	import { ui } from '#lib/ctr/translations.js';
+	import { walletAddress } from '#modules/auth/web3.js';
+	import {
+		getAuthNavActions,
+		resolveAuthNavAction,
+		isAuthEnabled,
+		isLoggedIn as isLoggedInHelper,
+		getAuthProviders
+	} from '#modules/auth/nav-actions.js';
+	import { shouldShowItem, type ItemWithShow } from '#lib/helpers/nav.js';
+	import { loadModule } from '#lib/helpers/modules.js';
+	import { getSiteConfig, getSiteTitleParts } from '#lib/helpers/siteConfig.js';
+	import { sloganSecondary, poolSince, poolNames } from '#lib/ctr/branding.js';
+
+	const _cfg = getSiteConfig();
+	const footerCfg = _cfg?.themeConfig?.footer;
+	const { style, logo, copyright, liner, links, iconExternal } = footerCfg ?? {};
+	const footerClass = style && `footer-${style}`;
+
+	const { session: sessionProp = undefined }: { session?: App.Locals['session'] } = $props();
+
+	/** Session from layout (passkey optional). */
+	const session = $derived(sessionProp);
+	const authEnabled = $derived(isAuthEnabled());
+	const isLoggedIn = $derived(isLoggedInHelper(session, $walletAddress));
+	const connected = $derived(session?.walletConnected ?? !!$walletAddress);
+	const authIn = $derived(Boolean(session?.user));
+	const showContext = $derived({ loggedIn: isLoggedIn, connected, authIn });
+	const authProviders = $derived(getAuthProviders(session, $walletAddress));
+
+	function authProviderLabel(provider: string): string {
+		if (provider.toLowerCase() === 'passkey') {
+			return torNot('content.footerExtras.brands.passkey', $LL) ?? 'Passkey';
+		}
+		return provider.charAt(0).toUpperCase() + provider.slice(1);
+	}
+
+	function disconnectLabel(): string {
+		return (
+			torNot('content.footerExtras.disconnectPasskey', $LL) ??
+			torNot('navbar.disconnect', $LL) ??
+			'Disconnect'
+		);
+	}
+
+	/** Filter by show only when auth enabled; otherwise show all. */
+	const visibleLinks = $derived(
+		(links ?? []).map((section) => ({
+			...section,
+			items: authEnabled
+				? (section.items ?? []).filter((item) => shouldShowItem(item as unknown as ItemWithShow, showContext))
+				: (section.items ?? [])
+		})).filter((section) => section.items.length > 0)
+	);
+	const authNavActions = $derived(getAuthNavActions($LL));
+
+	let bankingModule = $state<unknown>(null);
+	onMount(() => {
+		loadModule('banking').then((m) => (bankingModule = m));
+	});
+
+	type LinerItem = {
+		label?: string;
+		to?: string;
+		href?: string;
+		target?: string;
+		rel?: string;
+		className?: string;
+		icon?: string | (new (...args: unknown[]) => unknown);
+		action?: () => void;
+	};
+	const visibleLiner = $derived.by(() => {
+		const linerItems = liner ?? [];
+		const filtered = authEnabled
+			? linerItems.filter((item) => shouldShowItem(item as unknown as ItemWithShow, showContext))
+			: linerItems;
+		const oricItem =
+			bankingModule && typeof bankingModule === 'object' && 'getBankingOricFooterLinerItem' in bankingModule
+				? (bankingModule as { getBankingOricFooterLinerItem: (b: unknown) => unknown }).getBankingOricFooterLinerItem(
+						_cfg?.modules
+					)
+				: null;
+		const withOric = oricItem ? [...filtered, oricItem] : filtered;
+		return (withOric as Record<string, unknown>[]).map((item) => {
+			const action =
+				'action' in item && item.action !== undefined
+					? typeof item.action === 'string'
+						? resolveAuthNavAction(item.action, authNavActions)
+						: (item.action as () => void)
+					: undefined;
+			return { ...item, action } as LinerItem;
+		});
+	});
+
+	let connectionStatus = $state(false);
+
+	// Function to convert kebab-case to capitalized words with spaces
+	function kebabToCapitalized(str: string): string {
+		return str
+			.split('-')
+			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+	}
+
+	// Parse URL and create breadcrumb segments
+	const pathSegments = $derived.by(() => {
+		if (!page?.url) return [];
+		const path = page.url.pathname;
+		const segments = path.split('/').filter((segment) => segment);
+		const result: { name: string; url: string; current: boolean }[] = [
+			{ name: ui(t('footer.home', $LL) === 'footer.home' ? 'Home' : t('footer.home', $LL), $localeStore), url: '/', current: segments.length === 0 }
+		];
+		let currentPath = '';
+		segments.forEach((segment, index) => {
+			currentPath += `/${segment}`;
+			result.push({
+				name: ui(segment === 'mobile-app' ? 'Mobile app' : kebabToCapitalized(segment), $localeStore),
+				url: currentPath,
+				current: index === segments.length - 1
+			});
+		});
+		return result;
+	});
+
+	onMount(() => {
+		const updateConnectionStatus = () => {
+			connectionStatus = navigator.onLine ? true : false;
+		};
+
+		updateConnectionStatus();
+
+		window.addEventListener('online', updateConnectionStatus);
+		window.addEventListener('offline', updateConnectionStatus);
+
+		return () => {
+			window.removeEventListener('online', updateConnectionStatus);
+			window.removeEventListener('offline', updateConnectionStatus);
+		};
+	});
+</script>
+
+<footer class={`footer ctr-footer px-4 xl:px-0 ${footerClass}`}>
+	<div class="container ctr-footer-container mx-auto">
+		<nav aria-label="breadcrumb" class="ctr-footer-breadcrumb hidden sm:block">
+			<ol class="inline-flex items-center rounded text-sm font-medium">
+				{#each pathSegments as segment, index}
+					<li class="inline-flex items-center" aria-current={segment.current ? 'page' : undefined}>
+						{#if index > 0}
+							<ChevronRight
+								class="h-5 w-5 shrink-0 text-gray-400 mx-2 rtl:rotate-180"
+								aria-hidden="true"
+							/>
+						{/if}
+						<a
+							href={segment.url}
+							class={segment.current
+								? 'text-secondary-700'
+								: 'text-secondary-500 hover:text-secondary-600'}
+						>
+							{segment.name}
+						</a>
+					</li>
+				{/each}
+			</ol>
+		</nav>
+
+		<hr class="ctr-footer-rule" />
+
+		<div class="ctr-footer-main">
+			<div class="ctr-footer-intro">
+				{#if logo}
+					<a href="/" class="ctr-footer-logo flex items-center gap-2" aria-label="Catch That Rabbit home">
+						<img src={logo.src} alt="" class="ctr-logo-light h-10" />
+						<img src="/img/rabbit-white.svg" alt="" class="ctr-logo-dark h-10" />
+						<span>CTR</span>
+					</a>
+				{:else if _cfg?.title}
+					{@const titleParts = getSiteTitleParts(_cfg)}
+					<a href="/" class="ctr-footer-logo">
+						<span>{titleParts.brand}{titleParts.poweredBy ? ` | ${titleParts.poweredBy}` : ''}</span>
+					</a>
+				{/if}
+				<div class="ctr-footer-wording">
+					<strong>Catch That <em>Rabbit.</em></strong>
+					<span>{ui(sloganSecondary, $localeStore)}</span>
+					<small>{ui(poolSince, $localeStore)} · {ui('XCB Pools:', $localeStore)} {poolNames}</small>
+				</div>
+			</div>
+
+		<!-- Footer Links Section -->
+		{#if visibleLinks && visibleLinks.length > 0}
+			<div
+				class="ctr-footer-links grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8"
+			>
+				{#each visibleLinks as section}
+					<div class="ctr-footer-link-group">
+						<h4 class="text-lg font-semibold mb-2">
+							{ui(t(section.title, $LL), $localeStore)}
+						</h4>
+						<ul class="space-y-2">
+							{#each section.items as item}
+								<li class="text-sm min-w-0">
+									{#if item.to}
+										<a
+											href={item.to}
+											target={item.target ? item.target : undefined}
+											rel={item.rel ? item.rel : undefined}
+											class="hover:text-primary-600 transition duration-150 inline-flex max-w-full min-w-0 flex-nowrap items-center gap-1 text-start whitespace-nowrap"
+										>
+											{#if item.icon}
+												{#if typeof item.icon === 'string'}
+													<Icon name={item.icon} className="h-4 w-4 shrink-0" />
+												{:else}
+													{@const IconC = asDynamicIcon(item.icon)}
+													<IconC class="h-4 w-4 shrink-0" />
+												{/if}
+											{/if}
+											{#if item.label}
+												<span class="min-w-0">{ui(t(item.label, $LL), $localeStore)}</span>
+											{/if}
+										</a>
+									{:else if item.href}
+										<a
+											href={item.href}
+											target={item.target ? item.target : undefined}
+											rel={item.rel ? item.rel : undefined}
+											class="hover:text-primary-600 transition duration-150 inline-flex max-w-full min-w-0 flex-nowrap items-center justify-center gap-1.5 sm:justify-start"
+										>
+											{#if item.icon}
+												{#if typeof item.icon === 'string'}
+													<Icon name={item.icon} className="h-4 w-4 shrink-0" />
+												{:else}
+													{@const IconC = asDynamicIcon(item.icon)}
+													<IconC class="h-4 w-4 shrink-0" />
+												{/if}
+											{/if}
+											{#if item.label}
+												<span class="min-w-0 text-start">{ui(t(item.label, $LL), $localeStore)}</span>
+											{/if}
+											{#if typeof iconExternal === 'undefined' || iconExternal === true}
+												<ArrowUpRight class="h-4 w-4 shrink-0 rtl:hidden" aria-hidden="true" />
+												<ArrowUpLeft class="hidden h-4 w-4 shrink-0 rtl:inline" aria-hidden="true" />
+											{/if}
+										</a>
+									{:else if item.label}
+										<span class="ctr-footer-coming-soon">{ui(t(item.label, $LL), $localeStore)} <small>{ui('Coming soon', $localeStore)}</small></span>
+									{/if}
+								</li>
+							{/each}
+						</ul>
+					</div>
+				{/each}
+			</div>
+		{/if}
+		</div>
+		<hr class="ctr-footer-rule ctr-footer-rule-bottom" />
+
+		<div
+			class="ctr-footer-bottom flex w-full flex-col items-center gap-4 md:flex-row md:items-center md:justify-between"
+		>
+			<div
+				class="flex min-w-0 flex-1 flex-col flex-wrap items-center gap-4 sm:flex-row sm:items-center"
+			>
+			<div class="text-center text-sm text-footer-link sm:text-start max-w-full">
+				<span dir="ltr" class="inline-block [unicode-bidi:isolate]">
+					{t(copyright || 'footer.copyright', $LL, { year: new Date().getFullYear() })}
+				</span>
+			</div>
+			{#if visibleLiner && visibleLiner.length > 0}
+				<div
+					class="flex flex-wrap justify-center text-sm md:justify-start md:ms-4 gap-4"
+				>
+					{#each visibleLiner as { label, to, href, target, rel, className, icon, action }}
+						<div class="flex items-center">
+							{#if to}
+								<a
+									href={to}
+									target={target ? target : undefined}
+									rel={rel ? rel : undefined}
+									class="hover:text-footer-link-hover inline-flex max-w-full min-w-0 flex-nowrap items-center gap-1 {className ?? ''}"
+								>
+									{#if icon}
+										{#if typeof icon === 'string'}
+											<Icon name={icon} className="h-4 w-4 shrink-0" />
+										{:else}
+											{@const IconC = asDynamicIcon(icon)}
+											<IconC class="h-4 w-4 shrink-0" />
+										{/if}
+									{/if}
+									{#if label}
+										<span class="min-w-0 whitespace-nowrap">{t(label, $LL)}</span>
+									{/if}
+								</a>
+							{:else if href}
+								<a
+									{href}
+									target={target ? target : undefined}
+									rel={rel ? rel : undefined}
+									class="hover:text-footer-link-hover inline-flex max-w-full min-w-0 flex-nowrap items-center gap-1.5 {className}"
+								>
+									{#if icon}
+										{#if typeof icon === 'string'}
+											<Icon name={icon} className="h-4 w-4 shrink-0" />
+										{:else}
+											{@const IconC = asDynamicIcon(icon)}
+											<IconC class="h-4 w-4 shrink-0" />
+										{/if}
+									{/if}
+									{#if label}
+										<span class="min-w-0 whitespace-nowrap">{t(label, $LL)}</span>
+									{/if}
+									{#if typeof iconExternal === 'undefined' || iconExternal === true}
+										<ArrowUpRight class="h-4 w-4 shrink-0 rtl:hidden" aria-hidden="true" />
+										<ArrowUpLeft class="hidden h-4 w-4 shrink-0 rtl:inline" aria-hidden="true" />
+									{/if}
+								</a>
+							{:else if action}
+								<button
+									type="button"
+									onclick={action}
+									class="hover:text-footer-link-hover flex items-center cursor-pointer border-0 bg-transparent p-0 text-inherit {className}"
+								>
+									{#if icon}
+										{#if typeof icon === 'string'}
+											<Icon name={icon} className="h-4 w-4 {label ? 'me-1' : ''}" />
+										{:else}
+											{@const IconC = asDynamicIcon(icon)}
+											<IconC class="h-4 w-4 {label ? 'me-1' : ''}" />
+										{/if}
+									{/if}
+									{#if label}
+										{t(label, $LL)}
+									{/if}
+								</button>
+							{/if}
+						</div>
+					{/each}
+				</div>
+			{/if}
+			</div>
+			<div
+				class="flex flex-wrap items-center justify-center gap-4 md:justify-end rtl:md:justify-start shrink-0"
+			>
+				{#if authEnabled && isLoggedIn && authProviders.length > 0}
+					<div class="text-sm text-footer-link text-nowrap inline-flex items-center gap-1">
+						<Key class="h-4 w-4 me-0.5 shrink-0" />
+						{#each authProviders as provider}
+							<Tooltip>
+								<button
+									type="button"
+									class="cursor-pointer hover:underline focus:outline-none focus:underline"
+									onclick={() => {
+										if (provider === 'web3') authNavActions.disconnect();
+										else authNavActions.signout();
+									}}
+								>
+									{authProviderLabel(provider)}
+								</button>
+								<svelte:fragment slot="content">
+									{disconnectLabel()} {authProviderLabel(provider)}
+								</svelte:fragment>
+							</Tooltip>
+							{#if authProviders.indexOf(provider) < authProviders.length - 1}
+								<span class="opacity-70">•</span>
+							{/if}
+						{/each}
+					</div>
+				{/if}
+				<div class="inline-flex items-center gap-2 leading-none">
+					<span
+						class="status-dot inline-block shrink-0 w-1.5 h-1.5 rounded-full {connectionStatus
+							? 'connected'
+							: ''}"
+					></span>
+					<span class="text-sm text-footer-link text-nowrap">{ui(connectionStatus ? 'Online' : 'Offline', $localeStore)}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.ctr-footer { border-top: 1px solid #dce9dd; background: radial-gradient(circle at 9% 5%, #e5f2e7 0, transparent 38%), #f7f9f5; color: #183d30; }
+	.ctr-footer-container { max-width: 1200px; padding-top: 30px; padding-bottom: 24px; }
+	.ctr-footer-breadcrumb { color: #698375; }
+	.ctr-footer-breadcrumb :global(a) { color: #698375; }
+	.ctr-footer-breadcrumb :global(a:hover) { color: #177851; }
+	.ctr-footer-rule { margin: 18px 0 0; border: 0; border-top: 1px solid #d7e4d8; }
+	.ctr-footer-main { display: grid; grid-template-columns: minmax(230px, 280px) minmax(0, 1fr); gap: clamp(32px, 4vw, 64px); padding: 48px 0 56px; }
+	.ctr-footer-intro { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+	.ctr-footer-logo { width: fit-content; color: inherit; text-decoration: none; font-size: 29px; line-height: 1; font-weight: 850; letter-spacing: -.05em; }
+	.ctr-footer-logo img { width: 56px; height: 38px; object-fit: contain; }
+	.ctr-logo-dark { display: none; }
+	:global(.dark) .ctr-logo-light { display: none; }
+	:global(.dark) .ctr-logo-dark { display: block; }
+	.ctr-footer-wording { display: flex; flex-direction: column; gap: 9px; max-width: 350px; color: #476a58; font-size: 15px; line-height: 1.5; }
+	.ctr-footer-wording strong { color: #173c2c; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.1; font-weight: 800; letter-spacing: -.035em; }
+	.ctr-footer-wording em { color: #238b67; font-style: normal; }
+	.ctr-footer-wording small { margin-top: 8px; color: #6e8775; font-size: 12px; line-height: 1.55; }
+	.ctr-footer-links { align-content: start; }
+	.ctr-footer-link-group h4 { margin-bottom: 18px; color: #2c5640; font-size: 13px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+	.ctr-footer-link-group ul { display: grid; gap: 11px; }
+	.ctr-footer-link-group li { line-height: 1.45; }
+	.ctr-footer-link-group a { color: #385b49; text-decoration: none; white-space: normal; }
+	.ctr-footer-link-group a:hover { color: #17845c; }
+	.ctr-footer-coming-soon { display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 7px; color: #708779; }
+	.ctr-footer-coming-soon small { color: #769282; font-size: 11px; }
+	.ctr-footer-rule-bottom { margin: 0; }
+	.ctr-footer-bottom { padding-top: 20px; color: #668171; }
+	:global(.dark) .ctr-footer { border-color: #2d4d3b; background: radial-gradient(circle at 9% 5%, #1c3a2b 0, transparent 42%), #111f18; color: #e3f0e6; }
+	:global(.dark) .ctr-footer-breadcrumb, :global(.dark) .ctr-footer-breadcrumb :global(a) { color: #a6bead; }
+	:global(.dark) .ctr-footer-breadcrumb :global(a:hover) { color: #bbebca; }
+	:global(.dark) .ctr-footer-rule { border-color: #355342; }
+	:global(.dark) .ctr-footer-wording { color: #b2cbb9; }
+	:global(.dark) .ctr-footer-wording strong { color: #f0f8f1; }
+	:global(.dark) .ctr-footer-wording em { color: #a9e7b9; }
+	:global(.dark) .ctr-footer-wording small { color: #9db7a4; }
+	:global(.dark) .ctr-footer-link-group h4 { color: #a9e7b9; }
+	:global(.dark) .ctr-footer-link-group a { color: #d2e5d6; }
+	:global(.dark) .ctr-footer-link-group a:hover { color: #a9e7b9; }
+	:global(.dark) .ctr-footer-coming-soon, :global(.dark) .ctr-footer-coming-soon small { color: #9cb6a3; }
+	:global(.dark) .ctr-footer-bottom { color: #adc6b4; }
+	@media (max-width: 767px) {
+		.ctr-footer-container { padding-top: 18px; padding-bottom: 26px; }
+		.ctr-footer-main { grid-template-columns: 1fr; gap: 36px; padding: 24px 0 40px; }
+		.ctr-footer-intro { gap: 18px; }
+		.ctr-footer-links { gap: 32px; }
+		.ctr-footer-bottom { align-items: flex-start; }
+	}
+</style>

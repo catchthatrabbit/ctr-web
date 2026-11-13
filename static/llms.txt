@@ -1,0 +1,84 @@
+# Catch That Rabbit pool: technical reference
+
+Catch That Rabbit runs a Core Blockchain mining pool and pays miners in XCB. This document describes the current pool implementation. Values in an example configuration are identified as examples; each deployed pool can use different settings.
+
+## Components and data flow
+
+- The proxy accepts mining work requests and submitted shares over HTTP and Stratum.
+- Core node RPC supplies block templates, network state, and transaction submission. The proxy can select an available upstream node from its configured list.
+- Redis stores shares, miner and worker statistics, block state, balances, and payment records. Pool components that share one logical pool must use coordinated Redis state.
+- The unlocker examines candidate blocks, waits for configured maturity, computes PPLNS rewards, and credits miner balances.
+- The payouts processor sends XCB from the payout wallet to accounts with eligible balances.
+- The HTTP API reads pool state and exposes statistics, account data, workers, blocks, payments, public settings, and NFT fee waiver previews.
+- Mining proxy, API, unlocker, and payouts can run as separate processes. Only one active unlocker and one active payouts processor should credit or pay a given pool at a time.
+
+## Identity and units
+
+- A miner login is a 44-character hexadecimal Core payout address without the `0x` prefix in API paths. API route matching accepts uppercase or lowercase hexadecimal characters and account lookups normalize the login to lowercase.
+- A worker name identifies one machine under a payout address. The single-worker API requires the `worker` query parameter.
+- Hashrate values with an `Hs` suffix are hashes per second. The short and long hashrate windows are configurable independently.
+- Account balances and payout thresholds are stored in nucle. One XCB is 1,000,000,000 nucle.
+- Pool fees in configuration and the public settings API are percentages. NFT `tierDiscount` and `rebateFraction` are multipliers on a miner's share of the pool fee, not percentages of the full block reward.
+
+## Mining protocol
+
+- The Stratum-style interface uses JSON-RPC 2.0 over TCP. A session logs in with `xcb_submitLogin` and a payout address, requests work with `xcb_getWork`, and submits shares with `xcb_submitWork`.
+- The server can push a new job when the current work changes. A work result contains three hex strings: a header hash, a seed hash, and a difficulty target.
+- `xcb_submitWork` takes nonce, header hash, and mix digest parameters. The request can carry a `worker` name for per-machine statistics.
+- `xcb_submitHashrate` is optional and does not determine accounting. Accepted shares recorded by the pool drive hashrate and reward calculations.
+- Share responses distinguish accepted work, invalid shares, duplicate shares, malformed work, and an unsubscribed session. The server may disconnect a session after an error.
+- HTTP mining and Stratum listeners are separate configurable interfaces. The example configuration listens on port 8888 for HTTP mining, 8008 for Stratum, and 8088 for its NiceHash-oriented Stratum listener. Those are example values, not a guarantee for every deployment.
+
+## Rewards and fee accounting
+
+- The pool uses Pay Per Last N Shares (PPLNS). `pplns` configures the share window; the example configuration sets it to 9000 rounds.
+- When a block matures, the unlocker loads shares for that round and sums them. Each miner receives the miner portion of the block reward in proportion to `minerShares / totalShares`.
+- The nominal fee amount is `blockReward * poolFee / 100`. The remaining block reward is allocated to miners by PPLNS share. Transaction-fee treatment and any extra reward follow the unlocker configuration.
+- The public nominal fee for a selected pool is the `PoolFee` field from `GET /v2/api/settings`. The example configuration uses 1.0 percent; the live value must be read from the selected pool.
+- Rounding occurs when reward amounts are converted from the internal precise amount to nucle. Account balances and payout records should be treated as authoritative over a frontend estimate.
+
+## NFT voucher fee rebate
+
+- An NFT voucher can rebate part of a qualifying miner's proportional pool-fee share. The rebate is credited when the block reward is credited, not when a payout transaction is sent.
+- Qualification requires the waiver feature to be enabled, a valid configured contract, a positive hashrate-tier multiplier, and an eligible payout address.
+- The tier uses the payout address's aggregate hashrate over `nftFeeWaiverHashrateWindowLarge`. The example window is 3 hours. Its short window is 30 minutes and does not set the tier.
+- The example configuration defines these exact tiers: `hashrate <= 1,000,000 H/s` gives multiplier `1.0` (100 percent fee-share rebate); `1,000,000 < hashrate <= 5,000,000 H/s` gives `0.5` (50 percent); `hashrate > 5,000,000 H/s` gives `0.2` (20 percent).
+- The example configuration has `nftFeeWaiverEnabled: false` and no NFT contract or expiration method. Its tiers therefore describe the configured example bands, not an assertion that vouchers are active on a live pool.
+- Deployed tier arrays can have any number of finite upper bounds and an optional open-ended band. Finite bounds are inclusive and sorted by `maxHashrate` during evaluation. Without an open-ended band, hashrate above the largest bound receives multiplier zero.
+- A multiplier of 1 returns the miner's full nominal fee share. A multiplier below 1 returns that fraction. A multiplier above 1 can provide a bonus beyond the nominal fee share.
+- The NFT rule applies to the payout address. The configured contract view returns a Unix-second expiration value. The address is eligible through the final UTC calendar day represented by that value. An empty expiration method, failed RPC call, or invalid response does not establish eligibility.
+- A configured ownership collector can cache successful eligibility as `nftfee:own:{login}` in Redis. Otherwise the pool evaluates the contract view directly. Cache data can lag an on-chain transfer until refreshed.
+- The waiver does not use ERC-721 `balanceOf` for qualification. The contract view must encode the intended voucher policy for addresses with multiple tokens or expirations.
+- For a round, `nominalMinerFeeShare = poolFeeAmount * minerShares / totalShares`; `rebate = nominalMinerFeeShare * tierDiscount` when the NFT rule passes. The fee recipient's credited amount is reduced by aggregate rebates and floored at zero.
+- `GET /v2/api/nft_fee_waiver/{login}` provides a read-only preview with `hashrateHs`, `tierDiscount`, `rebateFraction`, `applied`, NFT eligibility indicators, and a reason when the waiver does not apply. Final accounting uses the actual round shares and eligibility at credit time.
+
+## Payout processing
+
+- The payouts processor reads credited balances and selects accounts that meet the configured payout threshold. The example threshold is 500,000,000 nucle; deployments can differ.
+- Before sending, it checks node peer count, payout wallet availability, and available funds. It locks payments, debits the miner balance, and records a pending payment.
+- The processor submits an `xcb_sendTransaction` request to Core node RPC. After a successful submission it records the transaction hash and unlocks payouts.
+- A failed submission can leave a pending payment and a lock requiring resolution. A transfer should not be retried until the chain and stored payment state have been reconciled.
+- The public API exposes pool payments, account payments, and payout problems. A payout problem can include source, severity, state, and class for operational diagnosis.
+
+## HTTP API v2
+
+All routes below are GET requests relative to `/v2/api`. JSON is returned by the API. Many list routes accept `offset` and `limit` query parameters. `{login}` is the 44-character hex payout address.
+
+- `/stats` and `/stats/charts`: pool-wide hashrate, miners, blocks, network data, and optional charts.
+- `/miners` and `/miners_stats`: miner list and aggregate miner statistics.
+- `/blocks`, `/matured_blocks`, `/immature_blocks`, `/candidates_blocks`: block lists by state.
+- `/payments`, `/payments_stats`, `/payments/{login}`: pool payment list, payment statistics, and account payments.
+- `/accounts/{login}` and `/accounts/{login}/charts`: balances, round shares, short and long hashrate, online and offline worker counts, payments, profitability estimate, fee prediction, and optional charts.
+- `/workers/{login}` and `/workers_sorted/{login}`: per-account workers. The list endpoints can filter with `online` and `offline` query parameters.
+- `/worker/{login}?worker={name}`: one machine's short and long hashrate, configured window lengths, last share time, offline state, start time, account blocks found, and profitability estimate. The optional `currency` query asks for a fiat estimate and depends on FX availability.
+- `/nft_fee_waiver/{login}`: current read-only voucher eligibility and tier preview.
+- `/settings`: public difficulty, nominal pool fee, fee address, unlock depth, mining interface flags, payout threshold and interval, region, and related settings. It does not expose the deployed NFT tier array.
+- `/time`: server time as Unix milliseconds, Unix seconds, and ISO 8601 UTC text.
+- `/payout-problems` and `/payout-problems/{id}`: operational payout problem list and detail. The list supports state, class, address, source, severity, time range, limit, and offset filters.
+
+## Reading estimates correctly
+
+- Account and worker profitability numbers are theoretical estimates based on hashrate, network difficulty, and reward assumptions. They are not guaranteed pool payouts.
+- `feePrediction` in the account response reports nominal pool fee, NFT entitlement, tier rebate multiplier, whether the waiver is predicted to apply, and predicted net fee as a percentage of gross reward.
+- The fee prediction and voucher preview are snapshots. Actual credited rewards depend on accepted shares in a matured round and the eligibility evaluated for that round.
+- Pool settings, fee rates, payout thresholds, hashrate windows, and NFT rules can differ across deployments. Read the selected pool's public API for available live values; do not infer a deployed value from an example configuration.
