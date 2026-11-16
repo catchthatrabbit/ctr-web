@@ -43,7 +43,6 @@ const siteConfigClient: Config = {
 				{ label: 'Blocks', to: '/blocks', position: 'right' },
 				{ label: 'Payments', to: '/payments', position: 'right' },
 				{ label: 'Miners', to: '/miners', position: 'right' },
-				{ label: 'Launch Miner', to: '/go-live', position: 'right' },
 				{ label: 'Contact', to: '/contact', position: 'right' },
 				{ label: 'Start mining', to: '/start-mining', position: 'right', className: 'button' }
 			]
@@ -60,7 +59,6 @@ const siteConfigClient: Config = {
 					title: 'Mining',
 					items: [
 						{ label: 'Start mining', to: '/start-mining' },
-						{ label: 'Launch Miner', to: '/go-live' },
 						{ label: 'Profit Calculator', to: '/calculator' },
 						{ label: 'Pool fee', to: '/fee' },
 						{ label: 'Miners', to: '/miners' },

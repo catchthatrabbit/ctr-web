@@ -34,11 +34,11 @@ The website serves a free, anonymous, read-only [MCP Streamable HTTP](https://mo
 
 ```json
 {
-	"mcpServers": {
-		"catch-that-rabbit": {
-			"url": "https://<website-host>/api/mcp"
-		}
-	}
+  "mcpServers": {
+    "catch-that-rabbit": {
+      "url": "https://<website-host>/api/mcp"
+    }
+  }
 }
 ```
 
